@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE language>
+
+<language>
+
+	<addon-name>iDempiere</addon-name>
+	
+	<language-name>xul/html</language-name>
+
+	<version>
+		<version-class>eone.webui.EONEWebUI</version-class>
+		<version-uid>1.0.0</version-uid>
+	</version>
+	
+	<component>
+		<component-name>keylistener</component-name>
+		<component-class>org.zkforge.keylistener.Keylistener</component-class>
+		<widget-class>zkforge.keylistener.KeyListener</widget-class>
+		<mold>
+			<mold-name>default</mold-name>
+			<mold-uri>mold/key-listener.js</mold-uri>
+		</mold>
+	</component>
+
+	<component>
+		<component-name>chosenbox</component-name>
+		<component-class>org.zkoss.addon.chosenbox.Chosenbox</component-class>
+		<widget-class>chosenbox.Chosenbox</widget-class>
+		<mold>
+			<mold-name>default</mold-name>
+			<mold-uri>mold/chosenbox.js</mold-uri>
+			<css-uri>css/chosenbox.css.dsp</css-uri>
+		</mold>
+	</component>
+	<!-- 
+	<component>
+		<component-name>ckeditor</component-name>
+		<extends>ckeditor</extends>
+		<annotation>
+			<annotation-name>ZKBIND</annotation-name>
+			<property-name>value</property-name>
+			<attribute>
+				<attribute-name>ACCESS</attribute-name>
+				<attribute-value>both</attribute-value>
+			</attribute>
+			<attribute>
+				<attribute-name>SAVE_EVENT</attribute-name>
+				<attribute-value>onChange</attribute-value>
+			</attribute>
+			<attribute>
+				<attribute-name>LOAD_REPLACEMENT</attribute-name>
+				<attribute-value>value</attribute-value>
+			</attribute>
+			<attribute>
+				<attribute-name>LOAD_TYPE</attribute-name>
+				<attribute-value>java.lang.String</attribute-value>
+			</attribute>
+		</annotation>
+	</component>
+	 -->
+	<javascript-module name="eone.websocket" charset="UTF-8" version="0"/>	
+	<javascript-module name="jawwa.atmosphere" charset="UTF-8" version="0"/>
+	<javascript-module name="eone.local.storage" charset="UTF-8" version="0"/>
+	<javascript-moudle name="html2canvas" version="1.3.1" />
+	<javascript-module name="eone.commons" charset="UTF-8" version="0"/>
+	<javascript-module name="jquery.maskedinput" version="1.4.1" />
+	<javascript-module name="photobooth"	version="0.7-rsd3" />
+	<javascript-module name="chosenbox" charset="UTF-8" version="0"/>
+	<javascript-module name="zkforge.keylistener" charset="UTF-8" version="0"/>
+	
+</language>

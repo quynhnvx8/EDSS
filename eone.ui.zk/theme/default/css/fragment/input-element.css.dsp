@@ -1,0 +1,79 @@
+<%-- Combobox --%>
+.z-combobox-disabled, .z-combobox[disabled] {
+	color: black !important; cursor: default !important; opacity: 1; -moz-opacity: 1; -khtml-opacity: 1; filter: alpha(opacity=100);
+}
+
+.z-combobox-disabled * {
+	color: black !important; cursor: default !important;
+}
+
+.z-combobox-text-disabled {
+	background-color: #ECEAE4 !important;
+}
+.z-comboitem {
+	min-height:14px;
+}
+<%-- highlight focus form element --%>
+input:focus, textarea:focus, .z-combobox-input:focus, z-datebox-input:focus {
+	border: 1px solid #0000ff;
+	background: #FFFFFF;
+}
+
+.z-textbox-readonly, .z-intbox-readonly, .z-longbox-readonly, .z-doublebox-readonly, 
+.z-decimalbox-readonly, .z-datebox-readonly, .z-timebox-readonly, .editor-input-disd, 
+.z-textbox[readonly], .z-intbox[readonly], .z-longbox[readonly], .z-doublebox[readonly], 
+.z-decimalbox[readonly], .z-datebox[readonly], .z-timebox[readonly] {
+	background-color: #F5F5F5;
+}
+
+.z-datebox-disabled>input,
+.z-combobox-disabled>input,
+.z-datebox-readonly>input,
+.z-timebox-readonly>input,
+.z-combobox-readonly>input 
+ {
+    background: #CFCFCF !important;
+    cursor: default !important;
+}
+
+.z-textbox[disabled], 
+.z-intbox[disabled], 
+.z-longbox[disabled],
+.z-combobox[disabled], 
+.z-doublebox[disabled], 
+.z-decimalbox[disabled], 
+.z-datebox[disabled], 
+.z-timebox[disabled] {
+	color: black !important;
+	background-color: #CFCFCF !important;
+	cursor: default !important;
+	opacity: 1 !important;
+	border: 1px solid #CFCFCF !important;
+}
+
+.z-combobox-disabled *, 
+.z-bandbox-disabled *, 
+.z-datebox-disabled *, 
+.z-timebox-disabled *, 
+.z-spinner-disabled *, 
+.z-doublespinner-disabled * {
+    color: #AAAAAA !important;
+    background: #F5F5F5 !important;
+    cursor: default !important;
+}
+
+.z-chosenbox {
+    background-color: #FFF;
+    border: 1px solid #cfcfcf;
+    border-radius: 3px;
+    margin: 0;
+    padding: 2px 5px;
+    line-height: 14px;
+    height: 24px;
+}
+
+<%-- workaround for http://jira.idempiere.com/browse/IDEMPIERE-692 --%>
+.z-combobox-popup {
+	max-height: 300px;
+	max-width: 400px
+}

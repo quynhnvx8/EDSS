@@ -1,0 +1,31 @@
+<?page title="EONE" contentType="text/html;charset=UTF-8" automaticTimeout="false" ?>
+<zk>
+<script>
+<![CDATA[
+	zk.load("eone.local.storage");
+]]>
+</script>
+<script defer="true">
+<![CDATA[
+	var callback = function(ok, val) {
+		if (ok && !!val)
+		{
+			window.location = val;
+		}
+		else
+		{
+			window.location = "sessiontimeout.zul";
+		}
+	};
+    
+    eone.get("zkTimeoutURL", callback);
+]]>	
+</script>
+<zscript>
+<![CDATA[
+	import eone.webui.theme.ThemeManager;
+	self.setTitle(ThemeManager.getBrowserTitle());
+]]>
+</zscript>
+
+</zk>

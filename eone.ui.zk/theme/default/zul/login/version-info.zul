@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk>
+
+<html>
+<![CDATA[
+<style>
+	.versionInfoBox {
+		background-image: url("~/theme/default/images/bgdefault.jpg");
+		margin: 5px;
+		padding: 3px;
+		margin-top: 20px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		font-size: 8pt;
+		height: 100%;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+</style>
+]]>
+<div contentSclass="versionInfoBox" if="${isInfoShown == true}">
+	<table border="0">
+		<tr>
+			<td>
+			<im src = "~/theme/default/images/bgdefault.jpg"></im>
+			</td>
+			
+		</tr>
+		
+	</table>
+</div>
+
+</html>
+</zk>

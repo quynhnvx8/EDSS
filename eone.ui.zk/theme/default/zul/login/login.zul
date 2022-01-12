@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk >
+<borderlayout id="layout">
+	<west border="none" autoscroll="true" sclass="login-bg">	
+		<window use="eone.webui.window.LoginWindow" id="loginWindow"/>
+	</west>
+	
+	<center border="none">
+		
+	</center>	
+</borderlayout>	
+
+</zk>
