@@ -55,12 +55,13 @@ public class HTMLExtension implements IHTMLExtension {
 
 		this.classPrefix = classPrefix;
 		this.componentId = componentId;
-		this.scriptURL = contextPath + theme + "js/report.js";
+		this.scriptURL = contextPath + theme + "web/js/eone/commons/report.js";
 		this.styleURL = contextPath + theme + "css/report.css";
 	}
 	
 	public void extendIDColumn(int row, ConcreteElement columnElement, a href,	PrintDataItem dataElement) {
-		href.addAttribute("onclick", "showColumnMenu(event)");		//zoomQuery
+		href.addAttribute("onclick", "eone.showColumnMenu(event)");		//zoomQuery
+		//href.addAttribute("onclick", "parent.idempiere.showColumnMenu(document, event, '" + dataElement.getColumnName() + "', " + row + ")");	
 		href.addAttribute ("componentId", componentId);
 		href.addAttribute ("tableLink", dataElement.getTableLink());
 		href.addAttribute ("zoomLogic", dataElement.getZoomLogic());

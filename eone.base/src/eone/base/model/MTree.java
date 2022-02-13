@@ -13,7 +13,6 @@ import java.util.logging.Level;
 
 import javax.sql.RowSet;
 
-import org.compiere.print.MPrintColor;
 import org.compiere.util.CCache;
 import org.compiere.util.CLogMgt;
 import org.compiere.util.CLogger;
@@ -514,13 +513,7 @@ public class MTree extends X_AD_Tree
 				else	//	always add
 				{
 					Color color = null;	//	action
-					if (actionColor != null && !getTreeType().equals(TREETYPE_Menu))
-					{
-						MPrintColor printColor = MPrintColor.get(getCtx(), actionColor);
-						if (printColor != null)
-							color = printColor.getColor();
-					}
-					//
+					
 					retValue = new MTreeNode (node_ID, name, description, parent_ID, isSummary,	null, color);			//	no action
 				}
 			}

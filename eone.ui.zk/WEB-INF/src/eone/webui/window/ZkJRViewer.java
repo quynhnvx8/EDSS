@@ -59,7 +59,6 @@ import net.sf.jasperreports.engine.export.JRCsvExporter;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
-import net.sf.jasperreports.export.SimpleCsvExporterConfiguration;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleHtmlExporterOutput;
 import net.sf.jasperreports.export.SimpleHtmlReportConfiguration;
@@ -156,7 +155,7 @@ public class ZkJRViewer extends Window implements EventListener<Event>, ITabOnCl
 		previewType.setMold("select");
 		attachment = null;  // Added by Martin Augustine - Ntier software Services 09/10/2013
 		if (isCanExport) {
-			//previewType.appendItem("PDF", "PDF");//TODO chua tim duoc loi export PDF
+			previewType.appendItem("PDF", "PDF");//TODO chua tim duoc loi export PDF
 			previewType.appendItem("HTML", "HTML");
 			previewType.appendItem("XLS", "XLS");
 			//previewType.appendItem("CSV", "CSV");
@@ -353,7 +352,7 @@ public class ZkJRViewer extends Window implements EventListener<Event>, ITabOnCl
 				if (prefix.length() < 3)
 					prefix += "_".repeat(3-prefix.length());
 				if (log.isLoggable(Level.FINE)) log.log(Level.FINE, "Path="+path + " Prefix="+prefix);
-				File file = File.createTempFile(prefix, ".html", new File(path));
+				File file = File.createTempFile(prefix, ".pdf", new File(path));
 
 				HtmlExporter exporter = new HtmlExporter();
 				SimpleHtmlReportConfiguration htmlConfig = new SimpleHtmlReportConfiguration();
@@ -367,9 +366,8 @@ public class ZkJRViewer extends Window implements EventListener<Event>, ITabOnCl
 				exporter.setExporterOutput(new SimpleHtmlExporterOutput(file));
 				exporter.setConfiguration(htmlConfig);
 		 	    exporter.exportReport();
-				media = new AMedia(m_title, "html", "text/html", file, false);
-				//attachment = getPDF();
-				//media = new AMedia(m_title + ".pdf", "pdf", "application/pdf", attachment, true);
+				attachment = getPDF();
+				media = new AMedia(m_title + ".pdf", "pdf", "application/pdf", attachment, true);
 
 			} else if ("HTML".equals(reportType)) {
 				String path = System.getProperty("java.io.tmpdir");
@@ -474,34 +472,8 @@ public class ZkJRViewer extends Window implements EventListener<Event>, ITabOnCl
 				exporter.exportReport();
 
 				media = new AMedia(m_title + ".csv", "csv", "application/csv", file, true);
-
-			}else if ("SSV".equals(reportType)) {
-				String path = System.getProperty("java.io.tmpdir");
-				String prefix = null;
-				if (isList)
-					prefix = makePrefix(jasperPrintList.get(0).getName())+"_List";
-				else
-					prefix = makePrefix(jasperPrint.getName());
-				if (prefix.length() < 3)
-					prefix += "_".repeat(3-prefix.length());
-				if (log.isLoggable(Level.FINE)) log.log(Level.FINE, "Path="+path + " Prefix="+prefix);
-				File file = File.createTempFile(prefix, ".ssv", new File(path));
-				FileOutputStream fos = new FileOutputStream(file);
-				JRCsvExporter exporter= new JRCsvExporter();
-				SimpleCsvExporterConfiguration csvConfig = new SimpleCsvExporterConfiguration();
-				csvConfig.setFieldDelimiter(";");
-				if (!isList){
-					jasperPrintList = new ArrayList<>();
-					jasperPrintList.add(jasperPrint);
-				}
-				exporter.setExporterInput(SimpleExporterInput.getInstance(jasperPrintList));
-				exporter.setExporterOutput(new SimpleWriterExporterOutput(fos));
-				exporter.setConfiguration(csvConfig);
-				exporter.exportReport();
-
-				media = new AMedia(m_title, "ssv", "application/ssv", file, true);
 			}
-		} finally {
+			} finally {
 			Thread.currentThread().setContextClassLoader(cl);
 		}
 
@@ -529,10 +501,8 @@ public class ZkJRViewer extends Window implements EventListener<Event>, ITabOnCl
 			jasperPrintList = new ArrayList<>();
 			jasperPrintList.add(jasperPrint);
 		}
-		jasperPrint.setProperty("net.sf.jasperreports.default.pdf.font.name", "Helvetica"); 
-		jasperPrint.setProperty("net.sf.jasperreports.default.pdf.encoding", "UTF-8"); 
-		jasperPrint.setProperty("net.sf.jasperreports.default.pdf.embedded", "true");
 		
+		//exporter.setParameter(JRExporterParameter.OUTPUT_FILE, jasperPrint);
 		exporter.setExporterInput(SimpleExporterInput.getInstance(jasperPrintList));
 		exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(file));
 		

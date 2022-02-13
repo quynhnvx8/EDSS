@@ -1,36 +1,33 @@
-if (typeof window.idempiere === 'undefined')
-	window.idempiere = {};
+if (typeof window.eone === 'undefined')
+	window.eone = {};
+window.eone.zoom = function (){
 	
-window.idempiere.zoom = function(cmpid, column, value){
+	cmpid = parent.arrayData[0]; 
+	tableLink = parent.arrayData[1];
+	zoomLogic = parent.arrayData[2];
+	value = parent.arrayData[3];
 	zAu.cmd0.showBusy(null);
 	var widget = zk.Widget.$(cmpid);
-	var event = new zk.Event(widget, 'onZoom', {data: [column, value]}, {toServer: true});
+	var event = new zk.Event(widget, 'onZoom', {data: [tableLink, value, zoomLogic]}, {toServer: true});
 	zAu.send(event);
-};
+}
 
-window.idempiere.zoomWindow = function(cmpid, column, value, windowuu){
+window.eone.zoomWindow = function (cmpid, column, value, windowuu){
 	zAu.cmd0.showBusy(null);
 	var widget = zk.Widget.$(cmpid);
 	var event = new zk.Event(widget, 'onZoom', {data: [column, value, 'AD_Window_UU', windowuu]}, {toServer: true});
 	zAu.send(event);
-};
+}
 
-window.idempiere.drillAcross = function(cmpid, column, value){
-	zAu.cmd0.showBusy(null);
-	var widget = zk.Widget.$(cmpid);
-	var event = new zk.Event(widget, 'onDrillAcross', {data: [column, value]}, {toServer: true});
-	zAu.send(event);
-};
+var arrayData = null;
 
-window.idempiere.drillDown = function(cmpid, column, value){
-	zAu.cmd0.showBusy(null);
-	var widget = zk.Widget.$(cmpid);
-	var event = new zk.Event(widget, 'onDrillDown', {data: [column, value]}, {toServer: true});
-	zAu.send(event);
-};
-
-window.idempiere.showColumnMenu = function(doc, e, columnName, row) {
-	var d = idempiere.getMenu (doc, e.target.getAttribute ("componentId"), e.target.getAttribute ("foreignColumnName"), e.target.getAttribute ("value"));
+window.eone.showColumnMenu = function (e) {
+	var compid = e.target.getAttribute ("componentId");
+	var tableLink = e.target.getAttribute ("tableLink");
+	var zoomLogic = e.target.getAttribute ("zoomLogic");
+	var value = e.target.getAttribute ("value");
+	parent.arrayData = [compid, tableLink, zoomLogic, value];
+	var d = getMenu (compid, tableLink, zoomLogic, value);
 	
 	var posx = 0;
 	var posy = 0;
@@ -40,27 +37,26 @@ window.idempiere.showColumnMenu = function(doc, e, columnName, row) {
 		posy = e.pageY;
 	}
 	else if (e.clientX || e.clientY) 	{
-		posx = e.clientX + doc.body.scrollLeft
-			+ doc.documentElement.scrollLeft;
-		posy = e.clientY + doc.body.scrollTop
-			+ doc.documentElement.scrollTop;
+		posx = e.clientX + document.body.scrollLeft
+			+ document.documentElement.scrollLeft;
+		posy = e.clientY + document.body.scrollTop
+			+ document.documentElement.scrollTop;
 	}
 	
 	d.style.top = posy;	
 	d.style.left = posx;
 	d.style.display = "block";
 	
-	var f = function() {
-		doc.contextMenu.style.display='none'
-	};
-	setTimeout(f, 3000);
-};
+	setTimeout("getMenu().style.display='none'", 3000);
+}
 
-window.idempiere.getMenu = function(doc, componentId, foreignColumnName, value){
-	doc.contextMenu = null;
-	if (componentId != null){	
+var contextMenu;
+
+window.eone.getMenu = function  (componentId, tableLink, zoomLogic, value){
+	if (componentId != null){
+	
 		//menu div
-		var menu = doc.createElement("div");
+		var menu = document.createElement("div");
 		menu.style.position = "absolute";
 		menu.style.display = "none";
 		menu.style.top = "0";
@@ -70,59 +66,35 @@ window.idempiere.getMenu = function(doc, componentId, foreignColumnName, value){
 		menu.style.backgroundColor = "white";
 		
 		//window menu item
-		var windowMenu = doc.createElement("div");
+		var windowMenu = document.createElement("div");
 		windowMenu.style.padding = "3px";
 		windowMenu.style.verticalAlign = "middle";
 		windowMenu.setAttribute("onmouseover", "this.style.backgroundColor = 'lightgray'");
 		windowMenu.setAttribute("onmouseout", "this.style.backgroundColor = 'white'");									
 		
-		var href = doc.createElement("a");
+		var href = document.createElement("a");
 		href.style.fontSize = "11px";
 		href.style.textDecoration = "none";
 		href.style.verticalAlign = "middle";
 		href.href = "javascript:void(0)";
-		href.setAttribute("onclick", "parent.idempiere.zoom('" + componentId + "','" + foreignColumnName + "','" + value + "')");
+		href.setAttribute("onclick", "parent.zoom()");
 		
 		windowMenu.appendChild(href);
 		menu.appendChild(windowMenu);				
 		
-		var windowIco = doc.body.getAttribute ("windowIco");
-		if (typeof windowIco === 'string' && windowIco.length > 0) {
-			var image = doc.createElement("img"); 
-			image.src = windowIco;
-			image.setAttribute("align", "middle");
-			href.appendChild(image);
-		}
-		href.appendChild(doc.createTextNode(doc.body.getAttribute ("windowLabel")));
-		
-		//report menu item
-		var report = doc.createElement("div");			
-		report.style.padding = "3px";
-		report.style.verticalAlign = "middle";
-		
-		report.setAttribute("onmouseover", "this.style.backgroundColor = 'lightgray'");
-		report.setAttribute("onmouseout", "this.style.backgroundColor = 'white'");									
-		
-		var reportHref = doc.createElement("a");
-		reportHref.href = "javascript:void(0)";	
-		reportHref.style.textDecoration = "none";
-		reportHref.style.fontSize = "11px";
-		reportHref.style.verticalAlign = "middle";
-		reportHref.setAttribute("onclick", "parent.idempiere.drillDown('" + componentId + "','" + foreignColumnName + "','" + value + "')");
-		
-		report.appendChild(reportHref);
-		menu.appendChild(report);
-		var reportIco = doc.body.getAttribute ("reportIco");
-		if (typeof reportIco === 'string' && reportIco.length > 0) {
-			var reportimage = doc.createElement("img"); 
-			reportimage.src = reportIco;
-			reportimage.setAttribute("align", "middle");
-			reportHref.appendChild(reportimage);
-		}
-		reportHref.appendChild(doc.createTextNode(doc.body.getAttribute ("reportLabel")));
-		
-		doc.contextMenu = menu;
-		doc.body.appendChild (doc.contextMenu);
-	}	
-	return doc.contextMenu;
-};
+		var image = document.createElement("img"); 
+		image.src = window.document.body.getAttribute ("windowIco"); 	
+		image.setAttribute("align", "middle");
+		href.appendChild(image);
+		href.appendChild(document.createTextNode(window.document.body.getAttribute ("windowLabel")));
+		contextMenu = menu;
+		window.document.body.appendChild (contextMenu);
+	}
+	
+	contextMenu.setAttribute ("componentId", componentId);
+	contextMenu.setAttribute ("tableLink", tableLink);
+	contextMenu.setAttribute ("zoomLogic", zoomLogic);
+	contextMenu.setAttribute ("value", value);
+	return contextMenu;
+}
+

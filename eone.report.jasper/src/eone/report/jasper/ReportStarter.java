@@ -1,5 +1,5 @@
 
-package org.adempiere.report.jasper;
+package eone.report.jasper;
 
 import java.awt.print.PrinterJob;
 import java.io.ByteArrayOutputStream;
@@ -46,7 +46,6 @@ import org.compiere.util.Language;
 import org.compiere.util.Msg;
 import org.compiere.util.Trx;
 import org.compiere.util.Util;
-import org.compiere.utils.DigestOfFile;
 
 import eone.base.model.MAttachment;
 import eone.base.model.MAttachmentEntry;
@@ -60,6 +59,7 @@ import eone.base.process.ProcessCall;
 import eone.base.process.ProcessInfo;
 import eone.base.process.ProcessInfoParameter;
 import eone.exceptions.EONEException;
+import eone.report.utils.DigestOfFile;
 import eone.exceptions.DBException;
 import net.sf.jasperreports.engine.DefaultJasperReportsContext;
 import net.sf.jasperreports.engine.JRException;
@@ -577,7 +577,7 @@ public class ReportStarter implements ProcessCall, ClientProcess
 				//JRPropertiesUtil.getInstance(jasperContext).setProperty("net.sf.jasperreports.default.pdf.embedded", "true");
 				JRBaseFiller filler = JRFiller.createFiller(jasperContext, jasperReport);
 				JasperPrint jasperPrint = filler.fill(params, conn);
-				params.clear();
+				//params.clear();
 				onrows = filler.getVariableValue(JRVariable.REPORT_COUNT);
 
                 if (!processInfo.isExport())
@@ -686,21 +686,6 @@ public class ReportStarter implements ProcessCall, ClientProcess
             				exporter = export;
             				// give a chance for customize jasper report configuration per report
             				JREventManage.sentPdfExporterConfigurationEvent(export, config, pi);
-            			} else if (ext.equals("xml")) {
-            				JRXmlExporter export = new JRXmlExporter(jasperContext);
-            				SimpleExporterConfiguration config = new SimpleExporterConfiguration();
-            				export.setConfiguration(config);
-            				export.setExporterOutput(new SimpleXmlExporterOutput(strm));
-            				exporter = export;
-            			} else if (ext.equals("html") || ext.equals("htm")) {
-            				HtmlExporter exporterHTML = new HtmlExporter();
-            				SimpleHtmlReportConfiguration htmlConfig = new SimpleHtmlReportConfiguration();
-            				htmlConfig.setEmbedImage(true);
-            				htmlConfig.setAccessibleHtml(true);
-            				exporterHTML.setExporterInput(SimpleExporterInput.getInstance(jasperPrintList));
-            				exporterHTML.setExporterOutput(new SimpleHtmlExporterOutput(file));
-            				exporterHTML.setConfiguration(htmlConfig);
-            				exporter = exporterHTML;
             			} else if (ext.equals("xls")) {
             				JRXlsExporter exporterXLS = new JRXlsExporter(jasperContext);
             				SimpleXlsReportConfiguration xlsConfig = new SimpleXlsReportConfiguration();

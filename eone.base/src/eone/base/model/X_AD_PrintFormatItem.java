@@ -1,5 +1,5 @@
 /******************************************************************************
- * Product: EOoe ERP & CRM Smart Business Solution	                        *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
  * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
@@ -18,7 +18,7 @@ public class X_AD_PrintFormatItem extends PO implements I_AD_PrintFormatItem, I_
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20210806L;
+	private static final long serialVersionUID = 20220113L;
 
     /** Standard Constructor */
     public X_AD_PrintFormatItem (Properties ctx, int AD_PrintFormatItem_ID, String trxName)
@@ -55,7 +55,7 @@ public class X_AD_PrintFormatItem extends PO implements I_AD_PrintFormatItem, I_
     }
 
     /** AccessLevel
-      * @return 7 - System - Client - Org 
+      * @return 4 - System 
       */
     protected int get_AccessLevel()
     {
@@ -75,62 +75,6 @@ public class X_AD_PrintFormatItem extends PO implements I_AD_PrintFormatItem, I_
         .append(get_ID()).append(",Name=").append(getName()).append("]");
       return sb.toString();
     }
-
-	public eone.base.model.I_AD_PrintColor getAD_PrintColor() throws RuntimeException
-    {
-		return (eone.base.model.I_AD_PrintColor)MTable.get(getCtx(), eone.base.model.I_AD_PrintColor.Table_Name)
-			.getPO(getAD_PrintColor_ID(), get_TrxName());	}
-
-	/** Set Print Color.
-		@param AD_PrintColor_ID 
-		Color used for printing and display
-	  */
-	public void setAD_PrintColor_ID (int AD_PrintColor_ID)
-	{
-		if (AD_PrintColor_ID < 1) 
-			set_Value (COLUMNNAME_AD_PrintColor_ID, null);
-		else 
-			set_Value (COLUMNNAME_AD_PrintColor_ID, Integer.valueOf(AD_PrintColor_ID));
-	}
-
-	/** Get Print Color.
-		@return Color used for printing and display
-	  */
-	public int getAD_PrintColor_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_AD_PrintColor_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_AD_PrintFont getAD_PrintFont() throws RuntimeException
-    {
-		return (eone.base.model.I_AD_PrintFont)MTable.get(getCtx(), eone.base.model.I_AD_PrintFont.Table_Name)
-			.getPO(getAD_PrintFont_ID(), get_TrxName());	}
-
-	/** Set Print Font.
-		@param AD_PrintFont_ID 
-		Maintain Print Font
-	  */
-	public void setAD_PrintFont_ID (int AD_PrintFont_ID)
-	{
-		if (AD_PrintFont_ID < 1) 
-			set_Value (COLUMNNAME_AD_PrintFont_ID, null);
-		else 
-			set_Value (COLUMNNAME_AD_PrintFont_ID, Integer.valueOf(AD_PrintFont_ID));
-	}
-
-	/** Get Print Font.
-		@return Maintain Print Font
-	  */
-	public int getAD_PrintFont_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_AD_PrintFont_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
 
 	public eone.base.model.I_AD_PrintFormat getAD_PrintFormat() throws RuntimeException
     {

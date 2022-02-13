@@ -40,7 +40,6 @@ import org.compiere.util.Ini;
 import org.compiere.util.Util;
 
 import eone.base.impexp.PrintDataXLSXExporter;
-import eone.base.model.I_AD_PrintFormat;
 import eone.base.model.MProcess;
 import eone.base.model.PrintInfo;
 import eone.base.process.ProcessInfo;
@@ -69,8 +68,10 @@ public class ReportEngine implements PrintServiceAttributeListener
 	public ReportEngine (Properties ctx, MPrintFormat pf, PrintInfo info, boolean isSummary, String trxName, HashMap<String, Object> m_params)
 	{
 		m_summary = isSummary;
-		if (pf == null)
-			throw new IllegalArgumentException("ReportEngine - no PrintFormat");
+		if (pf == null) {
+			pf = MPrintFormat.get(getCtx(), 10, true);
+		}
+			
 		if (log.isLoggable(Level.INFO)) log.info(pf + " -- " + m_params);
 		m_ctx = ctx;
 		//
@@ -162,7 +163,7 @@ public class ReportEngine implements PrintServiceAttributeListener
 	public String getName()
 	{
 		return m_printFormat.get_Translation("Name");
-	}	//	getName
+	}	//	getName	
 
 	/**
 	 * 	Get PrintFormat
@@ -340,8 +341,9 @@ public class ReportEngine implements PrintServiceAttributeListener
 				
 				StringBuilder styleBuild = new StringBuilder();
 								
-				MPrintFont printFont = MPrintFont.get(m_printFormat.getAD_PrintFont_ID());
-				Font base = printFont.getFont();
+				//MPrintFont printFont = MPrintFont.get(m_printFormat.getAD_PrintFont_ID());
+				Font base = Font.decode("sansserif-PLAIN-10");
+				//Font base = printFont.getFont();
 				Font newFont = new Font(base.getName(), Font.PLAIN, base.getSize()-1);
 				CSSInfo cssInfo = new CSSInfo(newFont, null);
 				styleBuild.append(".tr-level-1 td").append(cssInfo.getCssRule());
@@ -732,36 +734,7 @@ public class ReportEngine implements PrintServiceAttributeListener
 		private Color color;
 		private String cssStr;
 		public CSSInfo (MPrintFormatItem item){
-			MPrintFont mPrintFont = null;
-			I_AD_PrintFormat m_printFormat = item.getAD_PrintFormat();
 			
-			if (item.getAD_PrintFont_ID() > 0) 
-			{
-				mPrintFont = MPrintFont.get(item.getAD_PrintFont_ID());
-			}			
-			else if (m_printFormat.getAD_PrintFont_ID() > 0)
-			{
-				mPrintFont = MPrintFont.get(m_printFormat.getAD_PrintFont_ID());
-			}
-			if (mPrintFont != null && mPrintFont.getAD_PrintFont_ID() > 0)
-			{
-				font = mPrintFont.getFont();				
-			}
-			
-			MPrintColor mPrintColor = null;
-			if (item.getAD_PrintColor_ID() > 0) 
-			{
-				mPrintColor = MPrintColor.get(m_ctx, item.getAD_PrintColor_ID());
-			}
-			else if (m_printFormat.getAD_PrintColor_ID() > 0)
-			{
-				mPrintColor = MPrintColor.get(m_ctx, m_printFormat.getAD_PrintColor_ID());
-			}
-			if (mPrintColor != null && mPrintColor.getAD_PrintColor_ID() > 0)
-			{
-				color = mPrintColor.getColor();
-				
-			}
 		}
 		
 		public CSSInfo (Font font, Color color) {

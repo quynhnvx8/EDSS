@@ -1,4 +1,4 @@
-package org.adempiere.report.jasper;
+package eone.report.jasper;
 
 import eone.base.model.PrintInfo;
 import net.sf.jasperreports.engine.JRException;

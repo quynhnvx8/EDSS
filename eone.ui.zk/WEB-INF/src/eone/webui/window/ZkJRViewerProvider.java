@@ -2,10 +2,9 @@ package eone.webui.window;
 
 import java.util.List;
 
-import org.adempiere.report.jasper.JRViewerProvider;
-import org.adempiere.report.jasper.JRViewerProviderList;
-
 import eone.base.model.PrintInfo;
+import eone.report.jasper.JRViewerProvider;
+import eone.report.jasper.JRViewerProviderList;
 import eone.webui.apps.AEnv;
 import eone.webui.component.Window;
 import eone.webui.part.WindowContainer;

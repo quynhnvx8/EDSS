@@ -15,7 +15,7 @@
  * or via info@compiere.org or http://www.compiere.org/license.html           *
  *****************************************************************************/
 
-package org.adempiere.report.jasper;
+package eone.report.jasper;
 
 import org.adempiere.base.event.EventManager;
 import org.adempiere.base.event.EventProperty;

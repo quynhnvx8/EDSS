@@ -6,8 +6,8 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<import value="net.sf.jasperreports.engine.*"/>
-	<import value="java.util.*"/>
 	<import value="net.sf.jasperreports.engine.data.*"/>
+	<import value="java.util.*"/>
 	<style name="Bold_Left" hAlign="Left" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="true" isItalic="false" isUnderline="false" pdfFontName="TIMESBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
 		<box leftPadding="3"/>
 	</style>
@@ -49,8 +49,7 @@
 From C_cash ca
 	inner join C_ElementValue d On ca.Account_Dr_ID = d.C_ElementValue_ID
 	inner join C_ElementValue c On ca.Account_Cr_ID = c.C_ElementValue_ID
-Where C_Cash_ID = $P{RECORD_ID}
-]]>
+Where C_Cash_ID = $P{RECORD_ID}]]>
 	</queryString>
 	<field name="debit" class="java.lang.String"/>
 	<field name="credit" class="java.lang.String"/>

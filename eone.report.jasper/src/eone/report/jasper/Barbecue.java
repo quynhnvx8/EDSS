@@ -1,4 +1,4 @@
-package org.adempiere.report.jasper;
+package eone.report.jasper;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 

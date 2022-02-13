@@ -33,8 +33,36 @@
 							<followSymlinks>false</followSymlinks>
         				</fileset>
 					</filesets>
+					
 				</configuration>
 			</plugin>
+			<!-- Bo sung thu vien  -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.codehaus.jettison</groupId>
+								    <artifactId>jettison</artifactId>
+								    <version>1.4.1</version>									
+								</artifactItem>
+							</artifactItems>
+							<outputDirectory>WEB-INF/lib</outputDirectory>
+							<stripVersion>true</stripVersion>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!--End Bo sung thu vien  -->
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-compiler-plugin</artifactId>

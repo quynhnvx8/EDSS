@@ -22,7 +22,6 @@ import java.math.RoundingMode;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-import org.compiere.print.MPrintColor;
 import org.compiere.util.CCache;
 import org.compiere.util.Env;
 
@@ -141,11 +140,11 @@ public class MColorSchema extends X_PA_ColorSchema
 	{
 		setName("Default");
 		setMark1Percent (50);
-		setAD_PrintColor1_ID (102);		//	red
+		//setAD_PrintColor1_ID (102);		//	red
 		setMark2Percent (100);
-		setAD_PrintColor2_ID (113);		//	yellow
+		//setAD_PrintColor2_ID (113);		//	yellow
 		setMark3Percent (9999);
-		setAD_PrintColor3_ID (103);		//	green
+		//setAD_PrintColor3_ID (103);		//	green
 	}	//	setDefault
 	
 	/**
@@ -172,30 +171,7 @@ public class MColorSchema extends X_PA_ColorSchema
 	 */
 	public Color getColor (int percent)
 	{
-		int AD_PrintColor_ID = 0;
-		if (percent <= getMark1Percent() || getMark2Percent() == 0)
-			AD_PrintColor_ID = getAD_PrintColor1_ID();
-		else if (percent <= getMark2Percent() || getMark3Percent() == 0)
-			AD_PrintColor_ID = getAD_PrintColor2_ID();
-		else if (percent <= getMark3Percent() || getMark4Percent() == 0)
-			AD_PrintColor_ID = getAD_PrintColor3_ID();
-		else
-			AD_PrintColor_ID = getAD_PrintColor4_ID();
-		if (AD_PrintColor_ID == 0)
-		{
-			if (getAD_PrintColor3_ID() != 0)
-				AD_PrintColor_ID = getAD_PrintColor3_ID();
-			else if (getAD_PrintColor2_ID() != 0)
-				AD_PrintColor_ID = getAD_PrintColor2_ID();
-			else if (getAD_PrintColor1_ID() != 0)
-				AD_PrintColor_ID = getAD_PrintColor1_ID();
-		}
-		if (AD_PrintColor_ID == 0)
-			return Color.black;
-		//
-		MPrintColor pc = MPrintColor.get(getCtx(), AD_PrintColor_ID);
-		if (pc != null)
-			return pc.getColor();
+		
 		return Color.black;
 	}	//	getColor
 

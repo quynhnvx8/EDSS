@@ -7,6 +7,7 @@ package eone.base.model;
 
 import java.sql.ResultSet;
 import java.util.Properties;
+
 import org.compiere.util.KeyNamePair;
 
 /** Generated Model for PA_ColorSchema
@@ -18,7 +19,7 @@ public class X_PA_ColorSchema extends PO implements I_PA_ColorSchema, I_Persiste
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20210905L;
+	private static final long serialVersionUID = 20220113L;
 
     /** Standard Constructor */
     public X_PA_ColorSchema (Properties ctx, int PA_ColorSchema_ID, String trxName)
@@ -26,8 +27,6 @@ public class X_PA_ColorSchema extends PO implements I_PA_ColorSchema, I_Persiste
       super (ctx, PA_ColorSchema_ID, trxName);
       /** if (PA_ColorSchema_ID == 0)
         {
-			setAD_PrintColor1_ID (0);
-			setAD_PrintColor2_ID (0);
 			setMark1Percent (0);
 			setMark2Percent (0);
 			setName (null);
@@ -42,7 +41,7 @@ public class X_PA_ColorSchema extends PO implements I_PA_ColorSchema, I_Persiste
     }
 
     /** AccessLevel
-      * @return 6 - System - Client 
+      * @return 4 - System 
       */
     protected int get_AccessLevel()
     {
@@ -62,118 +61,6 @@ public class X_PA_ColorSchema extends PO implements I_PA_ColorSchema, I_Persiste
         .append(get_ID()).append(",Name=").append(getName()).append("]");
       return sb.toString();
     }
-
-	public eone.base.model.I_AD_PrintColor getAD_PrintColor1() throws RuntimeException
-    {
-		return (eone.base.model.I_AD_PrintColor)MTable.get(getCtx(), eone.base.model.I_AD_PrintColor.Table_Name)
-			.getPO(getAD_PrintColor1_ID(), get_TrxName());	}
-
-	/** Set Color 1.
-		@param AD_PrintColor1_ID 
-		First color used
-	  */
-	public void setAD_PrintColor1_ID (int AD_PrintColor1_ID)
-	{
-		if (AD_PrintColor1_ID < 1) 
-			set_Value (COLUMNNAME_AD_PrintColor1_ID, null);
-		else 
-			set_Value (COLUMNNAME_AD_PrintColor1_ID, Integer.valueOf(AD_PrintColor1_ID));
-	}
-
-	/** Get Color 1.
-		@return First color used
-	  */
-	public int getAD_PrintColor1_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_AD_PrintColor1_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_AD_PrintColor getAD_PrintColor2() throws RuntimeException
-    {
-		return (eone.base.model.I_AD_PrintColor)MTable.get(getCtx(), eone.base.model.I_AD_PrintColor.Table_Name)
-			.getPO(getAD_PrintColor2_ID(), get_TrxName());	}
-
-	/** Set Color 2.
-		@param AD_PrintColor2_ID 
-		Second color used
-	  */
-	public void setAD_PrintColor2_ID (int AD_PrintColor2_ID)
-	{
-		if (AD_PrintColor2_ID < 1) 
-			set_Value (COLUMNNAME_AD_PrintColor2_ID, null);
-		else 
-			set_Value (COLUMNNAME_AD_PrintColor2_ID, Integer.valueOf(AD_PrintColor2_ID));
-	}
-
-	/** Get Color 2.
-		@return Second color used
-	  */
-	public int getAD_PrintColor2_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_AD_PrintColor2_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_AD_PrintColor getAD_PrintColor3() throws RuntimeException
-    {
-		return (eone.base.model.I_AD_PrintColor)MTable.get(getCtx(), eone.base.model.I_AD_PrintColor.Table_Name)
-			.getPO(getAD_PrintColor3_ID(), get_TrxName());	}
-
-	/** Set Color 3.
-		@param AD_PrintColor3_ID 
-		Third color used
-	  */
-	public void setAD_PrintColor3_ID (int AD_PrintColor3_ID)
-	{
-		if (AD_PrintColor3_ID < 1) 
-			set_Value (COLUMNNAME_AD_PrintColor3_ID, null);
-		else 
-			set_Value (COLUMNNAME_AD_PrintColor3_ID, Integer.valueOf(AD_PrintColor3_ID));
-	}
-
-	/** Get Color 3.
-		@return Third color used
-	  */
-	public int getAD_PrintColor3_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_AD_PrintColor3_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_AD_PrintColor getAD_PrintColor4() throws RuntimeException
-    {
-		return (eone.base.model.I_AD_PrintColor)MTable.get(getCtx(), eone.base.model.I_AD_PrintColor.Table_Name)
-			.getPO(getAD_PrintColor4_ID(), get_TrxName());	}
-
-	/** Set Color 4.
-		@param AD_PrintColor4_ID 
-		Forth color used
-	  */
-	public void setAD_PrintColor4_ID (int AD_PrintColor4_ID)
-	{
-		if (AD_PrintColor4_ID < 1) 
-			set_Value (COLUMNNAME_AD_PrintColor4_ID, null);
-		else 
-			set_Value (COLUMNNAME_AD_PrintColor4_ID, Integer.valueOf(AD_PrintColor4_ID));
-	}
-
-	/** Get Color 4.
-		@return Forth color used
-	  */
-	public int getAD_PrintColor4_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_AD_PrintColor4_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
 
 	/** Set Description.
 		@param Description 

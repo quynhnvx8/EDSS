@@ -182,6 +182,7 @@ public abstract class AbstractProcessCtl implements Runnable
 			params.put("ProcessInfo", m_pi);
 			m_pi.setReportingProcess(true);
 			m_pi.setClassName(ProcessUtil.JASPER_STARTER_CLASS);
+			//ReportCtl.start(m_processUI, windowno, m_pi, params);
 			startProcess(params);			
 			return;
 		}

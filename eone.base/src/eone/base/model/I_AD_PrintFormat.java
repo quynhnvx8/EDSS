@@ -1,5 +1,5 @@
 /******************************************************************************
- * Product: EOoe ERP & CRM Smart Business Solution	                        *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
  * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 package eone.base.model;
@@ -23,9 +23,9 @@ public interface I_AD_PrintFormat
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 7 - System - Client - Org 
+    /** AccessLevel = 4 - System 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(7);
+    BigDecimal accessLevel = BigDecimal.valueOf(4);
 
     /** Load Meta Data */
 
@@ -49,36 +49,6 @@ public interface I_AD_PrintFormat
 	  * Organizational entity within client
 	  */
 	public int getAD_Org_ID();
-
-    /** Column name AD_PrintColor_ID */
-    public static final String COLUMNNAME_AD_PrintColor_ID = "AD_PrintColor_ID";
-
-	/** Set Print Color.
-	  * Color used for printing and display
-	  */
-	public void setAD_PrintColor_ID (int AD_PrintColor_ID);
-
-	/** Get Print Color.
-	  * Color used for printing and display
-	  */
-	public int getAD_PrintColor_ID();
-
-	public eone.base.model.I_AD_PrintColor getAD_PrintColor() throws RuntimeException;
-
-    /** Column name AD_PrintFont_ID */
-    public static final String COLUMNNAME_AD_PrintFont_ID = "AD_PrintFont_ID";
-
-	/** Set Print Font.
-	  * Maintain Print Font
-	  */
-	public void setAD_PrintFont_ID (int AD_PrintFont_ID);
-
-	/** Get Print Font.
-	  * Maintain Print Font
-	  */
-	public int getAD_PrintFont_ID();
-
-	public eone.base.model.I_AD_PrintFont getAD_PrintFont() throws RuntimeException;
 
     /** Column name AD_PrintFormat_ID */
     public static final String COLUMNNAME_AD_PrintFormat_ID = "AD_PrintFormat_ID";

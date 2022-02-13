@@ -23,9 +23,9 @@ public interface I_PA_ColorSchema
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 6 - System - Client 
+    /** AccessLevel = 4 - System 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(6);
+    BigDecimal accessLevel = BigDecimal.valueOf(4);
 
     /** Load Meta Data */
 
@@ -49,66 +49,6 @@ public interface I_PA_ColorSchema
 	  * Organizational entity within client
 	  */
 	public int getAD_Org_ID();
-
-    /** Column name AD_PrintColor1_ID */
-    public static final String COLUMNNAME_AD_PrintColor1_ID = "AD_PrintColor1_ID";
-
-	/** Set Color 1.
-	  * First color used
-	  */
-	public void setAD_PrintColor1_ID (int AD_PrintColor1_ID);
-
-	/** Get Color 1.
-	  * First color used
-	  */
-	public int getAD_PrintColor1_ID();
-
-	public eone.base.model.I_AD_PrintColor getAD_PrintColor1() throws RuntimeException;
-
-    /** Column name AD_PrintColor2_ID */
-    public static final String COLUMNNAME_AD_PrintColor2_ID = "AD_PrintColor2_ID";
-
-	/** Set Color 2.
-	  * Second color used
-	  */
-	public void setAD_PrintColor2_ID (int AD_PrintColor2_ID);
-
-	/** Get Color 2.
-	  * Second color used
-	  */
-	public int getAD_PrintColor2_ID();
-
-	public eone.base.model.I_AD_PrintColor getAD_PrintColor2() throws RuntimeException;
-
-    /** Column name AD_PrintColor3_ID */
-    public static final String COLUMNNAME_AD_PrintColor3_ID = "AD_PrintColor3_ID";
-
-	/** Set Color 3.
-	  * Third color used
-	  */
-	public void setAD_PrintColor3_ID (int AD_PrintColor3_ID);
-
-	/** Get Color 3.
-	  * Third color used
-	  */
-	public int getAD_PrintColor3_ID();
-
-	public eone.base.model.I_AD_PrintColor getAD_PrintColor3() throws RuntimeException;
-
-    /** Column name AD_PrintColor4_ID */
-    public static final String COLUMNNAME_AD_PrintColor4_ID = "AD_PrintColor4_ID";
-
-	/** Set Color 4.
-	  * Forth color used
-	  */
-	public void setAD_PrintColor4_ID (int AD_PrintColor4_ID);
-
-	/** Get Color 4.
-	  * Forth color used
-	  */
-	public int getAD_PrintColor4_ID();
-
-	public eone.base.model.I_AD_PrintColor getAD_PrintColor4() throws RuntimeException;
 
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";

@@ -54,7 +54,8 @@ Import-Package: javax.activation,
  org.apache.xerces.xs;version="2.9.0",
  org.apache.xerces.xs.datatypes;version="2.9.0",
  org.apache.xml.serialize;version="2.9.0",
- org.osgi.framework;version="1.6.0"
+ org.osgi.framework;version="1.6.0",
+ org.w3c.dom
 Require-Bundle: eone.base;bundle-version="0.0.0",
  eone.ui;bundle-version="0.0.0",
  org.apache.ecs;bundle-version="0.0.0",
@@ -99,7 +100,8 @@ Require-Bundle: eone.base;bundle-version="0.0.0",
  jakarta.xml.ws-api;bundle-version="2.3.2",
  jakarta.xml.soap-api;bundle-version="1.4.1"
 Bundle-ClassPath: .,
- WEB-INF/lib/idempiere-xmlbeans.jar
+ WEB-INF/lib/idempiere-xmlbeans.jar,
+ WEB-INF/lib/jettison-1.4.1.jar
 Export-Package: org.compiere.model,
  org.idempiere.adInterface.x10,
  org.idempiere.adInterface.x10.impl,
@@ -109,6 +111,6 @@ Export-Package: org.compiere.model,
  org.idempiere.webservices.fault
 Web-ContextPath: ADInterface
 Bundle-ActivationPolicy: lazy
-Automatic-Module-Name: org.idempiere.webservices
+Automatic-Module-Name: eone.webservices
 Bundle-Vendor: EONE Community
 Bundle-RequiredExecutionEnvironment: JavaSE-11
