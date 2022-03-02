@@ -6,11 +6,16 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry kind="src" path="WEB-INF/src"/>
+	<classpathentry kind="src" path="WEB-INF/src/"/>
 	<classpathentry exported="true" kind="lib" path="WEB-INF/lib/ckez.jar"/>
 	<classpathentry exported="true" kind="lib" path="WEB-INF/lib/daisydiff.jar"/>
 	<classpathentry exported="true" kind="lib" path="WEB-INF/lib/owasp-java-html-sanitizer.jar"/>
-	<!--<classpathentry exported="true" kind="lib" path="WEB-INF/lib/iText-5.0.0.jar"/>
-	-->
+	<classpathentry exported="true" kind="lib" path="WEB-INF/lib/breeze.jar"/>
+	<classpathentry exported="true" kind="lib" path="WEB-INF/lib/calendar.jar"/>
+	<classpathentry exported="true" kind="lib" path="WEB-INF/lib/closure-compiler.jar"/>
+	<classpathentry exported="true" kind="lib" path="WEB-INF/lib/gmapsz.jar"/>
+	<classpathentry exported="true" kind="lib" path="WEB-INF/lib/timelinez.jar"/>
+	<classpathentry exported="true" kind="lib" path="WEB-INF/lib/timeplotz.jar"/>
+	<classpathentry exported="true" kind="lib" path="WEB-INF/lib/iceblue_c.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -15,7 +15,7 @@
 		<tycho.version>2.3.0</tycho.version>
 		<tycho.extras.version>${tycho.version}</tycho.extras.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jp.version>6.11.0</jp.version>
+		<jp.version>6.15.0</jp.version>
 		<zk.version>9.6.0.1</zk.version>
 		<zk.javassist.src.version>3.23.1-GA</zk.javassist.src.version>
 		<maven.dependency.version>3.1.1</maven.dependency.version>
@@ -28,14 +28,13 @@
 		<maven-clean-plugin.version>2.5</maven-clean-plugin.version><!-- get from master, update when mave have update-->
 		<!-- default value of properties, use when run without profile -->
 		<eone.target>eone.p2.targetplatform</eone.target>
-		<idempiere.target>org.idempiere.p2.targetplatform</idempiere.target>
-		<idempiere-equinox-url>https://download.eclipse.org/eclipse/updates/4.20</idempiere-equinox-url>
-		<idempiere-equinox-repository-id>eclipse-2021-06</idempiere-equinox-repository-id>
-		<idempiere-orbit-url>https://download.eclipse.org/tools/orbit/downloads/drops/R20210602031627/repository</idempiere-orbit-url>
-		<idempiere-orbit-repository-id>orbit-2021-06-R20210602031627</idempiere-orbit-repository-id>
+		<eone-equinox-url>https://download.eclipse.org/eclipse/updates/4.15</eone-equinox-url>
+		<eone-equinox-repository-id>eclipse-2020-03</eone-equinox-repository-id>
+		<eone-orbit-url>https://download.eclipse.org/tools/orbit/downloads/drops/R20200831200620/repository</eone-orbit-url>
+		<eone-orbit-repository-id>orbit-2020-09-R20200831200620</eone-orbit-repository-id>
 		<url.file.srv>https://raw.githubusercontent.com/idempiere/binary.file/master</url.file.srv>
 		<extra.ui.install>org.eclipse.equinox.p2.director, eone.equinox.p2.director.feature.feature.group</extra.ui.install>
-		<idempiere.product.id>eone.server.product</idempiere.product.id>
+		<eone.product.id>eone.server.product</eone.product.id>
 		<codehaus.plexus>2.8.5</codehaus.plexus>
 	</properties>
 
@@ -112,13 +111,13 @@
 			        <configuration>
 				        <repositories>
 				            <repository>
-				                <id>${idempiere-equinox-repository-id}</id>
-				                <url>${idempiere-equinox-url}</url>
+				                <id>${eone-equinox-repository-id}</id>
+				                <url>${eone-equinox-url}</url>
 				                <layout>p2</layout>
 				            </repository>
 				            <repository>
-				                <id>${idempiere-orbit-repository-id}</id>
-				                <url>${idempiere-orbit-url}</url>
+				                <id>${eone-orbit-repository-id}</id>
+				                <url>${eone-orbit-url}</url>
 				                <layout>p2</layout>
 				            </repository>
 				        </repositories>
@@ -581,13 +580,13 @@
             <id>buildP2FromMaven</id>
             <repositories>
             	<repository>
-                	<id>${idempiere-equinox-repository-id}</id>
-                    <url>${idempiere-equinox-url}</url>
+                	<id>${eone-equinox-repository-id}</id>
+                    <url>${eone-equinox-url}</url>
                 	<layout>p2</layout>
                 </repository>
                 <repository>
-                    <id>${idempiere-orbit-repository-id}</id>
-                    <url>${idempiere-orbit-url}</url>
+                    <id>${eone-orbit-repository-id}</id>
+                    <url>${eone-orbit-url}</url>
                     <layout>p2</layout>
                 </repository>
             </repositories>

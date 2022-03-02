@@ -15,7 +15,6 @@
 		<module>eone.base</module>
 		<module>eone.eclipse.equinox.http.servlet</module>
 		<module>eone.install</module>
-		<module>eone.report.jasper.library</module>
 		<module>eone.report.jasper</module>
 		<module>eone.server</module>		
 		<module>eone.ui</module>
@@ -26,7 +25,6 @@
 		<module>eone.hazelcast.service</module>
 		<module>eone.webservices</module>
 		<module>eone.webservices-feature</module>
-		<module>eone.zk.extra</module>
 		<module>eone.report.jasper-feature</module>
 		<module>eone.base-feature</module>
 		<module>eone.server-feature</module>
@@ -36,7 +34,6 @@
 		<module>eone.equinox.p2.director-feature</module>
 		<module>eone.felix.webconsole-feature</module>
 		<module>eone.hazelcast.service-feature</module>
-		<module>eone.zk-feature</module>
 		<module>eone.webservices.client-feature</module>
 		<module>eone.p2</module>
 		<module>${eone.target}</module>

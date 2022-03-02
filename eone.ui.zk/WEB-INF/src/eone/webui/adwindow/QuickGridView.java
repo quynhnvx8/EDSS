@@ -49,7 +49,6 @@ import org.zkoss.zul.Paging;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Vbox;
 import org.zkoss.zul.event.ZulEvents;
-import org.zkoss.zul.impl.CustomGridDataLoader;
 
 import eone.base.model.GridField;
 import eone.base.model.GridTab;

@@ -52,7 +52,7 @@
 					<products>
 						<product>
 							<!-- The uid in the .product file, NOT the name of the .product file -->
-							<id>${idempiere.product.id}</id>
+							<id>${eone.product.id}</id>
 							<archiveFileName>idempiere-server-${unqualifiedVersion}-${buildQualifier}</archiveFileName>
 						</product>
 					</products>
@@ -63,7 +63,7 @@
 				<groupId>org.eclipse.tycho.extras</groupId>
 				<artifactId>tycho-eclipserun-plugin</artifactId>
 				<configuration>
-					<appArgLine>-application org.eclipse.equinox.p2.director -repository file:${project.build.directory}/repository -destination ${project.build.directory}/products/${idempiere.product.id}/${tycho.env.osgi.os}/${tycho.env.osgi.ws}/${tycho.env.osgi.arch} -installIU "${extra.ui.install}" -profileProperties org.eclipse.update.install.features=true -p2.os ${tycho.env.osgi.os} -p2.ws ${tycho.env.osgi.ws} -p2.arch ${tycho.env.osgi.arch} -consoleLog -roaming</appArgLine>
+					<appArgLine>-application org.eclipse.equinox.p2.director -repository file:${project.build.directory}/repository -destination ${project.build.directory}/products/${eone.product.id}/${tycho.env.osgi.os}/${tycho.env.osgi.ws}/${tycho.env.osgi.arch} -installIU "${extra.ui.install}" -profileProperties org.eclipse.update.install.features=true -p2.os ${tycho.env.osgi.os} -p2.ws ${tycho.env.osgi.ws} -p2.arch ${tycho.env.osgi.arch} -consoleLog -roaming</appArgLine>
 				</configuration>
 				<executions>
 					<execution>

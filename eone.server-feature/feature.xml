@@ -38,7 +38,7 @@
          version="0.0.0"/>
 
    <includes
-         id="eone.zk.feature"
+         id="eone.ui.zk.feature"
          version="0.0.0"/>
 
    <includes

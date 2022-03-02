@@ -560,8 +560,6 @@
 		<unit id="joda-time.source" version="2.10.0"/>
 		<unit id="json" version="20180813.0.0"/>
 		<unit id="json.source" version="20180813.0.0"/>
-		<unit id="net.sf.jasperreports.engine" version="6.11.0"/>
-		<unit id="net.sf.jasperreports.engine.source" version="6.11.0"/>
 		<unit id="net.sf.supercsv.super-csv" version="2.4.0"/>
 		<unit id="net.sf.supercsv.super-csv.source" version="2.4.0"/>
 		<unit id="org.apache.activemq.activemq-core" version="5.7.0"/>
@@ -837,14 +835,24 @@
 		<unit id="stax2-api" version="4.2.0"/>
 		<unit id="stax2-api.source" version="4.2.0"/>
 	</location>
-	
-	<location includeSource="true" missingManifest="generate" type="Maven">
-	  <groupId>org.codehaus.jettison</groupId>
-      <artifactId>jettison</artifactId>
-      <version>1.4.1</version>
-	  <type>jar</type>
+	<location includeAllPlatforms="true" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+		<repository location="https://idempiere.github.io/binary.file/p2.maven/maven-p2-R20201029"/>
+		<unit id="net.sf.jasperreports.engine" version="6.15.0"/>
+		<unit id="net.sf.jasperreports.engine.source" version="6.15.0"/>
 	</location>
 	
+	<location includeSource="true" missingManifest="generate" type="Maven">
+      	<groupId>net.sf.jasperreports</groupId>
+      	<artifactId>jasperreports</artifactId>
+      	<version>6.15.0</version>
+      	<type>jar</type>
+	</location>
+	<location includeSource="true" missingManifest="generate" type="Maven">
+    	<groupId>net.sf.jasperreports</groupId>
+    	<artifactId>jasperreports-fonts</artifactId>
+    	<version>6.15.0</version>
+		<type>jar</type>
+	</location>
 </locations>
 <targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11"/>
 </target>

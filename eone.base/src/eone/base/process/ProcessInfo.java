@@ -78,8 +78,16 @@ public class ProcessInfo implements Serializable
 	private String    			m_Summary = "";
 	/** Execution had an error      */
 	private boolean     		m_Error = false;
+	public String getJasperReport() {
+		
+		return m_JasperReport;
+	}
 
-	
+	public void setJasperReport(String m_JasperReport) {
+		this.m_JasperReport = m_JasperReport;
+	}
+
+	private String 			m_JasperReport = "";
 
 	//Quynhnv.x8 add.
 	//Lay so luong ban ghi cua cau lenh tu ProcedureName

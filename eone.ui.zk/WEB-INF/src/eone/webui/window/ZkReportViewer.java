@@ -309,6 +309,7 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 		if (ThemeManager.isUseFontIconForImage())
 			LayoutUtils.addSclass("medium-toolbarbutton", bSendMail);
 		*/
+		m_isCanExport = false;
 		if ( m_isCanExport )
 		{
 			bExport.setName("Export");

@@ -6,8 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 
+import org.compiere.EOne;
 import org.compiere.tools.FileUtil;
 import org.compiere.util.CLogger;
 import org.compiere.util.Env;
@@ -52,19 +54,17 @@ import net.sf.jasperreports.engine.DefaultJasperReportsContext;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.JasperReportsContext;
 import net.sf.jasperreports.engine.SimpleJasperReportsContext;
 import net.sf.jasperreports.engine.export.HtmlExporter;
-import net.sf.jasperreports.engine.export.JRCsvExporter;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
+import net.sf.jasperreports.engine.fonts.FontFamily;
+import net.sf.jasperreports.engine.fonts.SimpleFontFace;
+import net.sf.jasperreports.engine.fonts.SimpleFontFamily;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleHtmlExporterOutput;
 import net.sf.jasperreports.export.SimpleHtmlReportConfiguration;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
-import net.sf.jasperreports.export.SimpleWriterExporterOutput;
-import net.sf.jasperreports.export.SimpleXlsReportConfiguration;
 import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
 
 public class ZkJRViewer extends Window implements EventListener<Event>, ITabOnCloseHandler {
@@ -157,20 +157,11 @@ public class ZkJRViewer extends Window implements EventListener<Event>, ITabOnCl
 		if (isCanExport) {
 			previewType.appendItem("PDF", "PDF");//TODO chua tim duoc loi export PDF
 			previewType.appendItem("HTML", "HTML");
-			previewType.appendItem("XLS", "XLS");
-			//previewType.appendItem("CSV", "CSV");
-			//previewType.appendItem("SSV", "SSV");
 			previewType.appendItem("XLSX", "XLSX");
 			if ("PDF".equals(defaultType)) {
 				previewType.setSelectedIndex(0);
 			} else if ("HTML".equals(defaultType)) {
 				previewType.setSelectedIndex(1);
-			} else if ("XLS".equals(defaultType)) {
-				previewType.setSelectedIndex(2);
-			} else if ("CSV".equals(defaultType)) {
-				previewType.setSelectedIndex(3);
-			} else if ("SSV".equals(defaultType)) {
-				previewType.setSelectedIndex(4);
 			} else if ("XLSX".equals(defaultType)) {
 				previewType.setSelectedIndex(5);
 			} else {
@@ -180,16 +171,11 @@ public class ZkJRViewer extends Window implements EventListener<Event>, ITabOnCl
 		} else {
 			previewType.appendItem("PDF", "PDF");
 			previewType.appendItem("HTML", "HTML");
+			previewType.appendItem("EXCEL", "XLSX");
 			if ("PDF".equals(defaultType)) {
 				previewType.setSelectedIndex(0);
 			} else if ("HTML".equals(defaultType)) {
 				previewType.setSelectedIndex(1);
-			} else if ("XLS".equals(defaultType)) {
-				previewType.setSelectedIndex(0); // default to PDF if cannot export
-			} else if ("CSV".equals(defaultType)) {
-				previewType.setSelectedIndex(0); // default to PDF if cannot export
-			} else if ("SSV".equals(defaultType)) {
-				previewType.setSelectedIndex(0); // default to PDF if cannot export
 			} else if ("XLSX".equals(defaultType)) {
 				previewType.setSelectedIndex(0); // default to PDF if cannot export
 			} else {
@@ -209,7 +195,7 @@ public class ZkJRViewer extends Window implements EventListener<Event>, ITabOnCl
 		else
 			bSendMail.setImage(ThemeManager.getThemeResource("images/SendMail24.png"));
 		bSendMail.setTooltiptext(Util.cleanAmp(Msg.getMsg(Env.getCtx(), "SendMail")));
-		toolbar.appendChild(bSendMail);
+		//toolbar.appendChild(bSendMail);
 		bSendMail.addEventListener(Events.ON_CLICK, this);
 		
 		toolbar.appendChild(new Separator("vertical"));
@@ -219,7 +205,7 @@ public class ZkJRViewer extends Window implements EventListener<Event>, ITabOnCl
 		else
 			bArchive.setImage(ThemeManager.getThemeResource("images/Archive24.png"));
 		bArchive.setTooltiptext(Util.cleanAmp(Msg.getMsg(Env.getCtx(), "Archive")));
-		toolbar.appendChild(bArchive);
+		//toolbar.appendChild(bArchive);
 		bArchive.addEventListener(Events.ON_CLICK, this);
 
 		North north = new North();
@@ -341,31 +327,9 @@ public class ZkJRViewer extends Window implements EventListener<Event>, ITabOnCl
 			Thread.currentThread().setContextClassLoader(JasperReport.class.getClassLoader());
 			Listitem selected = previewType.getSelectedItem();
 			reportType=selected.getValue();
+			//reportType = "HTML";
 			if ( "PDF".equals( reportType ) )
 			{
-				String path = System.getProperty("java.io.tmpdir");
-				String prefix = null;
-				if (isList)
-					prefix = makePrefix(jasperPrintList.get(0).getName())+"_List";
-				else
-					prefix = makePrefix(jasperPrint.getName());
-				if (prefix.length() < 3)
-					prefix += "_".repeat(3-prefix.length());
-				if (log.isLoggable(Level.FINE)) log.log(Level.FINE, "Path="+path + " Prefix="+prefix);
-				File file = File.createTempFile(prefix, ".pdf", new File(path));
-
-				HtmlExporter exporter = new HtmlExporter();
-				SimpleHtmlReportConfiguration htmlConfig = new SimpleHtmlReportConfiguration();
-				htmlConfig.setEmbedImage(true);
-				htmlConfig.setAccessibleHtml(true);
-				if (!isList){
-					jasperPrintList = new ArrayList<>();
-					jasperPrintList.add(jasperPrint);
-				}
-				exporter.setExporterInput(SimpleExporterInput.getInstance(jasperPrintList));
-				exporter.setExporterOutput(new SimpleHtmlExporterOutput(file));
-				exporter.setConfiguration(htmlConfig);
-		 	    exporter.exportReport();
 				attachment = getPDF();
 				media = new AMedia(m_title + ".pdf", "pdf", "application/pdf", attachment, true);
 
@@ -394,34 +358,6 @@ public class ZkJRViewer extends Window implements EventListener<Event>, ITabOnCl
 				exporter.setConfiguration(htmlConfig);
 		 	    exporter.exportReport();
 				media = new AMedia(m_title, "html", "text/html", file, false);
-			} else if ("XLS".equals(reportType)) {
-				String path = System.getProperty("java.io.tmpdir");
-				String prefix = null;
-				if (isList)
-					prefix = makePrefix(jasperPrintList.get(0).getName())+"_List";
-				else
-					prefix = makePrefix(jasperPrint.getName());
-				if (prefix.length() < 3)
-					prefix += "_".repeat(3-prefix.length());
-				if (log.isLoggable(Level.FINE)) log.log(Level.FINE, "Path="+path + " Prefix="+prefix);
-				File file = File.createTempFile(prefix, ".xls", new File(path));
-		        FileOutputStream fos = new FileOutputStream(file);
-
-				// coding For Excel:
-				JRXlsExporter exporterXLS = new JRXlsExporter();
-				SimpleXlsReportConfiguration xlsConfig = new SimpleXlsReportConfiguration();
-				xlsConfig.setOnePagePerSheet(false);
-
-				if (!isList){
-					jasperPrintList = new ArrayList<>();
-					jasperPrintList.add(jasperPrint);
-				}
-				exporterXLS.setExporterInput(SimpleExporterInput.getInstance(jasperPrintList));
-				exporterXLS.setExporterOutput(new SimpleOutputStreamExporterOutput(fos));
-				exporterXLS.setConfiguration(xlsConfig);
-				exporterXLS.exportReport();
-				media = new AMedia(m_title + ".xls", "xls", "application/vnd.ms-excel", file, true);
-
 			} else if ("XLSX".equals(reportType)) {
 				String path = System.getProperty("java.io.tmpdir");
 				String prefix = null;
@@ -450,30 +386,9 @@ public class ZkJRViewer extends Window implements EventListener<Event>, ITabOnCl
 				exporterXLSX.exportReport();
 				media = new AMedia(m_title + ".xlsx", "xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", file, true);
 
-			}else if ("CSV".equals(reportType)) {
-				String path = System.getProperty("java.io.tmpdir");
-				String prefix = null;
-				if (isList)
-					prefix = makePrefix(jasperPrintList.get(0).getName())+"_List";
-				else
-					prefix = makePrefix(jasperPrint.getName());
-				if (prefix.length() < 3)
-					prefix += "_".repeat(3-prefix.length());
-				if (log.isLoggable(Level.FINE)) log.log(Level.FINE, "Path="+path + " Prefix="+prefix);
-				File file = File.createTempFile(prefix, ".csv", new File(path));
-				FileOutputStream fos = new FileOutputStream(file);
-				JRCsvExporter exporter= new JRCsvExporter();
-				if (!isList){
-					jasperPrintList = new ArrayList<>();
-					jasperPrintList.add(jasperPrint);
-				}
-				exporter.setExporterInput(SimpleExporterInput.getInstance(jasperPrintList));
-				exporter.setExporterOutput(new SimpleWriterExporterOutput(fos));
-				exporter.exportReport();
-
-				media = new AMedia(m_title + ".csv", "csv", "application/csv", file, true);
 			}
-			} finally {
+			
+		} finally {
 			Thread.currentThread().setContextClassLoader(cl);
 		}
 
@@ -481,7 +396,15 @@ public class ZkJRViewer extends Window implements EventListener<Event>, ITabOnCl
 		Events.echoEvent("onRenderReport", this, null);
 	}
 
+	
+	public static final String TIME_NONE = EOne.getEOneHome() + File.separator  + "fonts/times_new_roman.ttf";
+	public static final String TIME_BOLD = EOne.getEOneHome() + File.separator  + "fonts/times_new_roman_bold.ttf";
+	public static final String TIME_ITALIC = EOne.getEOneHome() + File.separator  + "fonts/times_new_roman_italic.ttf";
+	public static final String TIME_BOLD_ITALIC = EOne.getEOneHome() + File.separator  + "fonts/times_new_roman_bold_italic.ttf";
+	
+	
 	private File getPDF() throws IOException, JRException {
+		
 		String path = System.getProperty("java.io.tmpdir");
 
 		String prefix = null;
@@ -495,15 +418,53 @@ public class ZkJRViewer extends Window implements EventListener<Event>, ITabOnCl
 			log.log(Level.FINE, "Path="+path + " Prefix="+prefix);
 		}
 		File file = new File(FileUtil.getTempMailName(prefix, ".pdf"));
-		JasperReportsContext context = new SimpleJasperReportsContext(DefaultJasperReportsContext.getInstance());
-		JRPdfExporter exporter = new JRPdfExporter(context);
+		SimpleJasperReportsContext context = new SimpleJasperReportsContext(DefaultJasperReportsContext.getInstance());
+		
 		if (!isList){
 			jasperPrintList = new ArrayList<>();
 			jasperPrintList.add(jasperPrint);
 		}
+		/*
+		//create the context object and the font extension
+		SimpleJasperReportsContext jasperReportsContext = new SimpleJasperReportsContext();
+
+		SimpleFontFamily fontFamily = new SimpleFontFamily(jasperReportsContext);
+		fontFamily.setName("family name");//to be used in reports as fontName
+		fontFamily.setPdfEmbedded(true);
+		fontFamily.setPdfEncoding("Identity-H");
+
+		SimpleFontFace regular = new SimpleFontFace(jasperReportsContext);
+		regular.setTtf("font ttf path");
+		fontFamily.setNormalFace(regular);
+
+		jasperReportsContext.setExtensions(FontFamily.class, Arrays.asList(fontFamily));
+
+		//use the context when filling and exporting reports
+		//note that there are variations here depending on the API you use for filling and exporting
+		jasperPrint = JasperFillManager.getInstance(jasperReportsContext).fill(jasperReport, params);
 		
-		//exporter.setParameter(JRExporterParameter.OUTPUT_FILE, jasperPrint);
-		exporter.setExporterInput(SimpleExporterInput.getInstance(jasperPrintList));
+		JasperExportManager.getInstance(jasperReportsContext).exportToPdf(jasperPrint);
+		exporter = new JRPdfExporter(jasperReportsContext);
+		
+		jasperReportsContext.setExtensions(FontFamily.class, Arrays.asList(fontFamily));
+		*/
+		SimpleFontFamily fontFamily = new SimpleFontFamily(context);
+		fontFamily.setName("Times New Roman");//to be used in reports as fontName
+		fontFamily.setPdfEmbedded(true);
+		fontFamily.setPdfEncoding("Identity-H");
+
+		SimpleFontFace regular = new SimpleFontFace(context);
+		regular.setTtf(TIME_NONE);
+		
+		fontFamily.setNormalFace(regular);
+		
+		JRPdfExporter exporter = new JRPdfExporter(context);
+		context.setExtensions(FontFamily.class, Arrays.asList(fontFamily));
+		//jasperPrint.setProperty("net.sf.jasperreports.default.pdf.font.name", fontFamily.getName()); 
+		//jasperPrint.setProperty("net.sf.jasperreports.default.pdf.encoding", "UTF-8"); 
+		//jasperPrint.setProperty("net.sf.jasperreports.default.pdf.embedded", "true");
+		//exporter.setParameter(JRExporterParameter.JASPER_PRINT_LIST, jasperPrint);
+		exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
 		exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(file));
 		
 		exporter.exportReport();

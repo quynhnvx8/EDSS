@@ -27,9 +27,6 @@
    <feature url="features/eone.hazelcast.service.feature_7.1.0.qualifier.jar" id="eone.hazelcast.service.feature" version="7.1.0.qualifier">
       <category name="eone.core"/>
    </feature>
-   <feature url="features/eone.zk.feature_7.1.0.qualifier.jar" id="eone.zk.feature" version="7.1.0.qualifier">
-      <category name="eone.core"/>
-   </feature>
    <feature url="features/eone.webservices.feature_7.1.0.qualifier.jar" id="eone.webservices.feature" version="7.1.0.qualifier">
       <category name="eone.core"/>
    </feature>

@@ -140,6 +140,7 @@ public abstract class AbstractProcessCtl implements Runnable
 			if (ProcessUtil.JASPER_STARTER_CLASS.equals(m_pi.getClassName())) {
 				m_pi.setClassName(null);
 			}
+			m_pi.setJasperReport(JasperReport);
 		}
 		
 		/**********************************************************************
@@ -207,6 +208,29 @@ public abstract class AbstractProcessCtl implements Runnable
 			
 	}   //  run
 	
+	private Serializable getBalance(Map<String, Object> data, Map<String, String> formula, String columnName, Map<String, Object> valueOlds) {
+    	String formulaStr = formula.get(columnName);
+    	for(Map.Entry<String, Object> entry : data.entrySet()) {
+    		String key = entry.getKey();
+    		Object value = entry.getValue();
+    		if (value == null) {
+    			value = 0;
+    		}
+    		if(formulaStr.contains(key)) {
+    			formulaStr = formulaStr.replaceAll(key, ""+ value);
+    		}
+    	}
+    	Object valueOld = valueOlds.get(columnName);
+    	if (valueOld == null) {
+    		valueOld = Env.ZERO;
+    	}
+    	Serializable valueNew = Env.getValueByFormula(formulaStr);
+    	
+    	BigDecimal total = new BigDecimal(valueOld.toString()).add(new BigDecimal(valueNew.toString()));
+    	
+    	return (Serializable) (total);
+    }
+	
 	private void getDataExcuteOld(String sql, MPrintFormat  format)
 	{
         String sqlProc = Env.parseContext(Env.getCtx(), windowno, sql, false);
@@ -227,8 +251,10 @@ public abstract class AbstractProcessCtl implements Runnable
 		
 		//Gia tri tinh toan cong thuc bao cao
 		Map<String, Object> data = new HashMap<String, Object>();
-    	
+		Map<String, String> formula = format.getFormula();
 		ArrayList<Object> arrWidth = new ArrayList<Object>();
+		Map<String, Object> valueOld = new HashMap<String, Object>();
+		Serializable balance = Env.ZERO;
 		
 		int maxRow = 0;
 		
@@ -287,6 +313,15 @@ public abstract class AbstractProcessCtl implements Runnable
 						//Nhung truong du lieu kieu so se add vao data phuc vu cho tinh toan cong thuc (neu co)
 						if (item.isNumber()) {
 		        			data.put(item.getColumnName(), element);
+		        		}
+						
+						//Tinh toan doi voi cot dat cong thuc de day vao List data truoc khi view bao cao.
+						if (item.isBalanceFinal() && item.getFormulaSetup() != "") {
+		        			balance = getBalance(data, formula, item.getColumnName(), valueOld); 
+		        			valueOld.put(item.getColumnName(), balance);
+		        			if (new BigDecimal(balance.toString()).compareTo(Env.ZERO) < 0)
+		        				balance = 0;
+		        			element = balance;        			       			        			        				
 		        		}
 						
 						//Add vao data
@@ -643,8 +678,12 @@ public abstract class AbstractProcessCtl implements Runnable
 				item.getZoomLogic(), 		//zoom den ban ghi goc
 				item.getAlignment(), 		//Can trai, phai, giua
 				item.getFormulaSetup(),		//thiet lap cong thuc tinh so du
+				
 				item.isGroupBy(), 			//Co phan nhom hay khong	
+				item.isSummarized(), 		//Co cong tong bao cao hay khong
 				item.isCountedGroup(),		//Dem so luong ban ghi cua nhom
+				item.isBalanceFinal(),		//So du cuoi ky
+				
 				item.getTableName(),		//Ten bang can de zoom theo dieu kien ZoomLogic	
 				item.getRotationText(),		//Huong chu tren header cua bao cao
 				item.getFieldSumGroup(),	//Tính tổng theo group

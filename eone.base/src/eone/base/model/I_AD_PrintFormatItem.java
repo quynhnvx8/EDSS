@@ -201,6 +201,15 @@ public interface I_AD_PrintFormatItem
 	  */
 	public boolean isActive();
 
+    /** Column name IsBalanceFinal */
+    public static final String COLUMNNAME_IsBalanceFinal = "IsBalanceFinal";
+
+	/** Set IsBalanceFinal	  */
+	public void setIsBalanceFinal (boolean IsBalanceFinal);
+
+	/** Get IsBalanceFinal	  */
+	public boolean isBalanceFinal();
+
     /** Column name IsBreakPage */
     public static final String COLUMNNAME_IsBreakPage = "IsBreakPage";
 
@@ -270,6 +279,15 @@ public interface I_AD_PrintFormatItem
 	  * Indicates if this document / line is printed
 	  */
 	public boolean isPrinted();
+
+    /** Column name IsSummarized */
+    public static final String COLUMNNAME_IsSummarized = "IsSummarized";
+
+	/** Set IsSummarized	  */
+	public void setIsSummarized (boolean IsSummarized);
+
+	/** Get IsSummarized	  */
+	public boolean isSummarized();
 
     /** Column name IsZoom */
     public static final String COLUMNNAME_IsZoom = "IsZoom";

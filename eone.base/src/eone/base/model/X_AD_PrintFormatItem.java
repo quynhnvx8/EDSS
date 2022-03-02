@@ -18,7 +18,7 @@ public class X_AD_PrintFormatItem extends PO implements I_AD_PrintFormatItem, I_
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220113L;
+	private static final long serialVersionUID = 20220302L;
 
     /** Standard Constructor */
     public X_AD_PrintFormatItem (Properties ctx, int AD_PrintFormatItem_ID, String trxName)
@@ -349,6 +349,27 @@ public class X_AD_PrintFormatItem extends PO implements I_AD_PrintFormatItem, I_
 		return (String)get_Value(COLUMNNAME_FormulaSetup);
 	}
 
+	/** Set IsBalanceFinal.
+		@param IsBalanceFinal IsBalanceFinal	  */
+	public void setIsBalanceFinal (boolean IsBalanceFinal)
+	{
+		set_Value (COLUMNNAME_IsBalanceFinal, Boolean.valueOf(IsBalanceFinal));
+	}
+
+	/** Get IsBalanceFinal.
+		@return IsBalanceFinal	  */
+	public boolean isBalanceFinal () 
+	{
+		Object oo = get_Value(COLUMNNAME_IsBalanceFinal);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
+	}
+
 	/** Set IsBreakPage.
 		@param IsBreakPage IsBreakPage	  */
 	public void setIsBreakPage (boolean IsBreakPage)
@@ -478,6 +499,27 @@ public class X_AD_PrintFormatItem extends PO implements I_AD_PrintFormatItem, I_
 	public boolean isPrinted () 
 	{
 		Object oo = get_Value(COLUMNNAME_IsPrinted);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
+	}
+
+	/** Set IsSummarized.
+		@param IsSummarized IsSummarized	  */
+	public void setIsSummarized (boolean IsSummarized)
+	{
+		set_Value (COLUMNNAME_IsSummarized, Boolean.valueOf(IsSummarized));
+	}
+
+	/** Get IsSummarized.
+		@return IsSummarized	  */
+	public boolean isSummarized () 
+	{
+		Object oo = get_Value(COLUMNNAME_IsSummarized);
 		if (oo != null) 
 		{
 			 if (oo instanceof Boolean) 
