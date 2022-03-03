@@ -1,6 +1,6 @@
 if (typeof window.eone === 'undefined')
 	window.eone = {};
-window.eone.zoom = function (){
+function zoom(){
 	
 	cmpid = parent.arrayData[0]; 
 	tableLink = parent.arrayData[1];
@@ -12,19 +12,7 @@ window.eone.zoom = function (){
 	zAu.send(event);
 }
 
-window.eone.zoom = function (e){
-	var cmpid = e.target.getAttribute ("componentId");
-	var tableLink = e.target.getAttribute ("tableLink");
-	var zoomLogic = e.target.getAttribute ("zoomLogic");
-	var value = e.target.getAttribute ("value");
-	
-	zAu.cmd0.showBusy(null);
-	var widget = zk.Widget.$(cmpid);
-	var event = new zk.Event(widget, 'onZoom', {data: [tableLink, value, zoomLogic]}, {toServer: true});
-	zAu.send(event);
-}
-
-window.eone.zoomWindow = function (cmpid, column, value, windowuu){
+function zoomWindow(cmpid, column, value, windowuu){
 	zAu.cmd0.showBusy(null);
 	var widget = zk.Widget.$(cmpid);
 	var event = new zk.Event(widget, 'onZoom', {data: [column, value, 'AD_Window_UU', windowuu]}, {toServer: true});
@@ -33,13 +21,13 @@ window.eone.zoomWindow = function (cmpid, column, value, windowuu){
 
 var arrayData = null;
 
-window.eone.showColumnMenu = function (doc, e) {
+function showColumnMenu(e) {
 	var compid = e.target.getAttribute ("componentId");
 	var tableLink = e.target.getAttribute ("tableLink");
 	var zoomLogic = e.target.getAttribute ("zoomLogic");
 	var value = e.target.getAttribute ("value");
 	parent.arrayData = [compid, tableLink, zoomLogic, value];
-	var d = window.eone.getMenu (doc, compid, tableLink, zoomLogic, value);
+	var d = getMenu (compid, tableLink, zoomLogic, value);
 	
 	var posx = 0;
 	var posy = 0;
@@ -49,26 +37,24 @@ window.eone.showColumnMenu = function (doc, e) {
 		posy = e.pageY;
 	}
 	else if (e.clientX || e.clientY) 	{
-		posx = e.clientX + doc.body.scrollLeft
-			+ doc.documentElement.scrollLeft;
-		posy = e.clientY + doc.body.scrollTop
-			+ doc.documentElement.scrollTop;
+		posx = e.clientX + document.body.scrollLeft
+			+ document.documentElement.scrollLeft;
+		posy = e.clientY + document.body.scrollTop
+			+ document.documentElement.scrollTop;
 	}
 	
 	d.style.top = posy;	
 	d.style.left = posx;
 	d.style.display = "block";
-	
 	var f = function() {
-		doc.contextMenu.style.display='none'
+		document.contextMenu.style.display='none'
 	};
 	setTimeout(f, 3000);
 }
 
 var contextMenu;
 
-window.eone.getMenu = function  (doc, componentId, tableLink, zoomLogic, value){
-	doc.contextMenu = null;
+function  getMenu(componentId, tableLink, zoomLogic, value){
 	if (componentId != null){
 	
 		//menu div
@@ -93,7 +79,7 @@ window.eone.getMenu = function  (doc, componentId, tableLink, zoomLogic, value){
 		href.style.textDecoration = "none";
 		href.style.verticalAlign = "middle";
 		href.href = "javascript:void(0)";
-		href.setAttribute("onclick", "parent.eone.zoom()");
+		href.setAttribute("onclick", "parent.zoom()");
 		
 		windowMenu.appendChild(href);
 		menu.appendChild(windowMenu);				
@@ -105,16 +91,15 @@ window.eone.getMenu = function  (doc, componentId, tableLink, zoomLogic, value){
 			image.setAttribute("align", "middle");
 			href.appendChild(image);
 		}
-		href.appendChild(doc.createTextNode(window.document.body.getAttribute ("windowLabel")));
-		
-		doc.contextMenu = menu;
-		doc.body.appendChild (doc.contextMenu);
+		href.appendChild(document.createTextNode(window.document.body.getAttribute ("windowLabel")));
+		contextMenu = menu;
+		window.document.body.appendChild (contextMenu);
 	}
 	
-	doc.contextMenu.setAttribute ("componentId", componentId);
-	doc.contextMenu.setAttribute ("tableLink", tableLink);
-	doc.contextMenu.setAttribute ("zoomLogic", zoomLogic);
-	doc.contextMenu.setAttribute ("value", value);
-	return doc.contextMenu;
+	contextMenu.setAttribute ("componentId", componentId);
+	contextMenu.setAttribute ("tableLink", tableLink);
+	contextMenu.setAttribute ("zoomLogic", zoomLogic);
+	contextMenu.setAttribute ("value", value);
+	return contextMenu;
 }
 

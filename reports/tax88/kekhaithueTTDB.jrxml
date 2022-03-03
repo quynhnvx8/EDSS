@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="kekhaithueTTDB" pageWidth="540" pageHeight="80" whenNoDataType="AllSectionsNoDetail" columnWidth="540" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a32218b6-2a1a-403e-9ea4-726a3278fa47">
+	<property name="ireport.zoom" value="1.4641000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Bold_Left" hAlign="Left" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="true" isItalic="false" isUnderline="false" pdfFontName="TIMESBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box leftPadding="3"/>
+	</style>
+	<style name="Bold_Right" hAlign="Right" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="TIMESBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box rightPadding="3"/>
+	</style>
+	<style name="Bold_Center" hAlign="Center" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="true" isItalic="false" isUnderline="false" pdfFontName="TIMESBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+	<style name="Italic_Left" hAlign="Left" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="false" isItalic="true" isUnderline="false" pdfFontName="TIMESI.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box leftPadding="3"/>
+	</style>
+	<style name="Italic_Right" hAlign="Right" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="false" isItalic="true" isUnderline="false" pdfFontName="TIMESI.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box rightPadding="3"/>
+	</style>
+	<style name="Italic_Center" hAlign="Center" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="false" isItalic="true" isUnderline="false" pdfFontName="TIMESI.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+	<style name="Nomal_Left" hAlign="Left" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="false" isItalic="false" isUnderline="false" pdfFontName="TIMES.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box leftPadding="3"/>
+	</style>
+	<style name="Nomal_Right" hAlign="Right" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="false" isItalic="false" isUnderline="false" pdfFontName="TIMES.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box rightPadding="3"/>
+	</style>
+	<style name="Nomal_Center" hAlign="Center" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="false" isItalic="false" isUnderline="false" pdfFontName="TIMES.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+	<style name="BoldItalic_Left" hAlign="Left" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="true" isItalic="true" isUnderline="false" pdfFontName="TIMESBI.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box leftPadding="3"/>
+	</style>
+	<style name="BoldItalic_Right" hAlign="Right" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="true" isItalic="true" isUnderline="false" pdfFontName="TIMESBI.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box rightPadding="3"/>
+	</style>
+	<style name="BoldItalic_Center" hAlign="Center" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="true" isItalic="true" isUnderline="false" pdfFontName="TIMESBI.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+	<parameter name="FromDate" class="java.util.Date"/>
+	<parameter name="ToDate" class="java.util.Date"/>
+	<parameter name="AD_Org_ID" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select * from tax88_kekhaithuegtgt($P{FromDate},$P{ToDate},$P{AD_Org_ID});]]>
+	</queryString>
+	<field name="stt" class="java.lang.Integer"/>
+	<field name="machitieu" class="java.lang.String"/>
+	<field name="tenchitieu" class="java.lang.String"/>
+	<field name="doanhthu" class="java.math.BigDecimal"/>
+	<field name="thuegtgt" class="java.math.BigDecimal"/>
+	<field name="thuetncn" class="java.math.BigDecimal"/>
+	<pageHeader>
+		<band height="56">
+			<staticText>
+				<reportElement x="0" y="0" width="27" height="56" uuid="b771aae0-cf33-48be-a051-0051e1fdba3f"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[STT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="0" width="202" height="56" uuid="eb89fa5a-e3f3-4852-bd05-d326d4fc7ec7"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nhóm ngành nghề]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Bold_Center" x="229" y="0" width="35" height="56" uuid="fba359e0-54d0-45a0-ad47-57c647235507"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="10" isBold="true" pdfFontName="ARIALBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Mã chỉ tiêu"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="264" y="0" width="138" height="22" uuid="6a21cabd-ca04-4cf3-a986-bef833ab4a7f"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Thuế GTGT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="402" y="0" width="136" height="22" uuid="40b618f5-b01b-468f-8e40-fee9f7c34f50"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Thuế TNCN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="264" y="22" width="71" height="34" uuid="42eeb17d-45c7-42bd-89ef-4c09282bd586"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Doanh thu
+(a)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="335" y="22" width="67" height="34" uuid="51f3c175-1ff3-423e-ac9a-c3149beb7b22"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Số thuế
+(b)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="402" y="22" width="69" height="34" uuid="d531c0e8-784b-4cfe-8cd0-53ac1bf2a6e4"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Doanh thu
+(a)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="471" y="22" width="67" height="34" uuid="3a49bc73-ae02-46b2-93c0-ce6c849e7929"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Số thuế
+(b)]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Prevent">
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="27" height="20" uuid="ce36c769-a9a9-4460-acf3-3999a64a0522"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{stt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="229" y="0" width="35" height="20" uuid="1209d428-35e7-471c-a6a8-38a88fdd5825"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{machitieu}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="27" y="0" width="202" height="20" uuid="740905a3-7049-4ad4-bf55-5c61f92eaf9d"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" pdfEncoding="Identity-H (Unicode with horizontal writing) ANSI aka WinAnsi)"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tenchitieu}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="402" y="0" width="69" height="20" uuid="e86596f8-be1c-45e0-ba8b-599fa112d6af"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{doanhthu}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="335" y="0" width="67" height="20" uuid="1e5db902-88fa-4314-8877-5ca0580157a5"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{thuegtgt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="471" y="0" width="67" height="20" uuid="70cbe632-0ce0-4539-b23a-ce849ffcaa83"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{thuetncn}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="264" y="0" width="71" height="20" uuid="e037352f-e80f-4d5c-a7bb-d8bd9bb30ad4"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{doanhthu}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
