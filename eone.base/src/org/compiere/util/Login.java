@@ -802,7 +802,6 @@ public class Login
 					Env.setContext(m_ctx, "#AD_User_ID", rs.getString("AD_User_ID"));
 					Env.setContext(m_ctx, "#AD_User_Name", rs.getString("UserName"));
 					Env.setContext(m_ctx, "#AD_User_Value", rs.getString("Value"));
-					Env.setContext(m_ctx, "#AD_Org_ID", rs.getString("AD_Org_ID"));
 					
 					Env.setContext(m_ctx, "#AD_Client_ID", rs.getString("AD_Client_ID"));
 					Env.setContext(m_ctx, "#AD_Client_Name", rs.getString("ClientName"));
@@ -811,6 +810,8 @@ public class Login
 					Env.setContext(m_ctx, "#EmployeeName", rs.getString("EmployeeName"));
 					Env.setContext(m_ctx, "#AD_Department_ID", rs.getString("AD_Department_ID"));
 					Env.setContext(m_ctx, "#AD_Department_Name", rs.getString("DeptName"));
+					Env.setContext(m_ctx, "#AD_Org_ID", rs.getString("AD_Org_ID"));
+					Env.setContext(m_ctx, "#AD_Org_Name", rs.getString("OrgNames"));
 					Env.setContext(m_ctx, "#AD_OrgAccess_ID", rs.getString("listOrg"));
 					
 					Env.setContext(m_ctx, "#ShowAdvanced", rs.getString("IsAccessAdvanced"));

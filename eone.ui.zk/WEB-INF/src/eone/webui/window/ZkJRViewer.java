@@ -396,12 +396,7 @@ public class ZkJRViewer extends Window implements EventListener<Event>, ITabOnCl
 		Events.echoEvent("onRenderReport", this, null);
 	}
 
-	
-	public static final String TIME_NONE = EOne.getEOneHome() + File.separator  + "fonts/times_new_roman.ttf";
-	public static final String TIME_BOLD = EOne.getEOneHome() + File.separator  + "fonts/times_new_roman_bold.ttf";
-	public static final String TIME_ITALIC = EOne.getEOneHome() + File.separator  + "fonts/times_new_roman_italic.ttf";
-	public static final String TIME_BOLD_ITALIC = EOne.getEOneHome() + File.separator  + "fonts/times_new_roman_bold_italic.ttf";
-	
+	public static final String FONT = EOne.getEOneHome() + File.separator + "jettyhome" + File.separator + "Times_New_Roman.ttf";
 	
 	private File getPDF() throws IOException, JRException {
 		
@@ -424,46 +419,19 @@ public class ZkJRViewer extends Window implements EventListener<Event>, ITabOnCl
 			jasperPrintList = new ArrayList<>();
 			jasperPrintList.add(jasperPrint);
 		}
-		/*
-		//create the context object and the font extension
-		SimpleJasperReportsContext jasperReportsContext = new SimpleJasperReportsContext();
-
-		SimpleFontFamily fontFamily = new SimpleFontFamily(jasperReportsContext);
-		fontFamily.setName("family name");//to be used in reports as fontName
-		fontFamily.setPdfEmbedded(true);
-		fontFamily.setPdfEncoding("Identity-H");
-
-		SimpleFontFace regular = new SimpleFontFace(jasperReportsContext);
-		regular.setTtf("font ttf path");
-		fontFamily.setNormalFace(regular);
-
-		jasperReportsContext.setExtensions(FontFamily.class, Arrays.asList(fontFamily));
-
-		//use the context when filling and exporting reports
-		//note that there are variations here depending on the API you use for filling and exporting
-		jasperPrint = JasperFillManager.getInstance(jasperReportsContext).fill(jasperReport, params);
 		
-		JasperExportManager.getInstance(jasperReportsContext).exportToPdf(jasperPrint);
-		exporter = new JRPdfExporter(jasperReportsContext);
-		
-		jasperReportsContext.setExtensions(FontFamily.class, Arrays.asList(fontFamily));
-		*/
 		SimpleFontFamily fontFamily = new SimpleFontFamily(context);
 		fontFamily.setName("Times New Roman");//to be used in reports as fontName
 		fontFamily.setPdfEmbedded(true);
 		fontFamily.setPdfEncoding("Identity-H");
 
 		SimpleFontFace regular = new SimpleFontFace(context);
-		regular.setTtf(TIME_NONE);
+		regular.setTtf(FONT);
 		
 		fontFamily.setNormalFace(regular);
 		
 		JRPdfExporter exporter = new JRPdfExporter(context);
 		context.setExtensions(FontFamily.class, Arrays.asList(fontFamily));
-		//jasperPrint.setProperty("net.sf.jasperreports.default.pdf.font.name", fontFamily.getName()); 
-		//jasperPrint.setProperty("net.sf.jasperreports.default.pdf.encoding", "UTF-8"); 
-		//jasperPrint.setProperty("net.sf.jasperreports.default.pdf.embedded", "true");
-		//exporter.setParameter(JRExporterParameter.JASPER_PRINT_LIST, jasperPrint);
 		exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
 		exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(file));
 		

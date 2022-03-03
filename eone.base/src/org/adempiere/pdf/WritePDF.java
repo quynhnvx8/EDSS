@@ -72,8 +72,9 @@ public class WritePDF {
 		
 	}
 	
-	public static final String FONT = EOne.getEOneHome() + File.separator + "arial.ttf";
+	//public static final String FONT = EOne.getEOneHome() + File.separator + "arial.ttf";
 
+	public static final String FONT = EOne.getEOneHome() + File.separator + "jettyhome" + File.separator + "Times_New_Roman.ttf";
 	
 	//Create Header
 	private void createHeader(PdfPTable table, HashMap<String, Object> m_params, MPrintFormat format, BaseFont courier, int columnCount) {

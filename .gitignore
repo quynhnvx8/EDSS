@@ -1,8 +1,7 @@
 **/target/
 **/lib/*.jar
 **/seed/*.jar
-/org.adempiere.ui.zk/labelapplet.jar
-/org.adempiere.extend/test.properties
+/eone.ui.zk/labelapplet.jar
 /*_bk/
 /.metadata/
 /PostgreSQL/
@@ -15,7 +14,6 @@
 /.git_root/
 /.git_v5/
 /*.log
-/jettyhome/
 swingclient.product*.launch
 
 /*.sql
@@ -25,4 +23,3 @@ External Plug-in Libraries
 
 /runtime-server.product/
 
-/org.idempiere.javadoc/API

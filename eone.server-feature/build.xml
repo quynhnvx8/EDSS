@@ -53,7 +53,9 @@
 									tofile="jettyhome/etc/jetty-threadpool.xml" filtering="yes" overwrite="yes"/>
 		<copy file="hazelcast-template.xml"
 							tofile="hazelcast.xml" filtering="yes" overwrite="yes"/>
-
+		
+		<copy file="fonts/Times_New_Roman_tmp.ttf"	tofile="fonts/Times_New_Roman.ttf" filtering="yes" overwrite="yes"/>
+		<mkdir dir="fonts"/>
 		<mkdir dir="jettyhome/work"/>
 		<mkdir dir="log"/>
 	</target>

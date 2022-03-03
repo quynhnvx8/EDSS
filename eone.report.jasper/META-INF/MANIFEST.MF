@@ -15,15 +15,7 @@ Require-Bundle: eone.base;bundle-version="0.0.0",
 Service-Component: OSGI-INF/*.xml
 Export-Package: eone.report.jasper
 Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: .,
- lib/castor-core.jar,
- lib/castor-xml.jar,
- lib/jasperreports-chart-customizers.jar,
- lib/jasperreports-chart-themes.jar,
- lib/jasperreports-fonts.jar,
- lib/jasperreports-functions.jar,
- lib/olap4j.jar,
- lib/xmpcore.jar
+Bundle-ClassPath: .
 Automatic-Module-Name: eone.report.jasper
 Bundle-Vendor: EONE
 Bundle-RequiredExecutionEnvironment: JavaSE-11

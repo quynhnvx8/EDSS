@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.Properties;
 import java.util.PropertyResourceBundle;
 import java.util.logging.Level;
+
 import org.adempiere.base.IServiceReferenceHolder;
 import org.adempiere.base.Service;
 import org.compiere.print.ServerReportCtl;
@@ -36,6 +37,7 @@ import org.compiere.util.Language;
 import org.compiere.util.Msg;
 import org.compiere.util.Trx;
 import org.compiere.util.Util;
+
 import eone.base.model.MAttachment;
 import eone.base.model.MAttachmentEntry;
 import eone.base.model.MProcess;
@@ -46,7 +48,6 @@ import eone.base.process.ProcessCall;
 import eone.base.process.ProcessInfo;
 import eone.base.process.ProcessInfoParameter;
 import eone.exceptions.EONEException;
-import eone.report.utils.DigestOfFile;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JRPropertiesUtil;
@@ -913,8 +914,7 @@ public class ReportStarter implements ProcessCall, ClientProcess {
 			if (viewerLauncher != null)
 				return viewerLauncher;
 		}
-		IServiceReferenceHolder<JRViewerProvider> viewerReference = Service.locator().locate(JRViewerProvider.class)
-				.getServiceReference();
+		IServiceReferenceHolder<JRViewerProvider> viewerReference = Service.locator().locate(JRViewerProvider.class).getServiceReference();
 		if (viewerReference != null) {
 			viewerLauncher = viewerReference.getService();
 			s_viewerProviderReference = viewerReference;

@@ -95,5 +95,5 @@ public interface ITheme {
 	
 	public static String IMG_LOGOUT = ThemeManager.getThemeResource("erp/images/Logout24.png");
 	
-	public static String FONTPDF = ThemeManager.getThemeResource("font/arial.ttf");
+	//public static String PDF_TIMES_NEW_ROMAN = ThemeManager.getThemeResource("fonts/Times_New_Roman.ttf");
 }
