@@ -96,8 +96,6 @@ public class MBPartner extends X_C_BPartner
 	/** Users							*/
 	protected MUser[]				m_contacts = null;
 	/** BP Bank Accounts				*/
-	protected MBPartnerInfo[]		m_accounts = null;
-	/** Prim User						*/
 	protected Integer				m_primaryAD_User_ID = null;
 	/** BP Group						*/
 	protected MBPGroup				m_group = null;
@@ -209,37 +207,6 @@ public class MBPartner extends X_C_BPartner
 		return users[0];
 	}	//	getContact
 	
-	
-	
-	
-	/**
-	 * 	Get Bank Accounts
-	 * 	@param requery requery
-	 *	@return Bank Accounts
-	 */
-	public MBPartnerInfo[] getBankAccounts (boolean requery)
-	{
-		if (m_accounts != null && m_accounts.length >= 0 && !requery)	//	re-load
-			return m_accounts;
-		//
-		List<MBPartnerInfo> list = new Query(getCtx(), X_C_BPartnerInfo.Table_Name, "C_BPartner_ID=? AND IsActive='Y'", get_TrxName())
-				.setParameters(getC_BPartner_ID())
-				.list();
-		m_accounts = new MBPartnerInfo[list.size()];
-		list.toArray(m_accounts);
-		return m_accounts;
-	}	//	getBankAccounts
-
-	
-	public static MBPartnerInfo getInfoDefaultBPartner (Properties ctx, int C_BPartner_ID)
-	{
-		MBPartnerInfo value = new Query(ctx,I_C_BPartnerInfo.Table_Name,"C_BPartner_ID = ? And IsActive = 'Y' And IsDefault = 'Y'",null)
-		.setParameters(C_BPartner_ID)
-		.setOnlyActiveRecords(true)
-		.first();
-		
-		return value;
-	}
 	
 	
 	/**************************************************************************

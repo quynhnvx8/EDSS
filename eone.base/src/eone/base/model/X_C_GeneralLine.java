@@ -7,14 +7,13 @@ package eone.base.model;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.util.Properties;
 import org.compiere.util.Env;
 
-/** Generated Model for Fact_Acct
+/** Generated Model for C_GeneralLine
  *  @author EOne (generated) 
  *  @version Version 1.0 - $Id$ */
-public class X_Fact_Acct extends PO implements I_Fact_Acct, I_Persistent 
+public class X_C_GeneralLine extends PO implements I_C_GeneralLine, I_Persistent 
 {
 
 	/**
@@ -23,22 +22,18 @@ public class X_Fact_Acct extends PO implements I_Fact_Acct, I_Persistent
 	private static final long serialVersionUID = 20220305L;
 
     /** Standard Constructor */
-    public X_Fact_Acct (Properties ctx, int Fact_Acct_ID, String trxName)
+    public X_C_GeneralLine (Properties ctx, int C_GeneralLine_ID, String trxName)
     {
-      super (ctx, Fact_Acct_ID, trxName);
-      /** if (Fact_Acct_ID == 0)
+      super (ctx, C_GeneralLine_ID, trxName);
+      /** if (C_GeneralLine_ID == 0)
         {
-			setAD_Table_ID (0);
-			setC_Currency_ID (0);
-			setDateAcct (new Timestamp( System.currentTimeMillis() ));
-			setFact_Acct_ID (0);
-			setPostingType (null);
-			setRecord_ID (0);
+			setAmount (Env.ZERO);
+			setC_GeneraLline_ID (0);
         } */
     }
 
     /** Load Constructor */
-    public X_Fact_Acct (Properties ctx, ResultSet rs, String trxName)
+    public X_C_GeneralLine (Properties ctx, ResultSet rs, String trxName)
     {
       super (ctx, rs, trxName);
     }
@@ -60,38 +55,10 @@ public class X_Fact_Acct extends PO implements I_Fact_Acct, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_Fact_Acct[")
+      StringBuilder sb = new StringBuilder ("X_C_GeneralLine[")
         .append(get_ID()).append("]");
       return sb.toString();
     }
-
-	public eone.base.model.I_A_Asset getA_Asset() throws RuntimeException
-    {
-		return (eone.base.model.I_A_Asset)MTable.get(getCtx(), eone.base.model.I_A_Asset.Table_Name)
-			.getPO(getA_Asset_ID(), get_TrxName());	}
-
-	/** Set Asset.
-		@param A_Asset_ID 
-		Asset used internally or by customers
-	  */
-	public void setA_Asset_ID (int A_Asset_ID)
-	{
-		if (A_Asset_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_A_Asset_ID, null);
-		else 
-			set_ValueNoCheck (COLUMNNAME_A_Asset_ID, Integer.valueOf(A_Asset_ID));
-	}
-
-	/** Get Asset.
-		@return Asset used internally or by customers
-	  */
-	public int getA_Asset_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_A_Asset_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
 
 	public eone.base.model.I_C_ElementValue getAccount_Cr() throws RuntimeException
     {
@@ -144,87 +111,6 @@ public class X_Fact_Acct extends PO implements I_Fact_Acct, I_Persistent
 	public int getAccount_Dr_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_Account_Dr_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_AD_Department getAD_Department() throws RuntimeException
-    {
-		return (eone.base.model.I_AD_Department)MTable.get(getCtx(), eone.base.model.I_AD_Department.Table_Name)
-			.getPO(getAD_Department_ID(), get_TrxName());	}
-
-	/** Set Department.
-		@param AD_Department_ID Department	  */
-	public void setAD_Department_ID (int AD_Department_ID)
-	{
-		if (AD_Department_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_AD_Department_ID, null);
-		else 
-			set_ValueNoCheck (COLUMNNAME_AD_Department_ID, Integer.valueOf(AD_Department_ID));
-	}
-
-	/** Get Department.
-		@return Department	  */
-	public int getAD_Department_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_AD_Department_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_AD_Table getAD_Table() throws RuntimeException
-    {
-		return (eone.base.model.I_AD_Table)MTable.get(getCtx(), eone.base.model.I_AD_Table.Table_Name)
-			.getPO(getAD_Table_ID(), get_TrxName());	}
-
-	/** Set Table.
-		@param AD_Table_ID 
-		Database Table information
-	  */
-	public void setAD_Table_ID (int AD_Table_ID)
-	{
-		if (AD_Table_ID < 1) 
-			set_Value (COLUMNNAME_AD_Table_ID, null);
-		else 
-			set_Value (COLUMNNAME_AD_Table_ID, Integer.valueOf(AD_Table_ID));
-	}
-
-	/** Get Table.
-		@return Database Table information
-	  */
-	public int getAD_Table_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_AD_Table_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_AD_Window getAD_Window() throws RuntimeException
-    {
-		return (eone.base.model.I_AD_Window)MTable.get(getCtx(), eone.base.model.I_AD_Window.Table_Name)
-			.getPO(getAD_Window_ID(), get_TrxName());	}
-
-	/** Set Window.
-		@param AD_Window_ID 
-		Data entry or display window
-	  */
-	public void setAD_Window_ID (int AD_Window_ID)
-	{
-		if (AD_Window_ID < 1) 
-			set_Value (COLUMNNAME_AD_Window_ID, null);
-		else 
-			set_Value (COLUMNNAME_AD_Window_ID, Integer.valueOf(AD_Window_ID));
-	}
-
-	/** Get Window.
-		@return Data entry or display window
-	  */
-	public int getAD_Window_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_AD_Window_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
@@ -383,9 +269,9 @@ public class X_Fact_Acct extends PO implements I_Fact_Acct, I_Persistent
 	public void setC_Contract_ID (int C_Contract_ID)
 	{
 		if (C_Contract_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_C_Contract_ID, null);
+			set_Value (COLUMNNAME_C_Contract_ID, null);
 		else 
-			set_ValueNoCheck (COLUMNNAME_C_Contract_ID, Integer.valueOf(C_Contract_ID));
+			set_Value (COLUMNNAME_C_Contract_ID, Integer.valueOf(C_Contract_ID));
 	}
 
 	/** Get Contract.
@@ -448,113 +334,74 @@ public class X_Fact_Acct extends PO implements I_Fact_Acct, I_Persistent
 		return ii.intValue();
 	}
 
-	public eone.base.model.I_C_Currency getC_Currency() throws RuntimeException
+	public eone.base.model.I_C_General getC_General() throws RuntimeException
     {
-		return (eone.base.model.I_C_Currency)MTable.get(getCtx(), eone.base.model.I_C_Currency.Table_Name)
-			.getPO(getC_Currency_ID(), get_TrxName());	}
+		return (eone.base.model.I_C_General)MTable.get(getCtx(), eone.base.model.I_C_General.Table_Name)
+			.getPO(getC_General_ID(), get_TrxName());	}
 
-	/** Set Currency.
-		@param C_Currency_ID 
-		The Currency for this record
-	  */
-	public void setC_Currency_ID (int C_Currency_ID)
+	/** Set Gereral.
+		@param C_General_ID Gereral	  */
+	public void setC_General_ID (int C_General_ID)
 	{
-		if (C_Currency_ID < 1) 
-			set_Value (COLUMNNAME_C_Currency_ID, null);
+		if (C_General_ID < 1) 
+			set_ValueNoCheck (COLUMNNAME_C_General_ID, null);
 		else 
-			set_Value (COLUMNNAME_C_Currency_ID, Integer.valueOf(C_Currency_ID));
+			set_ValueNoCheck (COLUMNNAME_C_General_ID, Integer.valueOf(C_General_ID));
 	}
 
-	/** Get Currency.
-		@return The Currency for this record
-	  */
-	public int getC_Currency_ID () 
+	/** Get Gereral.
+		@return Gereral	  */
+	public int getC_General_ID () 
 	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_C_Currency_ID);
+		Integer ii = (Integer)get_Value(COLUMNNAME_C_General_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
 	}
 
-	public eone.base.model.I_C_DocType getC_DocType() throws RuntimeException
-    {
-		return (eone.base.model.I_C_DocType)MTable.get(getCtx(), eone.base.model.I_C_DocType.Table_Name)
-			.getPO(getC_DocType_ID(), get_TrxName());	}
-
-	/** Set Document Type.
-		@param C_DocType_ID 
-		Document type or rules
-	  */
-	public void setC_DocType_ID (int C_DocType_ID)
+	/** Set GeneraLline.
+		@param C_GeneraLline_ID GeneraLline	  */
+	public void setC_GeneraLline_ID (int C_GeneraLline_ID)
 	{
-		if (C_DocType_ID < 0) 
-			set_ValueNoCheck (COLUMNNAME_C_DocType_ID, null);
+		if (C_GeneraLline_ID < 1) 
+			set_ValueNoCheck (COLUMNNAME_C_GeneraLline_ID, null);
 		else 
-			set_ValueNoCheck (COLUMNNAME_C_DocType_ID, Integer.valueOf(C_DocType_ID));
+			set_ValueNoCheck (COLUMNNAME_C_GeneraLline_ID, Integer.valueOf(C_GeneraLline_ID));
 	}
 
-	/** Get Document Type.
-		@return Document type or rules
-	  */
-	public int getC_DocType_ID () 
+	/** Get GeneraLline.
+		@return GeneraLline	  */
+	public int getC_GeneraLline_ID () 
 	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_C_DocType_ID);
+		Integer ii = (Integer)get_Value(COLUMNNAME_C_GeneraLline_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
 	}
 
-	public eone.base.model.I_C_DocTypeSub getC_DocTypeSub() throws RuntimeException
+	public eone.base.model.I_C_Invoice getC_Invoice() throws RuntimeException
     {
-		return (eone.base.model.I_C_DocTypeSub)MTable.get(getCtx(), eone.base.model.I_C_DocTypeSub.Table_Name)
-			.getPO(getC_DocTypeSub_ID(), get_TrxName());	}
+		return (eone.base.model.I_C_Invoice)MTable.get(getCtx(), eone.base.model.I_C_Invoice.Table_Name)
+			.getPO(getC_Invoice_ID(), get_TrxName());	}
 
-	/** Set Sub Document.
-		@param C_DocTypeSub_ID 
-		Document type for generating in dispute Shipments
+	/** Set Invoice.
+		@param C_Invoice_ID 
+		Invoice Identifier
 	  */
-	public void setC_DocTypeSub_ID (int C_DocTypeSub_ID)
+	public void setC_Invoice_ID (int C_Invoice_ID)
 	{
-		if (C_DocTypeSub_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_C_DocTypeSub_ID, null);
+		if (C_Invoice_ID < 1) 
+			set_Value (COLUMNNAME_C_Invoice_ID, null);
 		else 
-			set_ValueNoCheck (COLUMNNAME_C_DocTypeSub_ID, Integer.valueOf(C_DocTypeSub_ID));
+			set_Value (COLUMNNAME_C_Invoice_ID, Integer.valueOf(C_Invoice_ID));
 	}
 
-	/** Get Sub Document.
-		@return Document type for generating in dispute Shipments
+	/** Get Invoice.
+		@return Invoice Identifier
 	  */
-	public int getC_DocTypeSub_ID () 
+	public int getC_Invoice_ID () 
 	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_C_DocTypeSub_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_C_Period getC_Period() throws RuntimeException
-    {
-		return (eone.base.model.I_C_Period)MTable.get(getCtx(), eone.base.model.I_C_Period.Table_Name)
-			.getPO(getC_Period_ID(), get_TrxName());	}
-
-	/** Set Period.
-		@param C_Period_ID 
-		Period of the Calendar
-	  */
-	public void setC_Period_ID (int C_Period_ID)
-	{
-		if (C_Period_ID < 1) 
-			set_Value (COLUMNNAME_C_Period_ID, null);
-		else 
-			set_Value (COLUMNNAME_C_Period_ID, Integer.valueOf(C_Period_ID));
-	}
-
-	/** Get Period.
-		@return Period of the Calendar
-	  */
-	public int getC_Period_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_C_Period_ID);
+		Integer ii = (Integer)get_Value(COLUMNNAME_C_Invoice_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
@@ -616,34 +463,6 @@ public class X_Fact_Acct extends PO implements I_Fact_Acct, I_Persistent
 		return ii.intValue();
 	}
 
-	public eone.base.model.I_C_Tax getC_Tax() throws RuntimeException
-    {
-		return (eone.base.model.I_C_Tax)MTable.get(getCtx(), eone.base.model.I_C_Tax.Table_Name)
-			.getPO(getC_Tax_ID(), get_TrxName());	}
-
-	/** Set Tax.
-		@param C_Tax_ID 
-		Tax identifier
-	  */
-	public void setC_Tax_ID (int C_Tax_ID)
-	{
-		if (C_Tax_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_C_Tax_ID, null);
-		else 
-			set_ValueNoCheck (COLUMNNAME_C_Tax_ID, Integer.valueOf(C_Tax_ID));
-	}
-
-	/** Get Tax.
-		@return Tax identifier
-	  */
-	public int getC_Tax_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_C_Tax_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
 	public eone.base.model.I_C_TypeCost getC_TypeCost() throws RuntimeException
     {
 		return (eone.base.model.I_C_TypeCost)MTable.get(getCtx(), eone.base.model.I_C_TypeCost.Table_Name)
@@ -654,9 +473,9 @@ public class X_Fact_Acct extends PO implements I_Fact_Acct, I_Persistent
 	public void setC_TypeCost_ID (int C_TypeCost_ID)
 	{
 		if (C_TypeCost_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_C_TypeCost_ID, null);
+			set_Value (COLUMNNAME_C_TypeCost_ID, null);
 		else 
-			set_ValueNoCheck (COLUMNNAME_C_TypeCost_ID, Integer.valueOf(C_TypeCost_ID));
+			set_Value (COLUMNNAME_C_TypeCost_ID, Integer.valueOf(C_TypeCost_ID));
 	}
 
 	/** Get TypeCost.
@@ -679,9 +498,9 @@ public class X_Fact_Acct extends PO implements I_Fact_Acct, I_Persistent
 	public void setC_TypeRevenue_ID (int C_TypeRevenue_ID)
 	{
 		if (C_TypeRevenue_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_C_TypeRevenue_ID, null);
+			set_Value (COLUMNNAME_C_TypeRevenue_ID, null);
 		else 
-			set_ValueNoCheck (COLUMNNAME_C_TypeRevenue_ID, Integer.valueOf(C_TypeRevenue_ID));
+			set_Value (COLUMNNAME_C_TypeRevenue_ID, Integer.valueOf(C_TypeRevenue_ID));
 	}
 
 	/** Get Type Revenue.
@@ -717,201 +536,6 @@ public class X_Fact_Acct extends PO implements I_Fact_Acct, I_Persistent
 	public int getC_UOM_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_C_UOM_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	/** Set Rate.
-		@param CurrencyRate 
-		Currency Conversion Rate
-	  */
-	public void setCurrencyRate (BigDecimal CurrencyRate)
-	{
-		set_Value (COLUMNNAME_CurrencyRate, CurrencyRate);
-	}
-
-	/** Get Rate.
-		@return Currency Conversion Rate
-	  */
-	public BigDecimal getCurrencyRate () 
-	{
-		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_CurrencyRate);
-		if (bd == null)
-			 return Env.ZERO;
-		return bd;
-	}
-
-	/** Set Account Date.
-		@param DateAcct 
-		Accounting Date
-	  */
-	public void setDateAcct (Timestamp DateAcct)
-	{
-		set_Value (COLUMNNAME_DateAcct, DateAcct);
-	}
-
-	/** Get Account Date.
-		@return Accounting Date
-	  */
-	public Timestamp getDateAcct () 
-	{
-		return (Timestamp)get_Value(COLUMNNAME_DateAcct);
-	}
-
-	/** Set Date Invoiced.
-		@param DateInvoiced 
-		Date printed on Invoice
-	  */
-	public void setDateInvoiced (Timestamp DateInvoiced)
-	{
-		set_Value (COLUMNNAME_DateInvoiced, DateInvoiced);
-	}
-
-	/** Get Date Invoiced.
-		@return Date printed on Invoice
-	  */
-	public Timestamp getDateInvoiced () 
-	{
-		return (Timestamp)get_Value(COLUMNNAME_DateInvoiced);
-	}
-
-	/** Set Description.
-		@param Description 
-		Optional short description of the record
-	  */
-	public void setDescription (String Description)
-	{
-		set_Value (COLUMNNAME_Description, Description);
-	}
-
-	/** Get Description.
-		@return Optional short description of the record
-	  */
-	public String getDescription () 
-	{
-		return (String)get_Value(COLUMNNAME_Description);
-	}
-
-	/** Set Document No.
-		@param DocumentNo 
-		Document sequence number of the document
-	  */
-	public void setDocumentNo (String DocumentNo)
-	{
-		set_ValueNoCheck (COLUMNNAME_DocumentNo, DocumentNo);
-	}
-
-	/** Get Document No.
-		@return Document sequence number of the document
-	  */
-	public String getDocumentNo () 
-	{
-		return (String)get_Value(COLUMNNAME_DocumentNo);
-	}
-
-	/** Set Accounting Fact.
-		@param Fact_Acct_ID Accounting Fact	  */
-	public void setFact_Acct_ID (int Fact_Acct_ID)
-	{
-		if (Fact_Acct_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_Fact_Acct_ID, null);
-		else 
-			set_ValueNoCheck (COLUMNNAME_Fact_Acct_ID, Integer.valueOf(Fact_Acct_ID));
-	}
-
-	/** Get Accounting Fact.
-		@return Accounting Fact	  */
-	public int getFact_Acct_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_Fact_Acct_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	/** Set InvoiceNo.
-		@param InvoiceNo InvoiceNo	  */
-	public void setInvoiceNo (String InvoiceNo)
-	{
-		set_Value (COLUMNNAME_InvoiceNo, InvoiceNo);
-	}
-
-	/** Get InvoiceNo.
-		@return InvoiceNo	  */
-	public String getInvoiceNo () 
-	{
-		return (String)get_Value(COLUMNNAME_InvoiceNo);
-	}
-
-	/** Set Line ID.
-		@param Line_ID 
-		Transaction line ID (internal)
-	  */
-	public void setLine_ID (int Line_ID)
-	{
-		if (Line_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_Line_ID, null);
-		else 
-			set_ValueNoCheck (COLUMNNAME_Line_ID, Integer.valueOf(Line_ID));
-	}
-
-	/** Get Line ID.
-		@return Transaction line ID (internal)
-	  */
-	public int getLine_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_Line_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	/** LessThan3 = 03 */
-	public static final String LISTDURATION_LessThan3 = "03";
-	/** LessThan6 = 06 */
-	public static final String LISTDURATION_LessThan6 = "06";
-	/** LessThan12 = 12 */
-	public static final String LISTDURATION_LessThan12 = "12";
-	/** GreatThan12 = 13 */
-	public static final String LISTDURATION_GreatThan12 = "13";
-	/** None = 00 */
-	public static final String LISTDURATION_None = "00";
-	/** Set ListDuration.
-		@param ListDuration ListDuration	  */
-	public void setListDuration (String ListDuration)
-	{
-
-		set_Value (COLUMNNAME_ListDuration, ListDuration);
-	}
-
-	/** Get ListDuration.
-		@return ListDuration	  */
-	public String getListDuration () 
-	{
-		return (String)get_Value(COLUMNNAME_ListDuration);
-	}
-
-	public eone.base.model.I_M_Product getM_Product_Cr() throws RuntimeException
-    {
-		return (eone.base.model.I_M_Product)MTable.get(getCtx(), eone.base.model.I_M_Product.Table_Name)
-			.getPO(getM_Product_Cr_ID(), get_TrxName());	}
-
-	/** Set Product Cr.
-		@param M_Product_Cr_ID Product Cr	  */
-	public void setM_Product_Cr_ID (int M_Product_Cr_ID)
-	{
-		if (M_Product_Cr_ID < 1) 
-			set_Value (COLUMNNAME_M_Product_Cr_ID, null);
-		else 
-			set_Value (COLUMNNAME_M_Product_Cr_ID, Integer.valueOf(M_Product_Cr_ID));
-	}
-
-	/** Get Product Cr.
-		@return Product Cr	  */
-	public int getM_Product_Cr_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_M_Product_Cr_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
@@ -957,9 +581,9 @@ public class X_Fact_Acct extends PO implements I_Fact_Acct, I_Persistent
 	public void setM_Warehouse_Cr_ID (int M_Warehouse_Cr_ID)
 	{
 		if (M_Warehouse_Cr_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_M_Warehouse_Cr_ID, null);
+			set_Value (COLUMNNAME_M_Warehouse_Cr_ID, null);
 		else 
-			set_ValueNoCheck (COLUMNNAME_M_Warehouse_Cr_ID, Integer.valueOf(M_Warehouse_Cr_ID));
+			set_Value (COLUMNNAME_M_Warehouse_Cr_ID, Integer.valueOf(M_Warehouse_Cr_ID));
 	}
 
 	/** Get Warehouse Cr.
@@ -1001,56 +625,6 @@ public class X_Fact_Acct extends PO implements I_Fact_Acct, I_Persistent
 		return ii.intValue();
 	}
 
-	public eone.base.model.I_M_Workshop getM_Workshop_Cr() throws RuntimeException
-    {
-		return (eone.base.model.I_M_Workshop)MTable.get(getCtx(), eone.base.model.I_M_Workshop.Table_Name)
-			.getPO(getM_Workshop_Cr_ID(), get_TrxName());	}
-
-	/** Set Workshop Cr.
-		@param M_Workshop_Cr_ID Workshop Cr	  */
-	public void setM_Workshop_Cr_ID (int M_Workshop_Cr_ID)
-	{
-		if (M_Workshop_Cr_ID < 1) 
-			set_Value (COLUMNNAME_M_Workshop_Cr_ID, null);
-		else 
-			set_Value (COLUMNNAME_M_Workshop_Cr_ID, Integer.valueOf(M_Workshop_Cr_ID));
-	}
-
-	/** Get Workshop Cr.
-		@return Workshop Cr	  */
-	public int getM_Workshop_Cr_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_M_Workshop_Cr_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_M_Workshop getM_Workshop() throws RuntimeException
-    {
-		return (eone.base.model.I_M_Workshop)MTable.get(getCtx(), eone.base.model.I_M_Workshop.Table_Name)
-			.getPO(getM_Workshop_ID(), get_TrxName());	}
-
-	/** Set Workshop.
-		@param M_Workshop_ID Workshop	  */
-	public void setM_Workshop_ID (int M_Workshop_ID)
-	{
-		if (M_Workshop_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_M_Workshop_ID, null);
-		else 
-			set_ValueNoCheck (COLUMNNAME_M_Workshop_ID, Integer.valueOf(M_Workshop_ID));
-	}
-
-	/** Get Workshop.
-		@return Workshop	  */
-	public int getM_Workshop_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_M_Workshop_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
 	public eone.base.model.I_PA_ReportLine getPA_ReportLine() throws RuntimeException
     {
 		return (eone.base.model.I_PA_ReportLine)MTable.get(getCtx(), eone.base.model.I_PA_ReportLine.Table_Name)
@@ -1076,37 +650,13 @@ public class X_Fact_Acct extends PO implements I_Fact_Acct, I_Persistent
 		return ii.intValue();
 	}
 
-	/** PostingType AD_Reference_ID=125 */
-	public static final int POSTINGTYPE_AD_Reference_ID=125;
-	/** Actual = A */
-	public static final String POSTINGTYPE_Actual = "A";
-	/** Wait = W */
-	public static final String POSTINGTYPE_Wait = "W";
-	/** Set PostingType.
-		@param PostingType 
-		The type of posted amount for the transaction
-	  */
-	public void setPostingType (String PostingType)
-	{
-
-		set_ValueNoCheck (COLUMNNAME_PostingType, PostingType);
-	}
-
-	/** Get PostingType.
-		@return The type of posted amount for the transaction
-	  */
-	public String getPostingType () 
-	{
-		return (String)get_Value(COLUMNNAME_PostingType);
-	}
-
 	/** Set Price.
 		@param Price 
 		Price
 	  */
 	public void setPrice (BigDecimal Price)
 	{
-		set_ValueNoCheck (COLUMNNAME_Price, Price);
+		set_Value (COLUMNNAME_Price, Price);
 	}
 
 	/** Get Price.
@@ -1118,6 +668,30 @@ public class X_Fact_Acct extends PO implements I_Fact_Acct, I_Persistent
 		if (bd == null)
 			 return Env.ZERO;
 		return bd;
+	}
+
+	/** Set Processed.
+		@param Processed 
+		The document has been processed
+	  */
+	public void setProcessed (boolean Processed)
+	{
+		set_Value (COLUMNNAME_Processed, Boolean.valueOf(Processed));
+	}
+
+	/** Get Processed.
+		@return The document has been processed
+	  */
+	public boolean isProcessed () 
+	{
+		Object oo = get_Value(COLUMNNAME_Processed);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
 	}
 
 	/** Set Quantity.
@@ -1138,28 +712,5 @@ public class X_Fact_Acct extends PO implements I_Fact_Acct, I_Persistent
 		if (bd == null)
 			 return Env.ZERO;
 		return bd;
-	}
-
-	/** Set Record ID.
-		@param Record_ID 
-		Direct internal record ID
-	  */
-	public void setRecord_ID (int Record_ID)
-	{
-		if (Record_ID < 0) 
-			set_ValueNoCheck (COLUMNNAME_Record_ID, null);
-		else 
-			set_ValueNoCheck (COLUMNNAME_Record_ID, Integer.valueOf(Record_ID));
-	}
-
-	/** Get Record ID.
-		@return Direct internal record ID
-	  */
-	public int getRecord_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_Record_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
 	}
 }

@@ -7,8 +7,6 @@ import eone.base.model.CalloutEngine;
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
 import eone.base.model.MAccount;
-import eone.base.model.MBPartner;
-import eone.base.model.MBPartnerInfo;
 import eone.base.model.MDocType;
 import eone.base.model.MTax;
 import eone.base.model.X_C_Account;
@@ -186,40 +184,7 @@ public class CalloutAccount extends CalloutEngine
 	{
 		if (isCalloutActive())		
 			return "";
-		Object objDocType = mTab.getValue("C_DocType_ID");
-		int p_C_DocType_ID = 0;
-		if (objDocType != null) {
-			p_C_DocType_ID = Integer.parseInt(objDocType.toString());
-		}
-		MDocType dt = MDocType.get(ctx, p_C_DocType_ID);
-		String columnName = mField.getColumnName();
-		MAccount re  = null;
-		int p_ID = 0;
-		if (value != null) {
-			p_ID = Integer.parseInt(value.toString());
-		}
-		re = MAccount.getAccountBPartner(p_ID);	
 		
-		//Dien them thong tin infobpartner (neu co)
-		MBPartnerInfo info = MBPartner.getInfoDefaultBPartner(ctx, p_ID);
-		if (re != null && re.getAccount_ID() > 0 && dt != null && dt.getDocType() != null) {
-			if((columnName.equalsIgnoreCase("C_BPartner_Dr_ID") 
-					|| columnName.equalsIgnoreCase("C_BPartner_ID")) 
-					&& X_C_DocType.DOCTYPE_Input.equalsIgnoreCase(dt.getDocType())) {
-				mTab.setValue("Account_Dr_ID", re.getAccount_ID());
-				if (info != null && info.getC_BPartnerInfo_ID() != 0) {
-					mTab.setValue("C_BPartnerInfo_Dr_ID", info.getC_BPartnerInfo_ID());
-				}
-			}
-			if((columnName.equalsIgnoreCase("C_BPartner_Cr_ID") 
-					|| columnName.equalsIgnoreCase("C_BPartner_ID")) 
-					&& X_C_DocType.DOCTYPE_Output.equalsIgnoreCase(dt.getDocType())) {
-				mTab.setValue("Account_Cr_ID", re.getAccount_ID());
-				if (info != null && info.getC_BPartnerInfo_ID() != 0) {
-					mTab.setValue("C_BPartnerInfo_Cr_ID", info.getC_BPartnerInfo_ID());
-				}
-			}
-		}
 		
 		
 		return "";

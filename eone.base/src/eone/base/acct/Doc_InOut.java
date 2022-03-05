@@ -91,6 +91,8 @@ public class Doc_InOut extends Doc
 				if (MDocType.DOCBASETYPE_156ReturnVendor.equals(dt.getDocBaseType())) {
 					f = fact.createLine(line, dr, cr, inout.getC_Currency_ID(), inout.getCurrencyRate(), inoutLine.getAmount(), inoutLine.getAmount());
 				} else {
+					if (cogs == null)
+						cogs = dr;
 					f = fact.createLine(line, cogs, cr, inout.getC_Currency_ID(), inout.getCurrencyRate(), amtCOGS, amtCOGS);
 				}
 				f.setM_Product_ID(inoutLine.getM_Product_ID());
@@ -104,12 +106,14 @@ public class Doc_InOut extends Doc
 				
 				//Revenue
 				BigDecimal amtRev = inoutLine.getAmount().subtract(inoutLine.getDiscountAmt());
-				if (amtRev.compareTo(Env.ZERO) != 0 && !MDocType.DOCTYPEDETAIL_RETURN.equals(dt.getDocTypeDetail())) {
+				if (amtRev.compareTo(Env.ZERO) != 0 && MDocType.DOCTYPEDETAIL_SELL.equals(dt.getDocTypeDetail())) {
 					
 					f = fact.createLine(line, dr, revenue, inout.getC_Currency_ID(), inout.getCurrencyRate(), amtRev, amtRev);
 					f.setC_BPartner_Cr_ID(inout.getC_BPartner_Cr_ID());
 					f.setC_BPartner_Dr_ID(inout.getC_BPartner_Dr_ID());			
-					
+					f.setM_Product_ID(inoutLine.getM_Product_ID());
+					f.setM_Product_Cr_ID(inoutLine.getM_Product_ID());
+					f.setQty(inoutLine.getQty());
 				}
 				
 				

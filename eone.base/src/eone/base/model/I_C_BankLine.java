@@ -1,18 +1,6 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 package eone.base.model;
 
@@ -21,8 +9,8 @@ import java.sql.Timestamp;
 import org.compiere.util.KeyNamePair;
 
 /** Generated Interface for C_BankLine
- *  @author iDempiere (generated) 
- *  @version Release 7.1
+ *  @author EOne (generated) 
+ *  @version Version 1.0
  */
 public interface I_C_BankLine 
 {
@@ -35,9 +23,9 @@ public interface I_C_BankLine
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 3 - Client - Org 
+    /** AccessLevel = 7 - System - Client - Org 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(3);
+    BigDecimal accessLevel = BigDecimal.valueOf(7);
 
     /** Load Meta Data */
 
@@ -142,15 +130,6 @@ public interface I_C_BankLine
 	  */
 	public int getC_BankLine_ID();
 
-    /** Column name C_BankLine_UU */
-    public static final String COLUMNNAME_C_BankLine_UU = "C_BankLine_UU";
-
-	/** Set C_BankLine_UU	  */
-	public void setC_BankLine_UU (String C_BankLine_UU);
-
-	/** Get C_BankLine_UU	  */
-	public String getC_BankLine_UU();
-
     /** Column name C_BPartner_Cr_ID */
     public static final String COLUMNNAME_C_BPartner_Cr_ID = "C_BPartner_Cr_ID";
 
@@ -181,28 +160,6 @@ public interface I_C_BankLine
 
 	public eone.base.model.I_C_BPartner getC_BPartner_Dr() throws RuntimeException;
 
-    /** Column name C_BPartnerInfo_Cr_ID */
-    public static final String COLUMNNAME_C_BPartnerInfo_Cr_ID = "C_BPartnerInfo_Cr_ID";
-
-	/** Set BPartner Info Cr	  */
-	public void setC_BPartnerInfo_Cr_ID (int C_BPartnerInfo_Cr_ID);
-
-	/** Get BPartner Info Cr	  */
-	public int getC_BPartnerInfo_Cr_ID();
-
-	public I_C_BPartnerInfo getC_BPartnerInfo_Cr() throws RuntimeException;
-
-    /** Column name C_BPartnerInfo_Dr_ID */
-    public static final String COLUMNNAME_C_BPartnerInfo_Dr_ID = "C_BPartnerInfo_Dr_ID";
-
-	/** Set BPartner Info Dr	  */
-	public void setC_BPartnerInfo_Dr_ID (int C_BPartnerInfo_Dr_ID);
-
-	/** Get BPartner Info Dr	  */
-	public int getC_BPartnerInfo_Dr_ID();
-
-	public I_C_BPartnerInfo getC_BPartnerInfo_Dr() throws RuntimeException;
-
     /** Column name C_DocTypeSub_ID */
     public static final String COLUMNNAME_C_DocTypeSub_ID = "C_DocTypeSub_ID";
 
@@ -216,7 +173,7 @@ public interface I_C_BankLine
 	  */
 	public int getC_DocTypeSub_ID();
 
-	public I_C_DocTypeSub getC_DocTypeSub() throws RuntimeException;
+	public eone.base.model.I_C_DocTypeSub getC_DocTypeSub() throws RuntimeException;
 
     /** Column name C_Invoice_ID */
     public static final String COLUMNNAME_C_Invoice_ID = "C_Invoice_ID";
@@ -242,7 +199,7 @@ public interface I_C_BankLine
 	/** Get TypeCost	  */
 	public int getC_TypeCost_ID();
 
-	public I_C_TypeCost getC_TypeCost() throws RuntimeException;
+	public eone.base.model.I_C_TypeCost getC_TypeCost() throws RuntimeException;
 
     /** Column name C_TypeRevenue_ID */
     public static final String COLUMNNAME_C_TypeRevenue_ID = "C_TypeRevenue_ID";
@@ -253,7 +210,7 @@ public interface I_C_BankLine
 	/** Get Type Revenue	  */
 	public int getC_TypeRevenue_ID();
 
-	public I_C_TypeRevenue getC_TypeRevenue() throws RuntimeException;
+	public eone.base.model.I_C_TypeRevenue getC_TypeRevenue() throws RuntimeException;
 
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";

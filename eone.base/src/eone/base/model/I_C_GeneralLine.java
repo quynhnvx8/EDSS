@@ -8,17 +8,17 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import org.compiere.util.KeyNamePair;
 
-/** Generated Interface for Fact_Acct
+/** Generated Interface for C_GeneralLine
  *  @author EOne (generated) 
  *  @version Version 1.0
  */
-public interface I_Fact_Acct 
+public interface I_C_GeneralLine 
 {
 
-    /** TableName=Fact_Acct */
-    public static final String Table_Name = "Fact_Acct";
+    /** TableName=C_GeneralLine */
+    public static final String Table_Name = "C_GeneralLine";
 
-    /** AD_Table_ID=1000006 */
+    /** AD_Table_ID=1200415 */
     public static final int Table_ID = MTable.getTable_ID(Table_Name);
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
@@ -28,21 +28,6 @@ public interface I_Fact_Acct
     BigDecimal accessLevel = BigDecimal.valueOf(7);
 
     /** Load Meta Data */
-
-    /** Column name A_Asset_ID */
-    public static final String COLUMNNAME_A_Asset_ID = "A_Asset_ID";
-
-	/** Set Asset.
-	  * Asset used internally or by customers
-	  */
-	public void setA_Asset_ID (int A_Asset_ID);
-
-	/** Get Asset.
-	  * Asset used internally or by customers
-	  */
-	public int getA_Asset_ID();
-
-	public eone.base.model.I_A_Asset getA_Asset() throws RuntimeException;
 
     /** Column name Account_Cr_ID */
     public static final String COLUMNNAME_Account_Cr_ID = "Account_Cr_ID";
@@ -82,17 +67,6 @@ public interface I_Fact_Acct
 	  */
 	public int getAD_Client_ID();
 
-    /** Column name AD_Department_ID */
-    public static final String COLUMNNAME_AD_Department_ID = "AD_Department_ID";
-
-	/** Set Department	  */
-	public void setAD_Department_ID (int AD_Department_ID);
-
-	/** Get Department	  */
-	public int getAD_Department_ID();
-
-	public eone.base.model.I_AD_Department getAD_Department() throws RuntimeException;
-
     /** Column name AD_Org_ID */
     public static final String COLUMNNAME_AD_Org_ID = "AD_Org_ID";
 
@@ -105,36 +79,6 @@ public interface I_Fact_Acct
 	  * Organizational entity within client
 	  */
 	public int getAD_Org_ID();
-
-    /** Column name AD_Table_ID */
-    public static final String COLUMNNAME_AD_Table_ID = "AD_Table_ID";
-
-	/** Set Table.
-	  * Database Table information
-	  */
-	public void setAD_Table_ID (int AD_Table_ID);
-
-	/** Get Table.
-	  * Database Table information
-	  */
-	public int getAD_Table_ID();
-
-	public eone.base.model.I_AD_Table getAD_Table() throws RuntimeException;
-
-    /** Column name AD_Window_ID */
-    public static final String COLUMNNAME_AD_Window_ID = "AD_Window_ID";
-
-	/** Set Window.
-	  * Data entry or display window
-	  */
-	public void setAD_Window_ID (int AD_Window_ID);
-
-	/** Get Window.
-	  * Data entry or display window
-	  */
-	public int getAD_Window_ID();
-
-	public eone.base.model.I_AD_Window getAD_Window() throws RuntimeException;
 
     /** Column name Amount */
     public static final String COLUMNNAME_Amount = "Amount";
@@ -243,65 +187,40 @@ public interface I_Fact_Acct
 
 	public eone.base.model.I_C_ContractLine getC_ContractLine() throws RuntimeException;
 
-    /** Column name C_Currency_ID */
-    public static final String COLUMNNAME_C_Currency_ID = "C_Currency_ID";
+    /** Column name C_General_ID */
+    public static final String COLUMNNAME_C_General_ID = "C_General_ID";
 
-	/** Set Currency.
-	  * The Currency for this record
+	/** Set Gereral	  */
+	public void setC_General_ID (int C_General_ID);
+
+	/** Get Gereral	  */
+	public int getC_General_ID();
+
+	public eone.base.model.I_C_General getC_General() throws RuntimeException;
+
+    /** Column name C_GeneraLline_ID */
+    public static final String COLUMNNAME_C_GeneraLline_ID = "C_GeneraLline_ID";
+
+	/** Set GeneraLline	  */
+	public void setC_GeneraLline_ID (int C_GeneraLline_ID);
+
+	/** Get GeneraLline	  */
+	public int getC_GeneraLline_ID();
+
+    /** Column name C_Invoice_ID */
+    public static final String COLUMNNAME_C_Invoice_ID = "C_Invoice_ID";
+
+	/** Set Invoice.
+	  * Invoice Identifier
 	  */
-	public void setC_Currency_ID (int C_Currency_ID);
+	public void setC_Invoice_ID (int C_Invoice_ID);
 
-	/** Get Currency.
-	  * The Currency for this record
+	/** Get Invoice.
+	  * Invoice Identifier
 	  */
-	public int getC_Currency_ID();
+	public int getC_Invoice_ID();
 
-	public eone.base.model.I_C_Currency getC_Currency() throws RuntimeException;
-
-    /** Column name C_DocType_ID */
-    public static final String COLUMNNAME_C_DocType_ID = "C_DocType_ID";
-
-	/** Set Document Type.
-	  * Document type or rules
-	  */
-	public void setC_DocType_ID (int C_DocType_ID);
-
-	/** Get Document Type.
-	  * Document type or rules
-	  */
-	public int getC_DocType_ID();
-
-	public eone.base.model.I_C_DocType getC_DocType() throws RuntimeException;
-
-    /** Column name C_DocTypeSub_ID */
-    public static final String COLUMNNAME_C_DocTypeSub_ID = "C_DocTypeSub_ID";
-
-	/** Set Sub Document.
-	  * Document type for generating in dispute Shipments
-	  */
-	public void setC_DocTypeSub_ID (int C_DocTypeSub_ID);
-
-	/** Get Sub Document.
-	  * Document type for generating in dispute Shipments
-	  */
-	public int getC_DocTypeSub_ID();
-
-	public eone.base.model.I_C_DocTypeSub getC_DocTypeSub() throws RuntimeException;
-
-    /** Column name C_Period_ID */
-    public static final String COLUMNNAME_C_Period_ID = "C_Period_ID";
-
-	/** Set Period.
-	  * Period of the Calendar
-	  */
-	public void setC_Period_ID (int C_Period_ID);
-
-	/** Get Period.
-	  * Period of the Calendar
-	  */
-	public int getC_Period_ID();
-
-	public eone.base.model.I_C_Period getC_Period() throws RuntimeException;
+	public eone.base.model.I_C_Invoice getC_Invoice() throws RuntimeException;
 
     /** Column name C_Project_ID */
     public static final String COLUMNNAME_C_Project_ID = "C_Project_ID";
@@ -332,21 +251,6 @@ public interface I_Fact_Acct
 	public int getC_ProjectLine_ID();
 
 	public eone.base.model.I_C_ProjectLine getC_ProjectLine() throws RuntimeException;
-
-    /** Column name C_Tax_ID */
-    public static final String COLUMNNAME_C_Tax_ID = "C_Tax_ID";
-
-	/** Set Tax.
-	  * Tax identifier
-	  */
-	public void setC_Tax_ID (int C_Tax_ID);
-
-	/** Get Tax.
-	  * Tax identifier
-	  */
-	public int getC_Tax_ID();
-
-	public eone.base.model.I_C_Tax getC_Tax() throws RuntimeException;
 
     /** Column name C_TypeCost_ID */
     public static final String COLUMNNAME_C_TypeCost_ID = "C_TypeCost_ID";
@@ -401,89 +305,6 @@ public interface I_Fact_Acct
 	  */
 	public int getCreatedBy();
 
-    /** Column name CurrencyRate */
-    public static final String COLUMNNAME_CurrencyRate = "CurrencyRate";
-
-	/** Set Rate.
-	  * Currency Conversion Rate
-	  */
-	public void setCurrencyRate (BigDecimal CurrencyRate);
-
-	/** Get Rate.
-	  * Currency Conversion Rate
-	  */
-	public BigDecimal getCurrencyRate();
-
-    /** Column name DateAcct */
-    public static final String COLUMNNAME_DateAcct = "DateAcct";
-
-	/** Set Account Date.
-	  * Accounting Date
-	  */
-	public void setDateAcct (Timestamp DateAcct);
-
-	/** Get Account Date.
-	  * Accounting Date
-	  */
-	public Timestamp getDateAcct();
-
-    /** Column name DateInvoiced */
-    public static final String COLUMNNAME_DateInvoiced = "DateInvoiced";
-
-	/** Set Date Invoiced.
-	  * Date printed on Invoice
-	  */
-	public void setDateInvoiced (Timestamp DateInvoiced);
-
-	/** Get Date Invoiced.
-	  * Date printed on Invoice
-	  */
-	public Timestamp getDateInvoiced();
-
-    /** Column name Description */
-    public static final String COLUMNNAME_Description = "Description";
-
-	/** Set Description.
-	  * Optional short description of the record
-	  */
-	public void setDescription (String Description);
-
-	/** Get Description.
-	  * Optional short description of the record
-	  */
-	public String getDescription();
-
-    /** Column name DocumentNo */
-    public static final String COLUMNNAME_DocumentNo = "DocumentNo";
-
-	/** Set Document No.
-	  * Document sequence number of the document
-	  */
-	public void setDocumentNo (String DocumentNo);
-
-	/** Get Document No.
-	  * Document sequence number of the document
-	  */
-	public String getDocumentNo();
-
-    /** Column name Fact_Acct_ID */
-    public static final String COLUMNNAME_Fact_Acct_ID = "Fact_Acct_ID";
-
-	/** Set Accounting Fact	  */
-	public void setFact_Acct_ID (int Fact_Acct_ID);
-
-	/** Get Accounting Fact	  */
-	public int getFact_Acct_ID();
-
-    /** Column name InvoiceNo */
-    public static final String COLUMNNAME_InvoiceNo = "InvoiceNo";
-
-	/** Set InvoiceNo	  */
-	public void setInvoiceNo (String InvoiceNo);
-
-	/** Get InvoiceNo	  */
-	public String getInvoiceNo();
-
     /** Column name IsActive */
     public static final String COLUMNNAME_IsActive = "IsActive";
 
@@ -496,39 +317,6 @@ public interface I_Fact_Acct
 	  * The record is active in the system
 	  */
 	public boolean isActive();
-
-    /** Column name Line_ID */
-    public static final String COLUMNNAME_Line_ID = "Line_ID";
-
-	/** Set Line ID.
-	  * Transaction line ID (internal)
-	  */
-	public void setLine_ID (int Line_ID);
-
-	/** Get Line ID.
-	  * Transaction line ID (internal)
-	  */
-	public int getLine_ID();
-
-    /** Column name ListDuration */
-    public static final String COLUMNNAME_ListDuration = "ListDuration";
-
-	/** Set ListDuration	  */
-	public void setListDuration (String ListDuration);
-
-	/** Get ListDuration	  */
-	public String getListDuration();
-
-    /** Column name M_Product_Cr_ID */
-    public static final String COLUMNNAME_M_Product_Cr_ID = "M_Product_Cr_ID";
-
-	/** Set Product Cr	  */
-	public void setM_Product_Cr_ID (int M_Product_Cr_ID);
-
-	/** Get Product Cr	  */
-	public int getM_Product_Cr_ID();
-
-	public eone.base.model.I_M_Product getM_Product_Cr() throws RuntimeException;
 
     /** Column name M_Product_ID */
     public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
@@ -575,28 +363,6 @@ public interface I_Fact_Acct
 
 	public eone.base.model.I_M_Warehouse getM_Warehouse_Dr() throws RuntimeException;
 
-    /** Column name M_Workshop_Cr_ID */
-    public static final String COLUMNNAME_M_Workshop_Cr_ID = "M_Workshop_Cr_ID";
-
-	/** Set Workshop Cr	  */
-	public void setM_Workshop_Cr_ID (int M_Workshop_Cr_ID);
-
-	/** Get Workshop Cr	  */
-	public int getM_Workshop_Cr_ID();
-
-	public eone.base.model.I_M_Workshop getM_Workshop_Cr() throws RuntimeException;
-
-    /** Column name M_Workshop_ID */
-    public static final String COLUMNNAME_M_Workshop_ID = "M_Workshop_ID";
-
-	/** Set Workshop	  */
-	public void setM_Workshop_ID (int M_Workshop_ID);
-
-	/** Get Workshop	  */
-	public int getM_Workshop_ID();
-
-	public eone.base.model.I_M_Workshop getM_Workshop() throws RuntimeException;
-
     /** Column name PA_ReportLine_ID */
     public static final String COLUMNNAME_PA_ReportLine_ID = "PA_ReportLine_ID";
 
@@ -607,19 +373,6 @@ public interface I_Fact_Acct
 	public int getPA_ReportLine_ID();
 
 	public eone.base.model.I_PA_ReportLine getPA_ReportLine() throws RuntimeException;
-
-    /** Column name PostingType */
-    public static final String COLUMNNAME_PostingType = "PostingType";
-
-	/** Set PostingType.
-	  * The type of posted amount for the transaction
-	  */
-	public void setPostingType (String PostingType);
-
-	/** Get PostingType.
-	  * The type of posted amount for the transaction
-	  */
-	public String getPostingType();
 
     /** Column name Price */
     public static final String COLUMNNAME_Price = "Price";
@@ -634,6 +387,19 @@ public interface I_Fact_Acct
 	  */
 	public BigDecimal getPrice();
 
+    /** Column name Processed */
+    public static final String COLUMNNAME_Processed = "Processed";
+
+	/** Set Processed.
+	  * The document has been processed
+	  */
+	public void setProcessed (boolean Processed);
+
+	/** Get Processed.
+	  * The document has been processed
+	  */
+	public boolean isProcessed();
+
     /** Column name Qty */
     public static final String COLUMNNAME_Qty = "Qty";
 
@@ -646,19 +412,6 @@ public interface I_Fact_Acct
 	  * Quantity
 	  */
 	public BigDecimal getQty();
-
-    /** Column name Record_ID */
-    public static final String COLUMNNAME_Record_ID = "Record_ID";
-
-	/** Set Record ID.
-	  * Direct internal record ID
-	  */
-	public void setRecord_ID (int Record_ID);
-
-	/** Get Record ID.
-	  * Direct internal record ID
-	  */
-	public int getRecord_ID();
 
     /** Column name Updated */
     public static final String COLUMNNAME_Updated = "Updated";

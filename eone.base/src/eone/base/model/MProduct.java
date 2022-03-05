@@ -231,9 +231,9 @@ public class MProduct extends X_M_Product
 		String sql = "";
 		Map<String, BigDecimal> data = new HashMap<String, BigDecimal>();
     	if (DB.isOracle() ) {
-    		sql = "select PriceSO, PricePO from (select Coalesce(Price,0) PriceSO, Coalesce(PricePO,0) PricePO from M_Price where ? between ValidFrom And ValidTo And M_Product_ID = ? order by ValidTo desc)b where ROWNUM <= 1";
+    		sql = "select PriceSO, PricePO from (select Coalesce(PriceSO,0) PriceSO, Coalesce(PricePO,0) PricePO from M_Price where ? between ValidFrom And ValidTo And M_Product_ID = ? order by ValidTo desc)b where ROWNUM <= 1";
     	} else {
-    		sql = "select PriceSO, PricePO from (select Coalesce(Price,0) PriceSO, Coalesce(PricePO,0) PricePO, COUNT(*) OVER ( ORDER BY ValidTo Desc) as ROWNUM from M_Price where ? between ValidFrom And ValidTo And M_Product_ID = ? order by ValidTo desc)b where ROWNUM <= 1";
+    		sql = "select PriceSO, PricePO from (select Coalesce(PriceSO,0) PriceSO, Coalesce(PricePO,0) PricePO, COUNT(*) OVER ( ORDER BY ValidTo Desc) as ROWNUM from M_Price where ? between ValidFrom And ValidTo And M_Product_ID = ? order by ValidTo desc)b where ROWNUM <= 1";
     	}
     	PreparedStatement ps = DB.prepareCall(sql);
     	ResultSet rs = null;

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import eone.base.model.MBPartner;
-import eone.base.model.MBPartnerInfo;
 import eone.base.model.MSysConfig;
 import eone.base.model.MTable;
 import eone.base.model.MUser;
@@ -634,33 +633,6 @@ public class WebUser
 	{
 		return m_bp.isVendor();
 	}
-
-	
-	
-	public MBPartnerInfo getBankAccount()
-	{
-		return getBankAccount(false);
-	}
-	
-	/**************************************************************************
-	 * 	Get BP Bank Account (or create it)
-	 *  @param requery Requery data
-	 *	@return Bank Account
-	 */
-	public MBPartnerInfo getBankAccount(boolean requery)
-	{
-		MBPartnerInfo retValue = null;
-		//	Find Bank Account for exact User
-		MBPartnerInfo[] bas = m_bp.getBankAccounts(requery);
-		for (int i = 0; i < bas.length; i++)
-		{
-			//if (bas[i].getAD_User_ID() == getAD_User_ID() && bas[i].isActive())
-			//	retValue = bas[i];
-		}
-
-		
-		return retValue;
-	}	//	getBankAccount
 
 	
 	

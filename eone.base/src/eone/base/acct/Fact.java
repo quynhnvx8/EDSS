@@ -104,7 +104,7 @@ public final class Fact
 			FactLine line = (FactLine)m_lines.get(i);
 			
 			MElementValue dr = line.getAccountDr();
-			if (dr == null && !X_C_DocType.DOCTYPE_Balance.equals(dt.getDocType())) {
+			if (dr == null && !X_C_DocType.DOCBASETYPE_OpenBalance.equals(dt.getDocBaseType())) {
 				log.warning("No Credit Account for " + line);
 				//rollbackPosted();
 				return Msg.getMsg(Env.getCtx(), "No_AccountDR") + "; ";
@@ -122,7 +122,7 @@ public final class Fact
 			}
 			
 			MElementValue cr = line.getAccountCr();
-			if (cr == null && !X_C_DocType.DOCTYPE_Balance.equals(dt.getDocType())) {
+			if (cr == null && !X_C_DocType.DOCBASETYPE_OpenBalance.equals(dt.getDocBaseType())) {
 				log.warning("No Credit Account for " + line);
 				//rollbackPosted();
 				return Msg.getMsg(Env.getCtx(), "No_AccountCR") + "; ";

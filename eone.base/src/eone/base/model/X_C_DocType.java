@@ -1,5 +1,5 @@
 /******************************************************************************
- * Product: EOoe ERP & CRM Smart Business Solution	                        *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
  * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
@@ -18,7 +18,7 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20210723L;
+	private static final long serialVersionUID = 20220305L;
 
     /** Standard Constructor */
     public X_C_DocType (Properties ctx, int C_DocType_ID, String trxName)
@@ -40,7 +40,7 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
     }
 
     /** AccessLevel
-      * @return 6 - System - Client 
+      * @return 4 - System 
       */
     protected int get_AccessLevel()
     {
@@ -178,8 +178,8 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	public static final String DOCBASETYPE_154Debit = "154DR";
 	/** 155 Debit = 155DR */
 	public static final String DOCBASETYPE_155Debit = "155DR";
-	/** 156 Debit = 156DR */
-	public static final String DOCBASETYPE_156Debit = "156DR";
+	/** Nhập xuất bệnh viện = HM */
+	public static final String DOCBASETYPE_NhậpXuấtBệnhViện = "HM";
 	/** Debit_157 = DR157 */
 	public static final String DOCBASETYPE_Debit_157 = "DR157";
 	/** Debit_158 = DR158 */
@@ -504,6 +504,28 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	public static final String DOCBASETYPE_131Debit = "131DR";
 	/** 156 Customer return = 156RC */
 	public static final String DOCBASETYPE_156CustomerReturn = "156RC";
+	/** 152 Sell = 152SE */
+	public static final String DOCBASETYPE_152Sell = "152SE";
+	/** 111 Debit 88 = 111DR88 */
+	public static final String DOCBASETYPE_111Debit88 = "111DR88";
+	/** 111 Credit 88 = 111CR88 */
+	public static final String DOCBASETYPE_111Credit88 = "111CR88";
+	/** 112 Debit 88 = 112DR88 */
+	public static final String DOCBASETYPE_112Debit88 = "112DR88";
+	/** 112 Credit 88 = 112CR88 */
+	public static final String DOCBASETYPE_112Credit88 = "112CR88";
+	/** Xuất bán hàng hóa tt88 = 156SE88 */
+	public static final String DOCBASETYPE_XuấtBánHàngHóaTt88 = "156SE88";
+	/** Mua mới 156 = 156NE88 */
+	public static final String DOCBASETYPE_MuaMới156 = "156NE88";
+	/** Xuất kho hàng hóa tt88 = 156EX88 */
+	public static final String DOCBASETYPE_XuấtKhoHàngHóaTt88 = "156EX88";
+	/** Open Balance = BALANCE */
+	public static final String DOCBASETYPE_OpenBalance = "BALANCE";
+	/** 156 Nhập kho hàng hóa = 156DR */
+	public static final String DOCBASETYPE_156NhậpKhoHàngHóa = "156DR";
+	/** 156 Nhập đầu kỳ = 156DK */
+	public static final String DOCBASETYPE_156NhậpĐầuKỳ = "156DK";
 	/** Set Document BaseType.
 		@param DocBaseType 
 		Logical type of document
@@ -563,6 +585,10 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	public static final String DOCTYPEDETAIL_NONE = "NONE";
 	/** RETURN = RETURN */
 	public static final String DOCTYPEDETAIL_RETURN = "RETURN";
+	/** SELL = SELL */
+	public static final String DOCTYPEDETAIL_SELL = "SELL";
+	/** BUY = BUY */
+	public static final String DOCTYPEDETAIL_BUY = "BUY";
 	/** Set DocTypeDetail.
 		@param DocTypeDetail DocTypeDetail	  */
 	public void setDocTypeDetail (String DocTypeDetail)

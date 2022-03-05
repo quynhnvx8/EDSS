@@ -381,13 +381,6 @@ public class WAcctViewerData
 		rc.setColSize(40);
 		m_rcolumn.add(rc);
 		
-		rc = new RColumn(ctx, X_Fact_Acct.COLUMNNAME_C_BPartnerInfo_Dr_ID, DisplayType.Table, null, 0, "C_BPartnerInfo_Dr_ID");
-		rc.setColSize(100);
-		m_rcolumn.add(rc);
-		//Credit partner
-		rc = new RColumn(ctx, X_Fact_Acct.COLUMNNAME_C_BPartnerInfo_Cr_ID, DisplayType.Table, null, 0, "C_BPartnerInfo_Cr_ID");
-		rc.setColSize(100);
-		m_rcolumn.add(rc);
 		
 		//Type Cost
 		rc = new RColumn(ctx, X_Fact_Acct.COLUMNNAME_C_TypeCost_ID, DisplayType.TableDir);

@@ -14,15 +14,8 @@
 package org.compiere.util;
 
 import java.math.BigDecimal;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.text.NumberFormat;
 import java.text.ParsePosition;
-import java.util.ArrayList;
-import java.util.logging.Level;
-
-import eone.base.model.MBPartner;
-import eone.base.model.MBPartnerInfo;
 
 /**
  * 
@@ -31,33 +24,7 @@ import eone.base.model.MBPartnerInfo;
  */
 public class PaymentUtil {
 
-	private static final CLogger logger = CLogger.getCLogger(PaymentUtil.class);
-
-	public static MBPartnerInfo[] getBankAccounts(MBPartner bpartner, String creditCardNo, int C_PaymentProcessor_ID) {
-		ArrayList<MBPartnerInfo> list = new ArrayList<MBPartnerInfo>();
-		String sql = "SELECT * FROM C_BP_BankAccount WHERE C_BPartner_ID=? AND CreditCardNumber=? AND C_PaymentProcessor_ID = ? AND IsActive='Y' ORDER BY Created";
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			pstmt = DB.prepareStatement(sql, bpartner.get_TrxName());
-			pstmt.setInt(1, bpartner.getC_BPartner_ID());
-			pstmt.setString(2, creditCardNo);
-			pstmt.setInt(3, C_PaymentProcessor_ID);
-			rs = pstmt.executeQuery();
-			while (rs.next())
-				list.add(new MBPartnerInfo(bpartner.getCtx(), rs, bpartner
-						.get_TrxName()));
-		} catch (Exception e) {
-			logger.log(Level.SEVERE, sql, e);
-		} finally {
-			DB.close(rs, pstmt);
-		}
-
-		MBPartnerInfo[] m_accounts = new MBPartnerInfo[list.size()];
-		list.toArray(m_accounts);
-		return m_accounts;
-	}
-
+	
 	public static String encrpytCreditCard(String value) {
 		if (value == null)
 			return "";

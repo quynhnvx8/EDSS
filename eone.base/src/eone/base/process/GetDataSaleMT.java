@@ -15,7 +15,6 @@ import org.compiere.util.Env;
 
 import eone.base.model.MBPGroup;
 import eone.base.model.MBPartner;
-import eone.base.model.MBPartnerInfo;
 import eone.base.model.MCurrency;
 import eone.base.model.MInOut;
 import eone.base.model.MInOutLine;
@@ -25,7 +24,6 @@ import eone.base.model.PO;
 import eone.base.model.X_C_Account;
 import eone.base.model.X_C_BP_Group;
 import eone.base.model.X_C_BPartner;
-import eone.base.model.X_C_BPartnerInfo;
 import eone.base.model.X_M_InOut;
 import eone.base.model.X_M_InOutLine;
 
@@ -78,7 +76,6 @@ public class GetDataSaleMT extends SvrProcess
 		CallableStatement cs = DB.prepareCallExtend(sql, get_TrxName());
 		ResultSet rs = cs.executeQuery();
 		sqlInsertHeader = PO.getSqlInsert(X_C_BPartner.Table_ID, get_TrxName());
-		sqlInsertLine = PO.getSqlInsert(X_C_BPartnerInfo.Table_ID, get_TrxName());
 		listRowHear = new ArrayList<List<Object>>();
 		
 		listRowLine = new ArrayList<List<Object>>();
@@ -86,7 +83,6 @@ public class GetDataSaleMT extends SvrProcess
 		int C_BP_Group_ID = MBPGroup.getC_BP_Group_ID(X_C_BP_Group.GROUPTYPE_Customer);
 		
 		MBPartner item = null;
-		MBPartnerInfo itemInfo = null;
 		int actionSyn = 0;
 		String key = "";
 		while (rs.next()) {
@@ -96,7 +92,6 @@ public class GetDataSaleMT extends SvrProcess
 			if (actionSyn == 1)
 			{
 				item = new MBPartner(getCtx());
-				itemInfo = new MBPartnerInfo(getCtx(), 0, get_TrxName());
 				int id = DB.getNextID(getCtx(), X_C_BPartner.Table_Name, get_TrxName());
 				item.setValue(rs.getString("customerCode"));
 				item.setKey_Original(item.getValue());//Luu key nay khong thay doi thuan tien cho viec doi chieu
@@ -127,41 +122,7 @@ public class GetDataSaleMT extends SvrProcess
 				listColHeader = PO.getBatchValueList(item, X_C_BPartner.Table_ID, get_TrxName(), id);
 				listRowHear.add(listColHeader);
 				
-				//Bpartner info:
-				itemInfo.setC_BPartner_ID(id);
-				itemInfo.setAddress(rs.getString("Address"));
-				itemInfo.setPhone(rs.getString("mobilePhone"));
-				itemInfo.setBirthday(rs.getTimestamp("dateOfBirth"));
-				itemInfo.setBirthPlace(rs.getString("placeOfBirth"));
-				String gender = rs.getString("sexCode");
-				if(gender != null  && gender.contains("1"))
-					itemInfo.setGender(X_C_BPartnerInfo.GENDER_Male);
-				if(gender != null  &&  gender.contains("2"))
-					itemInfo.setGender(X_C_BPartnerInfo.GENDER_Female);
-				itemInfo.setCardID(rs.getString("IdNo"));
-				itemInfo.setDateIssue(rs.getTimestamp("IdNoIssuedDate"));
-				itemInfo.setPlaceIssue(rs.getString("IdNoIssuedPlace"));
-				itemInfo.set_ValueNoCheck("Created", create);
-				itemInfo.set_ValueNoCheck("Updated", rs.getTimestamp("updateDate"));
-				itemInfo.set_ValueNoCheck("CreatedBy", 100);
-				itemInfo.set_ValueNoCheck("UpdatedBy", 100);
-				itemInfo.setAD_Client_ID(getAD_Client_ID());
-				itemInfo.setAD_Org_ID(Env.getAD_Org_ID(getCtx()));
-				itemInfo.setIsActive(true);
 				
-				int idInfo = DB.getNextID(getCtx(), X_C_BPartnerInfo.Table_Name, get_TrxName());
-				
-				listColLine = PO.getBatchValueList(itemInfo, X_C_BPartnerInfo.Table_ID, get_TrxName(), idInfo);
-				listRowLine.add(listColLine);
-				
-				if (listRowHear.size() >= BATCH_SIZE) {
-					DB.excuteBatch(sqlInsertHeader, listRowHear, get_TrxName());
-					listRowHear.clear();
-					
-					DB.excuteBatch(sqlInsertLine, listRowLine, get_TrxName());
-					listRowLine.clear();
-					
-				}
 			}//End Inserted
 				
 			//Deleted

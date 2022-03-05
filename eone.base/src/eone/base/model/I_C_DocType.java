@@ -1,5 +1,5 @@
 /******************************************************************************
- * Product: EOoe ERP & CRM Smart Business Solution	                        *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
  * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 package eone.base.model;
@@ -23,9 +23,9 @@ public interface I_C_DocType
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 6 - System - Client 
+    /** AccessLevel = 4 - System 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(6);
+    BigDecimal accessLevel = BigDecimal.valueOf(4);
 
     /** Load Meta Data */
 

@@ -41,7 +41,7 @@ public class CalloutOrder extends CalloutEngine
 			pricePO = data.get("PricePO");
 			priceSO = data.get("PriceSO");
 			MDocType dt = MDocType.get(ctx, order.getC_DocType_ID());
-			if(X_C_DocType.DOCTYPE_Output.equals(dt.getDocType())) {
+			if(!X_C_DocType.DOCTYPE_Output.equals(dt.getDocType())) {
 				price = pricePO;
 			} else {
 				price = priceSO;

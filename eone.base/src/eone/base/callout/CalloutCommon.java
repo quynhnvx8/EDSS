@@ -10,7 +10,11 @@ import org.compiere.util.Env;
 import eone.base.model.CalloutEngine;
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
+import eone.base.model.MBank;
+import eone.base.model.MCash;
 import eone.base.model.MDocType;
+import eone.base.model.MGeneral;
+import eone.base.model.MInOut;
 import eone.base.model.MProduct;
 import eone.base.model.MWarehouse;
 import eone.base.model.X_C_DocType;
@@ -20,6 +24,7 @@ import eone.base.model.X_C_DocType;
 //eone.base.callout.CalloutCommon.fill_UOM
 //eone.base.callout.CalloutCommon.getNewDocumentNo
 //eone.base.callout.CalloutCommon.getNewValue 
+//eone.base.callout.CalloutCommon.fillAmtConvert
 public class CalloutCommon extends CalloutEngine
 {
 	
@@ -83,6 +88,39 @@ public class CalloutCommon extends CalloutEngine
 		if (M_Product_ID != null) {
 			MProduct pr = MProduct.get(ctx, M_Product_ID);
 			mTab.setValue("C_UOM_ID", pr.getC_UOM_ID());
+		}
+		
+		
+		return "";
+	}
+	
+	public String fillAmtConvert (Properties ctx, int WindowNo, GridTab mTab, GridField mField, Object value)
+	{
+		if (isCalloutActive())		//	assuming it is resetting value
+			return "";
+		String tableCurrent = mTab.getTableName();
+		Object id = null;
+		BigDecimal rate = Env.ONE;
+		if (tableCurrent.equalsIgnoreCase(MGeneral.Table_Name)) {
+			id = mTab.getValue("C_General_ID");
+			MGeneral parent = MGeneral.get(ctx, Integer.parseInt(id.toString()), null);
+			rate = parent.getCurrencyRate();
+		} else if (tableCurrent.equalsIgnoreCase(MInOut.Table_Name)) {
+			id = mTab.getValue("M_InOut_ID");
+			MInOut parent = MInOut.get(ctx, Integer.parseInt(id.toString()));
+			rate = parent.getCurrencyRate();
+		} else if (tableCurrent.equalsIgnoreCase(MCash.Table_Name)) {
+			rate = (BigDecimal) mTab.getValue("CurrencyRate");			
+		} else if (tableCurrent.equalsIgnoreCase(MBank.Table_Name)) {
+			rate = (BigDecimal) mTab.getValue("CurrencyRate");			
+		}
+		if (rate == null || rate.compareTo(Env.ZERO) == 0) {
+			rate = Env.ONE;
+		}
+		
+		BigDecimal Amount = (BigDecimal)value;
+		if (Amount != null) {
+			mTab.setValue("AmountConvert", Amount.multiply(rate));
 		}
 		
 		

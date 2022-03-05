@@ -964,7 +964,7 @@ public class MLookupFactory
 		
 		//
 		StringBuilder embedSQL = new StringBuilder("SELECT ");
-
+		
 		StringBuilder displayColumn = getDisplayColumn(language, TableName, list, BaseTable);
 		embedSQL.append(displayColumn.toString());
 		embedSQL.append(" FROM ").append(TableName);

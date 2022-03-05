@@ -1,6 +1,7 @@
 package eone.base.model;
 
 import java.sql.ResultSet;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 
@@ -16,9 +17,9 @@ public class MGeneral extends X_C_General implements DocAction
 	private static final long serialVersionUID = 1L;
 	
 
-	public static MGeneral get (Properties ctx, int A_Asset_Build_ID, String trxName)
+	public static MGeneral get (Properties ctx, int C_General_ID, String trxName)
 	{
-		return (MGeneral)MTable.get(ctx, MGeneral.Table_Name).getPO(A_Asset_Build_ID, trxName);
+		return (MGeneral)MTable.get(ctx, MGeneral.Table_Name).getPO(C_General_ID, trxName);
 	}	//	get
 	
 	
@@ -80,6 +81,21 @@ public class MGeneral extends X_C_General implements DocAction
 	}       //      beforeDelete
 	
 	
+	protected MGeneralLine[]	m_lines = null;
+	public MGeneralLine[] getLines (boolean requery)
+	{
+		if (m_lines != null && !requery) {
+			set_TrxName(m_lines, get_TrxName());
+			return m_lines;
+		}
+		List<MGeneralLine> list = new Query(getCtx(), I_C_GeneralLine.Table_Name, "C_General_ID=?", get_TrxName())
+		.setParameters(getC_General_ID())
+		.list();
+		//
+		m_lines = new MGeneralLine[list.size()];
+		list.toArray(m_lines);
+		return m_lines;
+	}
 	
 	protected String		m_processMsg = null;
 

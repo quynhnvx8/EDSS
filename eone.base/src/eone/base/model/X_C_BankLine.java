@@ -1,18 +1,6 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
@@ -24,15 +12,15 @@ import org.compiere.util.Env;
 import org.compiere.util.KeyNamePair;
 
 /** Generated Model for C_BankLine
- *  @author iDempiere (generated) 
- *  @version Release 7.1 - $Id$ */
+ *  @author EOne (generated) 
+ *  @version Version 1.0 - $Id$ */
 public class X_C_BankLine extends PO implements I_C_BankLine, I_Persistent 
 {
 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200613L;
+	private static final long serialVersionUID = 20220305L;
 
     /** Standard Constructor */
     public X_C_BankLine (Properties ctx, int C_BankLine_ID, String trxName)
@@ -55,7 +43,7 @@ public class X_C_BankLine extends PO implements I_C_BankLine, I_Persistent
     }
 
     /** AccessLevel
-      * @return 3 - Client - Org 
+      * @return 7 - System - Client - Org 
       */
     protected int get_AccessLevel()
     {
@@ -220,20 +208,6 @@ public class X_C_BankLine extends PO implements I_C_BankLine, I_Persistent
 		return ii.intValue();
 	}
 
-	/** Set C_BankLine_UU.
-		@param C_BankLine_UU C_BankLine_UU	  */
-	public void setC_BankLine_UU (String C_BankLine_UU)
-	{
-		set_Value (COLUMNNAME_C_BankLine_UU, C_BankLine_UU);
-	}
-
-	/** Get C_BankLine_UU.
-		@return C_BankLine_UU	  */
-	public String getC_BankLine_UU () 
-	{
-		return (String)get_Value(COLUMNNAME_C_BankLine_UU);
-	}
-
 	public eone.base.model.I_C_BPartner getC_BPartner_Cr() throws RuntimeException
     {
 		return (eone.base.model.I_C_BPartner)MTable.get(getCtx(), eone.base.model.I_C_BPartner.Table_Name)
@@ -290,59 +264,9 @@ public class X_C_BankLine extends PO implements I_C_BankLine, I_Persistent
 		return ii.intValue();
 	}
 
-	public I_C_BPartnerInfo getC_BPartnerInfo_Cr() throws RuntimeException
+	public eone.base.model.I_C_DocTypeSub getC_DocTypeSub() throws RuntimeException
     {
-		return (I_C_BPartnerInfo)MTable.get(getCtx(), I_C_BPartnerInfo.Table_Name)
-			.getPO(getC_BPartnerInfo_Cr_ID(), get_TrxName());	}
-
-	/** Set BPartner Info Cr.
-		@param C_BPartnerInfo_Cr_ID BPartner Info Cr	  */
-	public void setC_BPartnerInfo_Cr_ID (int C_BPartnerInfo_Cr_ID)
-	{
-		if (C_BPartnerInfo_Cr_ID < 1) 
-			set_Value (COLUMNNAME_C_BPartnerInfo_Cr_ID, null);
-		else 
-			set_Value (COLUMNNAME_C_BPartnerInfo_Cr_ID, Integer.valueOf(C_BPartnerInfo_Cr_ID));
-	}
-
-	/** Get BPartner Info Cr.
-		@return BPartner Info Cr	  */
-	public int getC_BPartnerInfo_Cr_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_C_BPartnerInfo_Cr_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public I_C_BPartnerInfo getC_BPartnerInfo_Dr() throws RuntimeException
-    {
-		return (I_C_BPartnerInfo)MTable.get(getCtx(), I_C_BPartnerInfo.Table_Name)
-			.getPO(getC_BPartnerInfo_Dr_ID(), get_TrxName());	}
-
-	/** Set BPartner Info Dr.
-		@param C_BPartnerInfo_Dr_ID BPartner Info Dr	  */
-	public void setC_BPartnerInfo_Dr_ID (int C_BPartnerInfo_Dr_ID)
-	{
-		if (C_BPartnerInfo_Dr_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_C_BPartnerInfo_Dr_ID, null);
-		else 
-			set_ValueNoCheck (COLUMNNAME_C_BPartnerInfo_Dr_ID, Integer.valueOf(C_BPartnerInfo_Dr_ID));
-	}
-
-	/** Get BPartner Info Dr.
-		@return BPartner Info Dr	  */
-	public int getC_BPartnerInfo_Dr_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_C_BPartnerInfo_Dr_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public I_C_DocTypeSub getC_DocTypeSub() throws RuntimeException
-    {
-		return (I_C_DocTypeSub)MTable.get(getCtx(), I_C_DocTypeSub.Table_Name)
+		return (eone.base.model.I_C_DocTypeSub)MTable.get(getCtx(), eone.base.model.I_C_DocTypeSub.Table_Name)
 			.getPO(getC_DocTypeSub_ID(), get_TrxName());	}
 
 	/** Set Sub Document.
@@ -396,9 +320,9 @@ public class X_C_BankLine extends PO implements I_C_BankLine, I_Persistent
 		return ii.intValue();
 	}
 
-	public I_C_TypeCost getC_TypeCost() throws RuntimeException
+	public eone.base.model.I_C_TypeCost getC_TypeCost() throws RuntimeException
     {
-		return (I_C_TypeCost)MTable.get(getCtx(), I_C_TypeCost.Table_Name)
+		return (eone.base.model.I_C_TypeCost)MTable.get(getCtx(), eone.base.model.I_C_TypeCost.Table_Name)
 			.getPO(getC_TypeCost_ID(), get_TrxName());	}
 
 	/** Set TypeCost.
@@ -421,9 +345,9 @@ public class X_C_BankLine extends PO implements I_C_BankLine, I_Persistent
 		return ii.intValue();
 	}
 
-	public I_C_TypeRevenue getC_TypeRevenue() throws RuntimeException
+	public eone.base.model.I_C_TypeRevenue getC_TypeRevenue() throws RuntimeException
     {
-		return (I_C_TypeRevenue)MTable.get(getCtx(), I_C_TypeRevenue.Table_Name)
+		return (eone.base.model.I_C_TypeRevenue)MTable.get(getCtx(), eone.base.model.I_C_TypeRevenue.Table_Name)
 			.getPO(getC_TypeRevenue_ID(), get_TrxName());	}
 
 	/** Set Type Revenue.
