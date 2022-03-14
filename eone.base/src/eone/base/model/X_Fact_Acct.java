@@ -20,7 +20,7 @@ public class X_Fact_Acct extends PO implements I_Fact_Acct, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220305L;
+	private static final long serialVersionUID = 20220308L;
 
     /** Standard Constructor */
     public X_Fact_Acct (Properties ctx, int Fact_Acct_ID, String trxName)
@@ -842,6 +842,20 @@ public class X_Fact_Acct extends PO implements I_Fact_Acct, I_Persistent
 	public String getInvoiceNo () 
 	{
 		return (String)get_Value(COLUMNNAME_InvoiceNo);
+	}
+
+	/** Set InvoiceSymbol.
+		@param InvoiceSymbol InvoiceSymbol	  */
+	public void setInvoiceSymbol (String InvoiceSymbol)
+	{
+		set_Value (COLUMNNAME_InvoiceSymbol, InvoiceSymbol);
+	}
+
+	/** Get InvoiceSymbol.
+		@return InvoiceSymbol	  */
+	public String getInvoiceSymbol () 
+	{
+		return (String)get_Value(COLUMNNAME_InvoiceSymbol);
 	}
 
 	/** Set Line ID.

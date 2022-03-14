@@ -17,11 +17,9 @@
 package eone.base.model;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.sql.ResultSet;
 import java.util.List;
 import java.util.Properties;
-import java.util.logging.Level;
 
 import org.compiere.util.CCache;
 import org.compiere.util.Env;
@@ -157,42 +155,7 @@ public class MTax extends X_C_Tax
 	}	//	toString
 
 	
-	/**
-	 * 	Calculate Tax - no rounding
-	 *	@param amount amount
-	 *	@param taxIncluded if true tax is calculated from gross otherwise from net 
-	 *	@param scale scale 
-	 *	@return  tax amount
-	 */
-	public BigDecimal calculateTax (BigDecimal amount, boolean taxIncluded, int scale)
-	{
-		//	Null Tax
-		if (isZeroTax())
-			return Env.ZERO;
-
-		MTax[] taxarray = new MTax[] {this};
-
-		BigDecimal tax = Env.ZERO;		
-		for (MTax taxc : taxarray) {
-			BigDecimal multiplier = taxc.getRate().divide(Env.ONEHUNDRED, 12, RoundingMode.HALF_UP);		
-			if (!taxIncluded)	//	$100 * 6 / 100 == $6 == $100 * 0.06
-			{
-				BigDecimal itax = amount.multiply(multiplier).setScale(scale, RoundingMode.HALF_UP);
-				tax = tax.add(itax);
-			}
-			else			//	$106 - ($106 / (100+6)/100) == $6 == $106 - ($106/1.06)
-			{
-				multiplier = multiplier.add(Env.ONE);
-				BigDecimal base = amount.divide(multiplier, 12, RoundingMode.HALF_UP); 
-				BigDecimal itax = amount.subtract(base).setScale(scale, RoundingMode.HALF_UP);
-				tax = tax.add(itax);
-			}
-		}
-		if (log.isLoggable(Level.FINE)) log.fine("calculateTax " + amount 
-			+ " (incl=" + taxIncluded + ",scale=" + scale 
-			+ ") = " + tax + " [" + tax + "]");
-		return tax;
-	}	//	calculateTax
+	
 
 	@Override
 	protected boolean beforeSave(boolean newRecord) {

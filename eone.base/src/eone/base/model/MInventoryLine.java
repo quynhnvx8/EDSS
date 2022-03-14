@@ -169,8 +169,7 @@ public class MInventoryLine extends X_M_InventoryLine
 			MProduct product = getProduct();
 			if (product != null)
 			{
-				int precision = product.getUOMPrecision(); 
-				QtyCount = QtyCount.setScale(precision, RoundingMode.HALF_UP);
+				QtyCount = QtyCount.setScale(Env.getScalePrice(), RoundingMode.HALF_UP);
 			}
 		}
 		super.setQtyCount(QtyCount);
@@ -188,8 +187,7 @@ public class MInventoryLine extends X_M_InventoryLine
 			MProduct product = getProduct();
 			if (product != null)
 			{
-				int precision = product.getUOMPrecision(); 
-				QtyInternalUse = QtyInternalUse.setScale(precision, RoundingMode.HALF_UP);
+				QtyInternalUse = QtyInternalUse.setScale(Env.getScalePrice(), RoundingMode.HALF_UP);
 			}
 		}
 		super.setQtyInternalUse(QtyInternalUse);

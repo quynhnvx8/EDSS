@@ -52,7 +52,7 @@ public final class EOne
 
 	/** Subtitle                */
 	static public final String	SUB_TITLE		= "Smart ERP, CRM ";
-	static public final String	ADEMPIERE_R		= "EONE";
+	static public final String	EONE_R		= "EONE";
 	static public final String	COPYRIGHT		= "\u00A9 2020 EONE";
 
 	static private String		s_ImplementationVersion = null;

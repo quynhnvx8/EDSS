@@ -166,11 +166,7 @@ public class MUOM extends X_C_UOM
 	 */
 	public BigDecimal round (BigDecimal qty, boolean stdPrecision)
 	{
-		int precision = getStdPrecision();
-		
-		if (qty.scale() > precision)
-			return qty.setScale(getStdPrecision(), RoundingMode.HALF_UP);
-		return qty;
+		return qty.setScale(Env.getScalePrice(), RoundingMode.HALF_UP);
 	}	//	round
 
 	

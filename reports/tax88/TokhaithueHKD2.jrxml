@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TokhaithueHKD2" pageWidth="525" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="525" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a32218b6-2a1a-403e-9ea4-726a3278fa47">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="182"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Bold_Left" hAlign="Left" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="true" isItalic="false" isUnderline="false" pdfFontName="TIMESBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
 		<box leftPadding="3"/>
 	</style>
@@ -52,7 +52,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Số hộ chiếu:]]></text>
 			</staticText>
@@ -65,7 +65,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18d]]]></text>
 			</staticText>
@@ -78,7 +78,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18d.1]]]></text>
 			</staticText>
@@ -91,7 +91,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Ngày cấp: …/…/…… ]]></text>
 			</staticText>
@@ -104,7 +104,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Nơi cấp:]]></text>
 			</staticText>
@@ -117,7 +117,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18d.2]]]></text>
 			</staticText>
@@ -130,7 +130,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -143,7 +143,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -156,7 +156,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18đ]]]></text>
 			</staticText>
@@ -169,7 +169,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -182,7 +182,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Số giấy thông hành (đối với thương nhân nước ngoài):]]></text>
 			</staticText>
@@ -195,7 +195,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18d.1]]]></text>
 			</staticText>
@@ -208,7 +208,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Ngày cấp: …/…/…… ]]></text>
 			</staticText>
@@ -221,7 +221,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18d.2]]]></text>
 			</staticText>
@@ -234,7 +234,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Nơi cấp:]]></text>
 			</staticText>
@@ -247,7 +247,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -260,7 +260,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18e.1]]]></text>
 			</staticText>
@@ -273,7 +273,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -286,7 +286,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -299,7 +299,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Số CMND biên giới (đối với thương nhân nước ngoài):]]></text>
 			</staticText>
@@ -312,7 +312,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18e.2]]]></text>
 			</staticText>
@@ -325,7 +325,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Ngày cấp: …/…/…… ]]></text>
 			</staticText>
@@ -338,7 +338,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Nơi cấp:]]></text>
 			</staticText>
@@ -351,7 +351,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18e]]]></text>
 			</staticText>
@@ -364,7 +364,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18f]]]></text>
 			</staticText>
@@ -377,7 +377,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18f.2]]]></text>
 			</staticText>
@@ -390,7 +390,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -403,7 +403,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Ngày cấp: …/…/…]]></text>
 			</staticText>
@@ -416,7 +416,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -429,7 +429,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Số Giấy tờ chứng thực cá nhân khác:]]></text>
 			</staticText>
@@ -442,7 +442,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18f.1]]]></text>
 			</staticText>
@@ -455,7 +455,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Nơi cấp:]]></text>
 			</staticText>
@@ -468,7 +468,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18g]]]></text>
 			</staticText>
@@ -481,7 +481,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Nơi đăng ký thường trú:]]></text>
 			</staticText>
@@ -494,7 +494,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18g.2]]]></text>
 			</staticText>
@@ -507,7 +507,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -520,7 +520,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18g.3]]]></text>
 			</staticText>
@@ -533,7 +533,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -546,7 +546,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Phường/Xã/Thị trấn:]]></text>
 			</staticText>
@@ -559,7 +559,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Tỉnh/Thành phố:]]></text>
 			</staticText>
@@ -572,7 +572,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -585,7 +585,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Số nhà, đường phố/xóm/ấp/thôn:]]></text>
 			</staticText>
@@ -598,7 +598,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18g.1]]]></text>
 			</staticText>
@@ -611,7 +611,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18g.4]]]></text>
 			</staticText>
@@ -624,7 +624,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -637,7 +637,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Quận/Huyện/Thị xã/ Thành phố thuộc tỉnh:]]></text>
 			</staticText>
@@ -650,7 +650,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18h]]]></text>
 			</staticText>
@@ -663,7 +663,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Chỗ ở hiện tại:]]></text>
 			</staticText>
@@ -676,7 +676,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -689,7 +689,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18h.1]]]></text>
 			</staticText>
@@ -702,7 +702,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -715,7 +715,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Quận/Huyện/Thị xã/ Thành phố thuộc tỉnh:]]></text>
 			</staticText>
@@ -728,7 +728,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Số nhà, đường phố/xóm/ấp/thôn:]]></text>
 			</staticText>
@@ -741,7 +741,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18h.4]]]></text>
 			</staticText>
@@ -754,7 +754,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -767,7 +767,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18h.3]]]></text>
 			</staticText>
@@ -780,7 +780,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Phường/Xã/Thị trấn:]]></text>
 			</staticText>
@@ -793,7 +793,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Tỉnh/Thành phố:]]></text>
 			</staticText>
@@ -806,7 +806,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18h.2]]]></text>
 			</staticText>
@@ -819,7 +819,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -832,7 +832,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18i]]]></text>
 			</staticText>
@@ -845,7 +845,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Giấy chứng nhận đăng ký hộ kinh doanh (nếu có): Số:]]></text>
 			</staticText>
@@ -858,7 +858,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -871,7 +871,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[182.2]]]></text>
 			</staticText>
@@ -884,7 +884,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Ngày cấp: …/…/…… ]]></text>
 			</staticText>
@@ -897,7 +897,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18i.1]]]></text>
 			</staticText>
@@ -910,7 +910,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Cơ quan cấp:]]></text>
 			</staticText>
@@ -923,7 +923,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -936,7 +936,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Vốn kinh doanh (đồng):]]></text>
 			</staticText>
@@ -949,7 +949,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[18k]]]></text>
 			</staticText>
@@ -962,7 +962,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -975,7 +975,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="true" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[19]]]></text>
 			</staticText>
@@ -988,7 +988,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Tên đại lý thuế (nếu có):]]></text>
 			</staticText>
@@ -1001,7 +1001,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -1014,7 +1014,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Mã số thuế:]]></text>
 			</staticText>
@@ -1027,7 +1027,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="true" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[20]]]></text>
 			</staticText>
@@ -1040,7 +1040,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -1053,7 +1053,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="true" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[21]]]></text>
 			</staticText>
@@ -1066,7 +1066,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Hợp đồng đại lý thuế: Số: ]]></text>
 			</staticText>
@@ -1079,7 +1079,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -1092,7 +1092,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Ngày: …/…/…… ]]></text>
 			</staticText>
@@ -1105,7 +1105,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Tên của tổ chức khai thay (nếu có):]]></text>
 			</staticText>
@@ -1118,7 +1118,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="true" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[22]]]></text>
 			</staticText>
@@ -1131,7 +1131,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -1144,7 +1144,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -1157,7 +1157,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="true" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[23]]]></text>
 			</staticText>
@@ -1170,7 +1170,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Mã số thuế:]]></text>
 			</staticText>
@@ -1183,7 +1183,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -1196,7 +1196,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Địa chỉ:]]></text>
 			</staticText>
@@ -1209,7 +1209,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="true" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[24]]]></text>
 			</staticText>
@@ -1222,7 +1222,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="true" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[25]]]></text>
 			</staticText>
@@ -1235,7 +1235,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Điện thoại:]]></text>
 			</staticText>
@@ -1248,7 +1248,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -1261,7 +1261,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Fax:]]></text>
 			</staticText>
@@ -1274,7 +1274,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="true" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[26]]]></text>
 			</staticText>
@@ -1287,7 +1287,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -1300,7 +1300,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="true" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="true" isItalic="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[[27]]]></text>
 			</staticText>
@@ -1313,7 +1313,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Email:]]></text>
 			</staticText>
@@ -1326,7 +1326,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Justified" verticalAlignment="Bottom">
-					<font fontName="Times New Roman" size="10" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>

@@ -49,7 +49,7 @@ public class MTaxPersonal extends X_HR_TaxPersonal
 		return listItems;
 	}
 	
-	public static double getAmountTaxPersonal(BigDecimal BaseAmount, Properties ctx, String trxName, int AD_Client_ID) {
+	public static BigDecimal getAmountTaxPersonal(BigDecimal BaseAmount, Properties ctx, String trxName, int AD_Client_ID) {
 		Map<Integer, MTaxPersonal> items = s_cache;
 		if (items.size() <= 0) {
 			s_cache = (CCache<Integer, MTaxPersonal>) getAllItem(ctx, trxName, AD_Client_ID);
@@ -60,7 +60,7 @@ public class MTaxPersonal extends X_HR_TaxPersonal
 				return Env.getValueByFormula(entry.getValue().getFormulaSetup().replaceAll("X", ""+ BaseAmount));
 			}
 		}
-		return 0;
+		return Env.ZERO;
 	}
 
 	@Override

@@ -17,7 +17,6 @@ import eone.base.model.MTimekeeperMap;
 import eone.base.model.MWorkDay;
 import eone.base.model.PO;
 import eone.base.model.X_HR_DayOffLine;
-import eone.base.model.X_HR_SalaryLine;
 
 public class CreateDayOffLine extends SvrProcess {
 
@@ -84,10 +83,13 @@ public class CreateDayOffLine extends SvrProcess {
 				sequence = DB.getNextID(Env.getAD_Client_ID(Env.getCtx()), X_HR_DayOffLine.Table_Name, null);
 				line.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
 				line.setAD_Client_ID(Env.getAD_Client_ID(Env.getCtx()));
-				List<Object> lstParam = PO.getBatchValueList(line, X_HR_DayOffLine.Table_ID, get_TrxName(), sequence);
+				
+				List<String> colNames = PO.getSqlInsert_Para(X_HR_DayOffLine.Table_ID, get_TrxName());
+				List<Object> lstParam = PO.getBatchValueList(line, colNames, X_HR_DayOffLine.Table_ID, get_TrxName(), sequence);
+				
 				values.add(lstParam);
 				if(values.size() >= BATCH_SIZE) {
-					String sqlInsert = PO.getSqlInsert(X_HR_SalaryLine.Table_ID, null);
+					String sqlInsert = PO.getSqlInsert(X_HR_DayOffLine.Table_ID, null);
 					if(values.size() > 0) {
 						String err = DB.excuteBatch(sqlInsert, values, null);
 						if(err != null) {

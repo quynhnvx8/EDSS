@@ -109,7 +109,7 @@ public class MAssetBuild extends X_A_Asset_Build implements DocAction
 	@Override
 	public boolean processIt(String action, int AD_Window_ID) throws Exception {
 		m_processMsg = null;
-		DocumentEngine engine = new DocumentEngine (this, getDocStatus(), AD_Window_ID);
+		DocumentEngine engine = new DocumentEngine (this, getDocStatus(), AD_Window_ID, false);
 		return engine.processIt (action, getDocStatus());
 	}
 
@@ -207,7 +207,6 @@ public class MAssetBuild extends X_A_Asset_Build implements DocAction
 			asset.setUseLifes(insert? getUseLifes() : null);
 			asset.setEndDateCurrent(insert ? TimeUtil.addMonths(getDepreciationDate(), getUseLifes().intValue()) : null);
 			asset.setEndDateOriginal(asset.getEndDateCurrent());
-			asset.setTypeCalculate(insert ? getTypeCalculate() : null);
 			asset.setIsRecordUsed(insert? true : false);
 			
 			if (X_C_DocType.DOCBASETYPE_211AddNew.equalsIgnoreCase(dt.getDocBaseType())

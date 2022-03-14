@@ -45,6 +45,7 @@ import eone.base.model.MSalaryLine;
 import eone.base.model.MTaxPersonal;
 import eone.base.model.PO;
 import eone.base.model.X_HR_Config;
+import eone.base.model.X_HR_SalaryLine;
 
 public class CalculateSalary extends SvrProcess {
 
@@ -95,7 +96,7 @@ public class CalculateSalary extends SvrProcess {
 		BigDecimal totalWorkSalary;				//Tong ngay lam viec
 		BigDecimal salaryOneDay;				//Luong cua 1 ngay
 		BigDecimal totalTaxableIncom;			//Tong thu nhap chịu thu = Gross - cac khoan giam tru.
-		double taxIncom;					//Thue thu nhap ca nhan
+		BigDecimal taxIncom;					//Thue thu nhap ca nhan
 		String sqlUpdate = PO.getSqlUpdate(I_HR_SalaryLine.Table_ID);
 		
 		List<List<Object>> values = new ArrayList<List<Object>>();
@@ -123,7 +124,7 @@ public class CalculateSalary extends SvrProcess {
 			totalTaxableIncom = Env.ZERO;
 			numberDependent = Env.ZERO;
 			totalExtra = Env.ZERO;
-			taxIncom = 0;
+			taxIncom = Env.ZERO;
 			
 			line = entry.getValue();
 			
@@ -174,10 +175,10 @@ public class CalculateSalary extends SvrProcess {
 						if (extra.getFormulaSetup().contains("@BaseSalary@")) {
 							str = baseSalary.toString();
 						}
-						double value = 0;
+						BigDecimal value = Env.ZERO;
 						if (!str.isEmpty() && str != null)
 							value = Env.getValueByFormula(str);
-						totalExtra = totalExtra.add(extra.getPercent().multiply(new BigDecimal(value)));
+						totalExtra = totalExtra.add(extra.getPercent().multiply(value));
 					}
 					line.setSalaryExtra(totalExtra);
 				}
@@ -205,7 +206,7 @@ public class CalculateSalary extends SvrProcess {
 						.subtract(dependentDeduction.multiply(numberDependent));
 				
 				taxIncom = MTaxPersonal.getAmountTaxPersonal(totalTaxableIncom, getCtx(), get_TrxName(), Env.getAD_Client_ID(getCtx())); 
-				line.setTaxAmt(new BigDecimal(taxIncom).setScale(Env.getScaleFinal(), RoundingMode.HALF_UP));
+				line.setTaxAmt(taxIncom.setScale(Env.getScaleFinal(), RoundingMode.HALF_UP));
 				
 				line.setSalaryNet(line.getSalaryGross()
 						.subtract(line.getInsua_Health())
@@ -218,7 +219,9 @@ public class CalculateSalary extends SvrProcess {
 				line.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
 				line.setAD_Client_ID(Env.getAD_Client_ID(Env.getCtx()));
 				//Add du lieu vao list de update thoe batch
-				params = PO.getBatchValueList(line, I_HR_SalaryLine.Table_ID, get_TrxName(), line.getHR_SalaryLine_ID());
+				
+				List<String> colNames = PO.getSqlInsert_Para(X_HR_SalaryLine.Table_ID, get_TrxName());
+				params = PO.getBatchValueList(line, colNames, I_HR_SalaryLine.Table_ID, get_TrxName(), line.getHR_SalaryLine_ID());
 				values.add(params);
 				
 				

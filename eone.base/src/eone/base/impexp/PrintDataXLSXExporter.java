@@ -49,6 +49,7 @@ public class PrintDataXLSXExporter
 	int columnCount = 0;
 	int windowNo;
 	ProcessInfo info = null;
+	private static float [] widthTable = null;
 	private static MPrintFormatItem [] items = null;
 	
 	private XSSFWorkbook					m_workbook;
@@ -67,6 +68,7 @@ public class PrintDataXLSXExporter
 		windowNo = (int)m_params.get("WindowNo");
 		columnCount = info.getColumnCountQuery();
 		dataQuery = info.getDataQueryC();
+		widthTable = info.getWidthTable();
 		m_workbook = new XSSFWorkbook();
 		m_params.clear();
 		

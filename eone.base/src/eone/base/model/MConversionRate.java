@@ -141,10 +141,9 @@ public class MConversionRate extends X_C_Conversion_Rate
 			
 		//	Get Amount in Currency Precision
 		retValue = retValue.multiply(Amt);
-		int stdPrecision = isCosting ? MCurrency.getCostingPrecision(ctx, CurTo_ID): MCurrency.getStdPrecision(ctx, CurTo_ID);		
 
-		if (retValue.scale() > stdPrecision)
-			retValue = retValue.setScale(stdPrecision, RoundingMode.HALF_UP);
+		retValue = retValue.setScale(Env.getScalePrice(), RoundingMode.HALF_UP);
+			
 			
 		return retValue;
 	}	//	convert

@@ -80,7 +80,9 @@ public class VerifyRole extends SvrProcess
 			per.setIsUpdateable(true);
 			per.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
 			per.setAD_Client_ID(Env.getAD_Client_ID(Env.getCtx()));
-			List<Object> item = PO.getBatchValueList(per, X_AD_Permission.Table_ID, get_TrxName(), sequence);
+			
+			List<String> colNames = PO.getSqlInsert_Para(X_AD_Permission.Table_ID, get_TrxName());
+			List<Object> item = PO.getBatchValueList(per, colNames, X_AD_Permission.Table_ID, get_TrxName(), sequence);
 			ListItem.add(item);
 			
 			if (ListItem.size() >= BATCH_SIZE) {

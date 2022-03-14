@@ -19,7 +19,7 @@ public class X_C_GeneralLine extends PO implements I_C_GeneralLine, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220305L;
+	private static final long serialVersionUID = 20220308L;
 
     /** Standard Constructor */
     public X_C_GeneralLine (Properties ctx, int C_GeneralLine_ID, String trxName)
@@ -513,118 +513,6 @@ public class X_C_GeneralLine extends PO implements I_C_GeneralLine, I_Persistent
 		return ii.intValue();
 	}
 
-	public eone.base.model.I_C_UOM getC_UOM() throws RuntimeException
-    {
-		return (eone.base.model.I_C_UOM)MTable.get(getCtx(), eone.base.model.I_C_UOM.Table_Name)
-			.getPO(getC_UOM_ID(), get_TrxName());	}
-
-	/** Set UOM.
-		@param C_UOM_ID 
-		Unit of Measure
-	  */
-	public void setC_UOM_ID (int C_UOM_ID)
-	{
-		if (C_UOM_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_C_UOM_ID, null);
-		else 
-			set_ValueNoCheck (COLUMNNAME_C_UOM_ID, Integer.valueOf(C_UOM_ID));
-	}
-
-	/** Get UOM.
-		@return Unit of Measure
-	  */
-	public int getC_UOM_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_C_UOM_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_M_Product getM_Product() throws RuntimeException
-    {
-		return (eone.base.model.I_M_Product)MTable.get(getCtx(), eone.base.model.I_M_Product.Table_Name)
-			.getPO(getM_Product_ID(), get_TrxName());	}
-
-	/** Set Product.
-		@param M_Product_ID 
-		Product, Service, Item
-	  */
-	public void setM_Product_ID (int M_Product_ID)
-	{
-		if (M_Product_ID < 1) 
-			set_Value (COLUMNNAME_M_Product_ID, null);
-		else 
-			set_Value (COLUMNNAME_M_Product_ID, Integer.valueOf(M_Product_ID));
-	}
-
-	/** Get Product.
-		@return Product, Service, Item
-	  */
-	public int getM_Product_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_M_Product_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_M_Warehouse getM_Warehouse_Cr() throws RuntimeException
-    {
-		return (eone.base.model.I_M_Warehouse)MTable.get(getCtx(), eone.base.model.I_M_Warehouse.Table_Name)
-			.getPO(getM_Warehouse_Cr_ID(), get_TrxName());	}
-
-	/** Set Warehouse Cr.
-		@param M_Warehouse_Cr_ID 
-		Storage Warehouse and Service Point
-	  */
-	public void setM_Warehouse_Cr_ID (int M_Warehouse_Cr_ID)
-	{
-		if (M_Warehouse_Cr_ID < 1) 
-			set_Value (COLUMNNAME_M_Warehouse_Cr_ID, null);
-		else 
-			set_Value (COLUMNNAME_M_Warehouse_Cr_ID, Integer.valueOf(M_Warehouse_Cr_ID));
-	}
-
-	/** Get Warehouse Cr.
-		@return Storage Warehouse and Service Point
-	  */
-	public int getM_Warehouse_Cr_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_M_Warehouse_Cr_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_M_Warehouse getM_Warehouse_Dr() throws RuntimeException
-    {
-		return (eone.base.model.I_M_Warehouse)MTable.get(getCtx(), eone.base.model.I_M_Warehouse.Table_Name)
-			.getPO(getM_Warehouse_Dr_ID(), get_TrxName());	}
-
-	/** Set Warehouse Dr.
-		@param M_Warehouse_Dr_ID 
-		Storage Warehouse and Service Point
-	  */
-	public void setM_Warehouse_Dr_ID (int M_Warehouse_Dr_ID)
-	{
-		if (M_Warehouse_Dr_ID < 1) 
-			set_Value (COLUMNNAME_M_Warehouse_Dr_ID, null);
-		else 
-			set_Value (COLUMNNAME_M_Warehouse_Dr_ID, Integer.valueOf(M_Warehouse_Dr_ID));
-	}
-
-	/** Get Warehouse Dr.
-		@return Storage Warehouse and Service Point
-	  */
-	public int getM_Warehouse_Dr_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_M_Warehouse_Dr_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
 	public eone.base.model.I_PA_ReportLine getPA_ReportLine() throws RuntimeException
     {
 		return (eone.base.model.I_PA_ReportLine)MTable.get(getCtx(), eone.base.model.I_PA_ReportLine.Table_Name)
@@ -650,26 +538,6 @@ public class X_C_GeneralLine extends PO implements I_C_GeneralLine, I_Persistent
 		return ii.intValue();
 	}
 
-	/** Set Price.
-		@param Price 
-		Price
-	  */
-	public void setPrice (BigDecimal Price)
-	{
-		set_Value (COLUMNNAME_Price, Price);
-	}
-
-	/** Get Price.
-		@return Price
-	  */
-	public BigDecimal getPrice () 
-	{
-		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_Price);
-		if (bd == null)
-			 return Env.ZERO;
-		return bd;
-	}
-
 	/** Set Processed.
 		@param Processed 
 		The document has been processed
@@ -692,25 +560,5 @@ public class X_C_GeneralLine extends PO implements I_C_GeneralLine, I_Persistent
 			return "Y".equals(oo);
 		}
 		return false;
-	}
-
-	/** Set Quantity.
-		@param Qty 
-		Quantity
-	  */
-	public void setQty (BigDecimal Qty)
-	{
-		set_Value (COLUMNNAME_Qty, Qty);
-	}
-
-	/** Get Quantity.
-		@return Quantity
-	  */
-	public BigDecimal getQty () 
-	{
-		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_Qty);
-		if (bd == null)
-			 return Env.ZERO;
-		return bd;
 	}
 }

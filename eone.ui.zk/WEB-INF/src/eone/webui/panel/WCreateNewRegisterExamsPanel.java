@@ -34,6 +34,7 @@ import eone.base.model.MPatientRegisterLine;
 import eone.base.model.MProduct;
 import eone.base.model.MUOM;
 import eone.base.model.PO;
+import eone.base.model.X_HM_PatientRegisterLine;
 import eone.webui.LayoutUtils;
 import eone.webui.apps.WInfo_Column;
 import eone.webui.component.Button;
@@ -356,7 +357,9 @@ public class WCreateNewRegisterExamsPanel extends ADForm implements IFormControl
 				line.setHR_Employee_ID(0);
 				line.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
 				line.setAD_Client_ID(Env.getAD_Client_ID(Env.getCtx()));
-				List<Object> params = PO.getBatchValueList(line, I_HM_PatientRegisterLine.Table_ID, null, M_PatientRegisterLine_ID);
+				
+				List<String> colNames = PO.getSqlInsert_Para(X_HM_PatientRegisterLine.Table_ID, null);
+				List<Object> params = PO.getBatchValueList(line, colNames, I_HM_PatientRegisterLine.Table_ID, null, M_PatientRegisterLine_ID);
 				listParams.add(params);
 				if (listParams.size() >= BATCH_SIZE) {
 					DB.excuteBatch(sqlInsert, listParams, null);

@@ -208,8 +208,13 @@ public abstract class AbstractProcessCtl implements Runnable
 			
 	}   //  run
 	
-	private Serializable getBalance(Map<String, Object> data, Map<String, String> formula, String columnName, Map<String, Object> valueOlds) {
-    	String formulaStr = formula.get(columnName);
+	private BigDecimal getBalanceRow(Map<String, Object> data, String formula, String columnName, int row, BigDecimal valueOlds) {
+		if (valueOlds == null || row == 0) {
+			valueOlds = Env.ZERO;
+    	}
+    	
+    	String formulaStr = formula;
+    	
     	for(Map.Entry<String, Object> entry : data.entrySet()) {
     		String key = entry.getKey();
     		Object value = entry.getValue();
@@ -220,15 +225,42 @@ public abstract class AbstractProcessCtl implements Runnable
     			formulaStr = formulaStr.replaceAll(key, ""+ value);
     		}
     	}
-    	Object valueOld = valueOlds.get(columnName);
-    	if (valueOld == null) {
-    		valueOld = Env.ZERO;
+    	formulaStr = formulaStr + "+" + valueOlds;
+    	BigDecimal valueNew = Env.ZERO;
+    	try {
+    		valueNew = Env.getValueByFormula(formulaStr);
+    	} catch (Exception e) {
+    		log.config("Error " + row);
     	}
-    	Serializable valueNew = Env.getValueByFormula(formulaStr);
     	
-    	BigDecimal total = new BigDecimal(valueOld.toString()).add(new BigDecimal(valueNew.toString()));
-    	
-    	return (Serializable) (total);
+    	return valueNew;
+    }
+	
+	private Serializable getBalance(Map<String, Object> data, Map<String, String> formula, String columnName, Map<String, Object> valueOlds) {
+    	String formulaStr = formula.get(columnName);
+    	if (formulaStr != null) {
+	    	for(Map.Entry<String, Object> entry : data.entrySet()) {
+	    		String key = entry.getKey();
+	    		Object value = entry.getValue();
+	    		if (value == null) {
+	    			value = 0;
+	    		}
+	    		if(formulaStr.contains(key)) {
+	    			formulaStr = formulaStr.replaceAll(key, ""+ value);
+	    		}
+	    	}
+	    	Object valueOld = valueOlds.get(columnName);
+	    	if (valueOld == null) {
+	    		valueOld = Env.ZERO;
+	    	}
+	    	Serializable valueNew = Env.getValueByFormula(formulaStr);
+	    	
+	    	BigDecimal total = new BigDecimal(valueOld.toString()).add(new BigDecimal(valueNew.toString()));
+	    	
+	    	return (Serializable) (total);
+    	}else {
+    		return 0;
+    	}
     }
 	
 	private void getDataExcuteOld(String sql, MPrintFormat  format)
@@ -414,6 +446,11 @@ public abstract class AbstractProcessCtl implements Runnable
 		Map<String, BigDecimal> objGroup = new HashMap<String, BigDecimal>();
 		Map<String, Map<String, BigDecimal>> dataGroup = new HashMap<String, Map<String, BigDecimal>>();
     	//End
+		
+		Map<String, Object> dataRow = new HashMap<String, Object>();
+		//Map<String, String> formula = format.getFormula();
+		//Map<String, Object> valueOld = new HashMap<String, Object>();
+		BigDecimal balance = Env.ZERO;
     	
 		ArrayList<Object> arrWidth = new ArrayList<Object>();
 		
@@ -467,12 +504,13 @@ public abstract class AbstractProcessCtl implements Runnable
 				//Process Content
 				//Đang cấu hình chỉ 1 group
 				MPrintFormatItem itemG = null;
+				BigDecimal valueRowOld = null;
 				if(itemsG != null && itemsG.length > 0)
 					itemG = itemsG[0];
 				
 				ResultSet rsC = (ResultSet) rs.getObject(2);
 				while (rsC.next()) {
-					
+					dataRow = new HashMap<String, Object>();
 					//add group
 					int nextcol = 0;
 					if (itemsG != null && itemsG.length > 0) {
@@ -517,6 +555,16 @@ public abstract class AbstractProcessCtl implements Runnable
 						
 						if (item.isMapColumnSelectSQL() && item.isPrinted()){
 							element = (Serializable) rsC.getObject(item.getName());
+							
+							if (item.isNumber()) {
+								dataRow.put(item.getColumnName(), element);
+			        		}
+							//Tinh toan doi voi cot dat cong thuc de day vao List data truoc khi view bao cao.
+							if (item.isBalanceFinal() && item.getFormulaSetup() != "") {
+			        			balance = getBalanceRow(dataRow, item.getFormulaSetup(), item.getColumnName(), rowCount, valueRowOld); 
+			        			element = balance;
+			        			valueRowOld = balance;			        			
+			        		}
 							
 							arrC.add(addNewItem(item, element));
 							//Add do rong cua cac cot

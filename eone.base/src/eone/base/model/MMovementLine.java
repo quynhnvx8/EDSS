@@ -135,8 +135,7 @@ public class MMovementLine extends X_M_MovementLine
 			MProduct product = getProduct();
 			if (product != null)
 			{
-				int precision = product.getUOMPrecision(); 
-				MovementQty = MovementQty.setScale(precision, RoundingMode.HALF_UP);
+				MovementQty = MovementQty.setScale(Env.getScalePrice(), RoundingMode.HALF_UP);
 			}
 		}
 		super.setMovementQty(MovementQty);

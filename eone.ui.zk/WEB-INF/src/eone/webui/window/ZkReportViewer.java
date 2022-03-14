@@ -79,7 +79,6 @@ import org.zkoss.zul.Vlayout;
 import org.zkoss.zul.impl.Utils;
 import org.zkoss.zul.impl.XulElement;
 
-import eone.base.impexp.PrintDataXLSXExporter;
 import eone.base.model.MLanguage;
 import eone.base.model.MQuery;
 import eone.base.process.ProcessInfo;
@@ -1244,8 +1243,8 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 				}
 				File file = File.createTempFile(prefix, ".xlsx", new File(path));
 				viewer.m_reportEngine.createXLSX(file);
-				PrintDataXLSXExporter exp = new PrintDataXLSXExporter(m_params, viewer.m_reportEngine.getPrintFormat());
-				exp.export(file, true);
+				//PrintDataXLSXExporter exp = new PrintDataXLSXExporter(m_params, viewer.m_reportEngine.getPrintFormat());
+				//exp.export(file, true);
 				viewer.media = new AMedia(file.getName(), "xlsx",
 						"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", file, true);
 			}

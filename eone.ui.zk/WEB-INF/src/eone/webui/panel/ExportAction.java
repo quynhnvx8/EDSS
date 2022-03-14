@@ -1,16 +1,4 @@
-/******************************************************************************
- * Product: Adempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 2010 Heng Sin Low                							  *
- * This program is free software; you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY; without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program; if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- *****************************************************************************/
+
 package eone.webui.panel;
 
 import java.io.File;
@@ -57,11 +45,6 @@ import eone.webui.event.DialogEvents;
 import eone.webui.util.ZKUpdateUtil;
 import eone.webui.window.FDialog;
 
-/**
- *
- * @author hengsin
- *
- */
 public class ExportAction implements EventListener<Event>
 {
 	private AbstractADWindowContent panel;
@@ -151,12 +134,6 @@ public class ExportAction implements EventListener<Event>
 			
 			Row row = new Row();
 			rows.appendChild(row);
-			row.appendChild(new Label(Msg.getMsg(Env.getCtx(), "FilesOfType")));
-			row.appendChild(cboType);
-			ZKUpdateUtil.setHflex(cboType, "1");
-			
-			row = new Row();
-			rows.appendChild(row);
 			row.appendChild(new Space());
 			chkCurrentRow.setLabel(Msg.getMsg(Env.getCtx(), "ExportCurrentRowOnly"));
 			chkCurrentRow.setSelected(true);
@@ -197,12 +174,7 @@ public class ExportAction implements EventListener<Event>
 		vlayout.appendChild(new Label(Msg.getMsg(Env.getCtx(), "SelectTabToExport")));
 		
 		chkSelectionTabForExport = new ArrayList<Checkbox> ();
-		boolean isHasSelectionTab = false;
-		boolean isSelectTabDefault = false;
-		// with 2Pack, default is export all child tab
-		if (exporter.getClass().getName().equals("org.adempiere.pipo2.GridTab2PackExporter")){
-			isSelectTabDefault = true;
-		}
+		
 		// for to make each export tab with one checkbox
 		for (GridTab child : childs){
 			Checkbox chkSelectionTab = new Checkbox();
@@ -211,20 +183,14 @@ public class ExportAction implements EventListener<Event>
 			if (!exporter.isExportableTab(child)){
 				;//continue;
 			}
-			if (child.getTabNo() == indxDetailSelected || isSelectTabDefault){
-				chkSelectionTab.setSelected(true);
-			}
+			
+			chkSelectionTab.setSelected(true);
 			chkSelectionTab.setAttribute("tabBinding", child);
 			vlayout.appendChild(chkSelectionTab);
 			chkSelectionTabForExport.add(chkSelectionTab);
 			chkSelectionTab.addEventListener(Events.ON_CHECK, this);
-			isHasSelectionTab = true;
 		}
 		
-		// in case no child tab can export. clear selection area
-		if (isHasSelectionTab == false){
-			selectionTabRow.getChildren().clear();
-		}
 	}
 
 	@Override
@@ -274,23 +240,24 @@ public class ExportAction implements EventListener<Event>
 		Set<String> tables = new HashSet<String>();
 		childs = new ArrayList<GridTab>();
 		List<GridTab> includedList = panel.getActiveGridTab().getAllTabs();
+		
 		for(GridTab included : includedList)
 		{
 			String tableName = included.getTableName();
 			if (tables.contains(tableName))
 				continue;
 			tables.add(tableName);
-			childs.add(included);
+			//childs.add(included);
 		}
+		
 		for(int i = selected+1; i < adTab.getTabCount(); i++)
 		{
 			IADTabpanel adTabPanel = adTab.getADTabpanel(i);
 			if (adTabPanel.getGridTab().getTabLevel() <= tabLevel)
 				break;
 			String tableName = adTabPanel.getGridTab().getTableName();
-			if (tables.contains(tableName))
-				continue;
-			tables.add(tableName);
+			if (!tables.contains(tableName))
+				tables.add(tableName);
 			childs.add(adTabPanel.getGridTab());
 		}
 		
@@ -319,7 +286,7 @@ public class ExportAction implements EventListener<Event>
 	private void exportFile() {
 		try {
 			boolean currentRowOnly = chkCurrentRow.isSelected();
-			File file = File.createTempFile("Export", "."+cboType.getSelectedItem().getValue().toString());
+			File file = File.createTempFile("Export", ".xlsx");
 			childs.clear();
 			for (Checkbox chkSeletionTab : chkSelectionTabForExport){
 				if (chkSeletionTab.isChecked()){

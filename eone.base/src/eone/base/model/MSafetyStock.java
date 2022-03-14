@@ -105,7 +105,7 @@ public class MSafetyStock extends X_M_SafetyStock implements DocAction
 	@Override
 	public boolean processIt(String action, int AD_Window_ID) throws Exception {
 		m_processMsg = null;
-		DocumentEngine engine = new DocumentEngine (this, getDocStatus(), AD_Window_ID);
+		DocumentEngine engine = new DocumentEngine (this, getDocStatus(), AD_Window_ID, false);
 		return engine.processIt (action, getDocStatus());
 	}
 

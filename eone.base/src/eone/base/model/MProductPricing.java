@@ -803,8 +803,8 @@ public class MProductPricing extends AbstractProductPricing
 		if (m_PriceList.intValue() != 0)
 			Discount = BigDecimal.valueOf((m_PriceList.doubleValue() - m_PriceStd.doubleValue())
 				/ m_PriceList.doubleValue() * 100.0);
-		if (Discount.scale() > 2)
-			Discount = Discount.setScale(2, RoundingMode.HALF_UP);
+		Discount = Discount.setScale(Env.getScalePrice(), RoundingMode.HALF_UP);
+			
 		return Discount;
 	}	//	getDiscount
 
@@ -873,10 +873,7 @@ public class MProductPricing extends AbstractProductPricing
 	 */
 	private BigDecimal round (BigDecimal bd)
 	{
-		if (m_precision >= 0	//	-1 = no rounding
-			&& bd.scale() > m_precision)
-			return bd.setScale(m_precision, RoundingMode.HALF_UP);
-		return bd;
+		return bd.setScale(Env.getScalePrice(), RoundingMode.HALF_UP);
 	}	//	round
 	
 	/**************************************************************************

@@ -143,8 +143,7 @@ public abstract class PaymentProcessor
 			return createPair (name, "0", maxLength);
 		else
 		{
-			if (value.scale() < 2)
-				value = value.setScale(2, RoundingMode.HALF_UP);
+			value = value.setScale(Env.getScalePrice(), RoundingMode.HALF_UP);
 			return createPair (name, String.valueOf(value), maxLength);
 		}
 	}	//	createPair

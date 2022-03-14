@@ -21,7 +21,7 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20211227L;
+	private static final long serialVersionUID = 20220308L;
 
     /** Standard Constructor */
     public X_M_InOut (Properties ctx, int M_InOut_ID, String trxName)
@@ -216,6 +216,23 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 	public String getAddress () 
 	{
 		return (String)get_Value(COLUMNNAME_Address);
+	}
+
+	/** Set Address 1.
+		@param Address1 
+		Address line 1 for this location
+	  */
+	public void setAddress1 (String Address1)
+	{
+		set_Value (COLUMNNAME_Address1, Address1);
+	}
+
+	/** Get Address 1.
+		@return Address line 1 for this location
+	  */
+	public String getAddress1 () 
+	{
+		return (String)get_Value(COLUMNNAME_Address1);
 	}
 
 	/** Set Age.
@@ -754,9 +771,9 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 		return (String)get_Value(COLUMNNAME_Gender);
 	}
 
-	public eone.base.model.I_HM_Parts getHM_Parts() throws RuntimeException
+	public I_HM_Parts getHM_Parts() throws RuntimeException
     {
-		return (eone.base.model.I_HM_Parts)MTable.get(getCtx(), eone.base.model.I_HM_Parts.Table_Name)
+		return (I_HM_Parts)MTable.get(getCtx(), I_HM_Parts.Table_Name)
 			.getPO(getHM_Parts_ID(), get_TrxName());	}
 
 	/** Set Parts.
@@ -864,6 +881,20 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 		return (String)get_Value(COLUMNNAME_InvoiceNo);
 	}
 
+	/** Set InvoiceSymbol.
+		@param InvoiceSymbol InvoiceSymbol	  */
+	public void setInvoiceSymbol (String InvoiceSymbol)
+	{
+		set_Value (COLUMNNAME_InvoiceSymbol, InvoiceSymbol);
+	}
+
+	/** Get InvoiceSymbol.
+		@return InvoiceSymbol	  */
+	public String getInvoiceSymbol () 
+	{
+		return (String)get_Value(COLUMNNAME_InvoiceSymbol);
+	}
+
 	/** Set JobName.
 		@param JobName JobName	  */
 	public void setJobName (String JobName)
@@ -954,6 +985,20 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
+	}
+
+	/** Set ObjectName.
+		@param ObjectName ObjectName	  */
+	public void setObjectName (String ObjectName)
+	{
+		set_Value (COLUMNNAME_ObjectName, ObjectName);
+	}
+
+	/** Get ObjectName.
+		@return ObjectName	  */
+	public String getObjectName () 
+	{
+		return (String)get_Value(COLUMNNAME_ObjectName);
 	}
 
 	/** EONE = EONE */

@@ -358,10 +358,12 @@ public class WAcctViewerData
 		rc.setColSize(140);
 		m_rcolumn.add(rc);
 		//Source amount
-		rc = new RColumn(ctx, X_Fact_Acct.COLUMNNAME_AmountConvert, DisplayType.Amount);
-		rc.setColSize(140);
-		m_rcolumn.add(rc);
-		
+		if (Env.DisCurrency)
+		{
+			rc = new RColumn(ctx, X_Fact_Acct.COLUMNNAME_AmountConvert, DisplayType.Amount);
+			rc.setColSize(140);
+			m_rcolumn.add(rc);
+		}
 		
 		//Debt partner
 		rc = new RColumn(ctx, X_Fact_Acct.COLUMNNAME_C_BPartner_Dr_ID, DisplayType.Table, null, 0, "C_BPartner_ID");
@@ -373,13 +375,16 @@ public class WAcctViewerData
 		m_rcolumn.add(rc);
 		
 		//Currency
-		rc = new RColumn(ctx, X_Fact_Acct.COLUMNNAME_C_Currency_ID, DisplayType.TableDir);
-		rc.setColSize(80);
-		m_rcolumn.add(rc);
-		//Currency rate
-		rc = new RColumn(ctx, X_Fact_Acct.COLUMNNAME_CurrencyRate, DisplayType.Amount);
-		rc.setColSize(40);
-		m_rcolumn.add(rc);
+		if (Env.DisCurrency) {
+			rc = new RColumn(ctx, X_Fact_Acct.COLUMNNAME_C_Currency_ID, DisplayType.TableDir);
+			rc.setColSize(80);
+			m_rcolumn.add(rc);
+			//Currency rate
+			rc = new RColumn(ctx, X_Fact_Acct.COLUMNNAME_CurrencyRate, DisplayType.Amount);
+			rc.setColSize(40);
+			m_rcolumn.add(rc);
+			
+		}
 		
 		
 		//Type Cost
@@ -477,6 +482,10 @@ public class WAcctViewerData
 		}
 		//Document No
 		rc = new RColumn(ctx, X_Fact_Acct.COLUMNNAME_InvoiceNo, DisplayType.String);
+		rc.setColSize(250);
+		m_rcolumn.add(rc);
+		
+		rc = new RColumn(ctx, X_Fact_Acct.COLUMNNAME_InvoiceSymbol, DisplayType.String);
 		rc.setColSize(250);
 		m_rcolumn.add(rc);
 		

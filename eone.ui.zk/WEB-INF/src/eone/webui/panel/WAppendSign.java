@@ -471,7 +471,9 @@ public class WAppendSign extends Window implements EventListener<Event>
 				rowList.setAD_AppendSign_ID(AD_AppendSign_ID);
 				rowList.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
 				rowList.setAD_Client_ID(Env.getAD_Client_ID(Env.getCtx()));
-				List<Object> params = PO.getBatchValueList(rowList, X_AD_Signer.Table_ID, null, rowList.getAD_Signer_ID());
+				
+				List<String> colNames = PO.getSqlInsert_Para(X_AD_Signer.Table_ID, null);
+				List<Object> params = PO.getBatchValueList(rowList, colNames, X_AD_Signer.Table_ID, null, rowList.getAD_Signer_ID());
 				valuesIn.add(params);
 			}
 		}

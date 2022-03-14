@@ -72,16 +72,19 @@ public class Doc_InOut extends Doc
 		
 		MDocType dt = MDocType.get(getCtx(), inout.getC_DocType_ID());
 		
-		dr = MElementValue.get(getCtx(), inout.getAccount_Dr_ID());
-		cr = MElementValue.get(getCtx(), inout.getAccount_Cr_ID());
+		
 		if (MDocType.DOCTYPE_Output.equals(dt.getDocType()))
 		{
-			if (inout.getAccount_COGS_ID() > 0) 
-				cogs = MElementValue.get(getCtx(), inout.getAccount_COGS_ID());
-			if (inout.getAccount_REV_ID() > 0)
-				revenue = MElementValue.get(getCtx(), inout.getAccount_REV_ID());
 			for (int i = 0; i < p_lines.length; i++)
 			{
+				dr = MElementValue.get(getCtx(), inout.getAccount_Dr_ID());
+				cr = MElementValue.get(getCtx(), inout.getAccount_Cr_ID());
+				
+				if (inout.getAccount_COGS_ID() > 0) 
+					cogs = MElementValue.get(getCtx(), inout.getAccount_COGS_ID());
+				if (inout.getAccount_REV_ID() > 0)
+					revenue = MElementValue.get(getCtx(), inout.getAccount_REV_ID());
+				
 				DocLine line = p_lines[i];
 				MInOutLine inoutLine = (MInOutLine) line.getPO();
 				//COGS
@@ -135,6 +138,7 @@ public class Doc_InOut extends Doc
 					f1.setC_BPartner_Dr_ID(inout.getC_BPartner_Dr_ID());
 					f1.setC_Tax_ID(inout.getC_Tax_ID());
 					f1.setInvoiceNo(inout.getInvoiceNo());
+					f1.setInvoiceSymbol(inout.getInvoiceSymbol());
 					f1.setDateInvoiced(inout.getDateInvoiced());
 				}
 			}//end for
@@ -143,6 +147,10 @@ public class Doc_InOut extends Doc
 			{
 				DocLine line = p_lines[i];
 				MInOutLine inoutLine = (MInOutLine) line.getPO();
+				
+				dr = MElementValue.get(getCtx(), inout.getAccount_Dr_ID());
+				cr = MElementValue.get(getCtx(), inout.getAccount_Cr_ID());
+				
 				
 				FactLine f = null;
 				if (X_C_DocType.DOCTYPEDETAIL_RETURN.equals(dt.getDocTypeDetail())) {
@@ -153,6 +161,8 @@ public class Doc_InOut extends Doc
 					BigDecimal amtCOGS = inoutLine.getQty().multiply(inoutLine.getPricePO());
 					f = fact.createLine(line, dr, cogs, inout.getC_Currency_ID(), inout.getCurrencyRate(), amtCOGS, amtCOGS);
 				} else {
+					if (cogs == null)
+						cogs = dr;
 					f = fact.createLine(line, dr, cr, inout.getC_Currency_ID(), inout.getCurrencyRate(), inoutLine.getAmount(), inoutLine.getAmount());
 				}
 				f.setM_Product_ID(inoutLine.getM_Product_ID());
@@ -192,6 +202,7 @@ public class Doc_InOut extends Doc
 					f1.setC_BPartner_Dr_ID(inout.getC_BPartner_Dr_ID());
 					f1.setC_Tax_ID(inout.getC_Tax_ID());
 					f1.setInvoiceNo(inout.getInvoiceNo());
+					f1.setInvoiceSymbol(inout.getInvoiceSymbol());
 					f1.setDateInvoiced(inout.getDateInvoiced());
 				}
 			}//end for

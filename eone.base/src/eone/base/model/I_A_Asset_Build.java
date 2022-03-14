@@ -434,15 +434,6 @@ public interface I_A_Asset_Build
 	  */
 	public BigDecimal getTaxBaseAmt();
 
-    /** Column name TypeCalculate */
-    public static final String COLUMNNAME_TypeCalculate = "TypeCalculate";
-
-	/** Set TypeCalculate	  */
-	public void setTypeCalculate (String TypeCalculate);
-
-	/** Get TypeCalculate	  */
-	public String getTypeCalculate();
-
     /** Column name Updated */
     public static final String COLUMNNAME_Updated = "Updated";
 

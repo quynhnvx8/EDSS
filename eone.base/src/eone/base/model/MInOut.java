@@ -437,7 +437,7 @@ public class MInOut extends X_M_InOut implements DocAction
 	public boolean processIt(String action, int AD_Window_ID) throws Exception {
 		m_processMsg = null;
 		this.action = action;
-		DocumentEngine engine = new DocumentEngine (this, getDocStatus(), AD_Window_ID);
+		DocumentEngine engine = new DocumentEngine (this, getDocStatus(), AD_Window_ID, true);
 		return engine.processIt (action, getDocStatus());
 	}
 
@@ -531,7 +531,9 @@ public class MInOut extends X_M_InOut implements DocAction
 					int ID = DB.getNextID(getAD_Client_ID(), MStorage.Table_Name, get_TrxName());
 					storage.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
 					storage.setAD_Client_ID(Env.getAD_Client_ID(Env.getCtx()));
-					lstColumn = PO.getBatchValueList(storage, MStorage.Table_ID, get_TrxName(), ID);
+					
+					List<String> colNames = PO.getSqlInsert_Para(MStorage.Table_ID, get_TrxName());
+					lstColumn = PO.getBatchValueList(storage, colNames, MStorage.Table_ID, get_TrxName(), ID);
 					lstRows.add(lstColumn);
 					if (lstRows.size() >= BATCH_SIZE) {
 						DB.excuteBatch(sqlInsert, lstRows, get_TrxName());

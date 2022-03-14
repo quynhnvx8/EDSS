@@ -20,7 +20,7 @@ public class X_A_Asset_Build extends PO implements I_A_Asset_Build, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20211227L;
+	private static final long serialVersionUID = 20220311L;
 
     /** Standard Constructor */
     public X_A_Asset_Build (Properties ctx, int A_Asset_Build_ID, String trxName)
@@ -683,25 +683,6 @@ public class X_A_Asset_Build extends PO implements I_A_Asset_Build, I_Persistent
 		if (bd == null)
 			 return Env.ZERO;
 		return bd;
-	}
-
-	/** By Day = BD */
-	public static final String TYPECALCULATE_ByDay = "BD";
-	/** By Month = BM */
-	public static final String TYPECALCULATE_ByMonth = "BM";
-	/** Set TypeCalculate.
-		@param TypeCalculate TypeCalculate	  */
-	public void setTypeCalculate (String TypeCalculate)
-	{
-
-		set_Value (COLUMNNAME_TypeCalculate, TypeCalculate);
-	}
-
-	/** Get TypeCalculate.
-		@return TypeCalculate	  */
-	public String getTypeCalculate () 
-	{
-		return (String)get_Value(COLUMNNAME_TypeCalculate);
 	}
 
 	/** Set UseDate.

@@ -23,7 +23,7 @@ public class MAccount extends X_C_Account
 	private static final long serialVersionUID = 7980515458720808532L;
 
 
-	private static int AD_Client_ID = 0; // Env.getAD_Client_ID(Env.getCtx());
+	private static int AD_Client_ID = Env.getAD_Client_ID(Env.getCtx());
 	
 	public static MAccount get (Properties ctx)
 	{

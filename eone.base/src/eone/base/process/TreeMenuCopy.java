@@ -56,7 +56,9 @@ public class TreeMenuCopy extends SvrProcess
 			node.setAD_Tree_ID(toTree.getAD_Tree_ID());
 			node.setAD_Org_ID(0);
 			node.setAD_Client_ID(0);
-			params = PO.getBatchValueList(node, X_AD_TreeNode.Table_ID, get_TrxName(), node.getNode_ID());
+			
+			List<String> colNames = PO.getSqlInsert_Para(X_AD_TreeNode.Table_ID, get_TrxName());
+			params = PO.getBatchValueList(node, colNames, X_AD_TreeNode.Table_ID, get_TrxName(), node.getNode_ID());
 			values.add(params);
 			
 			if(values.size() >= BATCH_SIZE) {

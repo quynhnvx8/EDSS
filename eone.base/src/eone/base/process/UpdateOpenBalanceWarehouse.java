@@ -125,7 +125,9 @@ public class UpdateOpenBalanceWarehouse extends SvrProcess {
 			int ID = DB.getNextID(AD_Client_ID, MStorage.Table_Name, get_TrxName());
 			storage.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
 			storage.setAD_Client_ID(Env.getAD_Client_ID(Env.getCtx()));
-			lstColumn = PO.getBatchValueList(storage, MStorage.Table_ID, get_TrxName(), ID);
+			
+			List<String> colNames = PO.getSqlInsert_Para(MStorage.Table_ID, get_TrxName());
+			lstColumn = PO.getBatchValueList(storage, colNames, MStorage.Table_ID, get_TrxName(), ID);
 			lstRows.add(lstColumn);
 			if (lstRows.size() >= BATCH_SIZE) {
 				DB.excuteBatch(sqlInsert, lstRows, get_TrxName());
@@ -175,7 +177,9 @@ public class UpdateOpenBalanceWarehouse extends SvrProcess {
 			int ID = DB.getNextID(AD_Client_ID, MStorage.Table_Name, get_TrxName());
 			storage.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
 			storage.setAD_Client_ID(Env.getAD_Client_ID(Env.getCtx()));
-			lstColumn = PO.getBatchValueList(storage, MStorage.Table_ID, get_TrxName(), ID);
+			
+			List<String> colNames = PO.getSqlInsert_Para(MStorage.Table_ID, get_TrxName());
+			lstColumn = PO.getBatchValueList(storage, colNames, MStorage.Table_ID, get_TrxName(), ID);
 			lstRows.add(lstColumn);
 			if (lstRows.size() >= BATCH_SIZE) {
 				DB.excuteBatch(sqlInsert, lstRows, get_TrxName());

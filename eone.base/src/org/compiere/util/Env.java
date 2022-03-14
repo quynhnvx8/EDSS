@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -1917,7 +1918,7 @@ public final class Env
 		if (Util.isEmpty(s, true))
 			s = Env.getContext(Env.getCtx(), STANDARD_REPORT_FOOTER_TRADEMARK_TEXT);
 		if (Util.isEmpty(s))
-			s = EOne.ADEMPIERE_R;
+			s = EOne.EONE_R;
 		return s;
 	}
 	
@@ -2125,6 +2126,7 @@ public final class Env
     public static boolean DisProjectLine 		= false;//
     public static boolean DisConstruction 		= false;//hien thi cong trinh
     public static boolean DisConstructionLine 	= false;
+    public static boolean DisCurrency			= false;
     
     public static int roundAmount = 0;
     public static int rountQty = 2;
@@ -2136,8 +2138,9 @@ public final class Env
 	 * @param str
 	 * @return
 	 */
-	public static double getValueByFormula(final String str) {
-	    return new Object() {
+	public static BigDecimal getValueByFormula(final String str) {
+		double value = 
+	     new Object() {
 	        int pos = -1, ch;
 
 	        void nextChar() {
@@ -2214,6 +2217,8 @@ public final class Env
 	            return x;
 	        }
 	    }.parse();
+	    NumberFormat myformatter = new DecimalFormat("##############");  
+    	return new BigDecimal(myformatter.format(value));
 	}
    
 	public static int getScaleFinal() {

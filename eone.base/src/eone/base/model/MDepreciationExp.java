@@ -1,6 +1,7 @@
 package eone.base.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.ResultSet;
 import java.util.Properties;
 
@@ -60,7 +61,7 @@ public class MDepreciationExp extends X_A_Depreciation_Exp
 	protected boolean beforeSave(boolean newRecord) {
 		if (is_ValueChanged("StartDate") || is_ValueChanged("EndDate")) {
 			int numberDay = TimeUtil.getDaysBetween(getStartDate(), getEndDate());
-			setAmount(getOneDay().multiply(new BigDecimal(numberDay)).setScale(Env.roundAmount));
+			setAmount(getOneDay().multiply(new BigDecimal(numberDay)).setScale(Env.getScaleFinal(), RoundingMode.HALF_UP));
 		}
 		
 		return true;

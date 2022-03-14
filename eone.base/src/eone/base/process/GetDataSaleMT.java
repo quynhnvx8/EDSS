@@ -119,7 +119,8 @@ public class GetDataSaleMT extends SvrProcess
 				item.setSendEMail(false);
 				item.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
 				item.setAD_Client_ID(Env.getAD_Client_ID(Env.getCtx()));
-				listColHeader = PO.getBatchValueList(item, X_C_BPartner.Table_ID, get_TrxName(), id);
+				List<String> colNames = PO.getSqlInsert_Para(X_C_BPartner.Table_ID, get_TrxName());
+				listColHeader = PO.getBatchValueList(item, colNames, X_C_BPartner.Table_ID, get_TrxName(), id);
 				listRowHear.add(listColHeader);
 				
 				
@@ -230,7 +231,10 @@ public class GetDataSaleMT extends SvrProcess
 					item.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
 					item.setAD_Client_ID(Env.getAD_Client_ID(Env.getCtx()));
 					idheader = DB.getNextID(getCtx(), X_M_InOut.Table_Name, get_TrxName());
-					listColHeader = PO.getBatchValueList(item, X_M_InOut.Table_ID, get_TrxName(), idheader);
+					
+					List<String> colNames = PO.getSqlInsert_Para(X_M_InOut.Table_ID, get_TrxName());
+					listColHeader = PO.getBatchValueList(item, colNames, X_M_InOut.Table_ID, get_TrxName(), idheader);
+					
 					listRowHear.add(listColHeader);
 					arrID.add(idheader);
 				}//Insert header
@@ -271,7 +275,8 @@ public class GetDataSaleMT extends SvrProcess
 				line.setOriginal(X_M_InOutLine.ORIGINAL_SALEMT);
 				int idInfo = DB.getNextID(getCtx(), X_M_InOutLine.Table_Name, get_TrxName());
 				
-				listColLine = PO.getBatchValueList(line, X_M_InOutLine.Table_ID, get_TrxName(), idInfo);
+				List<String> colNames = PO.getSqlInsert_Para(X_M_InOutLine.Table_ID, get_TrxName());
+				listColLine = PO.getBatchValueList(line, colNames, X_M_InOutLine.Table_ID, get_TrxName(), idInfo);
 				listRowLine.add(listColLine);
 				
 				if (listRowLine.size() >= BATCH_SIZE) {
@@ -405,7 +410,9 @@ public class GetDataSaleMT extends SvrProcess
 					item.setOriginal(X_M_InOut.ORIGINAL_SALEMT);
 					idheader = DB.getNextID(getCtx(), X_M_InOut.Table_Name, get_TrxName());
 					
-					listColHeader = PO.getBatchValueList(item, X_M_InOut.Table_ID, get_TrxName(), idheader);
+					List<String> colNames = PO.getSqlInsert_Para(X_M_InOut.Table_ID, get_TrxName());
+					listColHeader = PO.getBatchValueList(item, colNames, X_M_InOut.Table_ID, get_TrxName(), idheader);
+					
 					listRowHear.add(listColHeader);
 					arrID.add(idheader);
 				}//Insert header
@@ -432,7 +439,8 @@ public class GetDataSaleMT extends SvrProcess
 				line.setOriginal(X_M_InOutLine.ORIGINAL_SALEMT);
 				int idInfo = DB.getNextID(getCtx(), X_M_InOutLine.Table_Name, get_TrxName());
 				
-				listColLine = PO.getBatchValueList(line, X_M_InOutLine.Table_ID, get_TrxName(), idInfo);
+				List<String> colNames = PO.getSqlInsert_Para(X_M_InOutLine.Table_ID, get_TrxName());
+				listColLine = PO.getBatchValueList(line, colNames, X_M_InOutLine.Table_ID, get_TrxName(), idInfo);
 				listRowLine.add(listColLine);
 				
 				if (listRowLine.size() >= BATCH_SIZE) {

@@ -1,5 +1,6 @@
 package org.compiere.print;
 
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -89,8 +90,8 @@ public class MPrintFormatItem extends X_AD_PrintFormatItem
 		if (item.contains("{") && item.contains("}")) {
 			int start = item.indexOf("{");
 			formula = item.substring(item.indexOf("{") + 1, item.indexOf("}"));
-			double num = Env.getValueByFormula(formula);
-			String value = Env.numToChar((int)num, 2);
+			BigDecimal num = Env.getValueByFormula(formula);
+			String value = Env.numToChar(num.intValue(), 2);
 			item = item.substring(0, start) + value + item.substring(item.indexOf("}") + 1);
 		}
 		

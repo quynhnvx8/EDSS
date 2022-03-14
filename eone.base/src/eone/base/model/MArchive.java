@@ -145,8 +145,8 @@ public class MArchive extends X_AD_Archive {
 	 * @param trxName
 	 */
 	private void initArchiveStoreDetails(Properties ctx, String trxName) {
-		MClientInfo clientInfo = MClientInfo.get(ctx, getAD_Client_ID());
-		provider=new MStorageProvider(ctx, clientInfo.getStorageArchive_ID(), trxName);		
+		//MClientInfo clientInfo = MClientInfo.get(ctx, getAD_Client_ID());
+		provider=new MStorageProvider(ctx, 0, trxName);//clientInfo.getStorageArchive_ID()		
 	}
 
 	/**

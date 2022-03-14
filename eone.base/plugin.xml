@@ -66,20 +66,20 @@
    
   
   <extension
-         id="eone.base.impexp.GridTabXLSExporter"
-         name="Grid data excel template exporter"
+         id="eone.base.impexp.GridTabXLSXExporter"
+         name="Grid data XLSX exporter"
          point="org.adempiere.base.IGridTabExporter">
       <exporter
-            class="eone.base.impexp.GridTabXLSExporter"
+            class="eone.base.impexp.GridTabXLSXExporter"
             priority="0">
       </exporter>
    </extension>
    <extension
-         id="eone.base.impexp.GridTabXLSImporter"
-         name="Grid data XLS importer"
+         id="eone.base.impexp.GridTabXLSXImporter"
+         name="Grid data XLSX importer"
          point="org.adempiere.base.IGridTabImporter">
       <importer
-            class="eone.base.impexp.GridTabXLSImporter"
+            class="eone.base.impexp.GridTabXLSXImporter"
             priority="0">
       </importer>
    </extension>

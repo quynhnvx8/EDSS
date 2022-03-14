@@ -43,207 +43,196 @@ import org.compiere.util.Util;
 import eone.exceptions.DBException;
 
 /**
- *	Persistent Column Model
- *	
- *  @author Jorg Janke
- *  @version $Id: MColumn.java,v 1.6 2006/08/09 05:23:49 jjanke Exp $
+ * Persistent Column Model
+ * 
+ * @author Jorg Janke
+ * @version $Id: MColumn.java,v 1.6 2006/08/09 05:23:49 jjanke Exp $
  */
-public class MColumn extends X_AD_Column
-{
+public class MColumn extends X_AD_Column {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6905852892037761285L;
 
-	public static MColumn get (Properties ctx, int AD_Column_ID)
-	{
+	public static MColumn get(Properties ctx, int AD_Column_ID) {
 		return get(ctx, AD_Column_ID, null);
 	}
 
 	/**
-	 * 	Get MColumn from Cache
-	 *	@param ctx context
-	 * 	@param AD_Column_ID id
-	 * 	@param trxName trx
-	 *	@return MColumn
+	 * Get MColumn from Cache
+	 * 
+	 * @param ctx          context
+	 * @param AD_Column_ID id
+	 * @param trxName      trx
+	 * @return MColumn
 	 */
-	public static MColumn get(Properties ctx, int AD_Column_ID, String trxName)
-	{
+	public static MColumn get(Properties ctx, int AD_Column_ID, String trxName) {
 		Integer key = Integer.valueOf(AD_Column_ID);
-		MColumn retValue = (MColumn) s_cache.get (key);
+		MColumn retValue = (MColumn) s_cache.get(key);
 		if (retValue != null) {
 			retValue.set_TrxName(trxName);
 			return retValue;
 		}
-		retValue = new MColumn (ctx, AD_Column_ID, trxName);
-		if (retValue.get_ID () != 0)
-			s_cache.put (key, retValue);
+		retValue = new MColumn(ctx, AD_Column_ID, trxName);
+		if (retValue.get_ID() != 0)
+			s_cache.put(key, retValue);
 		return retValue;
-	}	//	get
+	} // get
 
 	/**
-	 * 	Get MColumn given TableName and ColumnName
-	 *	@param ctx context
-	 * 	@param TableName
-	 * 	@param ColumnName
-	 *	@return MColumn
+	 * Get MColumn given TableName and ColumnName
+	 * 
+	 * @param ctx        context
+	 * @param TableName
+	 * @param ColumnName
+	 * @return MColumn
 	 */
-	public static MColumn get (Properties ctx, String tableName, String columnName)
-	{
+	public static MColumn get(Properties ctx, String tableName, String columnName) {
 		MTable table = MTable.get(ctx, tableName);
-		return  table.getColumn(columnName);
-	}	//	get
+		return table.getColumn(columnName);
+	} // get
 
-	public static String getColumnName (Properties ctx, int AD_Column_ID)
-	{
-		return getColumnName (ctx, AD_Column_ID, null);
+	public static String getColumnName(Properties ctx, int AD_Column_ID) {
+		return getColumnName(ctx, AD_Column_ID, null);
 	}
 
 	/**
-	 * 	Get Column Name
-	 *	@param ctx context
-	 *	@param AD_Column_ID id
-	 *	@param trxName transaction
-	 *	@return Column Name or null
+	 * Get Column Name
+	 * 
+	 * @param ctx          context
+	 * @param AD_Column_ID id
+	 * @param trxName      transaction
+	 * @return Column Name or null
 	 */
-	public static String getColumnName (Properties ctx, int AD_Column_ID, String trxName)
-	{
+	public static String getColumnName(Properties ctx, int AD_Column_ID, String trxName) {
 		MColumn col = MColumn.get(ctx, AD_Column_ID, trxName);
 		if (col.get_ID() == 0)
 			return null;
 		return col.getColumnName();
-	}	//	getColumnName
-	
-	/**	Cache						*/
-	private static CCache<Integer,MColumn>	s_cache	= new CCache<Integer,MColumn>(Table_Name, 20);
-	
-	/**	Static Logger	*/
-	private static CLogger	s_log	= CLogger.getCLogger (MColumn.class);
-	
+	} // getColumnName
+
+	/** Cache */
+	private static CCache<Integer, MColumn> s_cache = new CCache<Integer, MColumn>(Table_Name, 20);
+
+	/** Static Logger */
+	private static CLogger s_log = CLogger.getCLogger(MColumn.class);
+
 	/**************************************************************************
-	 * 	Standard Constructor
-	 *	@param ctx context
-	 *	@param AD_Column_ID
-	 *	@param trxName transaction
+	 * Standard Constructor
+	 * 
+	 * @param ctx          context
+	 * @param AD_Column_ID
+	 * @param trxName      transaction
 	 */
-	public MColumn (Properties ctx, int AD_Column_ID, String trxName)
-	{
-		super (ctx, AD_Column_ID, trxName);
-		if (AD_Column_ID == 0)
-		{
-			setIsAlwaysUpdateable (false);	// N
-			setIsEncrypted (false);
-			setIsIdentifier (false);
-			setIsKey (false);
-			setIsMandatory (false);
-			setIsParent (false);
-			setIsSelectionColumn (false);
-			setIsTranslated (false);
-			setIsUpdateable (true);	// Y
+	public MColumn(Properties ctx, int AD_Column_ID, String trxName) {
+		super(ctx, AD_Column_ID, trxName);
+		if (AD_Column_ID == 0) {
+			setIsAlwaysUpdateable(false); // N
+			setIsEncrypted(false);
+			setIsIdentifier(false);
+			setIsKey(false);
+			setIsMandatory(false);
+			setIsParent(false);
+			setIsSelectionColumn(false);
+			setIsTranslated(false);
+			setIsUpdateable(true); // Y
 		}
-	}	//	MColumn
+	} // MColumn
 
 	/**
-	 * 	Load Constructor
-	 *	@param ctx context
-	 *	@param rs result set
-	 *	@param trxName transaction
+	 * Load Constructor
+	 * 
+	 * @param ctx     context
+	 * @param rs      result set
+	 * @param trxName transaction
 	 */
-	public MColumn (Properties ctx, ResultSet rs, String trxName)
-	{
+	public MColumn(Properties ctx, ResultSet rs, String trxName) {
 		super(ctx, rs, trxName);
-	}	//	MColumn
-	
+	} // MColumn
+
 	/**
-	 * 	Parent Constructor
-	 *	@param parent table
+	 * Parent Constructor
+	 * 
+	 * @param parent table
 	 */
-	public MColumn (MTable parent)
-	{
-		this (parent.getCtx(), 0, parent.get_TrxName());
+	public MColumn(MTable parent) {
+		this(parent.getCtx(), 0, parent.get_TrxName());
 		setClientOrg(parent);
-		setAD_Table_ID (parent.getAD_Table_ID());
-	}	//	MColumn
-	
-	
+		setAD_Table_ID(parent.getAD_Table_ID());
+	} // MColumn
+
 	/**
-	 * 	Is Standard Column
-	 *	@return true for AD_Client_ID, etc.
+	 * Is Standard Column
+	 * 
+	 * @return true for AD_Client_ID, etc.
 	 */
-	public boolean isStandardColumn()
-	{
+	public boolean isStandardColumn() {
 		String columnName = getColumnName();
-		if (columnName.equals("AD_Client_ID") 
-			|| columnName.equals("AD_Org_ID")
-			|| columnName.equals("IsActive")
-			|| columnName.equals("Processing")
-			|| columnName.equals("Created")
-			|| columnName.equals("CreatedBy")
-			|| columnName.equals("Updated")
-			|| columnName.equals("UpdatedBy") )
+		if (columnName.equals("AD_Client_ID") || columnName.equals("AD_Org_ID") || columnName.equals("IsActive")
+				|| columnName.equals("Processing") || columnName.equals("Created") || columnName.equals("CreatedBy")
+				|| columnName.equals("Updated") || columnName.equals("UpdatedBy"))
 			return true;
-		
+
 		return false;
-	}	//	isStandardColumn
-	
+	} // isStandardColumn
+
 	/**
-	 * 	Is UUID Column
-	 *	@return true for UUID column
+	 * Is UUID Column
+	 * 
+	 * @return true for UUID column
 	 */
 	public boolean isUUIDColumn() {
 		return getColumnName().equals(PO.getUUIDColumnName(getAD_Table().getTableName()));
 	}
 
 	/**
-	 * 	Is Virtual Column
-	 *	@return true if virtual column
+	 * Is Virtual Column
+	 * 
+	 * @return true if virtual column
 	 */
-	public boolean isVirtualColumn()
-	{
+	public boolean isVirtualColumn() {
 		String s = getColumnSQL();
 		return s != null && s.length() > 0;
-	}	//	isVirtualColumn
+	} // isVirtualColumn
 
 	/**
-	 * 	Is Virtual DB Column
-	 *	@return true if virtual DB column
+	 * Is Virtual DB Column
+	 * 
+	 * @return true if virtual DB column
 	 */
-	public boolean isVirtualDBColumn()
-	{
+	public boolean isVirtualDBColumn() {
 		String s = getColumnSQL();
 		return s != null && s.length() > 0 && !s.startsWith("@SQL=");
-	}	//	isVirtualDBColumn
+	} // isVirtualDBColumn
 
 	/**
-	 * 	Is Virtual UI Column
-	 *	@return true if virtual UI column
+	 * Is Virtual UI Column
+	 * 
+	 * @return true if virtual UI column
 	 */
-	public boolean isVirtualUIColumn()
-	{
+	public boolean isVirtualUIColumn() {
 		String s = getColumnSQL();
 		return s != null && s.length() > 0 && s.startsWith("@SQL=");
-	}	//	isVirtualUIColumn
-	
+	} // isVirtualUIColumn
+
 	/**
-	 * 	Is Virtual Search Column
-	 *	@return true if virtual search column
+	 * Is Virtual Search Column
+	 * 
+	 * @return true if virtual search column
 	 */
-	public boolean isVirtualSearchColumn()
-	{
+	public boolean isVirtualSearchColumn() {
 		String s = getColumnSQL();
 		return s != null && s.length() > 0 && s.startsWith("@SQLFIND=");
-	}	//	isVirtualSearchColumn
+	} // isVirtualSearchColumn
 
-	
-	protected boolean beforeSave (boolean newRecord)
-	{
+	protected boolean beforeSave(boolean newRecord) {
 		String error = Database.isValidIdentifier(getColumnName());
 		if (!Util.isEmpty(error)) {
 			log.saveError("Error", Msg.getMsg(getCtx(), error) + " [ColumnName]");
 			return false;
 		}
 
-		if (! Util.isEmpty(getFKConstraintName())) {
+		if (!Util.isEmpty(getFKConstraintName())) {
 			error = Database.isValidIdentifier(getFKConstraintName());
 			if (!Util.isEmpty(error)) {
 				log.saveError("Error", Msg.getMsg(getCtx(), error) + " [FKConstraintName]");
@@ -252,94 +241,63 @@ public class MColumn extends X_AD_Column
 		}
 
 		int displayType = getAD_Reference_ID();
-		if (DisplayType.isLOB(displayType))	//	LOBs are 0
+		if (DisplayType.isLOB(displayType)) // LOBs are 0
 		{
 			if (getFieldLength() != 0)
 				setFieldLength(0);
-		}
-		else if (getFieldLength() == 0) 
-		{
+		} else if (getFieldLength() == 0) {
 			if (DisplayType.isID(displayType))
 				setFieldLength(10);
-			else if (DisplayType.isNumeric (displayType))
+			else if (DisplayType.isNumeric(displayType))
 				setFieldLength(14);
-			else if (DisplayType.isDate (displayType))
+			else if (DisplayType.isDate(displayType))
 				setFieldLength(7);
-			else
-			{
+			else {
 				log.saveError("FillMandatory", Msg.getElement(getCtx(), "FieldLength"));
 				return false;
 			}
 		}
 
-		/* IDEMPIERE-3509, IDEMPIERE-3902
-		 * removing this validation
-		 * it affects adversely PackIn process that can create the table later
-		if ( displayType == DisplayType.TableDir ||
-			(displayType == DisplayType.Search && getAD_Reference_Value_ID() <= 0))
-		{
-			// verify the foreign table exists
-			String foreignTableName = getReferenceTableName();
-			MTable foreignTable = MTable.get(getCtx(), foreignTableName);
-			if (foreignTable == null || foreignTable.getAD_Table_ID() <= 0) {
-				log.saveError("Error", Msg.getMsg(getCtx(), "NotReferenceTable", new Object[] {getColumnName()}));
-				return false;
-			}
-		}
-		*/
-
-		if (displayType == DisplayType.Table && getAD_Reference_Value_ID() <= 0)
-		{
+		if (displayType == DisplayType.Table && getAD_Reference_Value_ID() <= 0) {
 			log.saveError("FillMandatory", Msg.getElement(getCtx(), "AD_Reference_Value_ID"));
 			return false;
 		}
 
-		if (displayType != DisplayType.Button)
-		{
-			if (! ISTOOLBARBUTTON_Window.equals(getIsToolbarButton()))
-			{
+		if (displayType != DisplayType.Button) {
+			if (!ISTOOLBARBUTTON_Window.equals(getIsToolbarButton())) {
 				setIsToolbarButton(ISTOOLBARBUTTON_Window);
 			}
 		}
-		
-		if (!isVirtualColumn() && getValueMax() != null && getValueMin() != null)
-		{
+
+		if (!isVirtualColumn() && getValueMax() != null && getValueMin() != null) {
 			try {
 				BigDecimal valueMax = new BigDecimal(getValueMax());
 				BigDecimal valueMin = new BigDecimal(getValueMin());
-				if (valueMax.compareTo(valueMin) < 0) 
-				{
+				if (valueMax.compareTo(valueMin) < 0) {
 					log.saveError("MaxLessThanMin", Msg.getElement(getCtx(), COLUMNNAME_ValueMax));
 					return false;
 				}
-			} catch (Exception e){}
+			} catch (Exception e) {
+			}
 		}
-		
-		/** Views are not updateable
-		UPDATE AD_Column c
-		SET IsUpdateable='N', IsAlwaysUpdateable='N'
-		WHERE AD_Table_ID IN (SELECT AD_Table_ID FROM AD_Table WHERE IsView='Y')
-		**/
-		
-		/* Diego Ruiz - globalqss - BF [1651899] - AD_Column: Avoid dup. SeqNo for IsIdentifier='Y' */
-		if (isIdentifier())
-		{
-			int cnt = DB.getSQLValue(get_TrxName(),"SELECT COUNT(*) FROM AD_Column "+
-					"WHERE AD_Table_ID=?"+
-					" AND AD_Column_ID!=?"+
-					" AND IsIdentifier='Y'"+
-					" AND SeqNo=?",
-					new Object[] {getAD_Table_ID(), getAD_Column_ID(), getSeqNo()});
-			if (cnt>0)
-			{
+
+		/*
+		 * Diego Ruiz - globalqss - BF [1651899] - AD_Column: Avoid dup. SeqNo for
+		 * IsIdentifier='Y'
+		 */
+		if (isIdentifier()) {
+			int cnt = DB.getSQLValue(get_TrxName(),
+					"SELECT COUNT(*) FROM AD_Column " + "WHERE AD_Table_ID=?" + " AND AD_Column_ID!=?"
+							+ " AND IsIdentifier='Y'" + " AND SeqNo=?",
+					new Object[] { getAD_Table_ID(), getAD_Column_ID(), getSeqNo() });
+			if (cnt > 0) {
 				log.saveError(DBException.SAVE_ERROR_NOT_UNIQUE_MSG, Msg.getElement(getCtx(), COLUMNNAME_SeqNo));
 				return false;
 			}
 		}
-		
-		//	Virtual Column
-		if (isVirtualColumn())
-		{
+
+		// Virtual Column
+		if (isVirtualColumn()) {
 			if (isMandatory())
 				setIsMandatory(false);
 			if (isUpdateable())
@@ -347,53 +305,44 @@ public class MColumn extends X_AD_Column
 			if ((isVirtualUIColumn() || isVirtualSearchColumn()) && isIdentifier())
 				setIsIdentifier(false);
 		}
-		//	Updateable
+		// Updateable
 		if (isParent() || isKey())
 			setIsUpdateable(false);
 		if (isAlwaysUpdateable() && !isUpdateable())
 			setIsAlwaysUpdateable(false);
-		//	Encrypted
+		// Encrypted
 		String colname = getColumnName();
-		if (isEncrypted()) 
-		{
+		if (isEncrypted()) {
 			int dt = getAD_Reference_ID();
-			if (isKey() || isParent() || isStandardColumn()
-				|| isVirtualColumn() || isIdentifier() || isTranslated() || isUUIDColumn()
-				|| DisplayType.isLookup(dt) || DisplayType.isLOB(dt)
-				|| "DocumentNo".equalsIgnoreCase(colname)
-				|| "Value".equalsIgnoreCase(colname)
-				|| "Name".equalsIgnoreCase(colname))
-			{
+			if (isKey() || isParent() || isStandardColumn() || isVirtualColumn() || isIdentifier() || isTranslated()
+					|| isUUIDColumn() || DisplayType.isLookup(dt) || DisplayType.isLOB(dt)
+					|| "DocumentNo".equalsIgnoreCase(colname) || "Value".equalsIgnoreCase(colname)
+					|| "Name".equalsIgnoreCase(colname)) {
 				log.warning("Encryption not sensible - " + colname);
 				setIsEncrypted(false);
 			}
-		}	
-		
-		//	Sync Terminology
-		if ((newRecord || is_ValueChanged ("AD_Element_ID")) 
-			&& getAD_Element_ID() != 0)
-		{
-			M_Element element = new M_Element (getCtx(), getAD_Element_ID (), get_TrxName());
-			setColumnName (element.getColumnName());
-			setName (element.getName());
-			setDescription (element.getDescription());
 		}
-		
-		// Validations for IsAllowCopy - some columns must never be set as allowed copying
+
+		// Sync Terminology
+		if ((newRecord || is_ValueChanged("AD_Element_ID")) && getAD_Element_ID() != 0) {
+			M_Element element = new M_Element(getCtx(), getAD_Element_ID(), get_TrxName());
+			setColumnName(element.getColumnName());
+			setName(element.getName());
+			setDescription(element.getDescription());
+		}
+
+		// Validations for IsAllowCopy - some columns must never be set as allowed
+		// copying
 		if (isAllowCopy()) {
-			if (   isKey()
-				|| isVirtualColumn()
-				|| isUUIDColumn()
-				|| isStandardColumn()
-			)
+			if (isKey() || isVirtualColumn() || isUUIDColumn() || isStandardColumn())
 				setIsAllowCopy(false);
 		}
 
 		// validate FormatPattern
 		String pattern = getFormatPattern();
-		if (! Util.isEmpty(pattern, true)) {
+		if (!Util.isEmpty(pattern, true)) {
 			if (DisplayType.isNumeric(getAD_Reference_ID())) {
-				DecimalFormat format = (DecimalFormat)NumberFormat.getNumberInstance(Locale.US);
+				DecimalFormat format = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US);
 				try {
 					format.applyPattern(pattern);
 				} catch (IllegalArgumentException e) {
@@ -401,7 +350,7 @@ public class MColumn extends X_AD_Column
 					return false;
 				}
 			} else if (DisplayType.isDate(getAD_Reference_ID())) {
-				SimpleDateFormat format = (SimpleDateFormat)DateFormat.getInstance();
+				SimpleDateFormat format = (SimpleDateFormat) DateFormat.getInstance();
 				try {
 					format.applyPattern(pattern);
 				} catch (IllegalArgumentException e) {
@@ -424,6 +373,16 @@ public class MColumn extends X_AD_Column
 			}
 		}
 
+		if ((is_ValueChanged(COLUMNNAME_IsIdentifier) || is_ValueChanged(COLUMNNAME_IsActive)) && isIdentifier() && isActive()) {
+			int cnt = DB.getSQLValueEx(get_TrxName(),
+					"SELECT COUNT(*) FROM AD_Column WHERE AD_Table_ID=? AND IsActive='Y' AND AD_Column_ID!=? AND IsIdentifier='Y'",
+					getAD_Table_ID(), getAD_Column_ID());
+			if (cnt > 0) {
+				log.saveError("Error", Msg.getMsg(getCtx(), "IdentifierAlreadyDefined"));
+				return false;
+			}
+		}
+
 		if (isSelectionColumn() && getSeqNoSelection() <= 0) {
 			int next = DB.getSQLValueEx(get_TrxName(),
 					"SELECT ROUND((COALESCE(MAX(SeqNoSelection),0)+10)/10,0)*10 FROM AD_Column WHERE AD_Table_ID=? AND IsSelectionColumn='Y' AND IsActive='Y'",
@@ -432,60 +391,60 @@ public class MColumn extends X_AD_Column
 		}
 
 		return true;
-	}	//	beforeSave
-	
+	} // beforeSave
+
 	/**
-	 * 	After Save
-	 *	@param newRecord new
-	 *	@param success success
-	 *	@return success
+	 * After Save
+	 * 
+	 * @param newRecord new
+	 * @param success   success
+	 * @return success
 	 */
-	protected boolean afterSave (boolean newRecord, boolean success)
-	{
+	protected boolean afterSave(boolean newRecord, boolean success) {
 		if (!success)
 			return success;
 
 		return success;
-	}	//	afterSave
-	
+	} // afterSave
+
 	/**
-	 * 	Get SQL Add command
-	 *	@param table table
-	 *	@return sql
+	 * Get SQL Add command
+	 * 
+	 * @param table table
+	 * @return sql
 	 */
-	public String getSQLAdd (MTable table)
-	{
-		EONEDatabase db = DB.getDatabase();	
-		if (db.isNativeMode()) 
+	public String getSQLAdd(MTable table) {
+		EONEDatabase db = DB.getDatabase();
+		if (db.isNativeMode())
 			return db.getSQLAdd(table, this);
 		else
 			return Database.getDatabase(Database.DB_ORACLE).getSQLAdd(table, this);
-	}	//	getSQLAdd
+	} // getSQLAdd
 
 	/**
-	 * 	Get SQL DDL
-	 *	@return columnName datataype ..
+	 * Get SQL DDL
+	 * 
+	 * @return columnName datataype ..
 	 */
-	public String getSQLDDL()
-	{
+	public String getSQLDDL() {
 		if (isVirtualColumn())
 			return null;
-		
+
 		EONEDatabase db = DB.getDatabase();
 		if (db.isNativeMode())
 			return db.getSQLDDL(this);
 		else
 			return Database.getDatabase(Database.DB_ORACLE).getSQLDDL(this);
-	}	//	getSQLDDL	
-	
+	} // getSQLDDL
+
 	/**
-	 * 	Get SQL Modify command
-	 *	@param table table
-	 *	@param setNullOption generate null / not null statement
-	 *	@return sql separated by ;
+	 * Get SQL Modify command
+	 * 
+	 * @param table         table
+	 * @param setNullOption generate null / not null statement
+	 * @return sql separated by ;
 	 */
-	public String getSQLModify (MTable table, boolean setNullOption)
-	{
+	public String getSQLModify(MTable table, boolean setNullOption) {
 		EONEDatabase db = DB.getDatabase();
 		if (db.isNativeMode())
 			return db.getSQLModify(table, this, setNullOption);
@@ -493,59 +452,46 @@ public class MColumn extends X_AD_Column
 			return Database.getDatabase(Database.DB_ORACLE).getSQLModify(table, this, setNullOption);
 		else if (DB.isPostgreSQL())
 			return Database.getDatabase(Database.DB_POSTGRESQL).getSQLModify(table, this, setNullOption);
-		else 
+		else
 			return null;
-	}	//	getSQLModify
+	} // getSQLModify
 
 	/**
-	 * 	Get SQL Data Type
-	 *	@return e.g. NVARCHAR2(60)
+	 * Get SQL Data Type
+	 * 
+	 * @return e.g. NVARCHAR2(60)
 	 */
-	public String getSQLDataType()
-	{
+	public String getSQLDataType() {
 		String columnName = getColumnName();
 		int dt = getAD_Reference_ID();
-		return DisplayType.getSQLDataType (dt, columnName, getFieldLength());
-	}	//	getSQLDataType
-	
+		return DisplayType.getSQLDataType(dt, columnName, getFieldLength());
+	} // getSQLDataType
+
 	/**
-	 * 	Get SQL Data Type
-	 *	@return e.g. NVARCHAR2(60)
+	 * Get SQL Data Type
+	 * 
+	 * @return e.g. NVARCHAR2(60)
 	 */
 	/*
-	private String getSQLDataType()
-	{
-		int dt = getAD_Reference_ID();
-		if (DisplayType.isID(dt) || dt == DisplayType.Integer)
-			return "NUMBER(10)";
-		if (DisplayType.isDate(dt))
-			return "DATE";
-		if (DisplayType.isNumeric(dt))
-			return "NUMBER";
-		if (dt == DisplayType.Binary)
-			return "BLOB";
-		if (dt == DisplayType.TextLong)
-			return "CLOB";
-		if (dt == DisplayType.YesNo)
-			return "CHAR(1)";
-		if (dt == DisplayType.List)
-			return "NVARCHAR2(" + getFieldLength() + ")";
-		if (dt == DisplayType.Button)
-			return "CHAR(" + getFieldLength() + ")";
-		else if (!DisplayType.isText(dt))
-			log.severe("Unhandled Data Type = " + dt);
-			
-		return "NVARCHAR2(" + getFieldLength() + ")";
-	}	//	getSQLDataType
-	*/
-	
-	/**
-	 * 	Get Table Constraint
-	 *	@param tableName table name
-	 *	@return table constraint
+	 * private String getSQLDataType() { int dt = getAD_Reference_ID(); if
+	 * (DisplayType.isID(dt) || dt == DisplayType.Integer) return "NUMBER(10)"; if
+	 * (DisplayType.isDate(dt)) return "DATE"; if (DisplayType.isNumeric(dt)) return
+	 * "NUMBER"; if (dt == DisplayType.Binary) return "BLOB"; if (dt ==
+	 * DisplayType.TextLong) return "CLOB"; if (dt == DisplayType.YesNo) return
+	 * "CHAR(1)"; if (dt == DisplayType.List) return "NVARCHAR2(" + getFieldLength()
+	 * + ")"; if (dt == DisplayType.Button) return "CHAR(" + getFieldLength() + ")";
+	 * else if (!DisplayType.isText(dt)) log.severe("Unhandled Data Type = " + dt);
+	 * 
+	 * return "NVARCHAR2(" + getFieldLength() + ")"; } // getSQLDataType
 	 */
-	public String getConstraint(String tableName)
-	{
+
+	/**
+	 * Get Table Constraint
+	 * 
+	 * @param tableName table name
+	 * @return table constraint
+	 */
+	public String getConstraint(String tableName) {
 		if (isKey()) {
 			StringBuilder constraintName;
 			if (tableName.length() > 26)
@@ -553,16 +499,16 @@ public class MColumn extends X_AD_Column
 				constraintName = new StringBuilder(tableName.substring(0, 26)).append("_Key");
 			else
 				constraintName = new StringBuilder(tableName).append("_Key");
-			StringBuilder msgreturn = new StringBuilder("CONSTRAINT ").append(constraintName).append(" PRIMARY KEY (").append(getColumnName()).append(")");
+			StringBuilder msgreturn = new StringBuilder("CONSTRAINT ").append(constraintName).append(" PRIMARY KEY (")
+					.append(getColumnName()).append(")");
 			return msgreturn.toString();
 		}
 		/**
-		if (getAD_Reference_ID() == DisplayType.TableDir 
-			|| getAD_Reference_ID() == DisplayType.Search)
-			return "CONSTRAINT " ADTable_ADTableTrl
-				+ " FOREIGN KEY (" + getColumnName() + ") REFERENCES "
-				+ AD_Table(AD_Table_ID) ON DELETE CASCADE
-		**/
+		 * if (getAD_Reference_ID() == DisplayType.TableDir || getAD_Reference_ID() ==
+		 * DisplayType.Search) return "CONSTRAINT " ADTable_ADTableTrl + " FOREIGN KEY
+		 * (" + getColumnName() + ") REFERENCES " + AD_Table(AD_Table_ID) ON DELETE
+		 * CASCADE
+		 **/
 		// IDEMPIERE-965
 		if (getColumnName().equals(PO.getUUIDColumnName(tableName))) {
 			StringBuilder indexName = new StringBuilder().append(getColumnName()).append("_idx");
@@ -570,112 +516,108 @@ public class MColumn extends X_AD_Column
 				indexName = new StringBuilder().append(getColumnName().substring(0, 25));
 				indexName.append("uuidx");
 			}
-			StringBuilder msgreturn = new StringBuilder("CONSTRAINT ").append(indexName).append(" UNIQUE (").append(getColumnName()).append(")");
+			StringBuilder msgreturn = new StringBuilder("CONSTRAINT ").append(indexName).append(" UNIQUE (")
+					.append(getColumnName()).append(")");
 			return msgreturn.toString();
 		}
 		return "";
-	}	//	getConstraint
-	
+	} // getConstraint
+
 	/**
-	 * 	String Representation
-	 *	@return info
+	 * String Representation
+	 * 
+	 * @return info
 	 */
-	public String toString()
-	{
-		StringBuilder sb = new StringBuilder ("MColumn[");
-		sb.append (get_ID()).append ("-").append (getColumnName()).append ("]");
-		return sb.toString ();
-	}	//	toString
-	
-	//begin vpj-cd e-evolution
+	public String toString() {
+		StringBuilder sb = new StringBuilder("MColumn[");
+		sb.append(get_ID()).append("-").append(getColumnName()).append("]");
+		return sb.toString();
+	} // toString
+
+	// begin vpj-cd e-evolution
 	/**
-	 * 	get Column ID
-	 *  @param String windowName
-	 *	@param String columnName
-	 *	@return int retValue
+	 * get Column ID
+	 * 
+	 * @param String windowName
+	 * @param String columnName
+	 * @return int retValue
 	 */
-	public static int getColumn_ID(String TableName,String columnName) {
+	public static int getColumn_ID(String TableName, String columnName) {
 		int m_table_id = MTable.getTable_ID(TableName);
 		if (m_table_id == 0)
 			return 0;
-			
+
 		int retValue = 0;
 		String SQL = "SELECT AD_Column_ID FROM AD_Column WHERE AD_Table_ID = ?  AND columnname = ?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		try
-		{
+		try {
 			pstmt = DB.prepareStatement(SQL, null);
 			pstmt.setInt(1, m_table_id);
 			pstmt.setString(2, columnName);
 			rs = pstmt.executeQuery();
 			if (rs.next())
 				retValue = rs.getInt(1);
-		}
-		catch (SQLException e)
-		{
+		} catch (SQLException e) {
 			s_log.log(Level.SEVERE, SQL, e);
 			retValue = -1;
-		}
-		finally
-		{
+		} finally {
 			DB.close(rs, pstmt);
 			rs = null;
 			pstmt = null;
 		}
 		return retValue;
 	}
-	//end vpj-cd e-evolution
-	
+	// end vpj-cd e-evolution
+
 	/**
-	* Get Table Id for a column
-	* @param ctx context
-	* @param AD_Column_ID id
-	* @param trxName transaction
-	* @return MColumn
-	*/
-	public static int getTable_ID(Properties ctx, int AD_Column_ID, String trxName)
-	{
+	 * Get Table Id for a column
+	 * 
+	 * @param ctx          context
+	 * @param AD_Column_ID id
+	 * @param trxName      transaction
+	 * @return MColumn
+	 */
+	public static int getTable_ID(Properties ctx, int AD_Column_ID, String trxName) {
 		String sqlStmt = "SELECT AD_Table_ID FROM AD_Column WHERE AD_Column_ID=?";
 		return DB.getSQLValue(trxName, sqlStmt, AD_Column_ID);
 	}
 
-
-	public static boolean isSuggestSelectionColumn(String columnName, boolean caseSensitive)
-	{
+	public static boolean isSuggestSelectionColumn(String columnName, boolean caseSensitive) {
 		if (Util.isEmpty(columnName, true))
 			return false;
 		//
-        if (columnName.equals("Value") || (!caseSensitive && columnName.equalsIgnoreCase("Value")))
-            return true;
-        else if (columnName.equals("Name") || (!caseSensitive && columnName.equalsIgnoreCase("Name")))
-            return true;
-        else if (columnName.equals("DocumentNo") || (!caseSensitive && columnName.equalsIgnoreCase("DocumentNo")))
-            return true;
-        else if (columnName.equals("Description") || (!caseSensitive && columnName.equalsIgnoreCase("Description")))
-            return true;
-        else if (columnName.indexOf("Name") != -1
-        		|| (!caseSensitive && columnName.toUpperCase().indexOf("Name".toUpperCase()) != -1) )
-            return true;
-        else
-        	return false;
+		if (columnName.equals("Value") || (!caseSensitive && columnName.equalsIgnoreCase("Value")))
+			return true;
+		else if (columnName.equals("Name") || (!caseSensitive && columnName.equalsIgnoreCase("Name")))
+			return true;
+		else if (columnName.equals("DocumentNo") || (!caseSensitive && columnName.equalsIgnoreCase("DocumentNo")))
+			return true;
+		else if (columnName.equals("Description") || (!caseSensitive && columnName.equalsIgnoreCase("Description")))
+			return true;
+		else if (columnName.indexOf("Name") != -1
+				|| (!caseSensitive && columnName.toUpperCase().indexOf("Name".toUpperCase()) != -1))
+			return true;
+		else
+			return false;
 	}
 
 	public String getReferenceTableName() {
 		String foreignTable = null;
 		int refid = getAD_Reference_ID();
 		if (DisplayType.TableDir == refid || (DisplayType.Search == refid && getAD_Reference_Value_ID() == 0)) {
-			foreignTable = getColumnName().substring(0, getColumnName().length()-3);
+			foreignTable = getColumnName().substring(0, getColumnName().length() - 3);
 		} else if (DisplayType.Table == refid || DisplayType.Search == refid) {
 			MReference ref = MReference.get(getCtx(), getAD_Reference_Value_ID(), get_TrxName());
 			if (MReference.VALIDATIONTYPE_TableValidation.equals(ref.getValidationType())) {
-				int cnt = DB.getSQLValueEx(get_TrxName(), "SELECT COUNT(*) FROM AD_Ref_Table WHERE AD_Reference_ID=?", getAD_Reference_Value_ID());
+				int cnt = DB.getSQLValueEx(get_TrxName(), "SELECT COUNT(*) FROM AD_Ref_Table WHERE AD_Reference_ID=?",
+						getAD_Reference_Value_ID());
 				if (cnt == 1) {
 					MRefTable rt = MRefTable.get(getCtx(), getAD_Reference_Value_ID(), get_TrxName());
-					if (rt != null)
-					{
+					if (rt != null) {
 						foreignTable = rt.getAD_Table().getTableName();
-						//System.out.println("Alter table " + getT + " drop column "  +getColumnName() + ";");
+						// System.out.println("Alter table " + getT + " drop column " +getColumnName() +
+						// ";");
 					}
 				}
 			}
@@ -749,37 +691,18 @@ public class MColumn extends X_AD_Column
 			setIsKey(true);
 		} else {
 			// get defaults from most used case
-			String sql = ""
-					+ "SELECT AD_Reference_ID, "
-					+ "       AD_Val_Rule_ID, "
-					+ "       AD_Reference_Value_ID, "
-					+ "       FieldLength, "
-					+ "       DefaultValue, "
-					+ "       MandatoryLogic, "
-					+ "       ReadOnlyLogic, "
-					+ "       IsIdentifier, "
-					+ "       IsUpdateable, "
-					+ "       IsAlwaysUpdateable, "
-					+ "       FKConstraintType,"	
-					+ "       COUNT(*) "
-					+ "FROM   AD_Column "
-					+ "WHERE  ColumnName = ? "
-					+ "GROUP  BY AD_Reference_ID, "
-					+ "          AD_Val_Rule_ID, "
-					+ "          AD_Reference_Value_ID, "
-					+ "          FieldLength, "
-					+ "          DefaultValue, "
-					+ "          MandatoryLogic, "
-					+ "          ReadOnlyLogic, "
-					+ "          IsIdentifier, "
-					+ "          IsUpdateable, "
-					+ "          IsAlwaysUpdateable, "
-					+ "          FKConstraintType "
-					+ "ORDER  BY COUNT(*) DESC ";
+			String sql = "" + "SELECT AD_Reference_ID, " + "       AD_Val_Rule_ID, " + "       AD_Reference_Value_ID, "
+					+ "       FieldLength, " + "       DefaultValue, " + "       MandatoryLogic, "
+					+ "       ReadOnlyLogic, " + "       IsIdentifier, " + "       IsUpdateable, "
+					+ "       IsAlwaysUpdateable, " + "       FKConstraintType," + "       COUNT(*) "
+					+ "FROM   AD_Column " + "WHERE  ColumnName = ? " + "GROUP  BY AD_Reference_ID, "
+					+ "          AD_Val_Rule_ID, " + "          AD_Reference_Value_ID, " + "          FieldLength, "
+					+ "          DefaultValue, " + "          MandatoryLogic, " + "          ReadOnlyLogic, "
+					+ "          IsIdentifier, " + "          IsUpdateable, " + "          IsAlwaysUpdateable, "
+					+ "          FKConstraintType " + "ORDER  BY COUNT(*) DESC ";
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-			try
-			{
+			try {
 				pstmt = DB.prepareStatement(sql, null);
 				pstmt.setString(1, getColumnName());
 				rs = pstmt.executeQuery();
@@ -799,13 +722,9 @@ public class MColumn extends X_AD_Column
 					setIsAlwaysUpdateable("Y".equals(rs.getString(10)));
 					setFKConstraintType(rs.getString(11));
 				}
-			}
-			catch (SQLException e)
-			{
+			} catch (SQLException e) {
 				throw new DBException(e);
-			}
-			finally
-			{
+			} finally {
 				DB.close(rs, pstmt);
 				rs = null;
 				pstmt = null;
@@ -819,18 +738,16 @@ public class MColumn extends X_AD_Column
 		return table;
 	}
 
-	public static String getForeignKeyConstraintSql(DatabaseMetaData md, String catalog, String schema, String tableName, MTable table, MColumn column, boolean isNoTable) throws Exception
-	{
+	public static String getForeignKeyConstraintSql(DatabaseMetaData md, String catalog, String schema,
+			String tableName, MTable table, MColumn column, boolean isNoTable) throws Exception {
 		StringBuilder fkConstraintSql = new StringBuilder();
 
-		if (!column.isKey() && !column.getColumnName().equals(PO.getUUIDColumnName(table.getTableName())) && !column.isVirtualColumn())
-		{
+		if (!column.isKey() && !column.getColumnName().equals(PO.getUUIDColumnName(table.getTableName()))
+				&& !column.isVirtualColumn()) {
 			int refid = column.getAD_Reference_ID();
-			if (refid != DisplayType.List && refid != DisplayType.Payment)
-			{
+			if (refid != DisplayType.List && refid != DisplayType.Payment) {
 				String referenceTableName = column.getReferenceTableName();
-				if (referenceTableName != null)
-				{
+				if (referenceTableName != null) {
 					Hashtable<String, DatabaseKey> htForeignKeys = new Hashtable<String, DatabaseKey>();
 
 					if (md.storesUpperCaseIdentifiers()) {
@@ -845,8 +762,7 @@ public class MColumn extends X_AD_Column
 						ResultSet rs = null;
 						try {
 							rs = md.getCrossReference(catalog, schema, referenceTableName, catalog, schema, tableName);
-							while (rs.next())
-							{
+							while (rs.next()) {
 								String dbFKName = rs.getString("FK_NAME");
 								if (dbFKName == null)
 									continue;
@@ -862,18 +778,18 @@ public class MColumn extends X_AD_Column
 								String columnName = rs.getString("FKCOLUMN_NAME");
 								int pos = (rs.getShort("KEY_SEQ"));
 								if (pos > 0)
-									dbForeignKey.getKeyColumns()[pos-1] = columnName;
+									dbForeignKey.getKeyColumns()[pos - 1] = columnName;
 
 								htForeignKeys.put(key, dbForeignKey);
 							}
 						} finally {
-							DB.close(rs);  rs = null;
+							DB.close(rs);
+							rs = null;
 						}
 					}
 
 					Enumeration<String> en = htForeignKeys.keys();
-					while (en.hasMoreElements())
-					{
+					while (en.hasMoreElements()) {
 						String key = en.nextElement();
 						DatabaseKey dbForeignKey = htForeignKeys.get(key);
 						if (dbForeignKey.getKeyColumns()[1] != null)
@@ -882,15 +798,12 @@ public class MColumn extends X_AD_Column
 
 					boolean modified = false;
 					en = htForeignKeys.keys();
-					while (en.hasMoreElements())
-					{
+					while (en.hasMoreElements()) {
 						String key = en.nextElement();
 						DatabaseKey dbForeignKey = htForeignKeys.get(key);
-						if (dbForeignKey.getKeyColumns()[0].equalsIgnoreCase(column.getColumnName()))
-						{
+						if (dbForeignKey.getKeyColumns()[0].equalsIgnoreCase(column.getColumnName())) {
 							DatabaseKey primaryKey = getPrimaryKey(md, referenceTableName);
-							if (primaryKey != null)
-							{
+							if (primaryKey != null) {
 								fkConstraintSql.append(DB.SQLSTATEMENT_SEPARATOR);
 								fkConstraintSql.append("ALTER TABLE ").append(table.getTableName());
 								fkConstraintSql.append(" DROP CONSTRAINT ").append(dbForeignKey.getKeyName());
@@ -900,34 +813,34 @@ public class MColumn extends X_AD_Column
 									dbDeleteRule = MColumn.FKCONSTRAINTTYPE_Cascade;
 								else if (dbForeignKey.getDeleteRule() == DatabaseMetaData.importedKeySetNull)
 									dbDeleteRule = MColumn.FKCONSTRAINTTYPE_SetNull;
-								else if (dbForeignKey.getDeleteRule() == DatabaseMetaData.importedKeyNoAction || dbForeignKey.getDeleteRule() == DatabaseMetaData.importedKeyRestrict)
+								else if (dbForeignKey.getDeleteRule() == DatabaseMetaData.importedKeyNoAction
+										|| dbForeignKey.getDeleteRule() == DatabaseMetaData.importedKeyRestrict)
 									dbDeleteRule = MColumn.FKCONSTRAINTTYPE_NoAction;
 								String fkConstraintType = column.getFKConstraintType();
 								if (fkConstraintType == null) {
 									fkConstraintType = dbDeleteRule;
 									if (fkConstraintType == null) {
-										if (   "AD_Client_ID".equals(column.getColumnName())
-											|| "AD_Org_ID".equals(column.getColumnName())
-											|| "CreatedBy".equals(column.getColumnName())
-											|| "UpdatedBy".equals(column.getColumnName())
-										   )
+										if ("AD_Client_ID".equals(column.getColumnName())
+												|| "AD_Org_ID".equals(column.getColumnName())
+												|| "CreatedBy".equals(column.getColumnName())
+												|| "UpdatedBy".equals(column.getColumnName()))
 											fkConstraintType = MColumn.FKCONSTRAINTTYPE_DoNotCreate;
 										else
 											fkConstraintType = MColumn.FKCONSTRAINTTYPE_NoAction;
 									}
 								}
-								if (!fkConstraintType.equals(MColumn.FKCONSTRAINTTYPE_DoNotCreate))
-								{
-									String fkConstraintName = column.getFKConstraintName();						
+								if (!fkConstraintType.equals(MColumn.FKCONSTRAINTTYPE_DoNotCreate)) {
+									String fkConstraintName = column.getFKConstraintName();
 									if (fkConstraintName == null || fkConstraintName.trim().length() == 0)
 										fkConstraintName = dbForeignKey.getKeyName();
 
 									StringBuilder fkConstraint = new StringBuilder();
 									fkConstraint.append("CONSTRAINT ").append(fkConstraintName);
-									fkConstraint.append(" FOREIGN KEY (").append(column.getColumnName()).append(") REFERENCES ");
-									fkConstraint.append(primaryKey.getKeyTable()).append("(").append(primaryKey.getKeyColumns()[0]);
-									for (int i = 1; i < primaryKey.getKeyColumns().length; i++)
-									{
+									fkConstraint.append(" FOREIGN KEY (").append(column.getColumnName())
+											.append(") REFERENCES ");
+									fkConstraint.append(primaryKey.getKeyTable()).append("(")
+											.append(primaryKey.getKeyColumns()[0]);
+									for (int i = 1; i < primaryKey.getKeyColumns().length; i++) {
 										if (primaryKey.getKeyColumns()[i] == null)
 											break;
 										fkConstraint.append(", ").append(primaryKey.getKeyColumns()[i]);
@@ -953,13 +866,22 @@ public class MColumn extends X_AD_Column
 									column.saveEx();
 
 									// if the current db FK is same as what we need to create
-									if (   dbForeignKey.getKeyName().equalsIgnoreCase(column.getFKConstraintName())
-										&& (   (dbForeignKey.getDeleteRule() == DatabaseMetaData.importedKeyCascade && MColumn.FKCONSTRAINTTYPE_Cascade.equals(column.getFKConstraintType()))
-										    || (dbForeignKey.getDeleteRule() == DatabaseMetaData.importedKeySetNull && MColumn.FKCONSTRAINTTYPE_SetNull.equals(column.getFKConstraintType()))
-										    || (dbForeignKey.getDeleteRule() == DatabaseMetaData.importedKeyNoAction && MColumn.FKCONSTRAINTTYPE_NoAction.equals(column.getFKConstraintType()))
-										    || (dbForeignKey.getDeleteRule() == DatabaseMetaData.importedKeyRestrict && MColumn.FKCONSTRAINTTYPE_NoAction.equals(column.getFKConstraintType()))
-										   )
-									   ) {
+									if (dbForeignKey.getKeyName().equalsIgnoreCase(column.getFKConstraintName())
+											&& ((dbForeignKey.getDeleteRule() == DatabaseMetaData.importedKeyCascade
+													&& MColumn.FKCONSTRAINTTYPE_Cascade
+															.equals(column.getFKConstraintType()))
+													|| (dbForeignKey
+															.getDeleteRule() == DatabaseMetaData.importedKeySetNull
+															&& MColumn.FKCONSTRAINTTYPE_SetNull
+																	.equals(column.getFKConstraintType()))
+													|| (dbForeignKey
+															.getDeleteRule() == DatabaseMetaData.importedKeyNoAction
+															&& MColumn.FKCONSTRAINTTYPE_NoAction
+																	.equals(column.getFKConstraintType()))
+													|| (dbForeignKey
+															.getDeleteRule() == DatabaseMetaData.importedKeyRestrict
+															&& MColumn.FKCONSTRAINTTYPE_NoAction
+																	.equals(column.getFKConstraintType())))) {
 										// nothing changed
 										return "";
 									}
@@ -970,11 +892,9 @@ public class MColumn extends X_AD_Column
 						}
 					}
 
-					if (!modified)
-					{
+					if (!modified) {
 						String fkConstraint = getForeignKeyConstraint(md, table, column);
-						if (fkConstraint != null && fkConstraint.length() > 0)
-						{
+						if (fkConstraint != null && fkConstraint.length() > 0) {
 							fkConstraintSql.append(DB.SQLSTATEMENT_SEPARATOR);
 							fkConstraintSql.append("ALTER TABLE ").append(table.getTableName());
 							fkConstraintSql.append(" ADD ");
@@ -987,73 +907,66 @@ public class MColumn extends X_AD_Column
 		return fkConstraintSql.toString();
 	}
 
-	public static DatabaseKey getPrimaryKey(DatabaseMetaData md, String primaryTableName) throws Exception 
-	{
+	public static DatabaseKey getPrimaryKey(DatabaseMetaData md, String primaryTableName) throws Exception {
 		DatabaseKey primaryKey = null;
-		
+
 		String catalog = DB.getDatabase().getCatalog();
 		String schema = DB.getDatabase().getSchema();
-		
-		String tableName = primaryTableName;		
+
+		String tableName = primaryTableName;
 		if (md.storesUpperCaseIdentifiers())
 			tableName = tableName.toUpperCase();
 		else if (md.storesLowerCaseIdentifiers())
 			tableName = tableName.toLowerCase();
-		
+
 		ResultSet rs = null;
 		try {
 			rs = md.getPrimaryKeys(catalog, schema, tableName);
-			while (rs.next())
-			{
-				String primaryKeyName = rs.getString("PK_NAME");			
+			while (rs.next()) {
+				String primaryKeyName = rs.getString("PK_NAME");
 				if (primaryKeyName == null)
 					continue;
-				
+
 				String primaryKeyTableName = rs.getString("TABLE_NAME");
 				short deleteRule = -1;
-				
+
 				if (primaryKey == null)
 					primaryKey = new DatabaseKey(primaryKeyName, primaryKeyTableName, new String[30], deleteRule);
-				
+
 				String primaryKeyColumn = rs.getString("COLUMN_NAME");
-				int pos = (rs.getShort("KEY_SEQ"));				
+				int pos = (rs.getShort("KEY_SEQ"));
 				if (pos > 0)
-					primaryKey.getKeyColumns()[pos-1] = primaryKeyColumn;
+					primaryKey.getKeyColumns()[pos - 1] = primaryKeyColumn;
 			}
 		} catch (Exception e) {
-			DB.close(rs);  rs = null;
+			DB.close(rs);
+			rs = null;
 		}
 		return primaryKey;
 	}
 
-	public static String getForeignKeyConstraint(DatabaseMetaData md, MTable table, MColumn column) throws Exception 
-	{		
-		if (!column.isKey() && !column.getColumnName().equals(PO.getUUIDColumnName(table.getTableName())))
-		{
+	public static String getForeignKeyConstraint(DatabaseMetaData md, MTable table, MColumn column) throws Exception {
+		if (!column.isKey() && !column.getColumnName().equals(PO.getUUIDColumnName(table.getTableName()))) {
 			String fkConstraintType = column.getFKConstraintType();
 			if (fkConstraintType == null)
 				fkConstraintType = MColumn.FKCONSTRAINTTYPE_NoAction;
-			
+
 			if (fkConstraintType.equals(MColumn.FKCONSTRAINTTYPE_DoNotCreate))
 				return "";
 
 			int refid = column.getAD_Reference_ID();
-			if (refid != DisplayType.List && refid != DisplayType.Payment)
-			{
+			if (refid != DisplayType.List && refid != DisplayType.Payment) {
 				String referenceTableName = column.getReferenceTableName();
-				if (referenceTableName != null)
-				{
+				if (referenceTableName != null) {
 					DatabaseKey primaryKey = MColumn.getPrimaryKey(md, referenceTableName);
-					
-					if (primaryKey != null)
-					{
-						String fkConstraintName = column.getFKConstraintName();						
-						if (fkConstraintName == null || fkConstraintName.trim().length() == 0)
-						{
+
+					if (primaryKey != null) {
+						String fkConstraintName = column.getFKConstraintName();
+						if (fkConstraintName == null || fkConstraintName.trim().length() == 0) {
 							String columnName = column.getColumnName();
 							if (columnName.toUpperCase().endsWith("_ID"))
 								columnName = columnName.substring(0, columnName.length() - 3);
-							
+
 							StringBuilder constraintName = new StringBuilder();
 							constraintName.append(columnName.replace("_", ""));
 							constraintName.append("_");
@@ -1062,47 +975,44 @@ public class MColumn extends X_AD_Column
 								constraintName = new StringBuilder(constraintName.substring(0, 30));
 							fkConstraintName = constraintName.toString();
 						}
-						
+
 						StringBuilder fkConstraint = new StringBuilder();
 						fkConstraint.append("CONSTRAINT ").append(fkConstraintName);
 						fkConstraint.append(" FOREIGN KEY (").append(column.getColumnName()).append(") REFERENCES ");
 						fkConstraint.append(primaryKey.getKeyTable()).append("(").append(primaryKey.getKeyColumns()[0]);
-						for (int i = 1; i < primaryKey.getKeyColumns().length; i++)
-						{
+						for (int i = 1; i < primaryKey.getKeyColumns().length; i++) {
 							if (primaryKey.getKeyColumns()[i] == null)
 								break;
 							fkConstraint.append(", ").append(primaryKey.getKeyColumns()[i]);
 						}
 						fkConstraint.append(")");
-						
+
 						if (fkConstraintType.equals(MColumn.FKCONSTRAINTTYPE_NoAction))
 							;
 						else if (fkConstraintType.equals(MColumn.FKCONSTRAINTTYPE_Cascade))
 							fkConstraint.append(" ON DELETE CASCADE");
 						else if (fkConstraintType.equals(MColumn.FKCONSTRAINTTYPE_SetNull))
 							fkConstraint.append(" ON DELETE SET NULL");
-						
+
 						fkConstraint.append(" DEFERRABLE INITIALLY DEFERRED");
-						
+
 						column.setFKConstraintName(fkConstraintName);
 						column.setFKConstraintType(fkConstraintType);
 						column.saveEx();
-						
+
 						return fkConstraint.toString();
 					}
 				}
 			}
 		}
-		
+
 		return "";
 	}
-
-	
 
 	public String getColumnSQL(boolean nullForUI) {
 		return getColumnSQL(nullForUI, true);
 	}
-	
+
 	public String getColumnSQL(boolean nullForUI, boolean nullForSearch) {
 		String query = getColumnSQL();
 		if (query != null && query.length() > 0) {
@@ -1116,4 +1026,4 @@ public class MColumn extends X_AD_Column
 		return query;
 	}
 
-}	//	MColumn
+} // MColumn

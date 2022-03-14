@@ -93,14 +93,13 @@ public final class MConversionRateUtil
 		
 		// Calculate converted amount
 		BigDecimal amt = sourceAmt.multiply(rate);
-		int stdPrecision = MCurrency.getStdPrecision(model.getCtx(), C_Currency_ID_To);
-		amt = amt.setScale(stdPrecision, RoundingMode.HALF_UP);
+		amt = amt.setScale(Env.getScalePrice(), RoundingMode.HALF_UP);
 		
 		// Update model
 		if (AmtName != null)
 			model.set_AttrValue(AmtName, amt);
 		// Return amt
-		if (s_log.isLoggable(Level.FINE)) s_log.fine("amt=" + sourceAmt + " * " + rate + "=" + amt + ", scale=" + stdPrecision);
+		if (s_log.isLoggable(Level.FINE)) s_log.fine("amt=" + sourceAmt + " * " + rate + "=" + amt + ", scale=" + Env.getScalePrice());
 		return amt;
 	}	//	convert
 

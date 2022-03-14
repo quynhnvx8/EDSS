@@ -130,6 +130,19 @@ public interface I_M_InOut
 	/** Get Address	  */
 	public String getAddress();
 
+    /** Column name Address1 */
+    public static final String COLUMNNAME_Address1 = "Address1";
+
+	/** Set Address 1.
+	  * Address line 1 for this location
+	  */
+	public void setAddress1 (String Address1);
+
+	/** Get Address 1.
+	  * Address line 1 for this location
+	  */
+	public String getAddress1();
+
     /** Column name Age */
     public static final String COLUMNNAME_Age = "Age";
 
@@ -475,7 +488,7 @@ public interface I_M_InOut
 	/** Get Parts	  */
 	public int getHM_Parts_ID();
 
-	public eone.base.model.I_HM_Parts getHM_Parts() throws RuntimeException;
+	public I_HM_Parts getHM_Parts() throws RuntimeException;
 
     /** Column name HM_Patient_ID */
     public static final String COLUMNNAME_HM_Patient_ID = "HM_Patient_ID";
@@ -516,6 +529,15 @@ public interface I_M_InOut
 
 	/** Get InvoiceNo	  */
 	public String getInvoiceNo();
+
+    /** Column name InvoiceSymbol */
+    public static final String COLUMNNAME_InvoiceSymbol = "InvoiceSymbol";
+
+	/** Set InvoiceSymbol	  */
+	public void setInvoiceSymbol (String InvoiceSymbol);
+
+	/** Get InvoiceSymbol	  */
+	public String getInvoiceSymbol();
 
     /** Column name IsActive */
     public static final String COLUMNNAME_IsActive = "IsActive";
@@ -581,6 +603,15 @@ public interface I_M_InOut
 	public int getM_Warehouse_Dr_ID();
 
 	public eone.base.model.I_M_Warehouse getM_Warehouse_Dr() throws RuntimeException;
+
+    /** Column name ObjectName */
+    public static final String COLUMNNAME_ObjectName = "ObjectName";
+
+	/** Set ObjectName	  */
+	public void setObjectName (String ObjectName);
+
+	/** Get ObjectName	  */
+	public String getObjectName();
 
     /** Column name Original */
     public static final String COLUMNNAME_Original = "Original";

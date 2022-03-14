@@ -45,9 +45,9 @@ public class BuildDepreciation extends SvrProcess
 	{
 		MDepreciation de = MDepreciation.get(getCtx(), p_Record_ID);
 		//Lay danh sach tai san tinh khau hao
-		String sqlWhereAsset = "IsActive = 'Y' And IsDepreciated = 'Y' And IsDisposed != 'Y' And IsTransferred != 'Y' "+
+		String sqlWhereAsset = "IsActive = 'Y' And IsDepreciated = 'Y' And COALESCE(IsDisposed,'N') != 'Y' And COALESCE(IsTransferred,'N') != 'Y' "+
 				" And AD_Client_ID = ? And AD_Org_ID = ?  And RemainAmt > 0 "+
-				" And Not Exists (Select 1 From A_Depreciation_Exp e Where A_Depreciation_ID = ? And A_Asset_ID = e.A_Asset_ID)";
+				" And A_Asset_ID not in (Select A_Asset_ID From A_Depreciation_Exp e Where A_Depreciation_ID = ?)";
 		List<MAsset> assets = new eone.base.model.Query(getCtx(), X_A_Asset.Table_Name, sqlWhereAsset, get_TrxName())
 				.setParameters(de.getAD_Client_ID(), de.getAD_Org_ID(), p_Record_ID)
 				.list();
@@ -55,7 +55,7 @@ public class BuildDepreciation extends SvrProcess
 		//Lay danh sach khau hao
 		String sqlWhereWf = "Exists (Select 1 From A_Asset c Where c.A_Asset_ID = A_Asset_ID And "+ sqlWhereAsset +")";
 		List<MDepreciationWorkfile> wf = new eone.base.model.Query(getCtx(), X_A_Depreciation_Workfile.Table_Name, sqlWhereWf, get_TrxName())
-				.setParameters(de.getAD_Client_ID(), de.getAD_Org_ID())
+				.setParameters(de.getAD_Client_ID(), de.getAD_Org_ID(), getRecord_ID())
 				.list();
 		
 		
@@ -67,6 +67,7 @@ public class BuildDepreciation extends SvrProcess
 		
 		MDepreciationExp newExp = new MDepreciationExp(getCtx(), 0, get_TrxName());
 		for(int i = 0; i < assets.size(); i++) {
+			accumulatedAmt = Env.ZERO;
 			A_Asset_ID = assets.get(i).getA_Asset_ID();
 			typeCalculate = assets.get(i).getTypeCalculate(); //Kieu tinh khau hao theo 30 ngay hay theo thang thuc te.
 			int count = 0;//Tang bien dem de xac dinh dung gia tri thay doi gan nhat.
@@ -162,7 +163,7 @@ public class BuildDepreciation extends SvrProcess
 		}
 		newExp.setOneDay(accumulate.divide(new BigDecimal(numberDay), Env.rountQty, RoundingMode.HALF_UP));
 		
-		accumulate = accumulate.setScale(Env.roundAmount);
+		accumulate = accumulate.setScale(Env.getScaleFinal(), RoundingMode.HALF_UP);
 		newExp.setIsSelected(true);
 		newExp.setA_Asset_ID(asset.getA_Asset_ID());
 		newExp.setA_Depreciation_ID(p_Record_ID);

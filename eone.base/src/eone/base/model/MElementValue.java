@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import org.compiere.util.Env;
 import org.compiere.util.Msg;
 
 /**
@@ -188,7 +189,7 @@ public class MElementValue extends X_C_ElementValue
 		if (Account_ID > 0) {
 			StringBuilder whereClause =  new StringBuilder("AD_Client_ID=?").append(" AND C_ElementValue_ID=?");
 			ArrayList<Object> params = new ArrayList<Object>();
-			int AD_Client_ID = 0;// Env.getAD_Client_ID(ctx);
+			int AD_Client_ID = Env.getAD_Client_ID(ctx);
 			params.add(AD_Client_ID);
 			params.add(Account_ID);
 			MElementValue acct = new Query(ctx, MElementValue.Table_Name, whereClause.toString(), null)

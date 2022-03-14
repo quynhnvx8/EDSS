@@ -53,8 +53,6 @@ public class CalloutProject extends CalloutEngine
 			return "";
 
 		BigDecimal PlannedQty, PlannedPrice;
-		int StdPrecision = Env.getContextAsInt(ctx, WindowNo, "StdPrecision");
-
 
 		//	get values
 		PlannedQty = (BigDecimal)mTab.getValue("PlannedQty");
@@ -65,10 +63,10 @@ public class CalloutProject extends CalloutEngine
 			PlannedPrice = Env.ZERO;
 		//
 		BigDecimal PlannedAmt = PlannedQty.multiply(PlannedPrice);
-		if (PlannedAmt.scale() > StdPrecision)
-			PlannedAmt = PlannedAmt.setScale(StdPrecision, RoundingMode.HALF_UP);
-		//
-		if (log.isLoggable(Level.FINE)) log.fine("PlannedQty=" + PlannedQty + " * PlannedPrice=" + PlannedPrice + " -> PlannedAmt=" + PlannedAmt + " (Precision=" + StdPrecision+ ")");
+		
+		PlannedAmt = PlannedAmt.setScale(Env.getScaleFinal(), RoundingMode.HALF_UP);
+		
+		if (log.isLoggable(Level.FINE)) log.fine("PlannedQty=" + PlannedQty + " * PlannedPrice=" + PlannedPrice + " -> PlannedAmt=" + PlannedAmt + " (Precision=" + Env.getScaleFinal()+ ")");
 		mTab.setValue("PlannedAmt", PlannedAmt);
 		return "";
 	}	//	planned

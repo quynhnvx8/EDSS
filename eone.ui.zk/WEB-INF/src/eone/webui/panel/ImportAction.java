@@ -1,17 +1,4 @@
-/******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 2012 Trek Global                							  *
- * Copyright (C) 2012 Carlos Ruiz                							  *
- * This program is free software; you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY; without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program; if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- *****************************************************************************/
+
 package eone.webui.panel;
 
 import static eone.base.model.SystemIDs.REFERENCE_IMPORT_MODE;
@@ -74,10 +61,10 @@ import eone.webui.window.FDialog;
 
 /**
  *
- * @author Carlos Ruiz
+ * @author Quynhnv.x8 Modify 12/03/2022
  *
  */
-public class FileImportAction implements EventListener<Event>
+public class ImportAction implements EventListener<Event>
 {
 	private AbstractADWindowContent panel;
 
@@ -95,7 +82,7 @@ public class FileImportAction implements EventListener<Event>
 	/**
 	 * @param panel
 	 */
-	public FileImportAction(AbstractADWindowContent panel)
+	public ImportAction(AbstractADWindowContent panel)
 	{
 		this.panel = panel;
 	}
@@ -123,10 +110,12 @@ public class FileImportAction implements EventListener<Event>
 			}
 		}
 		fCharset.addEventListener(Events.ON_SELECT, this);
+		fCharset.setDisabled(true);
 
 		MLookupInfo lookupInfo = MLookupFactory.getLookup_List(Env.getLanguage(Env.getCtx()), REFERENCE_IMPORT_MODE);
 		MLookup lookup = new MLookup(lookupInfo, 0);
-		fImportMode = new WTableDirEditor("ImportMode",true,false,true,lookup);
+		fImportMode = new WTableDirEditor("ImportMode",true,true,true,lookup);
+		fImportMode.setValue("M");
 		
 		importerMap = new HashMap<String, IGridTabImporter>();
 		extensionMap = new HashMap<String, String>();
@@ -161,6 +150,7 @@ public class FileImportAction implements EventListener<Event>
 			}
 
 			cboType.setSelectedIndex(0);
+			cboType.setDisabled(true);
 
 			Vbox vb = new Vbox();
 			ZKUpdateUtil.setWidth(vb, "100%");

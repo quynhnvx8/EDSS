@@ -30,11 +30,15 @@ public class DocumentEngine implements DocAction
 {
 
 	
-	public DocumentEngine (DocAction po, String docStatus, int AD_Window_ID)
+	public DocumentEngine (DocAction po, String docStatus, int AD_Window_ID, boolean posted)
 	{
 		m_document = po;
 		if (docStatus != null)
 			m_status = docStatus;
+		
+		//Biến này dùng để xác định bảng nào đẩy vào fact bảng nào ko
+		m_posted = posted; 
+		
 		this.AD_Window_ID = AD_Window_ID;
 	}	//	DocActionEngine
 
@@ -46,6 +50,8 @@ public class DocumentEngine implements DocAction
 	private String		m_message = null;
 	/** Actual Doc Action		*/
 	private String		m_action = null;
+	
+	private static boolean m_posted; //Biến này dùng để xác định bảng nào đẩy vào fact bảng nào ko
 
 	/**	Logger			*/
 	private static CLogger log = CLogger.getCLogger(DocumentEngine.class);
@@ -144,11 +150,12 @@ public class DocumentEngine implements DocAction
 			if (m_document != null && ok)
 			{
 				m_document.saveEx();
-				boolean retVal = postIt();
-				if (! retVal) {
-					return false;
+				if (m_posted) {
+					boolean retVal = postIt();
+					if (! retVal) {
+						return false;
+					}
 				}
-
 			}
 			return ok;
 		}
@@ -585,7 +592,7 @@ public class DocumentEngine implements DocAction
 	public static boolean processIt(DocAction doc, String processAction) {
 		boolean success = false;
 		
-		DocumentEngine engine = new DocumentEngine(doc, doc.getDocStatus(), 0);
+		DocumentEngine engine = new DocumentEngine(doc, doc.getDocStatus(), 0, m_posted);
 		success = engine.processIt(processAction, doc.getDocStatus());
 
 		return success;

@@ -138,7 +138,10 @@ public class MRoleOrgAccess extends X_AD_Role_OrgAccess
 			orgAccess.set_ValueNoCheck("Updated", new Timestamp(new Date().getTime()));
 			orgAccess.setAD_Client_ID(org.getAD_Client_ID());
 			orgAccess.setAD_Org_ID(org.getAD_Org_ID());
-			List<Object> param = PO.getBatchValueList(orgAccess, X_AD_Role_OrgAccess.Table_ID, org.get_TrxName(), orgAccess.getAD_Role_OrgAccess_ID());
+			
+			List<String> colNames = PO.getSqlInsert_Para(X_AD_Role_OrgAccess.Table_ID, org.get_TrxName());
+			List<Object> param = PO.getBatchValueList(orgAccess, colNames, X_AD_Role_OrgAccess.Table_ID, org.get_TrxName(), orgAccess.getAD_Role_OrgAccess_ID());
+			
 			values.add(param);
 			//if (orgAccess.save())
 			//	counter++;

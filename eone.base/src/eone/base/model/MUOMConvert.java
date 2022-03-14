@@ -251,7 +251,6 @@ public class MUOMConvert extends X_C_UOM_Convert
 			return qty;
 		//
 		BigDecimal retValue = null;
-		int precision = 2;
 		String sql = "SELECT c.MultiplyRate, uomTo.StdPrecision "
 			+ "FROM	C_UOM_Convert c"
 			+ " INNER JOIN C_UOM uomTo ON (c.C_UOM_TO_ID=uomTo.C_UOM_ID) "
@@ -269,7 +268,6 @@ public class MUOMConvert extends X_C_UOM_Convert
 			if (rs.next())
 			{
 				retValue = rs.getBigDecimal(1);
-				precision = rs.getInt(2);
 			}
 		}
 		catch (SQLException e)
@@ -293,9 +291,8 @@ public class MUOMConvert extends X_C_UOM_Convert
 		
 		//	Calculate & Scale
 		retValue = retValue.multiply(qty);
-		if (retValue.scale() > precision)
-			retValue = retValue.setScale(precision, RoundingMode.HALF_UP);
-		return retValue;
+		
+		return retValue.setScale(Env.getScalePrice(), RoundingMode.HALF_UP);
 	}   //  convert
 
 	

@@ -4849,14 +4849,13 @@ public abstract class PO
 	
 	
 	
-	
-	public static List<Object> getBatchValueList(PO po,Integer AD_Table_ID, String trxName, int ID){
+	public static List<Object> getBatchValueList(PO po, List<String> colNames, Integer AD_Table_ID, String trxName, int ID){
 		MTable mtable = MTable.get(Env.getCtx(), AD_Table_ID);
 		if(mtable==null){
 			return null;
 		}
 		ArrayList<Object> arrList = new ArrayList<Object>();
-		List<String> colNames = PO.getSqlInsert_Para(AD_Table_ID, trxName);
+		
 		String KeyColumnName = mtable.getTableName() + "_ID";
 		
 		po.set_ValueNoCheck("CreatedBy", Env.getAD_User_ID(Env.getCtx()));

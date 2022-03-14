@@ -484,6 +484,15 @@ public interface I_Fact_Acct
 	/** Get InvoiceNo	  */
 	public String getInvoiceNo();
 
+    /** Column name InvoiceSymbol */
+    public static final String COLUMNNAME_InvoiceSymbol = "InvoiceSymbol";
+
+	/** Set InvoiceSymbol	  */
+	public void setInvoiceSymbol (String InvoiceSymbol);
+
+	/** Get InvoiceSymbol	  */
+	public String getInvoiceSymbol();
+
     /** Column name IsActive */
     public static final String COLUMNNAME_IsActive = "IsActive";
 

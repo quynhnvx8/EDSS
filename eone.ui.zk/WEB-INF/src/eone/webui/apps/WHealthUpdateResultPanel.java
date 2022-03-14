@@ -295,7 +295,9 @@ public class WHealthUpdateResultPanel extends ADForm implements IFormController,
 				line.set_ValueNoCheck("Updated", new Timestamp(new Date().getTime()));
 				line.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
 				line.setAD_Client_ID(Env.getAD_Client_ID(Env.getCtx()));
-				List<Object> params = PO.getBatchValueList(line, I_HM_PatientRegisterLine.Table_ID, null, M_PatientRegisterLine_ID);
+				
+				List<String> colNames = PO.getSqlInsert_Para(I_HM_PatientRegisterLine.Table_ID, null);
+				List<Object> params = PO.getBatchValueList(line, colNames, I_HM_PatientRegisterLine.Table_ID, null, M_PatientRegisterLine_ID);
 				listParams.add(params);
 				if (listParams.size() >= BATCH_SIZE) {
 					DB.excuteBatch(sqlInsert, listParams, null);

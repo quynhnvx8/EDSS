@@ -274,21 +274,6 @@ public interface I_C_GeneralLine
 
 	public eone.base.model.I_C_TypeRevenue getC_TypeRevenue() throws RuntimeException;
 
-    /** Column name C_UOM_ID */
-    public static final String COLUMNNAME_C_UOM_ID = "C_UOM_ID";
-
-	/** Set UOM.
-	  * Unit of Measure
-	  */
-	public void setC_UOM_ID (int C_UOM_ID);
-
-	/** Get UOM.
-	  * Unit of Measure
-	  */
-	public int getC_UOM_ID();
-
-	public eone.base.model.I_C_UOM getC_UOM() throws RuntimeException;
-
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
 
@@ -318,51 +303,6 @@ public interface I_C_GeneralLine
 	  */
 	public boolean isActive();
 
-    /** Column name M_Product_ID */
-    public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
-
-	/** Set Product.
-	  * Product, Service, Item
-	  */
-	public void setM_Product_ID (int M_Product_ID);
-
-	/** Get Product.
-	  * Product, Service, Item
-	  */
-	public int getM_Product_ID();
-
-	public eone.base.model.I_M_Product getM_Product() throws RuntimeException;
-
-    /** Column name M_Warehouse_Cr_ID */
-    public static final String COLUMNNAME_M_Warehouse_Cr_ID = "M_Warehouse_Cr_ID";
-
-	/** Set Warehouse Cr.
-	  * Storage Warehouse and Service Point
-	  */
-	public void setM_Warehouse_Cr_ID (int M_Warehouse_Cr_ID);
-
-	/** Get Warehouse Cr.
-	  * Storage Warehouse and Service Point
-	  */
-	public int getM_Warehouse_Cr_ID();
-
-	public eone.base.model.I_M_Warehouse getM_Warehouse_Cr() throws RuntimeException;
-
-    /** Column name M_Warehouse_Dr_ID */
-    public static final String COLUMNNAME_M_Warehouse_Dr_ID = "M_Warehouse_Dr_ID";
-
-	/** Set Warehouse Dr.
-	  * Storage Warehouse and Service Point
-	  */
-	public void setM_Warehouse_Dr_ID (int M_Warehouse_Dr_ID);
-
-	/** Get Warehouse Dr.
-	  * Storage Warehouse and Service Point
-	  */
-	public int getM_Warehouse_Dr_ID();
-
-	public eone.base.model.I_M_Warehouse getM_Warehouse_Dr() throws RuntimeException;
-
     /** Column name PA_ReportLine_ID */
     public static final String COLUMNNAME_PA_ReportLine_ID = "PA_ReportLine_ID";
 
@@ -373,19 +313,6 @@ public interface I_C_GeneralLine
 	public int getPA_ReportLine_ID();
 
 	public eone.base.model.I_PA_ReportLine getPA_ReportLine() throws RuntimeException;
-
-    /** Column name Price */
-    public static final String COLUMNNAME_Price = "Price";
-
-	/** Set Price.
-	  * Price
-	  */
-	public void setPrice (BigDecimal Price);
-
-	/** Get Price.
-	  * Price
-	  */
-	public BigDecimal getPrice();
 
     /** Column name Processed */
     public static final String COLUMNNAME_Processed = "Processed";
@@ -399,19 +326,6 @@ public interface I_C_GeneralLine
 	  * The document has been processed
 	  */
 	public boolean isProcessed();
-
-    /** Column name Qty */
-    public static final String COLUMNNAME_Qty = "Qty";
-
-	/** Set Quantity.
-	  * Quantity
-	  */
-	public void setQty (BigDecimal Qty);
-
-	/** Get Quantity.
-	  * Quantity
-	  */
-	public BigDecimal getQty();
 
     /** Column name Updated */
     public static final String COLUMNNAME_Updated = "Updated";

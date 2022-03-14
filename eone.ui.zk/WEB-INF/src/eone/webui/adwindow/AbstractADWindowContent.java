@@ -86,7 +86,7 @@ import eone.webui.event.ToolbarListener;
 import eone.webui.exception.ApplicationException;
 import eone.webui.panel.ADForm;
 import eone.webui.panel.ExportAction;
-import eone.webui.panel.FileImportAction;
+import eone.webui.panel.ImportAction;
 import eone.webui.panel.InfoPanel;
 import eone.webui.panel.WAppendSign;
 import eone.webui.panel.WSignPanel;
@@ -2732,7 +2732,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 
 	@Override
 	public void onExport() {
-		final boolean isCanExport= Env.getContext(Env.getCtx(), "#IsCanExport") == "Y" ? true : false;
+		final boolean isCanExport= Env.getContext(Env.getCtx(), "#IsCanExport").equals("Y") ? true : false;
 		if (!isCanExport) {
 			FDialog.error(curWindowNo, parent, "AccessCannotExport");
 			return;
@@ -2744,7 +2744,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 
 	@Override
 	public void onFileImport() {
-		FileImportAction action = new FileImportAction(this);
+		ImportAction action = new ImportAction(this);
 		action.fileImport();
 	}
 

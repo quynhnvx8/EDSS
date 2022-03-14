@@ -886,6 +886,7 @@ public class Login
 		Env.DisProjectLine 			= itemDis.getIsProjectLine() != null 		&& itemDis.getIsProjectLine().equals(Env.YES) ? true : false;
 		Env.DisConstruction 		= itemDis.getIsConstruction() != null 		&& itemDis.getIsConstruction().equals(Env.YES) ? true : false;
 		Env.DisConstructionLine 	= itemDis.getIsConstructionLine() != null 	&& itemDis.getIsConstructionLine().equals(Env.YES) ? true : false;
+		Env.DisCurrency				= itemDis.getIsMoreCurrency() != null 		&& itemDis.getIsMoreCurrency().equals(Env.YES) ? true : false;
 		
 		//MandatoryLogic
 		
