@@ -1,5 +1,8 @@
 package eone.base.impexp;
 
+/**
+ * @author Admin mode 15/03/2022
+ */
 import static eone.base.model.SystemIDs.REFERENCE_DOCUMENTACTION;
 import static eone.base.model.SystemIDs.REFERENCE_PAYMENTRULE;
 
@@ -43,7 +46,6 @@ import org.compiere.util.Msg;
 import org.compiere.util.Trx;
 import org.compiere.util.ValueNamePair;
 import org.supercsv.exception.SuperCsvCellProcessorException;
-import org.supercsv.prefs.CsvPreference;
 
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
@@ -71,6 +73,9 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 
 	/** Logger */
 	private static CLogger log = CLogger.getCLogger(GridTabXLSXImporter.class);
+	
+	private boolean isInsert = false;
+	private int primaryKey = 0;
 
 	public File fileImport(GridTab gridTab, List<GridTab> childs, InputStream filestream, Charset charset, String importMode) {
 		long start = System.currentTimeMillis();
@@ -98,13 +103,10 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 
 		//
 		File errFile = null;
+		//FileOutputStream fileO = null;
 		File logFile = null;
 		PrintWriter errFileW = null;
 		PrintWriter logFileW = null;
-		//
-		CsvPreference csvpref = CsvPreference.STANDARD_PREFERENCE;
-		String delimiter = String.valueOf((char) csvpref.getDelimiterChar());
-		String quoteChar = String.valueOf((char) csvpref.getQuoteChar());
 		//
 		PO masterRecord = null;
 		PO parentRecord = null;
@@ -112,13 +114,15 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 			throw new EONEException("Insert record disabled for Tab");
 		Map<String, Object> mapDefaultValue = new HashMap<String, Object>();
 		LinkedHashMap<Integer, List<List<Object>>> mapValues = new LinkedHashMap<Integer, List<List<Object>>>();
-		HashMap<Integer, Integer> mapSequence = new HashMap<Integer, Integer>();
+		
 		try {
 			String errFileName = FileUtil.getTempMailName("Import_" + gridTab.getTableName(), "_err.xlsx");
 			errFile = new File(errFileName);
+			//fileO = new FileOutputStream(errFile);
 			errFileW = new PrintWriter(errFile, charset.name());
 			mapReader = new XSSFWorkbook(filestream);
 			sheetReader = mapReader.getSheetAt(0);
+ 			//mapReader.write(fileO);
 			mapReader.close();
 			if (sheetReader == null) {
 				errFileW.close();
@@ -150,7 +154,7 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 					readProcArray.add(null);
 					continue;
 				}
-				if (headName.indexOf(">") > 0) {
+				if (headName.indexOf(".") > 0) {
 					if (idx == 0) {
 						errFileW.close();
 						throw new EONEException(Msg.getMsg(Env.getCtx(), "WrongHeader", new Object[] { headName }));
@@ -265,8 +269,8 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 
 			m_isError = false;
 			// write the header
-			String rawHeader = getUntokenizedRow(sheetReader.getRow(0));
-			errFileW.write(rawHeader + delimiter + ERROR_HEADER + "\n");
+			String rawHeader = "RESULT IMPORT";
+			errFileW.write(rawHeader + "\n");
 			List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
 			List<String> rawData = new ArrayList<String>();
 			m_tmpRow = new ArrayList<List<Object>>();
@@ -287,7 +291,8 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 					errMsg.append(header.get(idx)).append(": ").append(e.getMessage());
 					isLineError = true;
 				}
-				String rawLine = getUntokenizedRow(sheetReader.getRow(rownum++));
+				int rowReal = rownum++ + 1;
+				String rawLine = "Row "+  rowReal  +" ";
 				if (!isLineError) {
 					if (map == null)
 						break;
@@ -317,18 +322,18 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 					rawData.add(rawLine);
 				}
 				// write
-				rawLine = rawLine + delimiter + quoteChar + errMsg.toString().replaceAll(quoteChar, "") + quoteChar + "\n";
+				rawLine = rawLine  + errMsg.toString() + "\n";
 				errFileW.write(rawLine);
 			}
 			
-			boolean isInsert = true;
+			
 			
 			if (!m_isError) {
 				String logFileName = FileUtil.getTempMailName("Import_" + gridTab.getTableName(), "_log.xlsx");
 				logFile = new File(logFileName);
 				logFileW = new PrintWriter(logFile, charset.name());
 				// write the header
-				logFileW.write(rawHeader + delimiter + LOG_HEADER + "\n");
+				logFileW.write(rawHeader + "\n");
 				// no errors found - process header and then details
 				boolean isMasterok = true;
 
@@ -361,29 +366,13 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 					}
 
 					if (!isMasterok && isDetail) {
-						rawLine = rawLine + delimiter + quoteChar + Msg.getMsg(Env.getCtx(), "NotProccesed") + quoteChar +"\n";
+						rawLine = rawLine + Msg.getMsg(Env.getCtx(), "NotProccesed") +"\n";
 						rowsTmpResult.add(rawLine);
 						continue;
 					}
 					try {
 
 						if (!isDetail) {
-							if (trx != null) {
-								if (error) {
-									trx.rollback();
-									for (String row : rowsTmpResult) {
-										logFileW.write(row);
-									}
-									error = false;
-								} else {
-									trx.commit();
-									for (String row : rowsTmpResult) {
-										logFileW.write(row);
-									}
-								}
-								trx.close();
-								trx = null;
-							}
 							trxName = "Import_" + gridTab.getTableName() + "_" + UUID.randomUUID();
 							gridTab.getTableModel().setImportingMode(false, trxName);
 							trx = Trx.get(trxName, true);
@@ -394,7 +383,7 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 
 						for (Map.Entry<GridTab, Integer> tabIndex : sortedtTabMapIndexes.entrySet()) {
 							
-							int primaryKey = 0;
+							primaryKey = 0;
 							currentGridTab = tabIndex.getKey();
 							if (isDetail && gridTab.equals(currentGridTab)) {
 								currentColumn = indxDetail;
@@ -443,7 +432,7 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 									if (mapTabParent.containsKey(currentGridTab.getAD_Tab_ID())) {
 										parentRecord = mapTabPO.get(mapTabParent.get(currentGridTab.getAD_Tab_ID()));
 									}
-									logMsg = proccessRow(currentGridTab, header, data.get(idx), currentColumn, j, parentRecord, trx, isInsert, primaryKey);
+									logMsg = proccessRow(currentGridTab, header, data.get(idx), currentColumn, j, parentRecord, trx);
 
 								}
 								copyGridTabToPO(currentGridTab, po2);
@@ -472,15 +461,7 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 								}
 								int sequence = -1;
 								if (isInsert) {
-									if (mapSequence.containsKey(currentGridTab.getAD_Table_ID())) {
-										sequence = mapSequence.get(currentGridTab.getAD_Table_ID());
-										sequence++;
-										mapSequence.remove(currentGridTab.getAD_Table_ID());
-										mapSequence.put(currentGridTab.getAD_Table_ID(), sequence);
-									} else {
-										sequence = DB.getNextID(Env.getAD_Client_ID(Env.getCtx()), currentGridTab.getTableName(), null);
-										mapSequence.put(currentGridTab.getAD_Table_ID(), sequence);
-									}
+									sequence = DB.getNextID(Env.getAD_Client_ID(Env.getCtx()), currentGridTab.getTableName(), null);
 								} else {
 									sequence = primaryKey;
 								}
@@ -569,7 +550,6 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 
 									if (currentGridTab.equals(gridTab) && masterRecord == null) {
 										isMasterok = false;
-										rowResult.append("<" + currentGridTab.getTableName() + ">: ");
 										rowResult.append(logMsg);
 										rowResult.append(" / ");
 										break;
@@ -582,16 +562,15 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 										break;
 									}
 								}
-								rowResult.append("<" + currentGridTab.getTableName() + ">: ");
-								rowResult.append(logMsg);
-								rowResult.append(" / ");
+								if (logMsg != null) {
+									rowResult.append(logMsg);
+								} else {
+									rowResult.append("successed!");
+								}
+								
 							} else {
-								currentGridTab.dataIgnore();
-
-								rowResult.append("<" + currentGridTab.getTableName() + ">: ");
 								rowResult.append(logMsg);
-								rowResult.append(" / ");
-
+								
 								// Master Failed, thus details cannot be imported
 								if (currentGridTab.equals(gridTab) && masterRecord == null) {
 									isMasterok = false;
@@ -604,10 +583,7 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 							}
 						}
 					} catch (Exception e) {
-						rowResult.append("<" + currentGridTab.getTableName() + ">: ");
 						rowResult.append(Msg.getMsg(Env.getCtx(), "Error") + " " + e);
-						rowResult.append(" / ");
-						currentGridTab.dataIgnore();
 
 						error = true;
 						if (currentGridTab.equals(gridTab) && masterRecord == null)
@@ -615,11 +591,15 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 
 					} 
 					// write
-					rawLine = rawLine + delimiter + quoteChar + rowResult.toString().replaceAll(delimiter, "") + quoteChar + "\n";
+					rawLine = rawLine + rowResult.toString() + "\n";
 					rowsTmpResult.add(rawLine);
 				}
-
+				for(int i = 0; i < rowsTmpResult.size() ; i++) {
+					logFileW.write(rowsTmpResult.get(i));
+				}
 			}
+			
+			
 
 			mapTable = null;
 
@@ -749,7 +729,7 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 	}
 
 	private String proccessRow(GridTab gridTab, List<String> header, Map<String, Object> map, int startindx,
-			int endindx, PO masterRecord, Trx trx, boolean isInsert, int primaryKey) {
+			int endindx, PO masterRecord, Trx trx) {
 
 		String logMsg = null;
 		boolean isThereRow = false;
@@ -1065,7 +1045,7 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 	
 	@Override
 	public String getFileExtension() {
-		return "xlsx";
+		return "xls";
 	}
 
 	@Override
@@ -1075,7 +1055,7 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 
 	@Override
 	public String getContentType() {
-		return "application/xlsx";
+		return "application/vnd.ms-excel";
 	}
 
 	@Override
@@ -1083,7 +1063,7 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		String dt = sdf.format(cal.getTime());
-		String localFile = "Import_" + gridTab.getTableName() + "_" + dt + (m_isError ? "_err" : "_log") + getFileExtension();
+		String localFile = "Import_" + gridTab.getTableName() + "_" + dt + (m_isError ? "_err" : "_log") + "."+ getFileExtension();
 		return localFile;
 	}
 
@@ -1147,18 +1127,14 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 					} catch (Exception e) {
 						mapRow.put(headerMap, cell.getDateCellValue());
 					}
-				} else if (DisplayType.Integer == displayType || DisplayType.ID == displayType
-				// || DisplayType.TableDir == displayType
-				// || DisplayType.Table == displayType
-				) {
+				} else if (DisplayType.Integer == displayType || DisplayType.ID == displayType) {
 					try {
 						String value = cell.getStringCellValue();
 						if (value != null && value.toString().length() > 0) {
 							try {
 								mapRow.put(headerMap, new Integer(value));
 							} catch (Exception e) {
-								log.saveError("Error",
-										"Error while importing field " + headerMap + " with value: " + value);
+								log.saveError("Error", "Error while importing field " + headerMap + " with value: " + value);
 							}
 						} else {
 							mapRow.put(headerMap, null);
@@ -1191,32 +1167,7 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 		return mapRow;
 	}
 
-	/**
-	 * 
-	 * @param row
-	 * @return
-	 */
-	private String getUntokenizedRow(XSSFRow row) {
-		if (row == null)
-			return "";
-		StringBuilder untokenized = new StringBuilder();
-		for (int cn = 0; cn < row.getLastCellNum(); cn++) {
-
-			Cell cell = row.getCell(cn, MissingCellPolicy.CREATE_NULL_AS_BLANK);
-			if (cell.getCellType() == CellType.BOOLEAN) {
-				untokenized.append(cell.getBooleanCellValue()).append(",");
-			} else if (cell.getCellType() == CellType.NUMERIC) {
-				untokenized.append(cell.getNumericCellValue()).append(",");
-			} else if (cell.getCellType() == CellType.STRING) {
-				untokenized.append(cell.getStringCellValue()).append(",");
-			} else {
-				untokenized.append(",");
-			}
-
-		}
-		return untokenized.toString();
-	}
-
+	
 	private class CellProcessor {
 		private int m_displayType = -1;
 

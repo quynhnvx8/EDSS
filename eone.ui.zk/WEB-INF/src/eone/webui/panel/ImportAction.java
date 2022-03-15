@@ -319,7 +319,7 @@ public class ImportAction implements EventListener<Event>
 			winImportFile = null;
 
 			AMedia media = null;
-			media = new AMedia(importer.getSuggestedFileName(panel.getActiveGridTab()), null, importer.getContentType(), outFile, true);
+			media = new AMedia(importer.getSuggestedFileName(panel.getActiveGridTab()), null, importer.getContentType(), outFile, charset.name());
 			Filedownload.save(media);
 
 		} catch (Exception e) {

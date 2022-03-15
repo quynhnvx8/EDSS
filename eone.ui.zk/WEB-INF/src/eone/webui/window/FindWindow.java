@@ -769,6 +769,7 @@ public class FindWindow extends Window implements EventListener<Event>, ValueCha
                     	StringBuilder valueStr = new StringBuilder(value.toString());
                         if (!valueStr.toString().endsWith("%"))
                             valueStr.append("%");
+                        	
                         //
                         ColumnSQL = new StringBuilder("UPPER(").append(ColumnSQL).append(")");
                         value = valueStr.toString();
