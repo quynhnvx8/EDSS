@@ -15,8 +15,17 @@ public class ItemDisplayLogic {
 	String IsGroup;
 	String IsMoreCurrency;
 	String Element;
+	
 	String CurrenctyDefault;
 	String MaterialPolicy;
+	
+	public String getElement() {
+		return Element;
+	}
+	public void setElement(String element) {
+		Element = element;
+	}
+	
 	public String getIsGroup() {
 		return IsGroup;
 	}

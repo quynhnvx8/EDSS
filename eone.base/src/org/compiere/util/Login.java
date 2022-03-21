@@ -628,7 +628,7 @@ public class Login
 	public void getClientEnveronment(int AD_Client_ID, ItemDisplayLogic itemDisplay) 
 	{
 		//trường showlistitem dùng để ẩn hiện trên giao diện và có code hạch toán
-		String sql = " select isgroup, ismulticurrency, showlistitem, MMPolicy, C_Currency_ID from ad_client Where Ad_Client_ID = ?";
+		String sql = " select isgroup, ismulticurrency, showlistitem, MMPolicy, C_Currency_ID, C_Element_ID from ad_client Where Ad_Client_ID = ?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -649,7 +649,7 @@ public class Login
 				itemDisplay.setIsMoreCurrency(rs.getString(2));		//Su dung da tien te hay don tien te. Da tien tien thi ko readonly.
 				itemDisplay.setCurrenctyDefault(rs.getString(5));	//Gia tri mac dinh tien te theo cong ty
 				itemDisplay.setMaterialPolicy(rs.getString(4));			//Cach tinh gia vat tu
-				
+				itemDisplay.setElement(rs.getString(6));
 				String lists = rs.getString("showlistitem");
 				if (lists != null && !lists.isEmpty()) {
 					lists = lists.replaceAll(" ", "").replaceAll(";", ",");
@@ -878,6 +878,7 @@ public class Login
 		Env.setContext(m_ctx, "#IsMoreCurrency", 		itemDis.getIsMoreCurrency());
 		Env.setContext(m_ctx, "#C_CurrencyDefault_ID", 	itemDis.getCurrenctyDefault());
 		Env.setContext(m_ctx, "#MaterialPolicy", 		itemDis.getMaterialPolicy());
+		Env.setContext(m_ctx, "#C_Element_ID", 			itemDis.getElement());
 		
 		Env.DisProduct 				= itemDis.getIsProduct()!= null 			&& itemDis.getIsProduct().equals(Env.YES) ? true : false;
 		Env.DisContract 			= itemDis.getIsContract() != null 			&& itemDis.getIsContract().equals(Env.YES) ? true : false;

@@ -27,7 +27,6 @@ import java.util.logging.Level;
 
 import org.adempiere.base.IServiceReferenceHolder;
 import org.adempiere.base.Service;
-import org.compiere.print.ServerReportCtl;
 import org.compiere.util.CLogger;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
@@ -371,7 +370,7 @@ public class ReportStarter implements ProcessCall, ClientProcess {
 			if (pip != null) {
 				for (int i = 0; i < pip.length; i++) {
 
-					if (ServerReportCtl.PARAM_PRINT_INFO.equalsIgnoreCase(pip[i].getParameterName())) {
+					if ("PRINT_INFO".equalsIgnoreCase(pip[i].getParameterName())) {
 						printInfo = (PrintInfo) pip[i].getParameter();
 					}
 

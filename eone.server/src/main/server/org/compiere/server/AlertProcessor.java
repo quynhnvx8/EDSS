@@ -33,7 +33,7 @@ import eone.base.model.MUser;
 import eone.base.model.SystemIDs;
 
 
-public class AlertProcessor extends AdempiereServer
+public class AlertProcessor extends EONEServer
 {
 	/**
 	 * 	Alert Processor

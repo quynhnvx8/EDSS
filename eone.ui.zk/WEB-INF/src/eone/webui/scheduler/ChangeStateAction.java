@@ -26,7 +26,7 @@
 package eone.webui.scheduler;
 
 import org.adempiere.base.Core;
-import org.compiere.server.AdempiereServerMgr;
+import org.compiere.server.EONEServerMgr;
 import org.compiere.server.IServerManager;
 import org.compiere.util.Callback;
 import org.compiere.util.Env;
@@ -160,7 +160,7 @@ public class ChangeStateAction implements IAction, EventListener<Event> {
 		if (service != null)
 			serverMgr = ClusterServerMgr.getInstance();
 		else
-			serverMgr = AdempiereServerMgr.get(false);
+			serverMgr = EONEServerMgr.get(false);
 		return serverMgr;
 	}
 

@@ -40,7 +40,6 @@ import org.compiere.print.MPrintFormatItem;
 import org.compiere.print.PrintDataItem;
 import org.compiere.print.ReportEngine;
 import org.compiere.print.ReportEngine.ColumnInfo;
-import org.compiere.tools.FileUtil;
 import org.compiere.util.CLogger;
 import org.compiere.util.ContextRunnable;
 import org.compiere.util.Env;
@@ -60,6 +59,7 @@ import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.event.KeyEvent;
 import org.zkoss.zk.ui.ext.render.DynamicMedia;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zss.ui.Spreadsheet;
 import org.zkoss.zul.A;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Center;
@@ -79,6 +79,7 @@ import org.zkoss.zul.Vlayout;
 import org.zkoss.zul.impl.Utils;
 import org.zkoss.zul.impl.XulElement;
 
+import eone.base.impexp.PrintDataXLSXExporter;
 import eone.base.model.MLanguage;
 import eone.base.model.MQuery;
 import eone.base.process.ProcessInfo;
@@ -142,7 +143,6 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 
 	//
 	private Toolbar toolBar = new Toolbar();
-	private ToolBarButton bSendMail = new ToolBarButton();
 	private ToolBarButton bExport = new ToolBarButton();
 	//private WTableDirEditor wLanguage;
 	private Listbox previewType = new Listbox();
@@ -188,7 +188,9 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 		m_isCanExport = true;
 		
 		setTitle(Util.cleanAmp(Msg.getMsg(Env.getCtx(), "Report") + ": " + titleReport));
-		
+		Spreadsheet sheet = new Spreadsheet();
+		sheet.setSrc(null);
+		sheet.setShowToolbar(true);
 		addEventListener(ON_RENDER_REPORT_EVENT, this);
 	}
 
@@ -281,33 +283,9 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 		if (toolbarPopup == null)
 			toolBar.appendChild(new Separator("vertical"));
 		
-		//wLanguage.setValue(m_reportEngine.getLanguageID());
-		//wLanguage.getComponent().addEventListener(Events.ON_SELECT, this);
-		//toolBar.appendChild(wLanguage.getComponent());
-		
-		
 		if (toolbarPopup == null)
 			toolBar.appendChild(new Separator("vertical"));
 		
-		
-		/*Comment Send Email
-		bSendMail.setName("SendMail");
-		if (ThemeManager.isUseFontIconForImage())
-			bSendMail.setIconSclass("z-icon-SendMail");
-		else
-			bSendMail.setImage(ThemeManager.getThemeResource("images/SendMail24.png"));
-		bSendMail.setTooltiptext(Util.cleanAmp(Msg.getMsg(Env.getCtx(), "SendMail")));
-		if (toolbarPopup != null)
-		{
-			toolbarPopupLayout.appendChild(bSendMail);
-			bSendMail.setLabel(bSendMail.getTooltiptext());
-		}
-		else
-			toolBar.appendChild(bSendMail);
-		bSendMail.addEventListener(Events.ON_CLICK, this);
-		if (ThemeManager.isUseFontIconForImage())
-			LayoutUtils.addSclass("medium-toolbarbutton", bSendMail);
-		*/
 		m_isCanExport = false;
 		if ( m_isCanExport )
 		{
@@ -346,7 +324,6 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 				more.setIconSclass("z-icon-Expand");
 			else
 				more.setImage(ThemeManager.getThemeResource("images/expand-header.png"));
-//			more.setStyle("float: right;");
 			toolBar.appendChild(more);
 			LayoutUtils.addSclass("space-between-content", toolBar);
 			more.addEventListener(Events.ON_CLICK, evt -> {
@@ -362,8 +339,6 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 		Center center = new Center();
 		layout.appendChild(center);
 		iframe = new Iframe();
-		//ZKUpdateUtil.setHflex(iframe, "true");
-		//ZKUpdateUtil.setVflex(iframe, "true");
 		ZKUpdateUtil.setWidth(iframe, "100%");
 		ZKUpdateUtil.setHeight(iframe, "100%");
 		iframe.setId("reportFrame");
@@ -540,8 +515,6 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
         } else if (event.getName().equals(Events.ON_CTRL_KEY)) {
         	KeyEvent keyEvent = (KeyEvent) event;
         	if (LayoutUtils.isReallyVisible(this)) {
-	        	//filter same key event that is too close
-	        	//firefox fire key event twice when grid is visible
 	        	long time = System.currentTimeMillis();
 	        	if (prevKeyEvent != null && prevKeyEventTime > 0 &&
 	        			prevKeyEvent.getKeyCode() == keyEvent.getKeyCode() &&
@@ -585,10 +558,6 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 			cmd_export();
 		else if (e.getTarget() == previewType)
 			cmd_render();
-		else if (e.getTarget() == bSendMail)
-			cmd_sendMail();
-		
-		
 		else if (e.getTarget() == m_ddM)
 			cmd_window(m_ddQ);
 		else if (e.getTarget() == m_daM)
@@ -607,31 +576,7 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 		AEnv.zoom(query);
 	}	//	cmd_window
 	
-	/**
-	 * 	Send Mail
-	 */
-	private void cmd_sendMail()
-	{
-		String subject = m_reportEngine.getName();
-		File attachment = null;
-		
-		try
-		{
-			attachment = new File(FileUtil.getTempMailName(subject, ".pdf"));
-			m_reportEngine.getPDF(attachment);
-		}
-		catch (Exception e)
-		{
-			log.log(Level.SEVERE, "", e);
-		}
-
-		
-	}	//	cmd_sendMail
-
 	
-	/**
-	 * 	Export
-	 */
 	private void cmd_export()
 	{		
 		log.config("");
@@ -657,7 +602,6 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 			cboType.getItems().clear();			
 			ListItem li = cboType.appendItem("pdf" + " - " + Msg.getMsg(Env.getCtx(), "FilePDF"), "pdf");
 			cboType.appendItem("html" + " - " + Msg.getMsg(Env.getCtx(), "FileHTML"), "html");
-			//cboType.appendItem("xls" + " - " + Msg.getMsg(Env.getCtx(), "FileXLS"), "xls");
 			cboType.appendItem("xlsx" + " - " + Msg.getMsg(Env.getCtx(), "FileXLSX"), "xlsx");
 			cboType.setSelectedItem(li);
 			
@@ -715,7 +659,9 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 			else if (ext.equals("xlsx"))
 			{
 				inputFile = File.createTempFile("Export", ".xlsx");							
-				m_reportEngine.createXLSX(inputFile);
+				//m_reportEngine.createXLSX(inputFile);
+				PrintDataXLSXExporter exp = new PrintDataXLSXExporter(m_params, m_reportEngine.m_printFormat);
+				exp.export(inputFile, true);
 			}
 			
 			else
@@ -825,8 +771,6 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 		@Override
 		protected void doRun() {
 			try {
-				//if (!ArchiveEngine.isValid(viewer.m_reportEngine.getLayout()))
-				//	log.warning("Cannot archive Document");
 				String path = System.getProperty("java.io.tmpdir");
 				String prefix = viewer.makePrefix(viewer.m_reportEngine.getName());
 				if (prefix.length() < 3)
@@ -861,14 +805,10 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 		private String contextPath;
 		private MPrintFormat m_printFormat;
 		private int windowNo;
-		//private Listbox table = new Listbox();
-		//private Borderlayout resultPanel;
-		//private ArrayList<ArrayList<PrintDataItem>> dataQuery = null;
 		public HTMLRendererRunnable(ZkReportViewer viewer) {
 			super();
 			this.viewer = viewer;
 			contextPath = Executions.getCurrent().getContextPath();
-			//initLayout();
 		}
 		
 		@Override
@@ -881,10 +821,9 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 					prefix += "_".repeat(3-prefix.length());
 				if (log.isLoggable(Level.FINE)) log.log(Level.FINE, "Path="+path + " Prefix="+prefix);
 				File file = File.createTempFile(prefix, ".html", new File(path));
-				Writer fw = new OutputStreamWriter(new FileOutputStream(file, false), Ini.getCharset()); // teo_sarca: save using adempiere charset [ 1658127 ]
+				Writer fw = new OutputStreamWriter(new FileOutputStream(file, false), Ini.getCharset()); 
 				createHTML (new BufferedWriter(fw), false, new HTMLExtension(contextPath, "rp", viewer.getUuid()), false);
 				
-				//viewer.m_reportEngine.createHTML(file, false, new HTMLExtension(contextPath, "rp", viewer.getUuid()));
 				viewer.media = new AMedia(file.getName(), "html", "text/html", file, false);
 			} catch (Exception e) {
 				if (e instanceof RuntimeException)
@@ -1055,7 +994,6 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 							if (cssPrefix != null)
 								href.setClass(cssPrefix + "-href");
 							extension.extendIDColumn(row, td, href, item);
-							//new WAcctViewer(item.getZoomLogic());
 						
 						}else {
 							td.addElement(Util.maskHTML(value.toString()));
@@ -1211,8 +1149,6 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 				return null;
 			}
 		}
-		
-		
 	}
 	
 	
@@ -1233,8 +1169,6 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 		{
 			try
 			{
-				//if (!ArchiveEngine.isValid(viewer.m_reportEngine.getLayout()))
-				//	log.warning("Cannot archive Document");
 				String path = System.getProperty("java.io.tmpdir");
 				String prefix = viewer.makePrefix(viewer.m_reportEngine.getName());
 				if (log.isLoggable(Level.FINE))
@@ -1242,11 +1176,9 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 					log.log(Level.FINE, "Path=" + path + " Prefix=" + prefix);
 				}
 				File file = File.createTempFile(prefix, ".xlsx", new File(path));
-				viewer.m_reportEngine.createXLSX(file);
-				//PrintDataXLSXExporter exp = new PrintDataXLSXExporter(m_params, viewer.m_reportEngine.getPrintFormat());
-				//exp.export(file, true);
-				viewer.media = new AMedia(file.getName(), "xlsx",
-						"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", file, true);
+				PrintDataXLSXExporter exp = new PrintDataXLSXExporter(m_params, viewer.m_reportEngine.getPrintFormat());
+				exp.export(file, true);
+				viewer.media = new AMedia(file.getName(), "xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", file, true);
 			}
 			catch (Exception e)
 			{

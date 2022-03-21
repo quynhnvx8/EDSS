@@ -87,7 +87,7 @@ public class ZoomInfoFactory {
 		final List<ZoomInfoFactory.ZoomInfo> result = new ArrayList<ZoomInfoFactory.ZoomInfo>();
 
 		final Set<String> alreadySeen = new HashSet<String>();
-
+		/*
 		for (final ZoomInfo zoomInfo : MRelationType.retrieveZoomInfos(po,
 				windowID)) {
 
@@ -97,7 +97,7 @@ public class ZoomInfoFactory {
 				result.add(zoomInfo);
 			}
 		}
-
+		 */
 		final GenericZoomProvider genericZoomProvider = new GenericZoomProvider();
 
 		for (final ZoomInfo zoomInfo : genericZoomProvider

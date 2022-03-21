@@ -95,6 +95,16 @@
 									<artifactId>closure-compiler</artifactId>
 									<version>v20181028</version>
 								</artifactItem>
+								<artifactItem>
+									<groupId>org.zkoss.zss</groupId>
+								    <artifactId>zss</artifactId>
+								    <version>3.8.1</version>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.zkoss.zss</groupId>
+								    <artifactId>zssmodel</artifactId>
+								    <version>3.8.1</version>
+								</artifactItem>
 							</artifactItems>
 							<outputDirectory>WEB-INF/lib</outputDirectory>
 							<stripVersion>true</stripVersion>

@@ -15,16 +15,16 @@ package org.adempiere.server;
 
 import java.util.Properties;
 
-import org.compiere.server.AdempiereServer;
+import org.compiere.server.EONEServer;
 
-import eone.base.model.AdempiereProcessor;
+import eone.base.model.EONEProcessor;
 
 /**
  *
  * @author hengsin
  *
  */
-public interface IServerFactory<S extends AdempiereServer, M extends AdempiereProcessor> {
+public interface IServerFactory<S extends EONEServer, M extends EONEProcessor> {
 	
 	/**
 	 * @param ctx

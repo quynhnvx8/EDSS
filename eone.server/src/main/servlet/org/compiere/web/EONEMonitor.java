@@ -57,8 +57,8 @@ import org.apache.ecs.xhtml.td;
 import org.apache.ecs.xhtml.th;
 import org.apache.ecs.xhtml.tr;
 import org.compiere.EOne;
-import org.compiere.server.AdempiereServerGroup;
-import org.compiere.server.AdempiereServerMgr;
+import org.compiere.server.EONEServerGroup;
+import org.compiere.server.EONEServerMgr;
 import org.compiere.server.IServerManager;
 import org.compiere.server.LogFileInfo;
 import org.compiere.server.ServerCount;
@@ -87,7 +87,7 @@ import org.idempiere.server.cluster.callable.ReadLogCallable;
 import org.idempiere.server.cluster.callable.RotateLogCallable;
 import org.idempiere.server.cluster.callable.SetTraceLevelCallable;
 
-import eone.base.model.AdempiereProcessorLog;
+import eone.base.model.EONEProcessorLog;
 import eone.base.model.MClient;
 import eone.base.model.MSysConfig;
 import eone.base.model.MSystem;
@@ -235,10 +235,10 @@ public class EONEMonitor extends HttpServlet
 	//	line.addElement(new th().addElement("Description"));
 		table.addElement(line);
 		
-		AdempiereProcessorLog[] logs = server.getModel().getLogs();
+		EONEProcessorLog[] logs = server.getModel().getLogs();
 		for (int i = 0; i < logs.length; i++)
 		{
-			AdempiereProcessorLog pLog = logs[i];
+			EONEProcessorLog pLog = logs[i];
 			line = new tr();
 			line.addElement(new td().addElement(WebEnv.getCellContent(pLog.getCreated())));
 			line.addElement(new td().addElement(WebEnv.getCellContent(pLog.getSummary())));
@@ -645,7 +645,7 @@ public class EONEMonitor extends HttpServlet
 	{
 		WebDoc doc = WebDoc.create ("iDempiere Server Monitor");
 	//	log.info("ServletConfig=" + getServletConfig());
-		AdempiereServerGroup.get().dump();
+		EONEServerGroup.get().dump();
 
 		//	Body
 		body bb=new body();
@@ -1279,7 +1279,7 @@ public class EONEMonitor extends HttpServlet
 		log.info ("");
 		
 		//always create the local server manager instance
-		m_serverMgr = AdempiereServerMgr.get();
+		m_serverMgr = EONEServerMgr.get();
 		
 		//switch to cluster manager if cluster service is available
 		if (ClusterServerMgr.getClusterService() != null)

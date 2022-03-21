@@ -30,7 +30,7 @@ import java.sql.Timestamp;
 
 import org.idempiere.distributed.IClusterMember;
 
-import eone.base.model.AdempiereProcessor;
+import eone.base.model.EONEProcessor;
 
 /**
  * 
@@ -44,7 +44,7 @@ public class ServerInstance implements Serializable {
 	private static final long serialVersionUID = -6332080326921128215L;
 	
 	private String serverId;
-	private AdempiereProcessor model;
+	private EONEProcessor model;
 	private boolean started = false;
 	private boolean interrupted = false;
 	private boolean sleeping = false;
@@ -59,7 +59,7 @@ public class ServerInstance implements Serializable {
 	 * @param started
 	 * @param interrupted
 	 */
-	public ServerInstance(String serverId, AdempiereProcessor model, boolean started, boolean interrupted, 
+	public ServerInstance(String serverId, EONEProcessor model, boolean started, boolean interrupted, 
 			boolean sleeping, Timestamp startTime, String statistics, String serverInfo) {
 		this.serverId = serverId;
 		this.model = model;
@@ -124,9 +124,9 @@ public class ServerInstance implements Serializable {
 
 	/**
 	 * 
-	 * @return {@link AdempiereProcessor}
+	 * @return {@link EONEProcessor}
 	 */
-	public AdempiereProcessor getModel() {
+	public EONEProcessor getModel() {
 		return model;
 	}
 	

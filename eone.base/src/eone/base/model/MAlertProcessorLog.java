@@ -27,7 +27,7 @@ import java.util.Properties;
  *  @version $Id: MAlertProcessorLog.java,v 1.3 2006/07/30 00:51:05 jjanke Exp $
  */
 public class MAlertProcessorLog extends X_AD_AlertProcessorLog
-	implements AdempiereProcessorLog
+	implements EONEProcessorLog
 {
 	/**
 	 * 

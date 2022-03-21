@@ -2,7 +2,7 @@
 package eone.webui.scheduler;
 
 import org.adempiere.base.Core;
-import org.compiere.server.AdempiereServerMgr;
+import org.compiere.server.EONEServerMgr;
 import org.compiere.server.IServerManager;
 import org.compiere.util.Callback;
 import org.compiere.util.Env;
@@ -158,7 +158,7 @@ public class SchedulerStateEditor extends WEditor {
 	@Override
 	public void onEvent(Event event) throws Exception {
 		if (event.getName().equals(Events.ON_CLICK)) {        	
-			if (schedulerState == AdempiereServerMgr.SERVER_STATE_NOT_SCHEDULE) {
+			if (schedulerState == EONEServerMgr.SERVER_STATE_NOT_SCHEDULE) {
 				ADWindow adwindow = ADWindow.findADWindow(getComponent());
 				if (adwindow != null) {
 					if (gridTab != null && (gridTab.isNew() || gridTab.needSave(false, false))) {
@@ -177,7 +177,7 @@ public class SchedulerStateEditor extends WEditor {
 						schedule();
 					}
 				}
-			} else if (schedulerState == AdempiereServerMgr.SERVER_STATE_STARTED) {
+			} else if (schedulerState == EONEServerMgr.SERVER_STATE_STARTED) {
 				ADWindow adwindow = ADWindow.findADWindow(getComponent());
 				if (adwindow != null) {
 					if (gridTab != null && (gridTab.isNew() || gridTab.needSave(false, false))) {
@@ -192,7 +192,7 @@ public class SchedulerStateEditor extends WEditor {
 						stop();
 					}
 				}
-			} else if (schedulerState == AdempiereServerMgr.SERVER_STATE_STOPPED) {
+			} else if (schedulerState == EONEServerMgr.SERVER_STATE_STOPPED) {
 				ADWindow adwindow = ADWindow.findADWindow(getComponent());
 				if (adwindow != null) {
 					if (gridTab != null && (gridTab.isNew() || gridTab.needSave(false, false))) {
@@ -342,7 +342,7 @@ public class SchedulerStateEditor extends WEditor {
 		if (service != null)
 			serverMgr = ClusterServerMgr.getInstance();
 		else
-			serverMgr = AdempiereServerMgr.get(false);
+			serverMgr = EONEServerMgr.get(false);
 		return serverMgr;
 	}
 }

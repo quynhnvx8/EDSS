@@ -44,7 +44,7 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
-import eone.base.model.AdempiereProcessor;
+import eone.base.model.EONEProcessor;
 import eone.base.model.MScheduler;
 
 /**
@@ -53,15 +53,15 @@ import eone.base.model.MScheduler;
  *  @author Jorg Janke
  *  @version $Id: AdempiereServerMgr.java,v 1.4 2006/10/09 00:23:26 jjanke Exp $
  */
-public class AdempiereServerMgr implements ServiceTrackerCustomizer<IServerFactory<AdempiereServer, AdempiereProcessor>, IServerFactory<AdempiereServer, AdempiereProcessor>>, BundleListener, IServerManager
+public class EONEServerMgr implements ServiceTrackerCustomizer<IServerFactory<EONEServer, EONEProcessor>, IServerFactory<EONEServer, EONEProcessor>>, BundleListener, IServerManager
 {
-	private static ServiceTracker<IServerFactory<AdempiereServer, AdempiereProcessor>, IServerFactory<AdempiereServer, AdempiereProcessor>> serviceTracker;
+	private static ServiceTracker<IServerFactory<EONEServer, EONEProcessor>, IServerFactory<EONEServer, EONEProcessor>> serviceTracker;
 
 	/**
 	 * 	Get Adempiere Server Manager
 	 *	@return mgr
 	 */
-	public synchronized static AdempiereServerMgr get()
+	public synchronized static EONEServerMgr get()
 	{
 		return get(true);
 	}
@@ -70,12 +70,12 @@ public class AdempiereServerMgr implements ServiceTrackerCustomizer<IServerFacto
 	 * 	Get Adempiere Server Manager
 	 *	@return mgr
 	 */
-	public synchronized static AdempiereServerMgr get(boolean createNew)
+	public synchronized static EONEServerMgr get(boolean createNew)
 	{
 		if (m_serverMgr == null && createNew)
 		{
-			m_serverMgr = new AdempiereServerMgr();
-			serviceTracker = new ServiceTracker<IServerFactory<AdempiereServer, AdempiereProcessor>, IServerFactory<AdempiereServer, AdempiereProcessor>>(AdempiereServerActivator.getBundleContext(), 
+			m_serverMgr = new EONEServerMgr();
+			serviceTracker = new ServiceTracker<IServerFactory<EONEServer, EONEProcessor>, IServerFactory<EONEServer, EONEProcessor>>(AdempiereServerActivator.getBundleContext(), 
 					IServerFactory.class.getName(), m_serverMgr);
 			serviceTracker.open();
 			AdempiereServerActivator.getBundleContext().addBundleListener(m_serverMgr);
@@ -84,14 +84,14 @@ public class AdempiereServerMgr implements ServiceTrackerCustomizer<IServerFacto
 	}	//	get
 	
 	/**	Singleton					*/
-	private static AdempiereServerMgr	m_serverMgr = null;
+	private static EONEServerMgr	m_serverMgr = null;
 	/**	Logger			*/
-	protected static final CLogger	log = CLogger.getCLogger(AdempiereServerMgr.class);
+	protected static final CLogger	log = CLogger.getCLogger(EONEServerMgr.class);
 	
 	/**************************************************************************
 	 * 	Adempiere Server Manager
 	 */
-	private AdempiereServerMgr ()
+	private EONEServerMgr ()
 	{
 		super();
 		startEnvironment();
@@ -186,18 +186,18 @@ public class AdempiereServerMgr implements ServiceTrackerCustomizer<IServerFacto
 		return startAll() == null ? null : "Failed to restart all servers"; 
 	}	//	startEnvironment
 
-	private void createServers(IServerFactory<AdempiereServer, AdempiereProcessor> factory) {
+	private void createServers(IServerFactory<EONEServer, EONEProcessor> factory) {
 		String name = factory.getProcessorClass().getName();
 		//System.out.println(name);
 		if (!processorClass.contains(name))
 		{
 			processorClass.add(name);
-			AdempiereServer[] servers = factory.create(m_ctx);
+			EONEServer[] servers = factory.create(m_ctx);
 			if (servers != null && servers.length > 0)
 			{
-				for (AdempiereServer server : servers)
+				for (EONEServer server : servers)
 				{
-					AdempiereProcessor model = server.getModel();
+					EONEProcessor model = server.getModel();
 					if (canRunHere(server, model)) {
 						String clusterId = getClusterMemberId();
 						if (clusterId != null) {
@@ -231,8 +231,8 @@ public class AdempiereServerMgr implements ServiceTrackerCustomizer<IServerFacto
 		}
 	}
 
-	private boolean canRunHere(AdempiereServer server, AdempiereProcessor model) {
-		return AdempiereServer.isOKtoRunOnIP(model);
+	private boolean canRunHere(EONEServer server, EONEProcessor model) {
+		return EONEServer.isOKtoRunOnIP(model);
 	}
 	
 	/**
@@ -253,7 +253,7 @@ public class AdempiereServerMgr implements ServiceTrackerCustomizer<IServerFacto
 			for(IServerFactory factory : serverFactoryList )
 			{
 				if (factory.getProcessorClass().getName().equals(scheduler.getClass().getName())) {
-					AdempiereServer server = factory.create(m_ctx, scheduler);
+					EONEServer server = factory.create(m_ctx, scheduler);
 					if (server != null && canRunHere(server, scheduler)) {
 						if (getServerInstance(scheduler.getServerID()) == null) {
 							String clusterId = getClusterMemberId();
@@ -506,7 +506,7 @@ public class AdempiereServerMgr implements ServiceTrackerCustomizer<IServerFacto
 			}
 		}
 		if (log.isLoggable(Level.FINE)) log.fine("Running=" + noRunning + ", Stopped=" + noStopped);
-		AdempiereServerGroup.get().dump();
+		EONEServerGroup.get().dump();
 		return noRunning == 0 ? null : "Failed to stop all servers";
 	}	//	stopAll
 
@@ -612,7 +612,7 @@ public class AdempiereServerMgr implements ServiceTrackerCustomizer<IServerFacto
 		return responses.toArray(new ServerInstance[0]);
 	}
 
-	public synchronized int getStatus(AdempiereProcessor processor)
+	public synchronized int getStatus(EONEProcessor processor)
 	{
 		return getServerStatus(processor.getServerID());
 	}
@@ -712,14 +712,14 @@ public class AdempiereServerMgr implements ServiceTrackerCustomizer<IServerFacto
 	private class LocalServerController implements Runnable
 	{
 
-		protected AdempiereServer server;
+		protected EONEServer server;
 		protected volatile ScheduledFuture<?> scheduleFuture;
 
-		private LocalServerController(AdempiereServer server) {
+		private LocalServerController(EONEServer server) {
 			this(server, true);
 		}
 		
-		private LocalServerController(AdempiereServer server, boolean start) {
+		private LocalServerController(EONEServer server, boolean start) {
 			this.server = server;
 			if (start)
 				start();
@@ -742,7 +742,7 @@ public class AdempiereServerMgr implements ServiceTrackerCustomizer<IServerFacto
 			}
 		}
 		
-		public AdempiereServer getServer() {
+		public EONEServer getServer() {
 			return server;
 		}
 
@@ -757,9 +757,9 @@ public class AdempiereServerMgr implements ServiceTrackerCustomizer<IServerFacto
 	}
 
 	@Override
-	public synchronized IServerFactory<AdempiereServer, AdempiereProcessor> addingService(
-			ServiceReference<IServerFactory<AdempiereServer, AdempiereProcessor>> reference) {
-		IServerFactory<AdempiereServer, AdempiereProcessor> factory = AdempiereServerActivator.getBundleContext().getService(reference);
+	public synchronized IServerFactory<EONEServer, EONEProcessor> addingService(
+			ServiceReference<IServerFactory<EONEServer, EONEProcessor>> reference) {
+		IServerFactory<EONEServer, EONEProcessor> factory = AdempiereServerActivator.getBundleContext().getService(reference);
 		createServers(factory);
 		startAll();
 		return factory;
@@ -767,14 +767,14 @@ public class AdempiereServerMgr implements ServiceTrackerCustomizer<IServerFacto
 
 	@Override
 	public void modifiedService(
-			ServiceReference<IServerFactory<AdempiereServer, AdempiereProcessor>> reference,
-			IServerFactory<AdempiereServer, AdempiereProcessor> service) {
+			ServiceReference<IServerFactory<EONEServer, EONEProcessor>> reference,
+			IServerFactory<EONEServer, EONEProcessor> service) {
 	}
 
 	@Override
 	public void removedService(
-			ServiceReference<IServerFactory<AdempiereServer, AdempiereProcessor>> reference,
-			IServerFactory<AdempiereServer, AdempiereProcessor> service) {
+			ServiceReference<IServerFactory<EONEServer, EONEProcessor>> reference,
+			IServerFactory<EONEServer, EONEProcessor> service) {
 	}
 
 	@Override

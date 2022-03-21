@@ -28,7 +28,7 @@ package org.idempiere.server.cluster.callable;
 import java.io.Serializable;
 import java.util.concurrent.Callable;
 
-import org.compiere.server.AdempiereServerMgr;
+import org.compiere.server.EONEServerMgr;
 import org.compiere.server.IServerManager;
 import org.compiere.server.ServerCount;
 import org.compiere.server.ServerInstance;
@@ -53,7 +53,7 @@ public class GetServerCountCallable implements Callable<ServerCount>, Serializab
 	@Override
 	public ServerCount call() throws Exception {
 		ServerCount serverCount = new ServerCount();
-		IServerManager serverMgr = AdempiereServerMgr.get(false);
+		IServerManager serverMgr = EONEServerMgr.get(false);
 		if (serverMgr != null) {
 			ServerInstance[] servers = serverMgr.getServerInstances();
 			for (ServerInstance server : servers) {

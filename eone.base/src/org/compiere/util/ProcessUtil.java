@@ -1,24 +1,17 @@
 
 package org.compiere.util;
 
-import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import javax.script.ScriptEngine;
-
 import org.adempiere.base.Core;
 
 import eone.base.model.MProcess;
-import eone.base.model.MRule;
 import eone.base.process.ProcessCall;
 import eone.base.process.ProcessInfo;
-import eone.base.process.ProcessInfoParameter;
-import eone.base.process.ProcessInfoUtil;
-import eone.exceptions.EONEException;
 
 /**
  *
@@ -157,122 +150,6 @@ public final class ProcessUtil {
 				trx = null;
 			}
 			Thread.currentThread().setContextClassLoader(cl);
-		}
-		return success;
-	}
-
-	public static boolean startScriptProcess(Properties ctx, ProcessInfo pi, Trx trx) {
-		String msg = null;
-		boolean success = true;
-		try
-		{
-			String cmd = pi.getClassName();
-			MRule rule = MRule.get(ctx, cmd.substring(MRule.SCRIPT_PREFIX.length()));
-			if (rule == null) {
-				log.log(Level.WARNING, cmd + " not found");
-				pi.setSummary ("ScriptNotFound", true);
-				return false;
-			}
-			if ( !  (rule.getEventType().equals(MRule.EVENTTYPE_Process)
-				  && rule.getRuleType().equals(MRule.RULETYPE_JSR223ScriptingAPIs))) {
-				log.log(Level.WARNING, cmd + " must be of type JSR 223 and event Process");
-				pi.setSummary ("ScriptNotFound", true);
-				return false;
-			}
-
-			ScriptEngine engine = rule.getScriptEngine();
-			if (engine == null) {
-				throw new EONEException("Engine not found: " + rule.getEngineName());
-			}
-
-			// Window context are    W_
-			// Login context  are    G_
-			// Method arguments context are A_
-			// Parameter context are P_
-			MRule.setContext(engine, ctx, 0);  // no window
-			// now add the method arguments to the engine
-			engine.put(MRule.ARGUMENTS_PREFIX + "Ctx", ctx);
-			if (trx == null) {
-				trx = Trx.get(Trx.createTrxName(pi.getTitle()+"_"+pi.getAD_Session_ID()), true);
-				trx.setDisplayName(ProcessUtil.class.getName()+"_startScriptProcess");
-			}
-			engine.put(MRule.ARGUMENTS_PREFIX + "Trx", trx);
-			engine.put(MRule.ARGUMENTS_PREFIX + "TrxName", trx.getTrxName());
-			engine.put(MRule.ARGUMENTS_PREFIX + "Record_ID", pi.getRecord_ID());
-			engine.put(MRule.ARGUMENTS_PREFIX + "AD_Client_ID", pi.getAD_Client_ID());
-			engine.put(MRule.ARGUMENTS_PREFIX + "AD_User_ID", pi.getAD_User_ID());
-			engine.put(MRule.ARGUMENTS_PREFIX + "AD_Session_ID", pi.getAD_Session_ID());
-			engine.put(MRule.ARGUMENTS_PREFIX + "Table_ID", pi.getTable_ID());
-			// Add process parameters
-			ProcessInfoParameter[] para = pi.getParameter();
-			if (para == null) {
-				ProcessInfoUtil.setParameterFromDB(pi);
-				para = pi.getParameter();
-			}
-			if (para != null) {
-				engine.put(MRule.ARGUMENTS_PREFIX + "Parameter", pi.getParameter());
-				for (int i = 0; i < para.length; i++)
-				{
-					String name = para[i].getParameterName();
-					if (para[i].getParameter_To() == null) {
-						Object value = para[i].getParameter();
-						if (name.endsWith("_ID") && (value instanceof BigDecimal))
-							engine.put(MRule.PARAMETERS_PREFIX + name, ((BigDecimal)value).intValue());
-						else
-							engine.put(MRule.PARAMETERS_PREFIX + name, value);
-					} else {
-						Object value1 = para[i].getParameter();
-						Object value2 = para[i].getParameter_To();
-						if (name.endsWith("_ID") && (value1 instanceof BigDecimal))
-							engine.put(MRule.PARAMETERS_PREFIX + name + "1", ((BigDecimal)value1).intValue());
-						else
-							engine.put(MRule.PARAMETERS_PREFIX + name + "1", value1);
-						if (name.endsWith("_ID") && (value2 instanceof BigDecimal))
-							engine.put(MRule.PARAMETERS_PREFIX + name + "2", ((BigDecimal)value2).intValue());
-						else
-							engine.put(MRule.PARAMETERS_PREFIX + name + "2", value2);
-					}
-				}
-			}
-			engine.put(MRule.ARGUMENTS_PREFIX + "ProcessInfo", pi);
-
-			msg = engine.eval(rule.getScript()).toString();
-			//transaction should rollback if there are error in process
-			if (msg != null && msg.startsWith("@Error@"))
-				success = false;
-
-			//	Parse Variables
-			msg = Msg.parseTranslation(ctx, msg);
-			pi.setSummary (msg, !success);
-
-		}
-		catch (Exception e)
-		{
-			pi.setSummary("ScriptError", true);
-			log.log(Level.SEVERE, pi.getClassName(), e);
-			success = false;
-		}
-		if (success) {
-			if (trx != null)
-			{
-				try
-				{
-					trx.commit(true);
-				} catch (Exception e)
-				{
-					log.log(Level.SEVERE, "Commit failed.", e);
-					pi.addSummary("Commit Failed.");
-					pi.setError(true);
-					success = false;
-				}
-				trx.close();
-			}
-		} else {
-			if (trx != null)
-			{
-				trx.rollback();
-				trx.close();
-			}
 		}
 		return success;
 	}

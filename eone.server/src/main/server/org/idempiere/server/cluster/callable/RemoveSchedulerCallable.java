@@ -28,7 +28,7 @@ package org.idempiere.server.cluster.callable;
 import java.io.Serializable;
 import java.util.concurrent.Callable;
 
-import org.compiere.server.AdempiereServerMgr;
+import org.compiere.server.EONEServerMgr;
 import org.compiere.server.IServerManager;
 
 import eone.base.model.MScheduler;
@@ -55,7 +55,7 @@ public class RemoveSchedulerCallable implements Callable<Response>, Serializable
 	@Override
 	public Response call() throws Exception {
 		Response response = new Response();
-		IServerManager serverMgr = AdempiereServerMgr.get(false);
+		IServerManager serverMgr = EONEServerMgr.get(false);
 		if (serverMgr != null) {
 			if (serverMgr.getServerInstance(scheduler.getServerID()) != null) {
 				response.error = serverMgr.removeScheduler(scheduler);

@@ -340,6 +340,8 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 				boolean error = false;
 				Trx trx = null;
 				String trxName = null;
+				trx = Trx.get(trxName, true);
+				
 				List<String> rowsTmpResult = new ArrayList<String>();
 				System.out.println("FOR ROWS STARTS...");
 				for (int idx = 0; idx < data.size(); idx++) {
@@ -375,7 +377,7 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 						if (!isDetail) {
 							trxName = "Import_" + gridTab.getTableName() + "_" + UUID.randomUUID();
 							gridTab.getTableModel().setImportingMode(false, trxName);
-							trx = Trx.get(trxName, true);
+							
 							masterRecord = null;
 							rowsTmpResult.clear();
 							isMasterok = true;
@@ -1055,7 +1057,7 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 
 	@Override
 	public String getContentType() {
-		return "application/vnd.ms-excel";
+		return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 	}
 
 	@Override

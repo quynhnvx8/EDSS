@@ -28,7 +28,7 @@ package org.idempiere.server.cluster.callable;
 import java.io.Serializable;
 import java.util.concurrent.Callable;
 
-import org.compiere.server.AdempiereServerMgr;
+import org.compiere.server.EONEServerMgr;
 import org.compiere.server.IServerManager;
 
 import eone.base.model.MScheduler;
@@ -55,7 +55,7 @@ public class AddSchedulerCallable implements Callable<Response>, Serializable {
 	@Override
 	public Response call() throws Exception {
 		Response response = new Response();
-		IServerManager serverMgr = AdempiereServerMgr.get(false);
+		IServerManager serverMgr = EONEServerMgr.get(false);
 		if (serverMgr != null) {
 			String error = serverMgr.addScheduler(scheduler);
 			if (error != null) {

@@ -28,7 +28,7 @@ package org.idempiere.server.cluster.callable;
 import java.io.Serializable;
 import java.util.concurrent.Callable;
 
-import org.compiere.server.AdempiereServerMgr;
+import org.compiere.server.EONEServerMgr;
 import org.compiere.server.IServerManager;
 
 /**
@@ -50,7 +50,7 @@ public class StopAllCallable implements Callable<String>, Serializable {
 
 	@Override
 	public String call() throws Exception {
-		IServerManager serverMgr = AdempiereServerMgr.get(false);
+		IServerManager serverMgr = EONEServerMgr.get(false);
 		if (serverMgr != null) {
 			return serverMgr.stopAll();
 		}

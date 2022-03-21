@@ -26,26 +26,26 @@ import org.compiere.util.CLogger;
  *  @author Jorg Janke
  *  @version $Id: AdempiereServerGroup.java,v 1.2 2006/07/30 00:53:33 jjanke Exp $
  */
-public class AdempiereServerGroup extends ThreadGroup
+public class EONEServerGroup extends ThreadGroup
 {
 	/**
 	 * 	Get Adempiere Server Group
 	 *	@return Server Group
 	 */
-	public static AdempiereServerGroup get()
+	public static EONEServerGroup get()
 	{
 		if (s_group == null || s_group.isDestroyed())
-			s_group = new AdempiereServerGroup(); 
+			s_group = new EONEServerGroup(); 
 		return s_group;
 	}	//	get
 	
 	/** Group */
-	private volatile static AdempiereServerGroup	s_group	= null;
+	private volatile static EONEServerGroup	s_group	= null;
 	
 	/**
 	 * 	AdempiereServerGroup
 	 */
-	private AdempiereServerGroup ()
+	private EONEServerGroup ()
 	{
 		super ("AdempiereServers");
 		setDaemon(true);

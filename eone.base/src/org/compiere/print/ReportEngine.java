@@ -2,12 +2,8 @@ package org.compiere.print;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.net.URI;
@@ -39,7 +35,6 @@ import org.compiere.util.Env;
 import org.compiere.util.Ini;
 import org.compiere.util.Util;
 
-import eone.base.impexp.PrintDataXLSXExporter;
 import eone.base.model.MProcess;
 import eone.base.model.PrintInfo;
 import eone.base.process.ProcessInfo;
@@ -233,42 +228,7 @@ public class ReportEngine implements PrintServiceAttributeListener
 	}	//	getPrinterName
 
 
-	public boolean createHTML (File file, boolean onlyTable)
-	{
-		return createHTML(file, onlyTable, null);
-	}
 	
-
-	public boolean createHTML (File file, boolean onlyTable, IHTMLExtension extension)
-	{
-		try
-		{
-			Writer fw = new OutputStreamWriter(new FileOutputStream(file, false), Ini.getCharset()); // teo_sarca: save using adempiere charset [ 1658127 ]
-			return createHTML (new BufferedWriter(fw), onlyTable, extension);
-		}
-		catch (FileNotFoundException fnfe)
-		{
-			log.log(Level.SEVERE, "(f) - " + fnfe.toString());
-		}
-		catch (Exception e)
-		{
-			log.log(Level.SEVERE, "(f)", e);
-			throw new EONEException(e);
-		}
-		return false;
-	}	//	createHTML
-
-
-	public boolean createHTML (Writer writer, boolean onlyTable)
-	{
-		return createHTML(writer, onlyTable, null);
-	}
-
-	public boolean createHTML (Writer writer, boolean onlyTable, IHTMLExtension extension){
-		return createHTML (writer, onlyTable, extension, false);
-	}
-	
-
 	public boolean createHTML (Writer writer, boolean onlyTable, IHTMLExtension extension, boolean isExport)
 	{
 		try
@@ -475,47 +435,6 @@ public class ReportEngine implements PrintServiceAttributeListener
 	}	//	getPDF
 
 	
-	public File getHTML()
-	{
-		File file = null;
-		try
-		{
-			file = File.createTempFile (makePrefix(getName()), ".html");
-		}
-		catch (IOException e)
-		{
-			log.log(Level.SEVERE, "", e);
-		}
-		if (createHTML(file, false))
-			return file;
-		return null;
-	}	//	getHTML
-	
-	
-	
-	public File getXLSX()
-	{
-		File file = null;
-		try
-		{
-			file = File.createTempFile (makePrefix(getName()), ".xlsx");
-		}
-		catch (IOException e)
-		{
-			log.log(Level.SEVERE, "", e);
-		}
-		try 
-		{
-			createXLSX(file);
-			return file;
-		} 
-		catch (Exception e)
-		{
-			log.log(Level.SEVERE, "", e);
-			return null;
-		}
-	}	//	getXLSX
-	
 	/**
 	 * 	Create PDF File
 	 * 	@param file file
@@ -596,13 +515,6 @@ public class ReportEngine implements PrintServiceAttributeListener
 		return null;
 	}	//	createPDFData
 	
-	
-	public void createXLSX(File outFile)
-	throws Exception
-	{
-		PrintDataXLSXExporter exp = new PrintDataXLSXExporter(m_params, getPrintFormat());
-		exp.export(outFile, true);
-	}
 	
 	/**************************************************************************
 	 * 	Get Report Engine for process info 

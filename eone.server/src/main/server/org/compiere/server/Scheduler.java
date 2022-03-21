@@ -52,7 +52,7 @@ import eone.base.process.ServerProcessCtl;
  *  Contributors:
  *    Carlos Ruiz - globalqss - FR [3135351] - Enable Scheduler for buttons
  */
-public class Scheduler extends AdempiereServer
+public class Scheduler extends EONEServer
 {
 	/**
 	 * 	Scheduler

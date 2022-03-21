@@ -17,5 +17,7 @@
 	<classpathentry exported="true" kind="lib" path="WEB-INF/lib/timelinez.jar"/>
 	<classpathentry exported="true" kind="lib" path="WEB-INF/lib/timeplotz.jar"/>
 	<classpathentry exported="true" kind="lib" path="WEB-INF/lib/iceblue_c.jar"/>
+	<classpathentry exported="true" kind="lib" path="WEB-INF/lib/zss.jar"/>
+	<classpathentry exported="true" kind="lib" path="WEB-INF/lib/zssmodel.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

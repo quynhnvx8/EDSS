@@ -68,7 +68,9 @@ Bundle-ClassPath: .,
  WEB-INF/lib/gmapsz.jar,
  WEB-INF/lib/timelinez.jar,
  WEB-INF/lib/timeplotz.jar,
- WEB-INF/lib/iceblue_c.jar
+ WEB-INF/lib/iceblue_c.jar,
+ WEB-INF/lib/zss.jar,
+ WEB-INF/lib/zssmodel.jar
 Export-Package: eone.webui,
  eone.webui.acct,
  eone.webui.action,

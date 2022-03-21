@@ -33,7 +33,7 @@ import org.compiere.util.DB;
  *  @version $Id: MAlertProcessor.java,v 1.3 2006/07/30 00:51:03 jjanke Exp $
  */
 public class MAlertProcessor extends X_AD_AlertProcessor
-	implements AdempiereProcessor, AdempiereProcessor2
+	implements EONEProcessor, EONEProcessor2
 {
 	/**
 	 * 
@@ -110,7 +110,7 @@ public class MAlertProcessor extends X_AD_AlertProcessor
 	 * 	Get Logs
 	 *	@return logs
 	 */
-	public AdempiereProcessorLog[] getLogs ()
+	public EONEProcessorLog[] getLogs ()
 	{
 		final String whereClause ="AD_AlertProcessor_ID=?"; 
 		List <MAlertProcessorLog> list = new Query(getCtx(), I_AD_AlertProcessorLog.Table_Name,  whereClause, null)

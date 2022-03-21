@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import org.compiere.server.AdempiereServerMgr;
+import org.compiere.server.EONEServerMgr;
 import org.compiere.server.IServerManager;
 import org.compiere.server.ServerInstance;
 
@@ -54,7 +54,7 @@ public class GetAllCallable implements Callable<ServerInstance[]>, Serializable 
 	@Override
 	public ServerInstance[] call() throws Exception {		
 		List<ServerInstance> responses = new ArrayList<>();
-		IServerManager serverMgr = AdempiereServerMgr.get(false);		
+		IServerManager serverMgr = EONEServerMgr.get(false);		
 		if (serverMgr != null) {
 			ServerInstance[] servers = serverMgr.getServerInstances();
 			for (ServerInstance server : servers) {

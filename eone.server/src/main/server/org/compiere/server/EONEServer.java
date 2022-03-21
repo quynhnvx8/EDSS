@@ -24,9 +24,9 @@ import org.compiere.util.CLogger;
 import org.compiere.util.Env;
 import org.compiere.util.TimeUtil;
 
-import eone.base.model.AdempiereProcessor;
-import eone.base.model.AdempiereProcessor2;
-import eone.base.model.AdempiereProcessorLog;
+import eone.base.model.EONEProcessor;
+import eone.base.model.EONEProcessor2;
+import eone.base.model.EONEProcessorLog;
 import eone.base.model.MClient;
 import eone.base.model.MSchedule;
 import eone.base.model.MSystem;
@@ -38,7 +38,7 @@ import eone.base.model.PO;
  *  @author Jorg Janke
  *  @version $Id: AdempiereServer.java,v 1.3 2006/10/09 00:23:26 jjanke Exp $
  */
-public abstract class AdempiereServer implements Runnable 
+public abstract class EONEServer implements Runnable 
 {
 
 	/**************************************************************************
@@ -46,7 +46,7 @@ public abstract class AdempiereServer implements Runnable
 	 * 	@param model model
 	 *	@param initialNap delay time running in sec
 	 */
-	protected AdempiereServer (AdempiereProcessor model, int initialNap)
+	protected EONEServer (EONEProcessor model, int initialNap)
 	{
 		p_model = model;		
 		if (p_system == null)
@@ -66,7 +66,7 @@ public abstract class AdempiereServer implements Runnable
 	}	//	ServerBase
 
 	/**	The Processor Model						*/
-	protected	volatile AdempiereProcessor 	p_model;
+	protected	volatile EONEProcessor 	p_model;
 	/** Initial nap is seconds		*/
 	private int					m_initialNap = 0;
 
@@ -379,7 +379,7 @@ public abstract class AdempiereServer implements Runnable
 	 * 	Get Model
 	 *	@return Model
 	 */
-	public AdempiereProcessor getModel()
+	public EONEProcessor getModel()
 	{
 		return p_model;
 	}	//	getModel
@@ -435,7 +435,7 @@ public abstract class AdempiereServer implements Runnable
 	 * 	Get Processor Logs
 	 *	@return logs
 	 */
-	public AdempiereProcessorLog[] getLogs()
+	public EONEProcessorLog[] getLogs()
 	{
 		return p_model.getLogs();
 	}	//	getLogs
@@ -451,9 +451,9 @@ public abstract class AdempiereServer implements Runnable
 	}
 
 
-	public static boolean isOKtoRunOnIP(AdempiereProcessor model) {
-		if (model instanceof AdempiereProcessor2) {
-			int AD_Schedule_ID = ((AdempiereProcessor2)model).getAD_Schedule_ID();
+	public static boolean isOKtoRunOnIP(EONEProcessor model) {
+		if (model instanceof EONEProcessor2) {
+			int AD_Schedule_ID = ((EONEProcessor2)model).getAD_Schedule_ID();
 			MSchedule schedule = MSchedule.get(Env.getCtx(), AD_Schedule_ID);
 			if (!schedule.isOKtoRunOnIP())
 			{

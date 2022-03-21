@@ -43,14 +43,12 @@ import org.zkoss.zul.impl.XulElement;
 
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
-import eone.base.model.MStyle;
 import eone.webui.ClientInfo;
 import eone.webui.EONEWebUI;
 import eone.webui.LayoutUtils;
 import eone.webui.adwindow.IFieldEditorContainer;
 import eone.webui.component.Bandbox;
 import eone.webui.component.Button;
-import eone.webui.component.ComboEditorBox;
 import eone.webui.component.Datebox;
 import eone.webui.component.DatetimeBox;
 import eone.webui.component.EditorBox;
@@ -629,17 +627,7 @@ public abstract class WEditor implements EventListener<Event>, PropertyChangeLis
 	
 	protected void setLabelStyle(String style) {
 		if (label != null) {
-			if (style != null && style.toLowerCase().startsWith(MStyle.SCLASS_PREFIX)) {
-				String sclass = style.substring(MStyle.SCLASS_PREFIX.length());
-				label.setSclass(sclass);
-			} else if (style != null && style.toLowerCase().startsWith(MStyle.ZCLASS_PREFIX)) {
-				String zclass = style.substring(MStyle.ZCLASS_PREFIX.length());
-				label.setZclass(zclass);
-			} else {
-				label.setStyle(style);
-			}
-//			if (this instanceof WRadioGroupEditor)
-//				System.out.println(getComponent().getUuid() + " label stype="+label.getStyle());
+			label.setStyle(style);
 		}
 	}
 
@@ -661,30 +649,7 @@ public abstract class WEditor implements EventListener<Event>, PropertyChangeLis
 
 	protected void setFieldStyle(String style) {
 		HtmlBasedComponent component = (HtmlBasedComponent) getComponent();
-		if (style != null && style.startsWith(MStyle.SCLASS_PREFIX)) {
-			String sclass = style.substring(MStyle.SCLASS_PREFIX.length());
-			if (component instanceof EditorBox)
-				((EditorBox)component).getTextbox().setSclass(sclass);
-			else if (component instanceof ComboEditorBox)
-				((ComboEditorBox)component).getCombobox().setSclass(sclass);
-			else
-				component.setSclass(sclass);
-		} else if (style != null && style.startsWith(MStyle.ZCLASS_PREFIX)) {
-			String zclass = style.substring(MStyle.ZCLASS_PREFIX.length());
-			if (component instanceof EditorBox)
-				((EditorBox)component).getTextbox().setZclass(zclass);
-			else if (component instanceof ComboEditorBox)
-				((ComboEditorBox)component).getCombobox().setZclass(zclass);
-			else
-				component.setZclass(zclass);
-		} else {
-			if (component instanceof EditorBox)
-				((EditorBox)component).getTextbox().setStyle(style);
-			else if (component instanceof ComboEditorBox)
-				((ComboEditorBox)component).getCombobox().setStyle(style);
-			else
-				component.setStyle(style);
-		}
+		component.setStyle(style);
 	}
 	
 	/**
@@ -694,10 +659,6 @@ public abstract class WEditor implements EventListener<Event>, PropertyChangeLis
 		return true;
 	}
 
-	protected String buildStyle(int AD_Style_ID) {
-		MStyle style = MStyle.get(Env.getCtx(), AD_Style_ID);
-		return style.buildStyle(ThemeManager.getTheme(), getStyleEvaluatee());
-	}
 	
     /**
      * Stretch editor component to fill container

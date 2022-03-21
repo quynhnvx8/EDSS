@@ -34,7 +34,6 @@ import org.zkoss.zul.impl.XulElement;
 
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
-import eone.base.model.MStyle;
 import eone.base.model.MSysConfig;
 import eone.webui.ClientInfo;
 import eone.webui.LayoutUtils;
@@ -274,26 +273,7 @@ public class GridTabRowRenderer implements RowRenderer<Object[]>, RowRendererExt
 		return;
 	}
 
-	protected  void setComponentStyle(HtmlBasedComponent component, String style) {
-		if (style != null && style.startsWith(MStyle.SCLASS_PREFIX)) {
-			String sclass = style.substring(MStyle.SCLASS_PREFIX.length());
-			if (component instanceof EditorBox)
-				((EditorBox)component).getTextbox().setSclass(sclass);
-			else
-				component.setSclass(sclass);
-		} else if (style != null && style.startsWith(MStyle.ZCLASS_PREFIX)) {
-			String zclass = style.substring(MStyle.ZCLASS_PREFIX.length());
-			if (component instanceof EditorBox)
-				((EditorBox)component).getTextbox().setZclass(zclass);
-			else
-				component.setZclass(zclass);
-		} else {
-			if (component instanceof EditorBox)
-				((EditorBox)component).getTextbox().setStyle(style);
-			else
-				component.setStyle(style);
-		}
-	}
+	
 
 	/**
 	 * @param text

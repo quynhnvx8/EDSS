@@ -27,7 +27,7 @@ import java.util.Properties;
  *  @version $Id: MSchedulerLog.java,v 1.3 2006/07/30 00:51:02 jjanke Exp $
  */
 public class MSchedulerLog extends X_AD_SchedulerLog
-	implements AdempiereProcessorLog
+	implements EONEProcessorLog
 {
 	/**
 	 * 

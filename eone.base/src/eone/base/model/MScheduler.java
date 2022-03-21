@@ -37,7 +37,7 @@ import org.compiere.util.Msg;
  *    Carlos Ruiz - globalqss - FR [3135351] - Enable Scheduler for buttons
  */
 public class MScheduler extends X_AD_Scheduler
-	implements AdempiereProcessor, AdempiereProcessor2
+	implements EONEProcessor, EONEProcessor2
 {
 	/**
 	 * 
@@ -122,7 +122,7 @@ public class MScheduler extends X_AD_Scheduler
 	 * 	Get Logs
 	 *	@return logs
 	 */
-	public AdempiereProcessorLog[] getLogs ()
+	public EONEProcessorLog[] getLogs ()
 	{
 		final String whereClause = MSchedulerLog.COLUMNNAME_AD_Scheduler_ID+"=?";
 		List<MSchedulerLog> list = new Query(getCtx(), I_AD_SchedulerLog.Table_Name, whereClause, get_TrxName())
