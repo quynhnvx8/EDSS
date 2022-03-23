@@ -3,7 +3,7 @@ package eone.base.model;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-import org.compiere.util.CCache;
+import eone.util.CCache;
 
 public class MPromotionType extends X_M_PromotionType
 {

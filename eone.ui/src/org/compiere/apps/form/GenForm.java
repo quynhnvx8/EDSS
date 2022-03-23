@@ -16,10 +16,10 @@ package org.compiere.apps.form;
 import java.util.ArrayList;
 
 import org.compiere.minigrid.IMiniTable;
-import org.compiere.print.MPrintFormat;
-import org.compiere.util.Trx;
 
 import eone.base.process.ProcessInfo;
+import eone.print.MPrintFormat;
+import eone.util.Trx;
 
 /**
  * Generate custom form base class

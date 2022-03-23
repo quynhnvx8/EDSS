@@ -3,13 +3,13 @@ package eone.webui.editor;
 
 import java.util.List;
 
-import org.compiere.util.DisplayType;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 
 import eone.base.model.GridField;
+import eone.util.DisplayType;
 import eone.webui.LayoutUtils;
 import eone.webui.ValuePreference;
 import eone.webui.adwindow.ADWindow;

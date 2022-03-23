@@ -32,9 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-
 import eone.base.model.I_HR_SalaryLine;
 import eone.base.model.MConfig;
 import eone.base.model.MFamilyTies;
@@ -46,6 +43,8 @@ import eone.base.model.MTaxPersonal;
 import eone.base.model.PO;
 import eone.base.model.X_HR_Config;
 import eone.base.model.X_HR_SalaryLine;
+import eone.util.DB;
+import eone.util.Env;
 
 public class CalculateSalary extends SvrProcess {
 

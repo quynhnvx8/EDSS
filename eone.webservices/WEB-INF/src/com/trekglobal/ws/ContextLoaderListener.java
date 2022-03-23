@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package com.trekglobal.ws;
 
 import javax.servlet.ServletContextEvent;

@@ -1,9 +1,9 @@
-@Title Install idempiere Server
+@Title Install EOne Server
 @Echo off
 
 
 @REM Setup eone.properties and eoneEnv.properties
-idempiere --launcher.ini setup.ini -application eone.install.console-application
+eone --launcher.ini setup.ini -application eone.install.console-application
 
 @Echo ErrorLevel = %ERRORLEVEL%
 @IF NOT ERRORLEVEL = 1 GOTO NEXT
@@ -15,7 +15,7 @@ idempiere --launcher.ini setup.ini -application eone.install.console-application
 
 :NEXT
 @REM Setup Jetty
-idempiere --launcher.ini setup.ini -application org.eclipse.ant.core.antRunner -buildfile build.xml
+eone --launcher.ini setup.ini -application org.eclipse.ant.core.antRunner -buildfile build.xml
 
 @Echo .
 @Echo For problems, check log file in base directory

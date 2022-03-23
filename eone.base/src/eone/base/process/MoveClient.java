@@ -34,16 +34,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
-import org.compiere.db.CConnection;
-import org.compiere.util.EONEUserError;
-import org.compiere.util.DB;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Util;
-
 import eone.base.model.MColumn;
 import eone.base.model.MTable;
 import eone.base.model.Query;
+import eone.db.CConnection;
 import eone.exceptions.EONEException;
+import eone.util.DB;
+import eone.util.DisplayType;
+import eone.util.EONEUserError;
+import eone.util.Util;
 
 public class MoveClient extends SvrProcess {
 

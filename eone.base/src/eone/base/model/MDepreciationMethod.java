@@ -2,7 +2,7 @@ package eone.base.model;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-import org.compiere.util.CCache;
+import eone.util.CCache;
 
 /**
  * Method of adjusting the difference between depreciation (Calculated) and registered as (booked).

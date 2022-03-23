@@ -5,10 +5,11 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 
 import org.apache.tools.ant.Main;
-import org.compiere.util.CLogFile;
-import org.compiere.util.CLogMgt;
-import org.compiere.util.CLogger;
-import org.compiere.util.Ini;
+
+import eone.util.CLogFile;
+import eone.util.CLogMgt;
+import eone.util.CLogger;
+import eone.util.Ini;
 
 public class SilentSetup {
 

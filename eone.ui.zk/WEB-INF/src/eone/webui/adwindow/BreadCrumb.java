@@ -19,9 +19,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
-import org.compiere.util.Util;
 import org.zkoss.zk.au.out.AuScript;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -37,6 +34,9 @@ import org.zkoss.zul.Menuitem;
 
 import eone.base.model.DataStatusEvent;
 import eone.base.model.GridTab;
+import eone.util.Env;
+import eone.util.Msg;
+import eone.util.Util;
 import eone.webui.EONEWebUI;
 import eone.webui.LayoutUtils;
 import eone.webui.component.Label;

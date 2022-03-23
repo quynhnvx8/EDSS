@@ -20,8 +20,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
+import eone.util.CLogger;
+import eone.util.DB;
 
 public class SequenceCheck extends SvrProcess
 {

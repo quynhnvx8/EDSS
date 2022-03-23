@@ -1,14 +1,4 @@
-/******************************************************************************
- * This program is free software; you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY; without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program; if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- *****************************************************************************/
+
 package org.idempiere.adinterface;
 
 import java.sql.PreparedStatement;
@@ -23,18 +13,18 @@ import java.util.logging.Level;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.KeyNamePair;
-import org.compiere.util.Language;
-import org.compiere.util.Login;
-import org.compiere.util.ServerContext;
 import org.idempiere.adInterface.x10.ADLoginRequest;
 
 import eone.base.model.MSysConfig;
 import eone.base.model.MUser;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.KeyNamePair;
+import eone.util.Language;
+import eone.util.Login;
+import eone.util.ServerContext;
 
 /**
  * @author deepak
@@ -281,19 +271,7 @@ public class CompiereService {
 		Env.setContext( getCtx(), "#M_Warehouse_ID", M_Warehouse_ID );
 		Env.setContext(getCtx(), Env.LANGUAGE, m_language.getAD_Language());
 		
-		// Create session
-		/*Quynhnv.x8: Bo session luu database va lay tu database.
-		MSession session = MSession.get (getCtx(), false);
-		if (session == null){
-			log.fine("No Session found");
-			session = MSession.get (getCtx(), true);    	
-		}
-		session.setWebSession("WebService");
-		
-		session.setDescription(session.getDescription() + "\nUser Agent: " + getCtx().getProperty("#UserAgent"));
 
-		session.saveEx();
-		*/		
 		m_loggedin = true;		
 		
 		synchronized (csMap) {

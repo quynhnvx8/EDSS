@@ -18,7 +18,7 @@ package eone.install;
 
 import javax.swing.JCheckBox;
 
-import org.compiere.util.CLogger;
+import eone.util.CLogger;
 
 /**
  *	Configuration Setup and Test

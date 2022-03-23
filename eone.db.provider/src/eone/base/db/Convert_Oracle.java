@@ -2,8 +2,8 @@ package eone.base.db;
 
 import java.util.ArrayList;
 
-import org.compiere.db.Convert;
-import org.compiere.util.CLogger;
+import eone.db.Convert;
+import eone.util.CLogger;
 
 public class Convert_Oracle extends Convert {
 

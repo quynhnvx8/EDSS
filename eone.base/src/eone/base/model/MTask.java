@@ -20,9 +20,9 @@ import java.sql.ResultSet;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
-import org.compiere.util.Task;
+import eone.util.Env;
+import eone.util.Msg;
+import eone.util.Task;
 
 /**
  * 	Operating Task Model

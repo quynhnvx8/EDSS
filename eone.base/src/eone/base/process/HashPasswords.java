@@ -18,13 +18,12 @@ package eone.base.process;
 
 import java.util.List;
 
-import org.compiere.util.CacheMgt;
-
 import eone.base.model.MSysConfig;
 import eone.base.model.MTable;
 import eone.base.model.MUser;
 import eone.base.model.SystemIDs;
 import eone.exceptions.EONEException;
+import eone.util.CacheMgt;
 
 /**
  *	Hash existing passwords

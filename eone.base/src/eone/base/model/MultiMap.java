@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
+import eone.util.CLogger;
 
 /**
  *  MultiMap allows multiple keys with their values.

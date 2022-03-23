@@ -15,9 +15,9 @@ package org.idempiere.hazelcast.service;
 
 import java.net.InetAddress;
 
-import org.idempiere.distributed.IClusterMember;
-
 import com.hazelcast.core.Member;
+
+import eone.distributed.IClusterMember;
 
 /**
  * @author hengsin

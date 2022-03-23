@@ -15,13 +15,13 @@ package eone.webui.dashboard;
 
 import java.util.Properties;
 
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Center;
 import org.zkoss.zul.South;
 
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.apps.AEnv;
 import eone.webui.component.Borderlayout;
 import eone.webui.component.Column;

@@ -11,15 +11,14 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import org.compiere.EOne;
-import org.compiere.util.CLogger;
-import org.compiere.util.Ini;
-import org.compiere.util.ServerContext;
-import org.compiere.util.ServerContextURLHandler;
-
+import eone.EOne;
 import eone.base.model.ServerStateChangeEvent;
 import eone.base.model.ServerStateChangeListener;
 import eone.exceptions.EONEException;
+import eone.util.CLogger;
+import eone.util.Ini;
+import eone.util.ServerContext;
+import eone.util.ServerContextURLHandler;
 import eone.webui.session.SessionManager;
 
 public class LoggedSessionListener implements HttpSessionListener, ServletContextListener, ServerStateChangeListener{

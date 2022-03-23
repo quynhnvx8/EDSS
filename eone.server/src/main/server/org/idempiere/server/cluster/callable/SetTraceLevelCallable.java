@@ -28,8 +28,8 @@ package org.idempiere.server.cluster.callable;
 import java.io.Serializable;
 import java.util.concurrent.Callable;
 
-import org.compiere.util.CLogMgt;
-import org.compiere.util.Ini;
+import eone.util.CLogMgt;
+import eone.util.Ini;
 
 /**
  * @author hengsin

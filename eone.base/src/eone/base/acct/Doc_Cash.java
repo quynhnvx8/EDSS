@@ -20,13 +20,12 @@ import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import org.compiere.util.Env;
-
 import eone.base.model.MCash;
 import eone.base.model.MDocType;
 import eone.base.model.MElementValue;
 import eone.base.model.X_C_Cash;
 import eone.base.model.X_C_DocType;
+import eone.util.Env;
 
 /**
  *  Post Invoice Documents.

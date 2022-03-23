@@ -22,12 +22,7 @@
 		<filter-name>eoneMonitorFilter</filter-name>
 		<url-pattern>/eoneMonitor/*</url-pattern>
 	</filter-mapping>
-	<!-- <servlet>
-		<description>iDempiere Server Status Info</description>
-		<display-name>Server Status</display-name>
-		<servlet-name>StatusInfo</servlet-name>
-		<servlet-class>org.compiere.web.StatusInfo</servlet-class>
-	</servlet> -->
+	
 	<servlet>
 		<description>EONE Server Monitor</description>
 		<display-name>EONE Monitor</display-name>

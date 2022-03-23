@@ -29,7 +29,7 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.concurrent.Callable;
 
-import org.compiere.util.CLogFile;
+import eone.util.CLogFile;
 
 /**
  * @author hengsin

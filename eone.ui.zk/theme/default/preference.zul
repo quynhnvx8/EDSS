@@ -7,7 +7,7 @@
 </script>
 <zscript>
 <![CDATA[
-	import org.compiere.util.Env;
+	import eone.util.Env;
 	import eone.webui.theme.ITheme;
 	import eone.base.model.MSysConfig;
 	

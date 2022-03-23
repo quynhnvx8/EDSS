@@ -13,13 +13,13 @@
  *****************************************************************************/
 package eone.webui.desktop;
 
-import org.compiere.util.Callback;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Page;
 
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
 import eone.base.model.MQuery;
+import eone.util.Callback;
 import eone.webui.ClientInfo;
 import eone.webui.adwindow.ADWindow;
 import eone.webui.apps.ProcessDialog;

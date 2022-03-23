@@ -14,11 +14,11 @@
 
 package eone.webui.event;
 
-import org.compiere.util.WebUtil;
-import org.idempiere.broadcast.BroadCastMsg;
-import org.idempiere.broadcast.BroadCastUtil;
-import org.idempiere.broadcast.BroadcastMsgUtil;
-import org.idempiere.distributed.ITopicSubscriber;
+import eone.broadcast.BroadCastMsg;
+import eone.broadcast.BroadCastUtil;
+import eone.broadcast.BroadcastMsgUtil;
+import eone.distributed.ITopicSubscriber;
+import eone.util.WebUtil;
 /**
  * Class Manages Broadcast Messages across webui cluster
  * @author Deepak Pansheriya

@@ -7,8 +7,9 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
+
+import eone.util.CLogger;
+import eone.util.DB;
 
 
 public class MMenu extends X_AD_Menu

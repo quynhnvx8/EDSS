@@ -31,7 +31,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-import org.compiere.util.CCache;
+import eone.util.CCache;
 
 
 public class MSchedule extends X_AD_Schedule 

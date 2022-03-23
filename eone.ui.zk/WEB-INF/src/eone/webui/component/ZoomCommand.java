@@ -15,7 +15,6 @@ package eone.webui.component;
 
 import java.util.Map;
 
-import org.compiere.util.Env;
 import org.zkoss.json.JSONArray;
 import org.zkoss.lang.Objects;
 import org.zkoss.zk.au.AuRequest;
@@ -27,6 +26,7 @@ import org.zkoss.zk.ui.event.Events;
 
 import eone.base.model.MQuery;
 import eone.base.model.MWindow;
+import eone.util.Env;
 import eone.webui.event.ZoomEvent;
 
 /**

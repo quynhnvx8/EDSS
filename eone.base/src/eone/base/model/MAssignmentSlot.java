@@ -23,8 +23,8 @@ import java.util.Calendar;
 import java.util.Comparator;
 import java.util.GregorianCalendar;
 
-import org.compiere.util.Language;
-import org.compiere.util.TimeUtil;
+import eone.util.Language;
+import eone.util.TimeUtil;
 
 /**
  *	Assignment Slot.

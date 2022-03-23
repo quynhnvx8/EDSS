@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.compiere.util.KeyNamePair;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -15,6 +14,8 @@ import org.zkoss.zk.ui.event.MouseEvent;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
+
+import eone.util.KeyNamePair;
 /**
  * 
  * @author Quynhnv.x8

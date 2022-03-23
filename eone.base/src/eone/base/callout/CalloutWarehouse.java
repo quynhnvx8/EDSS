@@ -3,12 +3,11 @@ package eone.base.callout;
 
 import java.util.Properties;
 
-import org.compiere.util.Env;
-
 import eone.base.model.CalloutEngine;
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
 import eone.base.model.MWarehouse;
+import eone.util.Env;
 
 //eone.base.model.CalloutWarehouse.setWarehouseDefault
 public class CalloutWarehouse extends CalloutEngine

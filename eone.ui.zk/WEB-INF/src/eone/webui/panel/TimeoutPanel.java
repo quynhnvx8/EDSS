@@ -14,8 +14,6 @@
 
 package eone.webui.panel;
 
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.zkoss.zhtml.Script;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
@@ -32,6 +30,8 @@ import org.zkoss.zul.Timer;
 import org.zkoss.zul.Vlayout;
 import org.zkoss.zul.Window;
 
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.session.SessionManager;
 import eone.webui.util.ZKUpdateUtil;
 /**

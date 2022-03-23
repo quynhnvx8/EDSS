@@ -1,16 +1,4 @@
-/******************************************************************************
- * Copyright (C) 2012 Trek Global                                             *
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * This program is free software; you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY; without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program; if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- *****************************************************************************/
+
 package com.trekglobal.ws;
 
 import java.util.ArrayList;
@@ -18,8 +6,6 @@ import java.util.logging.Level;
 
 import javax.jws.WebService;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Trx;
 import org.idempiere.adInterface.x10.ADLoginRequest;
 import org.idempiere.adInterface.x10.CompositeRequest;
 import org.idempiere.adInterface.x10.CompositeRequestDocument;
@@ -39,6 +25,9 @@ import org.idempiere.adInterface.x10.StandardResponseDocument;
 import org.idempiere.adInterface.x10.WindowTabDataDocument;
 import org.idempiere.adinterface.ModelADServiceImpl;
 import org.idempiere.webservices.AbstractService;
+
+import eone.util.CLogger;
+import eone.util.Trx;
 
 
 /**

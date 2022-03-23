@@ -32,9 +32,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-import org.compiere.EOne;
-import org.compiere.util.CLogFile;
-import org.compiere.util.CLogger;
+import eone.EOne;
+import eone.util.CLogFile;
+import eone.util.CLogger;
 
 /**
  * @author hengsin

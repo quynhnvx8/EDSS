@@ -20,10 +20,10 @@ package eone.webui.session;
 import java.lang.ref.WeakReference;
 import java.util.Properties;
 
-import org.compiere.util.Env;
 import org.zkoss.zk.ui.Desktop;
 
 import eone.base.model.MUser;
+import eone.util.Env;
 import eone.webui.IWebClient;
 import eone.webui.apps.AEnv;
 import eone.webui.desktop.IDesktop;

@@ -15,11 +15,10 @@ package eone.exceptions;
 
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Msg;
-
 import eone.base.model.PO;
 import eone.exceptions.EONEException;
+import eone.util.CLogger;
+import eone.util.Msg;
 
 /**
  * 

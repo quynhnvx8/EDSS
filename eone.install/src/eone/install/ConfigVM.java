@@ -19,7 +19,7 @@ package eone.install;
 import java.io.File;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogMgt;
+import eone.util.CLogMgt;
 
 
 /**

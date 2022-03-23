@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="org.adempiere.base.DefaultColumnCalloutFactory">
-   <implementation class="org.adempiere.base.DefaultColumnCalloutFactory"/>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="eone.base.DefaultColumnCalloutFactory">
+   <implementation class="eone.base.DefaultColumnCalloutFactory"/>
    <service>
-      <provide interface="org.adempiere.base.IColumnCalloutFactory"/>
+      <provide interface="eone.base.IColumnCalloutFactory"/>
    </service>
 </scr:component>

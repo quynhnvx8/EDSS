@@ -2,13 +2,12 @@ package eone.base.process;
 
 import java.util.logging.Level;
 
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
-
 import eone.base.model.MSysConfig;
 import eone.base.model.MUser;
 import eone.exceptions.EONEException;
+import eone.util.DB;
+import eone.util.Env;
+import eone.util.Msg;
 
 public class ResetLockedAccount extends SvrProcess {
 

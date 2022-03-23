@@ -16,6 +16,7 @@
  *****************************************************************************/
 package org.compiere.print;
 
+import eone.print.ReportEngine;
 
 /**
  * 

@@ -24,13 +24,12 @@ import java.util.Iterator;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
-
 import bsh.EvalError;
 import bsh.Interpreter;
 import bsh.ParseException;
 import bsh.Parser;
+import eone.util.CLogger;
+import eone.util.Env;
 
 /**
  *  Script Model

@@ -20,11 +20,10 @@ package eone.base.callout;
 import java.math.BigDecimal;
 import java.util.Properties;
 
-import org.compiere.util.Env;
-
 import eone.base.model.CalloutEngine;
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
+import eone.util.Env;
 
 /**
  *	Inventory Movement Callouts

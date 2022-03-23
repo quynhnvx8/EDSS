@@ -9,15 +9,14 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.EONEUserError;
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.Util;
-
 import eone.base.process.DocAction;
 import eone.base.process.DocumentEngine;
 import eone.exceptions.EONEException;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.EONEUserError;
+import eone.util.Env;
+import eone.util.Util;
 
 public class MProduction extends X_M_Production implements DocAction {
 	/**

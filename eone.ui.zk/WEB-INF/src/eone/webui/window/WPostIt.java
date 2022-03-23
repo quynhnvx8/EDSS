@@ -15,8 +15,6 @@ package eone.webui.window;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.compiere.util.Env;
-import org.compiere.util.Language;
 import org.zkforge.ckez.CKeditor;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -24,6 +22,8 @@ import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Separator;
 
 import eone.base.model.MPostIt;
+import eone.util.Env;
+import eone.util.Language;
 import eone.webui.ClientInfo;
 import eone.webui.component.ConfirmPanel;
 import eone.webui.component.Label;

@@ -15,8 +15,7 @@ package eone.webui.adwindow;
 
 import java.util.Collection;
 
-import org.compiere.util.Callback;
-
+import eone.util.Callback;
 import eone.webui.editor.WEditor;
 
 /**

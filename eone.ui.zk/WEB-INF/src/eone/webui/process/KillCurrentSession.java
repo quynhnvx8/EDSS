@@ -14,12 +14,11 @@
 
 package eone.webui.process;
 
-import org.idempiere.broadcast.BroadCastMsg;
-import org.idempiere.broadcast.BroadCastUtil;
-import org.idempiere.broadcast.BroadcastMsgUtil;
-
 import eone.base.process.ProcessInfoParameter;
 import eone.base.process.SvrProcess;
+import eone.broadcast.BroadCastMsg;
+import eone.broadcast.BroadCastUtil;
+import eone.broadcast.BroadcastMsgUtil;
 
 /**
  * 

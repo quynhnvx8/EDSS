@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Properties;
 
-import org.compiere.util.DB;
+import eone.util.DB;
 
 
 public class MField extends X_AD_Field

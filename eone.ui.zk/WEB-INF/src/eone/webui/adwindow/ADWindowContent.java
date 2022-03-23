@@ -25,8 +25,6 @@ package eone.webui.adwindow;
 
 import java.util.Properties;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Callback;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.event.Event;
@@ -37,6 +35,8 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Vlayout;
 
+import eone.util.CLogger;
+import eone.util.Callback;
 import eone.webui.LayoutUtils;
 import eone.webui.component.Tabpanel;
 import eone.webui.panel.IHelpContext;

@@ -15,8 +15,7 @@ package eone.webui.apps;
 
 import java.util.List;
 
-import org.adempiere.apps.graph.GraphColumn;
-
+import eone.apps.graph.GraphColumn;
 import eone.base.model.MGoal;
 
 /**

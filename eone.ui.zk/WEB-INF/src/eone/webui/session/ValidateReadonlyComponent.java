@@ -16,8 +16,6 @@ package eone.webui.session;
 
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
 import org.zkoss.zk.au.AuRequest;
 import org.zkoss.zk.au.AuService;
 import org.zkoss.zk.ui.Component;
@@ -28,6 +26,9 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.impl.InputElement;
+
+import eone.util.CLogger;
+import eone.util.Env;
 
 
 /**

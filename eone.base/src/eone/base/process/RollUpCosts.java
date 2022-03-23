@@ -3,8 +3,8 @@ package eone.base.process;
 import java.util.HashSet;
 import java.util.logging.Level;
 
-import org.compiere.util.DB;
-import org.compiere.util.Env;
+import eone.util.DB;
+import eone.util.Env;
 
 public class RollUpCosts extends SvrProcess {
 

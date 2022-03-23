@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
-import org.compiere.util.Util;
 import org.zkoss.zk.au.out.AuScript;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -33,6 +30,9 @@ import org.zkoss.zul.impl.LabelElement;
 import org.zkoss.zul.impl.LabelImageElement;
 
 import eone.base.model.MTreeNode;
+import eone.util.Env;
+import eone.util.Msg;
+import eone.util.Util;
 import eone.webui.ClientInfo;
 import eone.webui.apps.AEnv;
 import eone.webui.component.AutoComplete;

@@ -5,12 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.compiere.util.Callback;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
+
+import eone.util.Callback;
 
 public class WindowValidatorManager implements BundleActivator, ServiceTrackerCustomizer<WindowValidator, WindowValidator> {
 

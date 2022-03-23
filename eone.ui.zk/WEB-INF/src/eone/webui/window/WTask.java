@@ -18,9 +18,6 @@ package eone.webui.window;
 
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.zkoss.zk.ui.DesktopUnavailableException;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
@@ -33,6 +30,9 @@ import org.zkoss.zul.Html;
 import org.zkoss.zul.South;
 
 import eone.base.model.MTask;
+import eone.util.CLogger;
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.component.ConfirmPanel;
 import eone.webui.component.Window;
 import eone.webui.panel.IHelpContext;

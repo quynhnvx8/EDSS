@@ -1,24 +1,10 @@
-/******************************************************************************
- * Product: Adempiere ERP & CRM Smart Business Solution                       *
- * This program is free software; you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY; without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program; if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- *****************************************************************************/
+
 package eone.base.callout;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
-
-import org.compiere.util.DB;
-import org.compiere.util.DisplayType;
 
 import eone.base.model.CalloutEngine;
 import eone.base.model.GridField;
@@ -29,21 +15,18 @@ import eone.base.model.MColumn;
 import eone.base.model.M_Element;
 import eone.base.model.PO;
 import eone.exceptions.DBException;
+import eone.util.DB;
+import eone.util.DisplayType;
 
-/**
- * @author teo_sarca
- * 
- * @author Carlos Ruiz - globalqss - IDEMPIERE-1011 Improve usability of Table window 
- */
+
 public class Callout_AD_Column extends CalloutEngine
 {
 	public String columnName (Properties ctx, int WindowNo, GridTab mTab, GridField mField, Object value)
-	{ // IDEMPIERE-1011 - dup code on MColumn.setmartDefaults
+	{ 
 		I_AD_Column column = GridTabWrapper.create(mTab, I_AD_Column.class);
 		if (MColumn.isSuggestSelectionColumn(column.getColumnName(), true))
 			column.setIsSelectionColumn(true);
 
-		// IDEMPIERE-1011
 		if (PO.getUUIDColumnName(column.getAD_Table().getTableName()).equals(column.getColumnName())) {
 			// UUID column
 			column.setAD_Reference_ID(DisplayType.String);
@@ -140,7 +123,6 @@ public class Callout_AD_Column extends CalloutEngine
 
 	public String element (Properties ctx, int WindowNo, GridTab mTab, GridField mField, Object value)
 	{
-		// IDEMPIERE-1011
 		I_AD_Column column = GridTabWrapper.create(mTab, I_AD_Column.class);
 		if (column.getAD_Element_ID() > 0) {
 			M_Element element = new M_Element(ctx, column.getAD_Element_ID(), null);

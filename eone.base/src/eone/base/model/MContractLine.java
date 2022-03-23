@@ -19,7 +19,7 @@ package eone.base.model;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-import org.compiere.util.DB;
+import eone.util.DB;
 
 /**
  * 	Project Line Model

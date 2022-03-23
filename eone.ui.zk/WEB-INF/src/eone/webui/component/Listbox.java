@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.compiere.util.KeyNamePair;
-import org.compiere.util.ValueNamePair;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Listitem;
+
+import eone.util.KeyNamePair;
+import eone.util.ValueNamePair;
 
 
 public class Listbox extends org.zkoss.zul.Listbox implements EventListener<Event>

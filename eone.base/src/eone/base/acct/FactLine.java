@@ -4,10 +4,9 @@ package eone.base.acct;
 import java.math.BigDecimal;
 import java.util.Properties;
 
-import org.compiere.util.Env;
-
 import eone.base.model.MElementValue;
 import eone.base.model.X_Fact_Acct;
+import eone.util.Env;
 
 
 public final class FactLine extends X_Fact_Acct

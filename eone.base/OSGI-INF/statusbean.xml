@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="org.compiere.interfaces.StatusBean">
-   <implementation class="org.compiere.interfaces.StatusBean"/>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="eone.interfaces.StatusBean">
+   <implementation class="eone.interfaces.StatusBean"/>
    <service>
-      <provide interface="org.compiere.interfaces.Status"/>
+      <provide interface="eone.interfaces.Status"/>
    </service>
 </scr:component>

@@ -13,11 +13,11 @@
  *****************************************************************************/
 package eone.webui.apps;
 
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Span;
 
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.LayoutUtils;
 import eone.webui.component.Label;
 import eone.webui.component.Window;

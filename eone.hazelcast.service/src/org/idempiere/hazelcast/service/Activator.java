@@ -21,8 +21,6 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Enumeration;
 
-import org.compiere.EOne;
-import org.compiere.util.CLogger;
 import org.eclipse.osgi.framework.console.CommandProvider;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -34,8 +32,10 @@ import com.hazelcast.config.UrlXmlConfig;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 
+import eone.EOne;
 import eone.base.model.ServerStateChangeEvent;
 import eone.base.model.ServerStateChangeListener;
+import eone.util.CLogger;
 
 /**
  * 

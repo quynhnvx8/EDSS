@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
-import org.compiere.util.TimeUtil;
+import eone.util.DB;
+import eone.util.Env;
+import eone.util.Msg;
+import eone.util.TimeUtil;
 
 public class MWorking extends X_HR_Working
 {

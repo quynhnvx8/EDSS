@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Properties;
 
-import org.compiere.util.Env;
+import eone.util.Env;
 
 /**
  * @author hengsin

@@ -24,10 +24,9 @@
  **********************************************************************/
 package eone.webui.component;
 
-import org.compiere.util.Env;
-import org.compiere.util.Language;
-
 import eone.base.model.MLanguage;
+import eone.util.Env;
+import eone.util.Language;
 
 public class Timebox extends org.zkoss.zul.Timebox
 {

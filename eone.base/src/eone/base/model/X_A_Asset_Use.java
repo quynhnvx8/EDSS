@@ -20,7 +20,8 @@ package eone.base.model;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
-import org.compiere.util.KeyNamePair;
+
+import eone.util.KeyNamePair;
 
 /** Generated Model for A_Asset_Use
  *  @author iDempiere (generated) 

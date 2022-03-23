@@ -4,7 +4,7 @@ package eone.base.model;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-import org.compiere.util.Env;
+import eone.util.Env;
 
 
 public class MInvoiceTax extends X_C_InvoiceTax

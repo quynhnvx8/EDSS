@@ -17,9 +17,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import org.compiere.util.DisplayType;
-import org.compiere.util.Msg;
-import org.compiere.util.Util;
+import eone.util.DisplayType;
+import eone.util.Msg;
+import eone.util.Util;
 
 /**
  * Export excel from ArrayList of data

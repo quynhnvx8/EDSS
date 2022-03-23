@@ -18,7 +18,8 @@ package eone.base.model;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import org.compiere.util.KeyNamePair;
+
+import eone.util.KeyNamePair;
 
 /** Generated Interface for A_Asset_Use
  *  @author iDempiere (generated) 

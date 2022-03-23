@@ -23,12 +23,11 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.CCache;
-import org.compiere.util.DB;
-import org.compiere.util.Msg;
-
 import eone.base.process.DocAction;
 import eone.base.process.DocumentEngine;
+import eone.util.CCache;
+import eone.util.DB;
+import eone.util.Msg;
 
 /**
  *  Physical Inventory Model

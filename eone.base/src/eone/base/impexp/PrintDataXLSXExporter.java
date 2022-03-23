@@ -28,19 +28,19 @@ import org.apache.poi.xssf.usermodel.XSSFRichTextString;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.compiere.print.MPrintFormat;
-import org.compiere.print.MPrintFormatItem;
-import org.compiere.print.MPrintPaper;
-import org.compiere.print.PrintDataItem;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.Ini;
-import org.compiere.util.Language;
-import org.compiere.util.Msg;
-import org.compiere.util.Util;
 
 import eone.base.model.MSysConfig;
 import eone.base.process.ProcessInfo;
+import eone.print.MPrintFormat;
+import eone.print.MPrintFormatItem;
+import eone.print.MPrintPaper;
+import eone.print.PrintDataItem;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.Ini;
+import eone.util.Language;
+import eone.util.Msg;
+import eone.util.Util;
 
 public class PrintDataXLSXExporter
 {
@@ -49,7 +49,7 @@ public class PrintDataXLSXExporter
 	int columnCount = 0;
 	int windowNo;
 	ProcessInfo info = null;
-	private static float [] widthTable = null;
+	//private static float [] widthTable = null;
 	private static MPrintFormatItem [] items = null;
 	
 	private XSSFWorkbook					m_workbook;
@@ -68,7 +68,7 @@ public class PrintDataXLSXExporter
 		windowNo = (int)m_params.get("WindowNo");
 		columnCount = info.getColumnCountQuery();
 		dataQuery = info.getDataQueryC();
-		widthTable = info.getWidthTable();
+		//widthTable = info.getWidthTable();
 		m_workbook = new XSSFWorkbook();
 		m_params.clear();
 		

@@ -3,11 +3,12 @@ package org.adempiere.server;
 import java.io.File;
 import java.util.Properties;
 
-import org.compiere.EOne;
-import org.compiere.util.Ini;
-import org.compiere.util.ServerContext;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
+
+import eone.EOne;
+import eone.util.Ini;
+import eone.util.ServerContext;
 
 
 public class Application implements IApplication {

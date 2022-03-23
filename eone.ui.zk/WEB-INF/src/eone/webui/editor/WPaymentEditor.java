@@ -15,11 +15,6 @@ package eone.webui.editor;
 
 import javax.swing.event.ListDataListener;
 
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.KeyNamePair;
-import org.compiere.util.NamePair;
-import org.compiere.util.ValueNamePair;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Comboitem;
@@ -27,6 +22,11 @@ import org.zkoss.zul.Comboitem;
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
 import eone.base.model.MPaymentLookup;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.KeyNamePair;
+import eone.util.NamePair;
+import eone.util.ValueNamePair;
 import eone.webui.ValuePreference;
 import eone.webui.component.Paymentbox;
 import eone.webui.event.ContextMenuEvent;

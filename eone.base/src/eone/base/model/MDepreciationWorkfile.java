@@ -7,9 +7,10 @@ import java.util.Properties;
 import java.util.logging.Level;
 
 import org.apache.commons.collections.keyvalue.MultiKey;
-import org.compiere.util.CCache;
-import org.compiere.util.CLogger;
-import org.compiere.util.TimeUtil;
+
+import eone.util.CCache;
+import eone.util.CLogger;
+import eone.util.TimeUtil;
 
 
 /**

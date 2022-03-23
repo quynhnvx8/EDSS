@@ -23,11 +23,11 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogMgt;
-import org.compiere.util.DB;
-import org.compiere.util.DisplayType;
-import org.compiere.util.KeyNamePair;
-import org.compiere.util.NamePair;
+import eone.util.CLogMgt;
+import eone.util.DB;
+import eone.util.DisplayType;
+import eone.util.KeyNamePair;
+import eone.util.NamePair;
 
 /**
  *	Product Attribute Lookup Model (not Cached)

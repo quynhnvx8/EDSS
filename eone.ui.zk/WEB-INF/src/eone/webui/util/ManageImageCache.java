@@ -29,14 +29,14 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.logging.Level;
 
-import org.adempiere.base.Core;
-import org.compiere.util.CCache;
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
 import org.zkoss.image.AImage;
 import org.zkoss.image.Image;
 
+import eone.base.Core;
 import eone.base.model.MImage;
+import eone.util.CCache;
+import eone.util.CLogger;
+import eone.util.Env;
 
 /**
  * Normal image can come from inside system or from outside system.

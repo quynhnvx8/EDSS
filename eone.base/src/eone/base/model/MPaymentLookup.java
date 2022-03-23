@@ -23,12 +23,12 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.DB;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.NamePair;
-import org.compiere.util.Util;
-import org.compiere.util.ValueNamePair;
+import eone.util.DB;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.NamePair;
+import eone.util.Util;
+import eone.util.ValueNamePair;
 
 /**
  * 

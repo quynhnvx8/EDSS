@@ -22,10 +22,10 @@ import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.compiere.db.Convert_SQL92;
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
-import org.compiere.util.Util;
+import eone.db.Convert_SQL92;
+import eone.util.CLogger;
+import eone.util.Env;
+import eone.util.Util;
 
 /**
  * Convert Oracle SQL to PostgreSQL SQL

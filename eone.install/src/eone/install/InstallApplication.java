@@ -22,8 +22,9 @@ public class InstallApplication implements IApplication {
 		while (Setup.instance.isDisplayable()) {
 			Thread.sleep(2000);//2000
 		}
-		String path = System.getProperty("user.dir") + "/eone.install/build.xml";
+		String path = System.getProperty("user.dir") + File.separator + "eone.install" + File.separator + "build.xml";
 		File file = new File(path);
+		System.out.println("ifile="+path+" exists="+file.exists());
 		if (file.exists()) {
 			AntRunner runner = new AntRunner();
 			runner.setBuildFileLocation(path);

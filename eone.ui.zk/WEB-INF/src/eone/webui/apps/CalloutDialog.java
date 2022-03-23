@@ -14,11 +14,11 @@
  
 package eone.webui.apps;
 
-import org.compiere.util.Callback;
-import org.compiere.util.ICalloutUI;
 import org.zkoss.zk.ui.Desktop;
 
 import eone.base.model.MLookup;
+import eone.util.Callback;
+import eone.util.ICalloutUI;
 import eone.webui.window.FDialog;
 
 /**

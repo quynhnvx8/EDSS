@@ -14,17 +14,16 @@ import java.util.logging.Level;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
-import org.compiere.util.AesBase64Wrapper;
-import org.compiere.util.CCache;
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.EMail;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
-import org.compiere.util.SecureEngine;
-import org.compiere.util.Util;
-
 import eone.exceptions.DBException;
+import eone.util.AesBase64Wrapper;
+import eone.util.CCache;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.EMail;
+import eone.util.Env;
+import eone.util.Msg;
+import eone.util.SecureEngine;
+import eone.util.Util;
 
 
 public class MUser extends X_AD_User

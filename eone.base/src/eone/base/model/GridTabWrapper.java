@@ -20,8 +20,8 @@ import java.math.BigDecimal;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
+import eone.util.CLogger;
+import eone.util.Env;
 
 /**
  * Wrap GridTab to ADempiere Bean Interface (i.e. generated interfaces).

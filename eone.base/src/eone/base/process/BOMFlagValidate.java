@@ -5,10 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-
 import eone.base.model.MProduct;
+import eone.util.DB;
+import eone.util.Env;
 
 
 public class BOMFlagValidate extends SvrProcess {

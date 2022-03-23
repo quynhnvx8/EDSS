@@ -5,8 +5,8 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Properties;
 
-import org.compiere.util.CCache;
-import org.compiere.util.TimeUtil;
+import eone.util.CCache;
+import eone.util.TimeUtil;
 
 public class MTimekeeperLine extends X_HR_TimekeeperLine
 {

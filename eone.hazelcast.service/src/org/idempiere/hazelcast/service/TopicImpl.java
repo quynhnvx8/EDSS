@@ -18,11 +18,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.idempiere.distributed.ITopic;
-import org.idempiere.distributed.ITopicSubscriber;
-
 import com.hazelcast.core.Message;
 import com.hazelcast.core.MessageListener;
+
+import eone.distributed.ITopic;
+import eone.distributed.ITopicSubscriber;
 
 /**
  * @author hengsin

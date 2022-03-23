@@ -20,9 +20,6 @@ import java.util.Map;
 
 import javax.swing.table.AbstractTableModel;
 
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
@@ -35,6 +32,9 @@ import eone.base.model.GridField;
 import eone.base.model.GridTab;
 import eone.base.model.GridTable;
 import eone.base.model.MSysConfig;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.component.Label;
 import eone.webui.component.ListHead;
 import eone.webui.component.ListHeader;

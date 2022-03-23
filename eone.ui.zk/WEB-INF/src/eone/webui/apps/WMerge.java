@@ -19,10 +19,6 @@ package eone.webui.apps;
 import java.util.logging.Level;
 
 import org.compiere.apps.form.Merge;
-import org.compiere.util.Callback;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.zkoss.zk.au.out.AuEcho;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -33,6 +29,10 @@ import org.zkoss.zul.South;
 
 import eone.base.model.Lookup;
 import eone.base.model.MLookupFactory;
+import eone.util.Callback;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.component.ConfirmPanel;
 import eone.webui.component.Grid;
 import eone.webui.component.GridFactory;

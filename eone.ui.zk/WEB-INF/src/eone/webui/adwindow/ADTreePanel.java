@@ -2,7 +2,6 @@
 package eone.webui.adwindow;
 
 
-import org.compiere.util.Env;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
@@ -12,6 +11,7 @@ import org.zkoss.zul.Panelchildren;
 import org.zkoss.zul.Toolbar;
 import org.zkoss.zul.Tree;
 
+import eone.util.Env;
 import eone.webui.EONEWebUI;
 import eone.webui.component.SimpleTreeModel;
 import eone.webui.component.ToolBarButton;

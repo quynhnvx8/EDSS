@@ -1,10 +1,3 @@
-// Usage:   WinEnv IDEMPIERE_HOME JAVA_HOME
-// Example: WinEnv C:\Adempiere C:\Program Files\Java\jdk1.5.0_05
-// Example: cscript WinEnv.js C:\Adempiere C:\Program Files\Java\jdk1.5.0_05
-//
-// WinEnv.js - Set up Windows Environment
-
-// $Id: WinEnv.js,v 1.1 2006/04/21 18:06:56 jjanke Exp $
 
 
 // Get Objects
@@ -15,8 +8,8 @@ var SysEnv = Shell.Environment("SYSTEM");
 
 if (Args.length != 2)
 {
-  WScript.Echo("Usage: cscript WinEnv.js IDEMPIERE_HOME JAVA_HOME"
-	+ "\nExample:\ncscript WinEnv.js C:\\Adempiere \"C:\\Program Files\\Java\\jdk1.5.0_05\"");
+  WScript.Echo("Usage: cscript WinEnv.js EONE_HOME JAVA_HOME"
+	+ "\nExample:\ncscript WinEnv.js C:\\EONE \"C:\\Program Files\\Java\\jdk1.5.0_05\"");
   WScript.Quit (1);
 }
 
@@ -47,23 +40,21 @@ else
   WScript.Echo ("Path is OK = " + SysEnv("PATH"));
 
 
-// Create Adempiere.exe Shortcut
-// http://msdn.microsoft.com/library/default.asp?url=/library/en-us/script56/html/wsMthCreateShortcut.asp
-var link = Shell.CreateShortcut(DesktopPath + "\\Adempiere.lnk");
-link.TargetPath = Args(0) + "\\lib\\Adempiere.exe";
+var link = Shell.CreateShortcut(DesktopPath + "\\eone.lnk");
+link.TargetPath = Args(0) + "\\lib\\eone.exe";
 link.Arguments = "-debug";
-link.Description = "Adempiere Client";
-link.IconLocation = Args(0) + "\\lib\\Adempiere.exe,0";
+link.Description = "EONE Client";
+link.IconLocation = Args(0) + "\\lib\\eone.exe,0";
 link.WorkingDirectory = Args(0);
 link.WindowStyle = 3;
 link.HotKey = "CTRL+ALT+SHIFT+C";
 link.Save();
-WScript.Echo ("Created Shortcut Adempiere.lnk");
+WScript.Echo ("Created Shortcut eone.lnk");
 
 // Create Web Site Shortcut
-var urlLink = Shell.CreateShortcut(DesktopPath + "\\Adempiere Web Site.url");
-urlLink.TargetPath = "http://www.adempiere.org";
+var urlLink = Shell.CreateShortcut(DesktopPath + "\\EONE Web Site.url");
+urlLink.TargetPath = "";
 urlLink.Save();
-WScript.Echo ("Created Shortcut Adempiere Web Site.url");
+WScript.Echo ("Created Shortcut EONE Web Site.url");
 
 WScript.Echo ("Done");

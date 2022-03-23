@@ -8,7 +8,6 @@ import java.util.LinkedList;
 import name.fraser.neil.plaintext.diff_match_patch;
 import name.fraser.neil.plaintext.diff_match_patch.Diff;
 
-import org.compiere.util.Env;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
@@ -22,6 +21,7 @@ import org.zkoss.zul.Vlayout;
 
 import eone.base.model.GridTab;
 import eone.base.model.MField;
+import eone.util.Env;
 import eone.webui.adwindow.ADWindow;
 import eone.webui.component.Column;
 import eone.webui.component.Columns;

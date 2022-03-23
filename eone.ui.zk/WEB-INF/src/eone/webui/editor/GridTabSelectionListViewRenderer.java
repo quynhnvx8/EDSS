@@ -18,7 +18,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.compiere.util.DisplayType;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
@@ -29,6 +28,7 @@ import org.zkoss.zul.RendererCtrl;
 
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
+import eone.util.DisplayType;
 import eone.webui.component.ListCell;
 import eone.webui.component.ListItem;
 

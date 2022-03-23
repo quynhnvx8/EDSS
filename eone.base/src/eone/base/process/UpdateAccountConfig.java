@@ -2,13 +2,12 @@ package eone.base.process;
 
 import java.util.List;
 
-import org.compiere.util.DB;
-
 import eone.base.model.MAccount;
 import eone.base.model.MColumn;
 import eone.base.model.MDocType;
 import eone.base.model.MTable;
 import eone.base.model.X_C_Account;
+import eone.util.DB;
 
 //eone.base.process.UpdateAccountConfig
 public class UpdateAccountConfig extends SvrProcess

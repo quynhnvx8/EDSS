@@ -15,9 +15,6 @@ package eone.webui.dashboard;
 
 import java.util.List;
 
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
-import org.compiere.util.Util;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -28,6 +25,9 @@ import org.zkoss.zul.Vbox;
 import eone.base.model.MInfoWindow;
 import eone.base.model.MSysConfig;
 import eone.base.model.Query;
+import eone.util.Env;
+import eone.util.Msg;
+import eone.util.Util;
 import eone.webui.LayoutUtils;
 import eone.webui.component.ToolBarButton;
 import eone.webui.session.SessionManager;

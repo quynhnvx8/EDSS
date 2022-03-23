@@ -17,10 +17,10 @@
 
 package eone.report.jasper;
 
-import org.adempiere.base.event.EventManager;
-import org.adempiere.base.event.EventProperty;
 import org.osgi.service.event.Event;
 
+import eone.base.event.EventManager;
+import eone.base.event.EventProperty;
 import eone.base.process.ProcessInfo;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.export.SimpleExporterConfiguration;

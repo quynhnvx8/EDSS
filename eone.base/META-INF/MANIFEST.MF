@@ -18,29 +18,28 @@ Export-Package: bsh,
  bsh.servlet,
  bsh.util,
  com.akunagroup.uk.postcode,
+ eone,
+ eone.apps.graph,
+ eone.base,
  eone.base.acct,
  eone.base.callout,
+ eone.base.equinox,
+ eone.base.event,
  eone.base.impexp,
  eone.base.model,
  eone.base.process,
+ eone.broadcast,
+ eone.cache,
+ eone.db,
+ eone.distributed,
  eone.exceptions,
- it.sauronsoftware.cron4j,
- org.adempiere.apps.graph,
- org.adempiere.base,
- org.adempiere.base.equinox,
- org.adempiere.base.event,
- org.adempiere.pdf,
- org.compiere,
- org.compiere.db,
- org.compiere.install,
- org.compiere.interfaces,
- org.compiere.print,
- org.compiere.report,
- org.compiere.tools,
- org.compiere.util,
- org.idempiere.broadcast,
- org.idempiere.cache,
- org.idempiere.distributed
+ eone.interfaces,
+ eone.pdf,
+ eone.print,
+ eone.report,
+ eone.tools,
+ eone.util,
+ it.sauronsoftware.cron4j
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version>=11))"
 Import-Package: com.google.zxing,
@@ -86,7 +85,7 @@ Import-Package: com.google.zxing,
  org.osgi.util.tracker;version="1.5.0"
 Eclipse-BuddyPolicy: registered
 Eclipse-ExtensibleAPI: true
-Bundle-Activator: org.adempiere.base.BaseActivator
+Bundle-Activator: eone.base.BaseActivator
 Service-Component: OSGI-INF/*.xml
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.equinox.app;bundle-version="0.0.0",

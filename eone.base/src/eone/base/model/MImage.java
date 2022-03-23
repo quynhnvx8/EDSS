@@ -16,10 +16,10 @@ import java.util.logging.Level;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-import org.adempiere.base.Core;
-import org.compiere.util.Env;
-import org.idempiere.cache.ImmutableIntPOCache;
-import org.idempiere.cache.ImmutablePOSupport;
+import eone.base.Core;
+import eone.cache.ImmutableIntPOCache;
+import eone.cache.ImmutablePOSupport;
+import eone.util.Env;
 
 /**
  *  Image Model

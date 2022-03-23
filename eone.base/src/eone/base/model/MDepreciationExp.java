@@ -5,8 +5,8 @@ import java.math.RoundingMode;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-import org.compiere.util.Env;
-import org.compiere.util.TimeUtil;
+import eone.util.Env;
+import eone.util.TimeUtil;
 
 
 public class MDepreciationExp extends X_A_Depreciation_Exp

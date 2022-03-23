@@ -21,10 +21,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-import org.compiere.util.Env;
-
 import eone.base.model.MInventory;
 import eone.base.model.MInventoryLine;
+import eone.util.Env;
 
 /**
  *  Post Inventory Documents.

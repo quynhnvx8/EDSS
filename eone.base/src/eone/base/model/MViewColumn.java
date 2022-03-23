@@ -19,9 +19,9 @@ package eone.base.model;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-import org.compiere.db.Database;
-import org.compiere.util.Msg;
-import org.compiere.util.Util;
+import eone.db.Database;
+import eone.util.Msg;
+import eone.util.Util;
 
 
 public class MViewColumn extends X_AD_ViewColumn {

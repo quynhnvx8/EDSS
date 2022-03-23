@@ -15,15 +15,14 @@ package eone.webui.util;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.adempiere.base.Core;
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
-import org.compiere.util.Trx;
-
+import eone.base.Core;
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
 import eone.base.model.GridTable;
 import eone.exceptions.EONEException;
+import eone.util.CLogger;
+import eone.util.Env;
+import eone.util.Trx;
 import eone.webui.editor.WEditor;
 import eone.webui.event.ValueChangeEvent;
 import eone.webui.event.ValueChangeListener;

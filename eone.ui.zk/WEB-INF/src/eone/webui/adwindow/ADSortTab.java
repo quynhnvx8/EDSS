@@ -25,12 +25,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.KeyNamePair;
-import org.compiere.util.Msg;
-import org.compiere.util.NamePair;
 import org.zkoss.zk.au.out.AuFocus;
 import org.zkoss.zk.ui.event.DropEvent;
 import org.zkoss.zk.ui.event.Event;
@@ -41,6 +35,12 @@ import org.zkoss.zul.Hlayout;
 import org.zkoss.zul.event.ListDataEvent;
 
 import eone.base.model.GridTab;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.Env;
+import eone.util.KeyNamePair;
+import eone.util.Msg;
+import eone.util.NamePair;
 import eone.webui.EONEIdGenerator;
 import eone.webui.LayoutUtils;
 import eone.webui.component.Button;

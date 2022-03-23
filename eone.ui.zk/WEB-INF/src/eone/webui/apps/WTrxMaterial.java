@@ -21,9 +21,6 @@ import java.util.Properties;
 import java.util.logging.Level;
 
 import org.compiere.apps.form.TrxMaterial;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Borderlayout;
@@ -33,6 +30,9 @@ import org.zkoss.zul.South;
 
 import eone.base.model.MLookup;
 import eone.base.model.MLookupFactory;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.ClientInfo;
 import eone.webui.LayoutUtils;
 import eone.webui.adwindow.ADTabpanel;

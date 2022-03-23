@@ -23,8 +23,8 @@ import java.util.Arrays;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
+import eone.util.CLogger;
+import eone.util.DB;
 
 /**
  *	Change Log Model

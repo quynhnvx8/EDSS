@@ -32,12 +32,11 @@ import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.Store;
 
-import org.compiere.EOne;
-import org.compiere.util.CLogMgt;
-import org.compiere.util.CLogger;
-import org.compiere.util.EMailAuthenticator;
-
+import eone.EOne;
 import eone.base.model.MClient;
+import eone.util.CLogMgt;
+import eone.util.CLogger;
+import eone.util.EMailAuthenticator;
 
 /**
  *	Request Mail Processor

@@ -19,9 +19,8 @@ import java.lang.reflect.Proxy;
 import java.math.BigDecimal;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-
 import eone.exceptions.EONEException;
+import eone.util.CLogger;
 
 /**
  * Wrap a PO object to a given bean interface.

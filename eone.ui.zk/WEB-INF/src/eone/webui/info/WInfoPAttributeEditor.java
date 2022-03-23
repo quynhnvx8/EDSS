@@ -15,13 +15,13 @@ package eone.webui.info;
 
 import java.util.Properties;
 
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 
 import eone.base.model.GridField;
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.component.Button;
 import eone.webui.editor.WEditor;
 import eone.webui.event.DialogEvents;

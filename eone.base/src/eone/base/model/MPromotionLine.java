@@ -8,8 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
-import org.compiere.util.DB;
-import org.compiere.util.Env;
+import eone.util.DB;
+import eone.util.Env;
 
 public class MPromotionLine extends X_M_PromotionLine
 {

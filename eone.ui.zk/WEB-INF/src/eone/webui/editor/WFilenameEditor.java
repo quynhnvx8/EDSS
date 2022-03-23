@@ -21,13 +21,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.event.UploadEvent;
 
 import eone.base.model.GridField;
+import eone.util.CLogger;
 import eone.webui.EONEWebUI;
 import eone.webui.component.FilenameBox;
 import eone.webui.event.ValueChangeEvent;

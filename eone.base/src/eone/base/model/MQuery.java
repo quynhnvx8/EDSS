@@ -6,11 +6,11 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.KeyNamePair;
-import org.compiere.util.Msg;
-import org.compiere.util.ValueNamePair;
+import eone.util.DB;
+import eone.util.Env;
+import eone.util.KeyNamePair;
+import eone.util.Msg;
+import eone.util.ValueNamePair;
 
 public class MQuery implements Serializable, Cloneable
 {

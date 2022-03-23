@@ -9,8 +9,9 @@ import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
-import org.compiere.util.Env;
-import org.compiere.util.KeyNamePair;
+
+import eone.util.Env;
+import eone.util.KeyNamePair;
 
 /** Generated Model for C_TransferPeriod
  *  @author EOne (generated) 

@@ -29,18 +29,17 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.db.CConnection;
-import org.compiere.db.Database;
-import org.compiere.db.LDAP;
-import org.compiere.util.CCache;
-import org.compiere.util.CLogMgt;
-import org.compiere.util.DB;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.Ini;
-import org.compiere.util.TimeUtil;
-
 import eone.exceptions.EONEException;
+import eone.util.CCache;
+import eone.util.CLogMgt;
+import eone.util.DB;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.Ini;
+import eone.util.TimeUtil;
+import eone.db.CConnection;
+import eone.db.Database;
+import eone.db.LDAP;
 import eone.exceptions.DBException;
 
 /**

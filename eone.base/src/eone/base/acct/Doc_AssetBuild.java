@@ -7,12 +7,11 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-import org.compiere.util.Env;
-
 import eone.base.model.MAssetBuild;
 import eone.base.model.MDocType;
 import eone.base.model.MElementValue;
 import eone.base.model.X_C_DocType;
+import eone.util.Env;
 
 
 public class Doc_AssetBuild extends Doc

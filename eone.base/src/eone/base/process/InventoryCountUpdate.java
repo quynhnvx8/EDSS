@@ -18,10 +18,9 @@ package eone.base.process;
 
 import java.util.logging.Level;
 
-import org.compiere.util.AdempiereSystemError;
-import org.compiere.util.DB;
-
 import eone.base.model.MInventory;
+import eone.util.AdempiereSystemError;
+import eone.util.DB;
 
 /**
  *	Update existing Inventory Count List with current Book value

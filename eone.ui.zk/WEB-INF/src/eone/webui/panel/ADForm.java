@@ -3,14 +3,14 @@ package eone.webui.panel;
 
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 
 import eone.base.model.GridTab;
 import eone.base.model.MForm;
 import eone.base.process.ProcessInfo;
+import eone.util.CLogger;
+import eone.util.Env;
 import eone.webui.Extensions;
 import eone.webui.component.Window;
 import eone.webui.exception.ApplicationException;

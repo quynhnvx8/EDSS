@@ -3,9 +3,9 @@ package eone.exceptions;
 
 import java.util.Properties;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
+import eone.util.CLogger;
+import eone.util.Env;
+import eone.util.Msg;
 
 
 public class EONEException extends RuntimeException {
@@ -43,7 +43,7 @@ public class EONEException extends RuntimeException {
 
 	
 	private static String getMessageFromLogger() {
-		org.compiere.util.ValueNamePair err = CLogger.retrieveError();
+		eone.util.ValueNamePair err = CLogger.retrieveError();
 		String msg = null;
 		if (err != null)
 			msg = err.getName();

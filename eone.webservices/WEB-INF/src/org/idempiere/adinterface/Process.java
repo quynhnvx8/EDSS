@@ -3,14 +3,6 @@ package org.idempiere.adinterface;
 import java.util.Map;
 import java.util.logging.Level;
 
-import org.compiere.print.MPrintFormat;
-import org.compiere.print.ReportEngine;
-import org.compiere.util.CLogger;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.ProcessUtil;
-import org.compiere.util.Trx;
-import org.compiere.util.Util;
 import org.idempiere.adInterface.x10.DataField;
 import org.idempiere.adInterface.x10.GetProcessParamsDocument;
 import org.idempiere.adInterface.x10.LookupValues;
@@ -30,13 +22,15 @@ import eone.base.model.PrintInfo;
 import eone.base.process.ProcessInfo;
 import eone.base.process.ProcessInfoParameter;
 import eone.base.process.ProcessInfoUtil;
+import eone.print.MPrintFormat;
+import eone.print.ReportEngine;
+import eone.util.CLogger;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.ProcessUtil;
+import eone.util.Trx;
+import eone.util.Util;
 
-/*
- * ADEMPIERE/COMPIERE
- * 
- * GridField na GridField
- * GridTab na GridTab
- */
 
 public class Process {
 	

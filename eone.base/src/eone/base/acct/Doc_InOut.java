@@ -6,14 +6,13 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-import org.compiere.util.Env;
-
 import eone.base.model.MDocType;
 import eone.base.model.MElementValue;
 import eone.base.model.MInOut;
 import eone.base.model.MInOutLine;
 import eone.base.model.X_C_DocType;
 import eone.base.model.X_M_InOut;
+import eone.util.Env;
 
 public class Doc_InOut extends Doc
 {

@@ -20,10 +20,6 @@ import java.io.InputStream;
 import java.util.logging.Level;
 
 import org.apache.commons.codec.binary.Base64;
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
-import org.compiere.util.Util;
 import org.zkoss.image.AImage;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.event.Event;
@@ -42,6 +38,10 @@ import org.zkoss.zul.South;
 import org.zkoss.zul.Space;
 
 import eone.base.model.MImage;
+import eone.util.CLogger;
+import eone.util.Env;
+import eone.util.Msg;
+import eone.util.Util;
 import eone.webui.EONEWebUI;
 import eone.webui.ClientInfo;
 import eone.webui.LayoutUtils;

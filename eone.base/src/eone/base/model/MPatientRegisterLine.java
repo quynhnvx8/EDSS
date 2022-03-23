@@ -3,7 +3,7 @@ package eone.base.model;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-import org.compiere.util.Env;
+import eone.util.Env;
 
 public class MPatientRegisterLine extends X_HM_PatientRegisterLine
 {

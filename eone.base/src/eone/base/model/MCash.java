@@ -21,11 +21,10 @@ import java.sql.ResultSet;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
-
 import eone.base.process.DocAction;
 import eone.base.process.DocumentEngine;
+import eone.util.Env;
+import eone.util.Msg;
 
 
 public class MCash extends X_C_Cash implements DocAction

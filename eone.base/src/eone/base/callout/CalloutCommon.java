@@ -4,9 +4,6 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Properties;
 
-import org.compiere.util.CalloutUtil;
-import org.compiere.util.Env;
-
 import eone.base.model.CalloutEngine;
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
@@ -18,6 +15,8 @@ import eone.base.model.MInOut;
 import eone.base.model.MProduct;
 import eone.base.model.MWarehouse;
 import eone.base.model.X_C_DocType;
+import eone.util.CalloutUtil;
+import eone.util.Env;
 
 //eone.base.callout.CalloutCommon.cal_From_Curr_To_Rate
 //eone.base.callout.CalloutCommon.cal_From_Amount_To_AmountConvert

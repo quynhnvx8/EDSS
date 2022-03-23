@@ -1,16 +1,4 @@
-/******************************************************************************
- * Copyright (C) 2012 Trek Global                                             *
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * This program is free software; you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY; without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program; if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- *****************************************************************************/
+
 package org.idempiere.webservices;
 
 import java.math.BigDecimal;
@@ -28,18 +16,9 @@ import javax.xml.namespace.QName;
 import javax.xml.ws.WebServiceContext;
 import javax.xml.ws.handler.MessageContext;
 
-import org.adempiere.base.ServiceQuery;
-import org.adempiere.base.equinox.EquinoxExtensionLocator;
 import org.apache.commons.codec.binary.Base64;
 import org.compiere.model.MWebService;
 import org.compiere.model.MWebServiceType;
-import org.compiere.util.CCache;
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.KeyNamePair;
-import org.compiere.util.Login;
-import org.compiere.util.NamePair;
-import org.compiere.util.Trx;
 import org.idempiere.adInterface.x10.ADLoginRequest;
 import org.idempiere.adInterface.x10.DataField;
 import org.idempiere.adInterface.x10.OutputField;
@@ -49,6 +28,8 @@ import org.idempiere.adInterface.x10.StandardResponseDocument;
 import org.idempiere.adinterface.CompiereService;
 import org.idempiere.webservices.fault.IdempiereServiceFault;
 
+import eone.base.ServiceQuery;
+import eone.base.equinox.EquinoxExtensionLocator;
 import eone.base.model.Lookup;
 import eone.base.model.MUser;
 import eone.base.model.PO;
@@ -57,6 +38,13 @@ import eone.base.model.Query;
 import eone.base.model.X_WS_WebServiceMethod;
 import eone.base.model.X_WS_WebServiceTypeAccess;
 import eone.exceptions.EONEException;
+import eone.util.CCache;
+import eone.util.DB;
+import eone.util.Env;
+import eone.util.KeyNamePair;
+import eone.util.Login;
+import eone.util.NamePair;
+import eone.util.Trx;
 
 
 
@@ -572,7 +560,7 @@ public class AbstractService {
 			ColumnClass = Integer.class;
 		}
 		else
-			ColumnClass = org.compiere.util.DisplayType.getClass(displayType, true);
+			ColumnClass = eone.util.DisplayType.getClass(displayType, true);
 		
 		return ColumnClass;
 	}

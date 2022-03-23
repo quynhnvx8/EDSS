@@ -3,13 +3,13 @@ package eone.webui.window;
 
 import java.util.Properties;
 
-import org.compiere.util.Env;
-import org.compiere.util.KeyNamePair;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.Clients;
 
+import eone.util.Env;
+import eone.util.KeyNamePair;
 import eone.webui.IWebClient;
 import eone.webui.component.FWindow;
 import eone.webui.panel.ChangePasswordPanel;

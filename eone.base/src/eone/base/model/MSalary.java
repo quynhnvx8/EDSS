@@ -8,11 +8,10 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-
 import eone.base.process.DocAction;
 import eone.base.process.DocumentEngine;
+import eone.util.DB;
+import eone.util.Env;
 
 public class MSalary extends X_HR_Salary implements DocAction
 {

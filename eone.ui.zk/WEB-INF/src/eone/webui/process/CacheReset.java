@@ -16,9 +16,8 @@
  *****************************************************************************/
 package eone.webui.process;
 
-import org.compiere.util.*;
-
 import eone.base.process.SvrProcess;
+import eone.util.*;
 
 /**
  *	Reset Cache

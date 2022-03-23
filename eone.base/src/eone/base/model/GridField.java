@@ -20,21 +20,20 @@ import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 
-import org.adempiere.base.LookupFactoryHelper;
-import org.compiere.util.CCache;
-import org.compiere.util.CLogMgt;
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.DefaultEvaluatee;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.Evaluatee;
-import org.compiere.util.Evaluator;
-import org.compiere.util.NamePair;
-import org.compiere.util.ParseSeq;
-import org.compiere.util.Util;
-
+import eone.base.LookupFactoryHelper;
 import eone.exceptions.EONEException;
+import eone.util.CCache;
+import eone.util.CLogMgt;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.DefaultEvaluatee;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.Evaluatee;
+import eone.util.Evaluator;
+import eone.util.NamePair;
+import eone.util.ParseSeq;
+import eone.util.Util;
 
 public class GridField 
 	implements Serializable, Evaluatee, Cloneable

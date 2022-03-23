@@ -34,8 +34,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JToggleButton;
 import javax.swing.KeyStroke;
 
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
+import eone.util.Env;
+import eone.util.Msg;
 
 /**
  *  Application Action.

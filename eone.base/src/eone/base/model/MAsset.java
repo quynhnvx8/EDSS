@@ -6,11 +6,10 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.Msg;
-import org.compiere.util.TimeUtil;
-
 import eone.base.process.DocAction;
 import eone.base.process.DocumentEngine;
+import eone.util.Msg;
+import eone.util.TimeUtil;
 
 
 public class MAsset extends X_A_Asset implements DocAction

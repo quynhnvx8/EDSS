@@ -19,10 +19,6 @@ package eone.webui.grid;
 
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.HtmlBasedComponent;
 import org.zkoss.zk.ui.WrongValueException;
@@ -37,6 +33,10 @@ import org.zkoss.zul.Vlayout;
 import eone.base.model.MBPartner;
 import eone.base.model.MRole;
 import eone.base.model.MUser;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.component.ConfirmPanel;
 import eone.webui.component.Label;
 import eone.webui.component.Listbox;

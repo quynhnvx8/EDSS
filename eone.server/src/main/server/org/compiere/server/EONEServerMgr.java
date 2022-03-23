@@ -27,16 +27,8 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
-import org.adempiere.base.Core;
-import org.adempiere.base.Service;
 import org.adempiere.server.AdempiereServerActivator;
 import org.adempiere.server.IServerFactory;
-import org.compiere.EOne;
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
-import org.idempiere.distributed.ICacheService;
-import org.idempiere.distributed.IClusterMember;
-import org.idempiere.distributed.IClusterService;
 import org.idempiere.server.cluster.ClusterServerMgr;
 import org.osgi.framework.BundleEvent;
 import org.osgi.framework.BundleListener;
@@ -44,8 +36,16 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
+import eone.EOne;
+import eone.base.Core;
+import eone.base.Service;
 import eone.base.model.EONEProcessor;
 import eone.base.model.MScheduler;
+import eone.distributed.ICacheService;
+import eone.distributed.IClusterMember;
+import eone.distributed.IClusterService;
+import eone.util.CLogger;
+import eone.util.Env;
 
 /**
  *	Adempiere Server Manager

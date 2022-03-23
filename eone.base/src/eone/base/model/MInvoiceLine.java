@@ -21,8 +21,8 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Properties;
 
-import org.adempiere.base.IProductPricing;
-import org.compiere.util.CLogger;
+import eone.base.IProductPricing;
+import eone.util.CLogger;
 
 
 /**

@@ -18,8 +18,6 @@ package eone.webui.apps;
 
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.HtmlBasedComponent;
 import org.zkoss.zk.ui.event.Event;
@@ -27,6 +25,8 @@ import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 
 import eone.base.process.ProcessInfo;
+import eone.util.CLogger;
+import eone.util.Env;
 import eone.webui.ClientInfo;
 import eone.webui.LayoutUtils;
 import eone.webui.component.Window;

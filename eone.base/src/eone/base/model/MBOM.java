@@ -20,9 +20,9 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Properties;
 
-import org.compiere.util.CCache;
-import org.compiere.util.CLogger;
-import org.compiere.util.Msg;
+import eone.util.CCache;
+import eone.util.CLogger;
+import eone.util.Msg;
 
 /**
  * 	BOM Model

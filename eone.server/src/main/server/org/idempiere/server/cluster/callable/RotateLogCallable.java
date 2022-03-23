@@ -28,7 +28,7 @@ package org.idempiere.server.cluster.callable;
 import java.io.Serializable;
 import java.util.concurrent.Callable;
 
-import org.compiere.util.CLogFile;
+import eone.util.CLogFile;
 
 /**
  * @author hengsin

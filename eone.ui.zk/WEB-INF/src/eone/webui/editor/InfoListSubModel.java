@@ -27,9 +27,6 @@ package eone.webui.editor;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.compiere.util.NamePair;
-import org.compiere.util.Util;
-import org.compiere.util.ValueNamePair;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.ListSubModel;
@@ -37,6 +34,9 @@ import org.zkoss.zul.ListSubModel;
 import eone.base.model.GridField;
 import eone.base.model.Lookup;
 import eone.base.model.MLookup;
+import eone.util.NamePair;
+import eone.util.Util;
+import eone.util.ValueNamePair;
 import eone.webui.factory.InfoManager;
 import eone.webui.panel.InfoPanel;
 

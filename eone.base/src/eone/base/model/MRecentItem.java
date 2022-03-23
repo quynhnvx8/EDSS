@@ -24,18 +24,18 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.adempiere.base.Service;
-import org.adempiere.base.event.EventManager;
-import org.compiere.util.CCache;
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.Util;
-import org.idempiere.distributed.IMessageService;
-import org.idempiere.distributed.ITopic;
 import org.osgi.service.event.Event;
 
+import eone.base.Service;
+import eone.base.event.EventManager;
+import eone.distributed.IMessageService;
+import eone.distributed.ITopic;
 import eone.exceptions.EONEException;
+import eone.util.CCache;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.Env;
+import eone.util.Util;
 
 /**
  *	Recent Item model

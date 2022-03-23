@@ -6,8 +6,6 @@ import java.math.RoundingMode;
 import java.util.Map;
 import java.util.Properties;
 
-import org.compiere.util.Env;
-
 import eone.base.model.CalloutEngine;
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
@@ -18,6 +16,7 @@ import eone.base.model.MTax;
 import eone.base.model.Query;
 import eone.base.model.X_C_DocType;
 import eone.base.model.X_C_Order;
+import eone.util.Env;
 
 
 public class CalloutOrder extends CalloutEngine

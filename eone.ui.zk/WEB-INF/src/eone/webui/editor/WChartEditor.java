@@ -16,8 +16,6 @@ package eone.webui.editor;
 
 import java.util.List;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
 import org.zkoss.zk.ui.event.AfterSizeEvent;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
@@ -27,6 +25,8 @@ import org.zkoss.zul.Panelchildren;
 
 import eone.base.model.GridField;
 import eone.base.model.MChart;
+import eone.util.CLogger;
+import eone.util.Env;
 import eone.webui.Extensions;
 import eone.webui.apps.ChartModel;
 import eone.webui.apps.IChartRendererService;

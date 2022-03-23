@@ -15,8 +15,6 @@ package eone.webui.part;
 
 import java.util.List;
 
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.event.Event;
@@ -27,6 +25,8 @@ import org.zkoss.zk.ui.event.OpenEvent;
 import org.zkoss.zk.ui.event.SwipeEvent;
 import org.zkoss.zul.Menuitem;
 
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.ClientInfo;
 import eone.webui.component.Menupopup;
 import eone.webui.component.Tab;

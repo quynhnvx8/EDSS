@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.TimeUtil;
+import eone.util.DB;
+import eone.util.Env;
+import eone.util.TimeUtil;
 
 
 public class MStorage extends X_M_Storage

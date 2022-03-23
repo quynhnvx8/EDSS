@@ -19,15 +19,15 @@ package eone.webui.panel;
 
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Separator;
 
+import eone.util.CLogger;
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.component.Button;
 import eone.webui.component.Window;
 import eone.webui.event.DialogEvents;

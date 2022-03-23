@@ -16,11 +16,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.compiere.minigrid.IDColumn;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.Language;
-import org.compiere.util.MSort;
-import org.compiere.util.Util;
 import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
@@ -35,6 +30,11 @@ import org.zkoss.zul.ListitemRenderer;
 import org.zkoss.zul.ListitemRendererExt;
 
 import eone.base.model.MImage;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.Language;
+import eone.util.MSort;
+import eone.util.Util;
 import eone.webui.EONEWebUI;
 import eone.webui.ClientInfo;
 import eone.webui.apps.AEnv;

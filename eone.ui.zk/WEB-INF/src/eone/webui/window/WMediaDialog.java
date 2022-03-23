@@ -21,9 +21,6 @@ import java.sql.Clob;
 import java.sql.SQLException;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.zkoss.util.media.AMedia;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.event.Event;
@@ -35,6 +32,9 @@ import org.zkoss.zul.Center;
 import org.zkoss.zul.North;
 import org.zkoss.zul.South;
 
+import eone.util.CLogger;
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.EONEWebUI;
 import eone.webui.component.Button;
 import eone.webui.component.Panel;

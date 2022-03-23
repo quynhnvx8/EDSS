@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.compiere.util.CCache;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
+import eone.util.CCache;
+import eone.util.Env;
+import eone.util.Msg;
 
 public class MTimekeeperMap extends X_HR_TimekeeperMap
 {

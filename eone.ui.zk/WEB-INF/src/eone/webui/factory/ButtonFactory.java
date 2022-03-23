@@ -13,11 +13,10 @@
  *****************************************************************************/
 package eone.webui.factory;
 
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
-import org.compiere.util.Util;
-
 import eone.base.model.MSysConfig;
+import eone.util.Env;
+import eone.util.Msg;
+import eone.util.Util;
 import eone.webui.LayoutUtils;
 import eone.webui.component.Button;
 import eone.webui.theme.ThemeManager;

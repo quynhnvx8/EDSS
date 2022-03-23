@@ -1,7 +1,5 @@
 package eone.webui.apps;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
@@ -9,6 +7,8 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.Label;
 
 import eone.base.model.MGoal;
+import eone.util.CLogger;
+import eone.util.Env;
 import eone.webui.apps.WPerformanceIndicator.Options;
 import eone.webui.component.Grid;
 import eone.webui.component.Panel;

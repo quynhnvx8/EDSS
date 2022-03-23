@@ -19,7 +19,8 @@ package eone.base.model;
 
 import java.sql.ResultSet;
 import java.util.Properties;
-import org.compiere.util.KeyNamePair;
+
+import eone.util.KeyNamePair;
 
 /** Generated Model for A_Depreciation_Method
  *  @author iDempiere (generated) 

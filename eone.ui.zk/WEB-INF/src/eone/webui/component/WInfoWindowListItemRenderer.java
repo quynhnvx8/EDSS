@@ -5,11 +5,11 @@ import java.util.List;
 
 import org.compiere.minigrid.ColumnInfo;
 import org.compiere.minigrid.IDColumn;
-import org.compiere.util.KeyNamePair;
 import org.zkoss.zul.Listcell;
 
 import eone.base.model.GridField;
 import eone.base.model.MInfoColumn;
+import eone.util.KeyNamePair;
 import eone.webui.editor.WEditor;
 import eone.webui.editor.WebEditorFactory;
 import eone.webui.event.ValueChangeEvent;

@@ -18,11 +18,10 @@ package eone.base.process;
 
 import static eone.base.model.SystemIDs.REFERENCE_WFINSTANCE_STATE;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
-import org.compiere.util.Util;
-
 import eone.base.model.MRefList;
+import eone.util.CLogger;
+import eone.util.Env;
+import eone.util.Util;
 
 
 /**

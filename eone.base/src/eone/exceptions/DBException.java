@@ -18,8 +18,8 @@ package eone.exceptions;
 
 import java.sql.SQLException;
 
-import org.compiere.util.CLogMgt;
-import org.compiere.util.DB;
+import eone.util.CLogMgt;
+import eone.util.DB;
 
 
 /**

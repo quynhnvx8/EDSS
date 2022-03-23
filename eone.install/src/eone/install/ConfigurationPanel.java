@@ -25,7 +25,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
-import org.compiere.util.CLogger;
+import eone.util.CLogger;
 
 public class ConfigurationPanel extends JPanel implements ActionListener, IDBConfigMonitor
 {

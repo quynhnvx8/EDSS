@@ -22,13 +22,13 @@ import java.net.URL;
 import org.apache.ecs.ConcreteElement;
 import org.apache.ecs.xhtml.a;
 import org.apache.ecs.xhtml.body;
-import org.compiere.print.IHTMLExtension;
-import org.compiere.print.PrintDataItem;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 
 import eone.base.model.MSysConfig;
 import eone.exceptions.EONEException;
+import eone.print.IHTMLExtension;
+import eone.print.PrintDataItem;
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.apps.AEnv;
 import eone.webui.theme.ThemeManager;
 

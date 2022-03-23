@@ -3,8 +3,6 @@ package eone.webui.dashboard;
 
 import java.util.Calendar;
 
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.zkoss.calendar.event.CalendarsEvent;
 import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
@@ -13,6 +11,8 @@ import org.zkoss.zul.Center;
 import org.zkoss.zul.South;
 import org.zkoss.zul.Timebox;
 
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.component.Borderlayout;
 import eone.webui.component.Column;
 import eone.webui.component.Columns;

@@ -5,10 +5,9 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.DB;
-
 import eone.base.process.DocAction;
 import eone.base.process.DocumentEngine;
+import eone.util.DB;
 
 
 public class MTransferPeriod extends X_C_TransferPeriod implements DocAction

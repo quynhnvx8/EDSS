@@ -16,9 +16,6 @@ package eone.webui.component;
 import java.io.File;
 import java.util.Arrays;
 
-import org.compiere.util.Ini;
-import org.compiere.util.Util;
-import org.compiere.util.ValueNamePair;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
@@ -28,6 +25,9 @@ import org.zkoss.zul.North;
 import org.zkoss.zul.South;
 
 import eone.base.model.MSysConfig;
+import eone.util.Ini;
+import eone.util.Util;
+import eone.util.ValueNamePair;
 import eone.webui.apps.AEnv;
 import eone.webui.theme.ThemeManager;
 import eone.webui.util.ZKUpdateUtil;

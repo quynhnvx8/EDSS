@@ -6,9 +6,6 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.logging.Level;
 
-import org.compiere.util.Env;
-import org.compiere.util.TimeUtil;
-
 import eone.base.model.MAsset;
 import eone.base.model.MDepreciation;
 import eone.base.model.MDepreciationExp;
@@ -17,6 +14,8 @@ import eone.base.model.MDepreciationWorkfile;
 import eone.base.model.X_A_Asset;
 import eone.base.model.X_A_Depreciation_Split;
 import eone.base.model.X_A_Depreciation_Workfile;
+import eone.util.Env;
+import eone.util.TimeUtil;
 
 
 public class BuildDepreciation extends SvrProcess

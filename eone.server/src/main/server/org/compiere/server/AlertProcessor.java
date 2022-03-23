@@ -11,15 +11,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.Language;
-import org.compiere.util.Msg;
-import org.compiere.util.Trx;
-import org.compiere.util.ValueNamePair;
-
 import eone.base.impexp.ArrayExcelExporter;
 import eone.base.model.MAlert;
 import eone.base.model.MAlertProcessor;
@@ -31,6 +22,14 @@ import eone.base.model.MSysConfig;
 import eone.base.model.MSystem;
 import eone.base.model.MUser;
 import eone.base.model.SystemIDs;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.Language;
+import eone.util.Msg;
+import eone.util.Trx;
+import eone.util.ValueNamePair;
 
 
 public class AlertProcessor extends EONEServer

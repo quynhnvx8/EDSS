@@ -20,15 +20,14 @@ import java.sql.ResultSet;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.db.Database;
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.Evaluatee;
-import org.compiere.util.Evaluator;
-import org.compiere.util.Msg;
-import org.compiere.util.Util;
-
 import eone.base.model.AccessSqlParser.TableInfo;
+import eone.db.Database;
+import eone.util.DB;
+import eone.util.Env;
+import eone.util.Evaluatee;
+import eone.util.Evaluator;
+import eone.util.Msg;
+import eone.util.Util;
 
 /**
  * 	Info Window Column Model

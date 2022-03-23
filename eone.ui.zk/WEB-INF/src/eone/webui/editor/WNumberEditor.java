@@ -21,14 +21,14 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.Language;
-import org.compiere.util.Util;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
 
 import eone.base.model.GridField;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.Language;
+import eone.util.Util;
 import eone.webui.ClientInfo;
 import eone.webui.ValuePreference;
 import eone.webui.apps.AEnv;

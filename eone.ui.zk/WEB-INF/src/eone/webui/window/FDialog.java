@@ -20,14 +20,6 @@ package eone.webui.window;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogMgt;
-import org.compiere.util.CLogger;
-import org.compiere.util.Callback;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
-import org.compiere.util.Trace;
-
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Desktop;
 import org.zkoss.zk.ui.Executions;
@@ -35,6 +27,13 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 
 import eone.base.model.MLookup;
+import eone.util.CLogMgt;
+import eone.util.CLogger;
+import eone.util.Callback;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.Msg;
+import eone.util.Trace;
 import eone.webui.apps.AEnv;
 import eone.webui.component.Messagebox;
 import eone.webui.editor.WEditor;

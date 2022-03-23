@@ -18,10 +18,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.GridRowCtx;
-import org.compiere.util.Msg;
 import org.zkoss.zk.au.out.AuScript;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -43,6 +39,10 @@ import org.zkoss.zul.Timebox;
 
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.GridRowCtx;
+import eone.util.Msg;
 import eone.webui.LayoutUtils;
 import eone.webui.component.Button;
 import eone.webui.component.Checkbox;

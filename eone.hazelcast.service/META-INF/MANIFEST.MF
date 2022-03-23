@@ -5,7 +5,11 @@ Bundle-SymbolicName: eone.hazelcast.service
 Bundle-Version: 7.1.0.qualifier
 Bundle-Activator: org.idempiere.hazelcast.service.Activator
 Bundle-ActivationPolicy: lazy
-Import-Package: javax.crypto,
+Import-Package: eone,
+ eone.base,
+ eone.distributed,
+ eone.util,
+ javax.crypto,
  javax.crypto.spec,
  javax.management,
  javax.net.ssl,
@@ -17,10 +21,6 @@ Import-Package: javax.crypto,
  javax.xml.transform.dom,
  javax.xml.transform.stream,
  javax.xml.xpath,
- org.adempiere.base,
- org.compiere,
- org.compiere.util,
- org.idempiere.distributed,
  org.osgi.framework;version="1.3.0",
  org.slf4j;version="1.6.1",
  org.w3c.dom

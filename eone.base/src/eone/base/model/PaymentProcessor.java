@@ -31,9 +31,9 @@ import java.util.logging.Level;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
+import eone.util.CLogger;
+import eone.util.Env;
+import eone.util.Msg;
 
 /**
  *  Payment Processor Abstract Class

@@ -20,10 +20,9 @@ import java.sql.ResultSet;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.Msg;
-
 import eone.base.process.DocAction;
 import eone.base.process.DocumentEngine;
+import eone.util.Msg;
 
 
 public class MAssembly extends X_M_Assembly implements DocAction

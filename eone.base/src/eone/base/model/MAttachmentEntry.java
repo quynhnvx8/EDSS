@@ -25,8 +25,8 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.MimeType;
+import eone.util.CLogger;
+import eone.util.MimeType;
 
 
 /**

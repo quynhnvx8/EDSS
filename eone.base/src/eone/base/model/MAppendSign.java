@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import org.compiere.util.CCache;
-import org.compiere.util.DB;
+import eone.util.CCache;
+import eone.util.DB;
 
 
 public class MAppendSign extends X_AD_AppendSign

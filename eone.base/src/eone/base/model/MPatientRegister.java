@@ -5,10 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import org.compiere.util.Env;
-
 import eone.base.process.DocAction;
 import eone.base.process.DocumentEngine;
+import eone.util.Env;
 
 public class MPatientRegister extends X_HM_PatientRegister implements DocAction
 {

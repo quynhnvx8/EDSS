@@ -8,7 +8,8 @@ package eone.base.model;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
-import org.compiere.util.KeyNamePair;
+
+import eone.util.KeyNamePair;
 
 /** Generated Model for AD_User
  *  @author EOne (generated) 

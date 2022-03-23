@@ -8,12 +8,11 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.CCache;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
-
 import eone.base.process.DocAction;
 import eone.base.process.DocumentEngine;
+import eone.util.CCache;
+import eone.util.Env;
+import eone.util.Msg;
 
 public class MPatient extends X_HM_Patient implements DocAction
 {

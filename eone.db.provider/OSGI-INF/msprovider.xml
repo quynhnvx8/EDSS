@@ -2,7 +2,7 @@
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="eone.base.db.DB_MSSQL">
    <implementation class="eone.base.db.DB_MSSQL"/>
    <service>
-      <provide interface="org.compiere.db.EONEDatabase"/>
+      <provide interface="eone.db.EONEDatabase"/>
    </service>
    <property name="id" type="String" value="MSSQL"/>
 </scr:component>

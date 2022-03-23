@@ -1,13 +1,13 @@
 #!/bin/sh
 #
-echo ... Setup iDempiere Server
+echo ... Setup EOne Server
 
 # Setup eone.properties and eoneEnv.properties
-./idempiere --launcher.ini setup.ini -application eone.install.application
+./eone --launcher.ini setup.ini -application eone.install.application
 
 echo ... Setup Jetty
 # Setup Jetty
-./idempiere --launcher.ini setup.ini -application org.eclipse.ant.core.antRunner -buildfile build.xml
+./eone --launcher.ini setup.ini -application org.eclipse.ant.core.antRunner -buildfile build.xml
 
 echo ... Make .sh executable
 chmod -R a+x *.sh

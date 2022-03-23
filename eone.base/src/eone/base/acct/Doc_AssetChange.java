@@ -4,11 +4,10 @@ package eone.base.acct;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import org.compiere.util.Env;
-
 import eone.base.model.MAssetChange;
 import eone.base.model.MAssetChangeLine;
 import eone.base.model.MElementValue;
+import eone.util.Env;
 
 
 public class Doc_AssetChange extends Doc

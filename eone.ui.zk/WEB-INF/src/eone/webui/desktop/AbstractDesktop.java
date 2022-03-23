@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
 import org.zkoss.zk.ui.Desktop;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
@@ -27,6 +25,8 @@ import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Window.Mode;
 
 import eone.base.model.MMenu;
+import eone.util.CLogger;
+import eone.util.Env;
 import eone.webui.EONEWebUI;
 import eone.webui.ClientInfo;
 import eone.webui.LayoutUtils;

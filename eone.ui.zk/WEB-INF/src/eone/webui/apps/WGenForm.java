@@ -18,11 +18,6 @@ import java.util.logging.Level;
 
 import org.compiere.apps.form.GenForm;
 import org.compiere.minigrid.IDColumn;
-import org.compiere.util.CLogger;
-import org.compiere.util.Callback;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.zkoss.zhtml.Table;
 import org.zkoss.zhtml.Td;
 import org.zkoss.zhtml.Text;
@@ -41,6 +36,11 @@ import org.zkoss.zul.North;
 import org.zkoss.zul.South;
 
 import eone.base.process.ProcessInfoLog;
+import eone.util.CLogger;
+import eone.util.Callback;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.LayoutUtils;
 import eone.webui.component.Button;
 import eone.webui.component.ConfirmPanel;

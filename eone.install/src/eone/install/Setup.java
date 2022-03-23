@@ -33,10 +33,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import org.compiere.EOne;
-import org.compiere.util.CLogFile;
-import org.compiere.util.CLogMgt;
-import org.compiere.util.CLogger;
+import eone.EOne;
+import eone.util.CLogFile;
+import eone.util.CLogMgt;
+import eone.util.CLogger;
 
 /**
  *	Setup Dialog Frame.

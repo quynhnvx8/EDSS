@@ -26,13 +26,12 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
 
-import org.compiere.db.Database;
-import org.compiere.util.CLogger;
-
+import eone.db.Database;
 import eone.install.ConfigurationData;
 import eone.install.DBConfigStatus;
 import eone.install.IDBConfigMonitor;
 import eone.install.IDatabaseConfig;
+import eone.util.CLogger;
 
 /**
  *	Oracle Configuration

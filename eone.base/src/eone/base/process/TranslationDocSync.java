@@ -20,16 +20,15 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Level;
 
-import org.compiere.util.EONEUserError;
-import org.compiere.util.DB;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Language;
-
 import eone.base.model.MClient;
 import eone.base.model.MColumn;
 import eone.base.model.MTable;
 import eone.base.model.PO;
 import eone.base.model.Query;
+import eone.util.DB;
+import eone.util.DisplayType;
+import eone.util.EONEUserError;
+import eone.util.Language;
 
 
 /**

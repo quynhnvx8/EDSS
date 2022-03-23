@@ -27,10 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import org.compiere.util.Env;
-import org.compiere.util.HistoryRuleSupportHash;
-import org.compiere.util.Msg;
-import org.compiere.util.Util;
 import org.passay.CharacterCharacteristicsRule;
 import org.passay.CharacterRule;
 import org.passay.DictionarySubstringRule;
@@ -54,6 +50,10 @@ import org.passay.dictionary.WordLists;
 import org.passay.dictionary.sort.ArraysSort;
 
 import eone.exceptions.EONEException;
+import eone.util.Env;
+import eone.util.HistoryRuleSupportHash;
+import eone.util.Msg;
+import eone.util.Util;
 
 
 /**

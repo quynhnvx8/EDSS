@@ -18,7 +18,7 @@ package eone.base.model;
 
 import java.io.Serializable;
 
-import org.compiere.util.Util;
+import eone.util.Util;
 
 
 /**

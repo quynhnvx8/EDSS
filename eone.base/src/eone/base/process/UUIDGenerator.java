@@ -24,20 +24,19 @@ import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.DisplayType;
-import org.compiere.util.EONEUserError;
-import org.compiere.util.Msg;
-import org.compiere.util.Trx;
-import org.compiere.util.Util;
-import org.compiere.util.ValueNamePair;
-
 import eone.base.model.MColumn;
 import eone.base.model.MTable;
 import eone.base.model.M_Element;
 import eone.base.model.PO;
 import eone.exceptions.DBException;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.DisplayType;
+import eone.util.EONEUserError;
+import eone.util.Msg;
+import eone.util.Trx;
+import eone.util.Util;
+import eone.util.ValueNamePair;
 
 /**
  * Add UUID column (tableName_UU) to table and update existing records with new UUID.

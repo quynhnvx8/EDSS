@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
+import eone.util.CLogger;
 
 
 public class AccessSqlParser

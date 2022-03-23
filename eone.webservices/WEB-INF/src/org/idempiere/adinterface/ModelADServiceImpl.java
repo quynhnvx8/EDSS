@@ -1,31 +1,4 @@
-/**********************************************************************
-* This file is part of Adempiere ERP Bazaar                           *
-* http://www.adempiere.org                                            *
-*                                                                     *
-* Copyright (C) Carlos Ruiz - globalqss                               *
-* Copyright (C) Contributors                                          *
-*                                                                     *
-* This program is free software; you can redistribute it and/or       *
-* modify it under the terms of the GNU General Public License         *
-* as published by the Free Software Foundation; either version 2      *
-* of the License, or (at your option) any later version.              *
-*                                                                     *
-* This program is distributed in the hope that it will be useful,     *
-* but WITHOUT ANY WARRANTY; without even the implied warranty of      *
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the        *
-* GNU General Public License for more details.                        *
-*                                                                     *
-* You should have received a copy of the GNU General Public License   *
-* along with this program; if not, write to the Free Software         *
-* Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,          *
-* MA 02110-1301, USA.                                                 *
-*                                                                     *
-* Contributors:                                                       *
-* - Carlos Ruiz  (globalqss@users.sourceforge.net)                    *
-*                                                                     *
-* Sponsors:                                                           *
-* - GlobalQSS (http://www.globalqss.com)                              *
-***********************************************************************/
+
 
 package org.idempiere.adinterface;
 
@@ -47,14 +20,6 @@ import org.apache.xmlbeans.StringEnumAbstractBase.Table;
 import org.apache.xmlbeans.XmlInt;
 import org.apache.xmlbeans.impl.values.XmlValueOutOfRangeException;
 import org.compiere.model.MWebServiceType;
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.KeyNamePair;
-import org.compiere.util.Trx;
-import org.compiere.util.Util;
-import org.compiere.util.ValueNamePair;
 import org.idempiere.adInterface.x10.ADLoginRequest;
 import org.idempiere.adInterface.x10.DataField;
 import org.idempiere.adInterface.x10.DataRow;
@@ -97,32 +62,15 @@ import eone.base.model.PO;
 import eone.base.model.POInfo;
 import eone.base.model.X_WS_WebServiceFieldInput;
 import eone.base.model.X_WS_WebService_Para;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.KeyNamePair;
+import eone.util.Trx;
+import eone.util.Util;
+import eone.util.ValueNamePair;
 
-/*
- * ADEMPIERE/COMPIERE
- *
- * replacement:
- * GridField by GridFieldVO
- * GridTabVO by GridTabVO
- * GridWindowVO by GridWindowVO	
- *
- * Contributors: Carlos Ruiz - globalqss
- *     Add model oriented method modelSetDocAction
- *     Some Polish messages translated to english using google translate
- *     Deepak Pansheriya 
- *     Abstracting out Authenticate and login method
- *     Re factored to add support for composite web service
- *     Added CreateUpdate end point
- *     Added Support for Ctx Variable and ability to pass ctx variable in request
- *     Added configurable output fields
- */
-
-
-/**
- *
- * @author kolec
- *
- */
 @RestController
 @WebService(endpointInterface="org.idempiere.adinterface.ModelADService", serviceName="ModelADService",targetNamespace="http://idempiere.org/ADInterface/1_0")
 public class ModelADServiceImpl extends AbstractService implements ModelADService {

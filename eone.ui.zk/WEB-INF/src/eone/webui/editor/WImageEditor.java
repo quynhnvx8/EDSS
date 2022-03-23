@@ -16,8 +16,6 @@ package eone.webui.editor;
 
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
 import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Page;
@@ -29,6 +27,8 @@ import org.zkoss.zul.Image;
 
 import eone.base.model.GridField;
 import eone.base.model.MImage;
+import eone.util.CLogger;
+import eone.util.Env;
 import eone.webui.LayoutUtils;
 import eone.webui.event.DialogEvents;
 import eone.webui.event.ValueChangeEvent;

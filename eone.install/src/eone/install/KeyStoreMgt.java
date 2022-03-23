@@ -30,10 +30,9 @@ import java.util.logging.Level;
 
 import javax.swing.JFrame;
 
-import org.compiere.EOne;
-import org.compiere.util.CLogMgt;
-import org.compiere.util.CLogger;
-
+import eone.EOne;
+import eone.util.CLogMgt;
+import eone.util.CLogger;
 import sun.security.tools.keytool.Main;
 
 /**

@@ -8,13 +8,12 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.CCache;
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
-
 import eone.base.model.AccessSqlParser.TableInfo;
 import eone.exceptions.EONEException;
+import eone.util.CCache;
+import eone.util.DB;
+import eone.util.Env;
+import eone.util.Msg;
 
 
 public class MInfoWindow extends X_AD_InfoWindow

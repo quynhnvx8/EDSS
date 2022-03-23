@@ -20,7 +20,7 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Properties;
 
-import org.compiere.util.CLogger;
+import eone.util.CLogger;
 
 /**
  * 	BOM Product/Component Model

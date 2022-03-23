@@ -22,14 +22,13 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import org.compiere.util.DB;
-import org.compiere.util.Msg;
-import org.compiere.util.Trx;
-
 import eone.base.model.MTable;
 import eone.base.model.MViewColumn;
 import eone.base.model.MViewComponent;
 import eone.exceptions.EONEException;
+import eone.util.DB;
+import eone.util.Msg;
+import eone.util.Trx;
 
 public class DatabaseViewValidate extends SvrProcess {
 

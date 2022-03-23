@@ -22,8 +22,8 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Properties;
 
-import org.compiere.util.CCache;
-import org.compiere.util.Env;
+import eone.util.CCache;
+import eone.util.Env;
 
 /**
  *	Unit Of Measure Model

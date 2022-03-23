@@ -13,10 +13,10 @@
  *****************************************************************************/
 package org.idempiere.hazelcast.service;
 
-import org.idempiere.distributed.IMessageService;
-import org.idempiere.distributed.ITopic;
-
 import com.hazelcast.core.HazelcastInstance;
+
+import eone.distributed.IMessageService;
+import eone.distributed.ITopic;
 
 /**
  * @author hengsin

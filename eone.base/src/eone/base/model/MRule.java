@@ -25,11 +25,11 @@ import java.util.Properties;
 
 import javax.script.ScriptEngine;
 
-import org.adempiere.base.Core;
-import org.compiere.util.CCache;
-import org.compiere.util.CLogger;
-import org.compiere.util.Msg;
-import org.compiere.util.Util;
+import eone.base.Core;
+import eone.util.CCache;
+import eone.util.CLogger;
+import eone.util.Msg;
+import eone.util.Util;
 
 /**
  *	Persistent Rule Model

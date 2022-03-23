@@ -20,10 +20,6 @@ import java.sql.Timestamp;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
-import org.compiere.util.TimeUtil;
-
 import eone.base.model.EONEProcessor;
 import eone.base.model.EONEProcessor2;
 import eone.base.model.EONEProcessorLog;
@@ -31,6 +27,9 @@ import eone.base.model.MClient;
 import eone.base.model.MSchedule;
 import eone.base.model.MSystem;
 import eone.base.model.PO;
+import eone.util.CLogger;
+import eone.util.Env;
+import eone.util.TimeUtil;
 
 /**
  *	Adempiere Server Base

@@ -6,8 +6,6 @@ import java.math.RoundingMode;
 import java.sql.Timestamp;
 import java.util.Properties;
 
-import org.compiere.util.Env;
-
 import eone.base.model.CalloutEngine;
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
@@ -18,6 +16,7 @@ import eone.base.model.MProduct;
 import eone.base.model.MStorage;
 import eone.base.model.MTax;
 import eone.base.model.X_M_InOut;
+import eone.util.Env;
 
 //eone.base.callout.CalloutInOut.fillAmount_QtyPrice
 //eone.base.callout.CalloutInOut.fillAmount_Discount

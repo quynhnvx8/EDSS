@@ -13,8 +13,7 @@
  *****************************************************************************/
 package eone.webui.util;
 
-import org.adempiere.base.IProcessFactory;
-
+import eone.base.IProcessFactory;
 import eone.base.process.ProcessCall;
 
 /**

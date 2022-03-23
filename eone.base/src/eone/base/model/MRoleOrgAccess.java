@@ -25,10 +25,10 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.Env;
+import eone.util.Msg;
 
 /**
  *	Role Org Access Model

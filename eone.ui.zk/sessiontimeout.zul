@@ -4,8 +4,8 @@
 <zk>
 <zscript>
 <![CDATA[
-	import org.compiere.util.Msg;
-	import org.compiere.util.Env;
+	import eone.util.Msg;
+	import eone.util.Env;
 	import eone.webui.theme.ThemeManager;
 	self.setTitle(ThemeManager.getBrowserTitle());
 ]]>

@@ -20,8 +20,8 @@ import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-import org.compiere.util.DB;
-import org.compiere.util.Trx;
+import eone.util.DB;
+import eone.util.Trx;
 
 
 /**

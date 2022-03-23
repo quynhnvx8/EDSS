@@ -21,13 +21,13 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import org.adempiere.base.equinox.EquinoxExtensionLocator;
-import org.compiere.EOne;
-import org.compiere.db.CConnection;
-import org.compiere.db.Database;
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.Ini;
+import eone.EOne;
+import eone.base.equinox.EquinoxExtensionLocator;
+import eone.db.CConnection;
+import eone.db.Database;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.Ini;
 
 
 
@@ -382,7 +382,7 @@ public class ConfigurationData
 	 */
 	public String testEnveroment()
 	{
-		//	Adempiere Home
+		
 		m_eoneHome = new File (getEONEHome());
 		boolean pass =m_eoneHome.exists();
 		String error = "Not found: EONEHome = " + m_eoneHome;
@@ -621,19 +621,7 @@ public class ConfigurationData
 			return false;
 		}
 		Ini.setProperty(Ini.P_CONNECTION, cc.toStringLong());
-		/*
-		List<MClient> arr = MClient.getAllClient(Env.getCtx(), null);
-		for (int i = 0; i < arr.size(); i++) {
-			String domain = arr.get(i).getDomain();
-			cc = CConnection.get (ccType,
-					getDatabaseServer(), getDatabasePort(), domain,
-					getDatabaseUser(), getDatabasePassword());
-				cc.setAppsHost(getAppsServer());
-				cc.setWebPort(getAppsServerWebPort());
-				cc.setSSLPort(getAppsServerSSLPort());
-			Ini.setProperty(Ini.P_CONNECTION + "_" + domain, cc.toStringLong());
-		}
-		*/
+		
 		if (getDBHostEx() != null) {
 			cc.setHostSecond(getDBHostEx());
 			cc.setDbNameSecond(getDBNameEx());
@@ -645,12 +633,8 @@ public class ConfigurationData
 		}
 		
 		Ini.setProperty(Ini.P_TRACELEVEL, "SEVERE");
-		//org.eclipse.jetty.osgi.annotations.TraceLevel=SEVERE
-		//org.eclipse.jetty.annotations.TraceLevel=SEVERE
-		//-Dorg.eclipse.jetty.annotations.AnnotationParser.LEVEL=OFF -Dorg.eclipse.jetty.LEVEL=OFF
 		Ini.setProperty("org.eclipse.jetty.osgi.annotations.TraceLevel", "OFF");
 		Ini.setProperty("org.eclipse.jetty.annotations.AnnotationParser.LEVEL", "OFF");
-		//org.eclipse.jetty.LEVEL", "OFF"
 		Ini.setProperty("org.eclipse.jetty.LEVEL", "OFF");
 		Ini.saveProperties(false);
 		return true;
@@ -666,28 +650,20 @@ public class ConfigurationData
 		return p_properties;
 	}	//	getProperties
 
-	/**
-	 * 	Get Adempiere Home
-	 *	@return adempiere home
-	 */
 	public String getEONEHome()
 	{
 		return p_panel != null
 			? p_panel.fEONEHome.getText()
 			: (String)p_properties.get(EONE_HOME);
-	}	//	getAdempiereHome
+	}
 
-	/**
-	 * 	Set Adempiere Home
-	 *	@param adempiereHome
-	 */
 	public void setEONEHome (String eoneHome)
 	{
 		if (p_panel != null)
 			p_panel.fEONEHome.setText(eoneHome);
 		else
 			updateProperty(EONE_HOME, eoneHome);
-	}	//	setAdempiereHome
+	}
 
 	/**
 	 * 	Get Key Store
@@ -944,9 +920,6 @@ public class ConfigurationData
 			if (p_panel != null)
 			{
 				String[] databases = m_databaseConfig[index].discoverDatabases(selected);
-				//DefaultComboBoxModel<Object> model = new DefaultComboBoxModel<Object>(databases);
-				//p_panel.fDatabaseDiscovered.setModel(model);
-				//p_panel.fDatabaseDiscovered.setEnabled(databases.length != 0);
 				if (databases.length > 0)
 					p_panel.fDatabaseName.setText(databases[0]);
 			}

@@ -29,18 +29,18 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.adempiere.base.IModelFactory;
-import org.adempiere.base.IServiceReferenceHolder;
-import org.adempiere.base.Service;
-import org.compiere.db.Database;
-import org.compiere.db.EONEDatabase;
-import org.compiere.util.CCache;
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.KeyNamePair;
-import org.compiere.util.Msg;
-import org.compiere.util.Util;
+import eone.base.IModelFactory;
+import eone.base.IServiceReferenceHolder;
+import eone.base.Service;
+import eone.db.Database;
+import eone.db.EONEDatabase;
+import eone.util.CCache;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.Env;
+import eone.util.KeyNamePair;
+import eone.util.Msg;
+import eone.util.Util;
 
 
 public class MTable extends X_AD_Table

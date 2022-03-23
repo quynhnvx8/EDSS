@@ -21,12 +21,11 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.CCache;
-import org.compiere.util.DB;
-import org.compiere.util.ProcessUtil;
-import org.compiere.util.Trx;
-
 import eone.base.process.ProcessInfo;
+import eone.util.CCache;
+import eone.util.DB;
+import eone.util.ProcessUtil;
+import eone.util.Trx;
 
 /**
  *  Process Model

@@ -22,8 +22,8 @@ import java.sql.Timestamp;
 import java.text.Collator;
 import java.util.Comparator;
 
-import org.compiere.util.Language;
-import org.compiere.util.NamePair;
+import eone.util.Language;
+import eone.util.NamePair;
 
 /**
  * Default comparator, adapted from MSort

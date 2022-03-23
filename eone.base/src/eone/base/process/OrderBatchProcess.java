@@ -22,10 +22,9 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.logging.Level;
 
-import org.compiere.util.EONEUserError;
-import org.compiere.util.DB;
-
 import eone.base.model.MOrder;
+import eone.util.DB;
+import eone.util.EONEUserError;
 
 
 /**

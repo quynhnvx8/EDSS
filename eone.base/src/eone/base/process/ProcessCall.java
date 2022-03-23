@@ -19,8 +19,8 @@ package eone.base.process;
 import java.util.HashMap;
 import java.util.Properties;
 
-import org.compiere.util.IProcessUI;
-import org.compiere.util.Trx;
+import eone.util.IProcessUI;
+import eone.util.Trx;
 
 /**
  *  Interface for user started processes.

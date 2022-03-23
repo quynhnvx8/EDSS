@@ -13,10 +13,9 @@
  *****************************************************************************/
 package eone.report.jasper;
 
-import org.adempiere.base.IProcessFactory;
-import org.compiere.util.ProcessUtil;
-
+import eone.base.IProcessFactory;
 import eone.base.process.ProcessCall;
+import eone.util.ProcessUtil;
 
 /**
  * ProcessFactory to start the ReportStarter class.

@@ -21,7 +21,6 @@ import java.util.logging.Level;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.compiere.util.CLogger;
 import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.au.out.AuScript;
 import org.zkoss.zk.ui.Executions;
@@ -34,6 +33,7 @@ import org.zkoss.zul.Iframe;
 import org.zkoss.zul.Separator;
 
 import eone.base.model.MAttachmentEntry;
+import eone.util.CLogger;
 import eone.webui.component.Button;
 import eone.webui.component.ConfirmPanel;
 import eone.webui.component.Listbox;

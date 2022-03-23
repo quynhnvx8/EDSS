@@ -1,7 +1,5 @@
 package eone.webui.panel;
 
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.zkoss.zk.ui.IdSpace;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -13,6 +11,8 @@ import org.zkoss.zul.Tree;
 import org.zkoss.zul.Treeitem;
 import org.zkoss.zul.Vbox;
 
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.theme.ThemeManager;
 import eone.webui.util.TreeItemAction;
 import eone.webui.util.TreeUtils;

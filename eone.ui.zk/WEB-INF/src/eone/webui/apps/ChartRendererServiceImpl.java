@@ -16,9 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 
-import org.adempiere.apps.graph.GraphBuilder;
-import org.adempiere.apps.graph.GraphColumn;
-import org.compiere.util.CLogger;
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.encoders.EncoderUtil;
@@ -36,8 +33,11 @@ import org.zkoss.zul.Area;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Imagemap;
 
+import eone.apps.graph.GraphBuilder;
+import eone.apps.graph.GraphColumn;
 import eone.base.model.MGoal;
 import eone.base.model.MQuery;
+import eone.util.CLogger;
 
 /**
  * 

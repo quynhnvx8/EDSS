@@ -21,10 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.KeyNamePair;
-import org.compiere.util.NamePair;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.KeyNamePair;
+import eone.util.NamePair;
 
 /**
  *	Account Model Lookup - Maintains ValidCombination Info for Display & Edit - not cached

@@ -1,9 +1,8 @@
 package eone.webui.factory;
 
-import org.compiere.util.DisplayType;
-
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
+import eone.util.DisplayType;
 import eone.webui.editor.IEditorConfiguration;
 import eone.webui.editor.WAssignmentEditor;
 import eone.webui.editor.WBinaryEditor;

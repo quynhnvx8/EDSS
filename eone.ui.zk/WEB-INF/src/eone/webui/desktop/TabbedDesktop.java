@@ -15,8 +15,6 @@ package eone.webui.desktop;
 
 import java.util.List;
 
-import org.compiere.util.Callback;
-import org.compiere.util.Env;
 import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
@@ -29,6 +27,8 @@ import eone.base.model.MForm;
 import eone.base.model.MInfoWindow;
 import eone.base.model.MQuery;
 import eone.base.model.MTask;
+import eone.util.Callback;
+import eone.util.Env;
 import eone.webui.EONEIdGenerator;
 import eone.webui.adwindow.ADWindow;
 import eone.webui.apps.ProcessDialog;

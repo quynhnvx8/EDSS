@@ -30,7 +30,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.compiere.util.CLogFile;
+import eone.util.CLogFile;
 
 /**
  * @author hengsin

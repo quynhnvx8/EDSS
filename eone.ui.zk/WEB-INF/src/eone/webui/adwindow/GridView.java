@@ -11,14 +11,6 @@ import java.util.Properties;
 
 import javax.swing.table.AbstractTableModel;
 
-import org.adempiere.base.Core;
-import org.compiere.util.CLogger;
-import org.compiere.util.Callback;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.GridRowCtx;
-import org.compiere.util.Msg;
-import org.compiere.util.Util;
 import org.zkoss.lang.Library;
 import org.zkoss.zk.au.out.AuFocus;
 import org.zkoss.zk.au.out.AuScript;
@@ -41,12 +33,20 @@ import org.zkoss.zul.Tabpanel;
 import org.zkoss.zul.Vlayout;
 import org.zkoss.zul.event.ZulEvents;
 
+import eone.base.Core;
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
 import eone.base.model.GridTable;
 import eone.base.model.MSysConfig;
 import eone.base.model.StateChangeEvent;
 import eone.base.model.StateChangeListener;
+import eone.util.CLogger;
+import eone.util.Callback;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.GridRowCtx;
+import eone.util.Msg;
+import eone.util.Util;
 import eone.webui.ClientInfo;
 import eone.webui.component.Checkbox;
 import eone.webui.component.Columns;

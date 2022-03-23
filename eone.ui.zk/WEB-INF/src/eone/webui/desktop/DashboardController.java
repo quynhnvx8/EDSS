@@ -9,9 +9,6 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.adempiere.base.Service;
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Desktop;
 import org.zkoss.zk.ui.HtmlBasedComponent;
@@ -34,6 +31,7 @@ import org.zkoss.zul.Timer;
 import org.zkoss.zul.Toolbarbutton;
 import org.zkoss.zul.Vlayout;
 
+import eone.base.Service;
 import eone.base.model.MChart;
 import eone.base.model.MDashboardContent;
 import eone.base.model.MDashboardContentAccess;
@@ -41,6 +39,8 @@ import eone.base.model.MDashboardPreference;
 import eone.base.model.MGoal;
 import eone.base.model.MSysConfig;
 import eone.exceptions.EONEException;
+import eone.util.CLogger;
+import eone.util.Env;
 import eone.webui.ClientInfo;
 import eone.webui.apps.ChartModel;
 import eone.webui.apps.IChartRendererService;

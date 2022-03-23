@@ -20,15 +20,15 @@ import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 
 import org.apache.commons.codec.binary.Base64;
-import org.compiere.EOne;
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
 import org.zkoss.zk.au.out.AuScript;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.util.Clients;
 
+import eone.EOne;
 import eone.base.model.MSystem;
 import eone.base.model.MUser;
+import eone.util.CLogger;
+import eone.util.Env;
 
 /**
  * class to manage browser token for auto authentication

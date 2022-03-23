@@ -4,14 +4,13 @@ import java.net.InetAddress;
 import java.sql.Connection;
 import java.util.logging.Level;
 
-import org.compiere.db.Database;
-import org.compiere.db.EONEDatabase;
-import org.compiere.util.CLogger;
-
+import eone.db.Database;
+import eone.db.EONEDatabase;
 import eone.install.ConfigurationData;
 import eone.install.DBConfigStatus;
 import eone.install.IDBConfigMonitor;
 import eone.install.IDatabaseConfig;
+import eone.util.CLogger;
 
 
 public class ConfigPostgreSQL implements IDatabaseConfig

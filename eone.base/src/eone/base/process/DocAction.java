@@ -3,10 +3,9 @@ package eone.base.process;
 
 import java.util.Properties;
 
-import org.compiere.util.CLogger;
-
 import eone.base.model.SystemIDs;
 import eone.exceptions.EONEException;
+import eone.util.CLogger;
 
 
 public interface DocAction

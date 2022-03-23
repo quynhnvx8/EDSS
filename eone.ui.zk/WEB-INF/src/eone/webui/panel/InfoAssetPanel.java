@@ -24,9 +24,6 @@ import java.util.logging.Level;
 
 import org.compiere.minigrid.ColumnInfo;
 import org.compiere.minigrid.IDColumn;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
@@ -40,6 +37,9 @@ import org.zkoss.zul.Vbox;
 
 import eone.base.model.MLookupFactory;
 import eone.base.model.MQuery;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.apps.AEnv;
 import eone.webui.component.Grid;
 import eone.webui.component.GridFactory;

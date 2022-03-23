@@ -16,13 +16,12 @@ package eone.webui.util;
 import java.io.Serializable;
 import java.util.Properties;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
-import org.compiere.util.Language;
-
 import eone.base.model.I_AD_Preference;
 import eone.base.model.MPreference;
 import eone.base.model.Query;
+import eone.util.CLogger;
+import eone.util.Env;
+import eone.util.Language;
 
 /**
  *

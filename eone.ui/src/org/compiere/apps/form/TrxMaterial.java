@@ -19,14 +19,14 @@ import java.sql.Timestamp;
 import java.util.logging.Level;
 
 import org.compiere.apps.IStatusBar;
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 
 import eone.base.model.GridTab;
 import eone.base.model.GridWindow;
 import eone.base.model.GridWindowVO;
 import eone.base.model.MQuery;
+import eone.util.CLogger;
+import eone.util.Env;
+import eone.util.Msg;
 
 public class TrxMaterial {
 

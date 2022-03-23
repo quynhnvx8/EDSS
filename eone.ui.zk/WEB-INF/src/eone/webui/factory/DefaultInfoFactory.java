@@ -1,11 +1,10 @@
 
 package eone.webui.factory;
 
-import org.compiere.util.Env;
-
 import eone.base.model.GridField;
 import eone.base.model.Lookup;
 import eone.base.model.MInfoWindow;
+import eone.util.Env;
 import eone.webui.info.InfoWindow;
 import eone.webui.panel.InfoGeneralPanel;
 import eone.webui.panel.InfoPanel;

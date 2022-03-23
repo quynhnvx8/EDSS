@@ -8,9 +8,6 @@ import java.util.Properties;
 
 import javax.servlet.http.HttpSession;
 
-import org.compiere.util.Env;
-import org.compiere.util.ServerContext;
-import org.compiere.util.ServerContextURLHandler;
 import org.zkoss.util.Locales;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Desktop;
@@ -28,6 +25,9 @@ import org.zkoss.zk.ui.util.DesktopInit;
 import org.zkoss.zk.ui.util.ExecutionCleanup;
 import org.zkoss.zk.ui.util.ExecutionInit;
 
+import eone.util.Env;
+import eone.util.ServerContext;
+import eone.util.ServerContextURLHandler;
 import eone.webui.EONEWebUI;
 
 /**

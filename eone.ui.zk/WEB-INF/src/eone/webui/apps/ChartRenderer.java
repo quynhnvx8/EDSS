@@ -4,8 +4,6 @@ import java.awt.image.BufferedImage;
 import java.util.Iterator;
 import java.util.logging.Level;
 
-import org.adempiere.apps.graph.ChartBuilder;
-import org.compiere.util.CLogger;
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.encoders.EncoderUtil;
@@ -26,8 +24,10 @@ import org.zkoss.zk.ui.event.MouseEvent;
 import org.zkoss.zul.Area;
 import org.zkoss.zul.Imagemap;
 
+import eone.apps.graph.ChartBuilder;
 import eone.base.model.MChart;
 import eone.base.model.MQuery;
+import eone.util.CLogger;
 
 /**
  * @author Paul Bowden, Adaxa Pty Ltd

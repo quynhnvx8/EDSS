@@ -15,12 +15,11 @@ package eone.webui.util;
 
 import javax.activation.DataSource;
 
-import org.adempiere.base.IServiceReferenceHolder;
-import org.adempiere.base.Service;
-import org.compiere.util.ByteArrayDataSource;
-import org.compiere.util.CLogErrorBuffer;
-import org.compiere.util.Env;
-
+import eone.base.IServiceReferenceHolder;
+import eone.base.Service;
+import eone.util.ByteArrayDataSource;
+import eone.util.CLogErrorBuffer;
+import eone.util.Env;
 import eone.webui.ClientInfo;
 import eone.webui.factory.IFeedbackService;
 import eone.webui.session.SessionManager;

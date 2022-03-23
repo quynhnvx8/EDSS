@@ -23,18 +23,18 @@ import java.util.Vector;
 import java.util.logging.Level;
 
 import org.compiere.minigrid.IMiniTable;
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.KeyNamePair;
-import org.compiere.util.Msg;
-import org.compiere.util.TimeUtil;
-import org.compiere.util.Util;
 
 import eone.base.model.MDocType;
 import eone.base.model.MRole;
 import eone.base.model.MSysConfig;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.KeyNamePair;
+import eone.util.Msg;
+import eone.util.TimeUtil;
+import eone.util.Util;
 
 public class Allocation
 {

@@ -3,11 +3,10 @@ package eone.base.process;
 
 import java.util.logging.Level;
 
-import org.compiere.util.EONEUserError;
-import org.compiere.util.DB;
-
 import eone.base.model.MField;
 import eone.base.model.MTab;
+import eone.util.DB;
+import eone.util.EONEUserError;
 
 
 public class TabCopy extends SvrProcess

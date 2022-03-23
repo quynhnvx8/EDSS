@@ -4,8 +4,8 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Properties;
 
-import org.compiere.util.CCache;
-import org.compiere.util.Msg;
+import eone.util.CCache;
+import eone.util.Msg;
 
 public class MProductCategory extends X_M_Product_Category
 {

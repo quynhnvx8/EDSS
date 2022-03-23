@@ -17,11 +17,11 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
 
 import eone.base.model.GridField;
+import eone.util.CLogger;
 import eone.webui.ValuePreference;
 import eone.webui.component.Timebox;
 import eone.webui.event.ContextMenuEvent;

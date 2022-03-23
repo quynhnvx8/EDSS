@@ -9,10 +9,10 @@ import java.util.Collections;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.Evaluatee;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.Env;
+import eone.util.Evaluatee;
 
 public class GridTabVO implements Evaluatee, Serializable
 {

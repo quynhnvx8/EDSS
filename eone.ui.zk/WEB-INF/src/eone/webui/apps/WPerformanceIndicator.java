@@ -18,9 +18,6 @@ import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.jfree.chart.ChartPanel;
 import org.zkoss.zk.ui.event.AfterSizeEvent;
 import org.zkoss.zk.ui.event.Event;
@@ -30,6 +27,9 @@ import org.zkoss.zul.Menuitem;
 import org.zkoss.zul.Menupopup;
 
 import eone.base.model.MGoal;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.Extensions;
 import eone.webui.component.Panel;
 import eone.webui.theme.ThemeManager;

@@ -24,13 +24,12 @@ import java.sql.Timestamp;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-
 import eone.base.model.CalloutEngine;
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
 import eone.base.model.MConversionRate;
+import eone.util.DB;
+import eone.util.Env;
 
 
 /**

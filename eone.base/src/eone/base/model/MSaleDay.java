@@ -7,12 +7,11 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
-
 import eone.base.process.DocAction;
 import eone.base.process.DocumentEngine;
+import eone.util.DB;
+import eone.util.Env;
+import eone.util.Msg;
 
 public class MSaleDay extends X_C_SaleDay implements DocAction
 {

@@ -20,10 +20,11 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 
 import org.compiere.apps.IStatusBar;
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.KeyNamePair;
-import org.compiere.util.ValueNamePair;
+
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.KeyNamePair;
+import eone.util.ValueNamePair;
 
 
 public class TranslationController

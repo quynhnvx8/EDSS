@@ -22,13 +22,12 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.logging.Level;
 
-import org.compiere.util.EONEUserError;
-import org.compiere.util.DB;
-import org.compiere.util.Msg;
-
 import eone.base.model.MBPartner;
 import eone.base.model.MOrder;
 import eone.base.model.MOrderLine;
+import eone.util.DB;
+import eone.util.EONEUserError;
+import eone.util.Msg;
 
 /**
  *	Generate PO from Sales Order

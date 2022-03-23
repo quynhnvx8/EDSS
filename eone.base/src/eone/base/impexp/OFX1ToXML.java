@@ -25,7 +25,7 @@ import java.io.PipedReader;
 import java.io.PipedWriter;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
+import eone.util.CLogger;
 
 /**
  *	Covert OFX 1XX (SQGML) into valid XML

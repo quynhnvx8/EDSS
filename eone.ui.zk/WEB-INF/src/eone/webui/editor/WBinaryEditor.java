@@ -16,12 +16,12 @@ package eone.webui.editor;
 
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 
 import eone.base.model.GridField;
+import eone.util.CLogger;
 import eone.webui.LayoutUtils;
 import eone.webui.adwindow.ADWindow;
 import eone.webui.adwindow.ADWindowContent;

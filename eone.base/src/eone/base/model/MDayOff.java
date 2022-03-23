@@ -4,11 +4,10 @@ import java.sql.ResultSet;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.DB;
-import org.compiere.util.TimeUtil;
-
 import eone.base.process.DocAction;
 import eone.base.process.DocumentEngine;
+import eone.util.DB;
+import eone.util.TimeUtil;
 
 
 public class MDayOff extends X_HR_DayOff implements DocAction

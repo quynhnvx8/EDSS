@@ -18,7 +18,7 @@ package org.compiere.server;
 
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
+import eone.util.CLogger;
 
 /**
  *	Adempiere Server Group

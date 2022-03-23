@@ -19,12 +19,12 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Properties;
 
-import org.compiere.util.CCache;
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.Evaluatee;
-import org.compiere.util.Evaluator;
-import org.compiere.util.Util;
+import eone.util.CCache;
+import eone.util.DB;
+import eone.util.Env;
+import eone.util.Evaluatee;
+import eone.util.Evaluator;
+import eone.util.Util;
 
 /**
  *  Zoom Condition model

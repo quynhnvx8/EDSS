@@ -9,7 +9,7 @@
 	
 	<function>
 		<name>getCtx</name>
-		<function-class>org.compiere.util.Env</function-class>
+		<function-class>eone.util.Env</function-class>
 		<function-signature>
 	java.util.Properties getCtx()
 		</function-signature>
@@ -20,7 +20,7 @@
 	
 	<function>
 		<name>getMsg</name>
-		<function-class>org.compiere.util.Msg</function-class>
+		<function-class>eone.util.Msg</function-class>
 		<function-signature>
 	java.lang.String getMsg(java.util.Properties,java.lang.String)
 		</function-signature>
@@ -31,7 +31,7 @@
 	
 	<function>
 		<name>cleanAmp</name>
-		<function-class>org.compiere.util.Util</function-class>
+		<function-class>eone.util.Util</function-class>
 		<function-signature>
 	java.lang.String cleanAmp(java.lang.String)
 		</function-signature>

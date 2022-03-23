@@ -10,9 +10,9 @@ import java.util.Comparator;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
+import eone.util.CLogger;
+import eone.util.DisplayType;
+import eone.util.Env;
 
 
 public class GridFieldVO implements Serializable

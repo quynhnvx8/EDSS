@@ -16,13 +16,13 @@ package eone.webui.component;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-import org.compiere.util.Env;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Div;
 
 import eone.base.model.MSysConfig;
+import eone.util.Env;
 import eone.webui.LayoutUtils;
 import eone.webui.util.ZKUpdateUtil;
 

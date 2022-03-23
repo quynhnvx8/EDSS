@@ -4,13 +4,6 @@ package eone.webui.panel;
 import java.sql.Timestamp;
 import java.util.Properties;
 
-import org.compiere.util.Env;
-import org.compiere.util.ItemMandatory;
-import org.compiere.util.KeyNamePair;
-import org.compiere.util.Language;
-import org.compiere.util.Login;
-import org.compiere.util.Msg;
-import org.compiere.util.TimeUtil;
 import org.zkoss.zk.au.out.AuFocus;
 import org.zkoss.zk.au.out.AuScript;
 import org.zkoss.zk.ui.event.Deferrable;
@@ -24,6 +17,13 @@ import org.zkoss.zul.Div;
 
 import eone.base.model.MSysConfig;
 import eone.base.model.MUser;
+import eone.util.Env;
+import eone.util.ItemMandatory;
+import eone.util.KeyNamePair;
+import eone.util.Language;
+import eone.util.Login;
+import eone.util.Msg;
+import eone.util.TimeUtil;
 import eone.webui.EONEIdGenerator;
 import eone.webui.LayoutUtils;
 import eone.webui.component.ComboItem;

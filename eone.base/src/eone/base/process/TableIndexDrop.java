@@ -14,9 +14,8 @@ package eone.base.process;
 
 import java.math.BigDecimal;
 
-import org.compiere.util.DB;
-
 import eone.base.model.MTableIndex;
+import eone.util.DB;
 
 public class TableIndexDrop extends SvrProcess {
 

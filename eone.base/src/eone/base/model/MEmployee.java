@@ -6,11 +6,10 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-
 import eone.base.process.DocAction;
 import eone.base.process.DocumentEngine;
+import eone.util.DB;
+import eone.util.Env;
 
 
 public class MEmployee extends X_HR_Employee implements DocAction

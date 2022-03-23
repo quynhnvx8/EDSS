@@ -4,14 +4,13 @@ package eone.base.process;
 
 import java.util.logging.Level;
 
-import org.compiere.util.DB;
-import org.compiere.util.VNCharacterUtils;
-
 import eone.base.model.MBPGroup;
 import eone.base.model.MBPartner;
 import eone.base.model.MEmployee;
 import eone.base.model.MUser;
 import eone.base.model.MUserRoles;
+import eone.util.DB;
+import eone.util.VNCharacterUtils;
 
 public class CreateAccountLogin extends SvrProcess {
 

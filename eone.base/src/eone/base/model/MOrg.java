@@ -4,9 +4,9 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Properties;
 
-import org.compiere.util.CCache;
-import org.compiere.util.DB;
-import org.compiere.util.Msg;
+import eone.util.CCache;
+import eone.util.DB;
+import eone.util.Msg;
 
 public class MOrg extends X_AD_Org
 {

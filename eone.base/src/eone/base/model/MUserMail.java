@@ -21,8 +21,8 @@ import java.util.Properties;
 
 import javax.mail.internet.InternetAddress;
 
-import org.compiere.util.EMail;
-import org.compiere.util.Env;
+import eone.util.EMail;
+import eone.util.Env;
 
 /**
  * 	User Mail Model

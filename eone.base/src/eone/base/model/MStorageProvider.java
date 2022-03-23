@@ -19,12 +19,11 @@ package eone.base.model;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-import org.adempiere.base.IServiceReferenceHolder;
-import org.adempiere.base.Service;
-import org.adempiere.base.ServiceQuery;
-import org.compiere.util.CCache;
-
+import eone.base.IServiceReferenceHolder;
+import eone.base.Service;
+import eone.base.ServiceQuery;
 import eone.exceptions.EONEException;
+import eone.util.CCache;
 
 public class MStorageProvider extends X_AD_StorageProvider {
 	/**

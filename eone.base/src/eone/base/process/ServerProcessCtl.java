@@ -2,8 +2,8 @@ package eone.base.process;
 
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Trx;
+import eone.util.CLogger;
+import eone.util.Trx;
 
 public class ServerProcessCtl implements Runnable {
 	

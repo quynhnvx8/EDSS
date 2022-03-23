@@ -23,11 +23,11 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.logging.Level;
 
-import org.adempiere.base.AbstractProductPricing;
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.Trace;
+import eone.base.AbstractProductPricing;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.Env;
+import eone.util.Trace;
 
 /**
  *  Product Price Calculations

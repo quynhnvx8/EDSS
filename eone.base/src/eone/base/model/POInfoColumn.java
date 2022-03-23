@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
+import eone.util.CLogger;
 
 
 public class POInfoColumn implements Serializable
@@ -29,7 +29,7 @@ public class POInfoColumn implements Serializable
 		DisplayType = displayType;
 		if (columnName.equals("AD_Language"))
 		{
-			DisplayType = org.compiere.util.DisplayType.String;
+			DisplayType = eone.util.DisplayType.String;
 			ColumnClass = String.class;
 		}
 		else if (columnName.equals("Posted") 
@@ -40,15 +40,15 @@ public class POInfoColumn implements Serializable
 		}
 		else if (columnName.equals("Record_ID"))
 		{
-			DisplayType = org.compiere.util.DisplayType.ID;
+			DisplayType = eone.util.DisplayType.ID;
 			ColumnClass = Integer.class;
 		}
-		else if (displayType == org.compiere.util.DisplayType.Button && columnName.endsWith("_ID"))
+		else if (displayType == eone.util.DisplayType.Button && columnName.endsWith("_ID"))
 		{
 			ColumnClass = Integer.class;
 		}
 		else
-			ColumnClass = org.compiere.util.DisplayType.getClass(displayType, true);
+			ColumnClass = eone.util.DisplayType.getClass(displayType, true);
 		IsMandatory = isMandatory;
 		IsSetContext = isSetContext;
 		

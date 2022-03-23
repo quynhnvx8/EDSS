@@ -6,7 +6,7 @@ import java.util.Enumeration;
 import javax.swing.Icon;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import org.compiere.util.Env;
+import eone.util.Env;
 
 public class MTreeNode extends DefaultMutableTreeNode
 {

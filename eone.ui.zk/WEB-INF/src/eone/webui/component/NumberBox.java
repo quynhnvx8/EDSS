@@ -5,8 +5,6 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.ParseException;
 
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
 import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -19,6 +17,8 @@ import org.zkoss.zul.Popup;
 import org.zkoss.zul.Vbox;
 
 import eone.base.model.MSysConfig;
+import eone.util.DisplayType;
+import eone.util.Env;
 import eone.webui.ClientInfo;
 import eone.webui.LayoutUtils;
 import eone.webui.theme.ThemeManager;

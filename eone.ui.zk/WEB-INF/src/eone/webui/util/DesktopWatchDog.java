@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.TimeUnit;
 
-import org.compiere.EOne;
 import org.zkoss.zk.ui.Desktop;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.WebApp;
@@ -40,6 +39,7 @@ import org.zkoss.zk.ui.sys.ServerPush;
 import org.zkoss.zk.ui.sys.SessionCtrl;
 import org.zkoss.zk.ui.sys.WebAppCtrl;
 
+import eone.EOne;
 import fi.jawsy.jawwa.zk.atmosphere.AtmosphereServerPush;
 
 /**

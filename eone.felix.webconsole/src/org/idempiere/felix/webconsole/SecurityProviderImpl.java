@@ -6,10 +6,10 @@ package org.idempiere.felix.webconsole;
 import java.util.logging.Level;
 
 import org.apache.felix.webconsole.WebConsoleSecurityProvider;
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
 
 import eone.base.model.MUser;
+import eone.util.CLogger;
+import eone.util.Env;
 
 /**
  * @author hengsin

@@ -21,8 +21,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.logging.Level;
 
-import org.compiere.util.CCache;
-import org.compiere.util.CLogger;
+import eone.util.CCache;
+import eone.util.CLogger;
 
 /**
  *  MLookup Data Cache.

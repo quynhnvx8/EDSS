@@ -22,9 +22,9 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.Msg;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.Msg;
 
 
 /**

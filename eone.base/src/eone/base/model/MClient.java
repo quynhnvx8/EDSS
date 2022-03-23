@@ -14,13 +14,13 @@ import java.util.logging.Level;
 
 import javax.mail.internet.InternetAddress;
 
-import org.compiere.db.CConnection;
-import org.compiere.util.CCache;
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.EMail;
-import org.compiere.util.Env;
-import org.compiere.util.Language;
+import eone.db.CConnection;
+import eone.util.CCache;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.EMail;
+import eone.util.Env;
+import eone.util.Language;
 
 /**
  *  Client Model

@@ -17,9 +17,8 @@
 
 package eone.webui.component;
 
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-
+import eone.util.DisplayType;
+import eone.util.Env;
 import eone.webui.apps.AEnv;
 
 /**

@@ -5,11 +5,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-import org.compiere.util.Env;
-
 import eone.base.model.MElementValue;
 import eone.base.model.MGeneral;
 import eone.base.model.MGeneralLine;
+import eone.util.Env;
 
 
 public class Doc_General extends Doc

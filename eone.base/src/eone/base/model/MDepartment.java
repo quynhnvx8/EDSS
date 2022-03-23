@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Properties;
 
-import org.compiere.util.CCache;
+import eone.util.CCache;
 
 
 public class MDepartment extends X_AD_Department

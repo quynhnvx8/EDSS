@@ -20,9 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -34,6 +31,9 @@ import eone.base.model.MQuery;
 import eone.base.model.PO;
 import eone.base.model.Query;
 import eone.base.model.ZoomInfoFactory;
+import eone.util.CLogger;
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.apps.AEnv;
 
 /**

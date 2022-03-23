@@ -21,10 +21,6 @@ import java.sql.Timestamp;
 import java.util.Vector;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -35,6 +31,10 @@ import org.zkoss.zul.North;
 import org.zkoss.zul.South;
 
 import eone.base.model.MDocType;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.apps.AEnv;
 import eone.webui.component.ConfirmPanel;
 import eone.webui.component.Label;

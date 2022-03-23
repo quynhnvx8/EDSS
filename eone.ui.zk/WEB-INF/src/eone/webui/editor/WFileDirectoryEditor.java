@@ -14,12 +14,12 @@
 package eone.webui.editor;
 
 
-import org.compiere.util.CLogger;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 
 import eone.base.model.GridField;
+import eone.util.CLogger;
 import eone.webui.component.FilenameBox;
 import eone.webui.component.FolderBrowser;
 import eone.webui.event.DialogEvents;

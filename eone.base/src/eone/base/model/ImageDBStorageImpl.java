@@ -21,7 +21,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-import org.compiere.util.CLogger;
+import eone.util.CLogger;
 
 /**
  * @author hengsin

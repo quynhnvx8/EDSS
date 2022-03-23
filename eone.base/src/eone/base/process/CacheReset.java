@@ -16,8 +16,8 @@
  *****************************************************************************/
 package eone.base.process;
 
-import org.compiere.util.CacheMgt;
-import org.compiere.util.Env;
+import eone.util.CacheMgt;
+import eone.util.Env;
 
 /**
  *	Reset Cache

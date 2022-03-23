@@ -37,7 +37,7 @@ EONE_WEB_PORT=@EONE_WEB_PORT@
 export EONE_WEB_PORT
 EONE_JNP_PORT=@EONE_JNP_PORT@
 export EONE_JNP_PORT
-#	SSL Settings - see jboss/server/adempiere/deploy/jbossweb.sar/META-INF/jboss-service.xml
+#	SSL Settings - see j/jbossweb.sar/META-INF/jboss-service.xml
 EONE_SSL_PORT=@EONE_SSL_PORT@
 export EONE_SSL_PORT
 EONE_KEYSTORE=@EONE_KEYSTORE@

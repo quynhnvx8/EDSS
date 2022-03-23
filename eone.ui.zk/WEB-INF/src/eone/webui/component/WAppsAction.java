@@ -20,9 +20,8 @@ package eone.webui.component;
 import java.io.IOException;
 import java.net.URI;
 
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
-
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.LayoutUtils;
 import eone.webui.apps.AEnv;
 

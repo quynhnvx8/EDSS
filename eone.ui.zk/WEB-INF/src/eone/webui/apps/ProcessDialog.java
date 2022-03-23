@@ -3,11 +3,6 @@ package eone.webui.apps;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
-import org.compiere.util.Util;
 import org.zkoss.zhtml.Table;
 import org.zkoss.zhtml.Td;
 import org.zkoss.zhtml.Text;
@@ -30,6 +25,11 @@ import org.zkoss.zul.Vlayout;
 
 import eone.base.process.ProcessInfo;
 import eone.base.process.ProcessInfoLog;
+import eone.util.CLogger;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.Msg;
+import eone.util.Util;
 import eone.webui.LayoutUtils;
 import eone.webui.component.ConfirmPanel;
 import eone.webui.component.DocumentLink;

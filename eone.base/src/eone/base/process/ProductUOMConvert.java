@@ -20,12 +20,11 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.logging.Level;
 
-import org.compiere.util.EONEUserError;
-import org.compiere.util.Env;
-
 import eone.base.model.MProduct;
 import eone.base.model.MUOM;
 import eone.base.model.MUOMConvert;
+import eone.util.EONEUserError;
+import eone.util.Env;
 
 
 /**

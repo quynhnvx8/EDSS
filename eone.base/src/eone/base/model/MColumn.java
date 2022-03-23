@@ -31,16 +31,15 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.db.Database;
-import org.compiere.db.EONEDatabase;
-import org.compiere.util.CCache;
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Msg;
-import org.compiere.util.Util;
-
+import eone.db.Database;
+import eone.db.EONEDatabase;
 import eone.exceptions.DBException;
+import eone.util.CCache;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.DisplayType;
+import eone.util.Msg;
+import eone.util.Util;
 
 /**
  * Persistent Column Model

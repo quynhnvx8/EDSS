@@ -27,11 +27,10 @@ package eone.base.process;
 
 import java.util.logging.Level;
 
-import org.compiere.util.EONEUserError;
-import org.compiere.util.Language;
-import org.compiere.util.Util;
-
 import eone.base.model.MLanguage;
+import eone.util.EONEUserError;
+import eone.util.Language;
+import eone.util.Util;
 
 /**
  *	Verify Language Configuration

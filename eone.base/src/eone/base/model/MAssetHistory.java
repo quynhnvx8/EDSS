@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
 
-import org.compiere.util.CCache;
+import eone.util.CCache;
 
 public class MAssetHistory extends X_A_Asset_History
 {

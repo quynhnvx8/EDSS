@@ -27,8 +27,8 @@ package eone.base.model;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-import org.compiere.util.CCache;
-import org.compiere.util.CLogger;
+import eone.util.CCache;
+import eone.util.CLogger;
 
 /**
  *	Persistent Validation Rule Model

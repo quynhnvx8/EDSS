@@ -5,13 +5,6 @@ import java.util.Properties;
 import java.util.UUID;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogMgt;
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.Login;
-import org.compiere.util.Msg;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.event.Event;
@@ -23,6 +16,13 @@ import org.zkoss.zul.Space;
 import org.zkoss.zul.Vlayout;
 
 import eone.base.model.GridField;
+import eone.util.CLogMgt;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.Login;
+import eone.util.Msg;
 import eone.webui.adwindow.ADWindow;
 import eone.webui.adwindow.AbstractADWindowContent;
 import eone.webui.apps.AEnv;
@@ -576,7 +576,7 @@ public class ValuePreference extends Window implements EventListener<Event>
 	 *  Get Context Key
 	 *  preferences in context update follow key.
 	 *  they load when login, and update when change.
-	 *  @see Login#loadPreferences(org.compiere.util.KeyNamePair, org.compiere.util.KeyNamePair, java.sql.Timestamp, String)
+	 *  @see Login#loadPreferences(eone.util.KeyNamePair, eone.util.KeyNamePair, java.sql.Timestamp, String)
 	 *  and set to field when display field, {@link GridField#getDefault()}
 	 *  @return Context Key
 	 */

@@ -16,12 +16,11 @@ package eone.exceptions;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 
-import org.compiere.util.DB;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-
 import eone.base.model.MConversionType;
 import eone.base.model.MCurrency;
+import eone.util.DB;
+import eone.util.DisplayType;
+import eone.util.Env;
 
 /**
  * Any exception that occurs when no currency conversion rate was found

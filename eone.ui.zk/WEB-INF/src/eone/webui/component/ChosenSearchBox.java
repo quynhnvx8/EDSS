@@ -18,13 +18,13 @@ package eone.webui.component;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-import org.compiere.util.ValueNamePair;
 import org.zkoss.addon.chosenbox.Chosenbox;
 import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Div;
 
+import eone.util.ValueNamePair;
 import eone.webui.LayoutUtils;
 
 /**

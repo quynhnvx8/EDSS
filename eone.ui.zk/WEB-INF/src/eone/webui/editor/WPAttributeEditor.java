@@ -19,14 +19,14 @@ import static eone.base.model.SystemIDs.COLUMN_M_PRODUCT_M_ATTRIBUTESETINSTANCE_
 
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
 
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
 import eone.base.model.Lookup;
+import eone.util.CLogger;
+import eone.util.Env;
 import eone.webui.apps.AEnv;
 import eone.webui.component.PAttributebox;
 import eone.webui.event.ContextMenuEvent;

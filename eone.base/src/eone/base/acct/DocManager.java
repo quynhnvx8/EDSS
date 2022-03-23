@@ -8,17 +8,16 @@ import java.sql.Savepoint;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adempiere.base.IDocFactory;
-import org.adempiere.base.IServiceReferenceHolder;
-import org.adempiere.base.Service;
-import org.adempiere.base.ServiceQuery;
-import org.compiere.util.CCache;
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.Trx;
-
+import eone.base.IDocFactory;
+import eone.base.IServiceReferenceHolder;
+import eone.base.Service;
+import eone.base.ServiceQuery;
 import eone.exceptions.DBException;
 import eone.exceptions.EONEException;
+import eone.util.CCache;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.Trx;
 
 
 public class DocManager {

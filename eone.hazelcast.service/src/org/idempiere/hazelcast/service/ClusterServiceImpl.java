@@ -21,12 +21,12 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
-import org.idempiere.distributed.IClusterMember;
-import org.idempiere.distributed.IClusterService;
-
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IExecutorService;
 import com.hazelcast.core.Member;
+
+import eone.distributed.IClusterMember;
+import eone.distributed.IClusterService;
 
 /**
  * @author hengsin

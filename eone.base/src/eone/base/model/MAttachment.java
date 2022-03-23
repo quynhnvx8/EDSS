@@ -32,14 +32,14 @@ import java.util.stream.Collectors;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.Target;
 import org.apache.tools.ant.taskdefs.Zip;
-import org.compiere.tools.FileUtil;
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.MimeType;
-import org.compiere.util.Util;
 
 import eone.exceptions.EONEException;
+import eone.tools.FileUtil;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.Env;
+import eone.util.MimeType;
+import eone.util.Util;
 
 
 /**
@@ -541,7 +541,7 @@ public class MAttachment extends X_AD_Attachment
 
 		System.exit(0);
 		
-		org.compiere.EOne.startupEnvironment(true);
+		eone.EOne.startupEnvironment(true);
 		MAttachment att = new MAttachment(Env.getCtx(), 100, 0, null);
 		att.addEntry(new File ("C:\\Adempiere\\Dev.properties"));
 		att.addEntry(new File ("C:\\Adempiere\\index.html"));

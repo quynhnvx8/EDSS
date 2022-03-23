@@ -562,11 +562,7 @@
 					            <ws>win32</ws>
 					            <arch>x86_64</arch>
 				            </environment>
-					    <environment>
-					            <os>macosx</os>
-					            <ws>cocoa</ws>
-					            <arch>x86_64</arch>
-				            </environment>
+					    
 			            </environments>
 			            <executionEnvironmentDefault>JavaSE-${jdk.version}</executionEnvironmentDefault>
 			            <executionEnvironment>JavaSE-${jdk.version}</executionEnvironment>

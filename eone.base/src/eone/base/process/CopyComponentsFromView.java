@@ -26,14 +26,13 @@ package eone.base.process;
 
 import java.util.logging.Level;
 
-import org.compiere.util.AdempiereSystemError;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
-
 import eone.base.model.MTable;
 import eone.base.model.MViewColumn;
 import eone.base.model.MViewComponent;
 import eone.base.model.PO;
+import eone.util.AdempiereSystemError;
+import eone.util.Env;
+import eone.util.Msg;
 
 /**
  *	Copy components from one view to other

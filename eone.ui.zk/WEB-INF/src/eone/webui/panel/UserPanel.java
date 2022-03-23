@@ -3,9 +3,6 @@ package eone.webui.panel;
 
 import java.util.Properties;
 
-import org.compiere.util.Callback;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.HtmlBasedComponent;
 import org.zkoss.zk.ui.event.Event;
@@ -23,6 +20,9 @@ import org.zkoss.zul.impl.LabelImageElement;
 
 import eone.base.model.MClient;
 import eone.base.model.MUser;
+import eone.util.Callback;
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.ClientInfo;
 import eone.webui.LayoutUtils;
 import eone.webui.component.Label;

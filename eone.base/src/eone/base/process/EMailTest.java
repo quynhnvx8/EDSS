@@ -19,10 +19,9 @@ package eone.base.process;
 import java.io.File;
 import java.util.logging.Level;
 
-import org.compiere.util.Env;
-import org.compiere.util.Ini;
-
 import eone.base.model.MClient;
+import eone.util.Env;
+import eone.util.Ini;
 
 /**
  *	Client EMail Test

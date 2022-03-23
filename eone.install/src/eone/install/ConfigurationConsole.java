@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.security.KeyStore;
 
-import org.compiere.util.Ini;
+import eone.util.Ini;
 
 /**
  *
@@ -250,7 +250,7 @@ public class ConfigurationConsole {
 					cn = System.getProperty("user.name");
 				String ou = data.getProperty(ConfigurationData.EONE_CERT_ORG_UNIT);
 				if (ou == null)
-					ou = "EONE";//iDempiereUser
+					ou = "EONE";//
 				String o = data.getProperty(ConfigurationData.EONE_CERT_ORG);
 				if (o == null)
 					o = System.getProperty("user.name");
@@ -326,7 +326,7 @@ public class ConfigurationConsole {
 	}
 
 	private void eoneHome(BufferedReader reader, PrintWriter writer) throws IOException {
-		writer.println("iDempiere Home ["+data.getEONEHome()+"]:");
+		writer.println("EONE Home ["+data.getEONEHome()+"]:");
 		String input = reader.readLine();
 		if (input != null && input.trim().length() > 0)
 		{

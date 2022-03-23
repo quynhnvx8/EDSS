@@ -19,7 +19,7 @@ package eone.base.model;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-import org.compiere.util.CCache;
+import eone.util.CCache;
 
 
 public class MRefTable extends X_AD_Ref_Table

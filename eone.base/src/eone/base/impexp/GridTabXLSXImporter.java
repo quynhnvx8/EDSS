@@ -28,25 +28,15 @@ import java.util.TreeMap;
 import java.util.UUID;
 import java.util.logging.Level;
 
-import org.adempiere.base.IGridTabImporter;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row.MissingCellPolicy;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.compiere.tools.FileUtil;
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.IProcessUI;
-import org.compiere.util.Language;
-import org.compiere.util.Msg;
-import org.compiere.util.Trx;
-import org.compiere.util.ValueNamePair;
 import org.supercsv.exception.SuperCsvCellProcessorException;
 
+import eone.base.IGridTabImporter;
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
 import eone.base.model.MColumn;
@@ -54,6 +44,16 @@ import eone.base.model.MRefList;
 import eone.base.model.MTable;
 import eone.base.model.PO;
 import eone.exceptions.EONEException;
+import eone.tools.FileUtil;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.IProcessUI;
+import eone.util.Language;
+import eone.util.Msg;
+import eone.util.Trx;
+import eone.util.ValueNamePair;
 
 public class GridTabXLSXImporter implements IGridTabImporter {
 	private static final String ERROR_HEADER = "_ERROR_";
@@ -339,10 +339,10 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 
 				boolean error = false;
 				Trx trx = null;
-				String trxName = null;
+				String trxName = "Import_" + gridTab.getTableName() + "_" + UUID.randomUUID();
 				trx = Trx.get(trxName, true);
 				
-				List<String> rowsTmpResult = new ArrayList<String>();
+				//List<String> rowsTmpResult = new ArrayList<String>();
 				System.out.println("FOR ROWS STARTS...");
 				for (int idx = 0; idx < data.size(); idx++) {
 					lstHeader.clear();
@@ -369,17 +369,17 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 
 					if (!isMasterok && isDetail) {
 						rawLine = rawLine + Msg.getMsg(Env.getCtx(), "NotProccesed") +"\n";
-						rowsTmpResult.add(rawLine);
+						//rowsTmpResult.add(rawLine);
 						continue;
 					}
 					try {
 
 						if (!isDetail) {
-							trxName = "Import_" + gridTab.getTableName() + "_" + UUID.randomUUID();
+							
 							gridTab.getTableModel().setImportingMode(false, trxName);
 							
 							masterRecord = null;
-							rowsTmpResult.clear();
+							//rowsTmpResult.clear();
 							isMasterok = true;
 						}
 
@@ -594,10 +594,8 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 					} 
 					// write
 					rawLine = rawLine + rowResult.toString() + "\n";
-					rowsTmpResult.add(rawLine);
-				}
-				for(int i = 0; i < rowsTmpResult.size() ; i++) {
-					logFileW.write(rowsTmpResult.get(i));
+					//rowsTmpResult.add(rawLine);
+					logFileW.write(rawLine);
 				}
 			}
 			

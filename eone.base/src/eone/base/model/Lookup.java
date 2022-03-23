@@ -24,10 +24,10 @@ import java.util.logging.Level;
 import javax.swing.AbstractListModel;
 import javax.swing.MutableComboBoxModel;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.KeyNamePair;
-import org.compiere.util.NamePair;
-import org.compiere.util.ValueNamePair;
+import eone.util.CLogger;
+import eone.util.KeyNamePair;
+import eone.util.NamePair;
+import eone.util.ValueNamePair;
 
 /**
  *	Base Class for MLookup, MLocator.

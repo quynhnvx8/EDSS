@@ -12,10 +12,10 @@
  *****************************************************************************/
 package eone.webui.adwindow;
 
-import org.compiere.util.Evaluatee;
 import org.zkoss.zk.ui.Component;
 
 import eone.base.model.GridTab;
+import eone.util.Evaluatee;
 
 /**
  * Interface for UI component that edit/display record using ad_tab definitions

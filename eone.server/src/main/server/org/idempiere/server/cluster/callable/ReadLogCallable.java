@@ -34,7 +34,7 @@ import java.nio.channels.FileChannel;
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogFile;
+import eone.util.CLogFile;
 
 /**
  * @author hengsin

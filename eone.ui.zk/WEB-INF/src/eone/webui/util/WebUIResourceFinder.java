@@ -17,8 +17,7 @@ import java.net.URL;
 import java.util.Enumeration;
 import java.util.regex.Pattern;
 
-import org.adempiere.base.IResourceFinder;
-
+import eone.base.IResourceFinder;
 import eone.webui.WebUIActivator;
 import eone.webui.theme.ThemeManager;
 

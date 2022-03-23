@@ -6,7 +6,6 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.compiere.util.Util;
 import org.zkoss.zk.au.out.AuOuter;
 import org.zkoss.zk.au.out.AuScript;
 import org.zkoss.zk.ui.AbstractComponent;
@@ -26,6 +25,7 @@ import org.zkoss.zul.Space;
 import org.zkoss.zul.Window;
 import org.zkoss.zul.Window.Mode;
 
+import eone.util.Util;
 import eone.webui.component.Label;
 import eone.webui.component.Mask;
 import eone.webui.component.Tabpanel;

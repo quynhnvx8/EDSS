@@ -18,7 +18,8 @@ package eone.base.model;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import org.compiere.util.KeyNamePair;
+
+import eone.util.KeyNamePair;
 
 /** Generated Interface for C_Conversion_Rate
  *  @author iDempiere (generated) 

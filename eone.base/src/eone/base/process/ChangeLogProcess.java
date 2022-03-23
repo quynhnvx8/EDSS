@@ -22,12 +22,11 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-import org.compiere.util.DB;
-import org.compiere.util.DisplayType;
-
 import eone.base.model.MChangeLog;
 import eone.base.model.MColumn;
 import eone.base.model.MTable;
+import eone.util.DB;
+import eone.util.DisplayType;
 
 
 /**

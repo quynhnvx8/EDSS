@@ -22,15 +22,14 @@ import java.sql.ResultSet;
 import java.sql.Types;
 import java.util.logging.Level;
 
-import org.compiere.db.EONEDatabase;
-import org.compiere.util.AdempiereSystemError;
-import org.compiere.util.DB;
-import org.compiere.util.DisplayType;
-
 import eone.base.model.MColumn;
 import eone.base.model.MTable;
 import eone.base.model.M_Element;
 import eone.base.model.PO;
+import eone.db.EONEDatabase;
+import eone.util.AdempiereSystemError;
+import eone.util.DB;
+import eone.util.DisplayType;
 
 
 /**

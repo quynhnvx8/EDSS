@@ -23,16 +23,16 @@ import java.util.logging.Level;
 
 import org.compiere.minigrid.IDColumn;
 import org.compiere.minigrid.IMiniTable;
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.KeyNamePair;
-import org.compiere.util.Msg;
-import org.compiere.util.Trx;
 
 import eone.base.model.MInvoiceLine;
 import eone.base.model.MRole;
 import eone.exceptions.EONEException;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.Env;
+import eone.util.KeyNamePair;
+import eone.util.Msg;
+import eone.util.Trx;
 
 public class Match
 {

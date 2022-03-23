@@ -3,10 +3,6 @@ package eone.webui.component;
 
 import java.util.Properties;
 
-import org.compiere.util.Callback;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
-import org.compiere.util.Util;
 import org.zkoss.zhtml.Text;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Page;
@@ -19,6 +15,10 @@ import org.zkoss.zul.Image;
 import org.zkoss.zul.Vbox;
 
 import eone.webui.EONEIdGenerator;
+import eone.util.Callback;
+import eone.util.Env;
+import eone.util.Msg;
+import eone.util.Util;
 import eone.webui.ClientInfo;
 import eone.webui.apps.AEnv;
 import eone.webui.editor.WEditor;

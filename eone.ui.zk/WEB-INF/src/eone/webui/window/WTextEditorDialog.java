@@ -15,7 +15,6 @@ package eone.webui.window;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.compiere.util.Language;
 import org.owasp.html.PolicyFactory;
 import org.owasp.html.Sanitizers;
 import org.zkforge.ckez.CKeditor;
@@ -29,6 +28,7 @@ import org.zkoss.zul.Html;
 import org.zkoss.zul.Separator;
 import org.zkoss.zul.Vlayout;
 
+import eone.util.Language;
 import eone.webui.ClientInfo;
 import eone.webui.component.ConfirmPanel;
 import eone.webui.component.Label;

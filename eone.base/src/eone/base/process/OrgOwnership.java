@@ -19,8 +19,8 @@ package eone.base.process;
 import java.math.BigDecimal;
 import java.util.logging.Level;
 
-import org.compiere.util.DB;
-import org.compiere.util.Msg;
+import eone.util.DB;
+import eone.util.Msg;
 
 /**
  *	Org Ownership Process

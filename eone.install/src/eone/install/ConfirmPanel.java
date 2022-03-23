@@ -32,8 +32,8 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.KeyStroke;
 
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
+import eone.util.Env;
+import eone.util.Msg;
 
 /**
  *  Application Confirm Panel.

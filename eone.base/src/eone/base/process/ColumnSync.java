@@ -7,13 +7,12 @@ import java.sql.ResultSet;
 import java.sql.Types;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.EONEUserError;
-import org.compiere.util.ValueNamePair;
-
 import eone.base.model.MColumn;
 import eone.base.model.MTable;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.EONEUserError;
+import eone.util.ValueNamePair;
 
 
 public class ColumnSync extends SvrProcess

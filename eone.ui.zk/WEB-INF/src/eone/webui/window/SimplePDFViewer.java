@@ -14,8 +14,6 @@ package eone.webui.window;
 
 import java.io.InputStream;
 
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.zkoss.util.media.AMedia;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.ext.render.DynamicMedia;
@@ -23,6 +21,8 @@ import org.zkoss.zul.Iframe;
 import org.zkoss.zul.impl.Utils;
 import org.zkoss.zul.impl.XulElement;
 
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.ClientInfo;
 import eone.webui.component.Window;
 import eone.webui.util.ZKUpdateUtil;

@@ -7,11 +7,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.Util;
-
 import eone.exceptions.DBException;
+import eone.util.DB;
+import eone.util.Env;
+import eone.util.Util;
 
 public class MChartDatasource extends X_AD_ChartDatasource {
 

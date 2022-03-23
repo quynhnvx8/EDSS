@@ -2,13 +2,12 @@ package eone.base.process;
 
 import java.util.Properties;
 
-import org.compiere.util.DB;
-
 import eone.base.model.MBPGroup;
 import eone.base.model.MBPartner;
 import eone.base.model.MDepartment;
 import eone.base.model.MOrg;
 import eone.base.model.MWarehouse;
+import eone.util.DB;
 
 public class CreateOrUpdateRelatedOrg  {
 	

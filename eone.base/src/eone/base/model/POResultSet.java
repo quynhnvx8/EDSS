@@ -24,9 +24,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.compiere.util.DB;
-
 import eone.exceptions.DBException;
+import eone.util.DB;
 
 /**
  * Simple wrapper over jdbc resultset

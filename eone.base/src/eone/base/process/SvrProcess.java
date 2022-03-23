@@ -10,18 +10,18 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.adempiere.base.event.EventManager;
-import org.adempiere.base.event.EventProperty;
-import org.adempiere.base.event.IEventManager;
-import org.adempiere.base.event.IEventTopics;
-import org.compiere.util.CLogger;
-import org.compiere.util.Env;
-import org.compiere.util.IProcessUI;
-import org.compiere.util.Msg;
-import org.compiere.util.Trx;
 import org.osgi.service.event.Event;
 
+import eone.base.event.EventManager;
+import eone.base.event.EventProperty;
+import eone.base.event.IEventManager;
+import eone.base.event.IEventTopics;
 import eone.base.model.PO;
+import eone.util.CLogger;
+import eone.util.Env;
+import eone.util.IProcessUI;
+import eone.util.Msg;
+import eone.util.Trx;
 
 
 public abstract class SvrProcess implements ProcessCall

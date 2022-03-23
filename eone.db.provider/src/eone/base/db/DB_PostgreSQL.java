@@ -45,25 +45,24 @@ import javax.sql.ConnectionPoolDataSource;
 import javax.sql.DataSource;
 import javax.sql.RowSet;
 
-import org.compiere.db.CConnection;
-import org.compiere.db.Convert;
-import org.compiere.db.Database;
-import org.compiere.db.EONEDatabase;
-import org.compiere.util.CCache;
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Ini;
-import org.compiere.util.Language;
-import org.compiere.util.Trx;
-import org.compiere.util.Util;
-
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import eone.base.model.MColumn;
 import eone.base.model.MTable;
 import eone.base.model.PO;
+import eone.db.CConnection;
+import eone.db.Convert;
+import eone.db.Database;
+import eone.db.EONEDatabase;
 import eone.exceptions.DBException;
+import eone.util.CCache;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.DisplayType;
+import eone.util.Ini;
+import eone.util.Language;
+import eone.util.Trx;
+import eone.util.Util;
 
 /**
  *  PostgreSQL Database Port
@@ -472,8 +471,8 @@ public class DB_PostgreSQL implements EONEDatabase
 	 *
 	 *  @return TRIM(TO_CHAR(columnName,'999G999G999G990D00','NLS_NUMERIC_CHARACTERS='',.'''))
 	 *      or TRIM(TO_CHAR(columnName,'TM9')) depending on DisplayType and Language
-	 *  @see org.compiere.util.DisplayType
-	 *  @see org.compiere.util.Env
+	 *  @see eone.util.DisplayType
+	 *  @see eone.util.Env
 	 *
 	 **/
 	public String TO_CHAR (String columnName, int displayType, String AD_Language)

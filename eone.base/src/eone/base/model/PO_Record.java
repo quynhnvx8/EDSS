@@ -21,10 +21,10 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.DisplayType;
+import eone.util.Env;
 
 /**
  * 	Maintain AD_Table_ID/Record_ID constraint

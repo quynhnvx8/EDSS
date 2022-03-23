@@ -20,13 +20,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.ServerContext;
 import org.zkoss.util.Locales;
 import org.zkoss.zk.ui.Desktop;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.DesktopCleanup;
 
+import eone.util.CLogger;
+import eone.util.ServerContext;
 import eone.webui.session.SessionContextListener;
 import eone.webui.util.ServerPushTemplate;
 

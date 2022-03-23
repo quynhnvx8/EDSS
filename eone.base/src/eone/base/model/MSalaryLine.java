@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.compiere.util.Env;
+import eone.util.Env;
 
 public class MSalaryLine extends X_HR_SalaryLine
 {

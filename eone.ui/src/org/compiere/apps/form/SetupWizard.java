@@ -15,7 +15,7 @@
 
 package org.compiere.apps.form;
 
-import org.compiere.util.CLogger;
+import eone.util.CLogger;
 	
 /**
  * Model for Setup Wizard

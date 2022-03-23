@@ -21,14 +21,13 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.logging.Level;
 
-import org.compiere.util.DB;
-import org.compiere.util.Msg;
-import org.compiere.util.Trx;
-
 import eone.base.model.DatabaseKey;
 import eone.base.model.MColumn;
 import eone.base.model.MTable;
 import eone.base.model.PO;
+import eone.util.DB;
+import eone.util.Msg;
+import eone.util.Trx;
 
 /**
  * Create foreign key process

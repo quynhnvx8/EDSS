@@ -5,11 +5,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-import org.compiere.util.Env;
-
 import eone.base.model.MDepreciation;
 import eone.base.model.MDepreciationExp;
 import eone.base.model.MElementValue;
+import eone.util.Env;
 
 public class Doc_Depreciation extends Doc
 {

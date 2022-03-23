@@ -5,9 +5,6 @@ package eone.webui.adwindow;
 
 import java.util.List;
 
-import org.compiere.util.Callback;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
@@ -17,6 +14,9 @@ import org.zkoss.zul.Menu;
 import org.zkoss.zul.Menuitem;
 import org.zkoss.zul.Menuseparator;
 
+import eone.util.Callback;
+import eone.util.Env;
+import eone.util.Msg;
 import eone.webui.component.Menupopup;
 import eone.webui.editor.IProcessButton;
 import eone.webui.editor.WButtonEditor;

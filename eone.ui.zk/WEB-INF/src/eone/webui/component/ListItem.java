@@ -20,8 +20,8 @@ package eone.webui.component;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-import org.compiere.util.KeyNamePair;
-import org.compiere.util.ValueNamePair;
+import eone.util.KeyNamePair;
+import eone.util.ValueNamePair;
 /**
  *
  * @author  <a href="mailto:agramdass@gmail.com">Ashley G Ramdass</a>

@@ -17,10 +17,9 @@ package eone.base.process;
 
 import java.util.logging.Level;
 
-import org.compiere.util.Msg;
-
 import eone.base.model.MProcess;
 import eone.exceptions.EONEException;
+import eone.util.Msg;
 
 /**
  * 

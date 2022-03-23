@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
-import org.compiere.util.TimeUtil;
+import eone.util.Env;
+import eone.util.Msg;
+import eone.util.TimeUtil;
 
 public class MHoliday extends X_HR_Holiday
 {

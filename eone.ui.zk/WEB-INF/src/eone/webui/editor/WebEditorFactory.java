@@ -20,13 +20,13 @@ package eone.webui.editor;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.adempiere.base.IServiceReferenceHolder;
-import org.adempiere.base.Service;
-import org.compiere.util.CCache;
 import org.osgi.framework.Constants;
 
+import eone.base.IServiceReferenceHolder;
+import eone.base.Service;
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
+import eone.util.CCache;
 import eone.webui.factory.IEditorFactory;
 
 /**

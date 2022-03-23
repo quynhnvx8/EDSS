@@ -23,11 +23,6 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import org.compiere.util.DisplayType;
-import org.compiere.util.Env;
-import org.compiere.util.Evaluatee;
-import org.compiere.util.Msg;
-import org.compiere.util.Util;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.HtmlBasedComponent;
@@ -43,6 +38,11 @@ import org.zkoss.zul.impl.XulElement;
 
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.Evaluatee;
+import eone.util.Msg;
+import eone.util.Util;
 import eone.webui.ClientInfo;
 import eone.webui.EONEWebUI;
 import eone.webui.LayoutUtils;

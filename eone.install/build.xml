@@ -5,7 +5,7 @@
 <project name="setup" default="setup" basedir=".">
 
 	<description>
-	This buildfile is used to setup the idempiere Environment.
+	This buildfile is used to setup the eone Environment.
 	</description>
 
 	<property environment="env" />

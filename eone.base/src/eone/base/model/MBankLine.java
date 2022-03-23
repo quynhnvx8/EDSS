@@ -20,8 +20,8 @@ package eone.base.model;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-import org.compiere.util.DB;
-import org.compiere.util.Msg;
+import eone.util.DB;
+import eone.util.Msg;
  
 /**
  *	Bank Statement Line Model

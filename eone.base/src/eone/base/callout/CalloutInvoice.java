@@ -5,12 +5,11 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Properties;
 
-import org.compiere.util.Env;
-
 import eone.base.model.CalloutEngine;
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
 import eone.base.model.MTax;
+import eone.util.Env;
 
 //eone.base.callout.CalloutInvoice.fillAmount_TaxRate
 public class CalloutInvoice extends CalloutEngine

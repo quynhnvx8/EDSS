@@ -1,14 +1,4 @@
-/******************************************************************************
- * This program is free software; you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY; without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program; if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- *****************************************************************************/
+
 package org.idempiere.adinterface;
 
 import java.sql.PreparedStatement;
@@ -16,25 +6,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.KeyNamePair;
-import org.compiere.util.ValueNamePair;
 import org.idempiere.adInterface.x10.LookupValue;
 import org.idempiere.adInterface.x10.LookupValues;
 
 import eone.base.model.Lookup;
 import eone.base.model.MLookup;
 import eone.base.model.MRole;
+import eone.util.CLogger;
+import eone.util.DB;
+import eone.util.Env;
+import eone.util.KeyNamePair;
+import eone.util.ValueNamePair;
 
-/*
- * ADEMPIERE/COMPIERE
- * 
- * zamiana:
- *   GridField na GridField
- *   GridField
- */
 public class ADLookup {
 	
 	private static final CLogger	log = CLogger.getCLogger(ADLookup.class);	

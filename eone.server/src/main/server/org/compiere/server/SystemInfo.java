@@ -13,16 +13,17 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.logging.Level;
 
-import org.compiere.EOne;
-import org.compiere.db.CConnection;
-import org.compiere.db.EONEDatabase;
-import org.compiere.util.CLogMgt;
-import org.compiere.util.CMemoryUsage;
-import org.compiere.util.Ini;
-import org.idempiere.distributed.IClusterMember;
-import org.idempiere.distributed.IClusterService;
 import org.idempiere.server.cluster.ClusterServerMgr;
 import org.idempiere.server.cluster.callable.GetSystemInfoCallable;
+
+import eone.EOne;
+import eone.db.CConnection;
+import eone.db.EONEDatabase;
+import eone.distributed.IClusterMember;
+import eone.distributed.IClusterService;
+import eone.util.CLogMgt;
+import eone.util.CMemoryUsage;
+import eone.util.Ini;
 
 /**
  * @author hengsin

@@ -34,13 +34,15 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 
-import org.compiere.util.CLogger;
-import org.compiere.util.Util;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import eone.util.CLogger;
+import eone.util.Util;
+
 import org.w3c.dom.Element;
 
 /**

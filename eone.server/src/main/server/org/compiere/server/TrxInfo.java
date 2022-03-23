@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.compiere.util.Trx;
+import eone.util.Trx;
 
 /**
  * @author hengsin

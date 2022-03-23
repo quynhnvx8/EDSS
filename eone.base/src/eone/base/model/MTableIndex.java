@@ -20,11 +20,10 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Properties;
 
-import org.compiere.db.Database;
-import org.compiere.util.Msg;
-import org.compiere.util.Util;
-
+import eone.db.Database;
 import eone.exceptions.EONEException;
+import eone.util.Msg;
+import eone.util.Util;
 
 public class MTableIndex extends X_AD_TableIndex {
 	/**

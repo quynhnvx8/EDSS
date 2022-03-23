@@ -32,8 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
-import org.compiere.util.CacheMgt;
-
 import eone.base.model.IArchiveStore;
 import eone.base.model.IAttachmentStore;
 import eone.base.model.IImageStore;
@@ -44,6 +42,7 @@ import eone.base.model.MClientInfo;
 import eone.base.model.MImage;
 import eone.base.model.MStorageProvider;
 import eone.base.model.Query;
+import eone.util.CacheMgt;
 
 /**
  *	IDEMPIERE-4191

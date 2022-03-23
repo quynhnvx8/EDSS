@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
+import eone.util.DB;
+import eone.util.Env;
+import eone.util.Msg;
 
 public class MPayroll extends X_HR_Payroll
 {
