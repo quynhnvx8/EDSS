@@ -23,11 +23,11 @@ import org.idempiere.adInterface.x10.RunProcessResponseDocument;
 import org.idempiere.adInterface.x10.StandardResponse;
 import org.idempiere.adInterface.x10.StandardResponseDocument;
 import org.idempiere.adInterface.x10.WindowTabDataDocument;
-import org.idempiere.adinterface.ModelADServiceImpl;
-import org.idempiere.webservices.AbstractService;
 
+import eone.adinterface.ModelADServiceImpl;
 import eone.util.CLogger;
 import eone.util.Trx;
+import eone.webservices.AbstractService;
 
 
 /**

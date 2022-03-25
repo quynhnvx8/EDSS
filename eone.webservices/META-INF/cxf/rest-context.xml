@@ -23,12 +23,12 @@ http://cxf.apache.org/schemas/jaxrs.xsd">
 		</jaxrs:providers>
 	</jaxrs:server>
 
-	<bean id="ModelADServiceBean" class="org.idempiere.adinterface.ModelADServiceImpl" />
+	<bean id="ModelADServiceBean" class="eone.adinterface.ModelADServiceImpl" />
 	<bean id="CompositeServiceBean" class="com.trekglobal.ws.CompositeServiceImpl" />
 
 	<bean id="xmlBeansProvider"
 		class="org.apache.cxf.jaxrs.provider.xmlbeans.XMLBeansElementProvider" />
 		
 	<bean id="xmlBeansJSONProvider"
-		class="org.idempiere.jaxrs.provider.xmlbeans.XMLBeansJSONProvider" />
+		class="eone.jaxrs.provider.xmlbeans.XMLBeansJSONProvider" />
 </beans>

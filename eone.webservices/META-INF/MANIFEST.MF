@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: EONE Webservices
 Bundle-SymbolicName: eone.webservices;singleton:=true
 Bundle-Version: 7.1.0.qualifier
-Bundle-Activator: org.idempiere.webservices.Activator
+Bundle-Activator: eone.webservices.Activator
 Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version>=11))"
 Service-Component: OSGI-INF/*.xml
 Import-Package: javax.activation,
@@ -102,13 +102,13 @@ Require-Bundle: eone.base;bundle-version="0.0.0",
 Bundle-ClassPath: .,
  WEB-INF/lib/idempiere-xmlbeans.jar,
  WEB-INF/lib/jettison.jar
-Export-Package: org.compiere.model,
+Export-Package: eone.adinterface,
+ eone.model,
+ eone.webservices,
+ eone.webservices.client,
+ eone.webservices.fault,
  org.idempiere.adInterface.x10,
- org.idempiere.adInterface.x10.impl,
- org.idempiere.adinterface,
- org.idempiere.webservices,
- org.idempiere.webservices.client,
- org.idempiere.webservices.fault
+ org.idempiere.adInterface.x10.impl
 Web-ContextPath: ADInterface
 Bundle-ActivationPolicy: lazy
 Automatic-Module-Name: eone.webservices

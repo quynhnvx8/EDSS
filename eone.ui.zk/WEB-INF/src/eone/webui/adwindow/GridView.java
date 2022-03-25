@@ -1297,7 +1297,14 @@ public class GridView extends Vlayout implements EventListener<Event>, IdSpace, 
 	private static final String COLUMN_HFLEX_ORIGINAL = "column.hflex.original";
 
 	
+	private boolean isAutoHideEmptyColumns() {
+		return true;
+	}
+	
 	protected void autoHideEmptyColumns() {
+		if (!isAutoHideEmptyColumns()) {
+			return;
+		}
 		
 		String attr = listbox.getUuid()+".autoHideEmptyColumns";
 		if (Executions.getCurrent().getAttribute(attr) != null) {
