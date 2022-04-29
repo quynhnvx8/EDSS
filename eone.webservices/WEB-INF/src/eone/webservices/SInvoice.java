@@ -1,15 +1,16 @@
 package eone.webservices;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import javax.jws.WebMethod;
+import javax.jws.WebService;
+
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@WebService (serviceName = "SInvoice", targetNamespace = "http://dssvn.com")
 public class SInvoice {
 	
-	@GetMapping(value = "/sinvoice")
-	public String getData(@RequestBody String data) {
-		data = "Test";
-		return data;
+	@WebMethod(operationName = "getData")
+	public String getData(String username, String password) {
+		return username + password;
 	}
 }

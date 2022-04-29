@@ -880,6 +880,10 @@ public final class Env
 		return Env.getContextAsInt(ctx, AD_ORG_ID);
 	}	//	getAD_Org_ID
 	
+	public static boolean isUserSystem(Properties ctx) {
+		return "Y".equals(Env.getContext(ctx, "#IsUserSystem")) ? true : false;
+	}
+	
 	/**
 	 * 	Get Login AD_User_ID
 	 *	@param ctx context
@@ -894,37 +898,9 @@ public final class Env
 	{
 		return Env.getContext(ctx, AD_ORGACCESS_ID);
 	}	
-	/**
-	 * 	Get Login AD_Role_ID
-	 *	@param ctx context
-	 *	@return login AD_Role_ID
-	 */
-	public static int getAD_Role_ID (Properties ctx)
-	{
-		return Env.getContextAsInt(ctx, AD_ROLE_ID);
-	}	//	getAD_Role_ID
 	
-	
-	public static String getAD_Session_ID (Properties ctx)
-	{
-		return Env.getContext(ctx, AD_Session_ID);
-	}
 
-	/**************************************************************************
-	 *	Get Preference.
-	 *  <pre>
-	 *		0)	Current Setting
-	 *		1) 	Window Preference
-	 *		2) 	Global Preference
-	 *		3)	Login settings
-	 *		4)	Accounting settings
-	 *  </pre>
-	 *  @param  ctx context
-	 *	@param	AD_Window_ID window no
-	 *	@param	context		Entity to search
-	 *	@param	system		System level preferences (vs. user defined)
-	 *  @return preference value
-	 */
+	
 	public static String getPreference (Properties ctx, int AD_Window_ID, String context, boolean system)
 	{
 		if (ctx == null || context == null)
@@ -2244,4 +2220,36 @@ public final class Env
 		return str;
 	}
 	
+	public static String TO_STRING (String txt)
+	{
+		return TO_STRING (txt, 0);
+	}   //  TO_STRING
+
+	private static final char QUOTE = '\'';
+	
+	public static String TO_STRING (String txt, int maxLength)
+	{
+		if (txt == null || txt.length() == 0)
+			return "NULL";
+
+		//  Length
+		String text = txt;
+		if (maxLength != 0 && text.length() > maxLength)
+			text = txt.substring(0, maxLength);
+
+		//  copy characters		(we need to look through anyway)
+		StringBuilder out = new StringBuilder();
+		out.append(QUOTE);		//	'
+		for (int i = 0; i < text.length(); i++)
+		{
+			char c = text.charAt(i);
+			if (c == QUOTE)
+				out.append("''");
+			else
+				out.append(c);
+		}
+		out.append(QUOTE);		//	'
+		//
+		return out.toString();
+	}
 }   //  Env

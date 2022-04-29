@@ -36,7 +36,7 @@ import eone.webservices.AbstractService;
  * @author Deepak Pansheriya
  * 
  */
-@WebService(endpointInterface = "com.trekglobal.ws.CompositeService", serviceName = "compositeInterface" ,targetNamespace="http://idempiere.org/ADInterface/1_0")
+@WebService(endpointInterface = "com.trekglobal.ws.CompositeService", serviceName = "compositeInterface" ,targetNamespace="http://dssvn.com")
 public class CompositeServiceImpl extends AbstractService implements CompositeService {
 	private static final CLogger log = CLogger.getCLogger(CompositeServiceImpl.class);
 

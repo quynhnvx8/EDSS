@@ -234,7 +234,7 @@ public class WGadgets extends Window implements  EventListener<Event>{
 		Properties ctx = Env.getCtx();
 			
 		int AD_Client_ID =Env.getAD_Client_ID(ctx);
-		int AD_Role_ID = Env.getAD_Role_ID(ctx);
+		//int AD_Role_ID = Env.getAD_Role_ID(ctx);
 		int AD_User_ID = Env.getAD_User_ID(ctx);
 				
 		noItems.removeAll(noItems);
@@ -248,20 +248,20 @@ public class WGadgets extends Window implements  EventListener<Event>{
 				+ "       AND ct.PA_DashboardContent_ID NOT IN (SELECT pre.PA_DashboardContent_ID "
 				+ "                                             FROM   PA_DashboardPreference pre "
 				+ "                                             WHERE  pre.AD_Client_ID IN ( 0, ? ) "
-				+ "                                                    AND pre.AD_Role_ID = ? "
+				//+ "                                                    AND pre.AD_Role_ID = ? "
 				+ "                                                    AND pre.AD_User_ID = ? "
 				+ "                                                    AND pre.AD_Org_ID = 0 "
 				+ "                                                    AND pre.IsActive = 'Y') "
 				+ "       AND ( ct.PA_DashboardContent_ID NOT IN (SELECT cta.PA_DashboardContent_ID "
 				+ "                                               FROM   PA_DashboardContent_Access cta "
 				+ "                                               WHERE  cta.IsActive = 'N' "
-				+ "                                                      AND COALESCE(cta.AD_Role_ID, ?) = ? "
+				//+ "                                                      AND COALESCE(cta.AD_Role_ID, ?) = ? "
 				+ "                                                      AND COALESCE(cta.AD_User_ID, ?) = ? "
 				+ "                                                      AND cta.AD_Client_ID IN ( 0, ? )) "
 				+ "              OR ct.PA_DashboardContent_ID IN (SELECT cta.PA_DashboardContent_ID "
 				+ "                                               FROM   PA_DashboardContent_Access cta "
 				+ "                                               WHERE  cta.IsActive = 'Y' "
-				+ "                                                      AND COALESCE(cta.AD_Role_ID, ?) = ? "
+				//+ "                                                      AND COALESCE(cta.AD_Role_ID, ?) = ? "
 				+ "                                                      AND COALESCE(cta.AD_User_ID, ?) = ? "
 				+ "                                                      AND cta.AD_Client_ID IN ( 0, ? )) ) ";
 
@@ -272,18 +272,18 @@ public class WGadgets extends Window implements  EventListener<Event>{
 			pstmt = DB.prepareStatement(query, null);
 			pstmt.setInt(1, AD_Client_ID);
 			pstmt.setInt(2, AD_Client_ID);
-			pstmt.setInt(3, AD_Role_ID);
+			//pstmt.setInt(3, AD_Role_ID);
+			pstmt.setInt(3, AD_User_ID);
+			//pstmt.setInt(5, AD_Role_ID);
+			//pstmt.setInt(6, AD_Role_ID);
 			pstmt.setInt(4, AD_User_ID);
-			pstmt.setInt(5, AD_Role_ID);
-			pstmt.setInt(6, AD_Role_ID);
+			pstmt.setInt(5, AD_User_ID);
+			pstmt.setInt(6, AD_Client_ID);
+			//pstmt.setInt(10, AD_Role_ID);
+			//pstmt.setInt(11, AD_Role_ID);
 			pstmt.setInt(7, AD_User_ID);
 			pstmt.setInt(8, AD_User_ID);
 			pstmt.setInt(9, AD_Client_ID);
-			pstmt.setInt(10, AD_Role_ID);
-			pstmt.setInt(11, AD_Role_ID);
-			pstmt.setInt(12, AD_User_ID);
-			pstmt.setInt(13, AD_User_ID);
-			pstmt.setInt(14, AD_Client_ID);
 			rs = pstmt.executeQuery();
 		
 			while (rs.next()) {
@@ -301,13 +301,13 @@ public class WGadgets extends Window implements  EventListener<Event>{
 		}
 
 		String where=" AD_User_ID=?"
-				    +" AND AD_Role_ID=?"
+				    //+" AND AD_Role_ID=?"
 				    +" AND AD_Client_ID=?"
 				    +" AND AD_Org_ID=0"
 				    +" AND IsActive='Y'";
 		
 		Query query1 =new Query(ctx,MDashboardPreference.Table_Name, where, null);
-		query1.setParameters(new Object[]{AD_User_ID,AD_Role_ID ,AD_Client_ID});
+		query1.setParameters(new Object[]{AD_User_ID ,AD_Client_ID});//,AD_Role_ID
 		List<MDashboardPreference> preference=query1.list();
 
 	    if(preference.size() > 0){
@@ -376,15 +376,15 @@ public class WGadgets extends Window implements  EventListener<Event>{
 
 			Properties ctx =Env.getCtx();
 			int AD_User_ID= Env.getAD_User_ID(ctx);
-			int AD_Role_ID=Env.getAD_Role_ID(ctx);
+			//int AD_Role_ID=Env.getAD_Role_ID(ctx);
 			int AD_Client_ID= Env.getAD_Client_ID(ctx);
 			
 			MDashboardContent content = new MDashboardContent(Env.getCtx(),selObject.m_key, null);
 			String where=" AD_Client_ID=?"
 				    +" AND PA_DashboardContent_ID=?" 
-					+" AND AD_Role_ID=? AND AD_User_ID=? AND AD_Org_ID=0";
+					+" AND AD_User_ID=? AND AD_Org_ID=0";//AND AD_Role_ID=? 
 			Query query = new Query(ctx, MDashboardPreference.Table_Name, where, null);
-			query.setParameters(AD_Client_ID, content.getPA_DashboardContent_ID(), AD_Role_ID, AD_User_ID);
+			query.setParameters(AD_Client_ID, content.getPA_DashboardContent_ID(), AD_User_ID);//, AD_Role_ID
 			
 			MDashboardPreference pre = query.setOnlyActiveRecords(false).first();
 			
@@ -395,7 +395,7 @@ public class WGadgets extends Window implements  EventListener<Event>{
 				}else{
 					pre = new MDashboardPreference(Env.getCtx(), 0, null);
 					pre.setAD_Org_ID(0);
-					pre.setAD_Role_ID(AD_Role_ID);
+					//pre.setAD_Role_ID(AD_Role_ID);
 					pre.set_ValueNoCheck("AD_User_ID",AD_User_ID);
 					pre.setColumnNo(content.getColumnNo());
 					pre.setIsCollapsedByDefault(content.isCollapsedByDefault());
@@ -410,7 +410,7 @@ public class WGadgets extends Window implements  EventListener<Event>{
 				}else{
 					pre = new MDashboardPreference(Env.getCtx(), 0, null);
 					pre.setAD_Org_ID(0);
-					pre.setAD_Role_ID(AD_Role_ID);
+					//pre.setAD_Role_ID(AD_Role_ID);
 					pre.set_ValueNoCheck("AD_User_ID",AD_User_ID);
 					pre.setColumnNo(content.getColumnNo());
 					pre.setIsCollapsedByDefault(content.isCollapsedByDefault());

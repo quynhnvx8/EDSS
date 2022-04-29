@@ -171,6 +171,9 @@ public class MTable extends X_AD_Table
 
 
 
+	public int get_AccessLevel() {
+		return Integer.parseInt(getAccessLevel());
+	}
 	/**
 	 * 	Get Persistence Class for Table
 	 *	@param tableName table name

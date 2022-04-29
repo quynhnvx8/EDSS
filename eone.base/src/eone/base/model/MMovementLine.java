@@ -82,7 +82,6 @@ public class MMovementLine extends X_M_MovementLine
 	public MMovementLine (MMovement parent)
 	{
 		this (parent.getCtx(), 0, parent.get_TrxName());
-		setClientOrg(parent);
 		setM_Movement_ID(parent.getM_Movement_ID());
 	}	//	MMovementLine
 	

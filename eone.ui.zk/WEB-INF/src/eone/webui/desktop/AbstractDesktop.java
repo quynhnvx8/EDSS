@@ -1,16 +1,4 @@
-/******************************************************************************
- * Copyright (C) 2008 Low Heng Sin                                            *
- * Copyright (C) 2008 Idalica Corporation                                     *		
- * This program is free software; you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY; without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program; if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- *****************************************************************************/
+
 package eone.webui.desktop;
 
 import java.util.ArrayList;
@@ -22,22 +10,23 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Window.Mode;
 
 import eone.base.model.MMenu;
 import eone.util.CLogger;
+import eone.util.DB;
 import eone.util.Env;
-import eone.webui.EONEWebUI;
 import eone.webui.ClientInfo;
+import eone.webui.EONEWebUI;
 import eone.webui.LayoutUtils;
 import eone.webui.component.Window;
 import eone.webui.event.DialogEvents;
 import eone.webui.exception.ApplicationException;
 import eone.webui.part.AbstractUIPart;
+import eone.webui.session.SessionManager;
 
 /**
- * Base class for desktop implementation
- * @author hengsin
  *
  */
 public abstract class AbstractDesktop extends AbstractUIPart implements IDesktop {
@@ -50,18 +39,20 @@ public abstract class AbstractDesktop extends AbstractUIPart implements IDesktop
 	public AbstractDesktop() {
 	}
 	
-	/**
-     * Event listener for menu item selection.
-     * Identifies the action associated with the selected
-     * menu item and acts accordingly.
-     * 
-     * @param	menuId	Identifier for the selected menu item
-     * 
-     * @throws	ApplicationException	If the selected menu action has yet 
-     * 									to be implemented
-     */
+	
     public void onMenuSelected(int menuId)
     {
+    	//LOGOUT SAME SESSION
+    	String currSession = Env.getContext(Env.getCtx(), "#AD_Session_ID");
+    	
+    	String dbSession = DB.getSQLValueString(null, "SELECT SessionID FROM AD_User WHERE AD_User_ID = ?", Env.getAD_User_ID(Env.getCtx()));
+    	if (dbSession!= null && !dbSession.equalsIgnoreCase(currSession) && !Env.isUserSystem(Env.getCtx())) {
+    		Clients.confirmClose(null);
+    		SessionManager.logoutSession();
+    		return;
+    	}
+    	//END LOGOUT SAME SESION
+    	
         MMenu menu = new MMenu(Env.getCtx(), menuId, null);
 
         if(menu.getAction().equals(MMenu.ACTION_Window))
@@ -249,6 +240,8 @@ public abstract class AbstractDesktop extends AbstractUIPart implements IDesktop
 				}
 			}
    		}
+   		
+   		
 	}
    	
    	/**
@@ -303,12 +296,14 @@ public abstract class AbstractDesktop extends AbstractUIPart implements IDesktop
     	Desktop desktop = getComponent().getDesktop();
     	if (desktop != null) {
 	    	Session session = desktop.getSession();
+	    	
 	    	@SuppressWarnings("unchecked")
 			List<Object> list = (List<Object>) session.getAttribute("windows.list");
 	    	if (list == null) {
 	    		list = new ArrayList<Object>();
 	    		session.setAttribute("windows.list", list);
 	    	}
+	    	
 	    	return Collections.synchronizedList(list);
     	} else {
     		return null;

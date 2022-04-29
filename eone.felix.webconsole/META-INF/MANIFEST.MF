@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: EONE Felix Web Console
 Bundle-SymbolicName: eone.felix.webconsole
 Bundle-Version: 7.1.0.qualifier
-Bundle-Activator: org.idempiere.felix.webconsole.Activator
+Bundle-Activator: eone.felix.webconsole.Activator
 Bundle-ActivationPolicy: lazy
 Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version>=11))"
 Import-Package: eone.eclipse.equinox.http.servlet,
@@ -29,8 +29,8 @@ Import-Package: eone.eclipse.equinox.http.servlet,
 Web-ContextPath: osgi
 Service-Component: OSGI-INF/*.xml
 Bundle-ClassPath: .
-Automatic-Module-Name: org.idempiere.felix.webconsole
+Automatic-Module-Name: eone.felix.webconsole
 Bundle-Vendor: EONE Community
-Export-Package: org.idempiere.felix.webconsole;x-internal:=true
+Export-Package: eone.felix.webconsole;x-internal:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: eone.base;bundle-version="7.1.0"

@@ -9,6 +9,8 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.logging.Level;
 
+import javax.servlet.http.HttpSession;
+
 import org.zkoss.lang.Strings;
 import org.zkoss.util.Locales;
 import org.zkoss.web.Attributes;
@@ -369,6 +371,8 @@ public class LoginPanel extends Window implements EventListener<Event>
         String userPassword = txtPassword.getValue();
    
         Session currSess = Executions.getCurrent().getDesktop().getSession();
+        HttpSession httpSess = (HttpSession) currSess.getNativeSession();
+        Env.setContext(ctx, "#AD_Session_ID", httpSess.getId());
         
         KeyNamePair clientsKNPairs[] = login.getClients(userId, userPassword, ROLE_TYPES_WEBUI);
         

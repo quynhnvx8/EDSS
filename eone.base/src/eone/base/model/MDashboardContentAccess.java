@@ -43,7 +43,7 @@ public class MDashboardContentAccess extends X_PA_DashboardContent_Access {
 		super(ctx, rs, trxName);
 	}
 	
-	public static MDashboardContent[] get (Properties ctx,int AD_Role, int AD_User, String trxname)
+	public static MDashboardContent[] get (Properties ctx, int AD_User, String trxname)//,int AD_Role
 	{
 		
 		int AD_Client_ID = Env.getAD_Client_ID(ctx);
@@ -67,11 +67,13 @@ public class MDashboardContentAccess extends X_PA_DashboardContent_Access {
 		// New part : remove dashboard if inactive records 
 		sql.append(" AND PA_DashboardContent_ID NOT IN (SELECT PA_DashboardContent_ID FROM PA_DashboardContent_Access ct2 WHERE ct2.IsActive='N' AND ct2.AD_Client_ID in (0,?)");
 		parameters.add(AD_Client_ID);
+		/*
 		if (AD_Role >= 0) {
 			sql.append(" AND COALESCE(ct2.AD_Role_ID, ?) = ?");			  
 			parameters.add(AD_Role);
 			parameters.add(AD_Role);
 		}
+		*/
 		if (AD_User >= 0) {
 			sql.append(" AND COALESCE(ct2.AD_User_ID, ?) = ?");
 			parameters.add(AD_User);
@@ -86,12 +88,13 @@ public class MDashboardContentAccess extends X_PA_DashboardContent_Access {
 		   .append(" INNER JOIN PA_DashboardContent_Access cta on (ct.PA_DashboardContent_ID = cta.PA_DashboardContent_ID)")
 		   .append(" WHERE cta.IsActive='Y'")
 		   .append(" AND ct.IsActive='Y'");
-				
+		/*	
 		if(AD_Role >= 0) {
 			sql.append(" AND COALESCE(cta.AD_Role_ID, ?) = ?");			  
 			parameters.add(AD_Role);
 			parameters.add(AD_Role);
 		}
+		*/
 		if (AD_User >= 0) {
 			sql.append(" AND COALESCE(cta.AD_User_ID, ?) = ?");
 			parameters.add(AD_User);

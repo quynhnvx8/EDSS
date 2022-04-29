@@ -293,7 +293,6 @@ public class MPrintFormatItem extends X_AD_PrintFormatItem
 	{
 		MPrintFormatItem to = new MPrintFormatItem (p_ctx, 0, null);
 		MPrintFormatItem.copyValues(this, to);
-		to.setClientOrg(To_Client_ID, 0);
 		to.setAD_PrintFormat_ID(AD_PrintFormat_ID);
 		to.saveEx();
 		return to;

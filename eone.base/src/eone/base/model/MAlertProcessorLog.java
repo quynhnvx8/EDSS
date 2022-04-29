@@ -64,7 +64,6 @@ public class MAlertProcessorLog extends X_AD_AlertProcessorLog
 	public MAlertProcessorLog (MAlertProcessor parent, String summary)
 	{
 		this (parent.getCtx(), 0, parent.get_TrxName());
-		setClientOrg(parent);
 		setAD_AlertProcessor_ID(parent.getAD_AlertProcessor_ID());
 		setSummary(summary);
 	}	//	MAlertProcessorLog

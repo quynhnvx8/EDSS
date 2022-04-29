@@ -124,7 +124,6 @@ public class MInventory extends X_M_Inventory implements DocAction
 	public MInventory (MWarehouse wh, String trxName)
 	{
 		this (wh.getCtx(), 0, trxName);
-		setClientOrg(wh);
 		setM_Warehouse_ID(wh.getM_Warehouse_ID());
 	}
 	
@@ -167,16 +166,7 @@ public class MInventory extends X_M_Inventory implements DocAction
 		}
 	}	//	addDescription
 	
-	/**
-	 * 	Overwrite Client/Org - from Import.
-	 * 	@param AD_Client_ID client
-	 * 	@param AD_Org_ID org
-	 */
-	public void setClientOrg (int AD_Client_ID, int AD_Org_ID)
-	{
-		super.setClientOrg(AD_Client_ID, AD_Org_ID);
-	}	//	setClientOrg
-
+	
 	/**
 	 * 	String Representation
 	 *	@return info

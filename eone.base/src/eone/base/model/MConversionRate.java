@@ -332,7 +332,6 @@ public class MConversionRate extends X_C_Conversion_Rate
 		BigDecimal MultiplyRate, Timestamp ValidFrom)
 	{
 		this (po.getCtx(), 0, po.get_TrxName());
-		setClientOrg(po);
 		setC_ConversionType_ID (C_ConversionType_ID);
 		setC_Currency_ID (C_Currency_ID);
 		setC_Currency_ID_To (C_Currency_ID_To);

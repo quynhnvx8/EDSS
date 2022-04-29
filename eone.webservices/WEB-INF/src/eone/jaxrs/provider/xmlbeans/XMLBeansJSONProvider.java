@@ -1,10 +1,6 @@
 
 package eone.jaxrs.provider.xmlbeans;
 
-/**
- * @author hengsin
- *
- */
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -44,7 +40,7 @@ import eone.jettison.mapped.MappedXMLInputFactory;
 @Provider
 public class XMLBeansJSONProvider extends XMLBeansElementProvider {
 
-    private static final String AD_INTERFACE_1_0_NAMESPACE = "http://idempiere.org/ADInterface/1_0";
+    private static final String AD_INTERFACE_1_0_NAMESPACE = "http://dssvn.com";
 
 	/** {@inheritDoc} */
     @Override

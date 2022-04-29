@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.idempiere.felix.webconsole;
+package eone.felix.webconsole;
 
 import java.util.logging.Level;
 

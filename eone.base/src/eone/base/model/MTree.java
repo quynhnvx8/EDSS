@@ -18,10 +18,22 @@ import eone.util.CLogMgt;
 import eone.util.CLogger;
 import eone.util.DB;
 import eone.util.Env;
+import eone.util.Msg;
 
 
 public class MTree extends X_AD_Tree
 {
+
+	@Override
+	protected boolean beforeDelete() {
+		if (isAdminClient()) {
+			//Vai trò này dùng cho Account Admin các công ty. Không xóa vai trò này.
+			log.saveError("Error!", "Bạn không được xóa vai trò này !");
+			return false;
+		}
+		return true;
+	}
+
 
 	private static final long serialVersionUID = -212066085945645584L;
 
@@ -192,7 +204,8 @@ public class MTree extends X_AD_Tree
 					+ sourceTableName + "_ID as" + " Node_ID,st.Parent_ID,st.IsActive "
 					+ "FROM ").append(sourceTableName).append(" st ");								//	#2
 			sql.append(" WHERE st.IsActive='Y'");
-			
+			if (sourceTableName.equalsIgnoreCase("C_ElementValue"))
+				sql.append(" AND C_Element_ID = ").append(Env.getContext(getCtx(), "#C_Element_ID"));
 			sql.append(" ORDER BY st.Value");
 			
 			sql = new StringBuilder(MRole.addAccessSQL(sql.toString(), "st", MRole.SQL_FULLYQUALIFIED, MRole.SQL_RO, Env.getCtx()));	// SQL_RO for Org_ID = 0
@@ -624,6 +637,18 @@ public class MTree extends X_AD_Tree
 			setParent_Column_ID(-1);
 		}
 		
+		if (newRecord || is_ValueChanged(X_AD_Tree.COLUMNNAME_IsAdminClient)) {
+			Map<String, Object> dataColumn = new HashMap<String, Object>();
+			dataColumn.put(COLUMNNAME_AD_Tree_ID, getAD_Tree_ID());
+			dataColumn.put(COLUMNNAME_IsAdminClient, isAdminClient());
+			boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_AD_Tree_ID, getAD_Tree_ID());
+			
+			if (!check) {
+				log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": " + COLUMNNAME_IsAdminClient);
+				return false;
+			}
+		}
+		
 		String tableName = getSourceTableName(true);
 		MTable table = MTable.get(getCtx(), tableName);
 		if (table.getColumnIndex("IsSummary") < 0) {
@@ -713,7 +738,6 @@ public class MTree extends X_AD_Tree
 	public MTree (MClient client, String name, String treeType)
 	{
 		this (client.getCtx(), 0, client.get_TrxName());
-		setClientOrg (client);
 		setName (name);
 		setTreeType (treeType);
 	}	//	MTree_Base

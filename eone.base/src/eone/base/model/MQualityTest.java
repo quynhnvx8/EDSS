@@ -21,7 +21,6 @@ public class MQualityTest extends X_M_QualityTest {
 	public MQualityTestResult createResult(int m_attributesetinstance_id) 
 	{
 		MQualityTestResult result = new MQualityTestResult(getCtx(),0, get_TrxName());
-		result.setClientOrg(this);
 		result.setM_QualityTest_ID(getM_QualityTest_ID());
 		result.setM_AttributeSetInstance_ID(m_attributesetinstance_id);
 		result.setProcessed(false);

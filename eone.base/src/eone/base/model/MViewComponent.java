@@ -60,7 +60,6 @@ public class MViewComponent extends X_AD_ViewComponent {
 	public MViewComponent(MTable parent)
 	{
 		this(parent.getCtx(), 0, parent.get_TrxName());
-		setClientOrg(parent);
 		setAD_Table_ID(parent.getAD_Table_ID());
 	}
 	

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd" >
-<!--beans xmlns="http://www.springframework.org/schema/beans"
-     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-     xsi:schemaLocation="http://www.springframework.org/schema/beans      
-               http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"-->
-  
+<beans 
+	xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:jaxws="http://cxf.apache.org/jaxws" 
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans.xsd 
+			http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd" >
   
   <jaxws:endpoint id="ModelADService" address="/ModelADService" implementor="eone.adinterface.ModelADServiceImpl">
    <jaxws:dataBinding>
@@ -19,5 +21,11 @@
     </jaxws:dataBinding>
   </jaxws:endpoint>
  
+ <jaxws:endpoint id="SInvoice" address="/SInvoice" implementor="eone.webservices.SInvoice" >
+   <jaxws:dataBinding>
+       <bean class="org.apache.cxf.xmlbeans.XmlBeansDataBinding" >
+       </bean>
+    </jaxws:dataBinding>
+  </jaxws:endpoint>
 </beans>
 

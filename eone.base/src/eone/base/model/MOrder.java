@@ -125,16 +125,7 @@ public class MOrder extends X_C_Order implements DocAction
 	/** Force Creation of order		*/
 	protected boolean			m_forceCreation = false;
 	
-	/**
-	 * 	Overwrite Client/Org if required
-	 * 	@param AD_Client_ID client
-	 * 	@param AD_Org_ID org
-	 */
-	public void setClientOrg (int AD_Client_ID, int AD_Org_ID)
-	{
-		super.setClientOrg(AD_Client_ID, AD_Org_ID);
-	}	//	setClientOrg
-
+	
 
 	/**
 	 * 	Add to Description

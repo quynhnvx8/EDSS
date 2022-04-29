@@ -97,7 +97,6 @@ public class MTableIndex extends X_AD_TableIndex {
 	public MTableIndex(MTable parent, String name)
 	{
 		this(parent.getCtx(), 0, parent.get_TrxName());
-		setClientOrg(parent);
 		setAD_Table_ID(parent.getAD_Table_ID());
 		setName(name);
 	}

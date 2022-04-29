@@ -173,7 +173,6 @@ public class MChangeLog extends X_AD_ChangeLog
 		setAD_Column_ID (AD_Column_ID);
 		setRecord_ID (Record_ID);
 		//
-		setClientOrg (AD_Client_ID, AD_Org_ID);
 		//
 		setOldValue (OldValue);
 		setNewValue (NewValue);

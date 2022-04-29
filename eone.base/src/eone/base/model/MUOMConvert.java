@@ -513,7 +513,6 @@ public class MUOMConvert extends X_C_UOM_Convert
 	public MUOMConvert (MUOM parent)
 	{
 		this(parent.getCtx(), 0, parent.get_TrxName());
-		setClientOrg (parent);
 		setC_UOM_ID (parent.getC_UOM_ID());
 		setM_Product_ID(0);
 		//
@@ -529,7 +528,6 @@ public class MUOMConvert extends X_C_UOM_Convert
 	public MUOMConvert (MProduct parent)
 	{
 		this(parent.getCtx(), 0, parent.get_TrxName());
-		setClientOrg (parent);
 		setC_UOM_ID (parent.getC_UOM_ID());
 		setM_Product_ID(parent.getM_Product_ID());
 		//

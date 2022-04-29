@@ -5,11 +5,10 @@
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
-
-import eone.util.KeyNamePair;
 
 /** Generated Model for AD_User
  *  @author EOne (generated) 
@@ -20,7 +19,7 @@ public class X_AD_User extends PO implements I_AD_User, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20211230L;
+	private static final long serialVersionUID = 20220421L;
 
     /** Standard Constructor */
     public X_AD_User (Properties ctx, int AD_User_ID, String trxName)
@@ -129,20 +128,6 @@ public class X_AD_User extends PO implements I_AD_User, I_Persistent
 	public String getAnswer () 
 	{
 		return (String)get_Value(COLUMNNAME_Answer);
-	}
-
-	/** Set BP Name.
-		@param BPName BP Name	  */
-	public void setBPName (String BPName)
-	{
-		set_Value (COLUMNNAME_BPName, BPName);
-	}
-
-	/** Get BP Name.
-		@return BP Name	  */
-	public String getBPName () 
-	{
-		return (String)get_Value(COLUMNNAME_BPName);
 	}
 
 	/** Set Date Account Locked.
@@ -542,6 +527,20 @@ public class X_AD_User extends PO implements I_AD_User, I_Persistent
 	public String getSecurityQuestion () 
 	{
 		return (String)get_Value(COLUMNNAME_SecurityQuestion);
+	}
+
+	/** Set Session ID.
+		@param SessionID Session ID	  */
+	public void setSessionID (String SessionID)
+	{
+		set_Value (COLUMNNAME_SessionID, SessionID);
+	}
+
+	/** Get Session ID.
+		@return Session ID	  */
+	public String getSessionID () 
+	{
+		return (String)get_Value(COLUMNNAME_SessionID);
 	}
 
 	/** Set Code.

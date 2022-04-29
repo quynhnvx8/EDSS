@@ -4,10 +4,9 @@
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-
-import eone.util.KeyNamePair;
 
 /** Generated Interface for AD_Register
  *  @author EOne (generated) 
@@ -50,6 +49,17 @@ public interface I_AD_Register
 	  * Organizational entity within client
 	  */
 	public int getAD_Org_ID();
+
+    /** Column name AD_PackagePrice_ID */
+    public static final String COLUMNNAME_AD_PackagePrice_ID = "AD_PackagePrice_ID";
+
+	/** Set Package Price	  */
+	public void setAD_PackagePrice_ID (int AD_PackagePrice_ID);
+
+	/** Get Package Price	  */
+	public int getAD_PackagePrice_ID();
+
+	public eone.base.model.I_AD_PackagePrice getAD_PackagePrice() throws RuntimeException;
 
     /** Column name AD_Register_ID */
     public static final String COLUMNNAME_AD_Register_ID = "AD_Register_ID";
@@ -158,6 +168,15 @@ public interface I_AD_Register
 	  * Identifies a telephone number
 	  */
 	public String getPhone();
+
+    /** Column name RegisterType */
+    public static final String COLUMNNAME_RegisterType = "RegisterType";
+
+	/** Set Register Type	  */
+	public void setRegisterType (String RegisterType);
+
+	/** Get Register Type	  */
+	public String getRegisterType();
 
     /** Column name StartDate */
     public static final String COLUMNNAME_StartDate = "StartDate";

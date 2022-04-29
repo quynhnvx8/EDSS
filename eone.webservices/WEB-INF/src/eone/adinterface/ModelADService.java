@@ -19,19 +19,10 @@ import org.idempiere.adInterface.x10.WindowTabDataDocument;
 @Path("/model_adservice/")
 @Consumes({"application/xml", "application/json"}) 
 @Produces({"application/xml", "application/json"})
-@WebService(targetNamespace="http://idempiere.org/ADInterface/1_0")
+@WebService(targetNamespace="http://dssvn.com")
 @SOAPBinding(style=Style.RPC,use=Use.LITERAL,parameterStyle=ParameterStyle.WRAPPED)
 public interface ModelADService {
 
-    /* Model oriented web services */ 
-
-    //@POST
-	//@Path("/set_docaction") 
-    //public StandardResponseDocument setDocAction(ModelSetDocActionRequestDocument req);
-
-   // @POST
-	//@Path("/run_process") 
-    //public RunProcessResponseDocument runProcess(ModelRunProcessRequestDocument req);
     
     @POST
 	@Path("/get_list") 

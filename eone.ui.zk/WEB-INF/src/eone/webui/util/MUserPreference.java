@@ -28,6 +28,5 @@ public class MUserPreference extends MPreference {
 
 	public MUserPreference(Properties ctx, int AD_Preference_ID, String trxName) {
 		super(ctx, AD_Preference_ID, trxName);
-		setClientOrg(0, 0);
 	}
 }

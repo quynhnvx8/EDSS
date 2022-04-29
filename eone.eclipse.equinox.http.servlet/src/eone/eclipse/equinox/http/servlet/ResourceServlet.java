@@ -51,7 +51,7 @@ public class ResourceServlet extends HttpServlet {
 			if (resourceURL != null)
 				writeResource(req, resp, resourcePath, resourceURL);
 			else
-				resp.sendError(HttpServletResponse.SC_NOT_FOUND, "ProxyServlet: " + req.getRequestURI()); //$NON-NLS-1$
+				resp.sendError(HttpServletResponse.SC_NOT_FOUND, "ProxyServlet: " + Utils.TO_STRING(req.getRequestURI())); //$NON-NLS-1$
 		} else {
 			resp.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
 		}

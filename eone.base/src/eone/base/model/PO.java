@@ -216,11 +216,13 @@ public abstract class PO
 	private boolean m_isReplication = false;
 
 	/** Access Level S__ 100	4	System info			*/
-	public static final int ACCESSLEVEL_ALL = 4;
+	public static final int ACCESSLEVEL_System = 4;
 	/**	Access Level SCO 111	7	System shared info	*/
-	public static final int ACCESSLEVEL_CLIENTS = 7;
+	public static final int ACCESSLEVEL_Client = 7;
 	
 
+	public static final int ACCESSLEVEL_Special = 6;
+	
 	/**
 	 *  Initialize and return PO_Info
 	 *  @param ctx context
@@ -1716,28 +1718,7 @@ public abstract class PO
 		return ii.intValue();
 	}
 	
-	/**
-	 * 	Overwrite Client Org if different
-	 *	@param AD_Client_ID client
-	 *	@param AD_Org_ID org
-	 */
-	protected void setClientOrg (int AD_Client_ID, int AD_Org_ID)
-	{
-		if (AD_Client_ID != getAD_Client_ID())
-			setAD_Client_ID(AD_Client_ID);
-		if (AD_Org_ID != getAD_Org_ID())
-			setAD_Org_ID(AD_Org_ID);
-	}	//	setClientOrg
-
-	/**
-	 * 	Overwrite Client Org if different
-	 *	@param po persistent object
-	 */
-	protected void setClientOrg (PO po)
-	{
-		setClientOrg(po.getAD_Client_ID(), po.getAD_Org_ID());
-	}	//	setClientOrg
-
+	
 	/**
 	 * 	Set Active
 	 * 	@param active active
@@ -2779,7 +2760,8 @@ public abstract class PO
 			String columnName = DB.getDatabase().quoteColumnName(p_info.getColumnName(i));
 			int accessLevel = Integer.parseInt(p_info.getAccessLevel());
 			
-			if (accessLevel == ACCESSLEVEL_ALL) {
+			//Thiết lập giá trị client và org cho User
+			if (accessLevel == ACCESSLEVEL_System || (accessLevel == ACCESSLEVEL_Special && Env.isUserSystem(getCtx()))) {
 				if (("AD_Client_ID".equals(columnName) || "AD_Org_ID".equals(columnName)) ) {
 					value = 0;
 				}
@@ -3136,7 +3118,7 @@ public abstract class PO
 		}	//	force
 
 		MTable tb = MTable.get(getCtx(), AD_Table_ID);
-		if ((Env.getAD_Role_ID(getCtx()) != 0) && tb.get_AccessLevel() == ACCESSLEVEL_ALL)
+		if (tb.get_AccessLevel() == ACCESSLEVEL_System && !Env.isUserSystem(getCtx()))
 		{
 			log.warning("You cannot delete this record, role doesn't have access");
 			log.saveError("AccessCannotDelete", "", false);

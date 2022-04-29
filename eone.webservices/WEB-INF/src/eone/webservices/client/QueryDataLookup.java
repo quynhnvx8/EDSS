@@ -123,7 +123,7 @@ public class QueryDataLookup extends Lookup {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document document = builder.newDocument();
-			Element element = document.createElementNS("http://idempiere.org/ADInterface/1_0", "queryData");
+			Element element = document.createElementNS("http://dssvn.com", "queryData");
 			Node domNode = document.importNode(crudDocument.getDomNode().getFirstChild(), true);
 			document.appendChild(element);
 			element.appendChild(domNode);

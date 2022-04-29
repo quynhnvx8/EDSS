@@ -170,7 +170,6 @@ public class MAttachment extends X_AD_Attachment
 	 */
 	public void setClientOrg(int AD_Client_ID, int AD_Org_ID) 
 	{
-		super.setClientOrg(AD_Client_ID, AD_Org_ID);
 		initAttachmentStoreDetails(getCtx(), get_TrxName());
 	}	//	setClientOrg
 

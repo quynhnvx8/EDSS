@@ -33,12 +33,10 @@ import eone.base.model.PO;
 import eone.base.model.POInfo;
 import eone.base.model.Query;
 import eone.base.model.X_WS_WebServiceMethod;
-import eone.base.model.X_WS_WebServiceTypeAccess;
 import eone.exceptions.EONEException;
 import eone.model.MWebService;
 import eone.model.MWebServiceType;
 import eone.util.CCache;
-import eone.util.DB;
 import eone.util.Env;
 import eone.util.KeyNamePair;
 import eone.util.Login;
@@ -47,19 +45,10 @@ import eone.util.Trx;
 import eone.webservices.fault.IdempiereServiceFault;
 
 
-
-/**
- * 
- * @author Deepak Pansheriya
- *
- */
 public class AbstractService {
 
 	public static final String ROLE_TYPES_WEBSERVICE = "NULL,WS";  //webservice+null
-	private static final String ROLE_ACCESS_SQL = "SELECT IsActive FROM WS_WebServiceTypeAccess WHERE AD_Role_ID IN ("
-			+ "SELECT AD_Role_ID FROM AD_Role WHERE AD_Role_ID=? UNION "
-			+ "SELECT Included_Role_ID as AD_Role_ID FROM AD_Role_Included WHERE AD_Role_ID=?) "
-	        + "AND WS_WebServiceType_ID=?";
+	
 	private static final String COMPIERE_SERVICE = "CompiereService";
 	@Resource
 	protected WebServiceContext jaxwsContext; //soap context
@@ -130,53 +119,7 @@ public class AbstractService {
     		Env.setContext(m_cs.getCtx(), "#UserAgent",   userAgent == null ? "Unknown" : userAgent);
     	}
 
-    	/*FIXME Quynhnv.x8. Comment code không dùng Org
-    	 
-		KeyNamePair[] roles = login.getRoles(loginRequest.getUser(), selectedClient, ROLE_TYPES_WEBSERVICE);
-		if (roles != null) {
-			boolean okrole = false;
-			for (KeyNamePair role : roles) {
-				if (role.getKey() == loginRequest.getRoleID()) {
-					okrole = true;
-					break;
-				}
-			}
-			if (!okrole)
-				return "Error logging in - role not allowed for this user";
-			
-			KeyNamePair[] orgs = login.getOrgs(new KeyNamePair(loginRequest.getRoleID(), ""));
-
-			if (orgs == null)
-				return "Error logging in - no organizations for this role";
-
-			KeyNamePair orglogin = null;
-			boolean okorg = false;
-			for (KeyNamePair org : orgs) {
-				if (org.getKey() == loginRequest.getOrgID()) {
-					okorg = true;
-					orglogin = org;
-					break;
-				}
-			}
-			if (!okorg)
-				return "Error logging in - org not allowed for this role";
-
-			
-
-			String error = login.validateLogin(orglogin);
-			if (error != null && error.length() > 0)
-				return error;
-			
-			int AD_User_ID = Env.getAD_User_ID(m_cs.getCtx());
-
-			
-			if (!m_cs.login(AD_User_ID, loginRequest.getRoleID(), loginRequest.getClientID(), loginRequest.getOrgID(), loginRequest.getWarehouseID(), loginRequest.getLang()))
-				return "Error logging in";
-			
-		} else {
-			return "Error logging in - no roles or user/pwd invalid for user " + loginRequest.getUser();
-		}
-		*/
+    	
 		ret =invokeLoginValidator(loginRequest, m_cs.getCtx(), null, IWSValidator.TIMING_AFTER_LOGIN);
 		if(ret!=null && ret.length()>0)
 			return ret;
@@ -185,7 +128,7 @@ public class AbstractService {
 	}
 
 	private static CCache<String,MWebServiceType> s_WebServiceTypeCache	= new CCache<String,MWebServiceType>(MWebServiceType.Table_Name, 10, 60);	//60 minutes
-	private static CCache<String,Boolean> s_RoleAccessCache = new CCache<>(X_WS_WebServiceTypeAccess.Table_Name, 60, 60);
+	//private static CCache<String,Boolean> s_RoleAccessCache = new CCache<>(X_WS_WebServiceTypeAccess.Table_Name, 60, 60);
 
 	/**
 	 * Authenticate user for requested service type
@@ -228,11 +171,12 @@ public class AbstractService {
 			return "Service type " + serviceTypeValue + " not configured";
 
 		getHttpServletRequest().setAttribute("MWebServiceType", m_webservicetype);
-		
+		/*
 		int AD_Role_ID = Env.getAD_Role_ID( m_cs.getCtx());
 		key = AD_Role_ID + "|" + m_webservicetype.get_ID();
 		synchronized (s_RoleAccessCache) {
 			Boolean bAccess = s_RoleAccessCache.get(key);
+			
 			if (bAccess == null) {
 				// Check if role has access on web-service
 		        String hasAccess = DB.getSQLValueStringEx(null, ROLE_ACCESS_SQL,
@@ -243,9 +187,10 @@ public class AbstractService {
 	        if (!bAccess.booleanValue())
 	        {
 	            return "Web Service Error: Login role does not have access to the service type";
-	        }			
+	        }
+	       		
 		}
-        
+         */	
 		String ret=invokeLoginValidator(null, m_cs.getCtx(), m_webservicetype, IWSValidator.TIMING_ON_AUTHORIZATION);
 		if(ret!=null && ret.length()>0)
 			return ret;
@@ -266,7 +211,7 @@ public class AbstractService {
 	 */
 	protected static StandardResponseDocument rollbackAndSetError(Trx trx, StandardResponse resp, StandardResponseDocument ret, boolean isError,
 			String string) {
-		resp.setError(string);
+		resp.setError(Env.TO_STRING(string));
 		resp.setIsError(isError);
 		trx.rollback();
 		trx.close();

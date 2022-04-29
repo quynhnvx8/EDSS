@@ -112,7 +112,6 @@ public class MWarehouse extends X_M_Warehouse
 	public MWarehouse (MOrg org)
 	{
 		this (org.getCtx(), 0, org.get_TrxName());
-		setClientOrg(org);
 		setValue (org.getValue());
 		setName (org.getName());
 		

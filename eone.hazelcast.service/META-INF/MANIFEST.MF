@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: iDempiere Hazelcast Service
 Bundle-SymbolicName: eone.hazelcast.service
 Bundle-Version: 7.1.0.qualifier
-Bundle-Activator: org.idempiere.hazelcast.service.Activator
+Bundle-Activator: eone.hazelcast.service.Activator
 Bundle-ActivationPolicy: lazy
 Import-Package: eone,
  eone.base,
@@ -32,6 +32,6 @@ Service-Component: OSGI-INF/*.xml
 Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version>=11))"
 Require-Bundle: org.eclipse.osgi,
  eone.base;bundle-version="7.1.0"
-Automatic-Module-Name: org.idempiere.hazelcast.service
+Automatic-Module-Name: eone.hazelcast.service
 Bundle-Vendor: EONE Community
 Bundle-RequiredExecutionEnvironment: JavaSE-11

@@ -4,10 +4,9 @@
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-
-import eone.util.KeyNamePair;
 
 /** Generated Interface for AD_User
  *  @author EOne (generated) 
@@ -85,15 +84,6 @@ public interface I_AD_User
 
 	/** Get Answer	  */
 	public String getAnswer();
-
-    /** Column name BPName */
-    public static final String COLUMNNAME_BPName = "BPName";
-
-	/** Set BP Name	  */
-	public void setBPName (String BPName);
-
-	/** Get BP Name	  */
-	public String getBPName();
 
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
@@ -354,6 +344,15 @@ public interface I_AD_User
 
 	/** Get Security Question	  */
 	public String getSecurityQuestion();
+
+    /** Column name SessionID */
+    public static final String COLUMNNAME_SessionID = "SessionID";
+
+	/** Set Session ID	  */
+	public void setSessionID (String SessionID);
+
+	/** Get Session ID	  */
+	public String getSessionID();
 
     /** Column name Updated */
     public static final String COLUMNNAME_Updated = "Updated";

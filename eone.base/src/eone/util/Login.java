@@ -71,22 +71,6 @@ public class Login
 	private Properties 		m_ctx = null;
 	
 
-	public String validateLogin (KeyNamePair org)
-	{
-		int AD_Client_ID = Env.getAD_Client_ID(m_ctx);
-		int AD_Role_ID = Env.getAD_Role_ID(m_ctx);
-
-		if (! MRole.get(m_ctx, AD_Role_ID).isAccessAdvanced()) {
-			if (MSysConfig.getBooleanValue(MSysConfig.SYSTEM_IN_MAINTENANCE_MODE, false, 0))
-				return Msg.getMsg(m_ctx, "SystemInMaintenance");
-			if (AD_Client_ID != 0 && MSysConfig.getBooleanValue(MSysConfig.SYSTEM_IN_MAINTENANCE_MODE, false, AD_Client_ID))
-				return Msg.getMsg(m_ctx, "SystemInMaintenance");
-		}
-
-		return null;
-	}	//	validateLogin
-	
-
 	public String loadPreferences (KeyNamePair org)
 	{
 		if (log.isLoggable(Level.INFO)) log.info("Org: " + org.toStringX());
@@ -450,6 +434,7 @@ public class Login
 			{
 				user.setFailedLoginCount(0);
 				user.setDateLastLogin(new Timestamp(now));
+				user.setSessionID(Env.getContext(Env.getCtx(), "#AD_Session_ID"));
 				Env.setContext(Env.getCtx(), "#AD_Client_ID", user.getAD_Client_ID());
 				if (!user.save())
 					log.severe("Failed to update user record with date last login (" + user.getName() + " / clientID = " + user.getAD_Client_ID() + ")");
@@ -628,7 +613,7 @@ public class Login
 	public void getClientEnveronment(int AD_Client_ID, ItemDisplayLogic itemDisplay) 
 	{
 		//trường showlistitem dùng để ẩn hiện trên giao diện và có code hạch toán
-		String sql = " select isgroup, ismulticurrency, showlistitem, MMPolicy, C_Currency_ID, C_Element_ID from ad_client Where Ad_Client_ID = ?";
+		String sql = " select isgroup, ismulticurrency, showlistitem, MMPolicy, C_Currency_ID, C_Element_ID, Value from ad_client Where Ad_Client_ID = ?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -649,7 +634,8 @@ public class Login
 				itemDisplay.setIsMoreCurrency(rs.getString(2));		//Su dung da tien te hay don tien te. Da tien tien thi ko readonly.
 				itemDisplay.setCurrenctyDefault(rs.getString(5));	//Gia tri mac dinh tien te theo cong ty
 				itemDisplay.setMaterialPolicy(rs.getString(4));			//Cach tinh gia vat tu
-				itemDisplay.setElement(rs.getString(6));
+				itemDisplay.setElement(rs.getString(6));		//Che do ke toan
+				Env.setContext(m_ctx, "#Domain", rs.getString("Value"));
 				String lists = rs.getString("showlistitem");
 				if (lists != null && !lists.isEmpty()) {
 					lists = lists.replaceAll(" ", "").replaceAll(";", ",");
@@ -755,9 +741,9 @@ public class Login
 				+" 		CASE WHEN POSITION('Y' IN STRING_AGG(r.isShowPrice,',')) > 0 THEN 'Y' ELSE 'N' END isShowPrice, "
 				+" 		CASE WHEN POSITION('Y' IN STRING_AGG(r.isConfigAcct,',')) > 0 THEN 'Y' ELSE 'N' END isConfigAcct, "
 				+" 		CASE WHEN POSITION('Y' IN STRING_AGG(r.isDelItem,',')) > 0 THEN 'Y' ELSE 'N' END isDelItem, "
-				+" 		CASE WHEN POSITION('Y' IN STRING_AGG(r.IsMasterRole,',')) > 0 THEN 'Y' ELSE 'N' END IsMasterRole, "
+				//+" 		CASE WHEN POSITION('Y' IN STRING_AGG(r.IsMasterRole,',')) > 0 THEN 'Y' ELSE 'N' END IsMasterRole, "
 				+" 		CASE WHEN POSITION('Y' IN STRING_AGG(r.IsAccessAllOrgs,',')) > 0 THEN 'Y' ELSE 'N' END IsAccessAllOrgs,  "
-				+" 		CASE WHEN POSITION('Y' IN STRING_AGG(r.IsAccessAdvanced,',')) > 0 THEN 'Y' ELSE 'N' END IsAccessAdvanced,  "
+				//+" 		CASE WHEN POSITION('Y' IN STRING_AGG(r.IsAccessAdvanced,',')) > 0 THEN 'Y' ELSE 'N' END IsAccessAdvanced,  "
 				+" 		CASE WHEN POSITION('Y' IN STRING_AGG(r.IsDragDropMenu,',')) > 0 THEN 'Y' ELSE 'N' END IsDragDropMenu, "
 				+" 		CASE WHEN POSITION('Y' IN STRING_AGG(r.IsCanExport,',')) > 0 THEN 'Y' ELSE 'N' END IsCanExport, "
 				+" 		MAX(MaxQueryRecords) MaxQueryRecords "
@@ -773,8 +759,8 @@ public class Login
 				+" 		THEN (SELECT STRING_AGG(AD_Org_ID::text,',') FROM AD_Org WHERE IsActive = 'Y') "
 				+" 		ELSE (SELECT STRING_AGG(AD_Org_ID::text,',') FROM AD_User_OrgAccess uo Where uO.AD_User_ID = u.AD_User_ID) END listOrg, "
 				+" 		r.ListTree, r.RoleType, r.RoleLevel, r.ListRole, r.IsShowAcct, r.isShowPrice, r.isConfigAcct, r.isDelItem, "
-				+" 		r.IsMasterRole, r.IsAccessAllOrgs, r.IsAccessAdvanced, r.IsDragDropMenu, r.IsCanExport, r.MaxQueryRecords, "
-				+"		COALESCE(u.isUserAdmin, 'N') IsUserAdmin, COALESCE(u.isUserSystem, 'N') IsUserSystem"
+				+" 		r.IsAccessAllOrgs, r.IsDragDropMenu, r.IsCanExport, r.MaxQueryRecords, "
+				+"		COALESCE(u.isUserAdmin, 'N') IsUserAdmin, COALESCE(u.isUserSystem, 'N') IsUserSystem"//r.IsMasterRole, 
 				+" FROM AD_User u INNER JOIN tmp r ON u.AD_User_ID = r.AD_User_ID "
 				+"		LEFT JOIN HR_Employee e ON u.HR_Employee_ID = e.HR_Employee_ID "
 				+"		LEFT JOIN AD_Department d ON d.AD_Department_ID = e.AD_Department_ID "
@@ -814,7 +800,7 @@ public class Login
 					Env.setContext(m_ctx, "#AD_Org_Name", rs.getString("OrgNames"));
 					Env.setContext(m_ctx, "#AD_OrgAccess_ID", rs.getString("listOrg"));
 					
-					Env.setContext(m_ctx, "#ShowAdvanced", rs.getString("IsAccessAdvanced"));
+					Env.setContext(m_ctx, "#ShowAdvanced", "Y");
 					Env.setContext(m_ctx, "#IsDragDropMenu", rs.getString("IsDragDropMenu"));
 					Env.setContext(m_ctx, "#IsCanExport", rs.getString("IsCanExport"));
 					Env.setContext(m_ctx, "#MaxQueryRecords", rs.getString("MaxQueryRecords"));

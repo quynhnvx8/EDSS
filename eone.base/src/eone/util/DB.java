@@ -565,6 +565,11 @@ public final class DB
 	
 	public static int executeUpdate (String sql, Object[] params, boolean ignoreError, String trxName, int timeOut)
 	{
+		/*
+		if (sql.contains("AD_User")) {
+			System.out.println(sql);
+		}
+		*/
 		if (sql == null || sql.length() == 0)
 			throw new IllegalArgumentException("Required parameter missing - " + sql);
 		verifyTrx(trxName, sql);

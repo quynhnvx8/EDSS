@@ -1,4 +1,4 @@
-package org.idempiere.felix.webconsole;
+package eone.felix.webconsole;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;

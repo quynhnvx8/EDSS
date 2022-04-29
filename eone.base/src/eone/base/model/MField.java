@@ -46,7 +46,6 @@ public class MField extends X_AD_Field
 	public MField (MTab parent)
 	{
 		this (parent.getCtx(), 0, parent.get_TrxName());
-		setClientOrg(parent);
 		setAD_Tab_ID(parent.getAD_Tab_ID());
 	}	//	MField
 	
@@ -59,7 +58,6 @@ public class MField extends X_AD_Field
 	{
 		this (parent.getCtx(), 0, parent.get_TrxName());
 		copyValues(from, this);
-		setClientOrg(parent);
 		setAD_Tab_ID(parent.getAD_Tab_ID());
 	}	//	M_Field
 	

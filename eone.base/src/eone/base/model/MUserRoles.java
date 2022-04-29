@@ -21,8 +21,6 @@ import java.util.List;
 import java.util.Properties;
 
 import eone.util.CLogger;
-import eone.util.Env;
-import eone.util.Msg;
 
 /**
  *	User Roles Model
@@ -136,33 +134,14 @@ public class MUserRoles extends X_AD_User_Roles
 
 	@Override
 	protected boolean beforeSave(boolean newRecord) {
-		if ("N".equalsIgnoreCase(Env.getContext(getCtx(), "#ShowAdvanced"))) {
-			MRole role = new MRole(getCtx(), getAD_Role_ID(), get_TrxName());
-			if (role.isAccessAdvanced()) {
-				log.saveError("Error", Msg.getMsg(getCtx(), "ActionNotAllowedHere"));
-				return false;
-			}
-			if (! newRecord && is_ValueChanged(COLUMNNAME_AD_Role_ID)) {
-				MRole oldrole = new MRole(getCtx(), get_ValueOldAsInt(COLUMNNAME_AD_Role_ID), get_TrxName());
-				if (oldrole.isAccessAdvanced()) {
-					log.saveError("Error", Msg.getMsg(getCtx(), "ActionNotAllowedHere"));
-					return false;
-				}
-			}
-		}
+		
 		
 		return true;
 	}
 
 	@Override
 	protected boolean beforeDelete() {
-		if ("N".equalsIgnoreCase(Env.getContext(getCtx(), "#ShowAdvanced"))) {
-			MRole role = new MRole(getCtx(), getAD_Role_ID(), get_TrxName());
-			if (role.isAccessAdvanced()) {
-				log.saveError("Error", Msg.getMsg(getCtx(), "ActionNotAllowedHere"));
-				return false;
-			}
-		}
+		
 		return true;
 	}
 

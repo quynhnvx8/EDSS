@@ -18,7 +18,7 @@ public class X_AD_Register extends PO implements I_AD_Register, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220110L;
+	private static final long serialVersionUID = 20220401L;
 
     /** Standard Constructor */
     public X_AD_Register (Properties ctx, int AD_Register_ID, String trxName)
@@ -56,6 +56,31 @@ public class X_AD_Register extends PO implements I_AD_Register, I_Persistent
         .append(get_ID()).append(",Name=").append(getName()).append("]");
       return sb.toString();
     }
+
+	public eone.base.model.I_AD_PackagePrice getAD_PackagePrice() throws RuntimeException
+    {
+		return (eone.base.model.I_AD_PackagePrice)MTable.get(getCtx(), eone.base.model.I_AD_PackagePrice.Table_Name)
+			.getPO(getAD_PackagePrice_ID(), get_TrxName());	}
+
+	/** Set Package Price.
+		@param AD_PackagePrice_ID Package Price	  */
+	public void setAD_PackagePrice_ID (int AD_PackagePrice_ID)
+	{
+		if (AD_PackagePrice_ID < 1) 
+			set_ValueNoCheck (COLUMNNAME_AD_PackagePrice_ID, null);
+		else 
+			set_ValueNoCheck (COLUMNNAME_AD_PackagePrice_ID, Integer.valueOf(AD_PackagePrice_ID));
+	}
+
+	/** Get Package Price.
+		@return Package Price	  */
+	public int getAD_PackagePrice_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_AD_PackagePrice_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
 
 	/** Set Register.
 		@param AD_Register_ID Register	  */
@@ -171,6 +196,25 @@ public class X_AD_Register extends PO implements I_AD_Register, I_Persistent
 	public String getPhone () 
 	{
 		return (String)get_Value(COLUMNNAME_Phone);
+	}
+
+	/** Trial = TRIAL */
+	public static final String REGISTERTYPE_Trial = "TRIAL";
+	/** Real Use = REAL */
+	public static final String REGISTERTYPE_RealUse = "REAL";
+	/** Set Register Type.
+		@param RegisterType Register Type	  */
+	public void setRegisterType (String RegisterType)
+	{
+
+		set_Value (COLUMNNAME_RegisterType, RegisterType);
+	}
+
+	/** Get Register Type.
+		@return Register Type	  */
+	public String getRegisterType () 
+	{
+		return (String)get_Value(COLUMNNAME_RegisterType);
 	}
 
 	/** Set Start Date.

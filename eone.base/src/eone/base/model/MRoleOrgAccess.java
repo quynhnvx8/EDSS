@@ -191,7 +191,6 @@ public class MRoleOrgAccess extends X_AD_Role_OrgAccess
 	public MRoleOrgAccess (MOrg org, int AD_Role_ID)
 	{
 		this (org.getCtx(), 0, org.get_TrxName());
-		setClientOrg (org);
 		setAD_Role_ID (AD_Role_ID);
 	}	//	MRoleOrgAccess
 
@@ -203,7 +202,6 @@ public class MRoleOrgAccess extends X_AD_Role_OrgAccess
 	public MRoleOrgAccess (MRole role, int AD_Org_ID)
 	{
 		this (role.getCtx(), 0, role.get_TrxName());
-		setClientOrg (role.getAD_Client_ID(), AD_Org_ID);
 		setAD_Role_ID (role.getAD_Role_ID());
 	}	//	MRoleOrgAccess
 

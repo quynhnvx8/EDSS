@@ -1,28 +1,15 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import eone.util.KeyNamePair;
-
 /** Generated Interface for HR_Employee
- *  @author iDempiere (generated) 
+ *  @author EOne (generated) 
  *  @version Version 1.0
  */
 public interface I_HR_Employee 
@@ -36,9 +23,9 @@ public interface I_HR_Employee
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 3 - Client - Org 
+    /** AccessLevel = 7 - System - Client - Org 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(3);
+    BigDecimal accessLevel = BigDecimal.valueOf(7);
 
     /** Load Meta Data */
 
@@ -59,7 +46,7 @@ public interface I_HR_Employee
 	/** Get Department	  */
 	public int getAD_Department_ID();
 
-	public I_AD_Department getAD_Department() throws RuntimeException;
+	public eone.base.model.I_AD_Department getAD_Department() throws RuntimeException;
 
     /** Column name AD_Image_ID */
     public static final String COLUMNNAME_AD_Image_ID = "AD_Image_ID";
@@ -167,6 +154,15 @@ public interface I_HR_Employee
 	/** Get CardID	  */
 	public String getCardID();
 
+    /** Column name CardNumber */
+    public static final String COLUMNNAME_CardNumber = "CardNumber";
+
+	/** Set CardNumber	  */
+	public void setCardNumber (String CardNumber);
+
+	/** Get CardNumber	  */
+	public String getCardNumber();
+
     /** Column name Code */
     public static final String COLUMNNAME_Code = "Code";
 
@@ -236,15 +232,28 @@ public interface I_HR_Employee
 	  */
 	public String getDocStatus();
 
+    /** Column name Education */
+    public static final String COLUMNNAME_Education = "Education";
+
+	/** Set Education.
+	  * Education
+	  */
+	public void setEducation (String Education);
+
+	/** Get Education.
+	  * Education
+	  */
+	public String getEducation();
+
     /** Column name EMail */
     public static final String COLUMNNAME_EMail = "EMail";
 
-	/** Set EMail Address.
+	/** Set EMail.
 	  * Electronic Mail Address
 	  */
 	public void setEMail (String EMail);
 
-	/** Get EMail Address.
+	/** Get EMail.
 	  * Electronic Mail Address
 	  */
 	public String getEMail();
@@ -289,6 +298,15 @@ public interface I_HR_Employee
 	/** Get Height	  */
 	public BigDecimal getHeight();
 
+    /** Column name historyNo */
+    public static final String COLUMNNAME_historyNo = "historyNo";
+
+	/** Set historyNo	  */
+	public void sethistoryNo (String historyNo);
+
+	/** Get historyNo	  */
+	public String gethistoryNo();
+
     /** Column name HomeTown */
     public static final String COLUMNNAME_HomeTown = "HomeTown";
 
@@ -316,7 +334,7 @@ public interface I_HR_Employee
 	/** Get Jobs	  */
 	public int getHR_ItemLine_05_ID();
 
-	public I_HR_ItemLine getHR_ItemLine_05() throws RuntimeException;
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_05() throws RuntimeException;
 
     /** Column name HR_ItemLine_06_ID */
     public static final String COLUMNNAME_HR_ItemLine_06_ID = "HR_ItemLine_06_ID";
@@ -327,18 +345,51 @@ public interface I_HR_Employee
 	/** Get Position	  */
 	public int getHR_ItemLine_06_ID();
 
-	public I_HR_ItemLine getHR_ItemLine_06() throws RuntimeException;
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_06() throws RuntimeException;
 
     /** Column name HR_ItemLine_09_ID */
     public static final String COLUMNNAME_HR_ItemLine_09_ID = "HR_ItemLine_09_ID";
 
-	/** Set Item Line 09	  */
+	/** Set Nation	  */
 	public void setHR_ItemLine_09_ID (int HR_ItemLine_09_ID);
 
-	/** Get Item Line 09	  */
+	/** Get Nation	  */
 	public int getHR_ItemLine_09_ID();
 
-	public I_HR_ItemLine getHR_ItemLine_09() throws RuntimeException;
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_09() throws RuntimeException;
+
+    /** Column name HR_ItemLine_12_ID */
+    public static final String COLUMNNAME_HR_ItemLine_12_ID = "HR_ItemLine_12_ID";
+
+	/** Set Training Form	  */
+	public void setHR_ItemLine_12_ID (int HR_ItemLine_12_ID);
+
+	/** Get Training Form	  */
+	public int getHR_ItemLine_12_ID();
+
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_12() throws RuntimeException;
+
+    /** Column name HR_ItemLine_18_ID */
+    public static final String COLUMNNAME_HR_ItemLine_18_ID = "HR_ItemLine_18_ID";
+
+	/** Set Training Level	  */
+	public void setHR_ItemLine_18_ID (int HR_ItemLine_18_ID);
+
+	/** Get Training Level	  */
+	public int getHR_ItemLine_18_ID();
+
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_18() throws RuntimeException;
+
+    /** Column name HR_ItemLine_28_ID */
+    public static final String COLUMNNAME_HR_ItemLine_28_ID = "HR_ItemLine_28_ID";
+
+	/** Set Item Line 28	  */
+	public void setHR_ItemLine_28_ID (int HR_ItemLine_28_ID);
+
+	/** Get Item Line 28	  */
+	public int getHR_ItemLine_28_ID();
+
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_28() throws RuntimeException;
 
     /** Column name HR_ItemLine_29_ID */
     public static final String COLUMNNAME_HR_ItemLine_29_ID = "HR_ItemLine_29_ID";
@@ -349,7 +400,7 @@ public interface I_HR_Employee
 	/** Get National	  */
 	public int getHR_ItemLine_29_ID();
 
-	public I_HR_ItemLine getHR_ItemLine_29() throws RuntimeException;
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_29() throws RuntimeException;
 
     /** Column name HR_ItemLine_30_ID */
     public static final String COLUMNNAME_HR_ItemLine_30_ID = "HR_ItemLine_30_ID";
@@ -360,7 +411,7 @@ public interface I_HR_Employee
 	/** Get Item Line 30	  */
 	public int getHR_ItemLine_30_ID();
 
-	public I_HR_ItemLine getHR_ItemLine_30() throws RuntimeException;
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_30() throws RuntimeException;
 
     /** Column name HR_ItemLine_31_ID */
     public static final String COLUMNNAME_HR_ItemLine_31_ID = "HR_ItemLine_31_ID";
@@ -371,18 +422,29 @@ public interface I_HR_Employee
 	/** Get Item Line 31	  */
 	public int getHR_ItemLine_31_ID();
 
-	public I_HR_ItemLine getHR_ItemLine_31() throws RuntimeException;
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_31() throws RuntimeException;
+
+    /** Column name HR_ItemLine_32_ID */
+    public static final String COLUMNNAME_HR_ItemLine_32_ID = "HR_ItemLine_32_ID";
+
+	/** Set Politic Level	  */
+	public void setHR_ItemLine_32_ID (int HR_ItemLine_32_ID);
+
+	/** Get Politic Level	  */
+	public int getHR_ItemLine_32_ID();
+
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_32() throws RuntimeException;
 
     /** Column name HR_ItemLine_39_ID */
     public static final String COLUMNNAME_HR_ItemLine_39_ID = "HR_ItemLine_39_ID";
 
-	/** Set Item Line 39	  */
+	/** Set Marital Status	  */
 	public void setHR_ItemLine_39_ID (int HR_ItemLine_39_ID);
 
-	/** Get Item Line 39	  */
+	/** Get Marital Status	  */
 	public int getHR_ItemLine_39_ID();
 
-	public I_HR_ItemLine getHR_ItemLine_39() throws RuntimeException;
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_39() throws RuntimeException;
 
     /** Column name ImageURL */
     public static final String COLUMNNAME_ImageURL = "ImageURL";
@@ -435,6 +497,73 @@ public interface I_HR_Employee
 	  * Additional Name
 	  */
 	public String getName2();
+
+    /** Column name OfficialPartyDate */
+    public static final String COLUMNNAME_OfficialPartyDate = "OfficialPartyDate";
+
+	/** Set Official Party Date	  */
+	public void setOfficialPartyDate (Timestamp OfficialPartyDate);
+
+	/** Get Official Party Date	  */
+	public Timestamp getOfficialPartyDate();
+
+    /** Column name PartyBadgeNo */
+    public static final String COLUMNNAME_PartyBadgeNo = "PartyBadgeNo";
+
+	/** Set Party Badge No	  */
+	public void setPartyBadgeNo (String PartyBadgeNo);
+
+	/** Get Party Badge No	  */
+	public String getPartyBadgeNo();
+
+    /** Column name PartyCardPlace */
+    public static final String COLUMNNAME_PartyCardPlace = "PartyCardPlace";
+
+	/** Set Party Card Place	  */
+	public void setPartyCardPlace (String PartyCardPlace);
+
+	/** Get Party Card Place	  */
+	public String getPartyCardPlace();
+
+    /** Column name PartyDate */
+    public static final String COLUMNNAME_PartyDate = "PartyDate";
+
+	/** Set Party Date	  */
+	public void setPartyDate (Timestamp PartyDate);
+
+	/** Get Party Date	  */
+	public Timestamp getPartyDate();
+
+    /** Column name partyNo */
+    public static final String COLUMNNAME_partyNo = "partyNo";
+
+	/** Set partyNo.
+	  * Alphanumeric identifier of the entity
+	  */
+	public void setpartyNo (String partyNo);
+
+	/** Get partyNo.
+	  * Alphanumeric identifier of the entity
+	  */
+	public String getpartyNo();
+
+    /** Column name PartyPlace */
+    public static final String COLUMNNAME_PartyPlace = "PartyPlace";
+
+	/** Set Party Place	  */
+	public void setPartyPlace (String PartyPlace);
+
+	/** Get Party Place	  */
+	public String getPartyPlace();
+
+    /** Column name PartyRecPlace */
+    public static final String COLUMNNAME_PartyRecPlace = "PartyRecPlace";
+
+	/** Set Party Rec Place	  */
+	public void setPartyRecPlace (String PartyRecPlace);
+
+	/** Get Party Rec Place	  */
+	public String getPartyRecPlace();
 
     /** Column name Phone */
     public static final String COLUMNNAME_Phone = "Phone";
@@ -506,6 +635,19 @@ public interface I_HR_Employee
 	  */
 	public Timestamp getStartDate();
 
+    /** Column name Surname */
+    public static final String COLUMNNAME_Surname = "Surname";
+
+	/** Set Surname.
+	  * Alphanumeric identifier of the entity
+	  */
+	public void setSurname (String Surname);
+
+	/** Get Surname.
+	  * Alphanumeric identifier of the entity
+	  */
+	public String getSurname();
+
     /** Column name TaxID */
     public static final String COLUMNNAME_TaxID = "TaxID";
 
@@ -518,6 +660,24 @@ public interface I_HR_Employee
 	  * Tax Identification
 	  */
 	public String getTaxID();
+
+    /** Column name UnionDate */
+    public static final String COLUMNNAME_UnionDate = "UnionDate";
+
+	/** Set Union Date	  */
+	public void setUnionDate (Timestamp UnionDate);
+
+	/** Get Union Date	  */
+	public Timestamp getUnionDate();
+
+    /** Column name UnionPlace */
+    public static final String COLUMNNAME_UnionPlace = "UnionPlace";
+
+	/** Set Union Place	  */
+	public void setUnionPlace (String UnionPlace);
+
+	/** Get Union Place	  */
+	public String getUnionPlace();
 
     /** Column name Updated */
     public static final String COLUMNNAME_Updated = "Updated";

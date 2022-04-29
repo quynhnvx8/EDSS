@@ -290,7 +290,7 @@ public class WResetPassword implements IFormController, EventListener<Event>, Va
 			//	is entered Password correct ?
 			boolean hash_password = MSysConfig.getBooleanValue(MSysConfig.USER_PASSWORD_HASH, false);
 			if (hash_password) {
-				if (!user.authenticateHash(p_OldPassword) && !cbReset.isChecked())
+				if (!user.authenticateHash(p_OldPassword, user.getName()) && !cbReset.isChecked())
 					throw new IllegalArgumentException(Msg.getMsg(Env.getCtx(), "OldPasswordNoMatch"));
 			} else {
 				if (!p_OldPassword.equals(user.getPassword()) && !cbReset.isChecked())

@@ -104,7 +104,7 @@ public class BridgeServlet extends HttpServlet {
 
 			} else {
 				// Send HTTP 4040 Error.
-				resp.sendError(HttpServletResponse.SC_NOT_FOUND, "BridgeServlet: " + req.getRequestURI()); //$NON-NLS-1$
+				resp.sendError(HttpServletResponse.SC_NOT_FOUND, "BridgeServlet: " + Utils.TO_STRING(req.getRequestURI())); //$NON-NLS-1$
 			}
 		} else {
 			if (delegateIsFilter && chain != null) {

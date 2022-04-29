@@ -33,33 +33,33 @@ public class MDashboardPreference extends X_PA_DashboardPreference
 	 */
 	private static final long serialVersionUID = 7568476952229922042L;
 
-	public static int getForSessionColumnCount(boolean isShowInDashboard, int AD_User_ID, int AD_Role_ID)
+	public static int getForSessionColumnCount(boolean isShowInDashboard, int AD_User_ID)//, int AD_Role_ID
 	{
-        int noOfCols = getForSessionQuery(isShowInDashboard, AD_User_ID, AD_Role_ID)
+        int noOfCols = getForSessionQuery(isShowInDashboard, AD_User_ID)//, AD_Role_ID
         		.setOnlyActiveRecords(true)
         		.aggregate("DISTINCT "+COLUMNNAME_ColumnNo, Query.AGGREGATE_COUNT, Integer.class);
         return noOfCols;
 	}
 	
-	public static MDashboardPreference[] getForSession(boolean isShowInDashboard, int AD_User_ID, int AD_Role_ID)
+	public static MDashboardPreference[] getForSession(boolean isShowInDashboard, int AD_User_ID)//, int AD_Role_ID
 	{
-		List<MDashboardPreference> list = getForSessionQuery(isShowInDashboard, AD_User_ID, AD_Role_ID).list();
+		List<MDashboardPreference> list = getForSessionQuery(isShowInDashboard, AD_User_ID).list();//, AD_Role_ID
 		return list.toArray(new MDashboardPreference[list.size()]);
 	}
 	
-	public static Query getForSessionQuery(boolean isShowInDashboard, int AD_User_ID, int AD_Role_ID)
+	public static Query getForSessionQuery(boolean isShowInDashboard, int AD_User_ID)//, int AD_Role_ID
 	{
 		Properties ctx = Env.getCtx();
 		
 		StringBuilder whereClause = new StringBuilder(COLUMNNAME_IsShowInDashboard).append("=?")
-			.append(" AND ").append(COLUMNNAME_AD_Role_ID).append("=?")
+			//.append(" AND ").append(COLUMNNAME_AD_Role_ID).append("=?")
 			.append(" AND ").append(COLUMNNAME_AD_User_ID).append("=?")
 			.append(" AND ").append(COLUMNNAME_AD_Org_ID).append("=0");
 		
 		
 		List<Object> parameters = new ArrayList<Object>();
 		parameters.add(isShowInDashboard);
-		parameters.add(AD_Role_ID);
+		//parameters.add(AD_Role_ID);
 		parameters.add(AD_User_ID);
 		
 		return new Query(ctx, Table_Name, whereClause.toString(), null)
@@ -69,23 +69,24 @@ public class MDashboardPreference extends X_PA_DashboardPreference
 		.setOrderBy(COLUMNNAME_ColumnNo+","+COLUMNNAME_AD_Client_ID+","+COLUMNNAME_Line);
 	}
 	
-	public static MDashboardPreference[] getForSession(int AD_User_ID, int AD_Role_ID)
+	public static MDashboardPreference[] getForSession(int AD_User_ID)//, int AD_Role_ID
 	{
-		List<MDashboardPreference> list = getForSessionQuery(AD_User_ID, AD_Role_ID).list();
+		List<MDashboardPreference> list = getForSessionQuery(AD_User_ID).list();//, AD_Role_ID
 		return list.toArray(new MDashboardPreference[list.size()]);
 	}
 	
-	public static Query getForSessionQuery(int AD_User_ID, int AD_Role_ID)
+	public static Query getForSessionQuery(int AD_User_ID)
 	{
 		Properties ctx = Env.getCtx();
 		
 		StringBuilder whereClause = new StringBuilder()
-			.append(COLUMNNAME_AD_Role_ID).append("=?")
-			.append(" AND ").append(COLUMNNAME_AD_User_ID).append("=?")
+			//.append(COLUMNNAME_AD_Role_ID).append("=?")
+			//.append(" AND ")
+			.append(COLUMNNAME_AD_User_ID).append("=?")
 			.append(" AND ").append(COLUMNNAME_AD_Org_ID).append("=0");
 		
 		List<Object> parameters = new ArrayList<Object>();
-		parameters.add(AD_Role_ID);
+		//parameters.add(AD_Role_ID);
 		parameters.add(AD_User_ID);
 		
 		return new Query(ctx, Table_Name, whereClause.toString(), null)

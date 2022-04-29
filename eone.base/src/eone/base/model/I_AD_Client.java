@@ -4,10 +4,9 @@
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-
-import eone.util.KeyNamePair;
 
 /** Generated Interface for AD_Client
  *  @author EOne (generated) 
@@ -111,6 +110,20 @@ public interface I_AD_Client
 	public int getC_Currency_ID();
 
 	public eone.base.model.I_C_Currency getC_Currency() throws RuntimeException;
+
+    /** Column name C_Element_ID */
+    public static final String COLUMNNAME_C_Element_ID = "C_Element_ID";
+
+	/** Set Element.
+	  * Accounting Element
+	  */
+	public void setC_Element_ID (int C_Element_ID);
+
+	/** Get Element.
+	  * Accounting Element
+	  */
+	public int getC_Element_ID();
+
 
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";

@@ -162,22 +162,8 @@ public class MLookupFactory
 	}	//	getLookupInfo
 	
 	/**************************************************************************
-	 *  Get Information for Lookups based on Column_ID for Table Columns or Process Parameters.
+	 *  Hàm này dùng để load dữ liệu lookup các combobox,,,,
 	 *
-	 *	The SQL returns three columns:
-	 *  <pre>
-	 *		Key, Value, Name, IsActive	(where either key or value is null)
-	 *  </pre>
-	 *  @param ctx context for access
-	 *  @param language report language
-	 *  @param WindowNo window no
-	 *  @param tabNo    tab no
-	 *  @param Column_ID AD_Column_ID or AD_Process_Para_ID
-	 * 	@param ColumnName key column name
-	 * 	@param AD_Reference_ID display type
-	 * 	@param AD_Reference_Value_ID AD_Reference (List, Table)
-	 * 	@param IsParent parent (prevents query to directly access value)
-	 * 	@param ValidationCode optional SQL validation
 	 *  @return lookup info structure
 	 */
 	static public MLookupInfo getLookupInfo (Properties ctx, int WindowNo, int tabNo,
@@ -370,7 +356,7 @@ public class MLookupFactory
 		}
 		StringBuilder key = new StringBuilder()
 				.append(Env.getAD_Client_ID(ctx)).append("|")
-				.append(Env.getAD_Role_ID(ctx)).append("|")
+				//.append(Env.getAD_Role_ID(ctx)).append("|")
 				.append(Env.getAD_User_ID(ctx)).append("|")
 				.append(lang).append("|")
 				.append(String.valueOf(AD_Reference_Value_ID));
@@ -750,7 +736,7 @@ public class MLookupFactory
 		//try cache
 		StringBuilder cacheKey = new StringBuilder()
 				.append(Env.getAD_Client_ID(ctx)).append("|")
-				.append(Env.getAD_Role_ID(ctx)).append("|")
+				//.append(Env.getAD_Role_ID(ctx)).append("|")
 				.append(Env.getAD_User_ID(ctx)).append("|")
 				.append(language.getAD_Language()).append("|")
 				.append(TableName).append(".")

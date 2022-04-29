@@ -83,7 +83,6 @@ public class MTab extends X_AD_Tab
 	public MTab (MWindow parent)
 	{
 		this (parent.getCtx(), 0, parent.get_TrxName());
-		setClientOrg(parent);
 		setAD_Window_ID(parent.getAD_Window_ID());
 	}	//	M_Tab
 
@@ -96,7 +95,6 @@ public class MTab extends X_AD_Tab
 	{
 		this (parent.getCtx(), 0, parent.get_TrxName());
 		copyValues(from, this);
-		setClientOrg(parent);
 		setAD_Window_ID(parent.getAD_Window_ID());
 	}	//	M_Tab
 	

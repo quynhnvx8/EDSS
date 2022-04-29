@@ -261,7 +261,9 @@ public abstract class AbstractMenuPanel extends Panel implements EventListener<E
 		    else
 		    	selectedItem.setOpen(!selectedItem.isOpen());
 		    selectedItem.setSelected(true);
-	        EventQueues.lookup(MENU_ITEM_SELECTED_QUEUE, EventQueues.DESKTOP, true).publish(new Event(Events.ON_SELECT, null, selectedItem));
+		    if (selectedItem != null && !"".equals(selectedItem.getId()))
+		    	//System.out.println();
+		    	EventQueues.lookup(MENU_ITEM_SELECTED_QUEUE, EventQueues.DESKTOP, true).publish(new Event(Events.ON_SELECT, null, selectedItem));
 		}
 	}
     

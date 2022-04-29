@@ -190,7 +190,6 @@ public class MInOut extends X_M_InOut implements DocAction
 	public MInOut (MInOut original, int C_DocTypeShipment_ID, Timestamp movementDate)
 	{
 		this (original.getCtx(), 0, original.get_TrxName());
-		setClientOrg(original);
 		
 		if (C_DocTypeShipment_ID == 0)
 			setC_DocType_ID(original.getC_DocType_ID());

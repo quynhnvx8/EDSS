@@ -117,21 +117,21 @@ public class DashboardController implements EventListener<Event> {
         try
 		{
         	int AD_User_ID = Env.getAD_User_ID(Env.getCtx());
-        	int AD_Role_ID = Env.getAD_Role_ID(Env.getCtx());
+        	//int AD_Role_ID = Env.getAD_Role_ID(Env.getCtx());
         	
-        	MDashboardPreference[] dps = MDashboardPreference.getForSession(AD_User_ID, AD_Role_ID);
-        	MDashboardContent [] dcs =  MDashboardContentAccess.get(Env.getCtx(), AD_Role_ID, AD_User_ID, null);
+        	MDashboardPreference[] dps = MDashboardPreference.getForSession(AD_User_ID);//, AD_Role_ID
+        	MDashboardContent [] dcs =  MDashboardContentAccess.get(Env.getCtx(), AD_User_ID, null);//, AD_Role_ID
         	
         	if(dps.length == 0){
-        	    createDashboardPreference(AD_User_ID, AD_Role_ID);
-        	    dps = MDashboardPreference.getForSession(AD_User_ID, AD_Role_ID);
+        	    createDashboardPreference(AD_User_ID);//, AD_Role_ID
+        	    dps = MDashboardPreference.getForSession(AD_User_ID);//, AD_Role_ID
         	}else{
         		if(updatePreferences(dps, dcs,Env.getCtx())){        			
-        			dps = MDashboardPreference.getForSession(AD_User_ID, AD_Role_ID);
+        			dps = MDashboardPreference.getForSession(AD_User_ID);//, AD_Role_ID
         		}
         	}
         	               
-        	noOfCols = MDashboardPreference.getForSessionColumnCount(isShowInDashboard, AD_User_ID, AD_Role_ID);        	
+        	noOfCols = MDashboardPreference.getForSessionColumnCount(isShowInDashboard, AD_User_ID); //, AD_Role_ID       	
         	if (ClientInfo.isMobile() && isShowInDashboard) {
 	        	if (ClientInfo.maxWidth(ClientInfo.MEDIUM_WIDTH-1)) {
 	        		if (ClientInfo.maxWidth(ClientInfo.SMALL_WIDTH-1)) {
@@ -593,14 +593,14 @@ public class DashboardController implements EventListener<Event> {
 		}
 	}
 	
-	private void createDashboardPreference(int AD_User_ID, int AD_Role_ID)
+	private void createDashboardPreference(int AD_User_ID)//, int AD_Role_ID
 	{
-		MDashboardContent[] dcs = MDashboardContentAccess.get(Env.getCtx(),AD_Role_ID, AD_User_ID, null);
+		MDashboardContent[] dcs = MDashboardContentAccess.get(Env.getCtx(), AD_User_ID, null);//,AD_Role_ID
 		for (MDashboardContent dc : dcs)
 		{
 			MDashboardPreference preference = new MDashboardPreference(Env.getCtx(), 0, null);
 			preference.setAD_Org_ID(0);
-			preference.setAD_Role_ID(AD_Role_ID);
+			//preference.setAD_Role_ID(AD_Role_ID);
 			preference.set_ValueNoCheck("AD_User_ID", AD_User_ID);
 			preference.setColumnNo(dc.getColumnNo());
 			preference.setIsCollapsedByDefault(dc.isCollapsedByDefault());
@@ -627,7 +627,7 @@ public class DashboardController implements EventListener<Event> {
 			if (isNew) {
 				MDashboardPreference preference = new MDashboardPreference(ctx,0, null);
 				preference.setAD_Org_ID(0);
-				preference.setAD_Role_ID(Env.getAD_Role_ID(ctx));
+				//preference.setAD_Role_ID(Env.getAD_Role_ID(ctx));
 				preference.set_ValueNoCheck("AD_User_ID",Env.getAD_User_ID(ctx));
 				preference.setColumnNo(dcs[i].getColumnNo());
 				preference.setIsCollapsedByDefault(dcs[i].isCollapsedByDefault());

@@ -78,7 +78,6 @@ public class MCashLine extends X_C_CashLine
 	public MCashLine (MCash cash)
 	{
 		this (cash.getCtx(), 0, cash.get_TrxName());
-		setClientOrg(cash);
 		setC_Cash_ID(cash.getC_Cash_ID());
 		m_parent = cash;
 	}	//	MCashLine

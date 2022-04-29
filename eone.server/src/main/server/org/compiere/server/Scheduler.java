@@ -196,7 +196,6 @@ public class Scheduler extends EONEServer
 				if (notice) {
 					int AD_Message_ID = 442; // HARDCODED ProcessRunError
 					MNote note = new MNote(getCtx(), AD_Message_ID, supervisor, null);
-					note.setClientOrg(scheduler.getAD_Client_ID(), scheduler.getAD_Org_ID());
 					note.setTextMsg(schedulerName+"\n"+pi.getSummary());
 					note.saveEx();
 					String log = pi.getLogInfo(true);
@@ -235,7 +234,6 @@ public class Scheduler extends EONEServer
 					if (isReport)
 						AD_Message_ID = 884; //	HARDCODED SchedulerResult
 					MNote note = new MNote(getCtx(), AD_Message_ID, userIDs[i].intValue(), null);
-					note.setClientOrg(scheduler.getAD_Client_ID(), scheduler.getAD_Org_ID());
 					if (isReport) {
 						note.setTextMsg(schedulerName);
 						note.setDescription(scheduler.getDescription());

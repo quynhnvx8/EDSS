@@ -38,7 +38,6 @@ public class MGeneralLine extends X_C_GeneralLine
 	public MGeneralLine (MGeneral parent)
 	{
 		this (parent.getCtx(), 0, parent.get_TrxName());
-		setClientOrg (parent);
 		setC_General_ID (parent.getC_General_ID());
 		m_parent = parent;
 	}	//	MInOutLine

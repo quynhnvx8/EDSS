@@ -118,7 +118,6 @@ public class MInvoiceLine extends X_C_InvoiceLine
 		this (invoice.getCtx(), 0, invoice.get_TrxName());
 		if (invoice.get_ID() == 0)
 			throw new IllegalArgumentException("Header not saved");
-		setClientOrg(invoice.getAD_Client_ID(), invoice.getAD_Org_ID());
 		setC_Invoice_ID (invoice.getC_Invoice_ID());
 	}	//	MInvoiceLine
 

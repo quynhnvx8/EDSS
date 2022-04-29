@@ -98,7 +98,6 @@ public class MProcessPara extends X_AD_Process_Para
 	public MProcessPara(MProcess parent) {
 		
 		this (parent.getCtx(), 0, parent.get_TrxName());
-		setClientOrg(parent);
 		setAD_Process_ID(parent.getAD_Process_ID());
 	}
 

@@ -744,12 +744,15 @@ public class DefaultDesktop extends TabbedDesktop implements MenuListener, Seria
 
 	int getMenuID()
 	{
+		/*
 		int AD_Role_ID = Env.getAD_Role_ID(Env.getCtx());
 		int AD_Tree_ID = DB.getSQLValue(null,
 				"SELECT COALESCE(r.AD_Tree_Menu_ID, ci.AD_Tree_Menu_ID)" 
 						+ "FROM AD_ClientInfo ci" 
 						+ " INNER JOIN AD_Role r ON (ci.AD_Client_ID=r.AD_Client_ID) "
 						+ "WHERE AD_Role_ID=?", AD_Role_ID);
+		*/
+		int AD_Tree_ID = 0;
 		if (AD_Tree_ID <= 0)
 			AD_Tree_ID = TREE_MENUPRIMARY;	//	Menu
 

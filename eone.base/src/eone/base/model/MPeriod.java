@@ -189,7 +189,6 @@ public class MPeriod extends X_C_Period
 		Timestamp startDate,Timestamp endDate)
 	{
 		this (year.getCtx(), 0, year.get_TrxName());
-		setClientOrg(year);
 		setC_Year_ID(year.getC_Year_ID());
 		setPeriodNo(PeriodNo);
 		setName(name);

@@ -14,6 +14,7 @@ Import-Package: javax.activation,
  javax.servlet;version="3.0.0",
  javax.servlet.http;version="3.0.0",
  javax.xml.bind;version="2.3.0",
+ javax.xml.bind.annotation,
  net.sf.jasperreports.engine,
  net.sf.jasperreports.engine.base,
  net.sf.jasperreports.engine.util,
@@ -109,7 +110,7 @@ Export-Package: eone.adinterface,
  eone.webservices.fault,
  org.idempiere.adInterface.x10,
  org.idempiere.adInterface.x10.impl
-Web-ContextPath: ADInterface
+Web-ContextPath: Interface
 Bundle-ActivationPolicy: lazy
 Automatic-Module-Name: eone.webservices
 Bundle-Vendor: EONE Community

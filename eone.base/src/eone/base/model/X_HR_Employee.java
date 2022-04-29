@@ -1,32 +1,19 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.Env;
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
 
-import eone.util.Env;
-import eone.util.KeyNamePair;
-
 /** Generated Model for HR_Employee
- *  @author iDempiere (generated) 
+ *  @author EOne (generated) 
  *  @version Version 1.0 - $Id$ */
 public class X_HR_Employee extends PO implements I_HR_Employee, I_Persistent 
 {
@@ -34,7 +21,7 @@ public class X_HR_Employee extends PO implements I_HR_Employee, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20201225L;
+	private static final long serialVersionUID = 20220413L;
 
     /** Standard Constructor */
     public X_HR_Employee (Properties ctx, int HR_Employee_ID, String trxName)
@@ -54,7 +41,7 @@ public class X_HR_Employee extends PO implements I_HR_Employee, I_Persistent
     }
 
     /** AccessLevel
-      * @return 3 - Client - Org 
+      * @return 7 - System - Client - Org 
       */
     protected int get_AccessLevel()
     {
@@ -75,9 +62,9 @@ public class X_HR_Employee extends PO implements I_HR_Employee, I_Persistent
       return sb.toString();
     }
 
-	public I_AD_Department getAD_Department() throws RuntimeException
+	public eone.base.model.I_AD_Department getAD_Department() throws RuntimeException
     {
-		return (I_AD_Department)MTable.get(getCtx(), I_AD_Department.Table_Name)
+		return (eone.base.model.I_AD_Department)MTable.get(getCtx(), eone.base.model.I_AD_Department.Table_Name)
 			.getPO(getAD_Department_ID(), get_TrxName());	}
 
 	/** Set Department.
@@ -252,6 +239,20 @@ public class X_HR_Employee extends PO implements I_HR_Employee, I_Persistent
 		return (String)get_Value(COLUMNNAME_CardID);
 	}
 
+	/** Set CardNumber.
+		@param CardNumber CardNumber	  */
+	public void setCardNumber (String CardNumber)
+	{
+		set_Value (COLUMNNAME_CardNumber, CardNumber);
+	}
+
+	/** Get CardNumber.
+		@return CardNumber	  */
+	public String getCardNumber () 
+	{
+		return (String)get_Value(COLUMNNAME_CardNumber);
+	}
+
 	/** Set Code.
 		@param Code 
 		Validation Code
@@ -339,7 +340,24 @@ public class X_HR_Employee extends PO implements I_HR_Employee, I_Persistent
 		return (String)get_Value(COLUMNNAME_DocStatus);
 	}
 
-	/** Set EMail Address.
+	/** Set Education.
+		@param Education 
+		Education
+	  */
+	public void setEducation (String Education)
+	{
+		set_Value (COLUMNNAME_Education, Education);
+	}
+
+	/** Get Education.
+		@return Education
+	  */
+	public String getEducation () 
+	{
+		return (String)get_Value(COLUMNNAME_Education);
+	}
+
+	/** Set EMail.
 		@param EMail 
 		Electronic Mail Address
 	  */
@@ -348,7 +366,7 @@ public class X_HR_Employee extends PO implements I_HR_Employee, I_Persistent
 		set_Value (COLUMNNAME_EMail, EMail);
 	}
 
-	/** Get EMail Address.
+	/** Get EMail.
 		@return Electronic Mail Address
 	  */
 	public String getEMail () 
@@ -425,6 +443,20 @@ public class X_HR_Employee extends PO implements I_HR_Employee, I_Persistent
 		return bd;
 	}
 
+	/** Set historyNo.
+		@param historyNo historyNo	  */
+	public void sethistoryNo (String historyNo)
+	{
+		set_Value (COLUMNNAME_historyNo, historyNo);
+	}
+
+	/** Get historyNo.
+		@return historyNo	  */
+	public String gethistoryNo () 
+	{
+		return (String)get_Value(COLUMNNAME_historyNo);
+	}
+
 	/** Set HomeTown.
 		@param HomeTown HomeTown	  */
 	public void setHomeTown (String HomeTown)
@@ -459,9 +491,9 @@ public class X_HR_Employee extends PO implements I_HR_Employee, I_Persistent
 		return ii.intValue();
 	}
 
-	public I_HR_ItemLine getHR_ItemLine_05() throws RuntimeException
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_05() throws RuntimeException
     {
-		return (I_HR_ItemLine)MTable.get(getCtx(), I_HR_ItemLine.Table_Name)
+		return (eone.base.model.I_HR_ItemLine)MTable.get(getCtx(), eone.base.model.I_HR_ItemLine.Table_Name)
 			.getPO(getHR_ItemLine_05_ID(), get_TrxName());	}
 
 	/** Set Jobs.
@@ -484,9 +516,9 @@ public class X_HR_Employee extends PO implements I_HR_Employee, I_Persistent
 		return ii.intValue();
 	}
 
-	public I_HR_ItemLine getHR_ItemLine_06() throws RuntimeException
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_06() throws RuntimeException
     {
-		return (I_HR_ItemLine)MTable.get(getCtx(), I_HR_ItemLine.Table_Name)
+		return (eone.base.model.I_HR_ItemLine)MTable.get(getCtx(), eone.base.model.I_HR_ItemLine.Table_Name)
 			.getPO(getHR_ItemLine_06_ID(), get_TrxName());	}
 
 	/** Set Position.
@@ -509,13 +541,13 @@ public class X_HR_Employee extends PO implements I_HR_Employee, I_Persistent
 		return ii.intValue();
 	}
 
-	public I_HR_ItemLine getHR_ItemLine_09() throws RuntimeException
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_09() throws RuntimeException
     {
-		return (I_HR_ItemLine)MTable.get(getCtx(), I_HR_ItemLine.Table_Name)
+		return (eone.base.model.I_HR_ItemLine)MTable.get(getCtx(), eone.base.model.I_HR_ItemLine.Table_Name)
 			.getPO(getHR_ItemLine_09_ID(), get_TrxName());	}
 
-	/** Set Item Line 09.
-		@param HR_ItemLine_09_ID Item Line 09	  */
+	/** Set Nation.
+		@param HR_ItemLine_09_ID Nation	  */
 	public void setHR_ItemLine_09_ID (int HR_ItemLine_09_ID)
 	{
 		if (HR_ItemLine_09_ID < 1) 
@@ -524,8 +556,8 @@ public class X_HR_Employee extends PO implements I_HR_Employee, I_Persistent
 			set_Value (COLUMNNAME_HR_ItemLine_09_ID, Integer.valueOf(HR_ItemLine_09_ID));
 	}
 
-	/** Get Item Line 09.
-		@return Item Line 09	  */
+	/** Get Nation.
+		@return Nation	  */
 	public int getHR_ItemLine_09_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_HR_ItemLine_09_ID);
@@ -534,9 +566,84 @@ public class X_HR_Employee extends PO implements I_HR_Employee, I_Persistent
 		return ii.intValue();
 	}
 
-	public I_HR_ItemLine getHR_ItemLine_29() throws RuntimeException
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_12() throws RuntimeException
     {
-		return (I_HR_ItemLine)MTable.get(getCtx(), I_HR_ItemLine.Table_Name)
+		return (eone.base.model.I_HR_ItemLine)MTable.get(getCtx(), eone.base.model.I_HR_ItemLine.Table_Name)
+			.getPO(getHR_ItemLine_12_ID(), get_TrxName());	}
+
+	/** Set Training Form.
+		@param HR_ItemLine_12_ID Training Form	  */
+	public void setHR_ItemLine_12_ID (int HR_ItemLine_12_ID)
+	{
+		if (HR_ItemLine_12_ID < 1) 
+			set_Value (COLUMNNAME_HR_ItemLine_12_ID, null);
+		else 
+			set_Value (COLUMNNAME_HR_ItemLine_12_ID, Integer.valueOf(HR_ItemLine_12_ID));
+	}
+
+	/** Get Training Form.
+		@return Training Form	  */
+	public int getHR_ItemLine_12_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_HR_ItemLine_12_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_18() throws RuntimeException
+    {
+		return (eone.base.model.I_HR_ItemLine)MTable.get(getCtx(), eone.base.model.I_HR_ItemLine.Table_Name)
+			.getPO(getHR_ItemLine_18_ID(), get_TrxName());	}
+
+	/** Set Training Level.
+		@param HR_ItemLine_18_ID Training Level	  */
+	public void setHR_ItemLine_18_ID (int HR_ItemLine_18_ID)
+	{
+		if (HR_ItemLine_18_ID < 1) 
+			set_Value (COLUMNNAME_HR_ItemLine_18_ID, null);
+		else 
+			set_Value (COLUMNNAME_HR_ItemLine_18_ID, Integer.valueOf(HR_ItemLine_18_ID));
+	}
+
+	/** Get Training Level.
+		@return Training Level	  */
+	public int getHR_ItemLine_18_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_HR_ItemLine_18_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_28() throws RuntimeException
+    {
+		return (eone.base.model.I_HR_ItemLine)MTable.get(getCtx(), eone.base.model.I_HR_ItemLine.Table_Name)
+			.getPO(getHR_ItemLine_28_ID(), get_TrxName());	}
+
+	/** Set Item Line 28.
+		@param HR_ItemLine_28_ID Item Line 28	  */
+	public void setHR_ItemLine_28_ID (int HR_ItemLine_28_ID)
+	{
+		if (HR_ItemLine_28_ID < 1) 
+			set_Value (COLUMNNAME_HR_ItemLine_28_ID, null);
+		else 
+			set_Value (COLUMNNAME_HR_ItemLine_28_ID, Integer.valueOf(HR_ItemLine_28_ID));
+	}
+
+	/** Get Item Line 28.
+		@return Item Line 28	  */
+	public int getHR_ItemLine_28_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_HR_ItemLine_28_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_29() throws RuntimeException
+    {
+		return (eone.base.model.I_HR_ItemLine)MTable.get(getCtx(), eone.base.model.I_HR_ItemLine.Table_Name)
 			.getPO(getHR_ItemLine_29_ID(), get_TrxName());	}
 
 	/** Set National.
@@ -559,9 +666,9 @@ public class X_HR_Employee extends PO implements I_HR_Employee, I_Persistent
 		return ii.intValue();
 	}
 
-	public I_HR_ItemLine getHR_ItemLine_30() throws RuntimeException
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_30() throws RuntimeException
     {
-		return (I_HR_ItemLine)MTable.get(getCtx(), I_HR_ItemLine.Table_Name)
+		return (eone.base.model.I_HR_ItemLine)MTable.get(getCtx(), eone.base.model.I_HR_ItemLine.Table_Name)
 			.getPO(getHR_ItemLine_30_ID(), get_TrxName());	}
 
 	/** Set Item Line 30.
@@ -584,9 +691,9 @@ public class X_HR_Employee extends PO implements I_HR_Employee, I_Persistent
 		return ii.intValue();
 	}
 
-	public I_HR_ItemLine getHR_ItemLine_31() throws RuntimeException
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_31() throws RuntimeException
     {
-		return (I_HR_ItemLine)MTable.get(getCtx(), I_HR_ItemLine.Table_Name)
+		return (eone.base.model.I_HR_ItemLine)MTable.get(getCtx(), eone.base.model.I_HR_ItemLine.Table_Name)
 			.getPO(getHR_ItemLine_31_ID(), get_TrxName());	}
 
 	/** Set Item Line 31.
@@ -609,13 +716,38 @@ public class X_HR_Employee extends PO implements I_HR_Employee, I_Persistent
 		return ii.intValue();
 	}
 
-	public I_HR_ItemLine getHR_ItemLine_39() throws RuntimeException
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_32() throws RuntimeException
     {
-		return (I_HR_ItemLine)MTable.get(getCtx(), I_HR_ItemLine.Table_Name)
+		return (eone.base.model.I_HR_ItemLine)MTable.get(getCtx(), eone.base.model.I_HR_ItemLine.Table_Name)
+			.getPO(getHR_ItemLine_32_ID(), get_TrxName());	}
+
+	/** Set Politic Level.
+		@param HR_ItemLine_32_ID Politic Level	  */
+	public void setHR_ItemLine_32_ID (int HR_ItemLine_32_ID)
+	{
+		if (HR_ItemLine_32_ID < 1) 
+			set_Value (COLUMNNAME_HR_ItemLine_32_ID, null);
+		else 
+			set_Value (COLUMNNAME_HR_ItemLine_32_ID, Integer.valueOf(HR_ItemLine_32_ID));
+	}
+
+	/** Get Politic Level.
+		@return Politic Level	  */
+	public int getHR_ItemLine_32_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_HR_ItemLine_32_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_39() throws RuntimeException
+    {
+		return (eone.base.model.I_HR_ItemLine)MTable.get(getCtx(), eone.base.model.I_HR_ItemLine.Table_Name)
 			.getPO(getHR_ItemLine_39_ID(), get_TrxName());	}
 
-	/** Set Item Line 39.
-		@param HR_ItemLine_39_ID Item Line 39	  */
+	/** Set Marital Status.
+		@param HR_ItemLine_39_ID Marital Status	  */
 	public void setHR_ItemLine_39_ID (int HR_ItemLine_39_ID)
 	{
 		if (HR_ItemLine_39_ID < 1) 
@@ -624,8 +756,8 @@ public class X_HR_Employee extends PO implements I_HR_Employee, I_Persistent
 			set_Value (COLUMNNAME_HR_ItemLine_39_ID, Integer.valueOf(HR_ItemLine_39_ID));
 	}
 
-	/** Get Item Line 39.
-		@return Item Line 39	  */
+	/** Get Marital Status.
+		@return Marital Status	  */
 	public int getHR_ItemLine_39_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_HR_ItemLine_39_ID);
@@ -691,6 +823,107 @@ public class X_HR_Employee extends PO implements I_HR_Employee, I_Persistent
 	public String getName2 () 
 	{
 		return (String)get_Value(COLUMNNAME_Name2);
+	}
+
+	/** Set Official Party Date.
+		@param OfficialPartyDate Official Party Date	  */
+	public void setOfficialPartyDate (Timestamp OfficialPartyDate)
+	{
+		set_Value (COLUMNNAME_OfficialPartyDate, OfficialPartyDate);
+	}
+
+	/** Get Official Party Date.
+		@return Official Party Date	  */
+	public Timestamp getOfficialPartyDate () 
+	{
+		return (Timestamp)get_Value(COLUMNNAME_OfficialPartyDate);
+	}
+
+	/** Set Party Badge No.
+		@param PartyBadgeNo Party Badge No	  */
+	public void setPartyBadgeNo (String PartyBadgeNo)
+	{
+		set_Value (COLUMNNAME_PartyBadgeNo, PartyBadgeNo);
+	}
+
+	/** Get Party Badge No.
+		@return Party Badge No	  */
+	public String getPartyBadgeNo () 
+	{
+		return (String)get_Value(COLUMNNAME_PartyBadgeNo);
+	}
+
+	/** Set Party Card Place.
+		@param PartyCardPlace Party Card Place	  */
+	public void setPartyCardPlace (String PartyCardPlace)
+	{
+		set_Value (COLUMNNAME_PartyCardPlace, PartyCardPlace);
+	}
+
+	/** Get Party Card Place.
+		@return Party Card Place	  */
+	public String getPartyCardPlace () 
+	{
+		return (String)get_Value(COLUMNNAME_PartyCardPlace);
+	}
+
+	/** Set Party Date.
+		@param PartyDate Party Date	  */
+	public void setPartyDate (Timestamp PartyDate)
+	{
+		set_Value (COLUMNNAME_PartyDate, PartyDate);
+	}
+
+	/** Get Party Date.
+		@return Party Date	  */
+	public Timestamp getPartyDate () 
+	{
+		return (Timestamp)get_Value(COLUMNNAME_PartyDate);
+	}
+
+	/** Set partyNo.
+		@param partyNo 
+		Alphanumeric identifier of the entity
+	  */
+	public void setpartyNo (String partyNo)
+	{
+		set_Value (COLUMNNAME_partyNo, partyNo);
+	}
+
+	/** Get partyNo.
+		@return Alphanumeric identifier of the entity
+	  */
+	public String getpartyNo () 
+	{
+		return (String)get_Value(COLUMNNAME_partyNo);
+	}
+
+	/** Set Party Place.
+		@param PartyPlace Party Place	  */
+	public void setPartyPlace (String PartyPlace)
+	{
+		set_Value (COLUMNNAME_PartyPlace, PartyPlace);
+	}
+
+	/** Get Party Place.
+		@return Party Place	  */
+	public String getPartyPlace () 
+	{
+		return (String)get_Value(COLUMNNAME_PartyPlace);
+	}
+
+	/** Set Party Rec Place.
+		@param PartyRecPlace Party Rec Place	  */
+	public void setPartyRecPlace (String PartyRecPlace)
+	{
+		set_Value (COLUMNNAME_PartyRecPlace, PartyRecPlace);
+	}
+
+	/** Get Party Rec Place.
+		@return Party Rec Place	  */
+	public String getPartyRecPlace () 
+	{
+		return (String)get_Value(COLUMNNAME_PartyRecPlace);
 	}
 
 	/** Set Phone.
@@ -803,6 +1036,23 @@ public class X_HR_Employee extends PO implements I_HR_Employee, I_Persistent
 		return (Timestamp)get_Value(COLUMNNAME_StartDate);
 	}
 
+	/** Set Surname.
+		@param Surname 
+		Alphanumeric identifier of the entity
+	  */
+	public void setSurname (String Surname)
+	{
+		set_Value (COLUMNNAME_Surname, Surname);
+	}
+
+	/** Get Surname.
+		@return Alphanumeric identifier of the entity
+	  */
+	public String getSurname () 
+	{
+		return (String)get_Value(COLUMNNAME_Surname);
+	}
+
 	/** Set Tax ID.
 		@param TaxID 
 		Tax Identification
@@ -818,6 +1068,34 @@ public class X_HR_Employee extends PO implements I_HR_Employee, I_Persistent
 	public String getTaxID () 
 	{
 		return (String)get_Value(COLUMNNAME_TaxID);
+	}
+
+	/** Set Union Date.
+		@param UnionDate Union Date	  */
+	public void setUnionDate (Timestamp UnionDate)
+	{
+		set_Value (COLUMNNAME_UnionDate, UnionDate);
+	}
+
+	/** Get Union Date.
+		@return Union Date	  */
+	public Timestamp getUnionDate () 
+	{
+		return (Timestamp)get_Value(COLUMNNAME_UnionDate);
+	}
+
+	/** Set Union Place.
+		@param UnionPlace Union Place	  */
+	public void setUnionPlace (String UnionPlace)
+	{
+		set_Value (COLUMNNAME_UnionPlace, UnionPlace);
+	}
+
+	/** Get Union Place.
+		@return Union Place	  */
+	public String getUnionPlace () 
+	{
+		return (String)get_Value(COLUMNNAME_UnionPlace);
 	}
 
 	/** Set User Name.

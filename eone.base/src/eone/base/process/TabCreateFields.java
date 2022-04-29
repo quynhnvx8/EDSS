@@ -132,7 +132,7 @@ public class TabCreateFields extends SvrProcess
 				String accessLevel = tab.getAD_Table().getAccessLevel();
 				if (column.getColumnName().equals("AD_Org_ID")) {
 					field.setXPosition(3);
-					if (accessLevel.equals(MTable.ACCESSLEVEL_All)) {
+					if (accessLevel.equals(MTable.ACCESSLEVEL_System)) {
 						field.setIsDisplayedGrid(false);
 					}
 				}

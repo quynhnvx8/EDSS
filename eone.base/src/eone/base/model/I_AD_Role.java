@@ -1,28 +1,15 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import eone.util.KeyNamePair;
-
 /** Generated Interface for AD_Role
- *  @author iDempiere (generated) 
+ *  @author EOne (generated) 
  *  @version Version 1.0
  */
 public interface I_AD_Role 
@@ -36,9 +23,9 @@ public interface I_AD_Role
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 6 - System - Client 
+    /** AccessLevel = 7 - System - Client - Org 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(6);
+    BigDecimal accessLevel = BigDecimal.valueOf(7);
 
     /** Load Meta Data */
 
@@ -106,8 +93,6 @@ public interface I_AD_Role
 
 	public eone.base.model.I_AD_Tree getAD_Tree_Org() throws RuntimeException;
 
-   
-
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
 
@@ -137,15 +122,7 @@ public interface I_AD_Role
 	  */
 	public String getDescription();
 
-    /** Column name IsAccessAdvanced */
-    public static final String COLUMNNAME_IsAccessAdvanced = "IsAccessAdvanced";
-
-	/** Set Access Advanced 	  */
-	public void setIsAccessAdvanced (boolean IsAccessAdvanced);
-
-	/** Get Access Advanced 	  */
-	public boolean isAccessAdvanced();
-
+    
     /** Column name IsAccessAllOrgs */
     public static final String COLUMNNAME_IsAccessAllOrgs = "IsAccessAllOrgs";
 
@@ -172,6 +149,19 @@ public interface I_AD_Role
 	  */
 	public boolean isActive();
 
+    /** Column name IsAdminClient */
+    public static final String COLUMNNAME_IsAdminClient = "IsAdminClient";
+
+	/** Set Admin Company.
+	  * Admin Company
+	  */
+	public void setIsAdminClient (boolean IsAdminClient);
+
+	/** Get Admin Company.
+	  * Admin Company
+	  */
+	public boolean isAdminClient();
+
     /** Column name IsCanExport */
     public static final String COLUMNNAME_IsCanExport = "IsCanExport";
 
@@ -194,6 +184,15 @@ public interface I_AD_Role
 	/** Get IsConfigAcct	  */
 	public boolean isConfigAcct();
 
+    /** Column name IsDelItem */
+    public static final String COLUMNNAME_IsDelItem = "IsDelItem";
+
+	/** Set Delete Item special	  */
+	public void setIsDelItem (boolean IsDelItem);
+
+	/** Get Delete Item special	  */
+	public boolean isDelItem();
+
     /** Column name IsDragDropMenu */
     public static final String COLUMNNAME_IsDragDropMenu = "IsDragDropMenu";
 
@@ -202,32 +201,6 @@ public interface I_AD_Role
 
 	/** Get IsDragDropMenu	  */
 	public boolean isDragDropMenu();
-
-    /** Column name IsMasterRole */
-    public static final String COLUMNNAME_IsMasterRole = "IsMasterRole";
-
-	/** Set Master Role.
-	  * A master role cannot be assigned to users, it is intended to define access to menu option and documents and inherit to other roles
-	  */
-	public void setIsMasterRole (boolean IsMasterRole);
-
-	/** Get Master Role.
-	  * A master role cannot be assigned to users, it is intended to define access to menu option and documents and inherit to other roles
-	  */
-	public boolean isMasterRole();
-
-    /** Column name IsMenuAutoExpand */
-    public static final String COLUMNNAME_IsDelItem = "IsDelItem";
-
-	/** Set Auto expand menu.
-	  * If ticked, the menu is automatically expanded
-	  */
-	public void setIsDelItem (boolean IsDelItem);
-
-	/** Get Auto expand menu.
-	  * If ticked, the menu is automatically expanded
-	  */
-	public boolean isDelItem();
 
     /** Column name IsShowAcct */
     public static final String COLUMNNAME_IsShowAcct = "IsShowAcct";
@@ -290,7 +263,14 @@ public interface I_AD_Role
 	  */
 	public String getName();
 
-    
+    /** Column name Processing */
+    public static final String COLUMNNAME_Processing = "Processing";
+
+	/** Set Process Now	  */
+	public void setProcessing (boolean Processing);
+
+	/** Get Process Now	  */
+	public boolean isProcessing();
 
     /** Column name RoleLevel */
     public static final String COLUMNNAME_RoleLevel = "RoleLevel";
@@ -326,5 +306,16 @@ public interface I_AD_Role
 	  */
 	public int getUpdatedBy();
 
-   
+    /** Column name UserLevel */
+    public static final String COLUMNNAME_UserLevel = "UserLevel";
+
+	/** Set User Level.
+	  * System Client Organization
+	  */
+	public void setUserLevel (String UserLevel);
+
+	/** Get User Level.
+	  * System Client Organization
+	  */
+	public String getUserLevel();
 }

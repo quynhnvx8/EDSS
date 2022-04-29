@@ -1,14 +1,13 @@
 /******************************************************************************
- * Product: EOoe ERP & CRM Smart Business Solution	                        *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
  * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.sql.ResultSet;
 import java.util.Properties;
-
-import eone.util.KeyNamePair;
 
 /** Generated Model for AD_Table
  *  @author EOne (generated) 
@@ -19,7 +18,7 @@ public class X_AD_Table extends PO implements I_AD_Table, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20210905L;
+	private static final long serialVersionUID = 20220413L;
 
     /** Standard Constructor */
     public X_AD_Table (Properties ctx, int AD_Table_ID, String trxName)
@@ -28,7 +27,7 @@ public class X_AD_Table extends PO implements I_AD_Table, I_Persistent
       /** if (AD_Table_ID == 0)
         {
 			setAccessLevel (null);
-// 4
+// 7
 			setAD_Table_ID (0);
 			setIsChangeLog (true);
 // Y
@@ -75,15 +74,26 @@ public class X_AD_Table extends PO implements I_AD_Table, I_Persistent
 
 	/** AccessLevel AD_Reference_ID=5 */
 	public static final int ACCESSLEVEL_AD_Reference_ID=5;
-	
-	public static final String ACCESSLEVEL_All = "4";
-	/** All = 7 */
+	/** Organization = 1 */
+	public static final String ACCESSLEVEL_Organization = "1";
+	/** Client+Organization = 3 */
+	public static final String ACCESSLEVEL_ClientPlusOrganization = "3";
+	/** System = 4 */
+	public static final String ACCESSLEVEL_System = "4";
+	/** Client = 7 */
 	public static final String ACCESSLEVEL_Client = "7";
-	
+	/** All Access = 6 */
+	public static final String ACCESSLEVEL_Special = "6";
+	/** Client only = 2 */
+	public static final String ACCESSLEVEL_ClientOnly = "2";
+	/** Set Data Access Level.
+		@param AccessLevel 
+		Access Level required
+	  */
 	public void setAccessLevel (String AccessLevel)
 	{
 
-		set_Value (COLUMNNAME_AccessLevel, AccessLevel);
+		set_ValueNoCheck (COLUMNNAME_AccessLevel, AccessLevel);
 	}
 
 	/** Get Data Access Level.
@@ -117,9 +127,9 @@ public class X_AD_Table extends PO implements I_AD_Table, I_Persistent
 		return ii.intValue();
 	}
 
-	public I_AD_Val_Rule getAD_Val_Rule() throws RuntimeException
+	public eone.base.model.I_AD_Val_Rule getAD_Val_Rule() throws RuntimeException
     {
-		return (I_AD_Val_Rule)MTable.get(getCtx(), I_AD_Val_Rule.Table_Name)
+		return (eone.base.model.I_AD_Val_Rule)MTable.get(getCtx(), eone.base.model.I_AD_Val_Rule.Table_Name)
 			.getPO(getAD_Val_Rule_ID(), get_TrxName());	}
 
 	/** Set Dynamic Validation.
@@ -145,9 +155,9 @@ public class X_AD_Table extends PO implements I_AD_Table, I_Persistent
 		return ii.intValue();
 	}
 
-	public I_AD_Window getAD_Window() throws RuntimeException
+	public eone.base.model.I_AD_Window getAD_Window() throws RuntimeException
     {
-		return (I_AD_Window)MTable.get(getCtx(), I_AD_Window.Table_Name)
+		return (eone.base.model.I_AD_Window)MTable.get(getCtx(), eone.base.model.I_AD_Window.Table_Name)
 			.getPO(getAD_Window_ID(), get_TrxName());	}
 
 	/** Set Window.

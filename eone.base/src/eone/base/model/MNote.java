@@ -123,7 +123,6 @@ public class MNote extends X_AD_Note
 		int AD_Client_ID, int AD_Org_ID, String trxName) 
 	{
 		this (ctx, MMessage.getAD_Message_ID(ctx, AD_MessageValue), AD_User_ID, trxName);
-		setClientOrg(AD_Client_ID, AD_Org_ID);
 	}	//	MNote
 
 
@@ -169,15 +168,6 @@ public class MNote extends X_AD_Note
 		return msg.getMsgText();
 	}	//	getMessage
 
-	/**
-	 * 	Set Client Org
-	 *	@param AD_Client_ID client
-	 *	@param AD_Org_ID org
-	 */
-	public void setClientOrg(int AD_Client_ID, int AD_Org_ID) 
-	{
-		super.setClientOrg(AD_Client_ID, AD_Org_ID);
-	}	//	setClientOrg
 	
 	/**
 	 * 	Set Record

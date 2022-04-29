@@ -1,12 +1,15 @@
 
 package eone.base.model;
 
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
@@ -85,6 +88,8 @@ public class MUser extends X_AD_User
 		}
 		return retValue;
 	}	//	get
+	
+	
 
 	/**
 	 * 	Get Current User (cached)
@@ -662,6 +667,18 @@ public class MUser extends X_AD_User
 	 */
 	protected boolean beforeSave (boolean newRecord)
 	{
+		if (isUserSystem()) {
+			Map<String, Object> dataColumn = new HashMap<String, Object>();
+			dataColumn.put(COLUMNNAME_AD_User_ID, getAD_User_ID());
+			dataColumn.put(COLUMNNAME_IsUserSystem, isUserSystem());
+			
+			boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_AD_User_ID, getAD_User_ID());
+			
+			if (!check) {
+				log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": " + COLUMNNAME_IsUserSystem);
+				return false;
+			}
+		}
 		
 		if (!Util.isEmpty(getEMail()) && (newRecord || is_ValueChanged("EMail"))) {
 			if (! EMail.validate(getEMail())) {
@@ -670,6 +687,11 @@ public class MUser extends X_AD_User
 			}
 		}
 		
+		String error = checkCreateAcctRegister();
+		if (!"".equals(error)) {
+			log.saveError("Error", error);
+			return false;
+		}
 		
 
 		if (getPassword() != null && getPassword().length() > 0) {
@@ -689,7 +711,7 @@ public class MUser extends X_AD_User
 					return false;
 				}
 			} else {
-				// IDEMPIERE-1672 check duplicate name in client
+				
 				String nameToValidate = getLDAPUser();
 				if (Util.isEmpty(nameToValidate))
 					nameToValidate = getName();
@@ -723,11 +745,26 @@ public class MUser extends X_AD_User
 				setPassword(getPassword());
 		}
 		
+		
 		return true;
 	}	//	beforeSave
 
 
-
+	private String checkCreateAcctRegister() {
+		String domain = Env.getContext(getCtx(), "#Domain");
+		if (!"".equals(domain) && !domain.isEmpty()) {
+			String sql = "SELECT count(1) FROM AD_User WHERE AD_Client_ID = ? AND IsActive = 'Y'";
+			BigDecimal count = DB.getSQLValueBD(get_TrxName(), sql, Env.getAD_Client_ID(getCtx()));
+			MRegister reg = MRegister.getAllDomain(getCtx(), get_TrxName(), domain);
+			if (reg != null && X_AD_Register.REGISTERTYPE_RealUse.equals(reg.getRegisterType())) {
+				MPackagePrice price = MPackagePrice.get(getCtx(), reg.getAD_PackagePrice_ID(), get_TrxName());
+				if (price.getMaxValue().subtract(Env.ONE).compareTo(count) <= 0) {
+					return "Với gói hiện tại bạn chỉ đăng ký được tối đa là " + price.getMaxValue() + " người dùng!";
+				}
+			}
+		}
+		return "";
+	}
 
 	/**
 	 * 	Get User that has roles (already authenticated)

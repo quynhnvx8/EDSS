@@ -73,7 +73,6 @@ import eone.util.Msg;
 	public MBankLine(MBank statement)
 	{
 		this (statement.getCtx(), 0, statement.get_TrxName());
-		setClientOrg(statement);
 		setC_Bank_ID(statement.getC_Bank_ID());
 	}	//	MBankStatementLine
 

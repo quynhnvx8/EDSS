@@ -24,6 +24,7 @@ import java.util.logging.Level;
 
 import eone.util.CLogger;
 import eone.util.DB;
+import eone.util.Env;
 import eone.util.Msg;
 
 
@@ -124,9 +125,20 @@ public class MUserOrgAccess extends X_AD_User_OrgAccess
 	public MUserOrgAccess (MOrg org, int AD_User_ID)
 	{
 		this (org.getCtx(), 0, org.get_TrxName());
-		setClientOrg (org);
 		setAD_User_ID (AD_User_ID);
 	}	//	MUserOrgAccess
+
+	
+	@Override
+	protected boolean beforeSave(boolean newRecord) {
+		if (newRecord || is_ValueChanged(X_AD_User_OrgAccess.COLUMNNAME_AD_Org_ID)) {
+			if (Env.isUserSystem(getCtx()) && getAD_Org_ID() == 0) {
+				log.saveError("Error!", "Vai trò này không được phép khai báo Org hệ thống");
+				return false;
+			}
+		}
+		return true;
+	}
 
 	/**
 	 * 	User Constructor

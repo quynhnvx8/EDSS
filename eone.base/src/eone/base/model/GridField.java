@@ -405,7 +405,7 @@ public class GridField
 			}
 			else
 			{
-				boolean retValue = !Evaluator.evaluateLogic(this, m_vo.ReadOnlyLogic);
+				boolean retValue = Evaluator.evaluateLogic(this, m_vo.ReadOnlyLogic);
 				if (!retValue)
 					return false;
 			}
@@ -577,14 +577,13 @@ public class GridField
 	
 	protected Object defaultForClientOrg (){
 		// Set Client & Org to System, if System access
-		if (X_AD_Table.ACCESSLEVEL_Client.equals(Env.getContext(m_vo.ctx, m_vo.WindowNo, m_vo.TabNo, GridTab.CTX_AccessLevel))
+		if (X_AD_Table.ACCESSLEVEL_System.equals(Env.getContext(m_vo.ctx, m_vo.WindowNo, m_vo.TabNo, GridTab.CTX_AccessLevel))
 			&& (m_vo.ColumnName.equals("AD_Client_ID") || m_vo.ColumnName.equals("AD_Org_ID")))
 		{
 			if (log.isLoggable(Level.FINE)) log.fine("[SystemAccess] " + m_vo.ColumnName + "=0");
 			return Integer.valueOf(0);
 		}
-		//	Set Org to System, if Client access
-		
+				
 		else if (m_vo.ColumnName.equals("AD_Org_ID"))
 		{
 			if (log.isLoggable(Level.FINE)) log.fine("[ClientAccess] " + m_vo.ColumnName + "=0");

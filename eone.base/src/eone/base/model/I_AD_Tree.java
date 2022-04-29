@@ -1,29 +1,16 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import eone.util.KeyNamePair;
-
 /** Generated Interface for AD_Tree
- *  @author iDempiere (generated) 
- *  @version Release 7.1
+ *  @author EOne (generated) 
+ *  @version Version 1.0
  */
 public interface I_AD_Tree 
 {
@@ -36,9 +23,9 @@ public interface I_AD_Tree
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 6 - System - Client 
+    /** AccessLevel = 4 - System 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(6);
+    BigDecimal accessLevel = BigDecimal.valueOf(4);
 
     /** Load Meta Data */
 
@@ -91,14 +78,14 @@ public interface I_AD_Tree
 	  */
 	public int getAD_Tree_ID();
 
-    /** Column name AD_Tree_UU */
-    public static final String COLUMNNAME_AD_Tree_UU = "AD_Tree_UU";
+    /** Column name CreateCopy */
+    public static final String COLUMNNAME_CreateCopy = "CreateCopy";
 
-	/** Set AD_Tree_UU	  */
-	public void setAD_Tree_UU (String AD_Tree_UU);
+	/** Set Create Copy	  */
+	public void setCreateCopy (String CreateCopy);
 
-	/** Get AD_Tree_UU	  */
-	public String getAD_Tree_UU();
+	/** Get Create Copy	  */
+	public String getCreateCopy();
 
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
@@ -141,6 +128,19 @@ public interface I_AD_Tree
 	  * The record is active in the system
 	  */
 	public boolean isActive();
+
+    /** Column name IsAdminClient */
+    public static final String COLUMNNAME_IsAdminClient = "IsAdminClient";
+
+	/** Set Admin Company.
+	  * Admin Company
+	  */
+	public void setIsAdminClient (boolean IsAdminClient);
+
+	/** Get Admin Company.
+	  * Admin Company
+	  */
+	public boolean isAdminClient();
 
     /** Column name IsAllNodes */
     public static final String COLUMNNAME_IsAllNodes = "IsAllNodes";

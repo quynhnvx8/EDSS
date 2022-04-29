@@ -1,4 +1,4 @@
-package org.idempiere.hazelcast.service;
+package eone.hazelcast.service;
 
 import java.util.Collection;
 import java.util.Set;

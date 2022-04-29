@@ -441,7 +441,6 @@ DataStatusListener, IADTabpanel, IdSpace, IFieldEditorContainer
     
     protected void createUI(boolean update)
     {
-    	boolean isUserSystem = "Y".equals(Env.getContext(Env.getCtx(), "#IsUserSystem")) ? true : false;
     	if (update) 
     	{
     		if (!uiCreated) return;
@@ -764,7 +763,7 @@ DataStatusListener, IADTabpanel, IdSpace, IFieldEditorContainer
 	        						
 		        					if (popupMenu.isZoomEnabled() && editor instanceof IZoomableEditor)
 		        					{
-		        						if (field.getDisplayType() != DisplayType.List || isUserSystem) {
+		        						if (field.getDisplayType() != DisplayType.List || Env.isUserSystem(Env.getCtx())) {
 		        							label.addEventListener(Events.ON_CLICK, new ZoomListener((IZoomableEditor) editor));
 		        						} 
 		        					}

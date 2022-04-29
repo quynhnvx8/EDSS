@@ -1,29 +1,16 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-import eone.util.KeyNamePair;
-
 /** Generated Model for AD_Role
- *  @author iDempiere (generated) 
+ *  @author EOne (generated) 
  *  @version Version 1.0 - $Id$ */
 public class X_AD_Role extends PO implements I_AD_Role, I_Persistent 
 {
@@ -31,13 +18,32 @@ public class X_AD_Role extends PO implements I_AD_Role, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20201028L;
+	private static final long serialVersionUID = 20220413L;
 
     /** Standard Constructor */
     public X_AD_Role (Properties ctx, int AD_Role_ID, String trxName)
     {
       super (ctx, AD_Role_ID, trxName);
-      
+      /** if (AD_Role_ID == 0)
+        {
+			setAD_Role_ID (0);
+			setIsAccessAllOrgs (false);
+// N
+			setIsAdminClient (false);
+// N
+			setIsCanExport (true);
+// Y
+			setIsDelItem (false);
+// N
+			setIsShowAcct (false);
+// N
+			setIsUseUserOrgAccess (false);
+// N
+			setMaxQueryRecords (0);
+// 0
+			setName (null);
+			setUserLevel (null);
+        } */
     }
 
     /** Load Constructor */
@@ -47,7 +53,7 @@ public class X_AD_Role extends PO implements I_AD_Role, I_Persistent
     }
 
     /** AccessLevel
-      * @return 6 - System - Client 
+      * @return 7 - System - Client - Org 
       */
     protected int get_AccessLevel()
     {
@@ -147,7 +153,10 @@ public class X_AD_Role extends PO implements I_AD_Role, I_Persistent
 		return ii.intValue();
 	}
 
-	
+	/** Set Description.
+		@param Description 
+		Optional short description of the record
+	  */
 	public void setDescription (String Description)
 	{
 		set_Value (COLUMNNAME_Description, Description);
@@ -161,31 +170,7 @@ public class X_AD_Role extends PO implements I_AD_Role, I_Persistent
 		return (String)get_Value(COLUMNNAME_Description);
 	}
 
-	/** Set Access Advanced .
-		@param IsAccessAdvanced Access Advanced 	  */
-	public void setIsAccessAdvanced (boolean IsAccessAdvanced)
-	{
-		set_Value (COLUMNNAME_IsAccessAdvanced, Boolean.valueOf(IsAccessAdvanced));
-	}
-
-	/** Get Access Advanced .
-		@return Access Advanced 	  */
-	public boolean isAccessAdvanced () 
-	{
-		Object oo = get_Value(COLUMNNAME_IsAccessAdvanced);
-		if (oo != null) 
-		{
-			 if (oo instanceof Boolean) 
-				 return ((Boolean)oo).booleanValue(); 
-			return "Y".equals(oo);
-		}
-		return false;
-	}
-
-	/** Set Access all Orgs.
-		@param IsAccessAllOrgs 
-		Access all Organizations (no org access control) of the client
-	  */
+	
 	public void setIsAccessAllOrgs (boolean IsAccessAllOrgs)
 	{
 		set_Value (COLUMNNAME_IsAccessAllOrgs, Boolean.valueOf(IsAccessAllOrgs));
@@ -197,6 +182,30 @@ public class X_AD_Role extends PO implements I_AD_Role, I_Persistent
 	public boolean isAccessAllOrgs () 
 	{
 		Object oo = get_Value(COLUMNNAME_IsAccessAllOrgs);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
+	}
+
+	/** Set Admin Company.
+		@param IsAdminClient 
+		Admin Company
+	  */
+	public void setIsAdminClient (boolean IsAdminClient)
+	{
+		set_Value (COLUMNNAME_IsAdminClient, Boolean.valueOf(IsAdminClient));
+	}
+
+	/** Get Admin Company.
+		@return Admin Company
+	  */
+	public boolean isAdminClient () 
+	{
+		Object oo = get_Value(COLUMNNAME_IsAdminClient);
 		if (oo != null) 
 		{
 			 if (oo instanceof Boolean) 
@@ -251,6 +260,27 @@ public class X_AD_Role extends PO implements I_AD_Role, I_Persistent
 		return false;
 	}
 
+	/** Set Delete Item special.
+		@param IsDelItem Delete Item special	  */
+	public void setIsDelItem (boolean IsDelItem)
+	{
+		set_Value (COLUMNNAME_IsDelItem, Boolean.valueOf(IsDelItem));
+	}
+
+	/** Get Delete Item special.
+		@return Delete Item special	  */
+	public boolean isDelItem () 
+	{
+		Object oo = get_Value(COLUMNNAME_IsDelItem);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
+	}
+
 	/** Set IsDragDropMenu.
 		@param IsDragDropMenu IsDragDropMenu	  */
 	public void setIsDragDropMenu (boolean IsDragDropMenu)
@@ -263,54 +293,6 @@ public class X_AD_Role extends PO implements I_AD_Role, I_Persistent
 	public boolean isDragDropMenu () 
 	{
 		Object oo = get_Value(COLUMNNAME_IsDragDropMenu);
-		if (oo != null) 
-		{
-			 if (oo instanceof Boolean) 
-				 return ((Boolean)oo).booleanValue(); 
-			return "Y".equals(oo);
-		}
-		return false;
-	}
-
-	/** Set Master Role.
-		@param IsMasterRole 
-		A master role cannot be assigned to users, it is intended to define access to menu option and documents and inherit to other roles
-	  */
-	public void setIsMasterRole (boolean IsMasterRole)
-	{
-		set_Value (COLUMNNAME_IsMasterRole, Boolean.valueOf(IsMasterRole));
-	}
-
-	/** Get Master Role.
-		@return A master role cannot be assigned to users, it is intended to define access to menu option and documents and inherit to other roles
-	  */
-	public boolean isMasterRole () 
-	{
-		Object oo = get_Value(COLUMNNAME_IsMasterRole);
-		if (oo != null) 
-		{
-			 if (oo instanceof Boolean) 
-				 return ((Boolean)oo).booleanValue(); 
-			return "Y".equals(oo);
-		}
-		return false;
-	}
-
-	/** Set Auto expand menu.
-		@param IsMenuAutoExpand 
-		If ticked, the menu is automatically expanded
-	  */
-	public void setIsDelItem (boolean IsDelItem)
-	{
-		set_Value (COLUMNNAME_IsDelItem, Boolean.valueOf(IsDelItem));
-	}
-
-	/** Get Auto expand menu.
-		@return If ticked, the menu is automatically expanded
-	  */
-	public boolean isDelItem () 
-	{
-		Object oo = get_Value(COLUMNNAME_IsDelItem);
 		if (oo != null) 
 		{
 			 if (oo instanceof Boolean) 
@@ -434,7 +416,27 @@ public class X_AD_Role extends PO implements I_AD_Role, I_Persistent
         return new KeyNamePair(get_ID(), getName());
     }
 
-	
+	/** Set Process Now.
+		@param Processing Process Now	  */
+	public void setProcessing (boolean Processing)
+	{
+		set_Value (COLUMNNAME_Processing, Boolean.valueOf(Processing));
+	}
+
+	/** Get Process Now.
+		@return Process Now	  */
+	public boolean isProcessing () 
+	{
+		Object oo = get_Value(COLUMNNAME_Processing);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
+	}
+
 	/** Level1 = 01 */
 	public static final String ROLELEVEL_Level1 = "01";
 	/** Level2 = 02 */
@@ -491,5 +493,31 @@ public class X_AD_Role extends PO implements I_AD_Role, I_Persistent
 		return (String)get_Value(COLUMNNAME_RoleType);
 	}
 
-	
+	/** UserLevel AD_Reference_ID=226 */
+	public static final int USERLEVEL_AD_Reference_ID=226;
+	/** System = S   */
+	public static final String USERLEVEL_System = "S  ";
+	/** Client =  C  */
+	public static final String USERLEVEL_Client = " C ";
+	/** Organization =   O */
+	public static final String USERLEVEL_Organization = "  O";
+	/** Client+Organization =  CO */
+	public static final String USERLEVEL_ClientPlusOrganization = " CO";
+	/** Set User Level.
+		@param UserLevel 
+		System Client Organization
+	  */
+	public void setUserLevel (String UserLevel)
+	{
+
+		set_Value (COLUMNNAME_UserLevel, UserLevel);
+	}
+
+	/** Get User Level.
+		@return System Client Organization
+	  */
+	public String getUserLevel () 
+	{
+		return (String)get_Value(COLUMNNAME_UserLevel);
+	}
 }

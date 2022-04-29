@@ -918,7 +918,7 @@ public abstract class AbstractProcessCtl implements Runnable
     
     private void loadInfoClient(HashMap<String, Object> params) {
     	params.put("AD_CLIENT_ID", Integer.valueOf( Env.getAD_Client_ID(Env.getCtx())));
-    	params.put("AD_ROLE_ID", Integer.valueOf( Env.getAD_Role_ID(Env.getCtx())));
+    	//params.put("AD_ROLE_ID", Integer.valueOf( Env.getAD_Role_ID(Env.getCtx())));
     	params.put("AD_USER_ID", Integer.valueOf( Env.getAD_User_ID(Env.getCtx())));
 
     	params.put("AD_CLIENT_NAME", Env.getContext(Env.getCtx(), "#AD_Client_Name").toUpperCase());

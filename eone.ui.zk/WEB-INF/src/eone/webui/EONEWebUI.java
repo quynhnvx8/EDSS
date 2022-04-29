@@ -225,6 +225,7 @@ public class EONEWebUI extends Window implements EventListener<Event>, IWebClien
 			mSession.saveEx();
 		}
 		*/
+        //System.out.println("Session :"+  httpSess.getId());
 		Env.setContext(ctx, "#AD_Session_ID", httpSess.getId());
 
 		currSess.setAttribute("Check_AD_User_ID", Env.getAD_User_ID(ctx));
@@ -250,7 +251,7 @@ public class EONEWebUI extends Window implements EventListener<Event>, IWebClien
 		appDesktop.createPart(this.getPage());
 		this.getPage().getDesktop().setAttribute(APPLICATION_DESKTOP_KEY, new WeakReference<IDesktop>(appDesktop));
 		appDesktop.getComponent().getRoot().addEventListener(Events.ON_CLIENT_INFO, this);
-		
+		//appDesktop.logout();
 		//track browser tab per session
 		String AD_Session_ID = Env.getContext(ctx, "#AD_Session_ID");
 		SessionContextListener.addDesktopId(AD_Session_ID, getPage().getDesktop().getId());
@@ -557,7 +558,7 @@ public class EONEWebUI extends Window implements EventListener<Event>, IWebClien
 		Env.setContext(properties, Env.AD_CLIENT_ID, Env.getAD_Client_ID(Env.getCtx()));
 		Env.setContext(properties, Env.AD_ORG_ID, Env.getAD_Org_ID(Env.getCtx()));
 		Env.setContext(properties, Env.AD_USER_ID, user.getAD_User_ID());
-		Env.setContext(properties, Env.AD_ROLE_ID, Env.getAD_Role_ID(Env.getCtx()));
+		//Env.setContext(properties, Env.AD_ROLE_ID, Env.getAD_Role_ID(Env.getCtx()));
 		Env.setContext(properties, Env.AD_ORG_NAME, Env.getContext(Env.getCtx(), Env.AD_ORG_NAME));
 		Env.setContext(properties, Env.M_WAREHOUSE_ID, Env.getContext(Env.getCtx(), Env.M_WAREHOUSE_ID));
 		Env.setContext(properties, UserPreference.LANGUAGE_NAME, Env.getContext(Env.getCtx(), UserPreference.LANGUAGE_NAME));

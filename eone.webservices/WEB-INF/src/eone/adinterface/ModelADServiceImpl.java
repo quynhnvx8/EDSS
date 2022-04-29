@@ -72,7 +72,7 @@ import eone.webservices.IWSValidator;
 import eone.webservices.fault.IdempiereServiceFault;
 
 @RestController
-@WebService(endpointInterface="eone.adinterface.ModelADService", serviceName="ModelADService",targetNamespace="http://idempiere.org/ADInterface/1_0")
+@WebService(endpointInterface="eone.adinterface.ModelADService", serviceName="ModelADService",targetNamespace="http://dssvn.com")
 public class ModelADServiceImpl extends AbstractService implements ModelADService {
 	
 	//@RequestMapping(value = "/new", method = RequestMethod.GET)

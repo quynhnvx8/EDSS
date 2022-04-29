@@ -8,7 +8,9 @@ import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 
@@ -243,7 +245,19 @@ public final class MRole extends X_AD_Role
 	 */
 	protected boolean beforeSave(boolean newRecord)
 	{
-		
+		//Chỉ cho phép 1 Role khai báo Admin để điều khiển các role trong các công ty
+		if (newRecord || is_ValueChanged(X_AD_Role.COLUMNNAME_IsAdminClient)) {
+			Map<String, Object> dataColumn = new HashMap<String, Object>();
+			dataColumn.put(COLUMNNAME_AD_Role_ID, getAD_Role_ID());
+			dataColumn.put(COLUMNNAME_IsAdminClient, isAdminClient());
+			boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_AD_Role_ID, getAD_Role_ID());
+			
+			if (!check) {
+				log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": " + COLUMNNAME_IsAdminClient);
+				return false;
+			}
+		}
+			
 		return true;
 	}	//	beforeSave
 	
@@ -307,7 +321,7 @@ public final class MRole extends X_AD_Role
 	{
 		StringBuilder sb = new StringBuilder("MRole[");
 		sb.append(getAD_Role_ID()).append(",").append(getName())
-			.append(",").append(getOrgWhere(false))
+			.append(",").append("")
 			.append("]");
 		return sb.toString();
 	}	//	toString
@@ -353,15 +367,6 @@ public final class MRole extends X_AD_Role
 
 	
 	
-	
-	public String getOrgWhere (boolean rw)
-	{
-		String listOrg = Env.getContext(getCtx(), "#AD_OrgAccess_ID");
-		if(listOrg == null || listOrg.isEmpty())
-			listOrg = "0";
-		return "AD_Org_ID IN(0," + listOrg + ")";//sb.toString()
-	}	//	getOrgWhereValue
-	
 		
 	public boolean isCanExport (int AD_Table_ID)
 	{
@@ -370,6 +375,7 @@ public final class MRole extends X_AD_Role
 
 	public static String addAccessSQL (String SQL, String TableNameIn, boolean fullyQualified, boolean rw, Properties ctx)
 	{
+		
 		StringBuilder retSQL = new StringBuilder();
 
 		//	Cut off last ORDER BY clause
@@ -407,32 +413,81 @@ public final class MRole extends X_AD_Role
 		}
 		
 		//Add Quyen truy cap don vi theo login. khi khai bao them don vi truy cap thi phai login lai.
-		retSQL.append(" AND ");
-		if (fullyQualified)
-			retSQL.append(tableName).append(".");
 		
-		String listOrg = Env.getContext(ctx, "#AD_OrgAccess_ID");
-		if(listOrg == null || listOrg.isEmpty())
-			listOrg = "0";
-		
-		retSQL.append("AD_Org_ID IN(0, " + listOrg + ")");
 		MTable table = MTable.get(ctx, tableRoot);
 		
 		//Client
-		retSQL.append(" AND ");
-		if (fullyQualified)
-			retSQL.append(tableName).append(".");
-		if (ACCESSLEVEL_CLIENTS == table.get_AccessLevel()) {
-			retSQL.append("AD_Client_ID = " + Env.getAD_Client_ID(ctx));
-		} else {
-			retSQL.append("AD_Client_ID IN (0, " + Env.getAD_Client_ID(ctx) +")");
+		if (!Env.isUserSystem(ctx)) {
+			
+			//String roleType = Env.getContext(ctx, "#RoleType");
+			if (ACCESSLEVEL_Client == table.get_AccessLevel()) {
+				String listOrg = Env.getContext(ctx, "#AD_OrgAccess_ID");
+				if(listOrg != null && !listOrg.isEmpty())
+				{
+					retSQL.append(" AND ");
+					if (fullyQualified)
+						retSQL.append(tableName).append(".");
+					retSQL.append("AD_Org_ID IN(0, " + listOrg + ")");
+				}
+				//Cong ty
+				retSQL.append(" AND ");
+				
+				if ("AD_Client".equalsIgnoreCase(tableName) || "AD_Org".equalsIgnoreCase(tableName)) {
+					if (fullyQualified)
+						retSQL.append(tableName).append(".");
+					retSQL.append("AD_Client_ID IN (0," + Env.getAD_Client_ID(ctx)).append(")");
+				} else {
+					if (fullyQualified)
+						retSQL.append(tableName).append(".");
+					retSQL.append("AD_Client_ID = " + Env.getAD_Client_ID(ctx));
+				}
+				
+				
+			}
+			
+			if (ACCESSLEVEL_Special == table.get_AccessLevel()) {
+				String listOrg = Env.getContext(ctx, "#AD_OrgAccess_ID");
+				if(listOrg != null && !listOrg.isEmpty())
+				{
+					retSQL.append(" AND ");
+					if (fullyQualified)
+						retSQL.append(tableName).append(".");
+					retSQL.append("AD_Org_ID IN(0, " + listOrg + ")");
+				}
+				
+				retSQL.append(" AND ");
+				if (!fullyQualified) {
+					retSQL.append("(AD_Client_ID = " + Env.getAD_Client_ID(ctx))
+					.append(" OR AD_Client_ID = 0 AND IsAdminClient = 'Y')");
+				} else {
+					retSQL.append("(")
+					.append(tableName).append(".").append("AD_Client_ID = " + Env.getAD_Client_ID(ctx))
+					.append(" OR ")
+					.append(tableName).append(".").append("AD_Client_ID = 0 ")
+					.append(" AND ")
+					.append(tableName).append(".").append("IsAdminClient = 'Y')");
+				}
+			}
 		}
+		
+		
 		retSQL.append(orderBy);
 		return retSQL.toString();
 	}	//	addAccessSQL
 
 	
 	
+	@Override
+	protected boolean beforeDelete() {
+		if (isAdminClient()) {
+			//Vai trò này dùng cho Account Admin các công ty. Không xóa vai trò này.
+			log.saveError("Error!", "Bạn không được xóa vai trò này !");
+			return false;
+		}
+		return super.beforeDelete();
+	}
+
+
 	public boolean canUpdate (int AD_Client_ID, int AD_Org_ID, 
 		int AD_Table_ID, int Record_ID, boolean createError)
 	{

@@ -69,7 +69,6 @@ public class MUserMail extends X_AD_UserMail
 	public MUserMail (PO po, int AD_User_ID, EMail mail)
 	{
 		this (po.getCtx(), 0, null);
-		setClientOrg(po);
 		setAD_User_ID(AD_User_ID);
 		setSubject(mail.getSubject());
 		setMailText(mail.getMessageCRLF());

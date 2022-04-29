@@ -598,7 +598,7 @@ public class MoveClient extends SvrProcess {
 			}
 			if (! Util.isEmpty(foreignTable) && ! "AD_Ref_List".equalsIgnoreCase(foreignTable)) {
 				MTable tableFK = MTable.get(getCtx(), foreignTable);
-				if (tableFK == null || MTable.ACCESSLEVEL_All.equals(tableFK.getAccessLevel())) {
+				if (tableFK == null || MTable.ACCESSLEVEL_System.equals(tableFK.getAccessLevel())) {
 					continue;
 				}
 				StringBuilder sqlVerifFKSB = new StringBuilder()

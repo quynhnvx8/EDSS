@@ -1,43 +1,44 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-import eone.util.KeyNamePair;
-
 /** Generated Model for AD_Tree
- *  @author iDempiere (generated) 
- *  @version Release 7.1 - $Id$ */
+ *  @author EOne (generated) 
+ *  @version Version 1.0 - $Id$ */
 public class X_AD_Tree extends PO implements I_AD_Tree, I_Persistent 
 {
 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20220413L;
 
     /** Standard Constructor */
     public X_AD_Tree (Properties ctx, int AD_Tree_ID, String trxName)
     {
       super (ctx, AD_Tree_ID, trxName);
-     
+      /** if (AD_Tree_ID == 0)
+        {
+			setAD_Tree_ID (0);
+			setIsAllNodes (false);
+			setIsDefault (false);
+// N
+			setIsLoadAllNodesImmediately (true);
+// Y
+			setIsTreeDrivenByValue (false);
+// N
+			setIsValueDisplayed (false);
+// N
+			setName (null);
+			setTreeType (null);
+        } */
     }
 
     /** Load Constructor */
@@ -47,7 +48,7 @@ public class X_AD_Tree extends PO implements I_AD_Tree, I_Persistent
     }
 
     /** AccessLevel
-      * @return 6 - System - Client 
+      * @return 4 - System 
       */
     protected int get_AccessLevel()
     {
@@ -80,9 +81,9 @@ public class X_AD_Tree extends PO implements I_AD_Tree, I_Persistent
 	public void setAD_Table_ID (int AD_Table_ID)
 	{
 		if (AD_Table_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_AD_Table_ID, null);
+			set_Value (COLUMNNAME_AD_Table_ID, null);
 		else 
-			set_ValueNoCheck (COLUMNNAME_AD_Table_ID, Integer.valueOf(AD_Table_ID));
+			set_Value (COLUMNNAME_AD_Table_ID, Integer.valueOf(AD_Table_ID));
 	}
 
 	/** Get Table.
@@ -119,18 +120,18 @@ public class X_AD_Tree extends PO implements I_AD_Tree, I_Persistent
 		return ii.intValue();
 	}
 
-	/** Set AD_Tree_UU.
-		@param AD_Tree_UU AD_Tree_UU	  */
-	public void setAD_Tree_UU (String AD_Tree_UU)
+	/** Set Create Copy.
+		@param CreateCopy Create Copy	  */
+	public void setCreateCopy (String CreateCopy)
 	{
-		set_Value (COLUMNNAME_AD_Tree_UU, AD_Tree_UU);
+		set_Value (COLUMNNAME_CreateCopy, CreateCopy);
 	}
 
-	/** Get AD_Tree_UU.
-		@return AD_Tree_UU	  */
-	public String getAD_Tree_UU () 
+	/** Get Create Copy.
+		@return Create Copy	  */
+	public String getCreateCopy () 
 	{
-		return (String)get_Value(COLUMNNAME_AD_Tree_UU);
+		return (String)get_Value(COLUMNNAME_CreateCopy);
 	}
 
 	/** Set Description.
@@ -148,6 +149,30 @@ public class X_AD_Tree extends PO implements I_AD_Tree, I_Persistent
 	public String getDescription () 
 	{
 		return (String)get_Value(COLUMNNAME_Description);
+	}
+
+	/** Set Admin Company.
+		@param IsAdminClient 
+		Admin Company
+	  */
+	public void setIsAdminClient (boolean IsAdminClient)
+	{
+		set_Value (COLUMNNAME_IsAdminClient, Boolean.valueOf(IsAdminClient));
+	}
+
+	/** Get Admin Company.
+		@return Admin Company
+	  */
+	public boolean isAdminClient () 
+	{
+		Object oo = get_Value(COLUMNNAME_IsAdminClient);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
 	}
 
 	/** Set All Nodes.
@@ -345,7 +370,42 @@ public class X_AD_Tree extends PO implements I_AD_Tree, I_Persistent
 	public static final int TREETYPE_AD_Reference_ID=120;
 	/** Menu = MM */
 	public static final String TREETYPE_Menu = "MM";
-	
+	/** Element Value = EV */
+	public static final String TREETYPE_ElementValue = "EV";
+	/** Product = PR */
+	public static final String TREETYPE_Product = "PR";
+	/** BPartner = BP */
+	public static final String TREETYPE_BPartner = "BP";
+	/** Organization = OO */
+	public static final String TREETYPE_Organization = "OO";
+	/** BoM = BB */
+	public static final String TREETYPE_BoM = "BB";
+	/** Project = PJ */
+	public static final String TREETYPE_Project = "PJ";
+	/** Sales Region = SR */
+	public static final String TREETYPE_SalesRegion = "SR";
+	/** Product Category = PC */
+	public static final String TREETYPE_ProductCategory = "PC";
+	/** Campaign = MC */
+	public static final String TREETYPE_Campaign = "MC";
+	/** Activity = AY */
+	public static final String TREETYPE_Activity = "AY";
+	/** User 1 = U1 */
+	public static final String TREETYPE_User1 = "U1";
+	/** User 2 = U2 */
+	public static final String TREETYPE_User2 = "U2";
+	/** User 3 = U3 */
+	public static final String TREETYPE_User3 = "U3";
+	/** User 4 = U4 */
+	public static final String TREETYPE_User4 = "U4";
+	/** CM Container = CC */
+	public static final String TREETYPE_CMContainer = "CC";
+	/** CM Container Stage = CS */
+	public static final String TREETYPE_CMContainerStage = "CS";
+	/** CM Template = CT */
+	public static final String TREETYPE_CMTemplate = "CT";
+	/** CM Media = CM */
+	public static final String TREETYPE_CMMedia = "CM";
 	/** Custom Table = TL */
 	public static final String TREETYPE_CustomTable = "TL";
 	/** Set Type | Area.
@@ -355,7 +415,7 @@ public class X_AD_Tree extends PO implements I_AD_Tree, I_Persistent
 	public void setTreeType (String TreeType)
 	{
 
-		set_ValueNoCheck (COLUMNNAME_TreeType, TreeType);
+		set_Value (COLUMNNAME_TreeType, TreeType);
 	}
 
 	/** Get Type | Area.

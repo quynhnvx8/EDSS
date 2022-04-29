@@ -27,7 +27,7 @@ public class TreeMaintenance {
 	public KeyNamePair[] getTreeData()
 	{
 		return DB.getKeyNamePairs(MRole.addAccessSQL(
-				"SELECT AD_Tree_ID, Name FROM AD_Tree WHERE IsActive='Y' AND TreeType = 'MM' And AD_Tree_ID != 10 ORDER BY 2", 
+				"SELECT AD_Tree_ID, Name FROM AD_Tree WHERE IsActive='Y' AND TreeType = 'MM'  ORDER BY 2", 
 				"AD_Tree", MRole.SQL_NOTQUALIFIED, MRole.SQL_RW, Env.getCtx()), false);
 	}
 	

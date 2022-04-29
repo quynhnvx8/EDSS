@@ -38,7 +38,6 @@ public class MInOutLine extends X_M_InOutLine
 	public MInOutLine (MInOut inout)
 	{
 		this (inout.getCtx(), 0, inout.get_TrxName());
-		setClientOrg (inout);
 		setM_InOut_ID (inout.getM_InOut_ID());
 		m_parent = inout;
 	}	//	MInOutLine

@@ -259,7 +259,6 @@ public class AlertProcessor extends EONEServer
 					// Notice
 					int AD_Message_ID = SystemIDs.MESSAGE_NOTES;  /* TODO - Hardcoded message=notes */
 					MNote note = new MNote(getCtx(), AD_Message_ID, user_id, trx.getTrxName());
-					note.setClientOrg(alert.getAD_Client_ID(), alert.getAD_Org_ID());
 					note.setTextMsg(message);
 					note.setDescription(subject);
 					note.saveEx();

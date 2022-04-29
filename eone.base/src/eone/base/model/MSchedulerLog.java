@@ -66,7 +66,6 @@ public class MSchedulerLog extends X_AD_SchedulerLog
 	public MSchedulerLog (MScheduler parent, String summary)
 	{
 		this (parent.getCtx(), 0, parent.get_TrxName());
-		setClientOrg(parent);
 		setAD_Scheduler_ID(parent.getAD_Scheduler_ID());
 		setSummary(summary);
 	}	//	MSchedulerLog

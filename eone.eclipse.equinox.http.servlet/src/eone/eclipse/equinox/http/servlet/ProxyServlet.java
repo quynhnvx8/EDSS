@@ -93,7 +93,7 @@ public class ProxyServlet extends HttpServlet implements Filter {
 
 		} else {
 			// Send HTTP 4040 Error.
-			resp.sendError(HttpServletResponse.SC_NOT_FOUND, "ProxyServlet: " + req.getRequestURI()); //$NON-NLS-1$
+			resp.sendError(HttpServletResponse.SC_NOT_FOUND, "ProxyServlet: " + Utils.TO_STRING(req.getRequestURI())); //$NON-NLS-1$
 		}
 	}
 

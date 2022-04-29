@@ -201,7 +201,7 @@ public class GenericZoomProvider implements IZoomProvider {
 
 		String accessLevel = table.getAccessLevel();
 		if (   clientID != 0
-			&& MTable.ACCESSLEVEL_All.equals(accessLevel)) {
+			&& MTable.ACCESSLEVEL_System.equals(accessLevel)) {
 			return null;
 		}
 		if (   clientID != 0 && ( MTable.ACCESSLEVEL_Client.equals(accessLevel))) {
