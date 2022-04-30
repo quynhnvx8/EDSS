@@ -470,6 +470,20 @@ public final class MRole extends X_AD_Role
 			}
 		}
 		
+		if("C_ElementValue".equalsIgnoreCase(tableName)) {
+			retSQL.append(" AND ");
+			if (!fullyQualified) {
+				retSQL
+				.append(tableName).append(".")
+				.append("C_Element_ID").append(" = ")
+				.append(Env.getContextAsInt(ctx, "#C_Element_ID"));
+			} else {
+				retSQL
+				.append("C_Element_ID").append(" = ")
+				.append(Env.getContextAsInt(ctx, "#C_Element_ID"));
+			}
+		}
+		
 		
 		retSQL.append(orderBy);
 		return retSQL.toString();

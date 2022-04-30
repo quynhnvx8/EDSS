@@ -489,133 +489,7 @@ public final class MLookup extends Lookup implements Serializable
 		return getDirect(key, saveInCache, cacheLocal, null);
 	}	//	getDirect
 
-	/**
-	 *	Get Data Direct from Table.
-	 *  @param key key
-	 *  @param saveInCache save in cache for r/w
-	 * 	@param cacheLocal cache locally for r/o
-	 *  @return value
-	 */
-	public NamePair getDirect (Object key, boolean saveInCache, boolean cacheLocal, String trxName)
-	{
-		//	Nothing to query
-		if (key == null || m_info.QueryDirect == null || m_info.QueryDirect.length() == 0)
-			return null;
-		if (key.toString().trim().length() == 0)
-			return null;
-		//TODO: Chua xu ly duoc loi nay
-		if (key != null && key.toString().indexOf(",") > 0) {
-			return null;
-		}
-		//
-		NamePair directValue = null;
-		if (m_lookupDirect != null)		//	Lookup cache
-		{
-			directValue = (NamePair)m_lookupDirect.get(key);
-			if (directValue != null)
-				return directValue;
-		}
-		if (log.isLoggable(Level.FINER)) log.finer(m_info.KeyColumn + ": " + key 
-				+ ", SaveInCache=" + saveInCache + ",Local=" + cacheLocal);
-		
-		String cacheKey = m_info.TableName+"|"+m_info.KeyColumn+"|"+m_info.AD_Reference_Value_ID+"|"+Env.getAD_Language(Env.getCtx());
-		boolean isNumber = m_info.KeyColumn.endsWith("_ID");				
-		CCache<Integer, KeyNamePair> knpCache = null;
-		CCache<String, ValueNamePair> vnpCache = null;
-		if (isNumber)
-		{
-			knpCache = getDirectKeyNamePairCache(m_info, cacheKey);
-			KeyNamePair knp = knpCache.get(Integer.parseInt(key.toString()));
-			if (knp != null)
-				return knp;
-		}
-		else
-		{
-			vnpCache = getDirectValueNamePairCache(m_info, cacheKey);
-			ValueNamePair vnp = vnpCache.get(key.toString());
-			if (vnp != null)
-				return vnp;
-		}
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try
-		{
-			//	SELECT Key, Value, Name FROM ...
-			pstmt = DB.prepareStatement(m_info.QueryDirect, trxName);
-			//System.out.println(m_info.QueryDirect);
-			if (key.toString().indexOf(",") > 0) {
-				return null;
-			}
-			if (isNumber)
-				pstmt.setInt(1, Integer.parseInt(key.toString()));
-			else
-				pstmt.setString(1, key.toString());
-			rs = pstmt.executeQuery();
-			if (rs.next())
-			{
-				StringBuilder name = new StringBuilder().append(rs.getString(3));
-				boolean isActive = rs.getString(4).equals("Y");
-				if (!isActive)
-				{
-					name.insert(0, INACTIVE_S).append(INACTIVE_E);
-				}
-				if (isNumber)
-				{
-					int keyValue = rs.getInt(1);
-					KeyNamePair p = new KeyNamePair(keyValue, name.toString());
-					if (saveInCache)		//	save if
-						m_lookup.put(Integer.valueOf(keyValue), p);
-					directValue = p;
-					knpCache.put(p.getKey(), p);
-				}
-				else
-				{
-					String value = rs.getString(2);
-					ValueNamePair p = new ValueNamePair(value, name.toString());
-					if (saveInCache)		//	save if
-						m_lookup.put(value, p);
-					directValue = p;
-					vnpCache.put(p.getValue(), p);
-				}
-				if (rs.next())
-					log.log(Level.SEVERE, m_info.KeyColumn + ": Not unique (first returned) for "
-						+ key + " SQL=" + m_info.QueryDirect);
-			}
-			else
-			{
-				directValue = null;
-			}
-
-			if (log.isLoggable(Level.FINEST)) log.finest(m_info.KeyColumn + ": " + directValue + " - " + m_info);
-		}
-		catch (Exception e)
-		{
-			log.log(Level.SEVERE, m_info.KeyColumn + ": SQL=" + m_info.QueryDirect + "; Key=" + key, e);
-			directValue = null;
-		}
-		finally
-		{
-			DB.close(rs, pstmt);
-			rs = null;
-			pstmt = null;
-		}
-		//	Cache Local if not added to R/W cache
-		if (cacheLocal  && !saveInCache && directValue != null)
-		{
-			if (m_lookupDirect == null)
-			{
-				m_lookupDirect = new HashMap<Object,Object>();
-			}
-			else if (!m_lookupDirect.containsKey(key))
-			{
-				m_lookupDirect.clear();
-				m_lookupDirect.put(key, directValue);
-			}
-		}
-		m_hasInactive = true;
-		return directValue;
-	}	//	getDirect
-
+	
 	
 	@Override
 	public NamePair[] getDirect(Object[] keys) 
@@ -952,6 +826,134 @@ public final class MLookup extends Lookup implements Serializable
 		return vnpCache;
 	}
 	
+	/**
+	 *	Get Data Direct from Table.
+	 *  @param key key
+	 *  @param saveInCache save in cache for r/w
+	 * 	@param cacheLocal cache locally for r/o
+	 *  @return value
+	 */
+	public NamePair getDirect (Object key, boolean saveInCache, boolean cacheLocal, String trxName)
+	{
+		//	Nothing to query
+		if (key == null || m_info.QueryDirect == null || m_info.QueryDirect.length() == 0)
+			return null;
+		if (key.toString().trim().length() == 0)
+			return null;
+		//TODO: Chua xu ly duoc loi nay
+		if (key != null && key.toString().indexOf(",") > 0) {
+			return null;
+		}
+		//
+		NamePair directValue = null;
+		if (m_lookupDirect != null)		//	Lookup cache
+		{
+			directValue = (NamePair)m_lookupDirect.get(key);
+			if (directValue != null)
+				return directValue;
+		}
+		if (log.isLoggable(Level.FINER)) log.finer(m_info.KeyColumn + ": " + key 
+				+ ", SaveInCache=" + saveInCache + ",Local=" + cacheLocal);
+		
+		String cacheKey = m_info.TableName+"|"+m_info.KeyColumn+"|"+m_info.AD_Reference_Value_ID+"|"+Env.getAD_Language(Env.getCtx());
+		boolean isNumber = m_info.KeyColumn.endsWith("_ID");				
+		CCache<Integer, KeyNamePair> knpCache = null;
+		CCache<String, ValueNamePair> vnpCache = null;
+		if (isNumber)
+		{
+			knpCache = getDirectKeyNamePairCache(m_info, cacheKey);
+			KeyNamePair knp = knpCache.get(Integer.parseInt(key.toString()));
+			if (knp != null)
+				return knp;
+		}
+		else
+		{
+			vnpCache = getDirectValueNamePairCache(m_info, cacheKey);
+			ValueNamePair vnp = vnpCache.get(key.toString());
+			if (vnp != null)
+				return vnp;
+		}
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try
+		{
+			//	SELECT Key, Value, Name FROM ...
+			pstmt = DB.prepareStatement(m_info.QueryDirect, trxName);
+			//System.out.println(m_info.QueryDirect);
+			if (key.toString().indexOf(",") > 0) {
+				return null;
+			}
+			if (isNumber)
+				pstmt.setInt(1, Integer.parseInt(key.toString()));
+			else
+				pstmt.setString(1, key.toString());
+			rs = pstmt.executeQuery();
+			if (rs.next())
+			{
+				StringBuilder name = new StringBuilder().append(rs.getString(3));
+				boolean isActive = rs.getString(4).equals("Y");
+				if (!isActive)
+				{
+					name.insert(0, INACTIVE_S).append(INACTIVE_E);
+				}
+				if (isNumber)
+				{
+					int keyValue = rs.getInt(1);
+					KeyNamePair p = new KeyNamePair(keyValue, name.toString());
+					if (saveInCache)		//	save if
+						m_lookup.put(Integer.valueOf(keyValue), p);
+					directValue = p;
+					knpCache.put(p.getKey(), p);
+				}
+				else
+				{
+					String value = rs.getString(2);
+					ValueNamePair p = new ValueNamePair(value, name.toString());
+					if (saveInCache)		//	save if
+						m_lookup.put(value, p);
+					directValue = p;
+					vnpCache.put(p.getValue(), p);
+				}
+				if (rs.next())
+					log.log(Level.SEVERE, m_info.KeyColumn + ": Not unique (first returned) for "
+						+ key + " SQL=" + m_info.QueryDirect);
+			}
+			else
+			{
+				directValue = null;
+			}
+
+			if (log.isLoggable(Level.FINEST)) log.finest(m_info.KeyColumn + ": " + directValue + " - " + m_info);
+		}
+		catch (Exception e)
+		{
+			log.log(Level.SEVERE, m_info.KeyColumn + ": SQL=" + m_info.QueryDirect + "; Key=" + key, e);
+			directValue = null;
+		}
+		finally
+		{
+			DB.close(rs, pstmt);
+			rs = null;
+			pstmt = null;
+		}
+		//	Cache Local if not added to R/W cache
+		if (cacheLocal  && !saveInCache && directValue != null)
+		{
+			if (m_lookupDirect == null)
+			{
+				m_lookupDirect = new HashMap<Object,Object>();
+			}
+			else if (!m_lookupDirect.containsKey(key))
+			{
+				m_lookupDirect.clear();
+				m_lookupDirect.put(key, directValue);
+			}
+		}
+		m_hasInactive = true;
+		return directValue;
+	}	//	getDirect
+
+	
 	/**************************************************************************
 	 *	MLookup Loader
 	 */
@@ -980,7 +982,6 @@ public final class MLookup extends Lookup implements Serializable
 			long startTime = System.currentTimeMillis();
 			StringBuilder sql = new StringBuilder().append(m_info.Query);
 
-			// IDEMPIERE 90
 			if (isShortList())
 			{
 				// Adding ", IsShortList" to the sql SELECT clause
@@ -989,7 +990,7 @@ public final class MLookup extends Lookup implements Serializable
 				int posFirstFrom = sql.indexOf(tableName+".IsActive FROM "+tableName) + tableName.length() + 9 ; // 9 = .IsActive
 				String ClauseFromWhereOrder = sql.substring(posFirstFrom, sql.length());
 				sql = new StringBuilder(sql.substring(0, posFirstFrom)  + ", " + tableName + ".IsShortList" + ClauseFromWhereOrder);				
-			} // IDEMPIERE 90
+			}
 
 			//	not validated
 			if (!m_info.IsValidated)
@@ -1095,8 +1096,9 @@ public final class MLookup extends Lookup implements Serializable
 			try
 			{
 				//	SELECT Key, Value, Name, IsActive FROM ...
-				pstmt = DB.prepareStatement(sql.toString(), null);
-				//System.out.println(sql.toString());
+				//String sqlSelect = MRole.addAccessSQL(sql.toString(), "", MRole.SQL_NOTQUALIFIED, MRole.SQL_RO, Env.getCtx());
+				pstmt = DB.prepareStatement(sql.toString(), null);//sqlSelect
+				//System.out.println("MLookup.java: " + sql.toString());
 				rs = pstmt.executeQuery();
 
 				//	Get first ... rows
@@ -1129,7 +1131,6 @@ public final class MLookup extends Lookup implements Serializable
 						name.insert(0, INACTIVE_S).append(INACTIVE_E);
 						m_hasInactive = true;
 					}
-					// IDEMPIERE 90
 					if (isShortList())
 					{
 						boolean isShortListItem = rs.getString(5).equals("Y");
@@ -1139,7 +1140,6 @@ public final class MLookup extends Lookup implements Serializable
 							m_hasShortListItems = true;
 						}
 					}	
-					// IDEMPIERE 90
 					if (isNumber)
 					{
 						int key = rs.getInt(1);
@@ -1154,7 +1154,6 @@ public final class MLookup extends Lookup implements Serializable
 						m_lookup.put(value, p);
 						vnpCache.add(p);
 					}
-				//	if (log.isLoggable(Level.FINE)) log.fine( m_info.KeyColumn + ": " + name);
 				}				
 			}
 			catch (SQLException e)
@@ -1168,7 +1167,6 @@ public final class MLookup extends Lookup implements Serializable
 			int size = m_lookup.size();
 			if (log.isLoggable(Level.FINER)) log.finer(m_info.KeyColumn
 					+ " (" + m_info.Column_ID + "):"
-				//	+ " ID=" + m_info.AD_Column_ID + " " +
 					+ " - Loader complete #" + size + " - all=" + m_allLoaded
 					+ " - ms=" + String.valueOf(System.currentTimeMillis()-m_startTime)
 					+ " (" + String.valueOf(System.currentTimeMillis()-startTime) + ")");
