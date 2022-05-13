@@ -2,12 +2,14 @@ package eone.base.model;
 
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 
 import eone.base.process.DocAction;
 import eone.base.process.DocumentEngine;
+import eone.util.DB;
 import eone.util.Msg;
 import eone.util.TimeUtil;
 
@@ -57,63 +59,13 @@ public class MAsset extends X_A_Asset implements DocAction
 	}
 
 	
-	public void setAssetGroup(MAssetGroup assetGroup) {
-		setA_Asset_Group_ID(assetGroup.getA_Asset_Group_ID());		
-		
-	}
-	
-	public MAssetGroup getAssetGroup() {
-		return MAssetGroup.get(getCtx(), getA_Asset_Group_ID());
-	}
-	
-	public void completeAssetBuild(MAssetBuild assetBuild) {
-		
-		MDocType dt = MDocType.get(getCtx(), assetBuild.getC_DocType_ID());
-		String docBaseType = dt.getDocBaseType();
-		String typeCalculate = getTypeCalculate();
-		if (X_C_DocType.DOCBASETYPE_211AddNew.equalsIgnoreCase(docBaseType)) {
-			setCreateDate(assetBuild.getDateAcct());
-			setDepreciationDate(assetBuild.getDepreciationDate());
-			setUseDate(assetBuild.getUseDate());
-			setBaseAmtCurrent(assetBuild.getAmount());
-			setBaseAmtOriginal(assetBuild.getAmount());
-			setUseLifes(assetBuild.getUseLifes());
-			if (X_A_Asset.TYPECALCULATE_ByDay.equalsIgnoreCase(typeCalculate)) {
-				setEndDateCurrent(TimeUtil.addDays(getDepreciationDate(), assetBuild.getUseLifes().intValue()));				
-			} else {
-				setEndDateCurrent(TimeUtil.addMonths(getDepreciationDate(), assetBuild.getUseLifes().intValue()));
-			}
-			setEndDateOriginal(getEndDateCurrent());
-			
-		}
-		
-		if (X_C_DocType.DOCBASETYPE_211Upgrade.equalsIgnoreCase(docBaseType)) {
-			setBaseAmtCurrent(getBaseAmtCurrent().add(assetBuild.getAmount()));
-			setUseLifes(getUseLifes().add(assetBuild.getUseLifes()));
-			if (X_A_Asset.TYPECALCULATE_ByDay.equalsIgnoreCase(typeCalculate)) {
-				setEndDateCurrent(TimeUtil.addDays(getDepreciationDate(), assetBuild.getUseLifes().intValue()));
-			} else {
-				setEndDateCurrent(TimeUtil.addMonths(getDepreciationDate(), assetBuild.getUseLifes().intValue()));
-			}
-		}
-		
-		if (X_C_DocType.DOCBASETYPE_211Down.equalsIgnoreCase(docBaseType)) {
-			setBaseAmtCurrent(getBaseAmtCurrent().subtract(assetBuild.getAmount()));
-			setUseLifes(getUseLifes().add(assetBuild.getUseLifes()));
-			if (X_A_Asset.TYPECALCULATE_ByDay.equalsIgnoreCase(typeCalculate)) {
-				setEndDateCurrent(TimeUtil.addDays(getDepreciationDate(), assetBuild.getUseLifes().intValue()));
-			} else {
-				setEndDateCurrent(TimeUtil.addMonths(getDepreciationDate(), assetBuild.getUseLifes().intValue()));
-			}
-		}
-	}
-	
 	protected boolean beforeSave (boolean newRecord)
 	{
 		
-		if (newRecord || is_ValueChanged("Value") || isActive() || is_ValueChanged("Name")) {
-			List<MProduct> relValue = new Query(getCtx(), Table_Name, "A_Asset_ID != ? And (Value = ? Or Name = ?) And AD_Client_ID = ? And IsActive = 'Y'", get_TrxName())
-					.setParameters(getA_Asset_ID(), getValue(), getName(), getAD_Client_ID())
+		if (newRecord || is_ValueChanged("Value") || is_ValueChanged("IsActive") || is_ValueChanged("Name")) {
+			List<MAsset> relValue = new Query(getCtx(), Table_Name, "A_Asset_ID != ? And (Value = ? Or Name = ?) And IsActive = 'Y'", get_TrxName())
+					.setParameters(getA_Asset_ID(), getValue(), getName())
+					.setApplyAccessFilter(true)
 					.list();
 			if (relValue.size() >= 1) {
 				log.saveError("Error", Msg.getMsg(getCtx(), "ValueOrNameExists"));//ValueExists, NameExists
@@ -121,6 +73,30 @@ public class MAsset extends X_A_Asset implements DocAction
 			}
 
 		}
+		
+		if (is_ValueChanged(X_A_Asset.COLUMNNAME_StatusUse)) {
+			if (X_A_Asset.STATUSUSE_Using.equals(getStatusUse()))
+					setIsDepreciated(true);
+			if (X_A_Asset.STATUSUSE_None.equals(getStatusUse())) {
+				setIsDepreciated(false);
+				setUseDate(null);
+				setPendingDate(null);
+			}
+				
+			if (X_A_Asset.STATUSUSE_UnUse.equals(getStatusUse()) && getUseDate() != null) {
+				setPendingDate(TimeUtil.getDayLastMonth(new Timestamp(new Date().getTime())));
+			}
+			
+			if (X_A_Asset.STATUSUSE_UnUse.equals(getStatusUse()) && getUseDate() == null) {
+				setPendingDate(null);
+				setIsDepreciated(false);
+			}
+		}
+		
+		
+		
+		
+		
 		return true;
 	}	//	beforeSave
 	
@@ -132,7 +108,23 @@ public class MAsset extends X_A_Asset implements DocAction
 			return success;
 		}
 		
-		
+		//Xóa cấu hình cũ
+		if (is_ValueChanged(X_A_Asset.COLUMNNAME_A_Asset_Group_ID)) {
+			String sql = "DELETE C_Account WHERE A_Asset_ID = ?";
+			DB.executeUpdate(sql, getA_Asset_ID(), get_TrxName());
+		}
+		//Insert cấu hình mới
+		if (newRecord || is_ValueChanged(X_A_Asset.COLUMNNAME_A_Asset_Group_ID)) {
+			List<MAccount> lists = MAccount.getListAcctAssetGroup(getA_Asset_Group_ID());
+			for (int i = 0; i < lists.size(); i++) {
+				MAccount acc = new MAccount(getCtx(), 0, get_TrxName());
+				acc.setA_Asset_ID(getA_Asset_ID());
+				acc.setAccount_ID(lists.get(i).getAccount_ID());
+				acc.setIsDefault(lists.get(i).isDefault());
+				acc.setTypeAccount(lists.get(i).getTypeAccount());
+				acc.save();
+			}
+		}
 		
 		return true;
 	}	//	afterSave

@@ -23,7 +23,7 @@ import org.zkoss.zul.Listitem;
 import eone.base.model.I_HM_PatientRegisterLine;
 import eone.base.model.MPatientRegisterLine;
 import eone.base.model.MProduct;
-import eone.base.model.MProductCategory;
+import eone.base.model.MProductGroup;
 import eone.base.model.MUOM;
 import eone.base.model.PO;
 import eone.util.DB;
@@ -106,7 +106,6 @@ public class WHealthUpdateResultPanel extends ADForm implements IFormController,
 		String m_queryAlias = "SELECT ";
 		
 		StringBuilder m_queryFrom = new StringBuilder(" M_Product ")
-					.append(" INNER JOIN M_Product_Category ON M_Product.M_Product_Category_ID = M_Product_Category.M_Product_Category_ID")
 					.append(" INNER JOIN C_UOM ON M_Product.C_UOM_ID = C_UOM.C_UOM_ID");
 		
 		int colNumbers = 7;
@@ -115,10 +114,9 @@ public class WHealthUpdateResultPanel extends ADForm implements IFormController,
 		m_columns[index++] = new WInfo_Column("", MProduct.Table_Name + "." + MProduct.COLUMNNAME_M_Product_ID, IDColumn.class);
 		m_columns[index++] = new WInfo_Column(Msg.translate(Env.getCtx(), "productCode"), MProduct.Table_Name + "." + MProduct.COLUMNNAME_Value, String.class);
 		m_columns[index++] = new WInfo_Column(Msg.translate(Env.getCtx(), "productName"), MProduct.Table_Name + "." + MProduct.COLUMNNAME_Name, String.class);
-		m_columns[index++] = new WInfo_Column(Msg.translate(Env.getCtx(), "groupNameServices"), MProductCategory.Table_Name + "." + MProductCategory.COLUMNNAME_Name, String.class);
 		m_columns[index++] = new WInfo_Column(Msg.translate(Env.getCtx(), "UnitServices"), MUOM.Table_Name + "." + MUOM.COLUMNNAME_Name, String.class);
 		m_columns[index++] = new WInfo_Column(Msg.translate(Env.getCtx(), "PriceSOServices"), MProduct.Table_Name + "." + MProduct.COLUMNNAME_PriceSO, Double.class);
-		m_columns[index++] = new WInfo_Column("", MProduct.Table_Name + "." + MProduct.COLUMNNAME_M_Product_Category_ID, IDColumn.class);
+		m_columns[index++] = new WInfo_Column(Msg.translate(Env.getCtx(), "CategoryType"), MProductGroup.Table_Name + "." + MProductGroup.COLUMNNAME_CategoryType, String.class);
 		
 		
 		WListbox table = this.selectionTable;

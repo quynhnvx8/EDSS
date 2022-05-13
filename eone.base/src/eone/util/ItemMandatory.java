@@ -18,6 +18,13 @@ public class ItemMandatory {
 	String constructionLine;
 	String project;
 	String projectLine;
+	String tax;
+	public String getTax() {
+		return tax;
+	}
+	public void setTax(String tax) {
+		this.tax = tax;
+	}
 	public String getBankAccount() {
 		return bankAccount;
 	}

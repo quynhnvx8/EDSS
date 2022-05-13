@@ -37,18 +37,13 @@ public class MAssetTools extends X_A_Asset_Tools
 	{
 		if (A_Asset_ID <= 0 || M_Product_ID <= 0)
 			return null;
-		MAssetTools o = s_cache.get(A_Asset_ID + "_" + M_Product_ID);
-		if (o != null)
-			return o;
+		
 		String whereClause = " A_Asset_ID = ? And M_Product_ID = ? And DateTrx = ? ";
-		o = new Query(ctx, Table_Name, whereClause, null)
+		MAssetTools o = new Query(ctx, Table_Name, whereClause, null)
 				.setParameters(A_Asset_ID, M_Product_ID, date)
+				.setApplyAccessFilter(true)
 				.firstOnly();
-		if (o != null && o.get_ID() > 0) {
-			s_cache.put(A_Asset_ID + "_" + M_Product_ID, o);
-			return o;
-		}
-		return null;
+		return o;
 	}
 
 	public static MAssetTools get (Properties ctx, Object id)

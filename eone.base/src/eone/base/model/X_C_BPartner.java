@@ -5,10 +5,9 @@
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.sql.ResultSet;
 import java.util.Properties;
-
-import eone.util.KeyNamePair;
 
 /** Generated Model for C_BPartner
  *  @author EOne (generated) 
@@ -19,7 +18,7 @@ public class X_C_BPartner extends PO implements I_C_BPartner, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20210920L;
+	private static final long serialVersionUID = 20220504L;
 
     /** Standard Constructor */
     public X_C_BPartner (Properties ctx, int C_BPartner_ID, String trxName)
@@ -27,13 +26,11 @@ public class X_C_BPartner extends PO implements I_C_BPartner, I_Persistent
       super (ctx, C_BPartner_ID, trxName);
       /** if (C_BPartner_ID == 0)
         {
-			setC_BP_Group_ID (0);
 			setC_BPartner_ID (0);
 			setIsCustomer (false);
 // N
 			setIsEmployee (false);
 			setIsVendor (false);
-			setName (null);
 			setSendEMail (false);
 			setValue (null);
         } */
@@ -46,7 +43,7 @@ public class X_C_BPartner extends PO implements I_C_BPartner, I_Persistent
     }
 
     /** AccessLevel
-      * @return 3 - Client - Org 
+      * @return 7 - System - Client - Org 
       */
     protected int get_AccessLevel()
     {
@@ -106,32 +103,32 @@ public class X_C_BPartner extends PO implements I_C_BPartner, I_Persistent
 		return (String)get_Value(COLUMNNAME_Address);
 	}
 
-	public eone.base.model.I_C_BP_Group getC_BP_Group() throws RuntimeException
-    {
-		return (eone.base.model.I_C_BP_Group)MTable.get(getCtx(), eone.base.model.I_C_BP_Group.Table_Name)
-			.getPO(getC_BP_Group_ID(), get_TrxName());	}
-
-	/** Set Business Partner Group.
-		@param C_BP_Group_ID 
-		Business Partner Group
-	  */
-	public void setC_BP_Group_ID (int C_BP_Group_ID)
+	/** Set BankAccount.
+		@param BankAccount BankAccount	  */
+	public void setBankAccount (String BankAccount)
 	{
-		if (C_BP_Group_ID < 1) 
-			set_Value (COLUMNNAME_C_BP_Group_ID, null);
-		else 
-			set_Value (COLUMNNAME_C_BP_Group_ID, Integer.valueOf(C_BP_Group_ID));
+		set_Value (COLUMNNAME_BankAccount, BankAccount);
 	}
 
-	/** Get Business Partner Group.
-		@return Business Partner Group
-	  */
-	public int getC_BP_Group_ID () 
+	/** Get BankAccount.
+		@return BankAccount	  */
+	public String getBankAccount () 
 	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_C_BP_Group_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
+		return (String)get_Value(COLUMNNAME_BankAccount);
+	}
+
+	/** Set BankName.
+		@param BankName BankName	  */
+	public void setBankName (String BankName)
+	{
+		set_Value (COLUMNNAME_BankName, BankName);
+	}
+
+	/** Get BankName.
+		@return BankName	  */
+	public String getBankName () 
+	{
+		return (String)get_Value(COLUMNNAME_BankName);
 	}
 
 	/** Set Business Partner .
@@ -172,6 +169,37 @@ public class X_C_BPartner extends PO implements I_C_BPartner, I_Persistent
 	public String getFax () 
 	{
 		return (String)get_Value(COLUMNNAME_Fax);
+	}
+
+	/** Org = 01_ORG */
+	public static final String GROUPTYPE_Org = "01_ORG";
+	/** Patient = 07_PAT */
+	public static final String GROUPTYPE_Patient = "07_PAT";
+	/** Customer = 04_CUS */
+	public static final String GROUPTYPE_Customer = "04_CUS";
+	/** Vendor = 03_VEN */
+	public static final String GROUPTYPE_Vendor = "03_VEN";
+	/** Bank = 06_BAK */
+	public static final String GROUPTYPE_Bank = "06_BAK";
+	/** Other = 18_OTH */
+	public static final String GROUPTYPE_Other = "18_OTH";
+	/** Employee = 05_EMP */
+	public static final String GROUPTYPE_Employee = "05_EMP";
+	/** Department = 02_DEP */
+	public static final String GROUPTYPE_Department = "02_DEP";
+	/** Set GroupType.
+		@param GroupType GroupType	  */
+	public void setGroupType (String GroupType)
+	{
+
+		set_Value (COLUMNNAME_GroupType, GroupType);
+	}
+
+	/** Get GroupType.
+		@return GroupType	  */
+	public String getGroupType () 
+	{
+		return (String)get_Value(COLUMNNAME_GroupType);
 	}
 
 	public eone.base.model.I_HR_Employee getHR_Employee() throws RuntimeException
@@ -451,6 +479,20 @@ public class X_C_BPartner extends PO implements I_C_BPartner, I_Persistent
 		return (String)get_Value(COLUMNNAME_Original);
 	}
 
+	/** Set Personnel.
+		@param Personnel Personnel	  */
+	public void setPersonnel (String Personnel)
+	{
+		set_Value (COLUMNNAME_Personnel, Personnel);
+	}
+
+	/** Get Personnel.
+		@return Personnel	  */
+	public String getPersonnel () 
+	{
+		return (String)get_Value(COLUMNNAME_Personnel);
+	}
+
 	/** Set Phone.
 		@param Phone 
 		Identifies a telephone number
@@ -548,6 +590,20 @@ public class X_C_BPartner extends PO implements I_C_BPartner, I_Persistent
 	public String getTableName () 
 	{
 		return (String)get_Value(COLUMNNAME_TableName);
+	}
+
+	/** Set Tax Code.
+		@param TaxCode Tax Code	  */
+	public void setTaxCode (String TaxCode)
+	{
+		set_Value (COLUMNNAME_TaxCode, TaxCode);
+	}
+
+	/** Get Tax Code.
+		@return Tax Code	  */
+	public String getTaxCode () 
+	{
+		return (String)get_Value(COLUMNNAME_TaxCode);
 	}
 
 	/** Set Code.

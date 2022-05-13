@@ -5,10 +5,9 @@
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.sql.ResultSet;
 import java.util.Properties;
-
-import eone.util.KeyNamePair;
 
 /** Generated Model for C_DocType
  *  @author EOne (generated) 
@@ -19,7 +18,7 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220305L;
+	private static final long serialVersionUID = 20220511L;
 
     /** Standard Constructor */
     public X_C_DocType (Properties ctx, int C_DocType_ID, String trxName)
@@ -495,8 +494,8 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	public static final String DOCBASETYPE_242Openbalance = "242OP";
 	/** 153 Expense = 153EX */
 	public static final String DOCBASETYPE_153Expense = "153EX";
-	/** 153 ONE = 153ON */
-	public static final String DOCBASETYPE_153ONE = "153ON";
+	/** 153 Open balance = 153OP */
+	public static final String DOCBASETYPE_153OpenBalance = "153OP";
 	/** 156 Sell = 156SE */
 	public static final String DOCBASETYPE_156Sell = "156SE";
 	/** 331 Credit = 331CR */
@@ -525,8 +524,22 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	public static final String DOCBASETYPE_OpenBalance = "BALANCE";
 	/** 156 Nhập kho hàng hóa = 156DR */
 	public static final String DOCBASETYPE_156NhậpKhoHàngHóa = "156DR";
-	/** 156 Nhập đầu kỳ = 156DK */
-	public static final String DOCBASETYPE_156NhậpĐầuKỳ = "156DK";
+	/** 156 Open balance = 156OP */
+	public static final String DOCBASETYPE_156OpenBalance = "156OP";
+	/** 152 Open balance = 152OP */
+	public static final String DOCBASETYPE_152OpenBalance = "152OP";
+	/** 121 Debit = 121DR */
+	public static final String DOCBASETYPE_121Debit = "121DR";
+	/** 217 Invest land = 217IV */
+	public static final String DOCBASETYPE_217InvestLand = "217IV";
+	/** Asset Openbalance = OPASSET */
+	public static final String DOCBASETYPE_AssetOpenbalance = "OPASSET";
+	/** 241 Credit = 241CR */
+	public static final String DOCBASETYPE_241Credit = "241CR";
+	/** Asset Increment = ASSETINC */
+	public static final String DOCBASETYPE_AssetIncrement = "ASSETINC";
+	/** Asset DeIncrement = ASSETDOW */
+	public static final String DOCBASETYPE_AssetDeIncrement = "ASSETDOW";
 	/** Set Document BaseType.
 		@param DocBaseType 
 		Logical type of document

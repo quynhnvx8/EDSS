@@ -96,7 +96,7 @@ public class CreateEmployeeSalary extends SvrProcess {
 				if (employeeExists.containsKey(HR_Employee_ID)) {
 					line = MSalaryLine.get(getCtx(), HR_Employee_ID, salary.getC_Period_ID(), get_TrxName());			
 				} else {
-					int HR_SalaryLine_ID = DB.getNextID(getAD_Client_ID(), X_HR_SalaryLine.Table_Name, get_TrxName());
+					int HR_SalaryLine_ID = DB.getNextID(X_HR_SalaryLine.Table_Name, get_TrxName());
 					line = new MSalaryLine(getCtx(), 0, get_TrxName());
 					line.setHR_Employee_ID(HR_Employee_ID);
 					line.setHR_Salary_ID(salary.getHR_Salary_ID());

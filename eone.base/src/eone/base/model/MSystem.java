@@ -68,7 +68,7 @@ public class MSystem extends X_AD_System
 		if (s_system.get(0) != null)
 			return s_system.get(0);
 		//
-		MSystem system = new Query(ctx, Table_Name, null, null)
+		MSystem system = new Query(ctx, Table_Name, null, null, false)
 						.setOrderBy(COLUMNNAME_AD_System_ID)
 						.firstOnly();
 		if (system == null)

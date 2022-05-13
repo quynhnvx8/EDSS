@@ -1,28 +1,15 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import eone.util.KeyNamePair;
-
 /** Generated Interface for A_Depreciation_Exp
- *  @author iDempiere (generated) 
+ *  @author EOne (generated) 
  *  @version Version 1.0
  */
 public interface I_A_Depreciation_Exp 
@@ -36,9 +23,9 @@ public interface I_A_Depreciation_Exp
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 3 - Client - Org 
+    /** AccessLevel = 7 - System - Client - Org 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(3);
+    BigDecimal accessLevel = BigDecimal.valueOf(7);
 
     /** Load Meta Data */
 
@@ -65,15 +52,6 @@ public interface I_A_Depreciation_Exp
 
 	/** Get A_Depreciation_Exp_ID	  */
 	public int getA_Depreciation_Exp_ID();
-
-    /** Column name A_Depreciation_Exp_UU */
-    public static final String COLUMNNAME_A_Depreciation_Exp_UU = "A_Depreciation_Exp_UU";
-
-	/** Set A_Depreciation_Exp_UU	  */
-	public void setA_Depreciation_Exp_UU (String A_Depreciation_Exp_UU);
-
-	/** Get A_Depreciation_Exp_UU	  */
-	public String getA_Depreciation_Exp_UU();
 
     /** Column name A_Depreciation_ID */
     public static final String COLUMNNAME_A_Depreciation_ID = "A_Depreciation_ID";
@@ -159,7 +137,7 @@ public interface I_A_Depreciation_Exp
 	/** Get TypeCost	  */
 	public int getC_TypeCost_ID();
 
-	public I_C_TypeCost getC_TypeCost() throws RuntimeException;
+	public eone.base.model.I_C_TypeCost getC_TypeCost() throws RuntimeException;
 
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
@@ -275,4 +253,13 @@ public interface I_A_Depreciation_Exp
 	  * User who updated this records
 	  */
 	public int getUpdatedBy();
+
+    /** Column name UseLifed */
+    public static final String COLUMNNAME_UseLifed = "UseLifed";
+
+	/** Set UseLifed	  */
+	public void setUseLifed (int UseLifed);
+
+	/** Get UseLifed	  */
+	public int getUseLifed();
 }

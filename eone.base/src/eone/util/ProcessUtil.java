@@ -19,7 +19,7 @@ import eone.base.process.ProcessInfo;
  */
 public final class ProcessUtil {
 
-	public static final String JASPER_STARTER_CLASS = "org.adempiere.report.jasper.ReportStarter";
+	public static final String JASPER_STARTER_CLASS = "eone.report.jasper.ReportStarter";
 
 	/**	Logger				*/
 	private static final CLogger log = CLogger.getCLogger(ProcessUtil.class);

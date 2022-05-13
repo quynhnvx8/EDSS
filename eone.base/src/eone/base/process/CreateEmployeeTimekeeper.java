@@ -33,7 +33,7 @@ public class CreateEmployeeTimekeeper extends SvrProcess {
 		rs = ps.executeQuery();
 		MTimekeeperLine line = null;
 		while (rs.next()) {
-			int HR_TimekeeperLine_ID = DB.getNextID(getAD_Client_ID(), X_HR_TimekeeperLine.Table_Name, get_TrxName());
+			int HR_TimekeeperLine_ID = DB.getNextID(X_HR_TimekeeperLine.Table_Name, get_TrxName());
 			line = new MTimekeeperLine(getCtx(), 0, get_TrxName());
 			line.setHR_Employee_ID(rs.getInt("HR_Employee_ID"));
 			line.setHR_Timekeeper_ID(timekeeper.getHR_Timekeeper_ID());

@@ -1,31 +1,18 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.Env;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
 
-import eone.util.Env;
-
 /** Generated Model for M_Storage
- *  @author iDempiere (generated) 
+ *  @author EOne (generated) 
  *  @version Version 1.0 - $Id$ */
 public class X_M_Storage extends PO implements I_M_Storage, I_Persistent 
 {
@@ -33,7 +20,7 @@ public class X_M_Storage extends PO implements I_M_Storage, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20210201L;
+	private static final long serialVersionUID = 20220513L;
 
     /** Standard Constructor */
     public X_M_Storage (Properties ctx, int M_Storage_ID, String trxName)
@@ -51,7 +38,7 @@ public class X_M_Storage extends PO implements I_M_Storage, I_Persistent
     }
 
     /** AccessLevel
-      * @return 3 - Client - Org 
+      * @return 7 - System - Client - Org 
       */
     protected int get_AccessLevel()
     {
@@ -107,6 +94,29 @@ public class X_M_Storage extends PO implements I_M_Storage, I_Persistent
 	public Timestamp getDateTrx () 
 	{
 		return (Timestamp)get_Value(COLUMNNAME_DateTrx);
+	}
+
+	/** Set Line ID.
+		@param Line_ID 
+		Transaction line ID (internal)
+	  */
+	public void setLine_ID (int Line_ID)
+	{
+		if (Line_ID < 1) 
+			set_ValueNoCheck (COLUMNNAME_Line_ID, null);
+		else 
+			set_ValueNoCheck (COLUMNNAME_Line_ID, Integer.valueOf(Line_ID));
+	}
+
+	/** Get Line ID.
+		@return Transaction line ID (internal)
+	  */
+	public int getLine_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_Line_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
 	}
 
 	public eone.base.model.I_M_Product getM_Product() throws RuntimeException
@@ -183,6 +193,34 @@ public class X_M_Storage extends PO implements I_M_Storage, I_Persistent
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
+	}
+
+	/** MMPolicy AD_Reference_ID=335 */
+	public static final int MMPOLICY_AD_Reference_ID=335;
+	/** LiFo = L */
+	public static final String MMPOLICY_LiFo = "L";
+	/** FiFo = F */
+	public static final String MMPOLICY_FiFo = "F";
+	/** Average = A */
+	public static final String MMPOLICY_Average = "A";
+	/** None = N */
+	public static final String MMPOLICY_None = "N";
+	/** Set Material Policy.
+		@param MMPolicy 
+		Material Movement Policy
+	  */
+	public void setMMPolicy (String MMPolicy)
+	{
+
+		set_Value (COLUMNNAME_MMPolicy, MMPolicy);
+	}
+
+	/** Get Material Policy.
+		@return Material Movement Policy
+	  */
+	public String getMMPolicy () 
+	{
+		return (String)get_Value(COLUMNNAME_MMPolicy);
 	}
 
 	/** Set Price.

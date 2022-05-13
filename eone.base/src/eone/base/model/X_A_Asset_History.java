@@ -1,28 +1,18 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.Env;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
 
 /** Generated Model for A_Asset_History
- *  @author iDempiere (generated) 
+ *  @author EOne (generated) 
  *  @version Version 1.0 - $Id$ */
 public class X_A_Asset_History extends PO implements I_A_Asset_History, I_Persistent 
 {
@@ -30,7 +20,7 @@ public class X_A_Asset_History extends PO implements I_A_Asset_History, I_Persis
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200905L;
+	private static final long serialVersionUID = 20220511L;
 
     /** Standard Constructor */
     public X_A_Asset_History (Properties ctx, int A_Asset_History_ID, String trxName)
@@ -117,6 +107,43 @@ public class X_A_Asset_History extends PO implements I_A_Asset_History, I_Persis
 		return ii.intValue();
 	}
 
+	/** Set AccumulateAmt.
+		@param AccumulateAmt AccumulateAmt	  */
+	public void setAccumulateAmt (BigDecimal AccumulateAmt)
+	{
+		set_Value (COLUMNNAME_AccumulateAmt, AccumulateAmt);
+	}
+
+	/** Get AccumulateAmt.
+		@return AccumulateAmt	  */
+	public BigDecimal getAccumulateAmt () 
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_AccumulateAmt);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
+	}
+
+	/** Set Amount.
+		@param Amount 
+		Amount in a defined currency
+	  */
+	public void setAmount (BigDecimal Amount)
+	{
+		set_Value (COLUMNNAME_Amount, Amount);
+	}
+
+	/** Get Amount.
+		@return Amount in a defined currency
+	  */
+	public BigDecimal getAmount () 
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_Amount);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
+	}
+
 	/** Set ChangeDate.
 		@param ChangeDate ChangeDate	  */
 	public void setChangeDate (Timestamp ChangeDate)
@@ -146,5 +173,43 @@ public class X_A_Asset_History extends PO implements I_A_Asset_History, I_Persis
 	public String getDescription () 
 	{
 		return (String)get_Value(COLUMNNAME_Description);
+	}
+
+	/** Set IsFirst.
+		@param IsFirst IsFirst	  */
+	public void setIsFirst (boolean IsFirst)
+	{
+		set_Value (COLUMNNAME_IsFirst, Boolean.valueOf(IsFirst));
+	}
+
+	/** Get IsFirst.
+		@return IsFirst	  */
+	public boolean isFirst () 
+	{
+		Object oo = get_Value(COLUMNNAME_IsFirst);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
+	}
+
+	/** Set UseLifes.
+		@param UseLifes UseLifes	  */
+	public void setUseLifes (BigDecimal UseLifes)
+	{
+		set_Value (COLUMNNAME_UseLifes, UseLifes);
+	}
+
+	/** Get UseLifes.
+		@return UseLifes	  */
+	public BigDecimal getUseLifes () 
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_UseLifes);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
 	}
 }

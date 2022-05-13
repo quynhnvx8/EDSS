@@ -287,7 +287,7 @@ public class GridField
 			if (m_vo.MandatoryLogic != null && m_vo.MandatoryLogic.startsWith("@SQL=")) {
 				retValue = Evaluator.parseSQLLogic(m_vo.MandatoryLogic, m_vo.ctx, m_vo.WindowNo, m_vo.TabNo, m_vo.ColumnName);
 
-			} else{
+			} else {
 				retValue= Evaluator.evaluateLogic(this, m_vo.MandatoryLogic);
 
 			}
@@ -620,6 +620,9 @@ public class GridField
 				ResultSet rs = null;
 				try
 				{					
+					//FIXME: 11/05/2022: Add thêm điều kiện này cho trường hợp bắt các giá trị @SQL theo Client
+					sql = MRole.addAccessSQL(sql, Env.getCtx());
+					
 					String trxName = m_gridTab != null ? m_gridTab.getTableModel().get_TrxName() : null;
 					stmt = DB.prepareStatement(sql, trxName);
 					rs = stmt.executeQuery();
@@ -1306,6 +1309,7 @@ public class GridField
 	 */
 	public boolean isDisplayed()
 	{
+		
 		return m_vo.IsDisplayed;
 	}
 	/**
@@ -1314,6 +1318,18 @@ public class GridField
 	 */
 	public boolean isDisplayedGrid()
 	{
+		//FIXME: Bổ sung trường hợp không hiển thị cột trên grid do biến môi trường lúc login.
+		String displayLogic = m_vo.DisplayLogic;
+		if (displayLogic != null && displayLogic.length() > 0 
+				&& (m_vo.DisplayLogic.contains("#")|| !m_vo.DisplayLogic.contains("@"))) {
+			Evaluatee evaluatee = new Evaluatee() {
+				public String get_ValueAsString(String variableName) {
+					return GridField.this.get_ValueAsString(Env.getCtx(), variableName);
+				}
+			};
+			return Evaluator.evaluateLogic(evaluatee, m_vo.DisplayLogic);
+			
+		}
 		return m_vo.IsDisplayed;//m_vo.IsDisplayedGrid;
 	}
 	/**

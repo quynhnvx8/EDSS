@@ -31,6 +31,7 @@ public class CalloutOrder extends CalloutEngine
 
 		MOrder order = new Query(ctx, X_C_Order.Table_Name, "C_Order_ID = ?", null)
 				.setParameters(C_Order_ID)
+				.setApplyAccessFilter(true)
 				.first();
 		Map<String, BigDecimal> data = MProduct.getPrice_SOPO(order.getDateOrdered(), M_Product_ID);
 		BigDecimal pricePO = Env.ZERO;
@@ -67,6 +68,7 @@ public class CalloutOrder extends CalloutEngine
 
 		MOrder order = new Query(ctx, X_C_Order.Table_Name, "C_Order_ID = ?", null)
 				.setParameters(C_Order_ID)
+				.setApplyAccessFilter(true)
 				.first();
 		
 		BigDecimal priceActual = new BigDecimal(objPrice.toString());

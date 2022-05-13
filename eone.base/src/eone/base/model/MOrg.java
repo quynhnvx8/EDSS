@@ -92,7 +92,7 @@ public class MOrg extends X_AD_Org
 		
 		if (newRecord || is_ValueChanged("Value") || is_ValueChanged("Name") || isCreateBPartner()) {
 			if (!isSummary()) {
-				boolean ok = MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getValue(), getName(), getAD_Org_ID(), "AD_Org", "ORG", true);
+				boolean ok = MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getValue(), getName(), getAD_Org_ID(), "AD_Org", X_C_BPartner.GROUPTYPE_Org, true);
 				if (!ok)
 				{
 					log.saveError("Error!", "Create BPartner false!");

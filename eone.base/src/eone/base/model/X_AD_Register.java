@@ -18,7 +18,7 @@ public class X_AD_Register extends PO implements I_AD_Register, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220401L;
+	private static final long serialVersionUID = 20220507L;
 
     /** Standard Constructor */
     public X_AD_Register (Properties ctx, int AD_Register_ID, String trxName)
@@ -57,6 +57,31 @@ public class X_AD_Register extends PO implements I_AD_Register, I_Persistent
       return sb.toString();
     }
 
+	public eone.base.model.I_AD_ModelClient getAD_ModelClient() throws RuntimeException
+    {
+		return (eone.base.model.I_AD_ModelClient)MTable.get(getCtx(), eone.base.model.I_AD_ModelClient.Table_Name)
+			.getPO(getAD_ModelClient_ID(), get_TrxName());	}
+
+	/** Set Model Client.
+		@param AD_ModelClient_ID Model Client	  */
+	public void setAD_ModelClient_ID (int AD_ModelClient_ID)
+	{
+		if (AD_ModelClient_ID < 1) 
+			set_ValueNoCheck (COLUMNNAME_AD_ModelClient_ID, null);
+		else 
+			set_ValueNoCheck (COLUMNNAME_AD_ModelClient_ID, Integer.valueOf(AD_ModelClient_ID));
+	}
+
+	/** Get Model Client.
+		@return Model Client	  */
+	public int getAD_ModelClient_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_AD_ModelClient_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
 	public eone.base.model.I_AD_PackagePrice getAD_PackagePrice() throws RuntimeException
     {
 		return (eone.base.model.I_AD_PackagePrice)MTable.get(getCtx(), eone.base.model.I_AD_PackagePrice.Table_Name)
@@ -67,9 +92,9 @@ public class X_AD_Register extends PO implements I_AD_Register, I_Persistent
 	public void setAD_PackagePrice_ID (int AD_PackagePrice_ID)
 	{
 		if (AD_PackagePrice_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_AD_PackagePrice_ID, null);
+			set_Value (COLUMNNAME_AD_PackagePrice_ID, null);
 		else 
-			set_ValueNoCheck (COLUMNNAME_AD_PackagePrice_ID, Integer.valueOf(AD_PackagePrice_ID));
+			set_Value (COLUMNNAME_AD_PackagePrice_ID, Integer.valueOf(AD_PackagePrice_ID));
 	}
 
 	/** Get Package Price.
@@ -114,6 +139,34 @@ public class X_AD_Register extends PO implements I_AD_Register, I_Persistent
 	public String getAddress () 
 	{
 		return (String)get_Value(COLUMNNAME_Address);
+	}
+
+	public eone.base.model.I_C_Element getC_Element() throws RuntimeException
+    {
+		return (eone.base.model.I_C_Element)MTable.get(getCtx(), eone.base.model.I_C_Element.Table_Name)
+			.getPO(getC_Element_ID(), get_TrxName());	}
+
+	/** Set Element.
+		@param C_Element_ID 
+		Accounting Element
+	  */
+	public void setC_Element_ID (int C_Element_ID)
+	{
+		if (C_Element_ID < 1) 
+			set_ValueNoCheck (COLUMNNAME_C_Element_ID, null);
+		else 
+			set_ValueNoCheck (COLUMNNAME_C_Element_ID, Integer.valueOf(C_Element_ID));
+	}
+
+	/** Get Element.
+		@return Accounting Element
+	  */
+	public int getC_Element_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_C_Element_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
 	}
 
 	/** Set Domain.
@@ -162,6 +215,34 @@ public class X_AD_Register extends PO implements I_AD_Register, I_Persistent
 	public Timestamp getEndDate () 
 	{
 		return (Timestamp)get_Value(COLUMNNAME_EndDate);
+	}
+
+	/** MMPolicy AD_Reference_ID=335 */
+	public static final int MMPOLICY_AD_Reference_ID=335;
+	/** LiFo = L */
+	public static final String MMPOLICY_LiFo = "L";
+	/** FiFo = F */
+	public static final String MMPOLICY_FiFo = "F";
+	/** Average = A */
+	public static final String MMPOLICY_Average = "A";
+	/** None = N */
+	public static final String MMPOLICY_None = "N";
+	/** Set Material Policy.
+		@param MMPolicy 
+		Material Movement Policy
+	  */
+	public void setMMPolicy (String MMPolicy)
+	{
+
+		set_Value (COLUMNNAME_MMPolicy, MMPolicy);
+	}
+
+	/** Get Material Policy.
+		@return Material Movement Policy
+	  */
+	public String getMMPolicy () 
+	{
+		return (String)get_Value(COLUMNNAME_MMPolicy);
 	}
 
 	/** Set Name.

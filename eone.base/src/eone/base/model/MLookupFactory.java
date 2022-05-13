@@ -300,7 +300,7 @@ public class MLookupFactory
 		if ("Y".equals(byValue))
 			realSQL.append(" ORDER BY 2");
 		else
-			realSQL.append(" ORDER BY 3"); // sort by name/translated name - teo_sarca, [ 1672820 ]
+			realSQL.append(" ORDER BY Value"); // sort by default value
 		//
 		MLookupInfo info = new MLookupInfo(realSQL.toString(), "AD_Ref_List", "AD_Ref_List.Value",
 			101,101, MQuery.getEqualQuery("AD_Reference_ID", AD_Reference_Value_ID));	//	Zoom Window+Query

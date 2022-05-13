@@ -1,28 +1,15 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import eone.util.KeyNamePair;
-
 /** Generated Interface for A_Asset_History
- *  @author iDempiere (generated) 
+ *  @author EOne (generated) 
  *  @version Version 1.0
  */
 public interface I_A_Asset_History 
@@ -66,6 +53,15 @@ public interface I_A_Asset_History
 
 	public eone.base.model.I_A_Asset getA_Asset() throws RuntimeException;
 
+    /** Column name AccumulateAmt */
+    public static final String COLUMNNAME_AccumulateAmt = "AccumulateAmt";
+
+	/** Set AccumulateAmt	  */
+	public void setAccumulateAmt (BigDecimal AccumulateAmt);
+
+	/** Get AccumulateAmt	  */
+	public BigDecimal getAccumulateAmt();
+
     /** Column name AD_Client_ID */
     public static final String COLUMNNAME_AD_Client_ID = "AD_Client_ID";
 
@@ -87,6 +83,28 @@ public interface I_A_Asset_History
 	  */
 	public int getAD_Org_ID();
 
+    /** Column name Amount */
+    public static final String COLUMNNAME_Amount = "Amount";
+
+	/** Set Amount.
+	  * Amount in a defined currency
+	  */
+	public void setAmount (BigDecimal Amount);
+
+	/** Get Amount.
+	  * Amount in a defined currency
+	  */
+	public BigDecimal getAmount();
+
+    /** Column name ChangeDate */
+    public static final String COLUMNNAME_ChangeDate = "ChangeDate";
+
+	/** Set ChangeDate	  */
+	public void setChangeDate (Timestamp ChangeDate);
+
+	/** Get ChangeDate	  */
+	public Timestamp getChangeDate();
+
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
 
@@ -102,15 +120,6 @@ public interface I_A_Asset_History
 	  * User who created this records
 	  */
 	public int getCreatedBy();
-
-    /** Column name ChangeDate */
-    public static final String COLUMNNAME_ChangeDate = "ChangeDate";
-
-	/** Set ChangeDate	  */
-	public void setChangeDate (Timestamp ChangeDate);
-
-	/** Get ChangeDate	  */
-	public Timestamp getChangeDate();
 
     /** Column name Description */
     public static final String COLUMNNAME_Description = "Description";
@@ -138,6 +147,15 @@ public interface I_A_Asset_History
 	  */
 	public boolean isActive();
 
+    /** Column name IsFirst */
+    public static final String COLUMNNAME_IsFirst = "IsFirst";
+
+	/** Set IsFirst	  */
+	public void setIsFirst (boolean IsFirst);
+
+	/** Get IsFirst	  */
+	public boolean isFirst();
+
     /** Column name Updated */
     public static final String COLUMNNAME_Updated = "Updated";
 
@@ -153,4 +171,13 @@ public interface I_A_Asset_History
 	  * User who updated this records
 	  */
 	public int getUpdatedBy();
+
+    /** Column name UseLifes */
+    public static final String COLUMNNAME_UseLifes = "UseLifes";
+
+	/** Set UseLifes	  */
+	public void setUseLifes (BigDecimal UseLifes);
+
+	/** Get UseLifes	  */
+	public BigDecimal getUseLifes();
 }

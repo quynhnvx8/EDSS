@@ -3,7 +3,6 @@ package eone.webui.apps;
 import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -17,8 +16,6 @@ import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Center;
-import org.zkoss.zul.Comboitem;
-import org.zkoss.zul.ComboitemRenderer;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.North;
@@ -27,9 +24,10 @@ import org.zkoss.zul.South;
 import eone.base.model.I_HM_PatientRegisterLine;
 import eone.base.model.MPatientRegisterLine;
 import eone.base.model.MProduct;
-import eone.base.model.MProductCategory;
+import eone.base.model.MProductGroup;
 import eone.base.model.MUOM;
 import eone.base.model.PO;
+import eone.base.model.X_M_ProductGroup;
 import eone.util.DB;
 import eone.util.Env;
 import eone.util.KeyNamePair;
@@ -47,7 +45,6 @@ import eone.webui.component.ListHeader;
 import eone.webui.component.ListboxFactory;
 import eone.webui.component.Row;
 import eone.webui.component.Rows;
-import eone.webui.component.SimpleListModel;
 import eone.webui.component.WListbox;
 import eone.webui.event.ValueChangeEvent;
 import eone.webui.event.ValueChangeListener;
@@ -67,7 +64,7 @@ public class WSelectHealthCareServices extends ADForm implements IFormController
 	protected Properties 		p_ctx = null;
 
 	private int record_ID = 0;
-	private int M_Product_Category_ID;
+	private int M_ProductGroup_ID;
 	//Selection
 	private WListbox 			selectionTable = ListboxFactory.newDataTable();
 	
@@ -121,7 +118,7 @@ public class WSelectHealthCareServices extends ADForm implements IFormController
 		String m_queryAlias = "SELECT ";
 		
 		StringBuilder m_queryFrom = new StringBuilder(" M_Product ")
-					.append(" INNER JOIN M_Product_Category ON M_Product.M_Product_Category_ID = M_Product_Category.M_Product_Category_ID")
+					.append(" INNER JOIN M_ProductGroup ON M_Product.M_ProductGroup_ID = M_ProductGroup.M_ProductGroup_ID")
 					.append(" INNER JOIN C_UOM ON M_Product.C_UOM_ID = C_UOM.C_UOM_ID");
 		
 		int colNumbers = 7;
@@ -130,10 +127,9 @@ public class WSelectHealthCareServices extends ADForm implements IFormController
 		m_columns[index++] = new WInfo_Column("", MProduct.Table_Name + "." + MProduct.COLUMNNAME_M_Product_ID, IDColumn.class);
 		m_columns[index++] = new WInfo_Column(Msg.translate(Env.getCtx(), "productCode"), MProduct.Table_Name + "." + MProduct.COLUMNNAME_Value, String.class);
 		m_columns[index++] = new WInfo_Column(Msg.translate(Env.getCtx(), "productName"), MProduct.Table_Name + "." + MProduct.COLUMNNAME_Name, String.class);
-		m_columns[index++] = new WInfo_Column(Msg.translate(Env.getCtx(), "groupNameServices"), MProductCategory.Table_Name + "." + MProductCategory.COLUMNNAME_Name, String.class);
 		m_columns[index++] = new WInfo_Column(Msg.translate(Env.getCtx(), "UnitServices"), MUOM.Table_Name + "." + MUOM.COLUMNNAME_Name, String.class);
 		m_columns[index++] = new WInfo_Column(Msg.translate(Env.getCtx(), "PriceSOServices"), MProduct.Table_Name + "." + MProduct.COLUMNNAME_PriceSO, Double.class);
-		m_columns[index++] = new WInfo_Column("", MProduct.Table_Name + "." + MProduct.COLUMNNAME_M_Product_Category_ID, IDColumn.class);
+		m_columns[index++] = new WInfo_Column(Msg.translate(Env.getCtx(), "CategoryType"), MProductGroup.Table_Name + "." + MProductGroup.COLUMNNAME_CategoryType, String.class);
 		
 		
 		WListbox table = this.selectionTable;
@@ -194,7 +190,7 @@ public class WSelectHealthCareServices extends ADForm implements IFormController
 						layout[i].getColHeader());
 			}
 		}
-		m_query.append(", M_Product.M_Product_Category_ID ");
+		m_query.append(", M_Product.M_ProductGroup_ID ");
 		m_query = new StringBuilder(m_queryAlias).append(m_query);
 		m_query = m_query.append(" FROM ").append(m_queryFrom);
 		
@@ -234,26 +230,7 @@ public class WSelectHealthCareServices extends ADForm implements IFormController
 		return;
 	}
 	
-	private List<ObjCombobox> getProductCategory() {
-		List<ObjCombobox> arrs = new ArrayList<WSelectHealthCareServices.ObjCombobox>();
-		arrs.add(new ObjCombobox(0, "---------Lựa chọn----------"));
-		String sql = "Select M_Product_Category_ID, Name From M_Product_Category Where CategoryType = '" + MProductCategory.CATEGORYTYPE_Medical + "'";
-		PreparedStatement ps = DB.prepareCall(sql);
-		ResultSet rs = null;
-		try {
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				arrs.add(new ObjCombobox(rs.getInt("M_Product_Category_ID"), rs.getString("Name")));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DB.close(rs, ps);
-			rs = null;
-			ps = null;
-		}
-		return arrs;
-	}
+
 	
 	private void jbInit () throws Exception
 	{
@@ -279,9 +256,10 @@ public class WSelectHealthCareServices extends ADForm implements IFormController
 		Grid grid = GridFactory.newGridLayout();
 		Rows rows = new Rows();
 		Row row = new Row();
-		lbproductCategory = new Label(Msg.translate(Env.getCtx(), "M_Product_Category_ID"));
+		lbproductCategory = new Label(Msg.translate(Env.getCtx(), "M_ProductGroup_ID"));
 		row.appendChild(lbproductCategory);
 		
+		/*
 		SimpleListModel model = new SimpleListModel(getProductCategory());
 		productCategory.setModel(model);
 		productCategory.setItemRenderer(new ComboitemRenderer<ObjCombobox>() {
@@ -293,6 +271,7 @@ public class WSelectHealthCareServices extends ADForm implements IFormController
 			}
 			
 		});
+		*/
 		
 		row.appendChild(productCategory);
 		
@@ -396,7 +375,7 @@ public class WSelectHealthCareServices extends ADForm implements IFormController
 			else if (event.getTarget().equals(btnSearch))
 			{
 				if (productCategory == null && productCategory.getSelectedItem() == null) {
-					M_Product_Category_ID = 0;
+					M_ProductGroup_ID = 0;
 				}
 				run();
 			}
@@ -409,11 +388,11 @@ public class WSelectHealthCareServices extends ADForm implements IFormController
 	
 		whereClause.append("    WHERE 1=1");
 		if (productCategory != null && productCategory.getSelectedItem() != null) {
-			M_Product_Category_ID = Integer.parseInt(productCategory.getSelectedItem().getValue().toString());
-			if (M_Product_Category_ID == 0)
-				whereClause.append(" AND M_Product.M_Product_Category_ID IN (SELECT M_Product_Category_ID FROM M_Product_Category WHERE CategoryType = '"+ MProductCategory.CATEGORYTYPE_Medical +"')");
+			M_ProductGroup_ID = Integer.parseInt(productCategory.getSelectedItem().getValue().toString());
+			if (M_ProductGroup_ID == 0)
+				whereClause.append(" AND M_Product.M_ProductGroup_ID IN (SELECT M_ProductGroup_ID From M_ProductGroup WHERE CategoryType = '"+ X_M_ProductGroup.CATEGORYTYPE_Medical +"')");
 			else
-				whereClause.append(" AND M_Product.M_Product_Category_ID = " + M_Product_Category_ID);
+				whereClause.append(" AND M_Product.M_ProductGroup_ID = " + M_ProductGroup_ID);
 		}
 		
 		return whereClause.toString();

@@ -1,28 +1,15 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import eone.util.KeyNamePair;
-
 /** Generated Interface for C_Account
- *  @author iDempiere (generated) 
+ *  @author EOne (generated) 
  *  @version Version 1.0
  */
 public interface I_C_Account 
@@ -36,9 +23,9 @@ public interface I_C_Account
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 3 - Client - Org 
+    /** AccessLevel = 4 - System 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(3);
+    BigDecimal accessLevel = BigDecimal.valueOf(4);
 
     /** Load Meta Data */
 
@@ -117,21 +104,6 @@ public interface I_C_Account
 	/** Get Account	  */
 	public int getC_Account_ID();
 
-    /** Column name C_BP_Group_ID */
-    public static final String COLUMNNAME_C_BP_Group_ID = "C_BP_Group_ID";
-
-	/** Set Business Partner Group.
-	  * Business Partner Group
-	  */
-	public void setC_BP_Group_ID (int C_BP_Group_ID);
-
-	/** Get Business Partner Group.
-	  * Business Partner Group
-	  */
-	public int getC_BP_Group_ID();
-
-	public eone.base.model.I_C_BP_Group getC_BP_Group() throws RuntimeException;
-
     /** Column name C_BPartner_ID */
     public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 
@@ -156,7 +128,7 @@ public interface I_C_Account
 	/** Get Construction	  */
 	public int getC_Construction_ID();
 
-	public I_C_Construction getC_Construction() throws RuntimeException;
+	public eone.base.model.I_C_Construction getC_Construction() throws RuntimeException;
 
     /** Column name C_Contract_ID */
     public static final String COLUMNNAME_C_Contract_ID = "C_Contract_ID";
@@ -167,7 +139,7 @@ public interface I_C_Account
 	/** Get Contract	  */
 	public int getC_Contract_ID();
 
-	public I_C_Contract getC_Contract() throws RuntimeException;
+	public eone.base.model.I_C_Contract getC_Contract() throws RuntimeException;
 
     /** Column name C_DocType_ID */
     public static final String COLUMNNAME_C_DocType_ID = "C_DocType_ID";
@@ -197,7 +169,22 @@ public interface I_C_Account
 	  */
 	public int getC_DocTypeSub_ID();
 
-	public I_C_DocTypeSub getC_DocTypeSub() throws RuntimeException;
+	public eone.base.model.I_C_DocTypeSub getC_DocTypeSub() throws RuntimeException;
+
+    /** Column name C_Element_ID */
+    public static final String COLUMNNAME_C_Element_ID = "C_Element_ID";
+
+	/** Set Element.
+	  * Accounting Element
+	  */
+	public void setC_Element_ID (int C_Element_ID);
+
+	/** Get Element.
+	  * Accounting Element
+	  */
+	public int getC_Element_ID();
+
+	public eone.base.model.I_C_Element getC_Element() throws RuntimeException;
 
     /** Column name C_Project_ID */
     public static final String COLUMNNAME_C_Project_ID = "C_Project_ID";
@@ -284,21 +271,6 @@ public interface I_C_Account
 	  */
 	public boolean isDefault();
 
-    /** Column name M_Product_Category_ID */
-    public static final String COLUMNNAME_M_Product_Category_ID = "M_Product_Category_ID";
-
-	/** Set Product Category.
-	  * Category of a Product
-	  */
-	public void setM_Product_Category_ID (int M_Product_Category_ID);
-
-	/** Get Product Category.
-	  * Category of a Product
-	  */
-	public int getM_Product_Category_ID();
-
-	public eone.base.model.I_M_Product_Category getM_Product_Category() throws RuntimeException;
-
     /** Column name M_Product_ID */
     public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 
@@ -313,6 +285,17 @@ public interface I_C_Account
 	public int getM_Product_ID();
 
 	public eone.base.model.I_M_Product getM_Product() throws RuntimeException;
+
+    /** Column name M_ProductGroup_ID */
+    public static final String COLUMNNAME_M_ProductGroup_ID = "M_ProductGroup_ID";
+
+	/** Set ProductGroup	  */
+	public void setM_ProductGroup_ID (int M_ProductGroup_ID);
+
+	/** Get ProductGroup	  */
+	public int getM_ProductGroup_ID();
+
+	public eone.base.model.I_M_ProductGroup getM_ProductGroup() throws RuntimeException;
 
     /** Column name M_Warehouse_ID */
     public static final String COLUMNNAME_M_Warehouse_ID = "M_Warehouse_ID";

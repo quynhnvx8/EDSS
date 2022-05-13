@@ -2650,7 +2650,7 @@ public abstract class PO
 				if (key != null && !"0".equals(key.toString()))
 					no = Integer.parseInt(key.toString());
 				else
-					no = DB.getNextID(getAD_Client_ID(), p_info.getTableName(), m_trxName);
+					no = DB.getNextID(p_info.getTableName(), m_trxName);
 			}
 			// the primary key is not overwrite with the local sequence
 			if (isReplication())

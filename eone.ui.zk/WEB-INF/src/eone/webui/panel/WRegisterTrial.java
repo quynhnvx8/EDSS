@@ -5,6 +5,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
@@ -26,6 +28,7 @@ import eone.util.Env;
 import eone.util.Msg;
 import eone.util.TimeUtil;
 import eone.webui.component.Borderlayout;
+import eone.webui.component.Combobox;
 import eone.webui.component.ConfirmPanel;
 import eone.webui.component.Grid;
 import eone.webui.component.GridFactory;
@@ -51,6 +54,9 @@ public class WRegisterTrial extends Window implements EventListener<Event> {
 
 	private Textbox txtCompany, txtAddress, txtTaxCode, txtPhone, txtEmail, txtDomain;
 	private Label lblCompany, lblAddress, lblTaxCode, lblPhone, lblEmail, lblDomain;
+	private Label lblModel, lblCalPrice, lblRulesAccount;
+	private Combobox cboModel, cboCalPrice, cboRulesAccount;
+	
 	private ConfirmPanel confirmPanel;
 
 	private String domain;
@@ -66,7 +72,7 @@ public class WRegisterTrial extends Window implements EventListener<Event> {
 		setTitle(Msg.getMsg(Env.getCtx(), "Registertrial"));
 		setAttribute(Window.MODE_KEY, Window.MODE_HIGHLIGHTED);
 		ZKUpdateUtil.setWindowWidthX(this, 400);
-		ZKUpdateUtil.setWindowHeightX(this, 460);
+		ZKUpdateUtil.setWindowHeightX(this, 650);
 		this.setSclass("popup-dialog request-dialog");
 		this.setBorder("normal");
 		this.setShadow(true);
@@ -126,10 +132,34 @@ public class WRegisterTrial extends Window implements EventListener<Event> {
 		row = new Row();
 		row.appendChild(txtDomain);
 		rows.appendChild(row);
+		
+		row = new Row();
+		row.appendChild(lblModel);
+		rows.appendChild(row);
+
+		row = new Row();
+		row.appendChild(cboModel);
+		rows.appendChild(row);
+		
+		row = new Row();
+		row.appendChild(lblRulesAccount);
+		rows.appendChild(row);
+
+		row = new Row();
+		row.appendChild(cboRulesAccount);
+		rows.appendChild(row);
+		
+		row = new Row();
+		row.appendChild(lblCalPrice);
+		rows.appendChild(row);
+
+		row = new Row();
+		row.appendChild(cboCalPrice);
+		rows.appendChild(row);
 
 		ZKUpdateUtil.setHflex(mainPanel, "1");
 		ZKUpdateUtil.setVflex(mainPanel, "1");
-
+		
 		Center centerPane = new Center();
 		centerPane.setSclass("dialog-content");
 		centerPane.setAutoscroll(true);
@@ -139,6 +169,9 @@ public class WRegisterTrial extends Window implements EventListener<Event> {
 		ZKUpdateUtil.setVflex(grid, "min");
 		ZKUpdateUtil.setHflex(grid, "1");
 		ZKUpdateUtil.setVflex(centerPane, "min");
+		
+		ZKUpdateUtil.setWidth(grid, "100%");
+		ZKUpdateUtil.setHeight(grid, "100%");
 
 		South southPane = new South();
 		southPane.setSclass("dialog-footer");
@@ -175,6 +208,26 @@ public class WRegisterTrial extends Window implements EventListener<Event> {
 		txtDomain = new Textbox();
 		ZKUpdateUtil.setWidth(txtDomain, "100%");
 		lblDomain = new Label(Msg.getMsg(Env.getCtx(), "Trial_Domain"));
+		
+		cboModel = new Combobox();
+		ZKUpdateUtil.setWidth(cboModel, "100%");
+		lblModel = new Label(Msg.getMsg(Env.getCtx(), "Trial_Model"));
+		fillComboModel();
+		
+		cboRulesAccount = new Combobox();
+		ZKUpdateUtil.setWidth(cboRulesAccount, "100%");
+		lblRulesAccount = new Label(Msg.getMsg(Env.getCtx(), "Trial_RulesAccount"));
+		fillComboRulesAccountance();
+		
+		cboCalPrice = new Combobox();
+		cboCalPrice.appendItem(Msg.getMsg(Env.getCtx(), "Price_Average"), "A");
+		cboCalPrice.appendItem(Msg.getMsg(Env.getCtx(), "Price_FiFo"), "F");
+		cboCalPrice.appendItem(Msg.getMsg(Env.getCtx(), "Price_LiFo"), "L");
+		cboCalPrice.appendItem(Msg.getMsg(Env.getCtx(), "Price_None"), "N");
+		cboCalPrice.setSelectedIndex(0);
+		
+		ZKUpdateUtil.setWidth(cboCalPrice, "100%");
+		lblCalPrice = new Label(Msg.getMsg(Env.getCtx(), "Trial_CalPrice"));
 	}
 
 	public void onEvent(Event e) throws Exception {
@@ -251,12 +304,13 @@ public class WRegisterTrial extends Window implements EventListener<Event> {
 			FDialog.error(0, "Tên miền chỉ tối đa 20 ký tự viết liền nhau");
 			return false;
 		}
-
+		
+		/*
 		if (!Pattern.matches("\\D*", txtDomain.getValue())) {
 			FDialog.error(0, "Tên miền không hợp lệ");
 			return false;
 		}
-
+		*/
 		return true;
 	}
 
@@ -344,6 +398,9 @@ public class WRegisterTrial extends Window implements EventListener<Event> {
 			reg.setStartDate(new Timestamp(new Date().getTime()));
 			reg.setEndDate(TimeUtil.addDays(reg.getStartDate(), 90));
 			reg.setAD_Client_ID(DB.getNextID(Env.getCtx(), X_AD_Register.Table_Name, null));
+			reg.setC_Element_ID(cboRulesAccount.getSelectedItem().getValue());
+			reg.setMMPolicy(cboCalPrice.getSelectedItem().getValue());
+			reg.setAD_ModelClient_ID(cboModel.getSelectedItem().getValue());
 			if (!reg.save())
 				return "Đăng ký mới bị lỗi !";
 		} else {
@@ -360,6 +417,51 @@ public class WRegisterTrial extends Window implements EventListener<Event> {
 				.setParameters(domain)
 				.first();
 		return item;
+	}
+	
+	
+	private void fillComboRulesAccountance() {
+		String sql = "SELECT * FROM C_Element WHERE IsActive = 'Y' ORDER BY IsDefault DESC";
+		PreparedStatement ps = DB.prepareCall(sql);
+		ResultSet rs = null;
+		int i = 0;
+		try {
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				cboRulesAccount.appendItem(rs.getString("Name"), rs.getInt("C_Element_ID"));
+				if ("Y".equals(rs.getString("IsDefault")))
+					cboRulesAccount.setSelectedIndex(i);
+				i++;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DB.close(rs, ps);
+		}	
+				
+	}
+	
+	private void fillComboModel() {
+		String sql = "SELECT * FROM AD_ModelClient WHERE IsActive = 'Y' ORDER BY IsDefault DESC";
+		PreparedStatement ps = DB.prepareCall(sql);
+		ResultSet rs = null;
+		int i = 0;
+		try {
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				cboModel.appendItem(rs.getString("Name"), rs.getInt("AD_ModelClient_ID"));
+				if ("Y".equals(rs.getString("IsDefault")))
+					cboModel.setSelectedIndex(i);
+				i++;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DB.close(rs, ps);
+		}	
+				
 	}
 	
 }

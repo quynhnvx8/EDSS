@@ -141,12 +141,14 @@ public class MDepreciation extends X_A_Depreciation implements DocAction
 			m_processMsg = "@PeriodClosed@";
 			return false;
 		}
+		updateInfoAsset(false);
+		
 		if(!super.reActivate())
 			return false;
 		
 		setProcessed(false);
 		updateProcessed(false);
-		updateInfoAsset(false);
+		
 		return true;
 	}
 
@@ -155,28 +157,31 @@ public class MDepreciation extends X_A_Depreciation implements DocAction
 		String sql = 
 				"With t1 as "+
 				"( "+
-				" 	select A_Asset_ID, sum(Amount) Amount From A_Depreciation_Exp  "+
+				" 	select A_Asset_ID, sum(Amount) Amount, SUM(UseLifed) UseLifed From A_Depreciation_Exp  "+
 				" 	Where A_Depreciation_ID = ? And IsSelected = 'Y' "+
 				" 	Group by A_Asset_ID "+
 				"), "+
 				"t2 as "+
 				"( "+
-				" 	select sum(Amount) Amount, A_Asset_ID From A_Depreciation_Exp f	 "+
+				" 	select sum(Amount) Amount, A_Asset_ID, SUM(UseLifed) UseLifed From A_Depreciation_Exp f	 "+
 				" 	Where exists  (Select 1 From t1 where f.A_Asset_ID = t1.A_Asset_ID)  "+
+				"		AND Processed = 'Y'"+
 				" 	Group by A_Asset_ID "+
 				"), "+
 				"t3 as "+
 				"( "+
-				" 	select t1.A_Asset_ID, t2.Amount - t1.Amount Amount "+
+				" 	select t1.A_Asset_ID, t2.Amount - t1.Amount Amount, t2.UseLifed - t1.UseLifed UseLifed "+
 				" 	From t2 inner join t1 On t2.A_Asset_ID = t1.A_Asset_ID "+
 				") ";
 		if (isComplete)
-			sql = sql +	"Update A_Asset r set AccumulateAmt =(Select Amount From t2 where r.A_Asset_ID = t2.A_Asset_ID), "+
-				"	RemainAmt = BaseAmtCurrent - (Select Amount From t2 where r.A_Asset_ID = t2.A_Asset_ID) "+
+			sql = sql +	"Update A_Asset r set AccumulateAmt = (Select Amount From t2 where r.A_Asset_ID = t2.A_Asset_ID), "+
+				"	RemainAmt = nvl(BaseAmtCurrent,0) - (Select Amount From t2 where r.A_Asset_ID = t2.A_Asset_ID), "+
+				"	UseLifed = (Select UseLifed From t2 where r.A_Asset_ID = t2.A_Asset_ID) "+
 				"where exists (select 1 from t2 where r.A_Asset_ID = t2.A_Asset_ID)";
 		else
 			sql = sql +	"Update A_Asset r set AccumulateAmt =(Select Amount From t3 where r.A_Asset_ID = t3.A_Asset_ID), "+
-					"	RemainAmt = BaseAmtCurrent - (Select Amount From t3 where r.A_Asset_ID = t3.A_Asset_ID) "+
+					"	RemainAmt = BaseAmtCurrent - (Select Amount From t3 where r.A_Asset_ID = t3.A_Asset_ID), "+
+					"	UseLifed = (Select UseLifed From t3 where r.A_Asset_ID = t3.A_Asset_ID) "+
 					"where exists (select 1 from t3 where r.A_Asset_ID = t3.A_Asset_ID)";
 		Object [] params = new Object [] {getA_Depreciation_ID()};
 		DB.executeUpdate(sql, params, true, get_TrxName());		

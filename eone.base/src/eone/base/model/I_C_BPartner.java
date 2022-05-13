@@ -4,10 +4,9 @@
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-
-import eone.util.KeyNamePair;
 
 /** Generated Interface for C_BPartner
  *  @author EOne (generated) 
@@ -24,9 +23,9 @@ public interface I_C_BPartner
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 3 - Client - Org 
+    /** AccessLevel = 7 - System - Client - Org 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(3);
+    BigDecimal accessLevel = BigDecimal.valueOf(7);
 
     /** Load Meta Data */
 
@@ -71,20 +70,23 @@ public interface I_C_BPartner
 	/** Get Address	  */
 	public String getAddress();
 
-    /** Column name C_BP_Group_ID */
-    public static final String COLUMNNAME_C_BP_Group_ID = "C_BP_Group_ID";
+    /** Column name BankAccount */
+    public static final String COLUMNNAME_BankAccount = "BankAccount";
 
-	/** Set Business Partner Group.
-	  * Business Partner Group
-	  */
-	public void setC_BP_Group_ID (int C_BP_Group_ID);
+	/** Set BankAccount	  */
+	public void setBankAccount (String BankAccount);
 
-	/** Get Business Partner Group.
-	  * Business Partner Group
-	  */
-	public int getC_BP_Group_ID();
+	/** Get BankAccount	  */
+	public String getBankAccount();
 
-	public eone.base.model.I_C_BP_Group getC_BP_Group() throws RuntimeException;
+    /** Column name BankName */
+    public static final String COLUMNNAME_BankName = "BankName";
+
+	/** Set BankName	  */
+	public void setBankName (String BankName);
+
+	/** Get BankName	  */
+	public String getBankName();
 
     /** Column name C_BPartner_ID */
     public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
@@ -127,6 +129,15 @@ public interface I_C_BPartner
 	  * Facsimile number
 	  */
 	public String getFax();
+
+    /** Column name GroupType */
+    public static final String COLUMNNAME_GroupType = "GroupType";
+
+	/** Set GroupType	  */
+	public void setGroupType (String GroupType);
+
+	/** Get GroupType	  */
+	public String getGroupType();
 
     /** Column name HR_Employee_ID */
     public static final String COLUMNNAME_HR_Employee_ID = "HR_Employee_ID";
@@ -288,6 +299,15 @@ public interface I_C_BPartner
 	/** Get Original	  */
 	public String getOriginal();
 
+    /** Column name Personnel */
+    public static final String COLUMNNAME_Personnel = "Personnel";
+
+	/** Set Personnel	  */
+	public void setPersonnel (String Personnel);
+
+	/** Get Personnel	  */
+	public String getPersonnel();
+
     /** Column name Phone */
     public static final String COLUMNNAME_Phone = "Phone";
 
@@ -348,6 +368,15 @@ public interface I_C_BPartner
 	  * Name of the table in the database
 	  */
 	public String getTableName();
+
+    /** Column name TaxCode */
+    public static final String COLUMNNAME_TaxCode = "TaxCode";
+
+	/** Set Tax Code	  */
+	public void setTaxCode (String TaxCode);
+
+	/** Get Tax Code	  */
+	public String getTaxCode();
 
     /** Column name Updated */
     public static final String COLUMNNAME_Updated = "Updated";

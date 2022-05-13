@@ -62,7 +62,7 @@ public class MClient extends X_AD_Client
 	 */
 	public static MClient[] getAll (Properties ctx, String orderBy)
 	{
-		List<MClient> list = new Query(ctx,I_AD_Client.Table_Name,null,null)
+		List<MClient> list = new Query(ctx,I_AD_Client.Table_Name,null,null, false)
 		.setOrderBy(orderBy)
 		.list();
 		for(MClient client:list ){

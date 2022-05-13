@@ -4,29 +4,28 @@
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import eone.util.KeyNamePair;
-
-/** Generated Interface for M_Product_Category
+/** Generated Interface for C_Element
  *  @author EOne (generated) 
  *  @version Version 1.0
  */
-public interface I_M_Product_Category 
+public interface I_C_Element 
 {
 
-    /** TableName=M_Product_Category */
-    public static final String Table_Name = "M_Product_Category";
+    /** TableName=C_Element */
+    public static final String Table_Name = "C_Element";
 
-    /** AD_Table_ID=209 */
-    public static final int Table_ID = 209;
+    /** AD_Table_ID=142 */
+    public static final int Table_ID = 142;
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 7 - System - Client - Org 
+    /** AccessLevel = 4 - System 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(7);
+    BigDecimal accessLevel = BigDecimal.valueOf(4);
 
     /** Load Meta Data */
 
@@ -51,14 +50,18 @@ public interface I_M_Product_Category
 	  */
 	public int getAD_Org_ID();
 
-    /** Column name CategoryType */
-    public static final String COLUMNNAME_CategoryType = "CategoryType";
+    /** Column name C_Element_ID */
+    public static final String COLUMNNAME_C_Element_ID = "C_Element_ID";
 
-	/** Set CategoryType	  */
-	public void setCategoryType (String CategoryType);
+	/** Set Element.
+	  * Accounting Element
+	  */
+	public void setC_Element_ID (int C_Element_ID);
 
-	/** Get CategoryType	  */
-	public String getCategoryType();
+	/** Get Element.
+	  * Accounting Element
+	  */
+	public int getC_Element_ID();
 
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
@@ -102,45 +105,6 @@ public interface I_M_Product_Category
 	  */
 	public boolean isActive();
 
-    /** Column name IsDefault */
-    public static final String COLUMNNAME_IsDefault = "IsDefault";
-
-	/** Set Default.
-	  * Default value
-	  */
-	public void setIsDefault (boolean IsDefault);
-
-	/** Get Default.
-	  * Default value
-	  */
-	public boolean isDefault();
-
-    /** Column name M_Product_Category_ID */
-    public static final String COLUMNNAME_M_Product_Category_ID = "M_Product_Category_ID";
-
-	/** Set Product Category.
-	  * Category of a Product
-	  */
-	public void setM_Product_Category_ID (int M_Product_Category_ID);
-
-	/** Get Product Category.
-	  * Category of a Product
-	  */
-	public int getM_Product_Category_ID();
-
-    /** Column name MMPolicy */
-    public static final String COLUMNNAME_MMPolicy = "MMPolicy";
-
-	/** Set Material Policy.
-	  * Material Movement Policy
-	  */
-	public void setMMPolicy (String MMPolicy);
-
-	/** Get Material Policy.
-	  * Material Movement Policy
-	  */
-	public String getMMPolicy();
-
     /** Column name Name */
     public static final String COLUMNNAME_Name = "Name";
 
@@ -169,17 +133,4 @@ public interface I_M_Product_Category
 	  * User who updated this records
 	  */
 	public int getUpdatedBy();
-
-    /** Column name Value */
-    public static final String COLUMNNAME_Value = "Value";
-
-	/** Set Code.
-	  * Code
-	  */
-	public void setValue (String Value);
-
-	/** Get Code.
-	  * Code
-	  */
-	public String getValue();
 }

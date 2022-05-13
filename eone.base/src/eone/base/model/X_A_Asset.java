@@ -1,31 +1,18 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.Env;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
 
-import eone.util.Env;
-
 /** Generated Model for A_Asset
- *  @author iDempiere (generated) 
+ *  @author EOne (generated) 
  *  @version Version 1.0 - $Id$ */
 public class X_A_Asset extends PO implements I_A_Asset, I_Persistent 
 {
@@ -33,7 +20,7 @@ public class X_A_Asset extends PO implements I_A_Asset, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200906L;
+	private static final long serialVersionUID = 20220512L;
 
     /** Standard Constructor */
     public X_A_Asset (Properties ctx, int A_Asset_ID, String trxName)
@@ -41,7 +28,6 @@ public class X_A_Asset extends PO implements I_A_Asset, I_Persistent
       super (ctx, A_Asset_ID, trxName);
       /** if (A_Asset_ID == 0)
         {
-			setA_Asset_Group_ID (0);
 			setA_Asset_ID (0);
 			setIsDepreciated (false);
 			setIsDisposed (false);
@@ -59,7 +45,7 @@ public class X_A_Asset extends PO implements I_A_Asset, I_Persistent
     }
 
     /** AccessLevel
-      * @return 3 - Client - Org 
+      * @return 7 - System - Client - Org 
       */
     protected int get_AccessLevel()
     {
@@ -131,76 +117,6 @@ public class X_A_Asset extends PO implements I_A_Asset, I_Persistent
 		return ii.intValue();
 	}
 
-	/** Set A_Asset_UU.
-		@param A_Asset_UU A_Asset_UU	  */
-	public void setA_Asset_UU (String A_Asset_UU)
-	{
-		set_Value (COLUMNNAME_A_Asset_UU, A_Asset_UU);
-	}
-
-	/** Get A_Asset_UU.
-		@return A_Asset_UU	  */
-	public String getA_Asset_UU () 
-	{
-		return (String)get_Value(COLUMNNAME_A_Asset_UU);
-	}
-
-	public eone.base.model.I_C_ElementValue getAccount_Cr() throws RuntimeException
-    {
-		return (eone.base.model.I_C_ElementValue)MTable.get(getCtx(), eone.base.model.I_C_ElementValue.Table_Name)
-			.getPO(getAccount_Cr_ID(), get_TrxName());	}
-
-	/** Set Account Cr.
-		@param Account_Cr_ID 
-		Account Cr
-	  */
-	public void setAccount_Cr_ID (int Account_Cr_ID)
-	{
-		if (Account_Cr_ID < 1) 
-			set_Value (COLUMNNAME_Account_Cr_ID, null);
-		else 
-			set_Value (COLUMNNAME_Account_Cr_ID, Integer.valueOf(Account_Cr_ID));
-	}
-
-	/** Get Account Cr.
-		@return Account Cr
-	  */
-	public int getAccount_Cr_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_Account_Cr_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_C_ElementValue getAccount_Dr() throws RuntimeException
-    {
-		return (eone.base.model.I_C_ElementValue)MTable.get(getCtx(), eone.base.model.I_C_ElementValue.Table_Name)
-			.getPO(getAccount_Dr_ID(), get_TrxName());	}
-
-	/** Set Account Dr.
-		@param Account_Dr_ID 
-		Account Dr
-	  */
-	public void setAccount_Dr_ID (int Account_Dr_ID)
-	{
-		if (Account_Dr_ID < 1) 
-			set_Value (COLUMNNAME_Account_Dr_ID, null);
-		else 
-			set_Value (COLUMNNAME_Account_Dr_ID, Integer.valueOf(Account_Dr_ID));
-	}
-
-	/** Get Account Dr.
-		@return Account Dr
-	  */
-	public int getAccount_Dr_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_Account_Dr_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
 	/** Set AccumulateAmt.
 		@param AccumulateAmt AccumulateAmt	  */
 	public void setAccumulateAmt (BigDecimal AccumulateAmt)
@@ -230,27 +146,6 @@ public class X_A_Asset extends PO implements I_A_Asset, I_Persistent
 	public String getApproved () 
 	{
 		return (String)get_Value(COLUMNNAME_Approved);
-	}
-
-	/** Asset = AS */
-	public static final String ASSETTYPE_Asset = "AS";
-	/** Tools = TO */
-	public static final String ASSETTYPE_Tools = "TO";
-	/** Expense = EX */
-	public static final String ASSETTYPE_Expense = "EX";
-	/** Set AssetType.
-		@param AssetType AssetType	  */
-	public void setAssetType (String AssetType)
-	{
-
-		set_Value (COLUMNNAME_AssetType, AssetType);
-	}
-
-	/** Get AssetType.
-		@return AssetType	  */
-	public String getAssetType () 
-	{
-		return (String)get_Value(COLUMNNAME_AssetType);
 	}
 
 	/** Set BaseAmtCurrent.
@@ -287,9 +182,9 @@ public class X_A_Asset extends PO implements I_A_Asset, I_Persistent
 		return bd;
 	}
 
-	public I_C_TypeCost getC_TypeCost() throws RuntimeException
+	public eone.base.model.I_C_TypeCost getC_TypeCost() throws RuntimeException
     {
-		return (I_C_TypeCost)MTable.get(getCtx(), I_C_TypeCost.Table_Name)
+		return (eone.base.model.I_C_TypeCost)MTable.get(getCtx(), eone.base.model.I_C_TypeCost.Table_Name)
 			.getPO(getC_TypeCost_ID(), get_TrxName());	}
 
 	/** Set TypeCost.
@@ -354,23 +249,6 @@ public class X_A_Asset extends PO implements I_A_Asset, I_Persistent
 		return (Timestamp)get_Value(COLUMNNAME_CreateDate);
 	}
 
-	/** Set Depreciation Date.
-		@param DepreciationDate 
-		Date of last depreciation
-	  */
-	public void setDepreciationDate (Timestamp DepreciationDate)
-	{
-		set_Value (COLUMNNAME_DepreciationDate, DepreciationDate);
-	}
-
-	/** Get Depreciation Date.
-		@return Date of last depreciation
-	  */
-	public Timestamp getDepreciationDate () 
-	{
-		return (Timestamp)get_Value(COLUMNNAME_DepreciationDate);
-	}
-
 	/** Set Depreciation Split.
 		@param DepreciationSplit Depreciation Split	  */
 	public void setDepreciationSplit (boolean DepreciationSplit)
@@ -409,23 +287,6 @@ public class X_A_Asset extends PO implements I_A_Asset, I_Persistent
 		return (String)get_Value(COLUMNNAME_Description);
 	}
 
-	/** Set Disposal Date.
-		@param DisposalDate 
-		Date when the asset is/was disposed
-	  */
-	public void setDisposalDate (Timestamp DisposalDate)
-	{
-		set_Value (COLUMNNAME_DisposalDate, DisposalDate);
-	}
-
-	/** Get Disposal Date.
-		@return Date when the asset is/was disposed
-	  */
-	public Timestamp getDisposalDate () 
-	{
-		return (Timestamp)get_Value(COLUMNNAME_DisposalDate);
-	}
-
 	/** DocStatus AD_Reference_ID=131 */
 	public static final int DOCSTATUS_AD_Reference_ID=131;
 	/** Drafted = DR */
@@ -452,34 +313,6 @@ public class X_A_Asset extends PO implements I_A_Asset, I_Persistent
 	public String getDocStatus () 
 	{
 		return (String)get_Value(COLUMNNAME_DocStatus);
-	}
-
-	/** Set EndDateCurrent.
-		@param EndDateCurrent EndDateCurrent	  */
-	public void setEndDateCurrent (Timestamp EndDateCurrent)
-	{
-		set_Value (COLUMNNAME_EndDateCurrent, EndDateCurrent);
-	}
-
-	/** Get EndDateCurrent.
-		@return EndDateCurrent	  */
-	public Timestamp getEndDateCurrent () 
-	{
-		return (Timestamp)get_Value(COLUMNNAME_EndDateCurrent);
-	}
-
-	/** Set EndDateOriginal.
-		@param EndDateOriginal EndDateOriginal	  */
-	public void setEndDateOriginal (Timestamp EndDateOriginal)
-	{
-		set_Value (COLUMNNAME_EndDateOriginal, EndDateOriginal);
-	}
-
-	/** Get EndDateOriginal.
-		@return EndDateOriginal	  */
-	public Timestamp getEndDateOriginal () 
-	{
-		return (Timestamp)get_Value(COLUMNNAME_EndDateOriginal);
 	}
 
 	/** Set Guarantee Date.
@@ -582,6 +415,30 @@ public class X_A_Asset extends PO implements I_A_Asset, I_Persistent
 		return false;
 	}
 
+	/** Set Transferred.
+		@param IsTransferred 
+		Transferred to General Ledger (i.e. accounted)
+	  */
+	public void setIsTransferred (boolean IsTransferred)
+	{
+		set_ValueNoCheck (COLUMNNAME_IsTransferred, Boolean.valueOf(IsTransferred));
+	}
+
+	/** Get Transferred.
+		@return Transferred to General Ledger (i.e. accounted)
+	  */
+	public boolean isTransferred () 
+	{
+		Object oo = get_Value(COLUMNNAME_IsTransferred);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
+	}
+
 	/** Set Name.
 		@param Name 
 		Alphanumeric identifier of the entity
@@ -597,6 +454,23 @@ public class X_A_Asset extends PO implements I_A_Asset, I_Persistent
 	public String getName () 
 	{
 		return (String)get_Value(COLUMNNAME_Name);
+	}
+
+	/** Set Pending Date.
+		@param PendingDate 
+		Pending date
+	  */
+	public void setPendingDate (Timestamp PendingDate)
+	{
+		set_Value (COLUMNNAME_PendingDate, PendingDate);
+	}
+
+	/** Get Pending Date.
+		@return Pending date
+	  */
+	public Timestamp getPendingDate () 
+	{
+		return (Timestamp)get_Value(COLUMNNAME_PendingDate);
 	}
 
 	/** Set Processed.
@@ -640,20 +514,6 @@ public class X_A_Asset extends PO implements I_A_Asset, I_Persistent
 		return bd;
 	}
 
-	/** Set Revaluation Date.
-		@param RevalDate Revaluation Date	  */
-	public void setRevalDate (Timestamp RevalDate)
-	{
-		set_Value (COLUMNNAME_RevalDate, RevalDate);
-	}
-
-	/** Get Revaluation Date.
-		@return Revaluation Date	  */
-	public Timestamp getRevalDate () 
-	{
-		return (Timestamp)get_Value(COLUMNNAME_RevalDate);
-	}
-
 	/** Set Serial No.
 		@param SerNo 
 		Product Serial Number 
@@ -677,6 +537,8 @@ public class X_A_Asset extends PO implements I_A_Asset, I_Persistent
 	public static final String STATUSUSE_Using = "US";
 	/** UnUse = UN */
 	public static final String STATUSUSE_UnUse = "UN";
+	/** Delivery = DE */
+	public static final String STATUSUSE_Delivery = "DE";
 	/** Set StatusUse.
 		@param StatusUse StatusUse	  */
 	public void setStatusUse (String StatusUse)
@@ -725,6 +587,23 @@ public class X_A_Asset extends PO implements I_A_Asset, I_Persistent
 		return (Timestamp)get_Value(COLUMNNAME_UseDate);
 	}
 
+	/** Set UseLifed.
+		@param UseLifed UseLifed	  */
+	public void setUseLifed (int UseLifed)
+	{
+		set_Value (COLUMNNAME_UseLifed, Integer.valueOf(UseLifed));
+	}
+
+	/** Get UseLifed.
+		@return UseLifed	  */
+	public int getUseLifed () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_UseLifed);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
 	/** Set UseLifes.
 		@param UseLifes UseLifes	  */
 	public void setUseLifes (BigDecimal UseLifes)
@@ -757,22 +636,5 @@ public class X_A_Asset extends PO implements I_A_Asset, I_Persistent
 	public String getValue () 
 	{
 		return (String)get_Value(COLUMNNAME_Value);
-	}
-
-	/** Set Version No.
-		@param VersionNo 
-		Version Number
-	  */
-	public void setVersionNo (String VersionNo)
-	{
-		set_Value (COLUMNNAME_VersionNo, VersionNo);
-	}
-
-	/** Get Version No.
-		@return Version Number
-	  */
-	public String getVersionNo () 
-	{
-		return (String)get_Value(COLUMNNAME_VersionNo);
 	}
 }

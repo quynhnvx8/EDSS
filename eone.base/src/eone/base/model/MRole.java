@@ -372,6 +372,17 @@ public final class MRole extends X_AD_Role
 	{
 		return Env.getContext(getCtx(), "#IsCanExport") == "Y" ? true : false;
 	}	//	isCanExport
+	
+	public static String addAccessSQL(String SQL, Properties ctx) {
+		
+		String sqlCV = SQL.toUpperCase();
+		String	TableNameIn = "";
+		if (sqlCV.indexOf("FROM") > 0 && sqlCV.indexOf("WHERE") > 0) {
+			TableNameIn = sqlCV.substring(sqlCV.indexOf(" FROM ") + 5, sqlCV.indexOf(" WHERE ")).trim();
+		}
+		
+		return addAccessSQL(SQL, TableNameIn, false, false, ctx);
+	}
 
 	public static String addAccessSQL (String SQL, String TableNameIn, boolean fullyQualified, boolean rw, Properties ctx)
 	{
@@ -393,7 +404,7 @@ public final class MRole extends X_AD_Role
 		AccessSqlParser asp = new AccessSqlParser(retSQL.toString());
 		AccessSqlParser.TableInfo[] ti = asp.getTableInfo(asp.getMainSqlIndex()); 
 		//  Do we have to add WHERE or AND
-		if (asp.getMainSql().indexOf(" WHERE ") == -1)
+		if (asp.getMainSql().toUpperCase().indexOf(" WHERE ") == -1)
 			retSQL.append(" WHERE 1=1");
 		
 		
@@ -410,6 +421,9 @@ public final class MRole extends X_AD_Role
 		if (TableNameIn != null && !tableName.equals(TableNameIn))
 		{
 			tableName = TableNameIn;
+			if (tableRoot.isEmpty()) {
+				tableRoot = TableNameIn;
+			}
 		}
 		
 		//Add Quyen truy cap don vi theo login. khi khai bao them don vi truy cap thi phai login lai.
@@ -468,20 +482,23 @@ public final class MRole extends X_AD_Role
 					.append(tableName).append(".").append("IsAdminClient = 'Y')");
 				}
 			}
-		}
-		
-		if("C_ElementValue".equalsIgnoreCase(tableName)) {
-			retSQL.append(" AND ");
-			if (!fullyQualified) {
-				retSQL
-				.append(tableName).append(".")
-				.append("C_Element_ID").append(" = ")
-				.append(Env.getContextAsInt(ctx, "#C_Element_ID"));
-			} else {
-				retSQL
-				.append("C_Element_ID").append(" = ")
-				.append(Env.getContextAsInt(ctx, "#C_Element_ID"));
+			
+			if(X_C_ElementValue.Table_Name.equalsIgnoreCase(tableRoot) 
+					|| X_C_Account.Table_Name.equalsIgnoreCase(tableRoot)
+					|| X_A_Asset_Group.Table_Name.equalsIgnoreCase(tableRoot)) {
+				retSQL.append(" AND ");
+				if (!fullyQualified) {
+					retSQL
+					.append(tableName).append(".")
+					.append("C_Element_ID").append(" = ")
+					.append(Env.getContextAsInt(ctx, "#C_Element_ID"));
+				} else {
+					retSQL
+					.append("C_Element_ID").append(" = ")
+					.append(Env.getContextAsInt(ctx, "#C_Element_ID"));
+				}
 			}
+			
 		}
 		
 		

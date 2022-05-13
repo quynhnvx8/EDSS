@@ -32,6 +32,7 @@ public class MAppendSign extends X_AD_AppendSign
 		final String whereClause = X_AD_AppendSign.COLUMNNAME_AD_Table_ID+"=? AND "+X_AD_AppendSign.COLUMNNAME_Record_ID+"=?";
 		MAppendSign retValue = new Query(ctx,X_AD_AppendSign.Table_Name,whereClause, trxName)
 		.setParameters(AD_Table_ID, Record_ID)
+		.setApplyAccessFilter(true)
 		.first();
 		s_appendSign.put(AD_Table_ID + "_" + Record_ID, retValue);
 		return retValue;
@@ -44,6 +45,7 @@ public class MAppendSign extends X_AD_AppendSign
 				return s_cache.get(AD_Table_ID + "_" + Record_ID);
 			List<X_AD_Signer> query = new Query(ctx, X_AD_Signer.Table_Name, " AD_AppendSign_ID = ?", trxName)
 					.setParameters(append.getAD_AppendSign_ID())
+					.setApplyAccessFilter(true)
 					.setOrderBy("SeqNo")
 					.list();
 			if (query.size() > 0) {

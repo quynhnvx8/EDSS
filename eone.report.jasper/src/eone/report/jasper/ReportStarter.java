@@ -376,7 +376,7 @@ public class ReportStarter implements ProcessCall, ClientProcess {
 				}
 			}
 
-			params.put("CURRENT_LANG", currLang.getAD_Language());
+			params.put("AD_LANGUAGE", currLang.getAD_Language());
 			params.put(JRParameter.REPORT_LOCALE, currLang.getLocale());
 
 			// Resources

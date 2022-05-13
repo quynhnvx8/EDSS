@@ -23,8 +23,6 @@ public class MAccount extends X_C_Account
 	private static final long serialVersionUID = 7980515458720808532L;
 
 
-	private static int AD_Client_ID = Env.getAD_Client_ID(Env.getCtx());
-	
 	public static MAccount get (Properties ctx)
 	{
 		final String whereClause = "1=1";
@@ -64,89 +62,91 @@ public class MAccount extends X_C_Account
 	
 	protected boolean beforeSave (boolean newRecord)
 	{
+
+		MElementValue value = MElementValue.get(getCtx(), getAccount_ID());
+		setC_Element_ID(value.getC_Element_ID());
+		
 		String sql = "";
 		List<Object>  params = new ArrayList<Object>();
 		if (isDefault()) {
 			if (getC_DocType_ID() > 0) {
-				sql = "Select count(1) From C_Account Where C_DocType_ID = ? And C_Account_ID != ? And IsDefault = 'Y' And TypeAccount = ?";
+				sql = "Select count(1) From C_Account Where C_DocType_ID = ? And C_Account_ID != ? And IsDefault = 'Y' And TypeAccount = ? And C_Element_ID = ?";
 				params.add(getC_DocType_ID());
 				params.add(getC_Account_ID());
 				params.add(getTypeAccount());
+				params.add(getC_Element_ID());
 			}
 			
 			if (getC_DocTypeSub_ID() > 0) {
-				sql = "Select count(1) From C_Account Where C_DocTypeSub_ID = ? And C_Account_ID != ? And IsDefault = 'Y' And TypeAccount = ?";
+				sql = "Select count(1) From C_Account Where C_DocTypeSub_ID = ? And C_Account_ID != ? And IsDefault = 'Y' And TypeAccount = ? And C_Element_ID = ?";
 				params.add(getC_DocTypeSub_ID());
 				params.add(getC_Account_ID());
 				params.add(getTypeAccount());
+				params.add(getC_Element_ID());
 			}
 			//Asset
-			if (getA_Asset_Group_ID() > 0) {
-				sql = "Select count(1) From C_Account Where A_Asset_Group_ID = ? And C_Account_ID != ? And IsDefault = 'Y' ";
-				params.add(getA_Asset_Group_ID());
-				params.add(getC_Account_ID());
-			}
+			
 			if (getA_Asset_ID() > 0) {
-				sql = "Select count(1) From C_Account Where A_Asset_ID = ? And C_Account_ID != ? And IsDefault = 'Y'";
+				sql = "Select count(1) From C_Account Where A_Asset_ID = ? And C_Account_ID != ? And IsDefault = 'Y' And C_Element_ID = ?";
 				params.add(getA_Asset_ID());
 				params.add(getC_Account_ID());
+				params.add(getC_Element_ID());
 			}
 			//BPartner
-			if (getC_BP_Group_ID() > 0) {
-				sql = "Select count(1) From C_Account Where C_BP_Group_ID = ? And C_Account_ID != ? And IsDefault = 'Y'";
-				params.add(getC_BP_Group_ID());
-				params.add(getC_Account_ID());
-			}
+			
 			if (getC_BPartner_ID() > 0) {
-				sql = "Select count(1) From C_Account Where C_BPartner_ID = ? And C_Account_ID != ? And IsDefault = 'Y'";
+				sql = "Select count(1) From C_Account Where C_BPartner_ID = ? And C_Account_ID != ? And IsDefault = 'Y' And C_Element_ID = ?";
 				params.add(getC_BPartner_ID());
 				params.add(getC_Account_ID());
+				params.add(getC_Element_ID());
 			}
 			
 			//Product
-			if (getM_Product_Category_ID() > 0) {
-				sql = "Select count(1) From C_Account Where M_Product_Category_ID = ? And C_Account_ID != ? And IsDefault = 'Y'";
-				params.add(getM_Product_Category_ID());
-				params.add(getC_Account_ID());
-			}
+			
 			if (getM_Product_ID() > 0) {
-				sql = "Select count(1) From C_Account Where M_Product_ID = ? And C_Account_ID != ? And IsDefault = 'Y'";
+				sql = "Select count(1) From C_Account Where M_Product_ID = ? And C_Account_ID != ? And IsDefault = 'Y' And C_Element_ID = ?";
 				params.add(getM_Product_ID());
 				params.add(getC_Account_ID());
+				params.add(getC_Element_ID());
 			}
 			if (getM_Warehouse_ID() > 0) {
-				sql = "Select count(1) From C_Account Where M_Warehouse_ID = ? And C_Account_ID != ? And IsDefault = 'Y'";
+				sql = "Select count(1) From C_Account Where M_Warehouse_ID = ? And C_Account_ID != ? And IsDefault = 'Y' And C_Element_ID = ?";
 				params.add(getM_Warehouse_ID());
 				params.add(getC_Account_ID());
+				params.add(getC_Element_ID());
 			}
 			
 			//Tax
 			if (getC_Tax_ID() > 0) {
-				sql = "Select count(1) From C_Account Where C_Tax_ID = ? And C_Account_ID != ? And IsDefault = 'Y'  And TypeAccount = ?";
+				sql = "Select count(1) From C_Account Where C_Tax_ID = ? And C_Account_ID != ? And IsDefault = 'Y'  And TypeAccount = ? And C_Element_ID = ?";
 				params.add(getC_Tax_ID());
 				params.add(getC_Account_ID());
 				params.add(getTypeAccount());
+				params.add(getC_Element_ID());
 			}
 			
 			//Contract
 			if (getC_Contract_ID() > 0) {
-				sql = "Select count(1) From C_Account Where C_Contract_ID = ? And C_Account_ID != ? And IsDefault = 'Y'";
+				sql = "Select count(1) From C_Account Where C_Contract_ID = ? And C_Account_ID != ? And IsDefault = 'Y' And C_Element_ID = ?";
 				params.add(getC_Contract_ID());
 				params.add(getC_Account_ID());
+				params.add(getC_Element_ID());
 			}
 			
 			//Project
 			if (getC_Project_ID() > 0) {
-				sql = "Select count(1) From C_Account Where C_Project_ID = ? And C_Account_ID != ? And IsDefault = 'Y'";
+				sql = "Select count(1) From C_Account Where C_Project_ID = ? And C_Account_ID != ? And IsDefault = 'Y' And C_Element_ID = ?";
 				params.add(getC_Project_ID());
 				params.add(getC_Account_ID());
+				params.add(getC_Element_ID());
 			}
 			
 			//Construction
 			if (getC_Construction_ID() > 0) {
-				sql = "Select count(1) From C_Account Where C_Construction_ID = ? And C_Account_ID != ? And IsDefault = 'Y'";
+				sql = "Select count(1) From C_Account Where C_Construction_ID = ? And C_Account_ID != ? And IsDefault = 'Y' And C_Element_ID = ?";
 				params.add(getC_Construction_ID());
 				params.add(getC_Account_ID());
+				params.add(getC_Element_ID());
 			}
 			
 			int no = DB.getSQLValue(get_TrxName(), sql, params);
@@ -155,6 +155,7 @@ public class MAccount extends X_C_Account
 				return false;
 			}
 		}
+		
 		return true;
 	}	//	beforeSave
 	
@@ -164,10 +165,11 @@ public class MAccount extends X_C_Account
 	 * Lay danh sach tai khoan cau hinh theo doctype
 	 */
 	public static List<MAccount> getAccountDocType(int C_DocType_ID) {
-		String sqlWhere = "C_DocType_ID = ? And IsDefault = 'Y' And Account_ID in (Select C_ElementValue_ID From C_ElementValue WHERE AD_Client_ID = ?)";
+		String sqlWhere = "C_DocType_ID = ? And IsDefault = 'Y'";
 		
 		List<MAccount> value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
-				.setParameters(C_DocType_ID, AD_Client_ID)
+				.setParameters(C_DocType_ID)
+				.setApplyAccessFilter(true)
 				.list();
 		return value;
 	}
@@ -177,9 +179,10 @@ public class MAccount extends X_C_Account
 	 * Lay danh sach tai khoan cau hinh theo doctypeSub
 	 */
 	public static List<MAccount> getAccountDocTypeSub(int C_DocTypeSub_ID) {
-		String sqlWhere = "C_DocTypeSub_ID = ? And IsDefault = 'Y' And Account_ID in (Select C_ElementValue_ID From C_ElementValue Where AD_Client_ID = ?)";
+		String sqlWhere = "C_DocTypeSub_ID = ? And IsDefault = 'Y'";
 		List<MAccount> value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
-				.setParameters(C_DocTypeSub_ID, AD_Client_ID)
+				.setParameters(C_DocTypeSub_ID)
+				.setApplyAccessFilter(true)
 				.list();
 		return value;
 	}
@@ -188,19 +191,39 @@ public class MAccount extends X_C_Account
 	 * Lay tai khoan mac dinh cua BPartner (neu co)
 	 */
 	public static MAccount getAccountBPartner(int C_BPartner_ID) {
-		String sqlWhere = "C_BPartner_ID = ?  And Account_ID in (Select C_ElementValue_ID From C_ElementValue Where AD_Client_ID = ?) And IsDefault = 'Y'";
+		String sqlWhere = "C_BPartner_ID = ? And IsDefault = 'Y'";
 		MAccount value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
-				.setParameters(C_BPartner_ID, AD_Client_ID)
+				.setParameters(C_BPartner_ID)
+				.setApplyAccessFilter(true)
 				.firstOnly();
-		if (value == null) {
-			MBPartner bp = MBPartner.get(Env.getCtx(), C_BPartner_ID);
-			if (bp == null)
-				return null;
-			sqlWhere = "C_BP_Group_ID = ?  And Account_ID in (Select C_ElementValue_ID From C_ElementValue Where AD_Client_ID = ?) And IsDefault = 'Y'";
-			value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
-					.setParameters(bp.getC_BP_Group_ID(), AD_Client_ID)
-					.firstOnly();
-		}
+		
+		return value;
+	}
+	
+	public static List<MAccount> getListAcctAssetGroup(int A_Asset_Group_ID) {
+		String sqlWhere = "A_Asset_Group_ID = ?";
+		List<MAccount> value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
+				.setParameters(A_Asset_Group_ID)
+				.list();
+		
+		return value;
+	}
+	
+	public static List<MAccount> getListAcctProductGroup(int M_ProductGroup_ID) {
+		String sqlWhere = "M_ProductGroup_ID = ?";
+		List<MAccount> value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
+				.setParameters(M_ProductGroup_ID)
+				.list();
+		
+		return value;
+	}
+	
+	public static List<MAccount> getListAcctAsset(int A_Asset_ID) {
+		String sqlWhere = "A_Asset_ID = ? AND IsDefault = 'Y'";
+		List<MAccount> value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
+				.setParameters(A_Asset_ID)
+				.list();
+		
 		return value;
 	}
 	
@@ -208,19 +231,12 @@ public class MAccount extends X_C_Account
 	 * Lay tai khoan mac dinh cua Asset (neu co)
 	 */
 	public static MAccount getAccountAsset(int A_Asset_ID) {
-		String sqlWhere = "A_Asset_ID = ?  And Account_ID in (Select C_ElementValue_ID From C_ElementValue Where AD_Client_ID = ?) And IsDefault = 'Y'";
+		String sqlWhere = "A_Asset_ID = ?  And IsDefault = 'Y'";
 		MAccount value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
-				.setParameters(A_Asset_ID, AD_Client_ID)
+				.setParameters(A_Asset_ID)
+				.setApplyAccessFilter(true)
 				.firstOnly();
-		if (value == null) {
-			MAsset asset = MAsset.get(Env.getCtx(), A_Asset_ID, null);
-			if (asset == null)
-				return null;
-			sqlWhere = "A_Asset_Group_ID = ?  And Account_ID in (Select C_ElementValue_ID From C_ElementValue Where AD_Client_ID = ?) And IsDefault = 'Y'";
-			value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
-					.setParameters(asset.getA_Asset_Group_ID(), AD_Client_ID)
-					.firstOnly();
-		}
+		
 		return value;
 	}
 	
@@ -232,19 +248,12 @@ public class MAccount extends X_C_Account
 		if (!check) {
 			return null;
 		}
-		String sqlWhere = "M_Product_ID = ?  And Account_ID in (Select C_ElementValue_ID From C_ElementValue Where AD_Client_ID = ?) And IsDefault = 'Y'";
+		String sqlWhere = "M_Product_ID = ? And IsDefault = 'Y'";
 		MAccount value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
-				.setParameters(M_Product_ID, AD_Client_ID)
+				.setParameters(M_Product_ID)
+				.setApplyAccessFilter(true)
 				.firstOnly();
-		if (value == null) {
-			MProduct asset = MProduct.get(Env.getCtx(), M_Product_ID);
-			if (asset == null)
-				return null;
-			sqlWhere = "M_Product_Category_ID = ?  And Account_ID in (Select C_ElementValue_ID From C_ElementValue Where AD_Client_ID = ?) And IsDefault = 'Y'";
-			value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
-					.setParameters(asset.getM_Product_Category_ID(), AD_Client_ID)
-					.firstOnly();
-		}
+		
 		return value;
 	}
 	
@@ -252,9 +261,10 @@ public class MAccount extends X_C_Account
 	 * Lay tai khoan mac dinh Thue (neu co)
 	 */
 	public static List<MAccount> getAccountTax(int C_Tax_ID) {
-		String sqlWhere = "C_Tax_ID = ? And IsDefault = 'Y' And Account_ID in (Select C_ElementValue_ID From C_ElementValue Where AD_Client_ID = ?)";
+		String sqlWhere = "C_Tax_ID = ? And IsDefault = 'Y'";
 		List<MAccount> value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
-				.setParameters(C_Tax_ID, AD_Client_ID)
+				.setParameters(C_Tax_ID)
+				.setApplyAccessFilter(true)
 				.list();
 		return value;
 	}
@@ -267,9 +277,10 @@ public class MAccount extends X_C_Account
 		if (!check) {
 			return null;
 		}
-		String sqlWhere = "C_Contract_ID = ? And IsDefault = 'Y' And Account_ID in (Select C_ElementValue_ID From C_ElementValue Where AD_Client_ID = ?)";
+		String sqlWhere = "C_Contract_ID = ? And IsDefault = 'Y'";
 		MAccount value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
-				.setParameters(C_Contract_ID, AD_Client_ID)
+				.setParameters(C_Contract_ID)
+				.setApplyAccessFilter(true)
 				.firstOnly();
 		return value;
 	}
@@ -282,9 +293,10 @@ public class MAccount extends X_C_Account
 		if (!check) {
 			return null;
 		}
-		String sqlWhere = "C_Project_ID = ? And IsDefault = 'Y' And Account_ID in (Select C_ElementValue_ID From C_ElementValue Where AD_Client_ID = ?)";
+		String sqlWhere = "C_Project_ID = ? And IsDefault = 'Y'";
 		MAccount value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
-				.setParameters(C_Project_ID, AD_Client_ID)
+				.setParameters(C_Project_ID)
+				.setApplyAccessFilter(true)
 				.firstOnly();
 		return value;
 	}
@@ -297,9 +309,10 @@ public class MAccount extends X_C_Account
 		if (!check) {
 			return null;
 		}
-		String sqlWhere = "C_Construction_ID = ? And IsDefault = 'Y' And Account_ID in (Select C_ElementValue_ID From C_ElementValue Where AD_Client_ID = ?)";
+		String sqlWhere = "C_Construction_ID = ? And IsDefault = 'Y'";
 		MAccount value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
-				.setParameters(C_Construction_ID, AD_Client_ID)
+				.setParameters(C_Construction_ID)
+				.setApplyAccessFilter(true)
 				.firstOnly();
 		return value;
 	}
@@ -312,9 +325,10 @@ public class MAccount extends X_C_Account
 		if (!check) {
 			return null;
 		}
-		String sqlWhere = "M_Warehouse_ID = ? And IsDefault = 'Y' And Account_ID in (Select C_ElementValue_ID From C_ElementValue Where AD_Client_ID = ?)";
+		String sqlWhere = "M_Warehouse_ID = ? And IsDefault = 'Y'";
 		MAccount value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
-				.setParameters(M_Warehouse_ID, AD_Client_ID)
+				.setParameters(M_Warehouse_ID)
+				.setApplyAccessFilter(true)
 				.firstOnly();
 		return value;
 	}

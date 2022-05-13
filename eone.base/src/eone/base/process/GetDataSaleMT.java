@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import eone.base.model.MBPGroup;
 import eone.base.model.MBPartner;
 import eone.base.model.MCurrency;
 import eone.base.model.MInOut;
@@ -19,7 +18,6 @@ import eone.base.model.MProduct;
 import eone.base.model.MWarehouse;
 import eone.base.model.PO;
 import eone.base.model.X_C_Account;
-import eone.base.model.X_C_BP_Group;
 import eone.base.model.X_C_BPartner;
 import eone.base.model.X_M_InOut;
 import eone.base.model.X_M_InOutLine;
@@ -79,7 +77,6 @@ public class GetDataSaleMT extends SvrProcess
 		
 		listRowLine = new ArrayList<List<Object>>();
 		
-		int C_BP_Group_ID = MBPGroup.getC_BP_Group_ID(X_C_BP_Group.GROUPTYPE_Customer);
 		
 		MBPartner item = null;
 		int actionSyn = 0;
@@ -107,7 +104,7 @@ public class GetDataSaleMT extends SvrProcess
 				item.setIsBankAccount(false);
 				item.setAD_Client_ID(getAD_Client_ID());
 				item.setAD_Org_ID(Env.getAD_Org_ID(getCtx()));
-				item.setC_BP_Group_ID(C_BP_Group_ID);
+				item.setGroupType(X_C_BPartner.GROUPTYPE_Customer);
 				Timestamp create = rs.getTimestamp("createDate");
 				if(create == null)
 					create = new Timestamp(new Date().getTime());

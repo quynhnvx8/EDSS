@@ -50,6 +50,7 @@ public class MAssetUse extends X_A_Asset_Use
 		String whereClause = " A_Asset_ID = ? And UseDate = ?";
 		List<MAssetUse> retValue = new Query(ctx, Table_Name, whereClause, null)
 				.setParameters(A_Asset_ID, date)
+				.setApplyAccessFilter(true)
 				.list();
 		return retValue;
 	}

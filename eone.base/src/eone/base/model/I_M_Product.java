@@ -4,10 +4,9 @@
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-
-import eone.util.KeyNamePair;
 
 /** Generated Interface for M_Product
  *  @author EOne (generated) 
@@ -269,21 +268,6 @@ public interface I_M_Product
 	  */
 	public int getLowLevel();
 
-    /** Column name M_Product_Category_ID */
-    public static final String COLUMNNAME_M_Product_Category_ID = "M_Product_Category_ID";
-
-	/** Set Product Category.
-	  * Category of a Product
-	  */
-	public void setM_Product_Category_ID (int M_Product_Category_ID);
-
-	/** Get Product Category.
-	  * Category of a Product
-	  */
-	public int getM_Product_Category_ID();
-
-	public eone.base.model.I_M_Product_Category getM_Product_Category() throws RuntimeException;
-
     /** Column name M_Product_ID */
     public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 
@@ -305,6 +289,8 @@ public interface I_M_Product
 
 	/** Get ProductGroup	  */
 	public int getM_ProductGroup_ID();
+
+	public eone.base.model.I_M_ProductGroup getM_ProductGroup() throws RuntimeException;
 
     /** Column name M_Warehouse_ID */
     public static final String COLUMNNAME_M_Warehouse_ID = "M_Warehouse_ID";

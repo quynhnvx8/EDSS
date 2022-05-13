@@ -2,12 +2,10 @@ package eone.base.process;
 
 import java.util.Properties;
 
-import eone.base.model.MBPGroup;
 import eone.base.model.MBPartner;
 import eone.base.model.MDepartment;
 import eone.base.model.MOrg;
 import eone.base.model.MWarehouse;
-import eone.util.DB;
 
 public class CreateOrUpdateRelatedOrg  {
 	
@@ -47,9 +45,7 @@ public class CreateOrUpdateRelatedOrg  {
 		MBPartner bp = MBPartner.get(ctx, AD_Org_ID);
 		if (bp == null) {
 			bp = new MBPartner(ctx, 0, trxName);
-			bp.setC_BPartner_ID(AD_Org_ID);
-			int C_BP_Group_ID = DB.getSQLValue(trxName, "Select C_BP_Group_ID From C_BP_Group Where GroupType = ?", MBPGroup.GROUPTYPE_OrgDepartment);
-			bp.setC_BP_Group_ID(C_BP_Group_ID);
+			bp.setGroupType(MBPartner.GROUPTYPE_Org);
 		}
 		bp.setValue(org.getValue());
 		bp.setName(org.getName());

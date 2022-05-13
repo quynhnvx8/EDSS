@@ -73,7 +73,7 @@ public class UpdateOpenBalanceWarehouse extends SvrProcess {
 		DB.executeUpdate("Delete M_Storage Where DateTrx >= ? And AD_Client_ID = ?", new Object [] {endDate, AD_Client_ID}, true, get_TrxName());
 		
 		//Tinh toan so du dau ky cua nam N de Insert vao nam N + 1
-		insertOpenBalance(AD_Client_ID, startDate, endDate);
+		MStorage.insertOpenBalance(startDate, endDate, getCtx(), get_TrxName());
 		
 		//Insert so lieu phat sinh
 		insertIncurred(AD_Client_ID, startDate, endDate);
@@ -82,62 +82,6 @@ public class UpdateOpenBalanceWarehouse extends SvrProcess {
 	}
 
 	
-	
-	private void insertOpenBalance(int AD_Client_ID, Timestamp startDate, Timestamp endDate) throws Exception {
-		//TypeInOut: IN: Nhap; OP: Day ky; OU: XUAT
-		String sql = 
-				" Select Sum(Qty) Qty, Sum(Amount) Amount, "+
-				"		Case when Sum(Qty) > 0 Then Sum(Amount)/Sum(Qty) Else 0 End Price, M_Product_ID, M_Warehouse_ID "+
-				" From "+
-				" ( "+
-				" 	select Sum(Qty) Qty, Sum(Amount) Amount, M_Product_ID, M_Warehouse_ID from M_Storage "+ 
-				" 	Where (TypeInOut = 'IN' Or TypeInOut = 'OP')  And AD_Client_ID = ? And DateTrx >= ? And DateTrx < ? "+ //#1,#2,#3
-				" 	Group by M_Product_ID, M_Warehouse_ID "+
-				" 	Union All "+
-				" 	select -Sum(Qty) Qty, -Sum(Amount) Amount, M_Product_ID, M_Warehouse_ID from M_Storage "+ 
-				" 	Where TypeInOut = 'OU'  And AD_Client_ID = ? And DateTrx >= ? And DateTrx < ? "+ //#4,#5,#6
-				" 	Group by M_Product_ID, M_Warehouse_ID "+
-				" )B Group by M_Product_ID, M_Warehouse_ID  "+
-				" Having Sum(Qty) != 0";
-		ResultSet rs = null;
-		PreparedStatement ps = DB.prepareCall(sql);
-		ps.setInt(1, AD_Client_ID);
-		ps.setTimestamp(2, startDate);
-		ps.setTimestamp(3, endDate);
-		
-		ps.setInt(4, AD_Client_ID);
-		ps.setTimestamp(5, startDate);
-		ps.setTimestamp(6, endDate);
-		
-		rs = ps.executeQuery();
-		MStorage storage = null;
-		while (rs.next()) {
-			lstColumn = new ArrayList<Object>();
-			storage = new MStorage(getCtx(), 0, null);
-			storage.setM_Product_ID(rs.getInt("M_Product_ID"));
-			storage.setM_Warehouse_ID(rs.getInt("M_Warehouse_ID"));
-			storage.setQty(rs.getBigDecimal("Qty"));
-			storage.setPrice(rs.getBigDecimal("Price"));
-			storage.setAmount(rs.getBigDecimal("Amount"));
-			storage.setTypeInOut(MStorage.TYPEINOUT_Opening);
-			storage.setDateTrx(endDate);
-			int ID = DB.getNextID(AD_Client_ID, MStorage.Table_Name, get_TrxName());
-			storage.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
-			storage.setAD_Client_ID(Env.getAD_Client_ID(Env.getCtx()));
-			
-			List<String> colNames = PO.getSqlInsert_Para(MStorage.Table_ID, get_TrxName());
-			lstColumn = PO.getBatchValueList(storage, colNames, MStorage.Table_ID, get_TrxName(), ID);
-			lstRows.add(lstColumn);
-			if (lstRows.size() >= BATCH_SIZE) {
-				DB.excuteBatch(sqlInsert, lstRows, get_TrxName());
-				lstRows.clear();
-			}
-		}
-		if (lstRows.size() > 0) {
-			DB.excuteBatch(sqlInsert, lstRows, get_TrxName());
-			lstRows.clear();
-		}
-	}
 	
 	private void insertIncurred(int AD_Client_ID, Timestamp startDate, Timestamp endDate) throws Exception {
 		String sql = 
@@ -173,7 +117,7 @@ public class UpdateOpenBalanceWarehouse extends SvrProcess {
 			storage.setAmount(rs.getBigDecimal("Amount"));
 			storage.setTypeInOut(docType);
 			storage.setDateTrx(rs.getTimestamp("DateAcct"));
-			int ID = DB.getNextID(AD_Client_ID, MStorage.Table_Name, get_TrxName());
+			int ID = DB.getNextID(MStorage.Table_Name, get_TrxName());
 			storage.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
 			storage.setAD_Client_ID(Env.getAD_Client_ID(Env.getCtx()));
 			

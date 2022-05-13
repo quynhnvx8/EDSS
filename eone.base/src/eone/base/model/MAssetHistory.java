@@ -8,6 +8,31 @@ import eone.util.CCache;
 
 public class MAssetHistory extends X_A_Asset_History
 {
+	@Override
+	protected boolean beforeSave(boolean newRecord) {
+		
+		return super.beforeSave(newRecord);
+	}
+
+	@Override
+	protected boolean afterSave(boolean newRecord, boolean success) {
+		//updateHeader();
+		return super.afterSave(newRecord, success);
+	}
+
+	@Override
+	protected boolean beforeDelete() {
+		// TODO Auto-generated method stub
+		return super.beforeDelete();
+	}
+
+	
+	@Override
+	protected boolean afterDelete(boolean success) {
+		//updateHeader();
+		return super.afterDelete(success);
+	}
+
 	/**
 	 * 
 	 */
@@ -37,18 +62,14 @@ public class MAssetHistory extends X_A_Asset_History
 	{
 		if (A_Asset_ID <= 0 || date == null)
 			return null;
-		MAssetHistory o = s_cache.get(A_Asset_ID + "_" + date);
-		if (o != null)
-			return o;
+		
 		String whereClause = " A_Asset_ID = ? And ChangeDate = ? ";
-		o = new Query(ctx, Table_Name, whereClause, null)
+		MAssetHistory o = new Query(ctx, Table_Name, whereClause, null)
 				.setParameters(A_Asset_ID, date)
+				.setApplyAccessFilter(true)
 				.firstOnly();
-		if (o != null && o.get_ID() > 0) {
-			s_cache.put(A_Asset_ID + "_" + date, o);
-			return o;
-		}
-		return null;
+		
+		return o;
 	}
 
 	public static MAssetHistory get (Properties ctx, Object id)

@@ -1,18 +1,6 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
@@ -21,7 +9,7 @@ import java.sql.ResultSet;
 import java.util.Properties;
 
 /** Generated Model for C_Account
- *  @author iDempiere (generated) 
+ *  @author EOne (generated) 
  *  @version Version 1.0 - $Id$ */
 public class X_C_Account extends PO implements I_C_Account, I_Persistent 
 {
@@ -29,7 +17,7 @@ public class X_C_Account extends PO implements I_C_Account, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20210326L;
+	private static final long serialVersionUID = 20220513L;
 
     /** Standard Constructor */
     public X_C_Account (Properties ctx, int C_Account_ID, String trxName)
@@ -49,7 +37,7 @@ public class X_C_Account extends PO implements I_C_Account, I_Persistent
     }
 
     /** AccessLevel
-      * @return 3 - Client - Org 
+      * @return 4 - System 
       */
     protected int get_AccessLevel()
     {
@@ -174,34 +162,6 @@ public class X_C_Account extends PO implements I_C_Account, I_Persistent
 		return ii.intValue();
 	}
 
-	public eone.base.model.I_C_BP_Group getC_BP_Group() throws RuntimeException
-    {
-		return (eone.base.model.I_C_BP_Group)MTable.get(getCtx(), eone.base.model.I_C_BP_Group.Table_Name)
-			.getPO(getC_BP_Group_ID(), get_TrxName());	}
-
-	/** Set Business Partner Group.
-		@param C_BP_Group_ID 
-		Business Partner Group
-	  */
-	public void setC_BP_Group_ID (int C_BP_Group_ID)
-	{
-		if (C_BP_Group_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_C_BP_Group_ID, null);
-		else 
-			set_ValueNoCheck (COLUMNNAME_C_BP_Group_ID, Integer.valueOf(C_BP_Group_ID));
-	}
-
-	/** Get Business Partner Group.
-		@return Business Partner Group
-	  */
-	public int getC_BP_Group_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_C_BP_Group_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
 	public eone.base.model.I_C_BPartner getC_BPartner() throws RuntimeException
     {
 		return (eone.base.model.I_C_BPartner)MTable.get(getCtx(), eone.base.model.I_C_BPartner.Table_Name)
@@ -230,9 +190,9 @@ public class X_C_Account extends PO implements I_C_Account, I_Persistent
 		return ii.intValue();
 	}
 
-	public I_C_Construction getC_Construction() throws RuntimeException
+	public eone.base.model.I_C_Construction getC_Construction() throws RuntimeException
     {
-		return (I_C_Construction)MTable.get(getCtx(), I_C_Construction.Table_Name)
+		return (eone.base.model.I_C_Construction)MTable.get(getCtx(), eone.base.model.I_C_Construction.Table_Name)
 			.getPO(getC_Construction_ID(), get_TrxName());	}
 
 	/** Set Construction.
@@ -255,9 +215,9 @@ public class X_C_Account extends PO implements I_C_Account, I_Persistent
 		return ii.intValue();
 	}
 
-	public I_C_Contract getC_Contract() throws RuntimeException
+	public eone.base.model.I_C_Contract getC_Contract() throws RuntimeException
     {
-		return (I_C_Contract)MTable.get(getCtx(), I_C_Contract.Table_Name)
+		return (eone.base.model.I_C_Contract)MTable.get(getCtx(), eone.base.model.I_C_Contract.Table_Name)
 			.getPO(getC_Contract_ID(), get_TrxName());	}
 
 	/** Set Contract.
@@ -308,9 +268,9 @@ public class X_C_Account extends PO implements I_C_Account, I_Persistent
 		return ii.intValue();
 	}
 
-	public I_C_DocTypeSub getC_DocTypeSub() throws RuntimeException
+	public eone.base.model.I_C_DocTypeSub getC_DocTypeSub() throws RuntimeException
     {
-		return (I_C_DocTypeSub)MTable.get(getCtx(), I_C_DocTypeSub.Table_Name)
+		return (eone.base.model.I_C_DocTypeSub)MTable.get(getCtx(), eone.base.model.I_C_DocTypeSub.Table_Name)
 			.getPO(getC_DocTypeSub_ID(), get_TrxName());	}
 
 	/** Set Sub Document.
@@ -331,6 +291,34 @@ public class X_C_Account extends PO implements I_C_Account, I_Persistent
 	public int getC_DocTypeSub_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_C_DocTypeSub_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	public eone.base.model.I_C_Element getC_Element() throws RuntimeException
+    {
+		return (eone.base.model.I_C_Element)MTable.get(getCtx(), eone.base.model.I_C_Element.Table_Name)
+			.getPO(getC_Element_ID(), get_TrxName());	}
+
+	/** Set Element.
+		@param C_Element_ID 
+		Accounting Element
+	  */
+	public void setC_Element_ID (int C_Element_ID)
+	{
+		if (C_Element_ID < 1) 
+			set_Value (COLUMNNAME_C_Element_ID, null);
+		else 
+			set_Value (COLUMNNAME_C_Element_ID, Integer.valueOf(C_Element_ID));
+	}
+
+	/** Get Element.
+		@return Accounting Element
+	  */
+	public int getC_Element_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_C_Element_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
@@ -433,34 +421,6 @@ public class X_C_Account extends PO implements I_C_Account, I_Persistent
 		return false;
 	}
 
-	public eone.base.model.I_M_Product_Category getM_Product_Category() throws RuntimeException
-    {
-		return (eone.base.model.I_M_Product_Category)MTable.get(getCtx(), eone.base.model.I_M_Product_Category.Table_Name)
-			.getPO(getM_Product_Category_ID(), get_TrxName());	}
-
-	/** Set Product Category.
-		@param M_Product_Category_ID 
-		Category of a Product
-	  */
-	public void setM_Product_Category_ID (int M_Product_Category_ID)
-	{
-		if (M_Product_Category_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_M_Product_Category_ID, null);
-		else 
-			set_ValueNoCheck (COLUMNNAME_M_Product_Category_ID, Integer.valueOf(M_Product_Category_ID));
-	}
-
-	/** Get Product Category.
-		@return Category of a Product
-	  */
-	public int getM_Product_Category_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_M_Product_Category_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
 	public eone.base.model.I_M_Product getM_Product() throws RuntimeException
     {
 		return (eone.base.model.I_M_Product)MTable.get(getCtx(), eone.base.model.I_M_Product.Table_Name)
@@ -484,6 +444,31 @@ public class X_C_Account extends PO implements I_C_Account, I_Persistent
 	public int getM_Product_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_M_Product_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	public eone.base.model.I_M_ProductGroup getM_ProductGroup() throws RuntimeException
+    {
+		return (eone.base.model.I_M_ProductGroup)MTable.get(getCtx(), eone.base.model.I_M_ProductGroup.Table_Name)
+			.getPO(getM_ProductGroup_ID(), get_TrxName());	}
+
+	/** Set ProductGroup.
+		@param M_ProductGroup_ID ProductGroup	  */
+	public void setM_ProductGroup_ID (int M_ProductGroup_ID)
+	{
+		if (M_ProductGroup_ID < 1) 
+			set_ValueNoCheck (COLUMNNAME_M_ProductGroup_ID, null);
+		else 
+			set_ValueNoCheck (COLUMNNAME_M_ProductGroup_ID, Integer.valueOf(M_ProductGroup_ID));
+	}
+
+	/** Get ProductGroup.
+		@return ProductGroup	  */
+	public int getM_ProductGroup_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_M_ProductGroup_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
@@ -539,6 +524,8 @@ public class X_C_Account extends PO implements I_C_Account, I_Persistent
 	public static final String TYPEACCOUNT_RevenueAccount = "REVEN_ACCT";
 	/** COGS Account = COGS_ACCT */
 	public static final String TYPEACCOUNT_COGSAccount = "COGS_ACCT";
+	/** Expense Accumulate Account = EXPEN_ACCT */
+	public static final String TYPEACCOUNT_ExpenseAccumulateAccount = "EXPEN_ACCT";
 	/** Set TypeAccount.
 		@param TypeAccount TypeAccount	  */
 	public void setTypeAccount (String TypeAccount)

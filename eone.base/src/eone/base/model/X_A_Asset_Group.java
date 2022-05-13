@@ -1,18 +1,6 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
@@ -20,18 +8,16 @@ package eone.base.model;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-import eone.util.KeyNamePair;
-
 /** Generated Model for A_Asset_Group
- *  @author iDempiere (generated) 
- *  @version Release 7.1 - $Id$ */
+ *  @author EOne (generated) 
+ *  @version Version 1.0 - $Id$ */
 public class X_A_Asset_Group extends PO implements I_A_Asset_Group, I_Persistent 
 {
 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200711L;
+	private static final long serialVersionUID = 20220508L;
 
     /** Standard Constructor */
     public X_A_Asset_Group (Properties ctx, int A_Asset_Group_ID, String trxName)
@@ -39,8 +25,6 @@ public class X_A_Asset_Group extends PO implements I_A_Asset_Group, I_Persistent
       super (ctx, A_Asset_Group_ID, trxName);
       /** if (A_Asset_Group_ID == 0)
         {
-			setA_Asset_Group_ID (0);
-			setName (null);
         } */
     }
 
@@ -51,7 +35,7 @@ public class X_A_Asset_Group extends PO implements I_A_Asset_Group, I_Persistent
     }
 
     /** AccessLevel
-      * @return 3 - Client - Org 
+      * @return 4 - System 
       */
     protected int get_AccessLevel()
     {
@@ -95,43 +79,32 @@ public class X_A_Asset_Group extends PO implements I_A_Asset_Group, I_Persistent
 		return ii.intValue();
 	}
 
-    /** Get Record ID/ColumnName
-        @return ID/ColumnName pair
-      */
-    public KeyNamePair getKeyNamePair() 
+	public eone.base.model.I_C_Element getC_Element() throws RuntimeException
     {
-        return new KeyNamePair(get_ID(), String.valueOf(getA_Asset_Group_ID()));
-    }
+		return (eone.base.model.I_C_Element)MTable.get(getCtx(), eone.base.model.I_C_Element.Table_Name)
+			.getPO(getC_Element_ID(), get_TrxName());	}
 
-	/** Set A_Asset_Group_UU.
-		@param A_Asset_Group_UU A_Asset_Group_UU	  */
-	public void setA_Asset_Group_UU (String A_Asset_Group_UU)
-	{
-		set_Value (COLUMNNAME_A_Asset_Group_UU, A_Asset_Group_UU);
-	}
-
-	/** Get A_Asset_Group_UU.
-		@return A_Asset_Group_UU	  */
-	public String getA_Asset_Group_UU () 
-	{
-		return (String)get_Value(COLUMNNAME_A_Asset_Group_UU);
-	}
-
-	/** Set Description.
-		@param Description 
-		Optional short description of the record
+	/** Set Element.
+		@param C_Element_ID 
+		Accounting Element
 	  */
-	public void setDescription (String Description)
+	public void setC_Element_ID (int C_Element_ID)
 	{
-		set_Value (COLUMNNAME_Description, Description);
+		if (C_Element_ID < 1) 
+			set_Value (COLUMNNAME_C_Element_ID, null);
+		else 
+			set_Value (COLUMNNAME_C_Element_ID, Integer.valueOf(C_Element_ID));
 	}
 
-	/** Get Description.
-		@return Optional short description of the record
+	/** Get Element.
+		@return Accounting Element
 	  */
-	public String getDescription () 
+	public int getC_Element_ID () 
 	{
-		return (String)get_Value(COLUMNNAME_Description);
+		Integer ii = (Integer)get_Value(COLUMNNAME_C_Element_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
 	}
 
 	/** Set Name.
@@ -151,17 +124,17 @@ public class X_A_Asset_Group extends PO implements I_A_Asset_Group, I_Persistent
 		return (String)get_Value(COLUMNNAME_Name);
 	}
 
-	/** Set Search Key.
+	/** Set Code.
 		@param Value 
-		Search key for the record in the format required - must be unique
+		Code
 	  */
 	public void setValue (String Value)
 	{
 		set_Value (COLUMNNAME_Value, Value);
 	}
 
-	/** Get Search Key.
-		@return Search key for the record in the format required - must be unique
+	/** Get Code.
+		@return Code
 	  */
 	public String getValue () 
 	{

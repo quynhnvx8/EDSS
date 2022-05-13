@@ -244,6 +244,15 @@ public interface I_AD_User
 	/** Get Locked	  */
 	public boolean isLocked();
 
+    /** Column name IsManyLogin */
+    public static final String COLUMNNAME_IsManyLogin = "IsManyLogin";
+
+	/** Set ManyLogin	  */
+	public void setIsManyLogin (boolean IsManyLogin);
+
+	/** Get ManyLogin	  */
+	public boolean isManyLogin();
+
     /** Column name IsNoExpire */
     public static final String COLUMNNAME_IsNoExpire = "IsNoExpire";
 

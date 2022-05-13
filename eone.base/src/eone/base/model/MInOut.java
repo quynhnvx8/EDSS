@@ -2,11 +2,8 @@
 package eone.base.model;
 
 import java.math.BigDecimal;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -39,73 +36,8 @@ public class MInOut extends X_M_InOut implements DocAction
 		return inout;
 	}
 	
-	public static MInOut createFrom (MOrder order, Timestamp movementDate,
-			boolean forceDelivery, boolean allAttributeInstances, Timestamp minGuaranteeDate,
-			boolean complete, String trxName)
-	{		
-		if (order == null)
-			throw new IllegalArgumentException("No Order");
-		
-		//	Create Header
-		MInOut retValue = new MInOut (order, 0, movementDate);
-		
-		//	Check if we can create the lines
-		MOrderLine[] oLines = order.getLines(true, "M_Product_ID");
-		for (int i = 0; i < oLines.length; i++)
-		{
-			// Calculate how much is left to deliver (ordered - delivered)
-			BigDecimal qty = oLines[i].getQty().subtract(oLines[i].getQtyDelivered());
-			//	Nothing to deliver
-			if (qty.signum() == 0)
-				continue;
-			
-		}	//	for all order lines
-
-		//	No Lines saved
-		if (retValue.get_ID() == 0)
-			return null;
-
-		return retValue;
-		
-	}
-
-
-	public static MInOut copyFrom (MInOut from, Timestamp dateDoc, Timestamp dateAcct,
-		int C_DocType_ID, boolean counter, String trxName, boolean setOrder)
-	{
-		MInOut to = new MInOut (from.getCtx(), 0, null);
-		to.set_TrxName(trxName);
-		copyValues(from, to, from.getAD_Client_ID(), from.getAD_Org_ID());
-		to.set_ValueNoCheck ("M_InOut_ID", I_ZERO);
-		to.set_ValueNoCheck ("DocumentNo", null);
-		//
-		to.setDocStatus (DOCSTATUS_Drafted);		//	Draft
-		//
-		to.setC_DocType_ID (C_DocType_ID);
-		
-		//
-		to.setDateOrdered (dateDoc);
-		to.setDateAcct (dateAcct);
-		to.setDateReceived(null);
 	
-		to.setProcessed (false);
-		
-		
-
-		return to;
-	}	//	copyFrom
-
-
-	public static MInOut copyFrom (MInOut from, Timestamp dateDoc,
-		int C_DocType_ID, boolean isSOTrx, boolean counter, String trxName, boolean setOrder)
-	{
-		MInOut to = copyFrom ( from, dateDoc, dateDoc,
-				C_DocType_ID, counter,
-				trxName, setOrder);
-		return to;
-
-	}
-	
+	//Nếu có đơn đặt hàng thì tạo line tự động từ đơn đặt hàng
 	public static void createOrderLine(MOrder order, int C_Tax_ID, Properties ctx, int M_InOut_ID, String trxName) {
 		BigDecimal taxRate = Env.ZERO;
 		if(C_Tax_ID > 0) {
@@ -208,14 +140,7 @@ public class MInOut extends X_M_InOut implements DocAction
 	/**	Lines					*/
 	protected MInOutLine[]	m_lines = null;
 	
-	/** BPartner				*/
-	protected MBPartner		m_partner = null;
-
-
-	/**
-	 * 	Get Document Status
-	 *	@return Document Status Clear Text
-	 */
+	
 	public String getDocStatusName()
 	{
 		return MRefList.getListName(getCtx(), 131, getDocStatus());
@@ -322,47 +247,6 @@ public class MInOut extends X_M_InOut implements DocAction
 		if (log.isLoggable(Level.FINE)) log.fine(processed + " - Lines=" + noLine);
 	}	//	setProcessed
 
-	/**
-	 * 	Get BPartner
-	 *	@return partner
-	 */
-	public MBPartner getBPartner()
-	{
-		if (m_partner == null)
-			m_partner = new MBPartner (getCtx(), getC_BPartner_Dr_ID(), get_TrxName());
-		return m_partner;
-	}	//	getPartner
-
-	/**
-	 * 	Set Document Type
-	 * 	@param DocBaseType doc type MDocType.DOCBASETYPE_
-	 */
-	public void setC_DocType_ID (String DocBaseType)
-	{
-		
-	}	//	setC_DocType_ID
-
-	/**
-	 * 	Set Default C_DocType_ID.
-	 * 	Based on SO flag
-	 */
-	public void setC_DocType_ID()
-	{
-		
-	}	//	setC_DocType_ID
-
-	/**
-	 * 	Set Business Partner Defaults & Details
-	 * 	@param bp business partner
-	 */
-	public void setBPartner (MBPartner bp)
-	{
-		if (bp == null)
-			return;
-
-	
-	}	//	setBPartner
-
 	
 
 	protected boolean beforeSave (boolean newRecord)
@@ -462,7 +346,8 @@ public class MInOut extends X_M_InOut implements DocAction
 			updateQtyOrderDelivered(true);
 		}
 		
-		updateStorage(true);
+		//Insert vào bảng MStorage phục vụ tính giá xuất khi CO
+		MStorage.insertOrUpdateStorage(true, getCtx(), getM_InOut_ID(), getC_DocType_ID(), get_TrxName());
 		
 		setProcessed(true);
 		if (DocAction.STATUS_Inprogress.equals(action))
@@ -471,139 +356,7 @@ public class MInOut extends X_M_InOut implements DocAction
 	}	//	completeIt
 
 	
-	private void updateStorage(boolean isComplete) {
-		List<Object> lstColumn = new ArrayList<Object>();
-		List<List<Object>> lstRows = new ArrayList<List<Object>>();
-		String sqlInsert = MStorage.sqlInsert;
-		int BATCH_SIZE = Env.getBatchSize(getCtx());
-		String sql = "";
-		MDocType mDoctype = MDocType.get(getCtx(), getC_DocType_ID());
-		String doctype = mDoctype.getDocType();
-		
-		//Type nhap so du dau ky
-		if (MDocType.DOCTYPE_Balance.equals(doctype)) {
-			sql = " select 'OP' DocType, il.M_InOutLine_ID, i.M_Warehouse_Dr_ID M_Warehouse_ID, i.DateAcct, il.M_Product_ID, il.Qty, il.Price, il.Amount "+
-					" From M_InOut i Inner Join M_InOutLine il On i.M_InOut_ID = il.M_InOut_ID "+
-					" Where i.M_InOut_ID = ? ";
-		}
-		
-		//Type nhap
-		if (MDocType.DOCTYPE_Input.equals(doctype)) {
-			if (getIncludeTaxTab() != null 
-					&& getIncludeTaxTab().equals(MInOut.INCLUDETAXTAB_TAXS))
-				//Neu co tinh thue va Thanh tien da bao gom thue thi lay truong Amt khac
-				sql = " select 'IN' DocType, il.M_InOutLine_ID, i.M_Warehouse_Dr_ID M_Warehouse_ID, i.DateAcct, il.M_Product_ID, il.Qty, il.Price, il.TaxBaseAmt Amount "+
-						" From M_InOut i Inner Join M_InOutLine il On i.M_InOut_ID = il.M_InOut_ID "+
-						" Where i.M_InOut_ID = ? ";
-			else
-				sql = " select 'IN' DocType, il.M_InOutLine_ID, i.M_Warehouse_Dr_ID M_Warehouse_ID, i.DateAcct, il.M_Product_ID, il.Qty, il.Price, il.Amount "+
-						" From M_InOut i Inner Join M_InOutLine il On i.M_InOut_ID = il.M_InOut_ID "+
-						" Where i.M_InOut_ID = ? ";
-		}
-		
-		//Type Xuat
-		if (MDocType.DOCTYPE_Output.equals(doctype)) {
-			sql = " select 'OU' DocType, il.M_InOutLine_ID, i.M_Warehouse_Cr_ID M_Warehouse_ID, i.DateAcct, il.M_Product_ID, il.Qty, il.Price, il.Amount "+
-					" From M_InOut i Inner Join M_InOutLine il On i.M_InOut_ID = il.M_InOut_ID "+
-					" Where i.M_InOut_ID = ? ";
-		}
-		if (isComplete) {//CO
-			ResultSet rs = null;
-			PreparedStatement ps = DB.prepareCall(sql);
-			try {
-				ps.setInt(1, getM_InOut_ID());
-				rs = ps.executeQuery();
-				MStorage storage = null;
-				while (rs.next()) {
-					lstColumn = new ArrayList<Object>();
-					String docType = rs.getString("DocType");
-					storage = new MStorage(getCtx(), 0, null);
-					storage.setRecord_ID(rs.getInt("M_InOutLine_ID"));
-					storage.setM_Product_ID(rs.getInt("M_Product_ID"));
-					storage.setM_Warehouse_ID(rs.getInt("M_Warehouse_ID"));
-					storage.setQty(rs.getBigDecimal("Qty"));
-					storage.setPrice(rs.getBigDecimal("Price"));
-					storage.setAmount(rs.getBigDecimal("Amount"));
-					storage.setTypeInOut(docType);
-					storage.setDateTrx(rs.getTimestamp("DateAcct"));
-					int ID = DB.getNextID(getAD_Client_ID(), MStorage.Table_Name, get_TrxName());
-					storage.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
-					storage.setAD_Client_ID(Env.getAD_Client_ID(Env.getCtx()));
-					
-					List<String> colNames = PO.getSqlInsert_Para(MStorage.Table_ID, get_TrxName());
-					lstColumn = PO.getBatchValueList(storage, colNames, MStorage.Table_ID, get_TrxName(), ID);
-					lstRows.add(lstColumn);
-					if (lstRows.size() >= BATCH_SIZE) {
-						DB.excuteBatch(sqlInsert, lstRows, get_TrxName());
-						lstRows.clear();
-					}
-				}
-				if (lstRows.size() > 0) {
-					DB.excuteBatch(sqlInsert, lstRows, get_TrxName());
-					lstRows.clear();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}			
-			
-		} else { //RA
-			sql = "Delete M_Storage Where Record_ID in (Select M_InOutLine_ID From M_InOutLine Where M_InOut_ID = ?)";
-			DB.executeUpdate(sql, getM_InOut_ID(), get_TrxName());
-		}
-	}
-	
-	/* Save array of documents to process AFTER completing this one */
-	ArrayList<PO> docsPostProcess = new ArrayList<PO>();
 
-	protected void addDocsPostProcess(PO doc) {
-		docsPostProcess.add(doc);
-	}
-
-	public ArrayList<PO> getDocsPostProcess() {
-		return docsPostProcess;
-	}
-
-	
-	/**
-	 * 	Check Material Policy
-	 * 	Sets line ASI
-	 */
-	protected void checkMaterialPolicy(MInOutLine line,BigDecimal qty)
-	{
-			
-		
-		if(Env.ZERO.compareTo(qty)==0)
-			return;
-		
-		//	Incoming Trx
-		boolean needSave = false;
-
-		MProduct product = line.getProduct();
-
-		//	Need to have Location
-		if (product != null )
-		{
-			
-			needSave = true;
-		}
-
-		//	Attribute Set Instance
-		
-
-		if (needSave)
-		{
-			line.saveEx();
-		}
-	}	//	checkMaterialPolicy
-
-	protected BigDecimal autoBalanceNegative(MInOutLine line, MProduct product,BigDecimal qtyToReceive) {
-		
-		return qtyToReceive;
-	}
-
-
-	
-	
 
 	/**
 	 * 	Re-activate
@@ -623,8 +376,8 @@ public class MInOut extends X_M_InOut implements DocAction
 		if(!super.reActivate())
 			return false;
 		
-		//Cap nhat Storage
-		updateStorage(false);
+		//Xóa dữ liệu bảng MStorage phục vụ tính giá xuất khi RA
+		MStorage.insertOrUpdateStorage(false, getCtx(), getM_InOut_ID(), getC_DocType_ID(), get_TrxName());
 		
 		if (getC_Order_ID() > 0) {
 			updateQtyOrderDelivered(false);

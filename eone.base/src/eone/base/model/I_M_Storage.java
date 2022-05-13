@@ -1,28 +1,15 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import eone.util.KeyNamePair;
-
 /** Generated Interface for M_Storage
- *  @author iDempiere (generated) 
+ *  @author EOne (generated) 
  *  @version Version 1.0
  */
 public interface I_M_Storage 
@@ -36,9 +23,9 @@ public interface I_M_Storage
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 3 - Client - Org 
+    /** AccessLevel = 7 - System - Client - Org 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(3);
+    BigDecimal accessLevel = BigDecimal.valueOf(7);
 
     /** Load Meta Data */
 
@@ -118,6 +105,19 @@ public interface I_M_Storage
 	  */
 	public boolean isActive();
 
+    /** Column name Line_ID */
+    public static final String COLUMNNAME_Line_ID = "Line_ID";
+
+	/** Set Line ID.
+	  * Transaction line ID (internal)
+	  */
+	public void setLine_ID (int Line_ID);
+
+	/** Get Line ID.
+	  * Transaction line ID (internal)
+	  */
+	public int getLine_ID();
+
     /** Column name M_Product_ID */
     public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 
@@ -156,6 +156,19 @@ public interface I_M_Storage
 	public int getM_Warehouse_ID();
 
 	public eone.base.model.I_M_Warehouse getM_Warehouse() throws RuntimeException;
+
+    /** Column name MMPolicy */
+    public static final String COLUMNNAME_MMPolicy = "MMPolicy";
+
+	/** Set Material Policy.
+	  * Material Movement Policy
+	  */
+	public void setMMPolicy (String MMPolicy);
+
+	/** Get Material Policy.
+	  * Material Movement Policy
+	  */
+	public String getMMPolicy();
 
     /** Column name Price */
     public static final String COLUMNNAME_Price = "Price";

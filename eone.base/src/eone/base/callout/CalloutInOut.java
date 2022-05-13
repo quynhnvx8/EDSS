@@ -4,6 +4,7 @@ package eone.base.callout;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Properties;
 
 import eone.base.model.CalloutEngine;
@@ -148,15 +149,15 @@ public class CalloutInOut extends CalloutEngine
 			}
 			
 			
-			Object [] data = MStorage.getQtyPrice(M_Product_ID, M_Warehouse_ID, dateAcct);
+			List<List<Object>> data = MStorage.getQtyPrice(M_Product_ID, M_Warehouse_ID, dateAcct, null);
 			
 			BigDecimal qtyRemain = Env.ZERO;
 			BigDecimal amtRemain = Env.ZERO;
-			if (data != null && data.length > 0) {
-				if (data[0] != null)
-					qtyRemain = new BigDecimal(data[0].toString());
-				if (data[2] != null)
-					amtRemain = new BigDecimal(data[2].toString());
+			if (data != null && data.size() > 0) {
+				if (data.get(0).get(0) != null)
+					qtyRemain = new BigDecimal(data.get(0).get(0).toString());
+				if (data.get(0).get(2) != null)
+					amtRemain = new BigDecimal(data.get(0).get(2).toString());
 				if (qtyRemain.compareTo(Env.ZERO) > 0)
 					price = amtRemain.divide(qtyRemain, Env.getScalePrice(), RoundingMode.HALF_UP);
 				else

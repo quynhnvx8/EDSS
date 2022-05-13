@@ -463,7 +463,7 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 								}
 								int sequence = -1;
 								if (isInsert) {
-									sequence = DB.getNextID(Env.getAD_Client_ID(Env.getCtx()), currentGridTab.getTableName(), null);
+									sequence = DB.getNextID(currentGridTab.getTableName(), null);
 								} else {
 									sequence = primaryKey;
 								}

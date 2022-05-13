@@ -137,7 +137,7 @@ public final class UserPreference implements Serializable {
 			m_AD_User_ID = AD_User_ID;
 			props = new Properties();
 
-			Query query = new Query(Env.getCtx(), I_AD_Preference.Table_Name, "NVL(AD_User_ID,0) = ? AND Attribute = ? AND AD_Window_ID Is NULL AND AD_Process_ID IS NULL AND PreferenceFor = 'W'", null);
+			Query query = new Query(Env.getCtx(), I_AD_Preference.Table_Name, "NVL(AD_User_ID,0) = ? AND Attribute = ? AND AD_Window_ID Is NULL AND AD_Process_ID IS NULL AND PreferenceFor = 'W'", null, false);
 
 			for (int i = 0; i < PROPERTIES.length; i++) {
 				String attribute = PROPERTIES[i];

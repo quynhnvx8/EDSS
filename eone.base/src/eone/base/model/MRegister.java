@@ -119,7 +119,7 @@ public class MRegister extends X_AD_Register
 			client.set_ValueNoCheck("CreatedBy", 100);
 			client.set_ValueNoCheck("UpdatedBy", 100);
 			client.set_ValueNoCheck("IsActive", true);
-			client.setC_Element_ID(105);
+			client.setC_Element_ID(getC_Element_ID());
 			client.setAD_Language("vi_VN");
 			client.setRoundUnitPrice(4);
 			client.setRoundCalculate(2);
@@ -128,7 +128,7 @@ public class MRegister extends X_AD_Register
 			client.setIsGroup(false);
 			client.setIsMultiCurrency(false);
 			client.setC_Currency_ID(234);
-			client.setMMPolicy("A");
+			client.setMMPolicy(getMMPolicy());
 			client.setAutoArchive("N");
 			client.setAD_Org_ID(0);
 			if (!client.save()) {
@@ -148,6 +148,7 @@ public class MRegister extends X_AD_Register
 			org.setOrgType(X_AD_Org.ORGTYPE_Company);
 			org.setTaxID(getTaxID());
 			org.setPhone(getPhone());
+			
 			org.setIsCreateWarehouse(true);
 			org.setAD_Org_ID(DB.getNextID(ctx, X_AD_Org.Table_Name, trxName));
 			if (!org.save()) {
@@ -164,6 +165,7 @@ public class MRegister extends X_AD_Register
 			dept.setValue(org.getValue());
 			dept.setName(org.getName());
 			dept.setIsCreateBPartner(false);
+			dept.setIsAutoCreate(true);
 			dept.setAD_Department_ID(DB.getNextID(ctx, X_AD_Department.Table_Name, trxName));
 			if (!dept.save()) {
 				return "Tạo phòng ban mới bị lỗi !";
@@ -178,7 +180,7 @@ public class MRegister extends X_AD_Register
 			emp.setGender(X_HR_Employee.GENDER_None);
 			emp.setBirthday(new Timestamp(new Date().getTime()));
 			emp.setCardID("N/A");
-			//emp.setDateIssue(emp.getBirthday());
+			emp.setDateIssue(emp.getBirthday());
 			emp.setPlaceIssue("N/A");
 			emp.setAddress("N/A");
 			emp.setPhone("N/A");

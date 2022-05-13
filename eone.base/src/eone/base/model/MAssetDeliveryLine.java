@@ -25,6 +25,7 @@ public class MAssetDeliveryLine extends X_A_Asset_DeliveryLine
 		
 		List<MAssetDeliveryLine> list = new Query(ctx, I_A_Asset_DeliveryLine.Table_Name, "A_Asset_Delivery_ID = ? And AD_Client_ID = ?", null)
 				.setParameters(A_Asset_Delivery_ID, Env.getAD_Client_ID(ctx))
+				.setApplyAccessFilter(true)
 				.setOnlyActiveRecords(true)
 				.list();
 				
@@ -41,6 +42,7 @@ public class MAssetDeliveryLine extends X_A_Asset_DeliveryLine
 		final String whereClause = "A_Asset_Delivery_ID=?  AND AD_Client_ID=?";
 		MAssetDeliveryLine retValue = new Query(ctx,I_HR_Salary.Table_Name,whereClause,trxName)
 		.setParameters(A_Asset_Delivery_ID,Env.getAD_Client_ID(ctx))
+		.setApplyAccessFilter(true)
 		.firstOnly();
 		return retValue;
 	}

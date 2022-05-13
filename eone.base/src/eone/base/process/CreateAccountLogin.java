@@ -4,7 +4,6 @@ package eone.base.process;
 
 import java.util.logging.Level;
 
-import eone.base.model.MBPGroup;
 import eone.base.model.MBPartner;
 import eone.base.model.MEmployee;
 import eone.base.model.MUser;
@@ -78,7 +77,6 @@ public class CreateAccountLogin extends SvrProcess {
 	private MBPartner createBPartner(MEmployee employee) {
 		String sql = "Select C_BPartner_ID From C_BPartner Where HR_Employee_ID = ? And IsAutoCreate = 'Y' And IsEmployee_ID = 'Y'";
 		int p_C_Bpartner_ID = DB.getSQLValue(get_TrxName(), sql, employee.getHR_Employee_ID());
-		int C_BP_Group_ID = DB.getSQLValue(get_TrxName(), "Select C_BP_Group_ID From C_BP_Group Where GroupType = ?", MBPGroup.GROUPTYPE_Employee);
 		MBPartner bpartner = null;
 		if (p_C_Bpartner_ID > 0) {
 			bpartner = MBPartner.get(getCtx(), p_C_Bpartner_ID);
@@ -89,7 +87,7 @@ public class CreateAccountLogin extends SvrProcess {
 			bpartner.setAD_Department_ID(employee.getAD_Department_ID());
 			bpartner.setValue(employee.getUserName());
 			bpartner.setName(employee.getName());
-			bpartner.setC_BP_Group_ID(C_BP_Group_ID);
+			bpartner.setGroupType(MBPartner.GROUPTYPE_Employee);
 			bpartner.setIsActive(true);
 			bpartner.setIsEmployee(true);
 			bpartner.setIsAutoCreate(true);

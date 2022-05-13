@@ -56,15 +56,7 @@ public class X_M_PromotionCus extends PO implements I_M_PromotionCus, I_Persiste
       return sb.toString();
     }
 
-	public eone.base.model.I_C_BP_Group getC_BP_Group() throws RuntimeException
-    {
-		return (eone.base.model.I_C_BP_Group)MTable.get(getCtx(), eone.base.model.I_C_BP_Group.Table_Name)
-			.getPO(getC_BP_Group_ID(), get_TrxName());	}
-
-	/** Set Business Partner Group.
-		@param C_BP_Group_ID 
-		Business Partner Group
-	  */
+	
 	public void setC_BP_Group_ID (int C_BP_Group_ID)
 	{
 		if (C_BP_Group_ID < 1) 

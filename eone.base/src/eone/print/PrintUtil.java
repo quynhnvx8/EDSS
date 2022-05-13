@@ -577,7 +577,7 @@ public class PrintUtil
 
 	//	TODO: MPrintForm	
 	//	MPrintForm form = new MPrintForm(); 
-		int AD_PrintForm_ID = DB.getNextID (AD_Client_ID, "AD_PrintForm", null);
+		int AD_PrintForm_ID = DB.getNextID ("AD_PrintForm", null);
 		String sql = "INSERT INTO AD_PrintForm(AD_Client_ID,AD_Org_ID,IsActive,Created,CreatedBy,Updated,UpdatedBy,AD_PrintForm_ID,"
 			+ "Name,Order_PrintFormat_ID,Invoice_PrintFormat_ID,Remittance_PrintFormat_ID,Shipment_PrintFormat_ID)"
 			//

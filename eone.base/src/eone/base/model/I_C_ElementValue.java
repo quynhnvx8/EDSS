@@ -4,10 +4,9 @@
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-
-import eone.util.KeyNamePair;
 
 /** Generated Interface for C_ElementValue
  *  @author EOne (generated) 
@@ -24,9 +23,9 @@ public interface I_C_ElementValue
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 7 - System - Client - Org 
+    /** AccessLevel = 4 - System 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(7);
+    BigDecimal accessLevel = BigDecimal.valueOf(4);
 
     /** Load Meta Data */
 
@@ -78,6 +77,21 @@ public interface I_C_ElementValue
 	public int getC_Currency_ID();
 
 	public eone.base.model.I_C_Currency getC_Currency() throws RuntimeException;
+
+    /** Column name C_Element_ID */
+    public static final String COLUMNNAME_C_Element_ID = "C_Element_ID";
+
+	/** Set Element.
+	  * Accounting Element
+	  */
+	public void setC_Element_ID (int C_Element_ID);
+
+	/** Get Element.
+	  * Accounting Element
+	  */
+	public int getC_Element_ID();
+
+	public eone.base.model.I_C_Element getC_Element() throws RuntimeException;
 
     /** Column name C_ElementValue_ID */
     public static final String COLUMNNAME_C_ElementValue_ID = "C_ElementValue_ID";
@@ -227,6 +241,15 @@ public interface I_C_ElementValue
 
 	/** Get IsDetailProjectPharse	  */
 	public boolean isDetailProjectPharse();
+
+    /** Column name IsDetailTax */
+    public static final String COLUMNNAME_IsDetailTax = "IsDetailTax";
+
+	/** Set DetailTax	  */
+	public void setIsDetailTax (boolean IsDetailTax);
+
+	/** Get DetailTax	  */
+	public boolean isDetailTax();
 
     /** Column name IsDetailTypeCost */
     public static final String COLUMNNAME_IsDetailTypeCost = "IsDetailTypeCost";

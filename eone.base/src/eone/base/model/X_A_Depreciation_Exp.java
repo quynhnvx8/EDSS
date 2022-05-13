@@ -1,32 +1,19 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.Env;
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
 
-import eone.util.Env;
-import eone.util.KeyNamePair;
-
 /** Generated Model for A_Depreciation_Exp
- *  @author iDempiere (generated) 
+ *  @author EOne (generated) 
  *  @version Version 1.0 - $Id$ */
 public class X_A_Depreciation_Exp extends PO implements I_A_Depreciation_Exp, I_Persistent 
 {
@@ -34,7 +21,7 @@ public class X_A_Depreciation_Exp extends PO implements I_A_Depreciation_Exp, I_
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200831L;
+	private static final long serialVersionUID = 20220512L;
 
     /** Standard Constructor */
     public X_A_Depreciation_Exp (Properties ctx, int A_Depreciation_Exp_ID, String trxName)
@@ -55,7 +42,7 @@ public class X_A_Depreciation_Exp extends PO implements I_A_Depreciation_Exp, I_
     }
 
     /** AccessLevel
-      * @return 3 - Client - Org 
+      * @return 7 - System - Client - Org 
       */
     protected int get_AccessLevel()
     {
@@ -131,20 +118,6 @@ public class X_A_Depreciation_Exp extends PO implements I_A_Depreciation_Exp, I_
     {
         return new KeyNamePair(get_ID(), String.valueOf(getA_Depreciation_Exp_ID()));
     }
-
-	/** Set A_Depreciation_Exp_UU.
-		@param A_Depreciation_Exp_UU A_Depreciation_Exp_UU	  */
-	public void setA_Depreciation_Exp_UU (String A_Depreciation_Exp_UU)
-	{
-		set_Value (COLUMNNAME_A_Depreciation_Exp_UU, A_Depreciation_Exp_UU);
-	}
-
-	/** Get A_Depreciation_Exp_UU.
-		@return A_Depreciation_Exp_UU	  */
-	public String getA_Depreciation_Exp_UU () 
-	{
-		return (String)get_Value(COLUMNNAME_A_Depreciation_Exp_UU);
-	}
 
 	public eone.base.model.I_A_Depreciation getA_Depreciation() throws RuntimeException
     {
@@ -247,9 +220,9 @@ public class X_A_Depreciation_Exp extends PO implements I_A_Depreciation_Exp, I_
 		return bd;
 	}
 
-	public I_C_TypeCost getC_TypeCost() throws RuntimeException
+	public eone.base.model.I_C_TypeCost getC_TypeCost() throws RuntimeException
     {
-		return (I_C_TypeCost)MTable.get(getCtx(), I_C_TypeCost.Table_Name)
+		return (eone.base.model.I_C_TypeCost)MTable.get(getCtx(), eone.base.model.I_C_TypeCost.Table_Name)
 			.getPO(getC_TypeCost_ID(), get_TrxName());	}
 
 	/** Set TypeCost.
@@ -400,5 +373,22 @@ public class X_A_Depreciation_Exp extends PO implements I_A_Depreciation_Exp, I_
 	public Timestamp getStartDate () 
 	{
 		return (Timestamp)get_Value(COLUMNNAME_StartDate);
+	}
+
+	/** Set UseLifed.
+		@param UseLifed UseLifed	  */
+	public void setUseLifed (int UseLifed)
+	{
+		set_Value (COLUMNNAME_UseLifed, Integer.valueOf(UseLifed));
+	}
+
+	/** Get UseLifed.
+		@return UseLifed	  */
+	public int getUseLifed () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_UseLifed);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
 	}
 }

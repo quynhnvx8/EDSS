@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import eone.util.Env;
 import eone.util.Msg;
 
 /**
@@ -152,14 +151,7 @@ public class MElementValue extends X_C_ElementValue
 	@Override
 	protected boolean beforeSave (boolean newRecord)
 	{
-		
-		return true;
-	}	//	beforeSave
-	
-	@Override
-	protected boolean afterSave (boolean newRecord, boolean success)
-	{
-		if (newRecord || is_ValueChanged("Value") || isActive()) {
+		if (newRecord || is_ValueChanged("Value") || is_ValueChanged("IsActive")) {
 			List<MElementValue> relValue = new Query(getCtx(), Table_Name, "C_ElementValue_ID != ? And (Value = ?) And AD_Client_ID = ? And IsActive = 'Y'", get_TrxName())
 					.setParameters(getC_ElementValue_ID(), getValue(), getAD_Client_ID())
 					.list();
@@ -169,7 +161,14 @@ public class MElementValue extends X_C_ElementValue
 			}
 
 		}
-		
+
+		return true;
+	}	//	beforeSave
+	
+	@Override
+	protected boolean afterSave (boolean newRecord, boolean success)
+	{
+				
 		if (!success)
 			return success;
 		
@@ -187,10 +186,8 @@ public class MElementValue extends X_C_ElementValue
 	
 	public static MElementValue get(Properties ctx, int Account_ID) {
 		if (Account_ID > 0) {
-			StringBuilder whereClause =  new StringBuilder("AD_Client_ID=?").append(" AND C_ElementValue_ID=?");
+			StringBuilder whereClause =  new StringBuilder(" C_ElementValue_ID=?");
 			ArrayList<Object> params = new ArrayList<Object>();
-			int AD_Client_ID = Env.getAD_Client_ID(ctx);
-			params.add(AD_Client_ID);
 			params.add(Account_ID);
 			MElementValue acct = new Query(ctx, MElementValue.Table_Name, whereClause.toString(), null)
 					.setParameters(params)

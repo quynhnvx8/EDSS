@@ -79,7 +79,7 @@ public class CreateDayOffLine extends SvrProcess {
 			line.setEndTime(dayInc);
 			line.setAddress(dayoff.getAddress());
 			if (daybetween > 5) {
-				sequence = DB.getNextID(Env.getAD_Client_ID(Env.getCtx()), X_HR_DayOffLine.Table_Name, null);
+				sequence = DB.getNextID(X_HR_DayOffLine.Table_Name, null);
 				line.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
 				line.setAD_Client_ID(Env.getAD_Client_ID(Env.getCtx()));
 				

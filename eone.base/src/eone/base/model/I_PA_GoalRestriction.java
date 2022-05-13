@@ -91,7 +91,6 @@ public interface I_PA_GoalRestriction
 	  */
 	public int getC_BP_Group_ID();
 
-	public eone.base.model.I_C_BP_Group getC_BP_Group() throws RuntimeException;
 
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
@@ -148,7 +147,6 @@ public interface I_PA_GoalRestriction
 	  */
 	public int getM_Product_Category_ID();
 
-	public eone.base.model.I_M_Product_Category getM_Product_Category() throws RuntimeException;
 
     /** Column name M_Product_ID */
     public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";

@@ -37,6 +37,17 @@ public interface I_AD_Register
 	  */
 	public int getAD_Client_ID();
 
+    /** Column name AD_ModelClient_ID */
+    public static final String COLUMNNAME_AD_ModelClient_ID = "AD_ModelClient_ID";
+
+	/** Set Model Client	  */
+	public void setAD_ModelClient_ID (int AD_ModelClient_ID);
+
+	/** Get Model Client	  */
+	public int getAD_ModelClient_ID();
+
+	public eone.base.model.I_AD_ModelClient getAD_ModelClient() throws RuntimeException;
+
     /** Column name AD_Org_ID */
     public static final String COLUMNNAME_AD_Org_ID = "AD_Org_ID";
 
@@ -78,6 +89,21 @@ public interface I_AD_Register
 
 	/** Get Address	  */
 	public String getAddress();
+
+    /** Column name C_Element_ID */
+    public static final String COLUMNNAME_C_Element_ID = "C_Element_ID";
+
+	/** Set Element.
+	  * Accounting Element
+	  */
+	public void setC_Element_ID (int C_Element_ID);
+
+	/** Get Element.
+	  * Accounting Element
+	  */
+	public int getC_Element_ID();
+
+	public eone.base.model.I_C_Element getC_Element() throws RuntimeException;
 
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
@@ -142,6 +168,19 @@ public interface I_AD_Register
 	  * The record is active in the system
 	  */
 	public boolean isActive();
+
+    /** Column name MMPolicy */
+    public static final String COLUMNNAME_MMPolicy = "MMPolicy";
+
+	/** Set Material Policy.
+	  * Material Movement Policy
+	  */
+	public void setMMPolicy (String MMPolicy);
+
+	/** Get Material Policy.
+	  * Material Movement Policy
+	  */
+	public String getMMPolicy();
 
     /** Column name Name */
     public static final String COLUMNNAME_Name = "Name";

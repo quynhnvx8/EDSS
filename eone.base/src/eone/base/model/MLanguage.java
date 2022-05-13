@@ -70,7 +70,7 @@ public class MLanguage extends X_AD_Language
 	 */
 	public static MLanguage get (Properties ctx, String AD_Language)
 	{
-		return new Query(ctx, Table_Name, COLUMNNAME_AD_Language+"=?", null)
+		return new Query(ctx, Table_Name, COLUMNNAME_AD_Language+"=?", null, false)
 					.setParameters(AD_Language)
 					.firstOnly();
 	}	//	get

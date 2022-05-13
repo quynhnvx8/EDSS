@@ -102,15 +102,6 @@ public class X_PA_GoalRestriction extends PO implements I_PA_GoalRestriction, I_
 		return ii.intValue();
 	}
 
-	public eone.base.model.I_C_BP_Group getC_BP_Group() throws RuntimeException
-    {
-		return (eone.base.model.I_C_BP_Group)MTable.get(getCtx(), eone.base.model.I_C_BP_Group.Table_Name)
-			.getPO(getC_BP_Group_ID(), get_TrxName());	}
-
-	/** Set Business Partner Group.
-		@param C_BP_Group_ID 
-		Business Partner Group
-	  */
 	public void setC_BP_Group_ID (int C_BP_Group_ID)
 	{
 		if (C_BP_Group_ID < 1) 
@@ -160,15 +151,7 @@ public class X_PA_GoalRestriction extends PO implements I_PA_GoalRestriction, I_
 		return (String)get_Value(COLUMNNAME_GoalRestrictionType);
 	}
 
-	public eone.base.model.I_M_Product_Category getM_Product_Category() throws RuntimeException
-    {
-		return (eone.base.model.I_M_Product_Category)MTable.get(getCtx(), eone.base.model.I_M_Product_Category.Table_Name)
-			.getPO(getM_Product_Category_ID(), get_TrxName());	}
-
-	/** Set Product Category.
-		@param M_Product_Category_ID 
-		Category of a Product
-	  */
+	
 	public void setM_Product_Category_ID (int M_Product_Category_ID)
 	{
 		if (M_Product_Category_ID < 1) 

@@ -32,9 +32,10 @@ public class MBPartner extends X_C_BPartner
 	{
 		if (Value == null || Value.length() == 0)
 			return null;
-		final String whereClause = "Value=? AND AD_Client_ID=?";
+		final String whereClause = "Value=?";
 		MBPartner retValue = new Query(ctx, I_C_BPartner.Table_Name, whereClause, trxName)
-		.setParameters(Value,Env.getAD_Client_ID(ctx))
+		.setParameters(Value)
+		.setApplyAccessFilter(true)
 		.firstOnly();
 		return retValue;
 	}	//	get
@@ -42,9 +43,10 @@ public class MBPartner extends X_C_BPartner
 
 	public static MBPartner getFirstWithTaxID (Properties ctx, String taxID, String trxName)
 	{
-		final String whereClause = "TaxID=? AND AD_Client_ID=?";
+		final String whereClause = "TaxID=?";
 		MBPartner retValue = new Query(ctx, Table_Name, whereClause, trxName)
-		.setParameters(taxID, Env.getAD_Client_ID(ctx))
+		.setParameters(taxID)
+		.setApplyAccessFilter(true)
 		.setOrderBy(COLUMNNAME_C_BPartner_ID)
 		.first();
 		return retValue;
@@ -67,6 +69,7 @@ public class MBPartner extends X_C_BPartner
 		final String whereClause = "C_BPartner_ID=?";
 		retValue = new Query(ctx,I_C_BPartner.Table_Name,whereClause,trxName)
 		.setParameters(C_BPartner_ID)
+		.setApplyAccessFilter(true)
 		.firstOnly();
 		s_cache.put (key, retValue);
 		return retValue;
@@ -97,9 +100,7 @@ public class MBPartner extends X_C_BPartner
 	protected MUser[]				m_contacts = null;
 	/** BP Bank Accounts				*/
 	protected Integer				m_primaryAD_User_ID = null;
-	/** BP Group						*/
-	protected MBPGroup				m_group = null;
-	
+
 	/**
 	 * 	Load Default BPartner
 	 * 	@param AD_Client_ID client
@@ -224,37 +225,13 @@ public class MBPartner extends X_C_BPartner
 	}	//	toString
 
 	
-	public MBPGroup getBPGroup()
-	{
-		if (m_group == null)
-		{
-			if (getC_BP_Group_ID() == 0)
-				m_group = MBPGroup.getDefault(getCtx());
-			else
-				m_group = MBPGroup.get(getCtx(), getC_BP_Group_ID(), get_TrxName());
-		}
-		return m_group;
-	}	//	getBPGroup
-
-	/**
-	 * 	Get BP Group
-	 *	@param group group
-	 */
-	public void setBPGroup(MBPGroup group)
-	{
-		m_group = group;
-		if (m_group == null)
-			return;
-		setC_BP_Group_ID(m_group.getC_BP_Group_ID());
-		
-	}	//	setBPGroup
-
 	
 	protected boolean beforeSave (boolean newRecord)
 	{
 		if (newRecord || is_ValueChanged("Value") || isActive() || is_ValueChanged("Name")) {
-			List<MBPartner> relValue = new Query(getCtx(), Table_Name, "C_BPartner_ID != ? And (Value = ? Or Name = ?) AND C_BP_Group_ID = ? And AD_Client_ID = ? And IsActive = 'Y'", get_TrxName())
-					.setParameters(getC_BPartner_ID(), getValue(), getName(), getC_BP_Group_ID(), getAD_Client_ID())
+			List<MBPartner> relValue = new Query(getCtx(), Table_Name, "C_BPartner_ID != ? And (Value = ? Or Name = ?) AND GroupType = ? And AD_Client_ID = ? And IsActive = 'Y'", get_TrxName())
+					.setParameters(getC_BPartner_ID(), getValue(), getName(), getGroupType(), getAD_Client_ID())
+					.setApplyAccessFilter(true)
 					.list();
 			if (relValue.size() >= 1) {
 				log.saveError("Error", "Value Or Name BPartner exists");
@@ -330,7 +307,6 @@ public class MBPartner extends X_C_BPartner
 			int no = DB.executeUpdate(sqlUpdate, params, true, null);
 			if (no <= 0)
 			{
-				int C_BP_Group_ID = DB.getSQLValue(null, "Select C_BP_Group_ID From C_BP_Group Where GroupType = ?", groupType);
 				MBPartner bp = new MBPartner(Env.getCtx(), 0, null);
 				bp.setAD_Org_ID(AD_Org_ID);
 				bp.setAD_Client_ID(AD_Client_ID);
@@ -339,7 +315,7 @@ public class MBPartner extends X_C_BPartner
 				bp.setName2(Name);
 				bp.setIsAutoCreate(true);
 				bp.setIsEmployee(true);
-				bp.setC_BP_Group_ID(C_BP_Group_ID);
+				bp.setGroupType(groupType);
 				bp.setReferenceKey(souce_id);
 				bp.setTableName(tableName);
 				bp.setProcessed(true);

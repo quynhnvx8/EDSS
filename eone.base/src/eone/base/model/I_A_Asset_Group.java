@@ -1,29 +1,16 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import eone.util.KeyNamePair;
-
 /** Generated Interface for A_Asset_Group
- *  @author iDempiere (generated) 
- *  @version Release 7.1
+ *  @author EOne (generated) 
+ *  @version Version 1.0
  */
 public interface I_A_Asset_Group 
 {
@@ -31,14 +18,14 @@ public interface I_A_Asset_Group
     /** TableName=A_Asset_Group */
     public static final String Table_Name = "A_Asset_Group";
 
-    /** AD_Table_ID=542 */
-    public static final int Table_ID = 542;
+    /** AD_Table_ID=1200424 */
+    public static final int Table_ID = MTable.getTable_ID(Table_Name);
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 3 - Client - Org 
+    /** AccessLevel = 4 - System 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(3);
+    BigDecimal accessLevel = BigDecimal.valueOf(4);
 
     /** Load Meta Data */
 
@@ -54,15 +41,6 @@ public interface I_A_Asset_Group
 	  * Group of Assets
 	  */
 	public int getA_Asset_Group_ID();
-
-    /** Column name A_Asset_Group_UU */
-    public static final String COLUMNNAME_A_Asset_Group_UU = "A_Asset_Group_UU";
-
-	/** Set A_Asset_Group_UU	  */
-	public void setA_Asset_Group_UU (String A_Asset_Group_UU);
-
-	/** Get A_Asset_Group_UU	  */
-	public String getA_Asset_Group_UU();
 
     /** Column name AD_Client_ID */
     public static final String COLUMNNAME_AD_Client_ID = "AD_Client_ID";
@@ -85,6 +63,21 @@ public interface I_A_Asset_Group
 	  */
 	public int getAD_Org_ID();
 
+    /** Column name C_Element_ID */
+    public static final String COLUMNNAME_C_Element_ID = "C_Element_ID";
+
+	/** Set Element.
+	  * Accounting Element
+	  */
+	public void setC_Element_ID (int C_Element_ID);
+
+	/** Get Element.
+	  * Accounting Element
+	  */
+	public int getC_Element_ID();
+
+	public eone.base.model.I_C_Element getC_Element() throws RuntimeException;
+
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
 
@@ -100,19 +93,6 @@ public interface I_A_Asset_Group
 	  * User who created this records
 	  */
 	public int getCreatedBy();
-
-    /** Column name Description */
-    public static final String COLUMNNAME_Description = "Description";
-
-	/** Set Description.
-	  * Optional short description of the record
-	  */
-	public void setDescription (String Description);
-
-	/** Get Description.
-	  * Optional short description of the record
-	  */
-	public String getDescription();
 
     /** Column name IsActive */
     public static final String COLUMNNAME_IsActive = "IsActive";
@@ -159,13 +139,13 @@ public interface I_A_Asset_Group
     /** Column name Value */
     public static final String COLUMNNAME_Value = "Value";
 
-	/** Set Search Key.
-	  * Search key for the record in the format required - must be unique
+	/** Set Code.
+	  * Code
 	  */
 	public void setValue (String Value);
 
-	/** Get Search Key.
-	  * Search key for the record in the format required - must be unique
+	/** Get Code.
+	  * Code
 	  */
 	public String getValue();
 }

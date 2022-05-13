@@ -5,12 +5,11 @@
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.Env;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
-
-import eone.util.Env;
 
 /** Generated Model for A_Asset_Build
  *  @author EOne (generated) 
@@ -21,7 +20,7 @@ public class X_A_Asset_Build extends PO implements I_A_Asset_Build, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220311L;
+	private static final long serialVersionUID = 20220505L;
 
     /** Standard Constructor */
     public X_A_Asset_Build (Properties ctx, int A_Asset_Build_ID, String trxName)
@@ -108,121 +107,6 @@ public class X_A_Asset_Build extends PO implements I_A_Asset_Build, I_Persistent
 		return ii.intValue();
 	}
 
-	public eone.base.model.I_C_ElementValue getAccount_Cr() throws RuntimeException
-    {
-		return (eone.base.model.I_C_ElementValue)MTable.get(getCtx(), eone.base.model.I_C_ElementValue.Table_Name)
-			.getPO(getAccount_Cr_ID(), get_TrxName());	}
-
-	/** Set Account Cr.
-		@param Account_Cr_ID 
-		Account Cr
-	  */
-	public void setAccount_Cr_ID (int Account_Cr_ID)
-	{
-		if (Account_Cr_ID < 1) 
-			set_Value (COLUMNNAME_Account_Cr_ID, null);
-		else 
-			set_Value (COLUMNNAME_Account_Cr_ID, Integer.valueOf(Account_Cr_ID));
-	}
-
-	/** Get Account Cr.
-		@return Account Cr
-	  */
-	public int getAccount_Cr_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_Account_Cr_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_C_ElementValue getAccount_Dr() throws RuntimeException
-    {
-		return (eone.base.model.I_C_ElementValue)MTable.get(getCtx(), eone.base.model.I_C_ElementValue.Table_Name)
-			.getPO(getAccount_Dr_ID(), get_TrxName());	}
-
-	/** Set Account Dr.
-		@param Account_Dr_ID 
-		Account Dr
-	  */
-	public void setAccount_Dr_ID (int Account_Dr_ID)
-	{
-		if (Account_Dr_ID < 1) 
-			set_Value (COLUMNNAME_Account_Dr_ID, null);
-		else 
-			set_Value (COLUMNNAME_Account_Dr_ID, Integer.valueOf(Account_Dr_ID));
-	}
-
-	/** Get Account Dr.
-		@return Account Dr
-	  */
-	public int getAccount_Dr_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_Account_Dr_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_C_ElementValue getAccount_Tax() throws RuntimeException
-    {
-		return (eone.base.model.I_C_ElementValue)MTable.get(getCtx(), eone.base.model.I_C_ElementValue.Table_Name)
-			.getPO(getAccount_Tax_ID(), get_TrxName());	}
-
-	/** Set Account Tax.
-		@param Account_Tax_ID Account Tax	  */
-	public void setAccount_Tax_ID (int Account_Tax_ID)
-	{
-		if (Account_Tax_ID < 1) 
-			set_Value (COLUMNNAME_Account_Tax_ID, null);
-		else 
-			set_Value (COLUMNNAME_Account_Tax_ID, Integer.valueOf(Account_Tax_ID));
-	}
-
-	/** Get Account Tax.
-		@return Account Tax	  */
-	public int getAccount_Tax_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_Account_Tax_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	/** Set AccumulateAmt.
-		@param AccumulateAmt AccumulateAmt	  */
-	public void setAccumulateAmt (BigDecimal AccumulateAmt)
-	{
-		set_Value (COLUMNNAME_AccumulateAmt, AccumulateAmt);
-	}
-
-	/** Get AccumulateAmt.
-		@return AccumulateAmt	  */
-	public BigDecimal getAccumulateAmt () 
-	{
-		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_AccumulateAmt);
-		if (bd == null)
-			 return Env.ZERO;
-		return bd;
-	}
-
-	/** Set Accumulate UseLifes.
-		@param AccumulateUseLifes Accumulate UseLifes	  */
-	public void setAccumulateUseLifes (BigDecimal AccumulateUseLifes)
-	{
-		set_Value (COLUMNNAME_AccumulateUseLifes, AccumulateUseLifes);
-	}
-
-	/** Get Accumulate UseLifes.
-		@return Accumulate UseLifes	  */
-	public BigDecimal getAccumulateUseLifes () 
-	{
-		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_AccumulateUseLifes);
-		if (bd == null)
-			 return Env.ZERO;
-		return bd;
-	}
-
 	/** Set Amount.
 		@param Amount 
 		Amount in a defined currency
@@ -285,62 +169,6 @@ public class X_A_Asset_Build extends PO implements I_A_Asset_Build, I_Persistent
 		return ii.intValue();
 	}
 
-	public eone.base.model.I_C_DocTypeSub getC_DocTypeSub() throws RuntimeException
-    {
-		return (eone.base.model.I_C_DocTypeSub)MTable.get(getCtx(), eone.base.model.I_C_DocTypeSub.Table_Name)
-			.getPO(getC_DocTypeSub_ID(), get_TrxName());	}
-
-	/** Set Sub Document.
-		@param C_DocTypeSub_ID 
-		Document type for generating in dispute Shipments
-	  */
-	public void setC_DocTypeSub_ID (int C_DocTypeSub_ID)
-	{
-		if (C_DocTypeSub_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_C_DocTypeSub_ID, null);
-		else 
-			set_ValueNoCheck (COLUMNNAME_C_DocTypeSub_ID, Integer.valueOf(C_DocTypeSub_ID));
-	}
-
-	/** Get Sub Document.
-		@return Document type for generating in dispute Shipments
-	  */
-	public int getC_DocTypeSub_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_C_DocTypeSub_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_C_Tax getC_Tax() throws RuntimeException
-    {
-		return (eone.base.model.I_C_Tax)MTable.get(getCtx(), eone.base.model.I_C_Tax.Table_Name)
-			.getPO(getC_Tax_ID(), get_TrxName());	}
-
-	/** Set Tax.
-		@param C_Tax_ID 
-		Tax identifier
-	  */
-	public void setC_Tax_ID (int C_Tax_ID)
-	{
-		if (C_Tax_ID < 1) 
-			set_Value (COLUMNNAME_C_Tax_ID, null);
-		else 
-			set_Value (COLUMNNAME_C_Tax_ID, Integer.valueOf(C_Tax_ID));
-	}
-
-	/** Get Tax.
-		@return Tax identifier
-	  */
-	public int getC_Tax_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_C_Tax_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
 	public eone.base.model.I_C_TypeCost getC_TypeCost() throws RuntimeException
     {
 		return (eone.base.model.I_C_TypeCost)MTable.get(getCtx(), eone.base.model.I_C_TypeCost.Table_Name)
@@ -364,46 +192,6 @@ public class X_A_Asset_Build extends PO implements I_A_Asset_Build, I_Persistent
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
-	}
-
-	public eone.base.model.I_C_TypeRevenue getC_TypeRevenue() throws RuntimeException
-    {
-		return (eone.base.model.I_C_TypeRevenue)MTable.get(getCtx(), eone.base.model.I_C_TypeRevenue.Table_Name)
-			.getPO(getC_TypeRevenue_ID(), get_TrxName());	}
-
-	/** Set Type Revenue.
-		@param C_TypeRevenue_ID Type Revenue	  */
-	public void setC_TypeRevenue_ID (int C_TypeRevenue_ID)
-	{
-		if (C_TypeRevenue_ID < 1) 
-			set_Value (COLUMNNAME_C_TypeRevenue_ID, null);
-		else 
-			set_Value (COLUMNNAME_C_TypeRevenue_ID, Integer.valueOf(C_TypeRevenue_ID));
-	}
-
-	/** Get Type Revenue.
-		@return Type Revenue	  */
-	public int getC_TypeRevenue_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_C_TypeRevenue_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	/** Set CalculateTax.
-		@param CalculateTax CalculateTax	  */
-	public void setCalculateTax (String CalculateTax)
-	{
-
-		set_Value (COLUMNNAME_CalculateTax, CalculateTax);
-	}
-
-	/** Get CalculateTax.
-		@return CalculateTax	  */
-	public String getCalculateTax () 
-	{
-		return (String)get_Value(COLUMNNAME_CalculateTax);
 	}
 
 	/** Set Canceled.
@@ -435,40 +223,6 @@ public class X_A_Asset_Build extends PO implements I_A_Asset_Build, I_Persistent
 	public Timestamp getDateAcct () 
 	{
 		return (Timestamp)get_Value(COLUMNNAME_DateAcct);
-	}
-
-	/** Set Date Invoiced.
-		@param DateInvoiced 
-		Date printed on Invoice
-	  */
-	public void setDateInvoiced (Timestamp DateInvoiced)
-	{
-		set_Value (COLUMNNAME_DateInvoiced, DateInvoiced);
-	}
-
-	/** Get Date Invoiced.
-		@return Date printed on Invoice
-	  */
-	public Timestamp getDateInvoiced () 
-	{
-		return (Timestamp)get_Value(COLUMNNAME_DateInvoiced);
-	}
-
-	/** Set Depreciation Date.
-		@param DepreciationDate 
-		Date of last depreciation
-	  */
-	public void setDepreciationDate (Timestamp DepreciationDate)
-	{
-		set_Value (COLUMNNAME_DepreciationDate, DepreciationDate);
-	}
-
-	/** Get Depreciation Date.
-		@return Date of last depreciation
-	  */
-	public Timestamp getDepreciationDate () 
-	{
-		return (Timestamp)get_Value(COLUMNNAME_DepreciationDate);
 	}
 
 	/** Set Description.
@@ -533,95 +287,6 @@ public class X_A_Asset_Build extends PO implements I_A_Asset_Build, I_Persistent
 		return (String)get_Value(COLUMNNAME_DocumentNo);
 	}
 
-	/** NoneTax = NONE */
-	public static final String INCLUDETAX_NoneTax = "NONE";
-	/** Included = INCL */
-	public static final String INCLUDETAX_Included = "INCL";
-	/** Set IncludeTax.
-		@param IncludeTax IncludeTax	  */
-	public void setIncludeTax (String IncludeTax)
-	{
-
-		set_Value (COLUMNNAME_IncludeTax, IncludeTax);
-	}
-
-	/** Get IncludeTax.
-		@return IncludeTax	  */
-	public String getIncludeTax () 
-	{
-		return (String)get_Value(COLUMNNAME_IncludeTax);
-	}
-
-	/** Set InvoiceNo.
-		@param InvoiceNo InvoiceNo	  */
-	public void setInvoiceNo (String InvoiceNo)
-	{
-		set_Value (COLUMNNAME_InvoiceNo, InvoiceNo);
-	}
-
-	/** Get InvoiceNo.
-		@return InvoiceNo	  */
-	public String getInvoiceNo () 
-	{
-		return (String)get_Value(COLUMNNAME_InvoiceNo);
-	}
-
-	public eone.base.model.I_M_Product getM_Product() throws RuntimeException
-    {
-		return (eone.base.model.I_M_Product)MTable.get(getCtx(), eone.base.model.I_M_Product.Table_Name)
-			.getPO(getM_Product_ID(), get_TrxName());	}
-
-	/** Set Product.
-		@param M_Product_ID 
-		Product, Service, Item
-	  */
-	public void setM_Product_ID (int M_Product_ID)
-	{
-		if (M_Product_ID < 1) 
-			set_Value (COLUMNNAME_M_Product_ID, null);
-		else 
-			set_Value (COLUMNNAME_M_Product_ID, Integer.valueOf(M_Product_ID));
-	}
-
-	/** Get Product.
-		@return Product, Service, Item
-	  */
-	public int getM_Product_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_M_Product_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_M_Warehouse getM_Warehouse_Cr() throws RuntimeException
-    {
-		return (eone.base.model.I_M_Warehouse)MTable.get(getCtx(), eone.base.model.I_M_Warehouse.Table_Name)
-			.getPO(getM_Warehouse_Cr_ID(), get_TrxName());	}
-
-	/** Set Warehouse Cr.
-		@param M_Warehouse_Cr_ID 
-		Storage Warehouse and Service Point
-	  */
-	public void setM_Warehouse_Cr_ID (int M_Warehouse_Cr_ID)
-	{
-		if (M_Warehouse_Cr_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_M_Warehouse_Cr_ID, null);
-		else 
-			set_ValueNoCheck (COLUMNNAME_M_Warehouse_Cr_ID, Integer.valueOf(M_Warehouse_Cr_ID));
-	}
-
-	/** Get Warehouse Cr.
-		@return Storage Warehouse and Service Point
-	  */
-	public int getM_Warehouse_Cr_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_M_Warehouse_Cr_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
 	/** Set Processed.
 		@param Processed 
 		The document has been processed
@@ -644,76 +309,5 @@ public class X_A_Asset_Build extends PO implements I_A_Asset_Build, I_Persistent
 			return "Y".equals(oo);
 		}
 		return false;
-	}
-
-	/** Set Tax Amount.
-		@param TaxAmt 
-		Tax Amount for a document
-	  */
-	public void setTaxAmt (BigDecimal TaxAmt)
-	{
-		set_ValueNoCheck (COLUMNNAME_TaxAmt, TaxAmt);
-	}
-
-	/** Get Tax Amount.
-		@return Tax Amount for a document
-	  */
-	public BigDecimal getTaxAmt () 
-	{
-		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_TaxAmt);
-		if (bd == null)
-			 return Env.ZERO;
-		return bd;
-	}
-
-	/** Set Tax base Amount.
-		@param TaxBaseAmt 
-		Base for calculating the tax amount
-	  */
-	public void setTaxBaseAmt (BigDecimal TaxBaseAmt)
-	{
-		set_Value (COLUMNNAME_TaxBaseAmt, TaxBaseAmt);
-	}
-
-	/** Get Tax base Amount.
-		@return Base for calculating the tax amount
-	  */
-	public BigDecimal getTaxBaseAmt () 
-	{
-		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_TaxBaseAmt);
-		if (bd == null)
-			 return Env.ZERO;
-		return bd;
-	}
-
-	/** Set UseDate.
-		@param UseDate UseDate	  */
-	public void setUseDate (Timestamp UseDate)
-	{
-		set_Value (COLUMNNAME_UseDate, UseDate);
-	}
-
-	/** Get UseDate.
-		@return UseDate	  */
-	public Timestamp getUseDate () 
-	{
-		return (Timestamp)get_Value(COLUMNNAME_UseDate);
-	}
-
-	/** Set UseLifes.
-		@param UseLifes UseLifes	  */
-	public void setUseLifes (BigDecimal UseLifes)
-	{
-		set_Value (COLUMNNAME_UseLifes, UseLifes);
-	}
-
-	/** Get UseLifes.
-		@return UseLifes	  */
-	public BigDecimal getUseLifes () 
-	{
-		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_UseLifes);
-		if (bd == null)
-			 return Env.ZERO;
-		return bd;
 	}
 }

@@ -1212,10 +1212,10 @@ public final class DB
 			throw new IllegalArgumentException("Context missing");
 		if (TableName == null || TableName.length() == 0)
 			throw new IllegalArgumentException("TableName missing");
-		return getNextID(Env.getAD_Client_ID(ctx), TableName, trxName);
+		return getNextID(TableName, trxName);
 	}	//	getNextID
 
-	public static int getNextID (int AD_Client_ID, String TableName, String trxName)
+	public static int getNextID (String TableName, String trxName)
 	{
 		
 		String sequenceName ="";		

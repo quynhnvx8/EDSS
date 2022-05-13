@@ -578,60 +578,13 @@ public class GridView extends Vlayout implements EventListener<Event>, IdSpace, 
 					} else {
 						int estimatedWidth = 0;
 						estimatedWidth = gridField[i].getDisplayLength();
-						/*
-						if (DisplayType.isNumeric(gridField[i].getDisplayType()))
-							estimatedWidth =  MIN_NUMERIC_COL_WIDTH;
-						else if (DisplayType.isLookup(gridField[i].getDisplayType()))
-							estimatedWidth = MIN_COMBOBOX_WIDTH;
-						else if (DisplayType.isText(gridField[i].getDisplayType()))
-							estimatedWidth = gridField[i].getDisplayLength() * 8;
-						else
-							estimatedWidth = MIN_COLUMN_WIDTH;
-						*/
+						
 						int headerWidth = (gridField[i].getHeader().length()+2) * 8;
 						if (headerWidth > estimatedWidth)
 							estimatedWidth = headerWidth;
 						
 						ZKUpdateUtil.setWidth(column, Integer.toString(estimatedWidth) + "px");
-						/*
-						//hflex=min for first column not working well
-						if (i > 0 && !ClientInfo.isMobile())
-						{
-							if (DisplayType.isLookup(gridField[i].getDisplayType()))
-							{
-								if (headerWidth > MIN_COMBOBOX_WIDTH)
-									ZKUpdateUtil.setHflex(column, "min");
-							}
-							else if (DisplayType.isNumeric(gridField[i].getDisplayType()))
-							{
-								if (headerWidth > MIN_NUMERIC_COL_WIDTH)
-									ZKUpdateUtil.setHflex(column, "min");
-							}
-							else if (!DisplayType.isText(gridField[i].getDisplayType()))
-							{
-								if (headerWidth > MIN_COLUMN_WIDTH)
-									ZKUpdateUtil.setHflex(column, "min");
-							}
-						}
 						
-						//set estimated width if not using hflex=min
-						if (!"min".equals(column.getHflex())) {
-							if (ClientInfo.isMobile() && ClientInfo.get() != null &&
-								ClientInfo.get().desktopWidth <= ClientInfo.SMALL_WIDTH) {
-								int maxWidth = ClientInfo.get().desktopWidth / 5;
-								if (maxWidth < MIN_COLUMN_MOBILE_WIDTH)
-									maxWidth = MIN_COLUMN_MOBILE_WIDTH;
-								if (estimatedWidth > maxWidth)
-									estimatedWidth = maxWidth;
-							} else {
-								if (estimatedWidth > MAX_COLUMN_WIDTH)
-									estimatedWidth = MAX_COLUMN_WIDTH;
-								else if ( estimatedWidth < MIN_COLUMN_WIDTH)
-									estimatedWidth = MIN_COLUMN_WIDTH;								
-							}
-							ZKUpdateUtil.setWidth(column, Integer.toString(estimatedWidth) + "px");
-						}
-						*/
 					}
 				} 
 				columns.appendChild(column);
@@ -959,7 +912,7 @@ public class GridView extends Vlayout implements EventListener<Event>, IdSpace, 
 				}
 			}
 			if (cmp != null)
-				Clients.response(new AuScript(null, "parent.eone.scrollToRow('" + cmp.getUuid() + "');"));
+				Clients.response(new AuScript(null, "window.eone.scrollToRow('" + cmp.getUuid() + "');"));
 
 			if (columnOnClick != null && columnOnClick.trim().length() > 0) {
 				List<?> list = row.getChildren();
@@ -968,7 +921,7 @@ public class GridView extends Vlayout implements EventListener<Event>, IdSpace, 
 						Div div = (Div) element;
 						if (columnOnClick.equals(div.getAttribute("columnName"))) {
 							cmp = div.getFirstChild();
-							Clients.response(new AuScript(null, "parent.eone.scrollToRow('" + cmp.getUuid() + "');"));
+							Clients.response(new AuScript(null, "window.eone.scrollToRow('" + cmp.getUuid() + "');"));
 							break;
 						}
 					}

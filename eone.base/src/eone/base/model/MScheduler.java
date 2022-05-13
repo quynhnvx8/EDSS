@@ -51,7 +51,7 @@ public class MScheduler extends X_AD_Scheduler
 	 */
 	public static MScheduler[] getActive (Properties ctx)
 	{
-		List<MScheduler> list = new Query(ctx, Table_Name, null, null)
+		List<MScheduler> list = new Query(ctx, Table_Name, null, null, false)
 		.setOnlyActiveRecords(true)
 		.list();
 		MScheduler[] retValue = new MScheduler[list.size ()];

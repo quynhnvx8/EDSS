@@ -173,7 +173,6 @@ public interface I_HM_PatientRegisterLine
 	  */
 	public int getM_Product_Category_ID();
 
-	public eone.base.model.I_M_Product_Category getM_Product_Category() throws RuntimeException;
 
     /** Column name M_Product_ID */
     public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";

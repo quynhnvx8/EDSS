@@ -90,7 +90,7 @@ public class MigraID extends SvrProcess {
 		} else {
 			String idCol = tableName + "_ID";
 			if (p_ID_To <= 0) {
-				p_ID_To = DB.getNextID(getAD_Client_ID(), tableName, get_TrxName());
+				p_ID_To = DB.getNextID(tableName, get_TrxName());
 			} 
 			// convert ID
 			int cnt = updID(tableName, idCol);

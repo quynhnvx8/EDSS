@@ -1,28 +1,15 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import eone.util.KeyNamePair;
-
 /** Generated Interface for A_Asset
- *  @author iDempiere (generated) 
+ *  @author EOne (generated) 
  *  @version Version 1.0
  */
 public interface I_A_Asset 
@@ -36,9 +23,9 @@ public interface I_A_Asset
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 3 - Client - Org 
+    /** AccessLevel = 7 - System - Client - Org 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(3);
+    BigDecimal accessLevel = BigDecimal.valueOf(7);
 
     /** Load Meta Data */
 
@@ -69,45 +56,6 @@ public interface I_A_Asset
 	  * Asset used internally or by customers
 	  */
 	public int getA_Asset_ID();
-
-    /** Column name A_Asset_UU */
-    public static final String COLUMNNAME_A_Asset_UU = "A_Asset_UU";
-
-	/** Set A_Asset_UU	  */
-	public void setA_Asset_UU (String A_Asset_UU);
-
-	/** Get A_Asset_UU	  */
-	public String getA_Asset_UU();
-
-    /** Column name Account_Cr_ID */
-    public static final String COLUMNNAME_Account_Cr_ID = "Account_Cr_ID";
-
-	/** Set Account Cr.
-	  * Account Cr
-	  */
-	public void setAccount_Cr_ID (int Account_Cr_ID);
-
-	/** Get Account Cr.
-	  * Account Cr
-	  */
-	public int getAccount_Cr_ID();
-
-	public eone.base.model.I_C_ElementValue getAccount_Cr() throws RuntimeException;
-
-    /** Column name Account_Dr_ID */
-    public static final String COLUMNNAME_Account_Dr_ID = "Account_Dr_ID";
-
-	/** Set Account Dr.
-	  * Account Dr
-	  */
-	public void setAccount_Dr_ID (int Account_Dr_ID);
-
-	/** Get Account Dr.
-	  * Account Dr
-	  */
-	public int getAccount_Dr_ID();
-
-	public eone.base.model.I_C_ElementValue getAccount_Dr() throws RuntimeException;
 
     /** Column name AccumulateAmt */
     public static final String COLUMNNAME_AccumulateAmt = "AccumulateAmt";
@@ -148,15 +96,6 @@ public interface I_A_Asset
 	/** Get Approved	  */
 	public String getApproved();
 
-    /** Column name AssetType */
-    public static final String COLUMNNAME_AssetType = "AssetType";
-
-	/** Set AssetType	  */
-	public void setAssetType (String AssetType);
-
-	/** Get AssetType	  */
-	public String getAssetType();
-
     /** Column name BaseAmtCurrent */
     public static final String COLUMNNAME_BaseAmtCurrent = "BaseAmtCurrent";
 
@@ -184,7 +123,7 @@ public interface I_A_Asset
 	/** Get TypeCost	  */
 	public int getC_TypeCost_ID();
 
-	public I_C_TypeCost getC_TypeCost() throws RuntimeException;
+	public eone.base.model.I_C_TypeCost getC_TypeCost() throws RuntimeException;
 
     /** Column name Canceled */
     public static final String COLUMNNAME_Canceled = "Canceled";
@@ -229,19 +168,6 @@ public interface I_A_Asset
 	  */
 	public int getCreatedBy();
 
-    /** Column name DepreciationDate */
-    public static final String COLUMNNAME_DepreciationDate = "DepreciationDate";
-
-	/** Set Depreciation Date.
-	  * Date of last depreciation
-	  */
-	public void setDepreciationDate (Timestamp DepreciationDate);
-
-	/** Get Depreciation Date.
-	  * Date of last depreciation
-	  */
-	public Timestamp getDepreciationDate();
-
     /** Column name DepreciationSplit */
     public static final String COLUMNNAME_DepreciationSplit = "DepreciationSplit";
 
@@ -264,19 +190,6 @@ public interface I_A_Asset
 	  */
 	public String getDescription();
 
-    /** Column name DisposalDate */
-    public static final String COLUMNNAME_DisposalDate = "DisposalDate";
-
-	/** Set Disposal Date.
-	  * Date when the asset is/was disposed
-	  */
-	public void setDisposalDate (Timestamp DisposalDate);
-
-	/** Get Disposal Date.
-	  * Date when the asset is/was disposed
-	  */
-	public Timestamp getDisposalDate();
-
     /** Column name DocStatus */
     public static final String COLUMNNAME_DocStatus = "DocStatus";
 
@@ -289,24 +202,6 @@ public interface I_A_Asset
 	  * The current status of the document
 	  */
 	public String getDocStatus();
-
-    /** Column name EndDateCurrent */
-    public static final String COLUMNNAME_EndDateCurrent = "EndDateCurrent";
-
-	/** Set EndDateCurrent	  */
-	public void setEndDateCurrent (Timestamp EndDateCurrent);
-
-	/** Get EndDateCurrent	  */
-	public Timestamp getEndDateCurrent();
-
-    /** Column name EndDateOriginal */
-    public static final String COLUMNNAME_EndDateOriginal = "EndDateOriginal";
-
-	/** Set EndDateOriginal	  */
-	public void setEndDateOriginal (Timestamp EndDateOriginal);
-
-	/** Get EndDateOriginal	  */
-	public Timestamp getEndDateOriginal();
 
     /** Column name GuaranteeDate */
     public static final String COLUMNNAME_GuaranteeDate = "GuaranteeDate";
@@ -378,6 +273,19 @@ public interface I_A_Asset
 	/** Get IsRecordUsed	  */
 	public boolean isRecordUsed();
 
+    /** Column name IsTransferred */
+    public static final String COLUMNNAME_IsTransferred = "IsTransferred";
+
+	/** Set Transferred.
+	  * Transferred to General Ledger (i.e. accounted)
+	  */
+	public void setIsTransferred (boolean IsTransferred);
+
+	/** Get Transferred.
+	  * Transferred to General Ledger (i.e. accounted)
+	  */
+	public boolean isTransferred();
+
     /** Column name Name */
     public static final String COLUMNNAME_Name = "Name";
 
@@ -390,6 +298,19 @@ public interface I_A_Asset
 	  * Alphanumeric identifier of the entity
 	  */
 	public String getName();
+
+    /** Column name PendingDate */
+    public static final String COLUMNNAME_PendingDate = "PendingDate";
+
+	/** Set Pending Date.
+	  * Pending date
+	  */
+	public void setPendingDate (Timestamp PendingDate);
+
+	/** Get Pending Date.
+	  * Pending date
+	  */
+	public Timestamp getPendingDate();
 
     /** Column name Processed */
     public static final String COLUMNNAME_Processed = "Processed";
@@ -412,15 +333,6 @@ public interface I_A_Asset
 
 	/** Get RemainAmt	  */
 	public BigDecimal getRemainAmt();
-
-    /** Column name RevalDate */
-    public static final String COLUMNNAME_RevalDate = "RevalDate";
-
-	/** Set Revaluation Date	  */
-	public void setRevalDate (Timestamp RevalDate);
-
-	/** Get Revaluation Date	  */
-	public Timestamp getRevalDate();
 
     /** Column name SerNo */
     public static final String COLUMNNAME_SerNo = "SerNo";
@@ -478,6 +390,15 @@ public interface I_A_Asset
 	/** Get UseDate	  */
 	public Timestamp getUseDate();
 
+    /** Column name UseLifed */
+    public static final String COLUMNNAME_UseLifed = "UseLifed";
+
+	/** Set UseLifed	  */
+	public void setUseLifed (int UseLifed);
+
+	/** Get UseLifed	  */
+	public int getUseLifed();
+
     /** Column name UseLifes */
     public static final String COLUMNNAME_UseLifes = "UseLifes";
 
@@ -499,17 +420,4 @@ public interface I_A_Asset
 	  * Code
 	  */
 	public String getValue();
-
-    /** Column name VersionNo */
-    public static final String COLUMNNAME_VersionNo = "VersionNo";
-
-	/** Set Version No.
-	  * Version Number
-	  */
-	public void setVersionNo (String VersionNo);
-
-	/** Get Version No.
-	  * Version Number
-	  */
-	public String getVersionNo();
 }

@@ -69,7 +69,7 @@ public class MUserPreference extends X_AD_UserPreference{
 	}
 
 	public static MUserPreference getUserPreference(int AD_User_ID, int AD_Client_ID, String trxName){
-		Query query = new Query(Env.getCtx(), MUserPreference.Table_Name, "AD_User_ID=? AND AD_Client_ID=?", trxName);
+		Query query = new Query(Env.getCtx(), MUserPreference.Table_Name, "AD_User_ID=? AND AD_Client_ID=?", trxName, false);
 		MUserPreference preferences = query.setParameters(new Object[]{AD_User_ID, AD_Client_ID}).firstOnly();
 		
 		if(preferences==null){

@@ -8,7 +8,6 @@ import java.util.logging.Level;
 import eone.base.process.DocAction;
 import eone.base.process.DocumentEngine;
 import eone.util.DB;
-import eone.util.Env;
 
 public class MAssetDelivery extends X_A_Asset_Delivery implements DocAction
 {
@@ -30,9 +29,10 @@ public class MAssetDelivery extends X_A_Asset_Delivery implements DocAction
 
 	public static MAssetDelivery get (Properties ctx, int A_Asset_Delivery_ID, String trxName)
 	{
-		final String whereClause = "A_Asset_Delivery_ID=? AND AD_Client_ID=?";
+		final String whereClause = "A_Asset_Delivery_ID=?";
 		MAssetDelivery retValue = new Query(ctx,I_HR_Salary.Table_Name,whereClause,trxName)
-		.setParameters(A_Asset_Delivery_ID,Env.getAD_Client_ID(ctx))
+		.setParameters(A_Asset_Delivery_ID)
+		.setApplyAccessFilter(true)
 		.firstOnly();
 		return retValue;
 	}
@@ -74,7 +74,7 @@ public class MAssetDelivery extends X_A_Asset_Delivery implements DocAction
 	@Override
 	public boolean processIt(String action, int AD_Window_ID) throws Exception {
 		m_processMsg = null;
-		DocumentEngine engine = new DocumentEngine (this, getDocStatus(), AD_Window_ID, true);
+		DocumentEngine engine = new DocumentEngine (this, getDocStatus(), AD_Window_ID, false);
 		return engine.processIt (action, getDocStatus());
 	}
 
@@ -198,6 +198,7 @@ public class MAssetDelivery extends X_A_Asset_Delivery implements DocAction
 		String whereClause = "A_Asset_Delivery_ID = ? And A_Asset_ID is not null";
 		List<MAssetDeliveryLine> ls = new Query(getCtx(), X_A_Asset_DeliveryLine.Table_Name, whereClause, get_TrxName())
 				.setParameters(getA_Asset_Delivery_ID())
+				.setApplyAccessFilter(true)
 				.list();
 		return ls;
 	}

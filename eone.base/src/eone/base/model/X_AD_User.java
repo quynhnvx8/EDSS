@@ -19,7 +19,7 @@ public class X_AD_User extends PO implements I_AD_User, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220421L;
+	private static final long serialVersionUID = 20220511L;
 
     /** Standard Constructor */
     public X_AD_User (Properties ctx, int AD_User_ID, String trxName)
@@ -339,6 +339,27 @@ public class X_AD_User extends PO implements I_AD_User, I_Persistent
 	public boolean isLocked () 
 	{
 		Object oo = get_Value(COLUMNNAME_IsLocked);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
+	}
+
+	/** Set ManyLogin.
+		@param IsManyLogin ManyLogin	  */
+	public void setIsManyLogin (boolean IsManyLogin)
+	{
+		set_Value (COLUMNNAME_IsManyLogin, Boolean.valueOf(IsManyLogin));
+	}
+
+	/** Get ManyLogin.
+		@return ManyLogin	  */
+	public boolean isManyLogin () 
+	{
+		Object oo = get_Value(COLUMNNAME_IsManyLogin);
 		if (oo != null) 
 		{
 			 if (oo instanceof Boolean) 

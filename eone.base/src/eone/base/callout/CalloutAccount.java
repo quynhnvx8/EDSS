@@ -12,15 +12,15 @@ import eone.base.model.MTax;
 import eone.base.model.X_C_Account;
 import eone.base.model.X_C_DocType;
 
-//eone.base.model.CalloutAccount.fillByDocType
-//eone.base.model.CalloutAccount.fillByBPartner
-//eone.base.model.CalloutAccount.fillByAsset
-//eone.base.model.CalloutAccount.fillByProduct
-//eone.base.model.CalloutAccount.fillByContract
-//eone.base.model.CalloutAccount.fillByProject
-//eone.base.model.CalloutAccount.fillByConstruc
-//eone.base.model.CalloutAccount.fillByWarehouse
-//eone.base.model.CalloutAccount.fillByTax
+//eone.base.callout.CalloutAccount.fillByDocType
+//eone.base.callout.CalloutAccount.fillByBPartner
+//eone.base.callout.CalloutAccount.fillByAsset
+//eone.base.callout.CalloutAccount.fillByProduct
+//eone.base.callout.CalloutAccount.fillByContract
+//eone.base.callout.CalloutAccount.fillByProject
+//eone.base.callout.CalloutAccount.fillByConstruc
+//eone.base.callout.CalloutAccount.fillByWarehouse
+//eone.base.callout.CalloutAccount.fillByTax
 public class CalloutAccount extends CalloutEngine
 {
 	

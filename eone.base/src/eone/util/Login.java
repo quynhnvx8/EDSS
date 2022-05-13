@@ -280,7 +280,7 @@ public class Login
 				.append("         AND c.IsActive='Y') AND ")
 				.append(" AD_User.IsActive='Y'");
 		
-		List<MUser> users = new Query(m_ctx, MUser.Table_Name, where.toString(), null)
+		List<MUser> users = new Query(m_ctx, MUser.Table_Name, where.toString(), null, false)
 			.setParameters(app_user)
 			.setOrderBy(MUser.COLUMNNAME_AD_User_ID)
 			.list();
@@ -434,7 +434,10 @@ public class Login
 			{
 				user.setFailedLoginCount(0);
 				user.setDateLastLogin(new Timestamp(now));
-				user.setSessionID(Env.getContext(Env.getCtx(), "#AD_Session_ID"));
+				if (!user.isUserSystem() && !user.isManyLogin()) 
+					user.setSessionID(Env.getContext(Env.getCtx(), "#AD_Session_ID"));
+				else 
+					user.setSessionID(null);
 				Env.setContext(Env.getCtx(), "#AD_Client_ID", user.getAD_Client_ID());
 				if (!user.save())
 					log.severe("Failed to update user record with date last login (" + user.getName() + " / clientID = " + user.getAD_Client_ID() + ")");
@@ -500,46 +503,49 @@ public class Login
 
 	
    
-    public void loadContextElementValue(int AD_Client_ID, ItemMandatory itemMan) {
+    public void loadContextElementValue(int AD_Element_ID, ItemMandatory itemMan) {
 		String sql = 
 				" select COALESCE(string_agg(c_elementvalue_id::text,','),'') as Ids, 'AST' as Name "+
-				" from c_elementvalue where AD_Client_ID = ? And IsDetailAsset = 'Y' "+
+				" from c_elementvalue where C_Element_ID = ? And IsDetailAsset = 'Y' "+
 				" union all "+
 				" select COALESCE(string_agg(c_elementvalue_id::text,','),'') as Ids, 'CTN' as Name "+
-				" from c_elementvalue where AD_Client_ID = ? And IsDetailConstruction = 'Y' "+
+				" from c_elementvalue where C_Element_ID = ? And IsDetailConstruction = 'Y' "+
 				" union all "+
 				" select COALESCE(string_agg(c_elementvalue_id::text,','),'') as Ids, 'CTP' as Name "+
-				" from c_elementvalue where AD_Client_ID = ? And IsDetailConstructionPharse = 'Y' "+
+				" from c_elementvalue where C_Element_ID = ? And IsDetailConstructionPharse = 'Y' "+
 				" union all "+
 				" select COALESCE(string_agg(c_elementvalue_id::text,','),'') as Ids, 'CTT' as Name "+
-				" from c_elementvalue where AD_Client_ID = ? And IsDetailContract = 'Y' "+
+				" from c_elementvalue where C_Element_ID = ? And IsDetailContract = 'Y' "+
 				" union all "+
 				" select COALESCE(string_agg(c_elementvalue_id::text,','),'') as Ids, 'CTS' as Name "+
-				" from c_elementvalue where AD_Client_ID = ? And IsDetailContractSchedule = 'Y' "+
+				" from c_elementvalue where C_Element_ID = ? And IsDetailContractSchedule = 'Y' "+
 				" union all "+
 				" select COALESCE(string_agg(c_elementvalue_id::text,','),'') as Ids, 'WAE' as Name "+
-				" from c_elementvalue where AD_Client_ID = ? And IsDetailWarehouse = 'Y' "+
+				" from c_elementvalue where C_Element_ID = ? And IsDetailWarehouse = 'Y' "+
 				" union all "+
 				" select COALESCE(string_agg(c_elementvalue_id::text,','),'') as Ids, 'TCT' as Name "+
-				" from c_elementvalue where AD_Client_ID = ? And IsDetailTypeCost = 'Y' "+
+				" from c_elementvalue where C_Element_ID = ? And IsDetailTypeCost = 'Y' "+
 				" union all "+
 				" select COALESCE(string_agg(c_elementvalue_id::text,','),'') as Ids, 'TRE' as Name "+
-				" from c_elementvalue where AD_Client_ID = ? And IsDetailTypeRevenue = 'Y' "+
+				" from c_elementvalue where C_Element_ID = ? And IsDetailTypeRevenue = 'Y' "+
 				" union all "+
 				" select COALESCE(string_agg(c_elementvalue_id::text,','),'') as Ids, 'PRJ' as Name "+
-				" from c_elementvalue where AD_Client_ID = ? And IsDetailProject = 'Y' "+
+				" from c_elementvalue where C_Element_ID = ? And IsDetailProject = 'Y' "+
 				" union all "+
 				" select COALESCE(string_agg(c_elementvalue_id::text,','),'') as Ids, 'PRP' as Name "+
-				" from c_elementvalue where AD_Client_ID = ? And IsDetailProjectPharse = 'Y' "+
+				" from c_elementvalue where C_Element_ID = ? And IsDetailProjectPharse = 'Y' "+
 				" union all "+
 				" select COALESCE(string_agg(c_elementvalue_id::text,','),'') as Ids, 'BAC' as Name "+
-				" from c_elementvalue where AD_Client_ID = ? And IsBankAccount = 'Y' "+
+				" from c_elementvalue where C_Element_ID = ? And IsBankAccount = 'Y' "+
 				" union all "+
 				" select COALESCE(string_agg(c_elementvalue_id::text,','),'') as Ids, 'PRD' as Name "+
-				" from c_elementvalue where AD_Client_ID = ? And IsDetailProduct = 'Y'"+
+				" from c_elementvalue where C_Element_ID = ? And IsDetailProduct = 'Y'"+
+				" union all "+
+				" select COALESCE(string_agg(c_elementvalue_id::text,','),'') as Ids, 'TAX' as Name "+
+				" from c_elementvalue where C_Element_ID = ? And IsDetailTax = 'Y'"+
 				" union all "+
 				" select COALESCE(string_agg(c_elementvalue_id::text,','),'') as Ids, 'BPN' as Name "+
-				" from c_elementvalue where AD_Client_ID = ? And IsDetailBPartner = 'Y'";
+				" from c_elementvalue where C_Element_ID = ? And IsDetailBPartner = 'Y'";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -551,19 +557,20 @@ public class Login
 			}
 			pstmt = DB.prepareStatement(sql, null);
 			
-			pstmt.setInt(1, AD_Client_ID);
-			pstmt.setInt(2, AD_Client_ID);
-			pstmt.setInt(3, AD_Client_ID);
-			pstmt.setInt(4, AD_Client_ID);
-			pstmt.setInt(5, AD_Client_ID);
-			pstmt.setInt(6, AD_Client_ID);
-			pstmt.setInt(7, AD_Client_ID);
-			pstmt.setInt(8, AD_Client_ID);
-			pstmt.setInt(9, AD_Client_ID);
-			pstmt.setInt(10, AD_Client_ID);
-			pstmt.setInt(11, AD_Client_ID);
-			pstmt.setInt(12, AD_Client_ID);
-			pstmt.setInt(13, AD_Client_ID);
+			pstmt.setInt(1, AD_Element_ID);
+			pstmt.setInt(2, AD_Element_ID);
+			pstmt.setInt(3, AD_Element_ID);
+			pstmt.setInt(4, AD_Element_ID);
+			pstmt.setInt(5, AD_Element_ID);
+			pstmt.setInt(6, AD_Element_ID);
+			pstmt.setInt(7, AD_Element_ID);
+			pstmt.setInt(8, AD_Element_ID);
+			pstmt.setInt(9, AD_Element_ID);
+			pstmt.setInt(10, AD_Element_ID);
+			pstmt.setInt(11, AD_Element_ID);
+			pstmt.setInt(12, AD_Element_ID);
+			pstmt.setInt(13, AD_Element_ID);
+			pstmt.setInt(14, AD_Element_ID);
 			
 			rs = pstmt.executeQuery();
 				
@@ -595,6 +602,8 @@ public class Login
 					itemMan.setProduct(rs.getString("Ids"));
 				if ("BPN".equalsIgnoreCase(rs.getString("Name")))
 					itemMan.setBpartner(rs.getString("Ids"));
+				if ("TAX".equalsIgnoreCase(rs.getString("Name")))
+					itemMan.setTax(rs.getString("Ids"));
 			}		
 		} 
 		catch (SQLException ex)
@@ -839,9 +848,9 @@ public class Login
 		
 		getClientEnveronment(AD_Client_ID, itemDis);
 		
-		setContextExtend(itemDis, itemMan);
+		loadContextElementValue(Integer.parseInt(itemDis.getElement()), itemMan);//AD_Client_ID
 		
-		loadContextElementValue(0, itemMan);//AD_Client_ID
+		setContextExtend(itemDis, itemMan);
 		
 		loadDocType();
 		
@@ -890,6 +899,6 @@ public class Login
 		Env.setContext(m_ctx, "#Warehouse", 		itemMan.getWarehouse());
 		Env.setContext(m_ctx, "#TypeCost", 			itemMan.getTypeCost());
 		Env.setContext(m_ctx, "#TypeRevenue", 		itemMan.getTypeRevenue());
-		
+		Env.setContext(m_ctx, "#Tax", 				itemMan.getTax());
 	}
 }	//	Login

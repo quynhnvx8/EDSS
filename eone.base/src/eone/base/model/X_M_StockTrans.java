@@ -5,35 +5,34 @@
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.Env;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
 
-/** Generated Model for A_Asset_Change
+/** Generated Model for M_StockTrans
  *  @author EOne (generated) 
  *  @version Version 1.0 - $Id$ */
-public class X_A_Asset_Change extends PO implements I_A_Asset_Change, I_Persistent 
+public class X_M_StockTrans extends PO implements I_M_StockTrans, I_Persistent 
 {
 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20211227L;
+	private static final long serialVersionUID = 20220501L;
 
     /** Standard Constructor */
-    public X_A_Asset_Change (Properties ctx, int A_Asset_Change_ID, String trxName)
+    public X_M_StockTrans (Properties ctx, int M_StockTrans_ID, String trxName)
     {
-      super (ctx, A_Asset_Change_ID, trxName);
-      /** if (A_Asset_Change_ID == 0)
+      super (ctx, M_StockTrans_ID, trxName);
+      /** if (M_StockTrans_ID == 0)
         {
-			setA_Asset_Change_ID (0);
-			setProcessed (false);
-// 'N'
         } */
     }
 
     /** Load Constructor */
-    public X_A_Asset_Change (Properties ctx, ResultSet rs, String trxName)
+    public X_M_StockTrans (Properties ctx, ResultSet rs, String trxName)
     {
       super (ctx, rs, trxName);
     }
@@ -55,29 +54,46 @@ public class X_A_Asset_Change extends PO implements I_A_Asset_Change, I_Persiste
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_A_Asset_Change[")
+      StringBuilder sb = new StringBuilder ("X_M_StockTrans[")
         .append(get_ID()).append("]");
       return sb.toString();
     }
 
-	/** Set A_Asset_Change_ID.
-		@param A_Asset_Change_ID A_Asset_Change_ID	  */
-	public void setA_Asset_Change_ID (int A_Asset_Change_ID)
+	/** Set Amount.
+		@param Amount 
+		Amount in a defined currency
+	  */
+	public void setAmount (BigDecimal Amount)
 	{
-		if (A_Asset_Change_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_A_Asset_Change_ID, null);
-		else 
-			set_ValueNoCheck (COLUMNNAME_A_Asset_Change_ID, Integer.valueOf(A_Asset_Change_ID));
+		set_Value (COLUMNNAME_Amount, Amount);
 	}
 
-	/** Get A_Asset_Change_ID.
-		@return A_Asset_Change_ID	  */
-	public int getA_Asset_Change_ID () 
+	/** Get Amount.
+		@return Amount in a defined currency
+	  */
+	public BigDecimal getAmount () 
 	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_A_Asset_Change_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_Amount);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
+	}
+
+	/** Set AmountConvert.
+		@param AmountConvert AmountConvert	  */
+	public void setAmountConvert (BigDecimal AmountConvert)
+	{
+		set_Value (COLUMNNAME_AmountConvert, AmountConvert);
+	}
+
+	/** Get AmountConvert.
+		@return AmountConvert	  */
+	public BigDecimal getAmountConvert () 
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_AmountConvert);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
 	}
 
 	/** Set Approved.
@@ -94,6 +110,34 @@ public class X_A_Asset_Change extends PO implements I_A_Asset_Change, I_Persiste
 		return (String)get_Value(COLUMNNAME_Approved);
 	}
 
+	public eone.base.model.I_C_Currency getC_Currency() throws RuntimeException
+    {
+		return (eone.base.model.I_C_Currency)MTable.get(getCtx(), eone.base.model.I_C_Currency.Table_Name)
+			.getPO(getC_Currency_ID(), get_TrxName());	}
+
+	/** Set Currency.
+		@param C_Currency_ID 
+		The Currency for this record
+	  */
+	public void setC_Currency_ID (int C_Currency_ID)
+	{
+		if (C_Currency_ID < 1) 
+			set_Value (COLUMNNAME_C_Currency_ID, null);
+		else 
+			set_Value (COLUMNNAME_C_Currency_ID, Integer.valueOf(C_Currency_ID));
+	}
+
+	/** Get Currency.
+		@return The Currency for this record
+	  */
+	public int getC_Currency_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_C_Currency_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
 	public eone.base.model.I_C_DocType getC_DocType() throws RuntimeException
     {
 		return (eone.base.model.I_C_DocType)MTable.get(getCtx(), eone.base.model.I_C_DocType.Table_Name)
@@ -106,9 +150,9 @@ public class X_A_Asset_Change extends PO implements I_A_Asset_Change, I_Persiste
 	public void setC_DocType_ID (int C_DocType_ID)
 	{
 		if (C_DocType_ID < 0) 
-			set_Value (COLUMNNAME_C_DocType_ID, null);
+			set_ValueNoCheck (COLUMNNAME_C_DocType_ID, null);
 		else 
-			set_Value (COLUMNNAME_C_DocType_ID, Integer.valueOf(C_DocType_ID));
+			set_ValueNoCheck (COLUMNNAME_C_DocType_ID, Integer.valueOf(C_DocType_ID));
 	}
 
 	/** Get Document Type.
@@ -117,6 +161,34 @@ public class X_A_Asset_Change extends PO implements I_A_Asset_Change, I_Persiste
 	public int getC_DocType_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_C_DocType_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	public eone.base.model.I_C_DocTypeSub getC_DocTypeSub() throws RuntimeException
+    {
+		return (eone.base.model.I_C_DocTypeSub)MTable.get(getCtx(), eone.base.model.I_C_DocTypeSub.Table_Name)
+			.getPO(getC_DocTypeSub_ID(), get_TrxName());	}
+
+	/** Set Sub Document.
+		@param C_DocTypeSub_ID 
+		Document type for generating in dispute Shipments
+	  */
+	public void setC_DocTypeSub_ID (int C_DocTypeSub_ID)
+	{
+		if (C_DocTypeSub_ID < 1) 
+			set_Value (COLUMNNAME_C_DocTypeSub_ID, null);
+		else 
+			set_Value (COLUMNNAME_C_DocTypeSub_ID, Integer.valueOf(C_DocTypeSub_ID));
+	}
+
+	/** Get Sub Document.
+		@return Document type for generating in dispute Shipments
+	  */
+	public int getC_DocTypeSub_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_C_DocTypeSub_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
@@ -134,6 +206,26 @@ public class X_A_Asset_Change extends PO implements I_A_Asset_Change, I_Persiste
 	public String getCanceled () 
 	{
 		return (String)get_Value(COLUMNNAME_Canceled);
+	}
+
+	/** Set Rate.
+		@param CurrencyRate 
+		Currency Conversion Rate
+	  */
+	public void setCurrencyRate (BigDecimal CurrencyRate)
+	{
+		set_Value (COLUMNNAME_CurrencyRate, CurrencyRate);
+	}
+
+	/** Get Rate.
+		@return Currency Conversion Rate
+	  */
+	public BigDecimal getCurrencyRate () 
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_CurrencyRate);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
 	}
 
 	/** Set Account Date.
@@ -213,6 +305,26 @@ public class X_A_Asset_Change extends PO implements I_A_Asset_Change, I_Persiste
 	public String getDocumentNo () 
 	{
 		return (String)get_Value(COLUMNNAME_DocumentNo);
+	}
+
+	/** Set Business Stock.
+		@param M_StockTrans_ID Business Stock	  */
+	public void setM_StockTrans_ID (int M_StockTrans_ID)
+	{
+		if (M_StockTrans_ID < 1) 
+			set_ValueNoCheck (COLUMNNAME_M_StockTrans_ID, null);
+		else 
+			set_ValueNoCheck (COLUMNNAME_M_StockTrans_ID, Integer.valueOf(M_StockTrans_ID));
+	}
+
+	/** Get Business Stock.
+		@return Business Stock	  */
+	public int getM_StockTrans_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_M_StockTrans_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
 	}
 
 	/** Set Processed.

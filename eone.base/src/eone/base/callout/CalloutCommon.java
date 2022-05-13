@@ -10,6 +10,7 @@ import eone.base.model.GridTab;
 import eone.base.model.MBank;
 import eone.base.model.MCash;
 import eone.base.model.MDocType;
+import eone.base.model.MElementValue;
 import eone.base.model.MGeneral;
 import eone.base.model.MInOut;
 import eone.base.model.MProduct;
@@ -24,6 +25,7 @@ import eone.util.Env;
 //eone.base.callout.CalloutCommon.getNewDocumentNo
 //eone.base.callout.CalloutCommon.getNewValue 
 //eone.base.callout.CalloutCommon.fillAmtConvert
+//eone.base.callout.CalloutCommon.getC_Element
 public class CalloutCommon extends CalloutEngine
 {
 	
@@ -185,6 +187,23 @@ public class CalloutCommon extends CalloutEngine
 				mTab.setValue("M_Warehouse_Cr_ID", wh.getM_Warehouse_ID());
 			}
 		}
+	}
+	
+	public String getC_Element(Properties ctx, int WindowNo, GridTab mTab, GridField mField, Object value)
+	{
+		if (isCalloutActive())		//	assuming it is resetting value
+			return "";
+		Object objValue = value;
+		if (objValue == null)
+			return "";
+		int Account_ID = Integer.parseInt(objValue.toString());
+		MElementValue e = MElementValue.get(ctx, Account_ID);
+		
+		if (e != null) {
+			mTab.setValue("C_Element_ID", e.getC_Element_ID());
+		}
+		
+		return "";
 	}
 
 }	//	CalloutCashJournal

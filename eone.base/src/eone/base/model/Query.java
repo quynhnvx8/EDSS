@@ -131,6 +131,20 @@ public class Query
 	public Query(Properties ctx, String tableName, String whereClause, String trxName)
 	{
 		this(ctx, MTable.get(ctx, tableName), whereClause, trxName);
+		
+		//FIXME: Bổ sung điều kiện này để luôn luôn lọc theo MRole.addAccessSQL
+		applyAccessFilter = true;
+		if (this.table == null)
+			throw new IllegalArgumentException("Table Name Not Found - "+tableName);
+	}
+	
+	//Bổ sung hàm này trong trường hợp không lọc
+	public Query(Properties ctx, String tableName, String whereClause, String trxName, boolean flag)
+	{
+		this(ctx, MTable.get(ctx, tableName), whereClause, trxName);
+		
+		//FIXME: Bổ sung điều kiện này để luôn luôn lọc theo MRole.addAccessSQL
+		applyAccessFilter = flag;
 		if (this.table == null)
 			throw new IllegalArgumentException("Table Name Not Found - "+tableName);
 	}

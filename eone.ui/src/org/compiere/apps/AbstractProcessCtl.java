@@ -925,6 +925,7 @@ public abstract class AbstractProcessCtl implements Runnable
     	params.put("AD_ROLE_NAME", Env.getContext(Env.getCtx(), "#AD_Role_Name").toUpperCase());
     	params.put("AD_USER_NAME", Env.getContext(Env.getCtx(), "#AD_User_Name"));
     	params.put("AD_ORG_NAME", Env.getContext(Env.getCtx(), "#AD_Org_Name").toUpperCase());
+    	params.put("AD_LANGUAGE", Env.getAD_Client_ID(Env.getCtx()));
     	if (Env.getContext(Env.getCtx(), "#C_CurrencyDefault_ID") != null && !"".equals(Env.getContext(Env.getCtx(), "#C_CurrencyDefault_ID")))
     		params.put("C_CURRENCY_ID", Integer.valueOf(Env.getContext(Env.getCtx(), "#C_CurrencyDefault_ID")));
     	

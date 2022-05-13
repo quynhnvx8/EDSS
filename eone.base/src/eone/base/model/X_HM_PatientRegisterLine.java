@@ -212,15 +212,7 @@ public class X_HM_PatientRegisterLine extends PO implements I_HM_PatientRegister
 		return false;
 	}
 
-	public eone.base.model.I_M_Product_Category getM_Product_Category() throws RuntimeException
-    {
-		return (eone.base.model.I_M_Product_Category)MTable.get(getCtx(), eone.base.model.I_M_Product_Category.Table_Name)
-			.getPO(getM_Product_Category_ID(), get_TrxName());	}
-
-	/** Set Product Category.
-		@param M_Product_Category_ID 
-		Category of a Product
-	  */
+	
 	public void setM_Product_Category_ID (int M_Product_Category_ID)
 	{
 		if (M_Product_Category_ID < 1) 

@@ -5,10 +5,9 @@
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.sql.ResultSet;
 import java.util.Properties;
-
-import eone.util.KeyNamePair;
 
 /** Generated Model for C_ElementValue
  *  @author EOne (generated) 
@@ -19,7 +18,7 @@ public class X_C_ElementValue extends PO implements I_C_ElementValue, I_Persiste
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220109L;
+	private static final long serialVersionUID = 20220508L;
 
     /** Standard Constructor */
     public X_C_ElementValue (Properties ctx, int C_ElementValue_ID, String trxName)
@@ -49,7 +48,7 @@ public class X_C_ElementValue extends PO implements I_C_ElementValue, I_Persiste
     }
 
     /** AccessLevel
-      * @return 7 - System - Client - Org 
+      * @return 4 - System 
       */
     protected int get_AccessLevel()
     {
@@ -82,8 +81,12 @@ public class X_C_ElementValue extends PO implements I_C_ElementValue, I_Persiste
 	public static final String ACCOUNTTYPE_Expense = "E";
 	/** Owner's Equity = O */
 	public static final String ACCOUNTTYPE_OwnerSEquity = "O";
-	/** Memo = M */
-	public static final String ACCOUNTTYPE_Memo = "M";
+	/** Accumulate = M */
+	public static final String ACCOUNTTYPE_Accumulate = "M";
+	/** None = N */
+	public static final String ACCOUNTTYPE_None = "N";
+	/** OpenBalance = B */
+	public static final String ACCOUNTTYPE_OpenBalance = "B";
 	/** Set Account Type.
 		@param AccountType 
 		Indicates the type of account
@@ -125,6 +128,34 @@ public class X_C_ElementValue extends PO implements I_C_ElementValue, I_Persiste
 	public int getC_Currency_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_C_Currency_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	public eone.base.model.I_C_Element getC_Element() throws RuntimeException
+    {
+		return (eone.base.model.I_C_Element)MTable.get(getCtx(), eone.base.model.I_C_Element.Table_Name)
+			.getPO(getC_Element_ID(), get_TrxName());	}
+
+	/** Set Element.
+		@param C_Element_ID 
+		Accounting Element
+	  */
+	public void setC_Element_ID (int C_Element_ID)
+	{
+		if (C_Element_ID < 1) 
+			set_ValueNoCheck (COLUMNNAME_C_Element_ID, null);
+		else 
+			set_ValueNoCheck (COLUMNNAME_C_Element_ID, Integer.valueOf(C_Element_ID));
+	}
+
+	/** Get Element.
+		@return Accounting Element
+	  */
+	public int getC_Element_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_C_Element_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
@@ -374,6 +405,27 @@ public class X_C_ElementValue extends PO implements I_C_ElementValue, I_Persiste
 	public boolean isDetailProjectPharse () 
 	{
 		Object oo = get_Value(COLUMNNAME_IsDetailProjectPharse);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
+	}
+
+	/** Set DetailTax.
+		@param IsDetailTax DetailTax	  */
+	public void setIsDetailTax (boolean IsDetailTax)
+	{
+		set_Value (COLUMNNAME_IsDetailTax, Boolean.valueOf(IsDetailTax));
+	}
+
+	/** Get DetailTax.
+		@return DetailTax	  */
+	public boolean isDetailTax () 
+	{
+		Object oo = get_Value(COLUMNNAME_IsDetailTax);
 		if (oo != null) 
 		{
 			 if (oo instanceof Boolean) 

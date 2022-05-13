@@ -472,6 +472,7 @@ public class WAcctViewer extends Window implements IFormController, EventListene
 
 	}
 	
+	
 	private void dynInit (int AD_Table_ID, int Record_ID, String zoomLogic)
 	{
 

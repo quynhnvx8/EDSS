@@ -204,8 +204,6 @@ public class MTree extends X_AD_Tree
 					+ sourceTableName + "_ID as" + " Node_ID,st.Parent_ID,st.IsActive "
 					+ "FROM ").append(sourceTableName).append(" st ");								//	#2
 			sql.append(" WHERE st.IsActive='Y'");
-			if (sourceTableName.equalsIgnoreCase("C_ElementValue"))
-				sql.append(" AND C_Element_ID = ").append(Env.getContext(getCtx(), "#C_Element_ID"));
 			sql.append(" ORDER BY st.Value");
 			
 			sql = new StringBuilder(MRole.addAccessSQL(sql.toString(), "st", MRole.SQL_FULLYQUALIFIED, MRole.SQL_RO, Env.getCtx()));	// SQL_RO for Org_ID = 0

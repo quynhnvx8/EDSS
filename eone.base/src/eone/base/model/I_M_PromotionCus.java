@@ -64,7 +64,6 @@ public interface I_M_PromotionCus
 	  */
 	public int getC_BP_Group_ID();
 
-	public eone.base.model.I_C_BP_Group getC_BP_Group() throws RuntimeException;
 
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";

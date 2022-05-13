@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -116,39 +117,6 @@ public class MProduct extends X_M_Product
 	}	//	getUOMPrecision
 	
 	
-	/**
-	 * 	Create Asset Group for this product
-	 *	@return asset group id
-	 */
-	public int getA_Asset_Group_ID()
-	{
-		return 0;
-	}	//	getA_Asset_Group_ID
-
-	/**
-	 * 	Create Asset for this product
-	 *	@return true if asset is created
-	 */
-	public boolean isCreateAsset()
-	{
-		return false;
-	}	//	isCreated
-
-	
-	public boolean isOneAssetPerUOM()
-	{
-		return false;
-	}	//	isOneAssetPerUOM
-	
-	
-	public String getUOMSymbol()
-	{
-		int C_UOM_ID = getC_UOM_ID();
-		if (C_UOM_ID == 0)
-			return "";
-		return MUOM.get(getCtx(), C_UOM_ID).getUOMSymbol();
-	}	//	getUOMSymbol
-		
 	
 	
 	@Override
@@ -174,23 +142,24 @@ public class MProduct extends X_M_Product
 
 		}
 		
-		if (newRecord || is_ValueChanged(X_M_Product.COLUMNNAME_M_Product_Category_ID)) {
-			MProductCategory category = MProductCategory.get(getCtx(), getM_Product_Category_ID());
-			if (X_M_Product_Category.CATEGORYTYPE_Medical.equalsIgnoreCase(category.getCategoryType())
-					|| X_M_Product_Category.CATEGORYTYPE_Pharmaceuticals.equalsIgnoreCase(category.getCategoryType())
+		MProductGroup group = MProductGroup.get(getCtx(), getM_ProductGroup_ID());
+		
+		if (newRecord || is_ValueChanged(X_M_Product.COLUMNNAME_M_ProductGroup_ID)) {
+			if (X_M_ProductGroup.CATEGORYTYPE_Medical.equalsIgnoreCase(group.getCategoryType())
+					|| X_M_ProductGroup.CATEGORYTYPE_Pharmaceuticals.equalsIgnoreCase(group.getCategoryType())
 					) {
 				setIsMedical(true);
 			} else {
 				setIsMedical(false);
 			}
 			
-			if (X_M_Product_Category.CATEGORYTYPE_Service.equalsIgnoreCase(category.getCategoryType())) {
+			if (X_M_ProductGroup.CATEGORYTYPE_Service.equalsIgnoreCase(group.getCategoryType())) {
 				setIsService(true);
 			} else {
 				setIsService(false);
 			}
 			
-			if (X_M_Product_Category.CATEGORYTYPE_Goods.equalsIgnoreCase(category.getCategoryType())) {
+			if (X_M_ProductGroup.CATEGORYTYPE_Goods.equalsIgnoreCase(group.getCategoryType())) {
 				setIsSold(true);
 			} else {
 				setIsSold(false);
@@ -209,6 +178,24 @@ public class MProduct extends X_M_Product
 		if (!success)
 			return success;
 		
+		//Xóa cấu hình cũ
+		if (is_ValueChanged(X_M_Product.COLUMNNAME_M_ProductGroup_ID)) {
+			String sql = "DELETE C_Account WHERE M_Product_ID = ?";
+			DB.executeUpdate(sql, getM_Product_ID(), get_TrxName());
+		}
+		//Insert cấu hình mới
+		if (newRecord || is_ValueChanged(X_M_Product.COLUMNNAME_M_ProductGroup_ID)) {
+			List<MAccount> lists = MAccount.getListAcctProductGroup(getM_ProductGroup_ID());
+			for (int i = 0; i < lists.size(); i++) {
+				MAccount acc = new MAccount(getCtx(), 0, get_TrxName());
+				acc.setM_Product_ID(getM_Product_ID());
+				acc.setAccount_ID(lists.get(i).getAccount_ID());
+				acc.setIsDefault(lists.get(i).isDefault());
+				acc.setTypeAccount(lists.get(i).getTypeAccount());
+				acc.save();
+			}
+		}
+		
 		return success;
 	}	//	afterSave
 
@@ -222,12 +209,10 @@ public class MProduct extends X_M_Product
 	@Override
 	protected boolean afterDelete (boolean success)
 	{
-		if (success)
-			delete_Tree(X_AD_Tree.TREETYPE_CustomTable);
 		return success;
 	}	//	afterDelete
 	
-	public static Map<String, BigDecimal> getPrice_SOPO(java.sql.Timestamp date, int M_Product_ID) {
+	public static Map<String, BigDecimal> getPrice_SOPO(Timestamp date, int M_Product_ID) {
 		String sql = "";
 		Map<String, BigDecimal> data = new HashMap<String, BigDecimal>();
     	if (DB.isOracle() ) {
