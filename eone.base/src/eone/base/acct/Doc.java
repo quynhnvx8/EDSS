@@ -2,6 +2,7 @@
 package eone.base.acct;
 
 import java.lang.reflect.Constructor;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -20,8 +21,6 @@ import eone.util.Trx;
 
 public abstract class Doc
 {
-	
-	
 	public static final String 	STATUS_NotPosted        = "N";
 	public static final String 	STATUS_Posted           = "Y";
 	
@@ -52,8 +51,6 @@ public abstract class Doc
 			throw new IllegalArgumentException(msg);
 		}
 		p_po.load(p_po.get_TrxName());
-
-		
 		m_trxName = trxName;
 		m_manageLocalTrx = false;
 		if (m_trxName == null)
@@ -62,84 +59,48 @@ public abstract class Doc
 			m_manageLocalTrx = true;
 		}
 		p_po.set_TrxName(m_trxName);
-
-		
 	}   //  Doc
 
-	/** Properties					*/
 	private Properties			m_ctx = null;
-	/** Transaction Name			*/
 	private String				m_trxName = null;
-	/** The Document				*/
 	protected PO				p_po = null;
-	/** Document Type      			*/
 	private String				m_DocumentType = null;
-	/** Document No      			*/
 	private String				m_DocumentNo = null;
-	/** Description      			*/
 	private String				m_Description = null;
-	/** GL Period					*/
 	private MPeriod 			m_period = null;
-	/** Period ID					*/
-	private int					m_C_Period_ID = 0;
-	/** Accounting Date				*/
+	
 	private Timestamp			m_DateAcct = null;
-	
-	/** Currency					*/
 	private int					m_C_Currency_ID = -1;
-
-	/**	Contained Doc Lines			*/
 	protected DocLine[]			p_lines;
-	
 	protected DocLine[]			p_linesTax;
-	
 	protected Doc[]				headLines;
-
-	/** Facts                       */
 	private ArrayList<Fact>    	m_fact = null;
-
-	/** No Currency in Document Indicator (-1)	*/
-	protected static final int  NO_CURRENCY = -2;
-
-	/**	Actual Document Status  */
 	protected String			p_Status = null;
+	protected String			p_Error = null;
+	private int 				AD_Window_ID;
+
 	public String getPostStatus() {
 		return p_Status;
 	}
 
-	/** Error Message			*/
-	protected String			p_Error = null;
-
-
-	/**
-	 * 	Get Context
-	 *	@return context
-	 */
+	
 	public Properties getCtx()
 	{
 		return m_ctx;
 	}	//	getCtx
 
-	/**
-	 * 	Get Table Name
-	 *	@return table name
-	 */
 	public String get_TableName()
 	{
 		return p_po.get_TableName();
 	}	//	get_TableName
 
-	/**
-	 * 	Get Table ID
-	 *	@return table id
-	 */
 	public int get_Table_ID()
 	{
 		return p_po.get_Table_ID();
 		
 	}	//	get_Table_ID
 
-	private int AD_Window_ID;
+	
 	public int getAD_Window_ID() {
 		return AD_Window_ID;
 	}
@@ -168,7 +129,6 @@ public abstract class Doc
 	
 	public final String post ()
 	{
-		
 		p_Error = loadDocumentDetails();
 		if (p_Error != null)
 			return p_Error;
@@ -188,10 +148,8 @@ public abstract class Doc
 			p_Status = STATUS_NotPosted;
 			p_Error = e.toString();
 		}
-
 		
 		p_Status = postCommit (p_Status);
-
 		
 		if (!p_Status.equals(STATUS_Posted))
 		{
@@ -225,10 +183,6 @@ public abstract class Doc
 	
 	private final String postLogic ()
 	{
-		
-		//if (!isPeriodOpen())
-			//return STATUS_PeriodClosed;
-
 		//  createFacts
 		ArrayList<Fact> facts = createFacts ();
 		if (facts == null)
@@ -246,20 +200,16 @@ public abstract class Doc
 			p_Status = STATUS_NotPosted;
 
 			//	check accounts
-			
 			String error = fact.checkAccounts();
 			if (!error.isEmpty()) {
 				p_Error = error;
 				return STATUS_NotPosted;
 			}
-				
-	
 		}	//	for all facts
 
 		return STATUS_Posted;
 	}   //  postLogic
 
-	
 	
 	private final String postCommit (String status)
 	{
@@ -269,8 +219,6 @@ public abstract class Doc
 		Trx trx = Trx.get(getTrxName(), true);
 		try
 		{
-		//  *** Transaction Start       ***
-			//  Commit Facts
 			if (status.equals(STATUS_Posted))
 			{
 				for (int i = 0; i < m_fact.size(); i++)
@@ -299,7 +247,6 @@ public abstract class Doc
 				trx.close();
 				trx = null;
 			}
-		//  *** Transaction End         ***
 		}
 		catch (Exception e)
 		{
@@ -321,10 +268,6 @@ public abstract class Doc
 		return status;
 	}   //  postCommit
 
-	/**
-	 * 	Get Trx Name and create Transaction
-	 *	@return Trx Name
-	 */
 	public String getTrxName()
 	{
 		return m_trxName;
@@ -357,7 +300,7 @@ public abstract class Doc
 	{
 		if (m_period == null)
 			setPeriod();
-		return m_C_Period_ID;
+		return m_period.getC_Period_ID();
 	}	//	getC_Period_ID
 	
 	public int getC_Tax_ID()
@@ -372,25 +315,6 @@ public abstract class Doc
 		return 0;
 	}
 
-	/**
-	 *	Is Period Open
-	 *  @return true if period is open
-	 */
-	public boolean isPeriodOpen()
-	{
-		setPeriod();
-		boolean open = m_C_Period_ID > 0;
-		if (open) {
-			if (log.isLoggable(Level.FINE)) log.fine("Yes - " + toString());
-		} else {
-			log.warning("NO - " + toString());
-		}
-		return open;
-	}	//	isPeriodOpen
-
-	
-
-	
 	public DocLine getDocLine (int Record_ID)
 	{
 		if (p_lines == null || p_lines.length == 0 || Record_ID == 0)
@@ -438,10 +362,7 @@ public abstract class Doc
 		return p_po.getAD_Department_ID();
 	}
 	
-	/**
-	 * 	Get Document No
-	 *	@return document No
-	 */
+	
 	public String getDocumentNo()
 	{
 		if (m_DocumentNo != null)
@@ -486,23 +407,25 @@ public abstract class Doc
 				Integer ii = (Integer)p_po.get_Value(index);
 				if (ii != null)
 					m_C_Currency_ID = ii.intValue();
+			} else {
+				m_C_Currency_ID = Env.getContextAsInt(getCtx(), "#C_CurrencyDefault_ID");
 			}
-			if (m_C_Currency_ID == -1)
-				m_C_Currency_ID = NO_CURRENCY;
 		}
 		return m_C_Currency_ID;
 	}	//	getC_Currency_ID
 
-	/**
-	 * 	Set C_Currency_ID
-	 *	@param C_Currency_ID id
-	 */
-	public void setC_Currency_ID (int C_Currency_ID)
-	{
-		m_C_Currency_ID = C_Currency_ID;
-	}	//	setC_Currency_ID
-
-	
+	public BigDecimal getRate () {
+		int index = p_po.get_ColumnIndex("CurrencyRate");
+		if (index != -1)
+		{
+			BigDecimal ii = (BigDecimal)p_po.get_Value(index);
+			if (ii != null)
+				return ii;
+		} else {
+			return Env.getRateByCurrency(this.getC_Currency_ID(), this.getDateAcct());
+		}
+		return null;
+	}
 	
 	public Timestamp getDateAcct()
 	{
@@ -556,10 +479,7 @@ public abstract class Doc
 		return 0;
 	}
 
-	
 	protected abstract String loadDocumentDetails ();
-
-	
 	public abstract ArrayList<Fact> createFacts ();
 
 }   //  Doc

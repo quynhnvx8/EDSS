@@ -18,7 +18,7 @@ public class X_AD_Table extends PO implements I_AD_Table, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220413L;
+	private static final long serialVersionUID = 20220516L;
 
     /** Standard Constructor */
     public X_AD_Table (Properties ctx, int AD_Table_ID, String trxName)
@@ -76,13 +76,13 @@ public class X_AD_Table extends PO implements I_AD_Table, I_Persistent
 	public static final int ACCESSLEVEL_AD_Reference_ID=5;
 	/** Organization = 1 */
 	public static final String ACCESSLEVEL_Organization = "1";
-	/** Client+Organization = 3 */
-	public static final String ACCESSLEVEL_ClientPlusOrganization = "3";
+	/** All  = 3 */
+	public static final String ACCESSLEVEL_All = "3";
 	/** System = 4 */
 	public static final String ACCESSLEVEL_System = "4";
 	/** Client = 7 */
 	public static final String ACCESSLEVEL_Client = "7";
-	/** All Access = 6 */
+	/** Special = 6 */
 	public static final String ACCESSLEVEL_Special = "6";
 	/** Client only = 2 */
 	public static final String ACCESSLEVEL_ClientOnly = "2";
@@ -93,7 +93,7 @@ public class X_AD_Table extends PO implements I_AD_Table, I_Persistent
 	public void setAccessLevel (String AccessLevel)
 	{
 
-		set_ValueNoCheck (COLUMNNAME_AccessLevel, AccessLevel);
+		set_Value (COLUMNNAME_AccessLevel, AccessLevel);
 	}
 
 	/** Get Data Access Level.

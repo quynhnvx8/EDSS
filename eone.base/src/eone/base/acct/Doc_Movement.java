@@ -43,7 +43,7 @@ public class Doc_Movement extends Doc
 	 */
 	protected String loadDocumentDetails()
 	{
-		setC_Currency_ID(NO_CURRENCY);
+		//setC_Currency_ID(NO_CURRENCY);
 		MMovement move = (MMovement)getPO();
 		setDateAcct(move.getMovementDate());
 		m_DocStatus = move.getDocStatus();
@@ -66,8 +66,8 @@ public class Doc_Movement extends Doc
 		{
 			MMovementLine line = lines[i];
 			DocLine docLine = new DocLine (line, this);
-			docLine.setQty(line.getMovementQty(), false);
-			docLine.setReversalLine_ID(line.getReversalLine_ID());
+			//docLine.setQty(line.getMovementQty(), false);
+			//docLine.setReversalLine_ID(line.getReversalLine_ID());
 			if (log.isLoggable(Level.FINE)) log.fine(docLine.toString());
 			list.add (docLine);
 		}
@@ -103,8 +103,7 @@ public class Doc_Movement extends Doc
 	{
 		//  create Fact Header
 		Fact fact = new Fact(this, Fact.POST_Actual);
-		setC_Currency_ID(Env.getContextAsInt(getCtx(), "#C_CurrencyDefault_ID"));
-
+		
 		
 		ArrayList<Fact> facts = new ArrayList<Fact>();
 		facts.add(fact);

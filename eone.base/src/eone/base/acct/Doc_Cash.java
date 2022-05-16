@@ -111,7 +111,7 @@ public class Doc_Cash extends Doc
 		dr = MElementValue.get(getCtx(), cash.getAccount_Dr_ID());
 		cr = MElementValue.get(getCtx(), cash.getAccount_Cr_ID());
 		
-		FactLine f = fact.createHeader(dr, cr, cash.getC_Currency_ID(), cash.getCurrencyRate(), cash.getAmount(), cash.getAmountConvert());
+		FactLine f = fact.createHeader(dr, cr, cash.getAmount(), cash.getAmountConvert());
 		f.setC_BPartner_Dr_ID(cash.getC_BPartner_Dr_ID());
 		f.setC_BPartner_Cr_ID(cash.getC_BPartner_Cr_ID());
 		f.setC_TypeCost_ID(cash.getC_TypeCost_ID());
@@ -145,7 +145,7 @@ public class Doc_Cash extends Doc
 			if (X_C_DocType.DOCBASETYPE_111Debit.equalsIgnoreCase(dt.getDocBaseType())) {
 				cr = tax;
 			}
-			FactLine f1 = fact.createHeader(dr, cr, cash.getC_Currency_ID(), cash.getCurrencyRate(), taxAmt, taxAmtConvert);
+			FactLine f1 = fact.createHeader(dr, cr, taxAmt, taxAmtConvert);
 			f1.setC_BPartner_Dr_ID(cash.getC_BPartner_Dr_ID());
 			f1.setC_BPartner_Cr_ID(cash.getC_BPartner_Cr_ID());
 			f1.setC_TypeCost_ID(cash.getC_TypeCost_ID());

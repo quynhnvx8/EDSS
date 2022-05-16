@@ -1396,6 +1396,20 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 		return retValue;
 	}	//	isReadOnly
 
+	
+	public boolean isReadOnlyRecord()
+	{
+		if (m_vo.IsReadOnly)
+			return true;
+
+		//  no restrictions
+		if (m_vo.ReadOnlyLogicRecord == null || m_vo.ReadOnlyLogicRecord.equals(""))
+			return m_vo.IsReadOnly;
+
+		boolean retValue = Evaluator.evaluateLogic(this, m_vo.ReadOnlyLogicRecord);
+		if (log.isLoggable(Level.FINEST)) log.finest(m_vo.Name + " (" + m_vo.ReadOnlyLogic + ") => " + retValue);
+		return retValue;
+	}
 	/**
 	 * 	Tab contains Always Update Field
 	 *	@return true if field with always updateable
@@ -1428,7 +1442,7 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 	 */
 	public boolean isDeleteRecord()
 	{
-		if (isReadOnly())
+		if (isReadOnly() || isReadOnlyRecord())
 			return false;
 		if (!m_vo.IsDeleteable)
 			return false;

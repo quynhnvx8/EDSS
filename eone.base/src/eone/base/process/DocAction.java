@@ -12,19 +12,13 @@ public interface DocAction
 {
 	public static final String ACTION_Complete = "CO";
 	public static final String ACTION_ReActivate = "RE";
-	
-	/** Drafted = DR */
 	public static final String STATUS_Drafted = "DR";
-	
 	public static final String STATUS_Inprogress = "IP";
-	/** Completed = CO */
 	public static final String STATUS_Completed = "CO";
-	
 	public static final String SIGNSTATUS_None 		= "NON";
 	public static final String SIGNSTATUS_Approved 	= "APP";
 	public static final String SIGNSTATUS_Cancel 	= "CAN";
 	
-	/** DocAction Ref_List values **/
 	public static final int AD_REFERENCE_ID = SystemIDs.REFERENCE_DOCUMENTACTION;
 	
 	public static final int AD_REFERENCE_SIGN_ID = SystemIDs.REFERENCE_SIGNER;
@@ -44,8 +38,6 @@ public interface DocAction
 	public String getProcessMsg ();
 	
 	public void setProcessMsg(String text);
-	
-	public boolean save();
 	
 	public void saveEx() throws EONEException;
 	

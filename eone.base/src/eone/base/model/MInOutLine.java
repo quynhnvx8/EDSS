@@ -179,6 +179,14 @@ public class MInOutLine extends X_M_InOutLine
 				+ "WHERE M_InOut_ID=?";
 		DB.executeUpdateEx(sql, new Object[] {getM_InOut_ID()}, get_TrxName());
 		
+		/*
+		 * Thêm 1 dòng thuế nếu tiền hàng và tiền thuế khác nhau
+		 */
+		if (getAmount().compareTo(getTaxBaseAmt()) != 0) {
+			insertLineTax(getCtx(), this, get_TrxName());
+		}
+		
+		
 		return true;
 	}	
 	@Override
@@ -220,16 +228,18 @@ public class MInOutLine extends X_M_InOutLine
 		return sb.toString ();
 	}	//	toString
 
-	/**
-	 * 	Get Base value for Cost Distribution
-	 *	@param CostDistribution cost Distribution
-	 *	@return base number
-	 */
-	public BigDecimal getBase (String CostDistribution)
-	{
-		
-		return Env.ZERO;
-	}	//	getBase
-
 	
+	/*
+	 * Thêm 1 dòng thuế
+	 */
+	public static void insertLineTax(Properties ctx, MInOutLine lineCurr, String trxName) {
+		MInOutLine line = new MInOutLine(ctx, 0, trxName);
+		copyValues(lineCurr, line);
+		line.setAmount(lineCurr.getTaxBaseAmt().subtract(lineCurr.getAmount()));
+		line.setTaxBaseAmt(line.getAmount());
+		line.save();		
+		lineCurr.setTaxBaseAmt(lineCurr.getAmount());
+		lineCurr.save();
+		
+	}
 }	//	MInOutLine

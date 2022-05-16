@@ -220,10 +220,10 @@ public class WRegisterTrial extends Window implements EventListener<Event> {
 		fillComboRulesAccountance();
 		
 		cboCalPrice = new Combobox();
+		cboCalPrice.appendItem(Msg.getMsg(Env.getCtx(), "Price_None"), "N");
 		cboCalPrice.appendItem(Msg.getMsg(Env.getCtx(), "Price_Average"), "A");
 		cboCalPrice.appendItem(Msg.getMsg(Env.getCtx(), "Price_FiFo"), "F");
 		cboCalPrice.appendItem(Msg.getMsg(Env.getCtx(), "Price_LiFo"), "L");
-		cboCalPrice.appendItem(Msg.getMsg(Env.getCtx(), "Price_None"), "N");
 		cboCalPrice.setSelectedIndex(0);
 		
 		ZKUpdateUtil.setWidth(cboCalPrice, "100%");

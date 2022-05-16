@@ -11,9 +11,7 @@ import eone.util.Env;
 
 public final class FactLine extends X_Fact_Acct
 {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 6141312459030795891L;
 
 
@@ -30,8 +28,6 @@ public final class FactLine extends X_Fact_Acct
 	private MElementValue	m_acct = null;
 	private MElementValue m_acctCr = null;
 	
-	private Doc			m_doc = null;
-	private DocLine 	m_docLine = null;
 	
 	public void setAccount (MElementValue dr, MElementValue cr)
 	{
@@ -50,97 +46,56 @@ public final class FactLine extends X_Fact_Acct
 		setAmountConvert(AmountConvert);
 	}
 	
-	public void setDocumentInfo(Doc doc, DocLine docLine)
+	public void setInfoLine(Doc doc, DocLine docLine)
 	{
-		m_doc = doc;
-		m_docLine = docLine;
-		//	reset
-		setAD_Org_ID(m_doc.getAD_Org_ID());
-		setAD_Department_ID(m_doc.getAD_Department_ID());
-		setAD_Client_ID (m_doc.getAD_Client_ID());
-		setC_DocType_ID(m_doc.getC_DocType_ID());
-		setC_DocTypeSub_ID(m_doc.getC_DocTypeSub_ID());
-		setDateAcct (m_doc.getDateAcct());
-		setDocumentNo(m_doc.getDocumentNo());
-		setAD_Window_ID(m_doc.getAD_Window_ID());
-		if (m_docLine != null &&  m_docLine.getC_Period_ID() != 0)
-			setC_Period_ID(m_docLine.getC_Period_ID());
-		else
-			setC_Period_ID (m_doc.getC_Period_ID());
-		if (m_docLine != null)
-			setC_Tax_ID (m_docLine.getC_Tax_ID());
-		//	Description
-		setDescription(m_doc.getDescription());
+		
+		setAD_Org_ID(doc.getAD_Org_ID());
+		setAD_Department_ID(doc.getAD_Department_ID());
+		setAD_Client_ID (doc.getAD_Client_ID());
+		setC_DocType_ID(doc.getC_DocType_ID());
+		setC_DocTypeSub_ID(doc.getC_DocTypeSub_ID());
+		setDateAcct (doc.getDateAcct());
+		setDocumentNo(doc.getDocumentNo());
+		setAD_Window_ID(doc.getAD_Window_ID());
+		setC_Period_ID (doc.getC_Period_ID());
+		setC_Tax_ID (docLine.getC_Tax_ID());
+		setDescription(doc.getDescription());
 		
 		
 	}   //  setDocumentInfo
 	
-	public void setDocumentInfoHead(Doc doc)
+	public void setInfoHeader(Doc doc)
 	{
-		m_doc = doc;
-		//	reset
-		setAD_Org_ID(m_doc.getAD_Org_ID());
-		setAD_Client_ID (m_doc.getAD_Client_ID());
-		setAD_Department_ID(m_doc.getAD_Department_ID());
-		setC_DocType_ID(m_doc.getC_DocType_ID());
-		setC_DocTypeSub_ID(m_doc.getC_DocTypeSub_ID());
 		
-		setDateAcct (m_doc.getDateAcct());
-		setDocumentNo(m_doc.getDocumentNo());
+		setAD_Org_ID(doc.getAD_Org_ID());
+		setAD_Client_ID (doc.getAD_Client_ID());
+		setAD_Department_ID(doc.getAD_Department_ID());
+		setC_DocType_ID(doc.getC_DocType_ID());
+		setC_DocTypeSub_ID(doc.getC_DocTypeSub_ID());
+		setDateAcct (doc.getDateAcct());
+		setDocumentNo(doc.getDocumentNo());
+		setC_Period_ID (doc.getC_Period_ID());
+		setC_Tax_ID (doc.getC_Tax_ID());
 		
-		if (m_doc != null &&  m_doc.getC_Period_ID() != 0)
-			setC_Period_ID(m_doc.getC_Period_ID());
-		else
-			setC_Period_ID (m_doc.getC_Period_ID());
-		if (m_doc != null)
-			setC_Tax_ID (m_doc.getC_Tax_ID());
-		//	Description
-		setDescription(m_doc.getDescription());
-		setAD_Window_ID(m_doc.getAD_Window_ID());
+		setDescription(doc.getDescription());
+		setAD_Window_ID(doc.getAD_Window_ID());
 		
 		
 	}
 
-	/**
-	 * 	Get Document Line
-	 *	@return doc line
-	 */
-	public DocLine getDocLine()
-	{
-		return m_docLine;
-	}	//	getDocLine
 	
-	
-	public void setM_Warehouse_Dr_ID (int M_Warehouse_ID)
-	{
-		super.setM_Warehouse_Dr_ID (M_Warehouse_ID);
-		
-	}   
-	
-	public void setM_Warehouse_Cr_ID (int M_Warehouse_ID)
-	{
-		super.setM_Warehouse_Cr_ID (M_Warehouse_ID);
-		
-	}   
-
 	
 	public MElementValue getAccountDr()
 	{
 		return m_acct;
 	}	//	getAccount
 	
-	/**
-	 * 	Get Account
-	 *	@return account
-	 */
+	
 	public MElementValue getAccountCr()
 	{
 		return m_acctCr;
 	}
-	/**
-	 *	To String
-	 *  @return String
-	 */
+	
 	public String toString()
 	{
 		StringBuilder sb = new StringBuilder("FactLine=[");

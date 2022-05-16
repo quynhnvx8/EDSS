@@ -52,7 +52,6 @@ public class Doc_General extends Doc
 	{
 		
 		Fact fact = new Fact(this, Fact.POST_Actual);
-		MGeneral parent = (MGeneral)getPO();
 		MElementValue dr = null;
 		MElementValue cr = null;
 		
@@ -63,7 +62,7 @@ public class Doc_General extends Doc
 			
 			dr = MElementValue.get(getCtx(), line.getAccount_Dr_ID());
 			cr = MElementValue.get(getCtx(), line.getAccount_Cr_ID());
-			FactLine f = fact.createLine(docLine, dr, cr, parent.getC_Currency_ID(), parent.getCurrencyRate(), line.getAmount(), line.getAmount());
+			FactLine f = fact.createLine(docLine, dr, cr, line.getAmount(), line.getAmount());
 			
 			f.setC_TypeCost_ID(line.getC_TypeCost_ID());
 			f.setC_TypeRevenue_ID(line.getC_TypeRevenue_ID());

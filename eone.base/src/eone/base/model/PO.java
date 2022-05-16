@@ -64,8 +64,7 @@ import eone.util.Util;
 import eone.util.ValueNamePair;
 
 
-public abstract class PO
-	implements Serializable, Comparator<Object>, Evaluatee, Cloneable
+public abstract class PO	implements Serializable, Comparator<Object>, Evaluatee, Cloneable
 {
 	/**
 	 * 
@@ -86,24 +85,13 @@ public abstract class PO
 		this (ctx, 0, null, null);
 	}   //  PO
 
-	/**
-	 *  Create & Load existing Persistent Object
-	 *  @param ID  The unique ID of the object
-	 *  @param ctx context
-	 *  @param trxName transaction name
-	 */
+	
 	public PO (Properties ctx, int ID, String trxName)
 	{
 		this (ctx, ID, trxName, null);
 	}   //  PO
 
-	/**
-	 *  Create & Load existing Persistent Object.
-	 *  @param ctx context
-	 *  @param rs optional - load from current result set position (no navigation, not closed)
-	 *  	if null, a new record is created.
-	 *  @param trxName transaction name
-	 */
+	
 	public PO (Properties ctx, ResultSet rs, String trxName)
 	{
 		this (ctx, 0, trxName, rs);
@@ -131,13 +119,7 @@ public abstract class PO
 			load(ID, trxName);
 	}   //  PO
 
-	/**
-	 * 	Create New PO by Copying existing (key not copied).
-	 * 	@param ctx context
-	 * 	@param source source object
-	 * 	@param AD_Client_ID client
-	 * 	@param AD_Org_ID org
-	 */
+	
 	public PO (Properties ctx, PO source, int AD_Client_ID, int AD_Org_ID)
 	{
 		this (ctx, 0, null, null);	//	create new
@@ -215,6 +197,7 @@ public abstract class PO
 	/** Trifon - Indicates that this record is created by replication functionality.*/
 	private boolean m_isReplication = false;
 
+	public static final int ACCESSLEVEL_All = 3;
 	/** Access Level S__ 100	4	System info			*/
 	public static final int ACCESSLEVEL_System = 4;
 	/**	Access Level SCO 111	7	System shared info	*/
@@ -571,14 +554,7 @@ public abstract class PO
 		return is_ValueChanged (index);
 	}   //  is_ValueChanged
 
-	/**
-	 *  Return new - old.
-	 * 	- New Value if Old Value is null
-	 * 	- New Value - Old Value if Number
-	 * 	- otherwise null
-	 *  @param index index
-	 *  @return new - old or null if not appropriate or not changed
-	 */
+	
 	public final Object get_ValueDifference (int index)
 	{
 		if (index < 0 || index >= get_ColumnCount())
@@ -630,24 +606,12 @@ public abstract class PO
 	}   //  get_ValueDifference
 
 
-	/**************************************************************************
-	 *  Set Value
-	 *  @param ColumnName column name
-	 *  @param value value
-	 *  @return true if value set
-	 */
+	
 	protected final boolean set_Value (String ColumnName, Object value)
 	{
 		return set_Value(ColumnName, value, true);
 	}
 	
-	/**************************************************************************
-	 *  Set Value
-	 *  @param ColumnName column name
-	 *  @param value value
-	 *  @param checkWritable
-	 *  @return true if value set
-	 */
 	protected final boolean set_Value (String ColumnName, Object value, boolean checkWritable)
 	{
 		if (value instanceof String && ColumnName.equals("WhereClause")
@@ -663,7 +627,6 @@ public abstract class PO
 		}
 		if (ColumnName.endsWith("_ID") && value instanceof String )
 		{
-			// Convert to Integer only if info class is Integer - teo_sarca [ 2859125 ]
 			Class<?> clazz = p_info.getColumnClass(p_info.getColumnIndex(ColumnName));
 			if (Integer.class == clazz)
 			{
@@ -675,37 +638,19 @@ public abstract class PO
 		return set_Value (index, value, checkWritable);
 	}   //  setValue
 
-	/**
-	 *  Set Encrypted Value
-	 *  @param ColumnName column name
-	 *  @param value value
-	 *  @return true if value set
-	 */
+	
 	protected final boolean set_ValueE (String ColumnName, Object value)
 	{
 		return set_Value (ColumnName, value);
 	}   //  setValueE
 
-	/**
-	 *  Set Value if updateable and correct class.
-	 *  (and to NULL if not mandatory)
-	 *  @param index index
-	 *  @param value value
-	 *  @return true if value set
-	 */
+	
 	protected final boolean set_Value (int index, Object value)
 	{
 		return set_Value(index, value, true);
 	}
 	
-	/**
-	 *  Set Value if updateable and correct class.
-	 *  (and to NULL if not mandatory)
-	 *  @param index index
-	 *  @param value value
-	 *  @param checkWritable
-	 *  @return true if value set
-	 */
+	
 	protected final boolean set_Value (int index, Object value, boolean checkWritable)
 	{
 		if (index < 0 || index >= get_ColumnCount())
@@ -728,9 +673,6 @@ public abstract class PO
 				return false;
 			}
 	
-			//
-			// globalqss -- Bug 1618469 - is throwing not updateable even on new records
-			// if (!p_info.isColumnUpdateable(index))
 			if ( ( ! p_info.isColumnUpdateable(index) ) && ( ! is_new() ) )
 			{
 				colInfo += " - NewValue=" + value + " - OldValue=" + get_Value(index);
@@ -756,22 +698,15 @@ public abstract class PO
 		}
 		else
 		{
-			//  matching class or generic object
 			if (value.getClass().equals(p_info.getColumnClass(index))
 				|| p_info.getColumnClass(index) == Object.class)
 				m_newValues[index] = value;     //  correct
-			//  Integer can be set as BigDecimal
 			else if (value.getClass() == BigDecimal.class
 				&& p_info.getColumnClass(index) == Integer.class)
 				m_newValues[index] = Integer.valueOf(((BigDecimal)value).intValue());
-			//	Set Boolean
 			else if (p_info.getColumnClass(index) == Boolean.class
 				&& ("Y".equals(value) || "N".equals(value)) )
 				m_newValues[index] = Boolean.valueOf("Y".equals(value));
-			// added by vpj-cd
-			// To solve BUG [ 1618423 ] Set Project Type button in Project window throws warning
-			// generated because C_Project.C_Project_Type_ID is defined as button in dictionary
-			// although is ID (integer) in database
 			else if (value.getClass() == Integer.class
 					&& p_info.getColumnClass(index) == String.class)
 					m_newValues[index] = value;
@@ -861,35 +796,19 @@ public abstract class PO
 		return set_Value(ColumnName, value, false);
 	}   //  set_ValueNoCheck
 
-	/**
-	 *  Set Encrypted Value w/o check (update, r/o, ..).
-	 * 	Used when Column is R/O
-	 *  Required for key and parent values
-	 *  @param ColumnName column name
-	 *  @param value value
-	 *  @return true if value set
-	 */
+	
 	protected final boolean set_ValueNoCheckE (String ColumnName, Object value)
 	{
 		return set_ValueNoCheck (ColumnName, value);
 	}	//	set_ValueNoCheckE
 
-	/**
-	 * Set value of Column
-	 * @param columnName
-	 * @param value
-	 */
+	
 	public final void set_ValueOfColumn(String columnName, Object value)
 	{
 		set_ValueOfColumnReturningBoolean(columnName, value);
 	}
 
-	/**
-	 * Set value of Column returning boolean
-	 * @param columnName
-	 * @param value
-	 *  @returns boolean indicating success or failure
-	 */
+	
 	public final boolean set_ValueOfColumnReturningBoolean(String columnName, Object value)
 	{
 		int AD_Column_ID = p_info.getAD_Column_ID(columnName);
@@ -947,11 +866,8 @@ public abstract class PO
 	 */
 	public final boolean set_CustomColumnReturningBoolean (String columnName, Object value)
 	{
-		// [ 1845793 ] PO.set_CustomColumn not updating correctly m_newValues
-		// this is for columns not in PO - verify and call proper method if exists
 		int poIndex = get_ColumnIndex(columnName);
 		if (poIndex > 0) {
-			// is not custom column - it exists in the PO
 			return set_Value(columnName, value);
 		}
 		if (m_custom == null)
@@ -1141,12 +1057,7 @@ public abstract class PO
 		to.setAD_Org_ID(AD_Org_ID);
 	}	//	copyValues
 
-	/**
-	 * 	Copy old values of From to new values of To.
-	 *  Does not copy Keys and AD_Client_ID/AD_Org_ID
-	 * 	@param from old, existing & unchanged PO
-	 *  @param to new, not saved PO
-	 */
+	
 	public static void copyValues (PO from, PO to)
 	{
 		if (s_log.isLoggable(Level.FINE)) s_log.fine("From ID=" + from.get_ID() + " - To ID=" + to.get_ID());
@@ -1492,7 +1403,6 @@ public abstract class PO
 			while (it.hasNext())
 			{
 				String column = (String)it.next();
-//				int index = p_info.getColumnIndex(column);
 				String value = (String)m_custom.get(column);
 				if (value != null)
 					hmOut.put(column, value);
@@ -1502,14 +1412,7 @@ public abstract class PO
 		return hmOut;
 	}   //  get_HashMap
 
-	/**
-	 *  Load Special data (images, ..).
-	 *  To be extended by sub-classes
-	 *  @param rs result set
-	 *  @param index zero based index
-	 *  @return value value
-	 *  @throws SQLException
-	 */
+	
 	protected Object loadSpecial (ResultSet rs, int index) throws SQLException
 	{
 		if (log.isLoggable(Level.FINEST)) log.finest("(NOP) - " + p_info.getColumnName(index));
@@ -1799,17 +1702,7 @@ public abstract class PO
 		return get_Translation(columnName, AD_Language, false, true);
 	}
 
-	/**
-	 * Get Translation of column (if needed).
-	 * It checks if the base language is used or the column is not translated.
-	 * If there is no translation then it fallback to original value.
-	 * @param columnName
-	 * @param AD_Language
-	 * @param reload don't use cache, reload from DB
-	 * @param fallback fallback to base if no translation found
-	 * @return translated string
-	 * @throws IllegalArgumentException if columnName or AD_Language is null or model has multiple PK
-	 */
+	
 	public String get_Translation (String columnName, String AD_Language, boolean reload, boolean fallback)
 	{
 		//
@@ -1831,13 +1724,10 @@ public abstract class PO
 			return retValue;
 
 		} else {
-			//
-			// Check if NOT base language and column is translated => load trl from db
 			if (!Env.isBaseLanguage(AD_Language, get_TableName())
 					&& p_info.isColumnTranslated(p_info.getColumnIndex(columnName))
 				)
 			{
-				// Load translation from database
 				int ID = ((Integer)m_IDs[0]).intValue();
 				StringBuilder sql = new StringBuilder("SELECT ").append(columnName)
 										.append(" FROM ").append(p_info.getTableName()).append("_Trl WHERE ")
@@ -1846,8 +1736,6 @@ public abstract class PO
 				retValue = DB.getSQLValueString(get_TrxName(), sql.toString(), ID, AD_Language);
 			}
 		}
-		//
-		// If no translation found or not translated, fallback to original:
 		if (retValue == null && fallback) {
 			Object val = get_Value(columnName);
 			retValue = (val != null ? val.toString() : null);
@@ -1942,33 +1830,7 @@ public abstract class PO
 			}
 		}
 
-		//	Organization Check
-		/*Quynhnv.x8: Bo do khong dung ClientShare
-		if (getAD_Org_ID() == 0
-			&& (get_AccessLevel() == ACCESSLEVEL_ORG
-				|| get_AccessLevel() == ACCESSLEVEL_CLIENTORG))
-		{
-			log.saveError("FillMandatory", Msg.getElement(getCtx(), "AD_Org_ID"));
-			return false;
-		}
-		//	Should be Org 0
-		if (getAD_Org_ID() != 0)
-		{
-			boolean reset = get_AccessLevel() == ACCESSLEVEL_SYSTEM;
-			if (!reset )
-			{
-				reset = get_AccessLevel() == ACCESSLEVEL_CLIENT
-					|| get_AccessLevel() == ACCESSLEVEL_SYSTEMCLIENT
-					|| get_AccessLevel() == ACCESSLEVEL_ALL
-					|| get_AccessLevel() == ACCESSLEVEL_CLIENTORG;
-			}
-			if (reset)
-			{
-				log.warning("Set   to 0");
-				setAD_Org_ID(0);
-			}
-		}
-		*/
+		
 		Trx localTrx = null;
 		Trx trx = null;
 		Savepoint savepoint = null;
@@ -1991,9 +1853,6 @@ public abstract class PO
 			trx = Trx.get(m_trxName, false);
 			if (trx == null)
 			{
-				// Using a trx that was previously closed or never opened
-				// Creating and starting the transaction right here, but please note
-				// that this is not a good practice
 				trx = Trx.get(m_trxName, true);
 				log.severe("Transaction closed or never opened ("+m_trxName+") => starting now --> " + toString());
 			}
@@ -2203,7 +2062,6 @@ public abstract class PO
 			log.log(Level.WARNING, "afterSave", e);
 			log.saveError("Error", e, false);
 			success = false;
-		//	throw new DBException(e);
 		}
 		
 		set_ValueNoCheck("CreatedBy", Env.getAD_User_ID(getCtx()));
@@ -2238,7 +2096,6 @@ public abstract class PO
 			m_createNew = false;
 		}
 		if (!newRecord) {
-			//CacheMgt.get().reset(p_info.getTableName());
 			CacheMgt.get().reset(p_info.getTableName(), get_ID());
 			MRecentItem.clearLabel(p_info.getAD_Table_ID(), get_ID());
 		} else if (get_ID() > 0 && success)
@@ -2353,12 +2210,7 @@ public abstract class PO
 		boolean updatedBy = false;
 		lobReset();
 
-		//	Change Log
-		/*Quynhnv.x8: Bo session luu database va lay tu database.
-		MSession session = MSession.get (p_ctx, false);
-		if (session == null)
-			log.fine("No Session found");
-		*/
+		
 		int AD_ChangeLog_ID = 0;
 
 		int size = get_ColumnCount();
@@ -2442,8 +2294,6 @@ public abstract class PO
 					sql.append(DB.TO_DATE((Timestamp)encrypt(i,value),p_info.getColumnDisplayType(i) == DisplayType.Date));
 				else {
 					if (value.toString().length() == 0) {
-						// [ 1722057 ] Encrypted columns throw error if saved as null
-						// don't encrypt NULL
 						sql.append(DB.TO_STRING(value.toString()));
 					} else {
 						sql.append(encrypt(i,DB.TO_STRING(value.toString())));
@@ -2713,12 +2563,6 @@ public abstract class PO
 		int index;
 		lobReset();
 
-		//	Change Log
-		/*
-		MSession session = MSession.get (p_ctx, false);
-		if (session == null)
-			log.fine("No Session found");
-		*/
 		int AD_ChangeLog_ID = 0;
 
 		//params for insert statement
@@ -2761,7 +2605,10 @@ public abstract class PO
 			int accessLevel = Integer.parseInt(p_info.getAccessLevel());
 			
 			//Thiết lập giá trị client và org cho User
-			if (accessLevel == ACCESSLEVEL_System || (accessLevel == ACCESSLEVEL_Special && Env.isUserSystem(getCtx()))) {
+			if (accessLevel == ACCESSLEVEL_System 
+					|| (accessLevel == ACCESSLEVEL_Special && Env.isUserSystem(getCtx()))
+					|| (accessLevel == ACCESSLEVEL_All && Env.isUserSystem(getCtx()))) 
+			{
 				if (("AD_Client_ID".equals(columnName) || "AD_Org_ID".equals(columnName)) ) {
 					value = 0;
 				}

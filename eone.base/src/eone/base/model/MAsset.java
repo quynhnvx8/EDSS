@@ -191,7 +191,6 @@ public class MAsset extends X_A_Asset implements DocAction
 	public void setProcessMsg(String text) {
 		m_processMsg = text;
 	}
-
 	@Override
 	public String getSummary() {
 		StringBuilder sb = new StringBuilder();
@@ -200,8 +199,6 @@ public class MAsset extends X_A_Asset implements DocAction
 			sb.append(" - ").append(getDescription());
 		return sb.toString();
 	}
-
-
 
 	@Override
 	public int getAD_Window_ID() {

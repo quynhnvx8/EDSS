@@ -18,7 +18,7 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220511L;
+	private static final long serialVersionUID = 20220515L;
 
     /** Standard Constructor */
     public X_C_DocType (Properties ctx, int C_DocType_ID, String trxName)
@@ -474,8 +474,8 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	public static final String DOCBASETYPE_155Return = "155RE";
 	/** 152 Return = 152RE */
 	public static final String DOCBASETYPE_152Return = "152RE";
-	/** 156 ReturnVendor = 156RV */
-	public static final String DOCBASETYPE_156ReturnVendor = "156RV";
+	/** 156 Return = 156RE */
+	public static final String DOCBASETYPE_156Return = "156RE";
 	/** 15 Inventory miss = 15IVM */
 	public static final String DOCBASETYPE_15InventoryMiss = "15IVM";
 	/** 15 Inventory redundant = 15IVR */
@@ -522,8 +522,8 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	public static final String DOCBASETYPE_XuấtKhoHàngHóaTt88 = "156EX88";
 	/** Open Balance = BALANCE */
 	public static final String DOCBASETYPE_OpenBalance = "BALANCE";
-	/** 156 Nhập kho hàng hóa = 156DR */
-	public static final String DOCBASETYPE_156NhậpKhoHàngHóa = "156DR";
+	/** 156 Input = 156DR */
+	public static final String DOCBASETYPE_156Input = "156DR";
 	/** 156 Open balance = 156OP */
 	public static final String DOCBASETYPE_156OpenBalance = "156OP";
 	/** 152 Open balance = 152OP */
@@ -540,6 +540,12 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	public static final String DOCBASETYPE_AssetIncrement = "ASSETINC";
 	/** Asset DeIncrement = ASSETDOW */
 	public static final String DOCBASETYPE_AssetDeIncrement = "ASSETDOW";
+	/** 153 Credit Transfer = 153CRTR */
+	public static final String DOCBASETYPE_153CreditTransfer = "153CRTR";
+	/** 152 Credit Transfer = 152CRTR */
+	public static final String DOCBASETYPE_152CreditTransfer = "152CRTR";
+	/** 156  Credit Transfer = 156CRTR */
+	public static final String DOCBASETYPE_156CreditTransfer = "156CRTR";
 	/** Set Document BaseType.
 		@param DocBaseType 
 		Logical type of document

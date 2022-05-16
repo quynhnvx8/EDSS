@@ -8,7 +8,6 @@ import java.util.logging.Level;
 import eone.base.model.MDepreciation;
 import eone.base.model.MDepreciationExp;
 import eone.base.model.MElementValue;
-import eone.util.Env;
 
 public class Doc_Depreciation extends Doc
 {
@@ -54,7 +53,6 @@ public class Doc_Depreciation extends Doc
 		Fact fact = new Fact(this, Fact.POST_Actual);
 		MElementValue dr = null;
 		MElementValue cr = null;
-		int C_Currency_ID = Integer.parseInt(Env.getContext(getCtx(), "#C_CurrencyDefault_ID"));
 		for (int i = 0; i < p_lines.length; i++)
 		{
 			DocLine line = p_lines[i];
@@ -72,7 +70,7 @@ public class Doc_Depreciation extends Doc
 				return null;
 			}
 			
-			FactLine f = fact.createLine(line, dr, cr, C_Currency_ID, Env.ONE, lineExp.getAmount(), lineExp.getAmount());
+			FactLine f = fact.createLine(line, dr, cr, lineExp.getAmount(), lineExp.getAmount());
 			f.setC_TypeCost_ID(lineExp.getC_TypeCost_ID());
 			f.setA_Asset_ID(lineExp.getA_Asset_ID());
 			

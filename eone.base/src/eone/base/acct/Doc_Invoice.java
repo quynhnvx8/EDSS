@@ -106,7 +106,7 @@ public class Doc_Invoice extends Doc
 		tax = MElementValue.get(getCtx(), invoice.getAccount_Tax_ID());
 		
 		//Tien truoc thue
-		FactLine f = fact.createHeader(dr, cr, invoice.getC_Currency_ID(), invoice.getCurrencyRate(), invoice.getAmount(), invoice.getAmountConvert());
+		FactLine f = fact.createHeader(dr, cr, invoice.getAmount(), invoice.getAmountConvert());
 		f.setC_BPartner_Dr_ID(invoice.getC_BPartner_Dr_ID());
 		f.setC_BPartner_Cr_ID(invoice.getC_BPartner_Cr_ID());
 		f.setC_TypeCost_ID(invoice.getC_TypeCost_ID());
@@ -121,7 +121,7 @@ public class Doc_Invoice extends Doc
 			cr = tax;
 		}
 		
-		FactLine f1 = fact.createHeader(dr, cr, invoice.getC_Currency_ID(), invoice.getCurrencyRate(), invoice.getTaxAmt(), invoice.getTaxAmt());
+		FactLine f1 = fact.createHeader(dr, cr, invoice.getTaxAmt(), invoice.getTaxAmt());
 		f1.setC_BPartner_Dr_ID(invoice.getC_BPartner_Dr_ID());
 		f1.setC_BPartner_Cr_ID(invoice.getC_BPartner_Cr_ID());
 		f1.setC_TypeCost_ID(invoice.getC_TypeCost_ID());

@@ -56,7 +56,6 @@ public class Doc_TransferPeriod extends Doc
 	public ArrayList<Fact> createFacts ()
 	{
 		Fact fact = new Fact(this, Fact.POST_Actual);
-		MTransferPeriod transfer = (MTransferPeriod)getPO();
 		MElementValue dr = null;
 		MElementValue cr = null;
 		
@@ -67,7 +66,7 @@ public class Doc_TransferPeriod extends Doc
 			MTransferPeriodLine transferLine = (MTransferPeriodLine) line.getPO();
 			dr = MElementValue.get(getCtx(), transferLine.getAccount_Dr_ID());
 			cr = MElementValue.get(getCtx(), transferLine.getAccount_Cr_ID());
-			FactLine f = fact.createLine(line, dr, cr, transfer.getC_Currency_ID(), transfer.getCurrencyRate(), transferLine.getAmount(), transferLine.getAmountConvert());
+			FactLine f = fact.createLine(line, dr, cr, transferLine.getAmount(), transferLine.getAmountConvert());
 			f.setM_Product_ID(transferLine.getM_Product_ID());
 		}
 		ArrayList<Fact> facts = new ArrayList<Fact>();

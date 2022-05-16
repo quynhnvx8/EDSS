@@ -21,7 +21,6 @@ package eone.base.process;
 
 import java.math.BigDecimal;
 
-import eone.base.model.I_AD_Role_Included;
 import eone.exceptions.EONEException;
 import eone.util.DB;
 import eone.util.Env;
@@ -78,12 +77,10 @@ public class CopyRole extends SvrProcess
 			throw new EONEException("Roles must be different");
 
 		String[] tables = new String[] {"AD_Window_Access", "AD_Process_Access",
-				"AD_Task_Access", "AD_InfoWindow_Access",
-				I_AD_Role_Included.Table_Name
+				"AD_Task_Access", "AD_InfoWindow_Access"
 		};
 		String[] keycolumns = new String[] {"AD_Window_ID", "AD_Process_ID", "AD_Form_ID",
-				"AD_Task_ID", "C_DocType_ID, AD_Ref_List_ID", "AD_InfoWindow_ID",
-				I_AD_Role_Included.COLUMNNAME_Included_Role_ID
+				"AD_Task_ID", "C_DocType_ID, AD_Ref_List_ID", "AD_InfoWindow_ID"
 		};
 		
 		int action = 0;
@@ -97,16 +94,11 @@ public class CopyRole extends SvrProcess
 			int no = DB.executeUpdateEx(sql.toString(), get_TrxName());
 			addLog(action++, null, BigDecimal.valueOf(no), "Old records deleted from " + table );
 			
-			final boolean column_IsReadWrite =
-				!table.equals("AD_InfoWindow_Access")
-				&& !table.equals(I_AD_Role_Included.Table_Name);
-			final boolean column_SeqNo = table.equals(I_AD_Role_Included.Table_Name); 
+			final boolean column_IsReadWrite = !table.equals("AD_InfoWindow_Access");
 			
 			sql = new StringBuilder("INSERT INTO ").append(table)
 				.append(" (AD_Client_ID, AD_Org_ID, Created, CreatedBy, Updated, UpdatedBy, ") 
 				.append(   "AD_Role_ID, ").append(keycolumn).append(", isActive");
-			if (column_SeqNo)
-				sql.append(", SeqNo ");
 			if (column_IsReadWrite)
 				sql.append(", isReadWrite) ");
 			else
@@ -118,8 +110,7 @@ public class CopyRole extends SvrProcess
 				.append(", ").append(m_AD_Role_ID_To)
 				.append(", ").append(keycolumn)
 				.append(", IsActive ");
-			if (column_SeqNo)
-				sql.append(", SeqNo ");
+			
 			if (column_IsReadWrite)
 				sql.append(", isReadWrite ");
 			sql.append("FROM ").append(table).append(" WHERE AD_Role_ID = ").append(m_AD_Role_ID_From);

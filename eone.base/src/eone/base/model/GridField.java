@@ -422,6 +422,11 @@ public class GridField
 		//  Record is Processed	***	
 		if (checkContext && "Y".equals(get_ValueAsString("Processed")))
 			return false;
+		
+		//Bổ sung điều kiện là ReadOnly Record
+		if (getGridTab().isReadOnlyRecord()) {
+			return false;
+		}
 
 		//  IsActive field is editable, if record not processed
 		if (m_vo.ColumnName.equals("IsActive"))

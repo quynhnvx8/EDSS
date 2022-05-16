@@ -1,13 +1,12 @@
 /******************************************************************************
- * Product: EOoe ERP & CRM Smart Business Solution	                        *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
  * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-
-import eone.util.KeyNamePair;
 
 /** Generated Interface for M_InOutLine
  *  @author EOne (generated) 
@@ -24,9 +23,9 @@ public interface I_M_InOutLine
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 1 - Org 
+    /** AccessLevel = 7 - System - Client - Org 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(1);
+    BigDecimal accessLevel = BigDecimal.valueOf(7);
 
     /** Load Meta Data */
 
@@ -110,6 +109,19 @@ public interface I_M_InOutLine
 	  */
 	public int getCreatedBy();
 
+    /** Column name DateFinish */
+    public static final String COLUMNNAME_DateFinish = "DateFinish";
+
+	/** Set Finish Date.
+	  * Finish or (planned) completion date
+	  */
+	public void setDateFinish (Timestamp DateFinish);
+
+	/** Get Finish Date.
+	  * Finish or (planned) completion date
+	  */
+	public Timestamp getDateFinish();
+
     /** Column name Description */
     public static final String COLUMNNAME_Description = "Description";
 
@@ -135,6 +147,15 @@ public interface I_M_InOutLine
 	  * Calculated amount of discount
 	  */
 	public BigDecimal getDiscountAmt();
+
+    /** Column name DiscountPercent */
+    public static final String COLUMNNAME_DiscountPercent = "DiscountPercent";
+
+	/** Set DiscountPercent	  */
+	public void setDiscountPercent (BigDecimal DiscountPercent);
+
+	/** Get DiscountPercent	  */
+	public BigDecimal getDiscountPercent();
 
     /** Column name DiscountType */
     public static final String COLUMNNAME_DiscountType = "DiscountType";
@@ -218,6 +239,19 @@ public interface I_M_InOutLine
 
 	public eone.base.model.I_M_Product getM_Product() throws RuntimeException;
 
+    /** Column name NumLines */
+    public static final String COLUMNNAME_NumLines = "NumLines";
+
+	/** Set Number of Lines.
+	  * Number of lines for a field
+	  */
+	public void setNumLines (String NumLines);
+
+	/** Get Number of Lines.
+	  * Number of lines for a field
+	  */
+	public String getNumLines();
+
     /** Column name Original */
     public static final String COLUMNNAME_Original = "Original";
 
@@ -265,6 +299,15 @@ public interface I_M_InOutLine
 	  * The document has been processed
 	  */
 	public boolean isProcessed();
+
+    /** Column name Producer */
+    public static final String COLUMNNAME_Producer = "Producer";
+
+	/** Set Producer	  */
+	public void setProducer (String Producer);
+
+	/** Get Producer	  */
+	public String getProducer();
 
     /** Column name Qty */
     public static final String COLUMNNAME_Qty = "Qty";

@@ -1,16 +1,16 @@
 /******************************************************************************
- * Product: EOoe ERP & CRM Smart Business Solution	                        *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
  * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
-import java.math.BigDecimal;
-import java.sql.ResultSet;
-import java.util.Properties;
-
 import eone.util.Env;
 import eone.util.KeyNamePair;
+import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.util.Properties;
 
 /** Generated Model for M_InOutLine
  *  @author EOne (generated) 
@@ -21,7 +21,7 @@ public class X_M_InOutLine extends PO implements I_M_InOutLine, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20210723L;
+	private static final long serialVersionUID = 20220514L;
 
     /** Standard Constructor */
     public X_M_InOutLine (Properties ctx, int M_InOutLine_ID, String trxName)
@@ -45,7 +45,7 @@ public class X_M_InOutLine extends PO implements I_M_InOutLine, I_Persistent
     }
 
     /** AccessLevel
-      * @return 1 - Org 
+      * @return 7 - System - Client - Org 
       */
     protected int get_AccessLevel()
     {
@@ -72,7 +72,7 @@ public class X_M_InOutLine extends PO implements I_M_InOutLine, I_Persistent
 	  */
 	public void setAmount (BigDecimal Amount)
 	{
-		set_Value (COLUMNNAME_Amount, Amount);
+		set_ValueNoCheck (COLUMNNAME_Amount, Amount);
 	}
 
 	/** Get Amount.
@@ -142,6 +142,23 @@ public class X_M_InOutLine extends PO implements I_M_InOutLine, I_Persistent
 		return ii.intValue();
 	}
 
+	/** Set Finish Date.
+		@param DateFinish 
+		Finish or (planned) completion date
+	  */
+	public void setDateFinish (Timestamp DateFinish)
+	{
+		set_Value (COLUMNNAME_DateFinish, DateFinish);
+	}
+
+	/** Get Finish Date.
+		@return Finish or (planned) completion date
+	  */
+	public Timestamp getDateFinish () 
+	{
+		return (Timestamp)get_Value(COLUMNNAME_DateFinish);
+	}
+
 	/** Set Description.
 		@param Description 
 		Optional short description of the record
@@ -174,6 +191,23 @@ public class X_M_InOutLine extends PO implements I_M_InOutLine, I_Persistent
 	public BigDecimal getDiscountAmt () 
 	{
 		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_DiscountAmt);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
+	}
+
+	/** Set DiscountPercent.
+		@param DiscountPercent DiscountPercent	  */
+	public void setDiscountPercent (BigDecimal DiscountPercent)
+	{
+		set_Value (COLUMNNAME_DiscountPercent, DiscountPercent);
+	}
+
+	/** Get DiscountPercent.
+		@return DiscountPercent	  */
+	public BigDecimal getDiscountPercent () 
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_DiscountPercent);
 		if (bd == null)
 			 return Env.ZERO;
 		return bd;
@@ -294,9 +328,9 @@ public class X_M_InOutLine extends PO implements I_M_InOutLine, I_Persistent
 	public void setM_Product_ID (int M_Product_ID)
 	{
 		if (M_Product_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_M_Product_ID, null);
+			set_Value (COLUMNNAME_M_Product_ID, null);
 		else 
-			set_ValueNoCheck (COLUMNNAME_M_Product_ID, Integer.valueOf(M_Product_ID));
+			set_Value (COLUMNNAME_M_Product_ID, Integer.valueOf(M_Product_ID));
 	}
 
 	/** Get Product.
@@ -308,6 +342,23 @@ public class X_M_InOutLine extends PO implements I_M_InOutLine, I_Persistent
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
+	}
+
+	/** Set Number of Lines.
+		@param NumLines 
+		Number of lines for a field
+	  */
+	public void setNumLines (String NumLines)
+	{
+		set_Value (COLUMNNAME_NumLines, NumLines);
+	}
+
+	/** Get Number of Lines.
+		@return Number of lines for a field
+	  */
+	public String getNumLines () 
+	{
+		return (String)get_Value(COLUMNNAME_NumLines);
 	}
 
 	/** EONE = EONE */
@@ -393,6 +444,20 @@ public class X_M_InOutLine extends PO implements I_M_InOutLine, I_Persistent
 			return "Y".equals(oo);
 		}
 		return false;
+	}
+
+	/** Set Producer.
+		@param Producer Producer	  */
+	public void setProducer (String Producer)
+	{
+		set_Value (COLUMNNAME_Producer, Producer);
+	}
+
+	/** Get Producer.
+		@return Producer	  */
+	public String getProducer () 
+	{
+		return (String)get_Value(COLUMNNAME_Producer);
 	}
 
 	/** Set Quantity.

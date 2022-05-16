@@ -10,8 +10,6 @@ import eone.base.model.MDocType;
 import eone.base.model.MElementValue;
 import eone.base.model.MInOut;
 import eone.base.model.MInOutLine;
-import eone.base.model.X_C_DocType;
-import eone.base.model.X_M_InOut;
 import eone.util.Env;
 
 public class Doc_InOut extends Doc
@@ -47,12 +45,9 @@ public class Doc_InOut extends Doc
 			}
 
 			DocLine docLine = new DocLine (line, this);
-			
-			
 			list.add (docLine);
 		}
 
-		//	Return Array
 		DocLine[] dls = new DocLine[list.size()];
 		list.toArray(dls);
 		return dls;
@@ -63,150 +58,72 @@ public class Doc_InOut extends Doc
 	public ArrayList<Fact> createFacts ()
 	{
 		Fact fact = new Fact(this, Fact.POST_Actual);
-		MInOut inout = (MInOut)getPO();
-		MElementValue dr = null;
-		MElementValue cr = null;
-		MElementValue cogs = null;
-		MElementValue revenue = null;
-		
-		MDocType dt = MDocType.get(getCtx(), inout.getC_DocType_ID());
+		MInOut header = (MInOut)getPO();
 		
 		
-		if (MDocType.DOCTYPE_Output.equals(dt.getDocType()))
+		MDocType dt = MDocType.get(getCtx(), header.getC_DocType_ID());
+		
+		for (int i = 0; i < p_lines.length; i++)
 		{
-			for (int i = 0; i < p_lines.length; i++)
-			{
-				dr = MElementValue.get(getCtx(), inout.getAccount_Dr_ID());
-				cr = MElementValue.get(getCtx(), inout.getAccount_Cr_ID());
-				
-				if (inout.getAccount_COGS_ID() > 0) 
-					cogs = MElementValue.get(getCtx(), inout.getAccount_COGS_ID());
-				if (inout.getAccount_REV_ID() > 0)
-					revenue = MElementValue.get(getCtx(), inout.getAccount_REV_ID());
-				
-				DocLine line = p_lines[i];
-				MInOutLine inoutLine = (MInOutLine) line.getPO();
-				//COGS
-				FactLine f = null;
-				//xuất bán và khách hàng trả lại đều cùng type output. nhưng bút toán đảo lại
-				BigDecimal amtCOGS = inoutLine.getQty().multiply(inoutLine.getPricePO());
-				if (MDocType.DOCBASETYPE_156ReturnVendor.equals(dt.getDocBaseType())) {
-					f = fact.createLine(line, dr, cr, inout.getC_Currency_ID(), inout.getCurrencyRate(), inoutLine.getAmount(), inoutLine.getAmount());
-				} else {
-					if (cogs == null)
-						cogs = dr;
-					f = fact.createLine(line, cogs, cr, inout.getC_Currency_ID(), inout.getCurrencyRate(), amtCOGS, amtCOGS);
-				}
-				f.setM_Product_ID(inoutLine.getM_Product_ID());
-				f.setM_Product_Cr_ID(inoutLine.getM_Product_ID());
-				f.setQty(inoutLine.getQty());
-				f.setM_Warehouse_Dr_ID(inout.getM_Warehouse_Dr_ID());
-				f.setM_Warehouse_Cr_ID(inout.getM_Warehouse_Cr_ID());
-				f.setC_BPartner_Cr_ID(inout.getC_BPartner_Cr_ID());
-				f.setC_BPartner_Dr_ID(inout.getC_BPartner_Dr_ID());			
-				f.setPrice(inoutLine.getPrice());
-				
-				//Revenue
-				BigDecimal amtRev = inoutLine.getAmount().subtract(inoutLine.getDiscountAmt());
-				if (amtRev.compareTo(Env.ZERO) != 0 && MDocType.DOCTYPEDETAIL_SELL.equals(dt.getDocTypeDetail())) {
-					
-					f = fact.createLine(line, dr, revenue, inout.getC_Currency_ID(), inout.getCurrencyRate(), amtRev, amtRev);
-					f.setC_BPartner_Cr_ID(inout.getC_BPartner_Cr_ID());
-					f.setC_BPartner_Dr_ID(inout.getC_BPartner_Dr_ID());			
-					f.setM_Product_ID(inoutLine.getM_Product_ID());
-					f.setM_Product_Cr_ID(inoutLine.getM_Product_ID());
-					f.setQty(inoutLine.getQty());
+			DocLine docLine = p_lines[i];
+			MInOutLine line = (MInOutLine) docLine.getPO();
+			
+			//Bán hàng
+			if (MDocType.DOCBASETYPE_156Sell.equals(dt.getDocBaseType())) {
+				if (!output_COGS(fact, docLine, header, line))
+				{
+					return null;
 				}
 				
+				if (!output_REV(fact, docLine, header, line))
+				{
+					return null;
+				}
 				
-				//Neu co thue
-				if (inout.getC_Tax_ID() > 0 && X_M_InOut.INCLUDETAXTAB_TAXS.equalsIgnoreCase(inout.getIncludeTaxTab())) {
-					if (X_C_DocType.DOCBASETYPE_152New.equalsIgnoreCase(dt.getDocBaseType()) 
-							|| X_C_DocType.DOCBASETYPE_153New.equalsIgnoreCase(dt.getDocBaseType())
-							|| X_C_DocType.DOCBASETYPE_155New.equalsIgnoreCase(dt.getDocBaseType())
-							|| X_C_DocType.DOCBASETYPE_156New.equalsIgnoreCase(dt.getDocBaseType())
-						) 
+				//Nếu có tiền thuế thì hạch toán thuế
+				if (line.getTaxAmt().compareTo(Env.ZERO) != 0) {
+					if (!output_TAX(fact, docLine, header, line))
 					{
-						dr =  MElementValue.get(getCtx(), inout.getAccount_Tax_ID());
-					} else {
-						cr =  MElementValue.get(getCtx(), inout.getAccount_Tax_ID());
+						return null;
 					}
-					
-					FactLine f1 = fact.createLine(line, dr, cr, inout.getC_Currency_ID(), inout.getCurrencyRate(), inoutLine.getTaxAmt(), inoutLine.getTaxAmt());
-					f1.setC_BPartner_Cr_ID(inout.getC_BPartner_Cr_ID());
-					f1.setC_BPartner_Dr_ID(inout.getC_BPartner_Dr_ID());
-					f1.setC_Tax_ID(inout.getC_Tax_ID());
-					f1.setInvoiceNo(inout.getInvoiceNo());
-					f1.setInvoiceSymbol(inout.getInvoiceSymbol());
-					f1.setDateInvoiced(inout.getDateInvoiced());
 				}
-			}//end for
-		} else {
-			for (int i = 0; i < p_lines.length; i++)
+			}
+			
+			//Nhập mua
+			if (MDocType.DOCBASETYPE_152New.equals(dt.getDocBaseType()) 
+					|| MDocType.DOCBASETYPE_153New.equals(dt.getDocBaseType())
+					|| MDocType.DOCBASETYPE_156New.equals(dt.getDocBaseType())) {
+				if (!insert_Data(fact, docLine, header, line))
+				{
+					return null;
+				}
+				
+				if (line.getTaxAmt().compareTo(Env.ZERO) != 0) {
+					if (!input_TAX(fact, docLine, header, line))
+					{
+						return null;
+					}
+				}
+			}
+			
+			if (MDocType.DOCBASETYPE_152Credit.equals(dt.getDocBaseType()) 
+					|| MDocType.DOCBASETYPE_153Credit.equals(dt.getDocBaseType())
+					|| MDocType.DOCBASETYPE_156Credit.equals(dt.getDocBaseType())
+					|| MDocType.DOCBASETYPE_152CreditTransfer.equals(dt.getDocBaseType())
+					|| MDocType.DOCBASETYPE_153CreditTransfer.equals(dt.getDocBaseType())
+					|| MDocType.DOCBASETYPE_156CreditTransfer.equals(dt.getDocBaseType())
+					
+					|| MDocType.DOCBASETYPE_152Debit.equals(dt.getDocBaseType())
+					|| MDocType.DOCBASETYPE_153Debit.equals(dt.getDocBaseType())
+					//|| MDocType.DOCBASETYPE_156.equals(dt.getDocBaseType())
+					) 
 			{
-				DocLine line = p_lines[i];
-				MInOutLine inoutLine = (MInOutLine) line.getPO();
-				
-				dr = MElementValue.get(getCtx(), inout.getAccount_Dr_ID());
-				cr = MElementValue.get(getCtx(), inout.getAccount_Cr_ID());
-				
-				
-				FactLine f = null;
-				if (X_C_DocType.DOCTYPEDETAIL_RETURN.equals(dt.getDocTypeDetail())) {
-					if (inout.getAccount_COGS_ID() > 0) 
-						cogs = MElementValue.get(getCtx(), inout.getAccount_COGS_ID());
-					if (inout.getAccount_REV_ID() > 0)
-						revenue = MElementValue.get(getCtx(), inout.getAccount_REV_ID());
-					BigDecimal amtCOGS = inoutLine.getQty().multiply(inoutLine.getPricePO());
-					f = fact.createLine(line, dr, cogs, inout.getC_Currency_ID(), inout.getCurrencyRate(), amtCOGS, amtCOGS);
-				} else {
-					if (cogs == null)
-						cogs = dr;
-					f = fact.createLine(line, dr, cr, inout.getC_Currency_ID(), inout.getCurrencyRate(), inoutLine.getAmount(), inoutLine.getAmount());
+				if (!insert_Data(fact, docLine, header, line))
+				{
+					return null;
 				}
-				f.setM_Product_ID(inoutLine.getM_Product_ID());
-				f.setM_Product_Cr_ID(inoutLine.getM_Product_ID());
-				f.setQty(inoutLine.getQty());
-				f.setM_Warehouse_Dr_ID(inout.getM_Warehouse_Dr_ID());
-				f.setM_Warehouse_Cr_ID(inout.getM_Warehouse_Cr_ID());
-				f.setC_BPartner_Cr_ID(inout.getC_BPartner_Cr_ID());
-				f.setC_BPartner_Dr_ID(inout.getC_BPartner_Dr_ID());			
-				f.setPrice(inoutLine.getPrice());
-				
-				//Revenue hàng trả lại
-				BigDecimal amtRev = inoutLine.getAmount().subtract(inoutLine.getDiscountAmt());
-				if (amtRev.compareTo(Env.ZERO) != 0 && MDocType.DOCTYPEDETAIL_RETURN.equals(dt.getDocTypeDetail())) {
-					
-					f = fact.createLine(line, revenue, cr, inout.getC_Currency_ID(), inout.getCurrencyRate(), amtRev, amtRev);
-					f.setC_BPartner_Cr_ID(inout.getC_BPartner_Cr_ID());
-					f.setC_BPartner_Dr_ID(inout.getC_BPartner_Dr_ID());			
-					
-				}
-				
-				//Neu co thue
-				if (inout.getC_Tax_ID() > 0 && X_M_InOut.INCLUDETAXTAB_TAXS.equalsIgnoreCase(inout.getIncludeTaxTab())) {
-					if (X_C_DocType.DOCBASETYPE_152New.equalsIgnoreCase(dt.getDocBaseType()) 
-							|| X_C_DocType.DOCBASETYPE_153New.equalsIgnoreCase(dt.getDocBaseType())
-							|| X_C_DocType.DOCBASETYPE_155New.equalsIgnoreCase(dt.getDocBaseType())
-							|| X_C_DocType.DOCBASETYPE_156New.equalsIgnoreCase(dt.getDocBaseType())
-							|| MDocType.DOCTYPEDETAIL_RETURN.equals(dt.getDocTypeDetail())
-						) {
-						dr =  MElementValue.get(getCtx(), inout.getAccount_Tax_ID());
-					} else {
-						cr =  MElementValue.get(getCtx(), inout.getAccount_Tax_ID());
-					}
-					
-					FactLine f1 = fact.createLine(line, dr, cr, inout.getC_Currency_ID(), inout.getCurrencyRate(), inoutLine.getTaxAmt(), inoutLine.getTaxAmt());
-					f1.setC_BPartner_Cr_ID(inout.getC_BPartner_Cr_ID());
-					f1.setC_BPartner_Dr_ID(inout.getC_BPartner_Dr_ID());
-					f1.setC_Tax_ID(inout.getC_Tax_ID());
-					f1.setInvoiceNo(inout.getInvoiceNo());
-					f1.setInvoiceSymbol(inout.getInvoiceSymbol());
-					f1.setDateInvoiced(inout.getDateInvoiced());
-				}
-			}//end for
-		}//end nhap
-		
+			}
+		}//End for lines
 		
 		
 		ArrayList<Fact> facts = new ArrayList<Fact>();
@@ -214,5 +131,137 @@ public class Doc_InOut extends Doc
 		return facts;
 	}   //  createFact
 
+	//Post giá vốn
+	private boolean output_COGS(Fact fact, DocLine docLine, MInOut header, MInOutLine line) {
+		
+		MElementValue dr = null;
+		MElementValue cr = null;
+		dr = MElementValue.get(getCtx(), header.getAccount_COGS_ID());
+		cr = MElementValue.get(getCtx(), header.getAccount_Cr_ID());
+		BigDecimal amount = line.getPricePO().multiply(line.getQty());
+		
+		FactLine f = fact.createLine(docLine, dr, cr, amount, amount);
+		if (f == null) {
+			p_Error = "Not Create Fact";
+			log.log(Level.SEVERE, p_Error);
+			return false;
+		}
+		
+		f.setPrice(line.getPricePO());
+		f.setQty(line.getQty());
+		f.setC_BPartner_Dr_ID(header.getC_BPartner_Dr_ID());
+		f.setC_BPartner_Cr_ID(header.getC_BPartner_Cr_ID());
+		f.setM_Product_ID(line.getM_Product_ID());
+		f.setM_Product_Cr_ID(line.getM_Product_ID());
+		f.setM_Warehouse_Dr_ID(header.getM_Warehouse_Dr_ID());
+		f.setM_Warehouse_Cr_ID(header.getM_Warehouse_Cr_ID());
+		return true;
+	}
 	
+	//Post doanh thu
+	private boolean output_REV(Fact fact, DocLine docLine, MInOut header, MInOutLine line) {
+		
+		MElementValue dr = null;
+		MElementValue cr = null;
+		dr = MElementValue.get(getCtx(), header.getAccount_Dr_ID());
+		cr = MElementValue.get(getCtx(), header.getAccount_REV_ID());
+		BigDecimal amount = line.getAmount().subtract(line.getDiscountAmt());
+		
+		FactLine f = fact.createLine(docLine, dr, cr, amount, amount);
+		if (f == null) {
+			p_Error = "Not Create Fact";
+			log.log(Level.SEVERE, p_Error);
+			return false;
+		}
+		
+		f.setPrice(line.getPrice());
+		f.setQty(line.getQty());
+		f.setC_BPartner_Dr_ID(header.getC_BPartner_Dr_ID());
+		f.setC_BPartner_Cr_ID(header.getC_BPartner_Cr_ID());
+		f.setM_Product_ID(line.getM_Product_ID());
+		f.setM_Product_Cr_ID(line.getM_Product_ID());
+		f.setM_Warehouse_Dr_ID(header.getM_Warehouse_Dr_ID());
+		f.setM_Warehouse_Cr_ID(header.getM_Warehouse_Cr_ID());
+		return true;
+	}
+	
+	//Post thuế (nếu có)
+	private boolean output_TAX(Fact fact, DocLine docLine, MInOut header, MInOutLine line) {
+		
+		MElementValue dr = null;
+		MElementValue cr = null;
+		dr = MElementValue.get(getCtx(), header.getAccount_Dr_ID());
+		cr = MElementValue.get(getCtx(), header.getAccount_Tax_ID());
+		BigDecimal amount = line.getTaxAmt();
+		
+		FactLine f1 = fact.createLine(docLine, dr, cr, amount, amount);
+		if (f1 == null) {
+			p_Error = "Not Create Fact";
+			log.log(Level.SEVERE, p_Error);
+			return false;
+		}
+		f1.setC_BPartner_Cr_ID(header.getC_BPartner_Cr_ID());
+		f1.setC_BPartner_Dr_ID(header.getC_BPartner_Dr_ID());
+		f1.setC_Tax_ID(header.getC_Tax_ID());
+		f1.setInvoiceNo(header.getInvoiceNo());
+		f1.setInvoiceSymbol(header.getInvoiceSymbol());
+		f1.setDateInvoiced(header.getDateInvoiced());
+		return true;
+	}
+	
+	/**
+	 * 
+	 */
+	
+	//Hàm dùng chung cho nhập và xuất thông thường
+	private boolean insert_Data(Fact fact, DocLine docLine, MInOut header, MInOutLine line) {
+		
+		MElementValue dr = null;
+		MElementValue cr = null;
+		dr = MElementValue.get(getCtx(), header.getAccount_Dr_ID());
+		cr = MElementValue.get(getCtx(), header.getAccount_Cr_ID());
+		BigDecimal amount = line.getAmount();
+		
+		FactLine f = fact.createLine(docLine, dr, cr, amount, amount);
+		if (f == null) {
+			p_Error = "Not Create Fact";
+			log.log(Level.SEVERE, p_Error);
+			return false;
+		}
+		
+		f.setPrice(line.getPrice());
+		f.setQty(line.getQty());
+		f.setC_BPartner_Dr_ID(header.getC_BPartner_Dr_ID());
+		f.setC_BPartner_Cr_ID(header.getC_BPartner_Cr_ID());
+		f.setM_Product_ID(line.getM_Product_ID());
+		f.setM_Product_Cr_ID(line.getM_Product_ID());
+		f.setM_Warehouse_Dr_ID(header.getM_Warehouse_Dr_ID());
+		f.setM_Warehouse_Cr_ID(header.getM_Warehouse_Cr_ID());
+		return true;
+	}
+	
+	
+	//Post thuế (nếu có)
+	private boolean input_TAX(Fact fact, DocLine docLine, MInOut header, MInOutLine line) {
+		
+		MElementValue dr = null;
+		MElementValue cr = null;
+		dr = MElementValue.get(getCtx(), header.getAccount_Tax_ID());
+		cr = MElementValue.get(getCtx(), header.getAccount_Cr_ID());
+		BigDecimal amount = line.getTaxAmt();
+		
+		FactLine f1 = fact.createLine(docLine, dr, cr, amount, amount);
+		if (f1 == null) {
+			p_Error = "Not Create Fact";
+			log.log(Level.SEVERE, p_Error);
+			return false;
+		}
+		f1.setC_BPartner_Cr_ID(header.getC_BPartner_Cr_ID());
+		f1.setC_BPartner_Dr_ID(header.getC_BPartner_Dr_ID());
+		f1.setC_Tax_ID(header.getC_Tax_ID());
+		f1.setInvoiceNo(header.getInvoiceNo());
+		f1.setInvoiceSymbol(header.getInvoiceSymbol());
+		f1.setDateInvoiced(header.getDateInvoiced());
+		return true;
+	}
 }   //  Doc_InOut

@@ -912,7 +912,7 @@ public class GridView extends Vlayout implements EventListener<Event>, IdSpace, 
 				}
 			}
 			if (cmp != null)
-				Clients.response(new AuScript(null, "window.eone.scrollToRow('" + cmp.getUuid() + "');"));
+				Clients.response(new AuScript(null, "parent.window.eone.scrollToRow('" + cmp.getUuid() + "');"));
 
 			if (columnOnClick != null && columnOnClick.trim().length() > 0) {
 				List<?> list = row.getChildren();
@@ -921,7 +921,7 @@ public class GridView extends Vlayout implements EventListener<Event>, IdSpace, 
 						Div div = (Div) element;
 						if (columnOnClick.equals(div.getAttribute("columnName"))) {
 							cmp = div.getFirstChild();
-							Clients.response(new AuScript(null, "window.eone.scrollToRow('" + cmp.getUuid() + "');"));
+							Clients.response(new AuScript(null, "parent.window.eone.scrollToRow('" + cmp.getUuid() + "');"));
 							break;
 						}
 					}

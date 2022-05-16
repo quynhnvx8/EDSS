@@ -2,7 +2,6 @@
 package eone.base.process;
 
 import java.io.File;
-import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,24 +35,16 @@ public class DocumentEngine implements DocAction
 		if (docStatus != null)
 			m_status = docStatus;
 		
-		//Biến này dùng để xác định bảng nào đẩy vào fact bảng nào ko
 		m_posted = posted; 
 		
 		this.AD_Window_ID = AD_Window_ID;
-	}	//	DocActionEngine
+	}	
 
-	/** Persistent Document 	*/
 	private DocAction	m_document;
-	/** Document Status			*/
 	private String		m_status = STATUS_Drafted;
-	/**	Process Message 		*/
 	private String		m_message = null;
-	/** Actual Doc Action		*/
 	private String		m_action = null;
-	
-	private static boolean m_posted; //Biến này dùng để xác định bảng nào đẩy vào fact bảng nào ko
-
-	/**	Logger			*/
+	private static boolean m_posted; 
 	private static CLogger log = CLogger.getCLogger(DocumentEngine.class);
 
 	/**
@@ -95,32 +86,14 @@ public class DocumentEngine implements DocAction
 	
 	public boolean processIt (String processAction, String docStatus)
 	{
-		//ensure doc status not change by other session
-		/*FIXME: Khong can doan check nay: Do ban ghi cua nguoi nao thi nguoi ay COMPLETE
-		if (m_document instanceof PO) {
-			PO docPO = (PO) m_document;
-			if (docPO.get_ID() > 0 && docPO.get_TrxName() != null && docPO.get_ValueOld("DocStatus") != null) {
-				DB.getDatabase().forUpdate(docPO, 30);
-				String docStatusOriginal = (String) docPO.get_ValueOld("DocStatus");
-				String statusSql = "SELECT DocStatus FROM " + docPO.get_TableName() + " WHERE " + docPO.get_KeyColumns()[0] + " = ? ";
-				String currentStatus = DB.getSQLValueString((String)null, statusSql, docPO.get_ID());
-				if (!docStatusOriginal.equals(currentStatus) && currentStatus != null) {
-					currentStatus = DB.getSQLValueString(docPO.get_TrxName(), statusSql, docPO.get_ID());
-					if (!docStatusOriginal.equals(currentStatus)) {
-						throw new IllegalStateException(Msg.getMsg(docPO.getCtx(), "DocStatusChanged") + " " + docPO.toString());
-					}
-				}
-			}
-		}
-		*/
 		
 		m_message = null;
 		m_action = null;
 
-		if (isValidAction(processAction))	//	WF Selection first
+		if (isValidAction(processAction))	
 			m_action = processAction;
 		//
-		else if (isValidAction(docStatus))	//	User Selection second
+		else if (isValidAction(docStatus))	
 			m_action = docStatus;
 		//	Nothing to do
 		
@@ -288,87 +261,7 @@ public class DocumentEngine implements DocAction
 		throw new IllegalStateException(EXCEPTION_MSG);
 	}
 
-	/**
-	 * 	Get Document No
-	 *	@return throw exception
-	 */
-	public String getDocumentNo()
-	{
-		throw new IllegalStateException(EXCEPTION_MSG);
-	}
-
-	/**
-	 * 	Get Document Info
-	 *	@return throw exception
-	 */
-	public String getDocumentInfo()
-	{
-		throw new IllegalStateException(EXCEPTION_MSG);
-	}
-
-	/**
-	 * 	Get Document Owner
-	 *	@return throw exception
-	 */
-	public int getDoc_User_ID()
-	{
-		throw new IllegalStateException(EXCEPTION_MSG);
-	}
-
-	/**
-	 * 	Get Document Currency
-	 *	@return throw exception
-	 */
-	public int getC_Currency_ID()
-	{
-		throw new IllegalStateException(EXCEPTION_MSG);
-	}
-
-	/**
-	 * 	Get Document Approval Amount
-	 *	@return throw exception
-	 */
-	public BigDecimal getApprovalAmt()
-	{
-		throw new IllegalStateException(EXCEPTION_MSG);
-	}
-
-	/**
-	 * 	Get Document Client
-	 *	@return throw exception
-	 */
-	public int getAD_Client_ID()
-	{
-		throw new IllegalStateException(EXCEPTION_MSG);
-	}
-
-	/**
-	 * 	Get Document Organization
-	 *	@return throw exception
-	 */
-	public int getAD_Org_ID()
-	{
-		throw new IllegalStateException(EXCEPTION_MSG);
-	}
-
-	/**
-	 * 	Get Doc Action
-	 *	@return Document Action
-	 */
-	public String getDocAction()
-	{
-		return m_action;
-	}
-
-	/**
-	 * 	Save Document
-	 *	@return throw exception
-	 */
-	public boolean save()
-	{
-		throw new IllegalStateException(EXCEPTION_MSG);
-	}
-
+	
 	/**
 	 * 	Save Document
 	 *	@return throw exception
@@ -588,15 +481,6 @@ public class DocumentEngine implements DocAction
 		}
 	}
 
-	
-	public static boolean processIt(DocAction doc, String processAction) {
-		boolean success = false;
-		
-		DocumentEngine engine = new DocumentEngine(doc, doc.getDocStatus(), 0, m_posted);
-		success = engine.processIt(processAction, doc.getDocStatus());
-
-		return success;
-	}
 	
 	public static void readStatusReferenceList(ArrayList<String> v_value, ArrayList<String> v_name,
 			ArrayList<String> v_description)

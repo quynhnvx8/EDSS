@@ -58,7 +58,7 @@ public class Doc_StockTrans extends Doc
 	public ArrayList<Fact> createFacts ()
 	{
 		Fact fact = new Fact(this, Fact.POST_Actual);
-		MStockTrans inout = (MStockTrans)getPO();
+		
 		MElementValue dr = null;
 		MElementValue cr = null;
 		
@@ -73,7 +73,7 @@ public class Doc_StockTrans extends Doc
 			
 			//COGS
 			FactLine f = null;
-			f = fact.createLine(line, dr, cr, inout.getC_Currency_ID(), inout.getCurrencyRate(), inoutLine.getAmount(), inoutLine.getAmount());
+			f = fact.createLine(line, dr, cr, inoutLine.getAmount(), inoutLine.getAmount());
 			
 			f.setM_Product_ID(inoutLine.getM_Product_ID());
 			f.setM_Product_Cr_ID(inoutLine.getM_Product_ID());

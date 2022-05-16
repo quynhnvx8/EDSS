@@ -5,10 +5,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-import eone.base.model.MDocType;
 import eone.base.model.MElementValue;
 import eone.base.model.MFactAcct;
-import eone.base.model.X_C_DocType;
 import eone.util.CLogger;
 import eone.util.Env;
 import eone.util.Msg;
@@ -47,33 +45,30 @@ public final class Fact
 	}   //  dispose
 
 	
-	public FactLine createLine (DocLine docLine, MElementValue account_dr, MElementValue account_cr,
-		int C_Currency_ID, BigDecimal rate, BigDecimal Amount, BigDecimal AmountConvert)
+	public FactLine createLine (DocLine docLine, MElementValue dr, MElementValue cr, BigDecimal Amt, BigDecimal AmtConvert)
 	{
 		
-		FactLine line = new FactLine (m_doc.getCtx(), m_doc.get_Table_ID(),	m_doc.get_ID(),	docLine == null ? 0 : docLine.get_ID(), m_trxName);
+		FactLine line = new FactLine (m_doc.getCtx(), m_doc.get_Table_ID(),	m_doc.get_ID(),	docLine.get_ID(), m_trxName);
 		
-		line.setDocumentInfo(m_doc, docLine);
+		line.setInfoLine(m_doc, docLine);
 		line.setPostingType(m_postingType);
-		line.setAccount(account_dr, account_cr);
-
-		line.setAmount(C_Currency_ID, rate,Amount,  AmountConvert);
+		line.setAccount(dr, cr);
+		line.setAmount(m_doc.getC_Currency_ID(), m_doc.getRate(), Amt,  AmtConvert);
 		
 		add(line);
 		return line;
 	}	//	createLine
 	
-	public FactLine createHeader (MElementValue account_dr, MElementValue account_cr,
-			int C_Currency_ID, BigDecimal rate, BigDecimal Amount, BigDecimal AmountConvert)
+	public FactLine createHeader (MElementValue dr, MElementValue cr, BigDecimal Amt, BigDecimal AmtConvert)
 		{
 			
-			FactLine line = new FactLine (m_doc.getCtx(), m_doc.get_Table_ID(),	m_doc.get_ID(),	m_doc == null ? 0 : m_doc.get_ID(), m_trxName);
+			FactLine line = new FactLine (m_doc.getCtx(), m_doc.get_Table_ID(),	m_doc.get_ID(),	m_doc.get_ID(), m_trxName);
 			
-			line.setDocumentInfoHead(m_doc);
+			line.setInfoHeader(m_doc);
 			line.setPostingType(m_postingType);
-			line.setAccount(account_dr, account_cr);
-
-			line.setAmount(C_Currency_ID, rate,Amount,  AmountConvert);
+			line.setAccount(dr, cr);
+			
+			line.setAmount(m_doc.getC_Currency_ID(), m_doc.getRate(), Amt,  AmtConvert);
 			
 			add(line);
 			return line;
@@ -89,52 +84,35 @@ public final class Fact
 	}   //  add
 
 	
-	
-	
 	public String checkAccounts()
 	{
 		if (m_lines.size() == 0)
 			return "";
 		
-		//	For all fact lines
-		MDocType dt = MDocType.get(Env.getCtx(), m_doc.getC_DocType_ID());
+		
 		for (int i = 0; i < m_lines.size(); i++)
 		{
 			FactLine line = (FactLine)m_lines.get(i);
 			
 			MElementValue dr = line.getAccountDr();
-			if (dr == null && !X_C_DocType.DOCBASETYPE_OpenBalance.equals(dt.getDocBaseType())) {
-				log.warning("No Credit Account for " + line);
-				//rollbackPosted();
-				return Msg.getMsg(Env.getCtx(), "No_AccountDR") + "; ";
-			}
-
+			
 			if (dr != null && dr.isSummary()) {
 				log.warning("Cannot post to Summary Account " + dr + ": " + line);
-				//rollbackPosted();
 				return Msg.getMsg(Env.getCtx(), "Yes_Account_Summary") + ": " + dr + "; ";
 			}
 			if (dr != null && !dr.isActive()) {
 				log.warning("Cannot post to Inactive Account " + dr	+ ": " + line);
-				//rollbackPosted();
 				return Msg.getMsg(Env.getCtx(), "No_Account_Active") + ": " + dr + "; ";
 			}
 			
 			MElementValue cr = line.getAccountCr();
-			if (cr == null && !X_C_DocType.DOCBASETYPE_OpenBalance.equals(dt.getDocBaseType())) {
-				log.warning("No Credit Account for " + line);
-				//rollbackPosted();
-				return Msg.getMsg(Env.getCtx(), "No_AccountCR") + "; ";
-			}
-
+			
 			if (cr != null && cr.isSummary()) {
 				log.warning("Cannot post to Summary Account " + cr + ": " + line);
-				//rollbackPosted();
 				return Msg.getMsg(Env.getCtx(), "Yes_Account_Summary") + ": " + cr + "; ";
 			}
 			if (cr != null && !cr.isActive()) {
 				log.warning("Cannot post to Inactive Account " + cr + ": " + line);
-				//rollbackPosted();
 				return Msg.getMsg(Env.getCtx(), "No_Account_Active") + ": " + cr + "; ";
 			}
 

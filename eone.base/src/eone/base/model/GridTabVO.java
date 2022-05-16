@@ -104,6 +104,7 @@ public class GridTabVO implements Evaluatee, Serializable
 				vo.IsReadOnly = true;
 			vo.ReadOnlyLogic = rs.getString("ReadOnlyLogic");
 			
+			vo.ReadOnlyLogicRecord = rs.getString("ReadOnlyLogicRecord");
 			
 			vo.DeleteLogic = rs.getString("DeleteLogic");
 			
@@ -348,6 +349,7 @@ public class GridTabVO implements Evaluatee, Serializable
 	public  String      OrderByClause;
 	/** Tab Read Only	*/
 	public  String      ReadOnlyLogic;
+	public  String      ReadOnlyLogicRecord;
 	
 	public  String      DeleteLogic;
 	/** Tab Display		*/
@@ -452,6 +454,7 @@ public class GridTabVO implements Evaluatee, Serializable
 		clone.WhereClause = WhereClause;
 		clone.OrderByClause = OrderByClause;
 		clone.ReadOnlyLogic = ReadOnlyLogic;
+		clone.ReadOnlyLogicRecord = ReadOnlyLogicRecord;
 		
 		clone.DeleteLogic = DeleteLogic;
 		clone.DisplayLogic = DisplayLogic;

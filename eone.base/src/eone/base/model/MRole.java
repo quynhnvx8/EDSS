@@ -483,6 +483,18 @@ public final class MRole extends X_AD_Role
 				}
 			}
 			
+			if (ACCESSLEVEL_All == table.get_AccessLevel()) {
+				retSQL.append(" AND ");
+				if (!fullyQualified) {
+					retSQL.append(" AD_Client_ID IN (0, " + Env.getAD_Client_ID(ctx))
+					.append(" )");
+				} else {
+					retSQL
+					.append(tableName).append(".").append("AD_Client_ID IN (0, " + Env.getAD_Client_ID(ctx))
+					.append(" )");
+				}
+			}
+			
 			if(X_C_ElementValue.Table_Name.equalsIgnoreCase(tableRoot) 
 					|| X_C_Account.Table_Name.equalsIgnoreCase(tableRoot)
 					|| X_A_Asset_Group.Table_Name.equalsIgnoreCase(tableRoot)) {

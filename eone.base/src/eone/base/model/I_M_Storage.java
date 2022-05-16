@@ -29,6 +29,15 @@ public interface I_M_Storage
 
     /** Load Meta Data */
 
+    /** Column name AccumulateQty */
+    public static final String COLUMNNAME_AccumulateQty = "AccumulateQty";
+
+	/** Set Accumulate Qty	  */
+	public void setAccumulateQty (BigDecimal AccumulateQty);
+
+	/** Get Accumulate Qty	  */
+	public BigDecimal getAccumulateQty();
+
     /** Column name AD_Client_ID */
     public static final String COLUMNNAME_AD_Client_ID = "AD_Client_ID";
 
@@ -170,6 +179,19 @@ public interface I_M_Storage
 	  */
 	public String getMMPolicy();
 
+    /** Column name Note */
+    public static final String COLUMNNAME_Note = "Note";
+
+	/** Set Note.
+	  * Optional additional user defined information
+	  */
+	public void setNote (String Note);
+
+	/** Get Note.
+	  * Optional additional user defined information
+	  */
+	public String getNote();
+
     /** Column name Price */
     public static final String COLUMNNAME_Price = "Price";
 
@@ -209,14 +231,14 @@ public interface I_M_Storage
 	  */
 	public int getRecord_ID();
 
-    /** Column name RemainQty */
-    public static final String COLUMNNAME_RemainQty = "RemainQty";
+    /** Column name RemainOld */
+    public static final String COLUMNNAME_RemainOld = "RemainOld";
 
-	/** Set RemainQty	  */
-	public void setRemainQty (BigDecimal RemainQty);
+	/** Set RemainOld	  */
+	public void setRemainOld (BigDecimal RemainOld);
 
-	/** Get RemainQty	  */
-	public BigDecimal getRemainQty();
+	/** Get RemainOld	  */
+	public BigDecimal getRemainOld();
 
     /** Column name TypeInOut */
     public static final String COLUMNNAME_TypeInOut = "TypeInOut";

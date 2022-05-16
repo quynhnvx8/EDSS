@@ -52,7 +52,6 @@ import eone.base.model.MWindow;
 import eone.base.model.PO;
 import eone.base.model.X_AD_Signer;
 import eone.base.process.DocAction;
-import eone.base.process.DocumentEngine;
 import eone.base.process.ProcessInfo;
 import eone.base.process.ProcessInfoLog;
 import eone.util.CLogger;
@@ -89,8 +88,8 @@ import eone.webui.panel.ExportAction;
 import eone.webui.panel.ImportAction;
 import eone.webui.panel.InfoPanel;
 import eone.webui.panel.WAppendSign;
-import eone.webui.panel.WSignPanel;
 import eone.webui.panel.WAttachment;
+import eone.webui.panel.WSignPanel;
 import eone.webui.part.AbstractUIPart;
 import eone.webui.part.ITabOnSelectHandler;
 import eone.webui.session.SessionManager;
@@ -3547,7 +3546,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 				doc = (DocAction)po;
 				//
 				try {
-					success = doc.processIt (DocAction.ACTION_Complete, AD_Window_ID);	//	** Do the work
+					success = doc.processIt (DocAction.ACTION_Complete, AD_Window_ID);	
 					processMsg = doc.getProcessMsg();
 					m_docStatus = doc.getDocStatus();
 					if(m_docStatus == null || !m_docStatus.equals(DocAction.STATUS_Completed)) {
@@ -3566,12 +3565,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 				throw new IllegalStateException("Persistent Object not DocAction - "
 					+ po.getClass().getName()
 					+ " - AD_Table_ID=" + curTab.getAD_Table_ID() + ", Record_ID=" + curTab.getRecord_ID());
-			//
-			if (!po.save())
-			{
-				success = false;
-				processMsg = "SaveError";
-			}
+			
 			if (!success)
 			{
 				if (processMsg == null || processMsg.length() == 0)
@@ -3665,7 +3659,8 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 	                                Trx trx = Trx.get(trxName, true);
 	                                try {
 	                                    po.set_TrxName(trxName);
-	                                    isComplete = DocumentEngine.processIt(doc, DocumentEngine.ACTION_ReActivate);
+	                                    //isComplete = DocumentEngine.processIt(doc, DocumentEngine.ACTION_ReActivate);
+	                                    isComplete = doc.processIt (DocAction.ACTION_ReActivate, AD_Window_ID);
 	                                  
 	                                    if (!isComplete)
 	                                        m_processMsg = doc.getProcessMsg();
@@ -3710,7 +3705,8 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
                         Trx trx = Trx.get(trxName, true);
                         try {
                             po.set_TrxName(trxName);
-                            isComplete = DocumentEngine.processIt(doc, DocumentEngine.ACTION_ReActivate);
+                            //isComplete = DocumentEngine.processIt(doc, DocumentEngine.ACTION_ReActivate);
+                            isComplete = doc.processIt (DocAction.ACTION_ReActivate, AD_Window_ID);
                           
                             if (!isComplete)
                                 m_processMsg = doc.getProcessMsg();

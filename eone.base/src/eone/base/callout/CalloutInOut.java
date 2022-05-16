@@ -4,7 +4,6 @@ package eone.base.callout;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Properties;
 
 import eone.base.model.CalloutEngine;
@@ -83,7 +82,7 @@ public class CalloutInOut extends CalloutEngine
 
 		Object objQty = mTab.getValue(MInOutLine.COLUMNNAME_Qty);
 		Object objPrice = mTab.getValue(MInOutLine.COLUMNNAME_Price);
-		Object objAmount = mTab.getValue("Amount");
+		
 		Object objTax = mTab.getValue("C_Tax_ID");
 		Object objInOut = mTab.getValue("M_InOut_ID");
 		int p_M_InOut_ID = 0;
@@ -101,7 +100,7 @@ public class CalloutInOut extends CalloutEngine
 		BigDecimal taxRate = Env.ZERO;
 		
 		if (objQty == null) {
-			objQty = "0";
+			objQty = "0";			
 		}
 		if (objPrice == null) {
 			objPrice = "0";
@@ -111,24 +110,27 @@ public class CalloutInOut extends CalloutEngine
 			objTax = 0;
 		}
 		
-		//Cot so luong xoa ve 0
+		//Lấy số lượng trên form
+		qty = new BigDecimal(objQty.toString());
+		
+		//Lấy lại số lượng khi thay đổi cột số lượng
 		if (MInOutLine.COLUMNNAME_Qty.equalsIgnoreCase(mField.getColumnName())) {
 			objQty = mTab.getValue(MInOutLine.COLUMNNAME_Qty);
 			if (objQty == null)
-				return "";				
+				return "";	
+			qty = new BigDecimal(objQty.toString());
 		}
 		//Cot gia xoa ve 0
 		if (MInOutLine.COLUMNNAME_Price.equalsIgnoreCase(mField.getColumnName())) {
 			objPrice = mTab.getValue(MInOutLine.COLUMNNAME_Price);
 			if (objPrice == null)
-				return "";				
+				return "";	
+			price = new BigDecimal(objPrice.toString());
 		}
 		
 		//Nhap don gia hoac so luong
 		
 		if (MDocType.DOCTYPE_Output.equals(mDocType.getDocType())) {
-			//Neu la type xuat thi tu dong lay don gia theo AD_Client.MMPolicy
-			//Chi cho nhap so luong va tu dong tinh don gia theo phuong phap tinh gia vat tu duoc cau hinh AD_Client.MMPolicy
 			
 			//Lay kho xuat (Kho co)
 			int M_Warehouse_ID = inout.getM_Warehouse_Cr_ID();
@@ -139,48 +141,18 @@ public class CalloutInOut extends CalloutEngine
 				return "";
 			int M_Product_ID = Integer.parseInt(objProduct_ID.toString());
 			
-			//Lay so luong can xuat
-			if (MInOutLine.COLUMNNAME_Qty.equalsIgnoreCase(mField.getColumnName())) 
-			{
-				objQty = mTab.getValue(MInOutLine.COLUMNNAME_Qty);
-				if (objQty == null)
-					return "";
-				qty = new BigDecimal(objQty.toString());
-			}
+			//Lấy giá xuất vật tư hàng hóa trong bảng M_Storage
+			BigDecimal priceCurrent = MStorage.getPriceStorage(M_Product_ID, M_Warehouse_ID, dateAcct, null, qty);
 			
-			
-			List<List<Object>> data = MStorage.getQtyPrice(M_Product_ID, M_Warehouse_ID, dateAcct, null);
-			
-			BigDecimal qtyRemain = Env.ZERO;
-			BigDecimal amtRemain = Env.ZERO;
-			if (data != null && data.size() > 0) {
-				if (data.get(0).get(0) != null)
-					qtyRemain = new BigDecimal(data.get(0).get(0).toString());
-				if (data.get(0).get(2) != null)
-					amtRemain = new BigDecimal(data.get(0).get(2).toString());
-				if (qtyRemain.compareTo(Env.ZERO) > 0)
-					price = amtRemain.divide(qtyRemain, Env.getScalePrice(), RoundingMode.HALF_UP);
-				else
-					price = Env.ZERO;
-				p_Amount = qty.multiply(price);
+			if (priceCurrent.compareTo(Env.ZERO) > 0) {
 				
+				p_Amount = qty.multiply(priceCurrent);
 				p_Amount = p_Amount.setScale(Env.getScaleFinal(), RoundingMode.HALF_UP);
 			
-				if (qtyRemain.compareTo(qty) < 0)
-				{
-					//Neu so luong nhap nho hon so luong con lai thi lay so luong con lai.
-					mTab.setValue(MInOutLine.COLUMNNAME_Qty, qtyRemain);
-					mTab.setValue(MInOutLine.COLUMNNAME_Price, price);
-					mTab.setValue(MInOutLine.COLUMNNAME_PricePO, price);
-					mTab.setValue(MInOutLine.COLUMNNAME_Amount, amtRemain);
-				} 
-				else
-				{
-					//Nguoc lai thi lay tho so luong nhap tren form
-					mTab.setValue(MInOutLine.COLUMNNAME_Price, price);
-					mTab.setValue(MInOutLine.COLUMNNAME_PricePO, price);
-					mTab.setValue(MInOutLine.COLUMNNAME_Amount, p_Amount);
-				}
+				mTab.setValue(MInOutLine.COLUMNNAME_Price, priceCurrent);
+				mTab.setValue(MInOutLine.COLUMNNAME_PricePO, priceCurrent);
+				mTab.setValue(MInOutLine.COLUMNNAME_Amount, p_Amount);
+				
 			} 
 			else
 			{//trong hop khong co data tu m_storage
@@ -218,19 +190,6 @@ public class CalloutInOut extends CalloutEngine
 											
 			}
 		}//End Type nhap khac
-		
-		//Nhap thanh tien. Chi tinh lai so luong va tien chuyen doi
-		if ("Amount".equalsIgnoreCase(mField.getColumnName())) {
-			objAmount = mTab.getValue("Amount");
-			if (objAmount == null) {
-				objAmount = "0";
-			}
-			p_Amount = new BigDecimal(objAmount.toString());
-			qty = new BigDecimal(objQty.toString());
-			price = new BigDecimal(objPrice.toString());
-			if (price.compareTo(Env.ZERO) > 0)
-				mTab.setValue(MInOutLine.COLUMNNAME_Qty, p_Amount.divide(price, Env.getScaleCalculating(), RoundingMode.HALF_UP));		
-		}
 		
 		
 		if(!X_M_InOut.INCLUDETAXTAB_NONE.equalsIgnoreCase(inout.getIncludeTaxTab())) {

@@ -20,7 +20,7 @@ public class X_M_Storage extends PO implements I_M_Storage, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220513L;
+	private static final long serialVersionUID = 20220514L;
 
     /** Standard Constructor */
     public X_M_Storage (Properties ctx, int M_Storage_ID, String trxName)
@@ -58,6 +58,23 @@ public class X_M_Storage extends PO implements I_M_Storage, I_Persistent
         .append(get_ID()).append("]");
       return sb.toString();
     }
+
+	/** Set Accumulate Qty.
+		@param AccumulateQty Accumulate Qty	  */
+	public void setAccumulateQty (BigDecimal AccumulateQty)
+	{
+		set_Value (COLUMNNAME_AccumulateQty, AccumulateQty);
+	}
+
+	/** Get Accumulate Qty.
+		@return Accumulate Qty	  */
+	public BigDecimal getAccumulateQty () 
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_AccumulateQty);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
+	}
 
 	/** Set Amount.
 		@param Amount 
@@ -223,6 +240,23 @@ public class X_M_Storage extends PO implements I_M_Storage, I_Persistent
 		return (String)get_Value(COLUMNNAME_MMPolicy);
 	}
 
+	/** Set Note.
+		@param Note 
+		Optional additional user defined information
+	  */
+	public void setNote (String Note)
+	{
+		set_Value (COLUMNNAME_Note, Note);
+	}
+
+	/** Get Note.
+		@return Optional additional user defined information
+	  */
+	public String getNote () 
+	{
+		return (String)get_Value(COLUMNNAME_Note);
+	}
+
 	/** Set Price.
 		@param Price 
 		Price
@@ -286,18 +320,18 @@ public class X_M_Storage extends PO implements I_M_Storage, I_Persistent
 		return ii.intValue();
 	}
 
-	/** Set RemainQty.
-		@param RemainQty RemainQty	  */
-	public void setRemainQty (BigDecimal RemainQty)
+	/** Set RemainOld.
+		@param RemainOld RemainOld	  */
+	public void setRemainOld (BigDecimal RemainOld)
 	{
-		set_Value (COLUMNNAME_RemainQty, RemainQty);
+		set_Value (COLUMNNAME_RemainOld, RemainOld);
 	}
 
-	/** Get RemainQty.
-		@return RemainQty	  */
-	public BigDecimal getRemainQty () 
+	/** Get RemainOld.
+		@return RemainOld	  */
+	public BigDecimal getRemainOld () 
 	{
-		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_RemainQty);
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_RemainOld);
 		if (bd == null)
 			 return Env.ZERO;
 		return bd;

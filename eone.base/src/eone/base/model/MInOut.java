@@ -18,8 +18,6 @@ import eone.util.Env;
 public class MInOut extends X_M_InOut implements DocAction
 {
 
-
-	
 	private static final long serialVersionUID = 1226522383231204912L;
 
 	private static CCache<Integer,MInOut>		s_cache	= new CCache<Integer,MInOut>(Table_Name, 5);
@@ -50,9 +48,9 @@ public class MInOut extends X_M_InOut implements DocAction
 			ioline = new MInOutLine(ctx, 0, trxName);
 			ioline.setLine(line[i].getLine());
 			ioline.setM_Product_ID(line[i].getM_Product_ID());
-			ioline.setPrice(line[i].getPrice());
+			ioline.setPricePO(line[i].getPrice());
 			ioline.setQty(line[i].getQty().subtract(line[i].getQtyDelivered()));
-			ioline.setAmount(ioline.getPrice().multiply(ioline.getQty()));
+			ioline.setAmount(ioline.getPricePO().multiply(ioline.getQty()));
 			ioline.setTaxBaseAmt(ioline.getAmount().multiply((Env.ONE.add(taxRate))));
 			ioline.setTaxAmt(ioline.getTaxBaseAmt().subtract(ioline.getAmount()));
 			ioline.setM_InOut_ID(M_InOut_ID);
@@ -72,12 +70,6 @@ public class MInOut extends X_M_InOut implements DocAction
 		DB.executeUpdate(sql, getM_InOut_ID(), get_TrxName());
 	}
 
-	/**************************************************************************
-	 * 	Standard Constructor
-	 *	@param ctx context
-	 *	@param M_InOut_ID
-	 *	@param trxName rx name
-	 */
 	public MInOut (Properties ctx, int M_InOut_ID, String trxName)
 	{
 		super (ctx, M_InOut_ID, trxName);
@@ -90,35 +82,18 @@ public class MInOut extends X_M_InOut implements DocAction
 	}	//	MInOut
 
 	
-	/**
-	 *  Load Constructor
-	 *  @param ctx context
-	 *  @param rs result set record
-	 *	@param trxName transaction
-	 */
 	public MInOut (Properties ctx, ResultSet rs, String trxName)
 	{
 		super(ctx, rs, trxName);
 	}	//	MInOut
 
-	/**
-	 * 	Order Constructor - create header only
-	 *	@param order order
-	 *	@param movementDate optional movement date (default today)
-	 *	@param C_DocTypeShipment_ID document type or 0
-	 */
 	public MInOut (MOrder order, int C_DocTypeShipment_ID, Timestamp movementDate)
 	{
 		this (order.getCtx(), 0, order.get_TrxName());
 		
 	}	//	MInOut
 
-	/**
-	 * 	Copy Constructor - create header only
-	 *	@param original original
-	 *	@param movementDate optional movement date (default today)
-	 *	@param C_DocTypeShipment_ID document type or 0
-	 */
+	
 	public MInOut (MInOut original, int C_DocTypeShipment_ID, Timestamp movementDate)
 	{
 		this (original.getCtx(), 0, original.get_TrxName());
@@ -128,12 +103,8 @@ public class MInOut extends X_M_InOut implements DocAction
 		else
 			setC_DocType_ID (C_DocTypeShipment_ID);
 
-		
-
 		setDateOrdered(original.getDateOrdered());
 		setDescription(original.getDescription());
-
-
 	}	//	MInOut
 
 
@@ -232,8 +203,6 @@ public class MInOut extends X_M_InOut implements DocAction
 	}	//	getLines
 
 
-	
-
 	public void setProcessed (boolean processed)
 	{
 		super.setProcessed (processed);
@@ -246,13 +215,10 @@ public class MInOut extends X_M_InOut implements DocAction
 		m_lines = null;
 		if (log.isLoggable(Level.FINE)) log.fine(processed + " - Lines=" + noLine);
 	}	//	setProcessed
-
 	
 
 	protected boolean beforeSave (boolean newRecord)
 	{
-		
-
 		return true;
 	}	//	beforeSave
 
@@ -355,8 +321,6 @@ public class MInOut extends X_M_InOut implements DocAction
 		return DocAction.STATUS_Completed;
 	}	//	completeIt
 
-	
-
 
 	/**
 	 * 	Re-activate
@@ -389,28 +353,18 @@ public class MInOut extends X_M_InOut implements DocAction
 	}	//	reActivateIt
 
 
-	/*************************************************************************
-	 * 	Get Summary
-	 *	@return Summary of Document
-	 */
 	public String getSummary()
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append(getDocumentNo());
-		//	: Total Lines = 123.00 (#1)
 		sb.append(":")
-		//	.append(Msg.translate(getCtx(),"TotalLines")).append("=").append(getTotalLines())
 			.append(" (#").append(getLines(false).length).append(")");
-		//	 - Description
 		if (getDescription() != null && getDescription().length() > 0)
 			sb.append(" - ").append(getDescription());
 		return sb.toString();
 	}	//	getSummary
 
-	/**
-	 * 	Get Process Message
-	 *	@return clear text error message
-	 */
+	
 	public String getProcessMsg()
 	{
 		if (m_processMsg != null) {
@@ -424,25 +378,8 @@ public class MInOut extends X_M_InOut implements DocAction
 	public void setProcessMsg(String text) {
 		m_processMsg = text;
 	}
-	/**
-	 * 	Get Document Owner (Responsible)
-	 *	@return AD_User_ID
-	 */
-	public int getDoc_User_ID()
-	{
-		return getCreatedBy();
-	}	//	getDoc_User_ID
-
-	/**
-	 * 	Get Document Approval Amount
-	 *	@return amount
-	 */
-	public BigDecimal getApprovalAmt()
-	{
-		return Env.ZERO;
-	}	//	getApprovalAmt
-
 	
+
 	public boolean isComplete()
 	{
 		String ds = getDocStatus();
@@ -455,7 +392,4 @@ public class MInOut extends X_M_InOut implements DocAction
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	
-
-}	//	MInOut
+}	

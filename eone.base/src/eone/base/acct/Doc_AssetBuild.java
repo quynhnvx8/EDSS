@@ -3,14 +3,12 @@ package eone.base.acct;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
 import eone.base.model.MAssetBuild;
 import eone.base.model.MAssetBuildLine;
 import eone.base.model.MElementValue;
-import eone.util.Env;
 
 
 public class Doc_AssetBuild extends Doc
@@ -63,7 +61,6 @@ public class Doc_AssetBuild extends Doc
 	{
 		
 		Fact fact = new Fact(this, Fact.POST_Actual);
-		int C_Currency_ID = Env.getContextAsInt(getCtx(), "#C_CurrencyDefault_ID");
 		
 		MAssetBuild header = (MAssetBuild)getPO();
 		//MDocType dt = MDocType.get(getCtx(), header.getC_DocType_ID());
@@ -72,7 +69,7 @@ public class Doc_AssetBuild extends Doc
 			DocLine docLine = p_lines[i];
 			MAssetBuildLine line = (MAssetBuildLine) docLine.getPO();
 
-			if (!postFixedAsset(fact, docLine, header, line, C_Currency_ID)) {
+			if (!postFixedAsset(fact, docLine, header, line)) {
 				return null;
 			}
 		}
@@ -85,10 +82,7 @@ public class Doc_AssetBuild extends Doc
 	}   //  createFact
 
 	
-	private boolean postFixedAsset(Fact fact, DocLine docLine, MAssetBuild header, MAssetBuildLine line, int C_Currency_ID) {
-		
-		Timestamp DateAcct = header.getDateAcct();
-		BigDecimal rate = Env.getRateByCurrency(C_Currency_ID, DateAcct);
+	private boolean postFixedAsset(Fact fact, DocLine docLine, MAssetBuild header, MAssetBuildLine line) {
 		
 		MElementValue dr = null;
 		MElementValue cr = null;
@@ -96,7 +90,7 @@ public class Doc_AssetBuild extends Doc
 		cr = MElementValue.get(getCtx(), line.getAccount_Cr_ID());
 		BigDecimal amount = line.getAmount();
 		
-		FactLine f = fact.createLine(docLine, dr, cr, C_Currency_ID, rate, amount, amount);
+		FactLine f = fact.createLine(docLine, dr, cr, amount, amount);
 		if (f == null) {
 			p_Error = "Not Create Fact";
 			log.log(Level.SEVERE, p_Error);
