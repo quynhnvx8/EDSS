@@ -43,7 +43,7 @@ public class Merge
 
 	/** Tables to delete (not update) for AD_Org	*/
 	public static String[]	s_delete_Org = new String[]
-		{"AD_Role_OrgAccess"};
+		{""};
 	/** Tables to delete (not update) for AD_User	*/
 	public static String[]	s_delete_User = new String[]
 		{"AD_User_Roles"};

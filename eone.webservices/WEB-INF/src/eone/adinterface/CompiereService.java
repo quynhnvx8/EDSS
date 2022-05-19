@@ -180,12 +180,8 @@ public class CompiereService {
 		.append(" AND o.AD_Org_ID = ?")       //  #3
 		.append(" AND r.AD_Role_ID = ?")      //  #4
 		.append(" AND (o.AD_Client_ID = 0 OR o.AD_Client_ID=c.AD_Client_ID)")
-		.append(" AND ( ")
-		.append(" 	r.IsAccessAllOrgs='Y'")
-		.append(" 	OR (r.IsUseUserOrgAccess='N' AND o.AD_Org_ID IN (SELECT AD_Org_ID FROM AD_Role_OrgAccess ra WHERE ra.AD_Role_ID=r.AD_Role_ID AND ra.IsActive='Y'))")
-		.append(" 	OR (r.IsUseUserOrgAccess='Y' AND o.AD_Org_ID IN (SELECT AD_Org_ID FROM AD_User_OrgAccess ua WHERE ua.AD_User_ID=u.AD_User_ID AND ua.IsActive='Y'))")
-		.append(")");
-
+		.append(" AND o.AD_Org_ID IN (SELECT AD_Org_ID FROM AD_User_OrgAccess ra WHERE ra.AD_User_ID=u.AD_User_ID AND ra.IsActive='Y')");
+		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try

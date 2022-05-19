@@ -44,7 +44,6 @@ import eone.base.model.MAppendSign;
 import eone.base.model.MProcess;
 import eone.base.model.MQuery;
 import eone.base.model.MRecentItem;
-import eone.base.model.MRole;
 import eone.base.model.MSysConfig;
 import eone.base.model.MTable;
 import eone.base.model.MUserPreference;
@@ -615,7 +614,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
     }
 
 	private void initFirstTabpanel() {
-		adTabbox.getSelectedTabpanel().query(m_onlyCurrentRows, m_onlyCurrentDays, adTabbox.getSelectedGridTab().getMaxQueryRecords());
+		adTabbox.getSelectedTabpanel().query(m_onlyCurrentRows, m_onlyCurrentDays, 0);
 		adTabbox.getSelectedTabpanel().activate(true);
 		Events.echoEvent(new Event(ADTabpanel.ON_POST_INIT_EVENT, adTabbox.getSelectedTabpanel()));
 	}
@@ -654,15 +653,8 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
                     where.append(wh2);
                 }
             }
-            //
-            StringBuffer sql = new StringBuffer("SELECT COUNT(*) FROM ")
-                    .append(mTab.getTableName());
-            if (where.length() > 0)
-                sql.append(" WHERE ").append(where);
-            String finalSQL = MRole.addAccessSQL(sql.toString(), mTab.getTableName(), MRole.SQL_NOTQUALIFIED, MRole.SQL_RO, Env.getCtx());
-            int no = DB.getSQLValue(null, finalSQL.toString());
-            //
-            require = mTab.isQueryRequire(no);
+            
+            require = false;// mTab.isQueryRequire(no);
         }
         // Show Query
         if (require)
@@ -2049,7 +2041,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 				        {
 				            m_onlyCurrentRows = false;          //  search history too
 				            adTabbox.getSelectedGridTab().setQuery(query);
-				            adTabbox.getSelectedTabpanel().query(m_onlyCurrentRows, m_onlyCurrentDays, adTabbox.getSelectedGridTab().getMaxQueryRecords());   //  autoSize
+				            adTabbox.getSelectedTabpanel().query(m_onlyCurrentRows, m_onlyCurrentDays, 0);   //  autoSize
 				        }
 
 				        if (findWindow.isCreateNew())
@@ -2804,7 +2796,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 		if (query != null) {
 			m_onlyCurrentRows = false;
 			adTabbox.getSelectedGridTab().setQuery(query);
-			adTabbox.getSelectedTabpanel().query(m_onlyCurrentRows, m_onlyCurrentDays, Env.getContextAsInt(Env.getCtx(), "#MaxQueryRecords"));   //  autoSize
+			adTabbox.getSelectedTabpanel().query(m_onlyCurrentRows, m_onlyCurrentDays, 0);   //  autoSize
 		}
 
 		adTabbox.getSelectedGridTab().dataRefresh(false);

@@ -142,7 +142,7 @@ public class MInOutLine extends X_M_InOutLine
 			BigDecimal qtyRemain = MStorage.getQtyRemain(getM_Product_ID(), inout.getM_Warehouse_Cr_ID(), inout.getDateAcct());
 			if (qtyRemain.compareTo(getQty()) < 0)
 			{
-				log.saveError("Error!", "Not enough quantity!");
+				log.saveError("Error!", "Số lượng không đủ, số lượng còn lại là " + qtyRemain);
 				return false;
 			}			
 		}
@@ -182,9 +182,9 @@ public class MInOutLine extends X_M_InOutLine
 		/*
 		 * Thêm 1 dòng thuế nếu tiền hàng và tiền thuế khác nhau
 		 */
-		if (getAmount().compareTo(getTaxBaseAmt()) != 0) {
-			insertLineTax(getCtx(), this, get_TrxName());
-		}
+		//if (getAmount().compareTo(getTaxBaseAmt()) != 0) {
+		//	insertLineTax(getCtx(), this, get_TrxName());
+		//}
 		
 		
 		return true;

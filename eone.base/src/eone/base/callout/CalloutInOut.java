@@ -142,15 +142,15 @@ public class CalloutInOut extends CalloutEngine
 			int M_Product_ID = Integer.parseInt(objProduct_ID.toString());
 			
 			//Lấy giá xuất vật tư hàng hóa trong bảng M_Storage
-			BigDecimal priceCurrent = MStorage.getPriceStorage(M_Product_ID, M_Warehouse_ID, dateAcct, null, qty);
+			price = MStorage.getPriceStorage(M_Product_ID, M_Warehouse_ID, dateAcct, null, qty);
 			
-			if (priceCurrent.compareTo(Env.ZERO) > 0) {
+			if (price.compareTo(Env.ZERO) > 0) {
 				
-				p_Amount = qty.multiply(priceCurrent);
+				p_Amount = qty.multiply(price);
 				p_Amount = p_Amount.setScale(Env.getScaleFinal(), RoundingMode.HALF_UP);
 			
-				mTab.setValue(MInOutLine.COLUMNNAME_Price, priceCurrent);
-				mTab.setValue(MInOutLine.COLUMNNAME_PricePO, priceCurrent);
+				mTab.setValue(MInOutLine.COLUMNNAME_Price, price);
+				mTab.setValue(MInOutLine.COLUMNNAME_PricePO, price);
 				mTab.setValue(MInOutLine.COLUMNNAME_Amount, p_Amount);
 				
 			} 

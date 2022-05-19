@@ -158,6 +158,7 @@ public class MWarehouse extends X_M_Warehouse
 			wh.setAD_Client_ID(AD_Client_ID);
 			wh.setAD_Org_ID(AD_Org_ID);
 			wh.setIsAutoCreate(true);
+			wh.setIsDefault(true);
 			wh.save();
 				
 			return wh.getM_Warehouse_ID();

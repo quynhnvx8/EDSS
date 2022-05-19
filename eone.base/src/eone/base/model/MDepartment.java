@@ -13,7 +13,7 @@ public class MDepartment extends X_AD_Department
 	
 	@Override
 	protected boolean beforeDelete() {
-		MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getValue(), getName(), getAD_Department_ID(), "AD_Department", "ORG", false);
+		MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getValue(), getName(), getAD_Department_ID(), "AD_Department", "ORG", false, get_TrxName());
 		return super.beforeDelete();
 	}
 
@@ -83,7 +83,7 @@ public class MDepartment extends X_AD_Department
 	{
 		if (newRecord || !isSummary() || !isActive() || is_ValueChanged("Name") || is_ValueChanged("Value")) {
 			if ( isCreateBPartner()) {
-				boolean ok = MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getValue(), getName(), getAD_Department_ID(), "AD_Department", "DEP", true);
+				boolean ok = MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getValue(), getName(), getAD_Department_ID(), "AD_Department", "DEP", true, get_TrxName());
 				if (!ok) {
 					log.saveError("Error", "Create BPartner false!");
 					return false;
@@ -96,7 +96,7 @@ public class MDepartment extends X_AD_Department
 			if((!isCreateBPartner() && is_ValueChanged("IsCreateBPartner"))	|| 
 					(isSummary() && is_ValueChanged("IsSummary")) ||
 					(!isActive() && is_ValueChanged("IsActive"))) {
-				MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getValue(), getName(), getAD_Department_ID(), "AD_Department", "DEP", false);
+				MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getValue(), getName(), getAD_Department_ID(), "AD_Department", "DEP", false, get_TrxName());
 			}
 		}
 		

@@ -20,7 +20,7 @@ public class X_M_Storage extends PO implements I_M_Storage, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220514L;
+	private static final long serialVersionUID = 20220517L;
 
     /** Standard Constructor */
     public X_M_Storage (Properties ctx, int M_Storage_ID, String trxName)
@@ -214,14 +214,14 @@ public class X_M_Storage extends PO implements I_M_Storage, I_Persistent
 
 	/** MMPolicy AD_Reference_ID=335 */
 	public static final int MMPOLICY_AD_Reference_ID=335;
-	/** LiFo = L */
-	public static final String MMPOLICY_LiFo = "L";
+	/** Name = N */
+	public static final String MMPOLICY_Name = "N";
 	/** FiFo = F */
 	public static final String MMPOLICY_FiFo = "F";
 	/** Average = A */
 	public static final String MMPOLICY_Average = "A";
-	/** None = N */
-	public static final String MMPOLICY_None = "N";
+	/** None = O */
+	public static final String MMPOLICY_None = "O";
 	/** Set Material Policy.
 		@param MMPolicy 
 		Material Movement Policy
@@ -318,23 +318,6 @@ public class X_M_Storage extends PO implements I_M_Storage, I_Persistent
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
-	}
-
-	/** Set RemainOld.
-		@param RemainOld RemainOld	  */
-	public void setRemainOld (BigDecimal RemainOld)
-	{
-		set_Value (COLUMNNAME_RemainOld, RemainOld);
-	}
-
-	/** Get RemainOld.
-		@return RemainOld	  */
-	public BigDecimal getRemainOld () 
-	{
-		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_RemainOld);
-		if (bd == null)
-			 return Env.ZERO;
-		return bd;
 	}
 
 	/** Input = IN */

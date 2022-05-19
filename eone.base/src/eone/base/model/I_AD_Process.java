@@ -4,10 +4,9 @@
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-
-import eone.util.KeyNamePair;
 
 /** Generated Interface for AD_Process
  *  @author EOne (generated) 
@@ -24,24 +23,11 @@ public interface I_AD_Process
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 7 - System - Client - Org 
+    /** AccessLevel = 4 - System 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(7);
+    BigDecimal accessLevel = BigDecimal.valueOf(4);
 
     /** Load Meta Data */
-
-    /** Column name AccessLevel */
-    public static final String COLUMNNAME_AccessLevel = "AccessLevel";
-
-	/** Set Data Access Level.
-	  * Access Level required
-	  */
-	public void setAccessLevel (String AccessLevel);
-
-	/** Get Data Access Level.
-	  * Access Level required
-	  */
-	public String getAccessLevel();
 
     /** Column name AD_Client_ID */
     public static final String COLUMNNAME_AD_Client_ID = "AD_Client_ID";
@@ -257,15 +243,6 @@ public interface I_AD_Process
 	  * Name of the Database Procedure
 	  */
 	public String getProcedureName();
-
-    /** Column name TemplateApply */
-    public static final String COLUMNNAME_TemplateApply = "TemplateApply";
-
-	/** Set Template Apply	  */
-	public void setTemplateApply (String TemplateApply);
-
-	/** Get Template Apply	  */
-	public String getTemplateApply();
 
     /** Column name Updated */
     public static final String COLUMNNAME_Updated = "Updated";

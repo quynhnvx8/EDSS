@@ -18,7 +18,7 @@ public class X_AD_Client extends PO implements I_AD_Client, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220331L;
+	private static final long serialVersionUID = 20220517L;
 
     /** Standard Constructor */
     public X_AD_Client (Properties ctx, int AD_Client_ID, String trxName)
@@ -183,7 +183,12 @@ public class X_AD_Client extends PO implements I_AD_Client, I_Persistent
 		return ii.intValue();
 	}
 
-		/** Set Element.
+	public eone.base.model.I_C_Element getC_Element() throws RuntimeException
+    {
+		return (eone.base.model.I_C_Element)MTable.get(getCtx(), eone.base.model.I_C_Element.Table_Name)
+			.getPO(getC_Element_ID(), get_TrxName());	}
+
+	/** Set Element.
 		@param C_Element_ID 
 		Accounting Element
 	  */
@@ -394,14 +399,14 @@ public class X_AD_Client extends PO implements I_AD_Client, I_Persistent
 
 	/** MMPolicy AD_Reference_ID=335 */
 	public static final int MMPOLICY_AD_Reference_ID=335;
-	/** LiFo = L */
-	public static final String MMPOLICY_LiFo = "L";
+	/** Name = N */
+	public static final String MMPOLICY_Name = "N";
 	/** FiFo = F */
 	public static final String MMPOLICY_FiFo = "F";
 	/** Average = A */
 	public static final String MMPOLICY_Average = "A";
-	/** None = N */
-	public static final String MMPOLICY_None = "N";
+	/** None = O */
+	public static final String MMPOLICY_None = "O";
 	/** Set Material Policy.
 		@param MMPolicy 
 		Material Movement Policy

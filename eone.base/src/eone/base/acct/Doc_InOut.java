@@ -69,7 +69,7 @@ public class Doc_InOut extends Doc
 			MInOutLine line = (MInOutLine) docLine.getPO();
 			
 			//Bán hàng
-			if (MDocType.DOCBASETYPE_156Sell.equals(dt.getDocBaseType())) {
+			if (MDocType.DOCBASETYPE_ExportWarehouseForSell.equals(dt.getDocBaseType())) {
 				if (!output_COGS(fact, docLine, header, line))
 				{
 					return null;
@@ -90,9 +90,7 @@ public class Doc_InOut extends Doc
 			}
 			
 			//Nhập mua
-			if (MDocType.DOCBASETYPE_152New.equals(dt.getDocBaseType()) 
-					|| MDocType.DOCBASETYPE_153New.equals(dt.getDocBaseType())
-					|| MDocType.DOCBASETYPE_156New.equals(dt.getDocBaseType())) {
+			if (MDocType.DOCBASETYPE_PurchaseInputWarehouse.equals(dt.getDocBaseType())) {
 				if (!insert_Data(fact, docLine, header, line))
 				{
 					return null;
@@ -105,17 +103,22 @@ public class Doc_InOut extends Doc
 					}
 				}
 			}
-			
-			if (MDocType.DOCBASETYPE_152Credit.equals(dt.getDocBaseType()) 
-					|| MDocType.DOCBASETYPE_153Credit.equals(dt.getDocBaseType())
-					|| MDocType.DOCBASETYPE_156Credit.equals(dt.getDocBaseType())
-					|| MDocType.DOCBASETYPE_152CreditTransfer.equals(dt.getDocBaseType())
-					|| MDocType.DOCBASETYPE_153CreditTransfer.equals(dt.getDocBaseType())
-					|| MDocType.DOCBASETYPE_156CreditTransfer.equals(dt.getDocBaseType())
+			//Nhập nội bộ
+			if (MDocType.DOCBASETYPE_WarehouseImportUse.equals(dt.getDocBaseType()) 
 					
-					|| MDocType.DOCBASETYPE_152Debit.equals(dt.getDocBaseType())
-					|| MDocType.DOCBASETYPE_153Debit.equals(dt.getDocBaseType())
-					//|| MDocType.DOCBASETYPE_156.equals(dt.getDocBaseType())
+					//Xuất điều chuyển nội bộ
+					|| MDocType.DOCBASETYPE_ExportTransferWarehouse.equals(dt.getDocBaseType())
+					
+					//Xuất sử dụng
+					|| MDocType.DOCBASETYPE_WarehoseExportUse.equals(dt.getDocBaseType())
+					
+					//Kiểm kê thừa thiếu
+					|| MDocType.DOCBASETYPE_15InventoryMiss.equals(dt.getDocBaseType())
+					|| MDocType.DOCBASETYPE_15InventoryRedundant.equals(dt.getDocBaseType())
+					
+					//Dư đầu kỳ
+					|| MDocType.DOCBASETYPE_WarehouseOpenBalance.equals(dt.getDocBaseType())
+					
 					) 
 			{
 				if (!insert_Data(fact, docLine, header, line))

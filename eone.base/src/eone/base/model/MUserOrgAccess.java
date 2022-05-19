@@ -1,24 +1,13 @@
-/******************************************************************************
- * Product: Adempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2006 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software; you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY; without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program; if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
- *****************************************************************************/
+
 package eone.base.model;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 
@@ -28,12 +17,6 @@ import eone.util.Env;
 import eone.util.Msg;
 
 
-/**
- *	User Org Access
- *	
- *  @author Jorg Janke
- *  @version $Id: MUserOrgAccess.java,v 1.3 2006/07/30 00:58:37 jjanke Exp $
- */
 public class MUserOrgAccess extends X_AD_User_OrgAccess
 {
 	/**
@@ -42,24 +25,13 @@ public class MUserOrgAccess extends X_AD_User_OrgAccess
 	private static final long serialVersionUID = 11601583764711895L;
 
 
-	/**
-	 * 	Get Organizational Access of User
-	 *	@param ctx context
-	 *	@param AD_User_ID user
-	 *	@return array of User Org Access
-	 */
+	
 	public static MUserOrgAccess[] getOfUser (Properties ctx, int AD_User_ID)
 	{
 		return get (ctx, "SELECT * FROM AD_User_OrgAccess WHERE AD_User_ID=?", AD_User_ID);	
 	}	//	getOfUser
 
-	/**
-	 * 	Get Organizational Info
-	 *	@param ctx context
-	 *	@param sql sql command
-	 *	@param id id
-	 *	@return array of User Org Access
-	 */
+	
 	private static MUserOrgAccess[] get (Properties ctx, String sql, int id)
 	{
 		ArrayList<MUserOrgAccess> list = new ArrayList<MUserOrgAccess>();
@@ -92,23 +64,13 @@ public class MUserOrgAccess extends X_AD_User_OrgAccess
 	private static CLogger	s_log	= CLogger.getCLogger (MUserOrgAccess.class);
 
 	
-	/**************************************************************************
-	 * 	Load Constructor
-	 *	@param ctx context
-	 *	@param rs result set
-	 *	@param trxName transaction
-	 */
+	
 	public MUserOrgAccess (Properties ctx, ResultSet rs, String trxName)
 	{
 		super(ctx, rs, trxName);
 	}	//	MUserOrgAccess
 
-	/**
-	 * 	Persistency Constructor
-	 *	@param ctx context
-	 *	@param ignored ignored
-	 *	@param trxName transaction
-	 */
+	
 	public MUserOrgAccess (Properties ctx, int ignored, String trxName)
 	{
 		super(ctx, 0, trxName);
@@ -117,11 +79,7 @@ public class MUserOrgAccess extends X_AD_User_OrgAccess
 		setIsReadOnly(false);
 	}	//	MUserOrgAccess
 	
-	/**
-	 * 	Organization Constructor
-	 *	@param org org
-	 *	@param AD_User_ID role
-	 */
+	
 	public MUserOrgAccess (MOrg org, int AD_User_ID)
 	{
 		this (org.getCtx(), 0, org.get_TrxName());
@@ -140,22 +98,7 @@ public class MUserOrgAccess extends X_AD_User_OrgAccess
 		return true;
 	}
 
-	/**
-	 * 	User Constructor
-	 *	param user user
-	 *	param AD_Org_ID org
-	 *
-	public MUserOrgAccess (MUser user, int AD_Org_ID)
-	{
-		this (user.getCtx(), 0, user.get_TrxName());
-		setClientOrg (user.getAD_Client_ID(), AD_Org_ID);
-		setAD_User_ID (user.getAD_User_ID());
-	}	//	MUserOrgAccess
-
-	/**
-	 * 	String Representation
-	 *	@return info
-	 */
+	
 	public String toString()
 	{
 		StringBuilder sb = new StringBuilder("MUserOrgAccess[");
@@ -233,4 +176,63 @@ public class MUserOrgAccess extends X_AD_User_OrgAccess
 		return m_orgName;
 	}	//	getOrgName
 
+	
+	public static void createForOrg (Properties ctx, MOrg org, String trxName)
+	{
+		int BATCH_SIZE = Env.getBatchSize(ctx);
+		String sql = PO.getSqlInsert(X_AD_User_OrgAccess.Table_ID, org.get_TrxName());
+		String whereClause = "AD_User.AD_Client_ID = ?";
+		List<MUser> users = new Query(ctx, X_AD_User.Table_Name, whereClause, trxName)
+				.setParameters(Env.getAD_Client_ID(ctx))
+				.list();
+		
+		List<List<Object>> values = new ArrayList<List<Object>>();
+		for (int i = 0; i < users.size(); i++)
+		{
+			MUserOrgAccess orgAccess = new MUserOrgAccess (org, users.get(i).getAD_User_ID());
+			int ID = DB.getNextID(ctx, X_AD_User_OrgAccess.Table_Name, trxName);
+			orgAccess.setAD_Client_ID(org.getAD_Client_ID());
+			orgAccess.setAD_Org_ID(org.getAD_Org_ID());
+			orgAccess.setIsActive(true);
+			orgAccess.setIsReadOnly(false);
+			orgAccess.setAD_User_ID(users.get(i).getAD_User_ID());
+			orgAccess.setAD_User_OrgAccess_ID(ID);
+			orgAccess.set_ValueNoCheck("CreatedBy", Env.getAD_User_ID(Env.getCtx()));
+			orgAccess.set_ValueNoCheck("UpdatedBy", Env.getAD_User_ID(Env.getCtx()));
+			orgAccess.set_ValueNoCheck("Created", new Timestamp(new Date().getTime()));
+			orgAccess.set_ValueNoCheck("Updated", new Timestamp(new Date().getTime()));
+			orgAccess.setAD_Client_ID(org.getAD_Client_ID());
+			orgAccess.setAD_Org_ID(org.getAD_Org_ID());
+			
+			List<String> colNames = PO.getSqlInsert_Para(X_AD_User_OrgAccess.Table_ID, trxName);
+			List<Object> param = PO.getBatchValueList(orgAccess, colNames, X_AD_User_OrgAccess.Table_ID, trxName, ID);
+			
+			values.add(param);
+			
+			if (values.size() >= BATCH_SIZE) {
+				String err = DB.excuteBatch(sql, values, trxName);
+				if (err !=  null) {
+					try {
+						DB.rollback(false, trxName);
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				values.clear();
+			}
+			
+		}
+		if (values.size() > 0) {
+			String err = DB.excuteBatch(sql, values, trxName);
+			if (err !=  null) {
+				try {
+					DB.rollback(false, trxName);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			values.clear();			
+		}
+		
+	}
 }	//	MUserOrgAccess

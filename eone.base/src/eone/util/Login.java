@@ -750,12 +750,9 @@ public class Login
 				+" 		CASE WHEN POSITION('Y' IN STRING_AGG(r.isShowPrice,',')) > 0 THEN 'Y' ELSE 'N' END isShowPrice, "
 				+" 		CASE WHEN POSITION('Y' IN STRING_AGG(r.isConfigAcct,',')) > 0 THEN 'Y' ELSE 'N' END isConfigAcct, "
 				+" 		CASE WHEN POSITION('Y' IN STRING_AGG(r.isDelItem,',')) > 0 THEN 'Y' ELSE 'N' END isDelItem, "
-				//+" 		CASE WHEN POSITION('Y' IN STRING_AGG(r.IsMasterRole,',')) > 0 THEN 'Y' ELSE 'N' END IsMasterRole, "
 				+" 		CASE WHEN POSITION('Y' IN STRING_AGG(r.IsAccessAllOrgs,',')) > 0 THEN 'Y' ELSE 'N' END IsAccessAllOrgs,  "
-				//+" 		CASE WHEN POSITION('Y' IN STRING_AGG(r.IsAccessAdvanced,',')) > 0 THEN 'Y' ELSE 'N' END IsAccessAdvanced,  "
 				+" 		CASE WHEN POSITION('Y' IN STRING_AGG(r.IsDragDropMenu,',')) > 0 THEN 'Y' ELSE 'N' END IsDragDropMenu, "
-				+" 		CASE WHEN POSITION('Y' IN STRING_AGG(r.IsCanExport,',')) > 0 THEN 'Y' ELSE 'N' END IsCanExport, "
-				+" 		MAX(MaxQueryRecords) MaxQueryRecords "
+				+" 		CASE WHEN POSITION('Y' IN STRING_AGG(r.IsCanExport,',')) > 0 THEN 'Y' ELSE 'N' END IsCanExport "
 				+" 	FROM AD_Role r  "
 				+" 		INNER JOIN AD_User_Roles ur ON r.AD_Role_ID = ur.AD_Role_ID "
 				+" 		INNER JOIN AD_User u ON ur.AD_User_ID = u.AD_User_ID "
@@ -766,9 +763,10 @@ public class Login
 				+"		e.HR_Employee_ID, e.Name EmployeeName, d.AD_Department_ID, d.Name DeptName, c.AD_Client_ID, c.Name ClientName, "
 				+" 		CASE WHEN r.IsAccessAllOrgs = 'Y'  "
 				+" 		THEN (SELECT STRING_AGG(AD_Org_ID::text,',') FROM AD_Org WHERE IsActive = 'Y') "
-				+" 		ELSE (SELECT STRING_AGG(AD_Org_ID::text,',') FROM AD_User_OrgAccess uo Where uO.AD_User_ID = u.AD_User_ID) END listOrg, "
+				+" 		ELSE (SELECT STRING_AGG(AD_Org_ID::text,',') FROM AD_User_OrgAccess uo Where uO.AD_User_ID = u.AD_User_ID And uo.IsActive = 'Y') END listOrg, "
+				+" 		(SELECT STRING_AGG(AD_Org_ID::text,',') FROM AD_User_OrgAccess uo Where uO.AD_User_ID = u.AD_User_ID And uo.IsReadOnly = 'Y' And uo.IsActive = 'Y') listOrgReadOnly, "
 				+" 		r.ListTree, r.RoleType, r.RoleLevel, r.ListRole, r.IsShowAcct, r.isShowPrice, r.isConfigAcct, r.isDelItem, "
-				+" 		r.IsAccessAllOrgs, r.IsDragDropMenu, r.IsCanExport, r.MaxQueryRecords, "
+				+" 		r.IsAccessAllOrgs, r.IsDragDropMenu, r.IsCanExport, "
 				+"		COALESCE(u.isUserAdmin, 'N') IsUserAdmin, COALESCE(u.isUserSystem, 'N') IsUserSystem"//r.IsMasterRole, 
 				+" FROM AD_User u INNER JOIN tmp r ON u.AD_User_ID = r.AD_User_ID "
 				+"		LEFT JOIN HR_Employee e ON u.HR_Employee_ID = e.HR_Employee_ID "
@@ -788,7 +786,6 @@ public class Login
 					Env.setContext(m_ctx, "#ShowAcct", rs.getString("IsShowAcct"));
 					Env.setContext(m_ctx, "#AD_Role_IDs", rs.getString("ListRole"));
 					Env.setContext(m_ctx, "#AD_Tree_IDs", rs.getString("ListTree"));
-					//Env.setContext(m_ctx, "#AD_Role_Name", rs.getString(""));
 					
 					Env.setContext(m_ctx, "#RoleType", rs.getString("RoleType"));
 					Env.setContext(m_ctx, "#RoleLevel", rs.getString("RoleLevel"));
@@ -808,11 +805,11 @@ public class Login
 					Env.setContext(m_ctx, "#AD_Org_ID", rs.getString("AD_Org_ID"));
 					Env.setContext(m_ctx, "#AD_Org_Name", rs.getString("OrgNames"));
 					Env.setContext(m_ctx, "#AD_OrgAccess_ID", rs.getString("listOrg"));
+					Env.setContext(m_ctx, "#AD_OrgReadOnly_ID", rs.getString("listOrgReadOnly"));
 					
 					Env.setContext(m_ctx, "#ShowAdvanced", "Y");
 					Env.setContext(m_ctx, "#IsDragDropMenu", rs.getString("IsDragDropMenu"));
 					Env.setContext(m_ctx, "#IsCanExport", rs.getString("IsCanExport"));
-					Env.setContext(m_ctx, "#MaxQueryRecords", rs.getString("MaxQueryRecords"));
 					Env.setContext(m_ctx, "#IsUserAdmin", rs.getString("isUserAdmin"));
 					Env.setContext(m_ctx, "#IsUserSystem", rs.getString("isUserSystem"));
 					

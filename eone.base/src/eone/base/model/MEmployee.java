@@ -100,7 +100,7 @@ public class MEmployee extends X_HR_Employee implements DocAction
 		m_processMsg = null;
 		if (m_processMsg != null)
 			return DocAction.STATUS_Drafted;
-		MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getCode(), getName(), getHR_Employee_ID(), "HR_Employee", "EMP", true);
+		MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getCode(), getName(), getHR_Employee_ID(), "HR_Employee", "EMP", true, get_TrxName());
 		setProcessed(true);
 		//setProcessedLine(true);
 		return DocAction.STATUS_Completed;
@@ -161,7 +161,7 @@ public class MEmployee extends X_HR_Employee implements DocAction
 		if (log.isLoggable(Level.INFO)) log.info(toString());
 		if(!super.reActivate())
 			return false;
-		MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getCode(), getName(), getHR_Employee_ID(),  "HR_Employee", "EMP", false);
+		MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getCode(), getName(), getHR_Employee_ID(),  "HR_Employee", "EMP", false, get_TrxName());
 		setProcessed(false);
 		//setProcessedLine(false);
 		

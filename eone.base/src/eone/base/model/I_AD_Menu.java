@@ -194,18 +194,7 @@ public interface I_AD_Menu
 	  */
 	public boolean isActive();
 
-    /** Column name IsReadOnly */
-    public static final String COLUMNNAME_IsReadOnly = "IsReadOnly";
-
-	/** Set Read Only.
-	  * Field is read only
-	  */
-	public void setIsReadOnly (boolean IsReadOnly);
-
-	/** Get Read Only.
-	  * Field is read only
-	  */
-	public boolean isReadOnly();
+   
 
     /** Column name IsSOTrx */
     public static final String COLUMNNAME_IsSOTrx = "IsSOTrx";

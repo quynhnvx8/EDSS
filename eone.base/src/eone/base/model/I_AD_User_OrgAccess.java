@@ -1,29 +1,16 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import eone.util.KeyNamePair;
-
 /** Generated Interface for AD_User_OrgAccess
- *  @author iDempiere (generated) 
- *  @version Release 7.1
+ *  @author EOne (generated) 
+ *  @version Version 1.0
  */
 public interface I_AD_User_OrgAccess 
 {
@@ -36,9 +23,9 @@ public interface I_AD_User_OrgAccess
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 6 - System - Client 
+    /** AccessLevel = 7 - System - Client - Org 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(6);
+    BigDecimal accessLevel = BigDecimal.valueOf(7);
 
     /** Load Meta Data */
 
@@ -78,14 +65,14 @@ public interface I_AD_User_OrgAccess
 
 	public eone.base.model.I_AD_User getAD_User() throws RuntimeException;
 
-    /** Column name AD_User_OrgAccess_UU */
-    public static final String COLUMNNAME_AD_User_OrgAccess_UU = "AD_User_OrgAccess_UU";
+    /** Column name AD_User_OrgAccess_ID */
+    public static final String COLUMNNAME_AD_User_OrgAccess_ID = "AD_User_OrgAccess_ID";
 
-	/** Set AD_User_OrgAccess_UU	  */
-	public void setAD_User_OrgAccess_UU (String AD_User_OrgAccess_UU);
+	/** Set AD_User_OrgAccess	  */
+	public void setAD_User_OrgAccess_ID (int AD_User_OrgAccess_ID);
 
-	/** Get AD_User_OrgAccess_UU	  */
-	public String getAD_User_OrgAccess_UU();
+	/** Get AD_User_OrgAccess	  */
+	public int getAD_User_OrgAccess_ID();
 
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";

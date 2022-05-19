@@ -29,18 +29,11 @@ public class VerifyRole extends SvrProcess
 	protected String doIt() throws java.lang.Exception
 	{
 		int AD_Role_ID = getRecord_ID();
-		ClearOrgAccess(AD_Role_ID);
 		ClearUserAccess(AD_Role_ID);
 		ClearFormAccess_SaleMT(AD_Role_ID);
 		return "";
 	}	//	doIt
 	
-	private void ClearOrgAccess(int AD_Role_ID) {
-		String sql = "Delete From AD_Role_OrgAccess "+
-				" Where (AD_Role_ID not in (Select AD_Role_ID From AD_Role Where IsActive = 'Y') Or AD_Org_ID not in (Select AD_Org_ID From AD_Org Where IsActive = 'Y'))"+
-				"		And AD_Client_ID = ?"	;
-		DB.executeUpdate(sql, getAD_Client_ID(), get_TrxName());
-	}
 	
 	private void ClearUserAccess(int AD_Role_ID) {
 		String sql = "Delete From AD_User_Roles "+

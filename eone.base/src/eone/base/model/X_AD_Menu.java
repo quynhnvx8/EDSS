@@ -283,34 +283,6 @@ public class X_AD_Menu extends PO implements I_AD_Menu, I_Persistent
 		return (String)get_Value(COLUMNNAME_Description);
 	}
 
-	/** Set Read Only.
-		@param IsReadOnly 
-		Field is read only
-	  */
-	public void setIsReadOnly (boolean IsReadOnly)
-	{
-		set_Value (COLUMNNAME_IsReadOnly, Boolean.valueOf(IsReadOnly));
-	}
-
-	/** Get Read Only.
-		@return Field is read only
-	  */
-	public boolean isReadOnly () 
-	{
-		Object oo = get_Value(COLUMNNAME_IsReadOnly);
-		if (oo != null) 
-		{
-			 if (oo instanceof Boolean) 
-				 return ((Boolean)oo).booleanValue(); 
-			return "Y".equals(oo);
-		}
-		return false;
-	}
-
-	/** Set Sales Transaction.
-		@param IsSOTrx 
-		This is a Sales Transaction
-	  */
 	public void setIsSOTrx (boolean IsSOTrx)
 	{
 		set_Value (COLUMNNAME_IsSOTrx, Boolean.valueOf(IsSOTrx));

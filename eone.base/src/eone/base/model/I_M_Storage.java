@@ -231,15 +231,6 @@ public interface I_M_Storage
 	  */
 	public int getRecord_ID();
 
-    /** Column name RemainOld */
-    public static final String COLUMNNAME_RemainOld = "RemainOld";
-
-	/** Set RemainOld	  */
-	public void setRemainOld (BigDecimal RemainOld);
-
-	/** Get RemainOld	  */
-	public BigDecimal getRemainOld();
-
     /** Column name TypeInOut */
     public static final String COLUMNNAME_TypeInOut = "TypeInOut";
 

@@ -103,7 +103,7 @@ public final class MRole extends X_AD_Role
 	 */
 	public static MRole[] getOfClient (Properties ctx)
 	{
-		String sql = "SELECT * FROM AD_Role WHERE AD_Client_ID=?";
+		String sql = "SELECT * FROM AD_Role WHERE AD_Client_ID=? OR (AD_Client_ID = 0 AND IsAdminClient = 'Y')";
 		ArrayList<MRole> list = new ArrayList<MRole> ();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -202,8 +202,7 @@ public final class MRole extends X_AD_Role
 			setIsCanExport (true);
 			setIsShowAcct (false);
 			setIsAccessAllOrgs(false);
-			setIsUseUserOrgAccess(false);
-			setMaxQueryRecords(0);
+			
 		}
 	}	//	MRole
 
@@ -219,30 +218,6 @@ public final class MRole extends X_AD_Role
 	}	//	MRole
 
 	
-	public boolean isQueryRequire (int noRecords)
-	{
-		if (noRecords < 2)
-			return false;
-		int max = getMaxQueryRecords();
-		return (max > 0 && noRecords > max);
-	}	//	isQueryRequire
-
-	/**
-	 * 	Over max Query
-	 *	@param noRecords records
-	 *	@return true if over max query
-	 */
-	public boolean isQueryMax (int noRecords)
-	{
-		int max = getMaxQueryRecords();
-		return max > 0 && noRecords > max;
-	}	//	isQueryMax
-
-	/**
-	 * 	Before Save
-	 *	@param newRecord new
-	 *	@return true if it can be saved
-	 */
 	protected boolean beforeSave(boolean newRecord)
 	{
 		//Chỉ cho phép 1 Role khai báo Admin để điều khiển các role trong các công ty

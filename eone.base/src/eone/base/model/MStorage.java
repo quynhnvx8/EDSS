@@ -112,14 +112,14 @@ public class MStorage extends X_M_Storage
 		
 		//Type nhap hoặc đầu kỳ
 		if (MDocType.DOCTYPE_Input.equals(doctype) || MDocType.DOCTYPE_Balance.equals(doctype)) {
-			sql = " select 'IN' DocType, il.M_InOutLine_ID, i.M_Warehouse_Dr_ID M_Warehouse_ID, i.DateAcct, il.M_Product_ID, il.Qty, il.PricePO, il.Amount "+
+			sql = " select 'IN' DocType, il.M_InOutLine_ID, i.M_Warehouse_Dr_ID M_Warehouse_ID, i.DateAcct, il.M_Product_ID, il.Qty, il.Price, il.Amount "+
 						" From M_InOut i Inner Join M_InOutLine il On i.M_InOut_ID = il.M_InOut_ID "+
 						" Where i.M_InOut_ID = ? ";
 		}
 		
 		
 		if (MDocType.DOCTYPE_Output.equals(doctype)) {
-			sql = " select 'OU' DocType, il.M_InOutLine_ID, i.M_Warehouse_Cr_ID M_Warehouse_ID, i.DateAcct, il.M_Product_ID, il.Qty, il.PricePO, il.Amount "+
+			sql = " select 'OU' DocType, il.M_InOutLine_ID, i.M_Warehouse_Cr_ID M_Warehouse_ID, i.DateAcct, il.M_Product_ID, il.Qty, il.Price, il.Amount "+
 					" From M_InOut i Inner Join M_InOutLine il On i.M_InOut_ID = il.M_InOut_ID "+
 					" Where i.M_InOut_ID = ? ";
 		}
@@ -127,8 +127,7 @@ public class MStorage extends X_M_Storage
 		
 		if (isComplete) {//CO
 			if (MDocType.DOCTYPE_Output.equals(doctype)) {
-				if (MaterialPolicy.equals(MMPOLICY_LiFo) 
-						|| MaterialPolicy.equals(MMPOLICY_FiFo))
+				if (MaterialPolicy.equals(MMPOLICY_FiFo))
 				{
 					completeFIFO_LIFO(ctx, sql, Record_ID, trxName);
 				}
@@ -146,7 +145,7 @@ public class MStorage extends X_M_Storage
 				sql = "Delete M_Storage Where Record_ID  = ? ";
 				DB.executeUpdate(sql, Record_ID, trxName);
 			} else {
-				reActivateFIFO_LIFO(ctx, Record_ID, trxName);
+				reActivateFIFO(ctx, Record_ID, trxName);
 			}
 		}
 	}
@@ -174,7 +173,7 @@ public class MStorage extends X_M_Storage
 				storage.setM_Warehouse_ID(rs.getInt("M_Warehouse_ID"));
 				storage.setQty(rs.getBigDecimal("Qty"));
 				storage.setAccumulateQty(Env.ZERO);
-				storage.setPrice(rs.getBigDecimal("PricePO"));
+				storage.setPrice(rs.getBigDecimal("Price"));
 				storage.setAmount(rs.getBigDecimal("Amount"));
 				storage.setTypeInOut(docType);
 				storage.setMMPolicy(MaterialPolicy);
@@ -221,11 +220,6 @@ public class MStorage extends X_M_Storage
 			list = new Query(ctx, Table_Name, whereClause, trxName)
 				.setParameters(Record_ID)
 				.setOrderBy(" M_Product_ID, DateTrx ASC")
-				.list();
-		else
-			list = new Query(ctx, Table_Name, whereClause, trxName)
-				.setParameters(Record_ID)
-				.setOrderBy(" M_Product_ID, DateTrx DESC")
 				.list();
 		
 		PreparedStatement ps = DB.prepareCall(sql);
@@ -292,7 +286,7 @@ public class MStorage extends X_M_Storage
 		}
 	}
 	
-	public static void reActivateFIFO_LIFO(Properties ctx, int Record_ID, String trxName) {
+	public static void reActivateFIFO(Properties ctx, int Record_ID, String trxName) {
 		String whereClause = "STRPOS(Note, '@"+ Record_ID +":') > 0";
 		List<MStorage> list = new Query(ctx, Table_Name, whereClause, trxName)
 				.setParameters(Record_ID)
@@ -360,8 +354,8 @@ public class MStorage extends X_M_Storage
 			
 		} else {
 			//FIFO và LIFO
-			sql = "SELECT SUM(NVL(Qty,0) - NVL(AccumulateAmt,0)) FROM M_Storage "+
-				" WHERE M_Product_ID = ? AND NVL(Qty,0) > NVL(AccumulateAmt,0) AND M_Warehouse_ID = ?";
+			sql = "SELECT SUM(NVL(Qty,0) - NVL(AccumulateQty,0)) FROM M_Storage "+
+				" WHERE M_Product_ID = ? AND NVL(Qty,0) > NVL(AccumulateQty,0) AND M_Warehouse_ID = ?";
 			param = new Object [] {M_Product_ID, M_Warehouse_ID};
 		}
 		
@@ -409,7 +403,7 @@ public class MStorage extends X_M_Storage
 				" 	Where TypeInOut = 'OU' And DateTrx >= ? And DateTrx <= ?  And M_Warehouse_ID = ? And M_Product_ID = ? "+ //#5,#6,#7,#8
 				" )B Having Sum(Qty) != 0";
 			Object [] params = new Object[] {startDate, DateTrx, M_Warehouse_ID, M_Product_ID, startDate, DateTrx, M_Warehouse_ID, M_Product_ID};
-			Object [] data = DB.getObjectValuesEx(trxName, null, 2, params);
+			Object [] data = DB.getObjectValuesEx(trxName, sql, 2, params);
 			if (data != null) {
 				BigDecimal qty = Env.ZERO;
 				BigDecimal amt = Env.ZERO;
@@ -427,23 +421,19 @@ public class MStorage extends X_M_Storage
 		}//End binh quan
 		
 		//Lấy giá tiền và số lượng: FIFO và LIFO
-		if (MMPOLICY_FiFo.equals(MaterialPolicy) || MMPOLICY_LiFo.equals(MaterialPolicy))
+		if (MMPOLICY_FiFo.equals(MaterialPolicy))
 		{
 			sql = "M_Product_ID = ? AND M_Warehouse_ID = ? AND NVL(Qty,0) >  NVL(AccumulateQty,0)";
 			List<MStorage> list = null;
 			//LIFO thì lấy theo ngày giảm dần còn FIFO thì lấy theo ngày tăng dần
-			if (MMPOLICY_LiFo.equals(MaterialPolicy))
-				list = new Query(Env.getCtx(), Table_Name, sql, trxName)
-					.setParameters(M_Product_ID, M_Warehouse_ID)
-					.setOrderBy("DateTrx DESC")
-					.list();
-			else
+			if (MMPOLICY_FiFo.equals(MaterialPolicy))
 				list = new Query(Env.getCtx(), Table_Name, sql, trxName)
 				.setParameters(M_Product_ID, M_Warehouse_ID)
 				.setOrderBy("DateTrx ASC")
 				.list();
 			
 			BigDecimal totalAmount = Env.ZERO;
+			BigDecimal qtyActual = Env.ZERO;
 		
 			for(int i = 0; i < list.size(); i++) {
 				BigDecimal priceLine = list.get(i).getPrice();
@@ -451,6 +441,9 @@ public class MStorage extends X_M_Storage
 				BigDecimal remainQty = list.get(i).getQty().subtract(list.get(i).getAccumulateQty());
 				if (remainQty == null) {
 					remainQty = Env.ZERO;
+				}
+				if (remainQty.compareTo(Env.ZERO) == 0) {
+					break;
 				}
 				if(Qty.compareTo(remainQty) > 0)
 				{
@@ -462,12 +455,13 @@ public class MStorage extends X_M_Storage
 				}
 				
 				totalAmount = totalAmount.add(priceLine.multiply(qtyLine));
+				qtyActual = qtyActual.add(qtyLine);
 				
 				if (Qty.compareTo(Env.ZERO) == 0) {
 					break;
 				}
 			}
-			return totalAmount.divide(Qty, Env.getScalePrice(), RoundingMode.HALF_UP);
+			return totalAmount.divide(qtyActual, Env.getScalePrice(), RoundingMode.HALF_UP);
 		}
 		return Env.ZERO;
 	}
@@ -490,7 +484,7 @@ public class MStorage extends X_M_Storage
 			return;
 		}
 		String sqlInsert = "";
-		int BATCH_SIZE = 0;
+		int BATCH_SIZE = Env.getBatchSize(ctx);
 		List<Object> lstColumn = new ArrayList<Object>();
 		List<List<Object>> lstRows = new ArrayList<List<Object>>();
 		int AD_Client_ID = Env.getAD_Client_ID(ctx);

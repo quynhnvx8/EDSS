@@ -18,7 +18,7 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220515L;
+	private static final long serialVersionUID = 20220519L;
 
     /** Standard Constructor */
     public X_C_DocType (Properties ctx, int C_DocType_ID, String trxName)
@@ -170,8 +170,8 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	public static final String DOCBASETYPE_Debit_141 = "DR141";
 	/** Debit_151 = DR151 */
 	public static final String DOCBASETYPE_Debit_151 = "DR151";
-	/** 152 Debit = 152DR */
-	public static final String DOCBASETYPE_152Debit = "152DR";
+	/** Warehouse Import Use = 15DRIM */
+	public static final String DOCBASETYPE_WarehouseImportUse = "15DRIM";
 	/** 153 Debit = 153DR */
 	public static final String DOCBASETYPE_153Debit = "153DR";
 	/** 154 Debit = 154DR */
@@ -288,8 +288,8 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	public static final String DOCBASETYPE_Credit_151 = "CR151";
 	/** 152 Credit = 152CR */
 	public static final String DOCBASETYPE_152Credit = "152CR";
-	/** 153 Credit = 153CR */
-	public static final String DOCBASETYPE_153Credit = "153CR";
+	/** Warehose Export Use = 15CREX */
+	public static final String DOCBASETYPE_WarehoseExportUse = "15CREX";
 	/** 154 Credit = 154CR */
 	public static final String DOCBASETYPE_154Credit = "154CR";
 	/** 155 Credit = 155CR */
@@ -464,8 +464,8 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	public static final String DOCBASETYPE_211Transfer = "211TR";
 	/** 211 OTher  = 211OT */
 	public static final String DOCBASETYPE_211OTher = "211OT";
-	/** 152 New = 152NE */
-	public static final String DOCBASETYPE_152New = "152NE";
+	/** Purchase Input Warehouse = WHNE */
+	public static final String DOCBASETYPE_PurchaseInputWarehouse = "WHNE";
 	/** 155 New = 155NE */
 	public static final String DOCBASETYPE_155New = "155NE";
 	/** 156 New = 156NE */
@@ -474,8 +474,8 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	public static final String DOCBASETYPE_155Return = "155RE";
 	/** 152 Return = 152RE */
 	public static final String DOCBASETYPE_152Return = "152RE";
-	/** 156 Return = 156RE */
-	public static final String DOCBASETYPE_156Return = "156RE";
+	/** Warehouse Return To Vendor = WHRE */
+	public static final String DOCBASETYPE_WarehouseReturnToVendor = "WHRE";
 	/** 15 Inventory miss = 15IVM */
 	public static final String DOCBASETYPE_15InventoryMiss = "15IVM";
 	/** 15 Inventory redundant = 15IVR */
@@ -494,10 +494,10 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	public static final String DOCBASETYPE_242Openbalance = "242OP";
 	/** 153 Expense = 153EX */
 	public static final String DOCBASETYPE_153Expense = "153EX";
-	/** 153 Open balance = 153OP */
-	public static final String DOCBASETYPE_153OpenBalance = "153OP";
-	/** 156 Sell = 156SE */
-	public static final String DOCBASETYPE_156Sell = "156SE";
+	/** Warehouse Open balance = WHOP */
+	public static final String DOCBASETYPE_WarehouseOpenBalance = "WHOP";
+	/** Export Warehouse For Sell = 15SELL */
+	public static final String DOCBASETYPE_ExportWarehouseForSell = "15SELL";
 	/** 331 Credit = 331CR */
 	public static final String DOCBASETYPE_331Credit = "331CR";
 	/** 131 Debit = 131DR */
@@ -544,8 +544,8 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	public static final String DOCBASETYPE_153CreditTransfer = "153CRTR";
 	/** 152 Credit Transfer = 152CRTR */
 	public static final String DOCBASETYPE_152CreditTransfer = "152CRTR";
-	/** 156  Credit Transfer = 156CRTR */
-	public static final String DOCBASETYPE_156CreditTransfer = "156CRTR";
+	/** Export Transfer Warehouse = 15CRTR */
+	public static final String DOCBASETYPE_ExportTransferWarehouse = "15CRTR";
 	/** Set Document BaseType.
 		@param DocBaseType 
 		Logical type of document

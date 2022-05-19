@@ -34,44 +34,6 @@ public class MUser extends X_AD_User
 	private static final long serialVersionUID = 1366564982801896588L;
 
 	
-	public static MUser[] getWithRole (MRole role)
-	{
-		ArrayList<MUser> list = new ArrayList<MUser>();
-		String sql = "SELECT * FROM AD_User u "
-			+ "WHERE u.IsActive='Y'"
-			+ " AND EXISTS (SELECT * FROM AD_User_Roles ur "
-				+ "WHERE ur.AD_User_ID=u.AD_User_ID AND ur.AD_Role_ID=? AND ur.IsActive='Y')";
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try
-		{
-			pstmt = DB.prepareStatement (sql, null);
-			pstmt.setInt (1, role.getAD_Role_ID());
-			rs = pstmt.executeQuery ();
-			while (rs.next ())
-				list.add(new MUser(role.getCtx(), rs, null));
-		} 
-		catch (Exception e)
-		{
-			s_log.log(Level.SEVERE, sql, e);
-		}
-		finally
-		{
-			DB.close(rs, pstmt);
-		}
-		
-		MUser[] retValue = new MUser[list.size ()];
-		list.toArray (retValue);
-		return retValue;
-	}	//	getWithRole
-
-	/**
-	 * 	Get User (cached)
-	 * 	Also loads Admninistrator (0)
-	 *	@param ctx context
-	 *	@param AD_User_ID id
-	 *	@return user
-	 */
 	public static MUser get (Properties ctx, int AD_User_ID)
 	{
 		Integer key = Integer.valueOf(AD_User_ID);
@@ -574,26 +536,13 @@ public class MUser extends X_AD_User
 			return m_roles;
 		
 		ArrayList<MRole> list = new ArrayList<MRole>();
-		// 2007-06-08, matthiasO.
-		// Extension of sql query so that not only roles with org acces for this user
-		// are found but also roles which delegate org access to the user level where
-		// this user has access to the org in question
+		
 		String sql = "SELECT * FROM AD_Role r " 
 			+ "WHERE r.IsActive='Y'" 
-			+ " AND EXISTS (SELECT * FROM AD_User_Roles ur" 
+			+ " AND( EXISTS (SELECT * FROM AD_User_Roles ur" 
 			+ " WHERE r.AD_Role_ID=ur.AD_Role_ID AND ur.IsActive='Y' AND ur.AD_User_ID=?) "
-			+ " AND ( ( r.isaccessallorgs = 'Y' ) OR "
-			+ " ("
-			+ " r.IsUseUserOrgAccess <> 'Y'"
-			+ " AND EXISTS (SELECT * FROM AD_Role_OrgAccess ro"
-			+ " WHERE r.AD_Role_ID=ro.AD_Role_ID AND ro.IsActive='Y' AND ro.AD_Org_ID=?)" 
-			+ " ) OR "
-			+ " ("
-			+ " r.IsUseUserOrgAccess = 'Y'"
-			+ " AND EXISTS (SELECT * FROM AD_User_OrgAccess uo"
-			+ " WHERE uo.AD_User_ID=? AND uo.IsActive='Y' AND uo.AD_Org_ID=?)" 
-			+ " )"
-			+ " ) "
+			+ " OR EXISTS (SELECT * FROM AD_User_OrgAccess uo"
+			+ " WHERE uo.AD_User_ID=? AND uo.IsActive='Y' AND uo.AD_Org_ID=?))" 
 			+ "ORDER BY AD_Role_ID";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -601,9 +550,8 @@ public class MUser extends X_AD_User
 		{
 			pstmt = DB.prepareStatement (sql, get_TrxName());
 			pstmt.setInt (1, getAD_User_ID());
-			pstmt.setInt (2, AD_Org_ID);
-			pstmt.setInt (3, getAD_User_ID());
-			pstmt.setInt (4, AD_Org_ID);
+			pstmt.setInt (2, getAD_User_ID());
+			pstmt.setInt (3, AD_Org_ID);
 			rs = pstmt.executeQuery ();
 			while (rs.next ())
 				list.add (new MRole(getCtx(), rs, get_TrxName()));

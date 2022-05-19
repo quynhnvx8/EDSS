@@ -1404,9 +1404,25 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 
 		//  no restrictions
 		if (m_vo.ReadOnlyLogicRecord == null || m_vo.ReadOnlyLogicRecord.equals(""))
-			return m_vo.IsReadOnly;
+		{
+			String OrgReadOnlys = Env.getContext(Env.getCtx(), "#AD_OrgReadOnly_ID");
+			String OrgCurrent = Env.getContext(Env.getCtx(), "" + getWindowNo() +  "|0|AD_Org_ID");
+			//System.out.println(OrgCurrent);
+			if (!OrgReadOnlys.isEmpty() && OrgReadOnlys.contains(OrgCurrent))
+				return true;
+			else
+				return m_vo.IsReadOnly;
+		}
 
 		boolean retValue = Evaluator.evaluateLogic(this, m_vo.ReadOnlyLogicRecord);
+		
+		if (!retValue) {
+			//Xét có phải ReadOnly bản ghi do khác Org ko
+			String OrgReadOnlys = Env.getContext(Env.getCtx(), "#AD_OrgReadOnly_ID");
+			String OrgCurrent = Env.getContext(Env.getCtx(),"" + getWindowNo() +  "|0|AD_Org_ID");
+			if (!OrgReadOnlys.isEmpty() && OrgReadOnlys.contains(OrgCurrent))
+				return true;
+		}
 		if (log.isLoggable(Level.FINEST)) log.finest(m_vo.Name + " (" + m_vo.ReadOnlyLogic + ") => " + retValue);
 		return retValue;
 	}
@@ -2891,40 +2907,10 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 		this.calloutUI = calloutUI;
 	}
 
-	/** Get Max Query Records.
-	 *  @return If defined, you cannot query more records as defined - the query criteria needs to be changed to query less records
-     */
-	public int getMaxQueryRecords() {
-		// minimum between AD_Tab.MaxQueryRecords and AD_Role.MaxQueryRecords
-		int roleMaxQueryRecords = Env.getContextAsInt(Env.getCtx(), "#MaxQueryRecords");
-		int tabMaxQueryRecords = m_vo.MaxQueryRecords;
-		if (roleMaxQueryRecords > 0 && roleMaxQueryRecords < tabMaxQueryRecords)
-			tabMaxQueryRecords = roleMaxQueryRecords;
-		return tabMaxQueryRecords;
-	}
-
-	/**
-	 * 	Require Query
-	 *	@param noRecords records
-	 *	@return true if query required
-	 */
-	public boolean isQueryRequire (int noRecords)
-	{
-		if (noRecords < 2)
-			return false;
-		int max = getMaxQueryRecords();
-		return (max > 0 && noRecords > max);			
-	}	//	isQueryRequire
-
-	/**
-	 * 	Over max Query
-	 *	@param noRecords records
-	 *	@return true if over max query
-	 */
+	
 	public boolean isQueryMax (int noRecords)
 	{
-		int max = getMaxQueryRecords();
-		return max > 0 && noRecords > max;
+		return false;
 	}	//	isQueryMax
 	
 	

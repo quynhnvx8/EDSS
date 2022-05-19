@@ -1003,7 +1003,7 @@ public class FindWindow extends Window implements EventListener<Event>, ValueCha
         if (m_gridTab != null && query != null && m_gridTab.isQueryMax(m_total))
         {
             FDialog.error(m_targetWindowNo, this, "FindOverMax",
-                m_total + " > " + m_gridTab.getMaxQueryRecords());
+                m_total + " > " + 0);
             m_total = 0; 
         }
         else

@@ -18,7 +18,7 @@ public class X_AD_Role extends PO implements I_AD_Role, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220413L;
+	private static final long serialVersionUID = 20220518L;
 
     /** Standard Constructor */
     public X_AD_Role (Properties ctx, int AD_Role_ID, String trxName)
@@ -39,8 +39,6 @@ public class X_AD_Role extends PO implements I_AD_Role, I_Persistent
 // N
 			setIsUseUserOrgAccess (false);
 // N
-			setMaxQueryRecords (0);
-// 0
 			setName (null);
 			setUserLevel (null);
         } */
@@ -53,7 +51,7 @@ public class X_AD_Role extends PO implements I_AD_Role, I_Persistent
     }
 
     /** AccessLevel
-      * @return 7 - System - Client - Org 
+      * @return 6 - System - Client 
       */
     protected int get_AccessLevel()
     {
@@ -170,7 +168,10 @@ public class X_AD_Role extends PO implements I_AD_Role, I_Persistent
 		return (String)get_Value(COLUMNNAME_Description);
 	}
 
-	
+	/** Set Access all Orgs.
+		@param IsAccessAllOrgs 
+		Access all Organizations (no org access control) of the client
+	  */
 	public void setIsAccessAllOrgs (boolean IsAccessAllOrgs)
 	{
 		set_Value (COLUMNNAME_IsAccessAllOrgs, Boolean.valueOf(IsAccessAllOrgs));
@@ -347,50 +348,7 @@ public class X_AD_Role extends PO implements I_AD_Role, I_Persistent
 		return false;
 	}
 
-	/** Set Use User Org Access.
-		@param IsUseUserOrgAccess 
-		Use Org Access defined by user instead of Role Org Access
-	  */
-	public void setIsUseUserOrgAccess (boolean IsUseUserOrgAccess)
-	{
-		set_Value (COLUMNNAME_IsUseUserOrgAccess, Boolean.valueOf(IsUseUserOrgAccess));
-	}
-
-	/** Get Use User Org Access.
-		@return Use Org Access defined by user instead of Role Org Access
-	  */
-	public boolean isUseUserOrgAccess () 
-	{
-		Object oo = get_Value(COLUMNNAME_IsUseUserOrgAccess);
-		if (oo != null) 
-		{
-			 if (oo instanceof Boolean) 
-				 return ((Boolean)oo).booleanValue(); 
-			return "Y".equals(oo);
-		}
-		return false;
-	}
-
-	/** Set Max Query Records.
-		@param MaxQueryRecords 
-		If defined, you cannot query more records as defined - the query criteria needs to be changed to query less records
-	  */
-	public void setMaxQueryRecords (int MaxQueryRecords)
-	{
-		set_Value (COLUMNNAME_MaxQueryRecords, Integer.valueOf(MaxQueryRecords));
-	}
-
-	/** Get Max Query Records.
-		@return If defined, you cannot query more records as defined - the query criteria needs to be changed to query less records
-	  */
-	public int getMaxQueryRecords () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_MaxQueryRecords);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
+	
 	/** Set Name.
 		@param Name 
 		Alphanumeric identifier of the entity

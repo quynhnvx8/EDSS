@@ -75,19 +75,21 @@ public abstract class AbstractProcessCtl implements Runnable
 	{
 		if (log.isLoggable(Level.FINE)) log.fine("AD_Session_ID=" + m_pi.getAD_Session_ID()
 			+ ", Record_ID=" + m_pi.getRecord_ID());
-
+		int C_Element_ID = Env.getContextAsInt(Env.getCtx(), "#C_Element_ID");
 		String 	ProcedureName = "";
 		String  JasperReport = "";
 		String TemplateApply = "";
 		boolean IsReport = false;
 		String sql = "SELECT p.Name, p.ProcedureName,p.ClassName, p.AD_Process_ID,"		
-			+ " p.isReport, p.IsServerProcess, p.JasperReport, p.AD_Process_UU, p.TemplateApply "  
+			+ " p.isReport, p.IsServerProcess, p.JasperReport, p.AD_Process_UU, "
+			+ " CASE WHEN "+C_Element_ID+" = 105 THEN TemplateApply ELSE TemplateOther END TemplateApply "  
 			+ " FROM AD_Process p"
 			+ " WHERE p.IsActive='Y'"
 			+ " AND p.AD_Process_ID=?";
 		if (!Env.isBaseLanguage(Env.getCtx(), "AD_Process"))
 			sql = "SELECT t.Name, p.ProcedureName,p.ClassName, p.AD_Process_ID,"	
-				+ " p.isReport, p.IsServerProcess, p.JasperReport, p.AD_Process_UU, p.TemplateApply " 	
+				+ " p.isReport, p.IsServerProcess, p.JasperReport, p.AD_Process_UU,"
+				+ " CASE WHEN "+C_Element_ID+" = 105 THEN TemplateApply ELSE TemplateOther END TemplateApply " 	
 				+ "FROM AD_Process p"
 				+ " INNER JOIN AD_Process_Trl t ON (p.AD_Process_ID=t.AD_Process_ID"
 					+ " AND t.AD_Language='" + Env.getAD_Language(Env.getCtx()) + "') "

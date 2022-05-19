@@ -220,10 +220,10 @@ public class WRegisterTrial extends Window implements EventListener<Event> {
 		fillComboRulesAccountance();
 		
 		cboCalPrice = new Combobox();
-		cboCalPrice.appendItem(Msg.getMsg(Env.getCtx(), "Price_None"), "N");
+		cboCalPrice.appendItem(Msg.getMsg(Env.getCtx(), "Price_None"), "O");
 		cboCalPrice.appendItem(Msg.getMsg(Env.getCtx(), "Price_Average"), "A");
 		cboCalPrice.appendItem(Msg.getMsg(Env.getCtx(), "Price_FiFo"), "F");
-		cboCalPrice.appendItem(Msg.getMsg(Env.getCtx(), "Price_LiFo"), "L");
+		cboCalPrice.appendItem(Msg.getMsg(Env.getCtx(), "Price_Name"), "N");
 		cboCalPrice.setSelectedIndex(0);
 		
 		ZKUpdateUtil.setWidth(cboCalPrice, "100%");
@@ -397,7 +397,7 @@ public class WRegisterTrial extends Window implements EventListener<Event> {
 			reg.setRegisterType(X_AD_Register.REGISTERTYPE_Trial);
 			reg.setStartDate(new Timestamp(new Date().getTime()));
 			reg.setEndDate(TimeUtil.addDays(reg.getStartDate(), 90));
-			reg.setAD_Client_ID(DB.getNextID(Env.getCtx(), X_AD_Register.Table_Name, null));
+			reg.setAD_Client_ID(0);
 			reg.setC_Element_ID(cboRulesAccount.getSelectedItem().getValue());
 			reg.setMMPolicy(cboCalPrice.getSelectedItem().getValue());
 			reg.setAD_ModelClient_ID(cboModel.getSelectedItem().getValue());

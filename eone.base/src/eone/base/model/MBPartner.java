@@ -299,15 +299,15 @@ public class MBPartner extends X_C_BPartner
 	 * groupType = 'EMP'
 	 */
 	public static boolean createBPartner(int AD_Org_ID, int AD_Client_ID, String Code, String Name, 
-			int souce_id, String tableName, String groupType, boolean isInsert) {
+			int souce_id, String tableName, String groupType, boolean isInsert, String trxName) {
 		Object [] params = {Code, Name, souce_id, tableName};
 		if (isInsert)
 		{
 			String sqlUpdate = "UPDATE C_BPartner SET Value = ?, Name = ? WHERE ReferenceKey = ? And TableName = ?";
-			int no = DB.executeUpdate(sqlUpdate, params, true, null);
+			int no = DB.executeUpdate(sqlUpdate, params, true, trxName);
 			if (no <= 0)
 			{
-				MBPartner bp = new MBPartner(Env.getCtx(), 0, null);
+				MBPartner bp = new MBPartner(Env.getCtx(), 0, trxName);
 				bp.setAD_Org_ID(AD_Org_ID);
 				bp.setAD_Client_ID(AD_Client_ID);
 				bp.setValue(Code);
@@ -326,7 +326,7 @@ public class MBPartner extends X_C_BPartner
 			
 			String sql = "DELETE FROM C_BPartner WHERE ReferenceKey = ? And TableName = ?";
 			params = new Object [] {souce_id, tableName};
-			int no = DB.executeUpdate(sql, params, true, null);
+			int no = DB.executeUpdate(sql, params, true, trxName);
 			return no >= 0 ? true : false;
 		}
 	}

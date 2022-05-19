@@ -404,7 +404,7 @@ public class WQuickForm extends Window implements EventListener <Event>, DataSta
 		{
 			adWinContent.setCurrQGV(null);
 		}
-		adWinContent.getADTab().getSelectedTabpanel().query(onlyCurrentRows, onlyCurrentDays, Env.getContextAsInt(Env.getCtx(), "#MaxQueryRecords")); // autoSize
+		adWinContent.getADTab().getSelectedTabpanel().query(onlyCurrentRows, onlyCurrentDays, 0); // autoSize
 	} // dispose
 
 	private void createNewRow( )

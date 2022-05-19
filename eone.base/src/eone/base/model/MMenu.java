@@ -51,7 +51,6 @@ public class MMenu extends X_AD_Menu
 		super (ctx, AD_Menu_ID, trxName);
 		if (AD_Menu_ID == 0)
 		{
-			setIsReadOnly (false);	// N
 			setIsSOTrx (false);
 			setIsSummary (false);
 		//	setName (null);

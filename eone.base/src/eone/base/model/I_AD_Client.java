@@ -124,6 +124,7 @@ public interface I_AD_Client
 	  */
 	public int getC_Element_ID();
 
+	public eone.base.model.I_C_Element getC_Element() throws RuntimeException;
 
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";

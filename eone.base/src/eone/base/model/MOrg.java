@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Properties;
 
 import eone.util.CCache;
-import eone.util.DB;
+import eone.util.Env;
 import eone.util.Msg;
 
 public class MOrg extends X_AD_Org
@@ -84,15 +84,20 @@ public class MOrg extends X_AD_Org
 			return success;
 		if (newRecord)
 		{
-			MRoleOrgAccess.createForOrg (this);
-			//MRole  role = MRole.getDefault(getCtx(), true);	//	reload
-			//role.set_TrxName(get_TrxName());
-			//role.loadAccess(true); // reload org access within transaction
+			MUserOrgAccess.createForOrg(getCtx(), this, get_TrxName());
+			//Load lại context
+			String context = Env.getContext(getCtx(), "#AD_OrgAccess_ID");
+			if (context == null || "".contentEquals(context)) {
+				context = "" + getAD_Org_ID();
+			} else {
+				context = context + "," + getAD_Org_ID();
+			}
+			Env.setContext(getCtx(), "#AD_OrgAccess_ID", context);
 		}
 		
 		if (newRecord || is_ValueChanged("Value") || is_ValueChanged("Name") || isCreateBPartner()) {
 			if (!isSummary()) {
-				boolean ok = MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getValue(), getName(), getAD_Org_ID(), "AD_Org", X_C_BPartner.GROUPTYPE_Org, true);
+				boolean ok = MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getValue(), getName(), getAD_Org_ID(), "AD_Org", X_C_BPartner.GROUPTYPE_Org, true, get_TrxName());
 				if (!ok)
 				{
 					log.saveError("Error!", "Create BPartner false!");
@@ -102,15 +107,15 @@ public class MOrg extends X_AD_Org
 		}
 		
 		if (
-				(isSummary() && is_ValueChanged("IsSummary")) || 
+				(isSummary() && is_ValueChanged("IsSummary") && isCreateBPartner()) || 
 				(!isCreateBPartner() && is_ValueChanged("IsCreateBPartner")) ||
-				(!isActive() && is_ValueChanged("IsActive"))
+				(!isActive() && is_ValueChanged("IsActive") && isCreateBPartner())
 			)
 		{
-			MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getValue(), getName(), getAD_Org_ID(), "AD_Org", "ORG", false);
+			MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getValue(), getName(), getAD_Org_ID(), "AD_Org", "ORG", false, get_TrxName());
 		}
 		
-		if (is_ValueChanged("IsCreateWarehouse")) {
+		if ((newRecord && isCreateWarehouse()) || is_ValueChanged("IsCreateWarehouse")) {
 			int m_warehouse_id = 0;
 			
 			if (isCreateWarehouse()) {
@@ -119,8 +124,9 @@ public class MOrg extends X_AD_Org
 				MWarehouse.createWarehouse(getAD_Org_ID(), getAD_Client_ID(), getValue(), getName(), false);
 			}
 			
-			String sqlUpdate = "UPDATE AD_Org Set M_Warehouse_ID = ?";
-			DB.executeUpdate(sqlUpdate, m_warehouse_id, get_TrxName());
+			
+			this.setM_Warehouse_ID(m_warehouse_id);
+			//this.save();
 		}
 		
 		//this.save();
@@ -130,7 +136,7 @@ public class MOrg extends X_AD_Org
 	
 	@Override
 	protected boolean beforeDelete() {
-		MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getValue(), getName(), getAD_Org_ID(), "AD_Org", "ORG", false);
+		MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getValue(), getName(), getAD_Org_ID(), "AD_Org", "ORG", false, get_TrxName());
 		return super.beforeDelete();
 	}
 

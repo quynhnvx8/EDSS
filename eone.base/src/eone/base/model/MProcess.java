@@ -118,7 +118,6 @@ public class MProcess extends X_AD_Process
 		if (AD_Process_ID == 0)
 		{
 			setIsReport (false);
-			setAccessLevel (ACCESSLEVEL_All);
 		}
 	}	//	MProcess
 
@@ -315,7 +314,6 @@ public class MProcess extends X_AD_Process
 	{
 
 		if (log.isLoggable(Level.FINE))log.log(Level.FINE, "Copying from:" + source + ", to: " + this);
-		setAccessLevel(source.getAccessLevel());
 		setClassname(source.getClassname());
 		setDescription(source.getDescription());
 		setIsReport(source.isReport());
