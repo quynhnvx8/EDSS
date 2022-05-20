@@ -942,6 +942,31 @@ public class MClient extends X_AD_Client
 		return (MAIL_SEND_CREDENTIALS_SYSTEM.equalsIgnoreCase(msc));
 	}
 
+	@Override
+	protected boolean beforeSave(boolean newRecord) {
+		//Khi sửa thông tin trên CLient thì update cho Org, Dep, Employee, BPartner
+		
+		return super.beforeSave(newRecord);
+	}
+
+	@Override
+	protected boolean afterSave(boolean newRecord, boolean success) {
+		// TODO Auto-generated method stub
+		return super.afterSave(newRecord, success);
+	}
+
+	@Override
+	protected boolean beforeDelete() {
+		// TODO Auto-generated method stub
+		return super.beforeDelete();
+	}
+
+	@Override
+	protected boolean afterDelete(boolean success) {
+		// TODO Auto-generated method stub
+		return super.afterDelete(success);
+	}
+
 	public static List<MClient> getAllClient(Properties ctx, String trxName) {
 		List<MClient> arr = new Query(ctx, Table_Name, " IsActive = 'Y'", trxName)
 				.list();

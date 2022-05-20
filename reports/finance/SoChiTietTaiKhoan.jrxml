@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SoChiTietTaiKhoan" pageWidth="595" pageHeight="1040" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" resourceBundle="SoChiTietTaiKhoanNgoaiTe" uuid="1fba66b7-cc10-4dbc-8e48-752d6ed87b07">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="99"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Bold_Left" hAlign="Left" vAlign="Middle" isBlankWhenNull="true" fontName="Arial" isBold="true" isItalic="false" isUnderline="false" pdfFontName="TIMESBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
 		<box leftPadding="3" rightPadding="2"/>
 	</style>

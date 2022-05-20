@@ -38,11 +38,12 @@
 	<style name="BoldItalic_Center" hAlign="Center" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="true" isItalic="true" isUnderline="false" pdfFontName="TIMESBI.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 	<parameter name="RECORD_ID" class="java.lang.Integer"/>
 	<queryString>
-		<![CDATA[Select d.Value Debit,c.Value Credit
+		<![CDATA[Select (d.Value || case when coalesce(e.value,'') <>'' then (','|| e.value) else '' end ) Debit,c.Value Credit
 From C_cash ca
 	inner join C_ElementValue d On ca.Account_Dr_ID = d.C_ElementValue_ID
 	inner join C_ElementValue c On ca.Account_Cr_ID = c.C_ElementValue_ID
-Where C_Cash_ID = $P{RECORD_ID}]]>
+	left join C_ElementValue e on ca.Account_Tax_ID = e.C_ElementValue_ID
+Where C_Cash_ID = $P{RECORD_ID} and ca.docstatus = 'CO']]>
 	</queryString>
 	<field name="debit" class="java.lang.String"/>
 	<field name="credit" class="java.lang.String"/>

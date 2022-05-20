@@ -101,6 +101,15 @@ public interface I_C_BPartner
 	  */
 	public int getC_BPartner_ID();
 
+    /** Column name Code_Original */
+    public static final String COLUMNNAME_Code_Original = "Code_Original";
+
+	/** Set Original	  */
+	public void setCode_Original (String Code_Original);
+
+	/** Get Original	  */
+	public String getCode_Original();
+
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
 
@@ -198,6 +207,19 @@ public interface I_C_BPartner
 	  */
 	public boolean isCustomer();
 
+    /** Column name IsDefault */
+    public static final String COLUMNNAME_IsDefault = "IsDefault";
+
+	/** Set Default.
+	  * Default value
+	  */
+	public void setIsDefault (boolean IsDefault);
+
+	/** Get Default.
+	  * Default value
+	  */
+	public boolean isDefault();
+
     /** Column name IsEmployee */
     public static final String COLUMNNAME_IsEmployee = "IsEmployee";
 
@@ -237,10 +259,10 @@ public interface I_C_BPartner
     public static final String COLUMNNAME_Key_Original = "Key_Original";
 
 	/** Set Key Original	  */
-	public void setKey_Original (String Key_Original);
+	public void setKey_Original (int Key_Original);
 
 	/** Get Key Original	  */
-	public String getKey_Original();
+	public int getKey_Original();
 
     /** Column name Logo_ID */
     public static final String COLUMNNAME_Logo_ID = "Logo_ID";
@@ -290,15 +312,6 @@ public interface I_C_BPartner
 	  */
 	public String getNote();
 
-    /** Column name Original */
-    public static final String COLUMNNAME_Original = "Original";
-
-	/** Set Original	  */
-	public void setOriginal (String Original);
-
-	/** Get Original	  */
-	public String getOriginal();
-
     /** Column name Personnel */
     public static final String COLUMNNAME_Personnel = "Personnel";
 
@@ -333,15 +346,6 @@ public interface I_C_BPartner
 	  * The document has been processed
 	  */
 	public boolean isProcessed();
-
-    /** Column name ReferenceKey */
-    public static final String COLUMNNAME_ReferenceKey = "ReferenceKey";
-
-	/** Set ReferenceKey	  */
-	public void setReferenceKey (int ReferenceKey);
-
-	/** Get ReferenceKey	  */
-	public int getReferenceKey();
 
     /** Column name SendEMail */
     public static final String COLUMNNAME_SendEMail = "SendEMail";

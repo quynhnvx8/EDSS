@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.util.Properties;
 
 import eone.base.model.X_PA_Report;
-import eone.util.DB;
 
 
 public class MReport extends X_PA_Report
@@ -50,8 +49,8 @@ public class MReport extends X_PA_Report
 		}
 		
 		if (isDetailReportLine()) {
-			String sql = "Update PA_ReportColumn set AmountType = 'NO' Where PA_Report_ID = ? ";
-			DB.executeUpdateEx(sql, new Object [] {getPA_Report_ID()}, null);
+			//String sql = "Update PA_ReportColumn set AmountType = 'NO' Where PA_Report_ID = ? ";
+			//DB.executeUpdateEx(sql, new Object [] {getPA_Report_ID()}, null);
 		}
 		
 		return true;

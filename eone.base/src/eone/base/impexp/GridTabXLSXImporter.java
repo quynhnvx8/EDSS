@@ -1157,8 +1157,12 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 						mapRow.put(headerMap, false);
 					}
 				} else {
-					if (cell.getStringCellValue() != null && !cell.getStringCellValue().equals(""))
-						mapRow.put(headerMap, cell.getStringCellValue());
+					try {
+						if (cell.getStringCellValue() != null && !cell.getStringCellValue().equals(""))
+							mapRow.put(headerMap, cell.getStringCellValue());
+					}catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		} else

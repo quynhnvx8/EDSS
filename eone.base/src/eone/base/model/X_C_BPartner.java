@@ -18,7 +18,7 @@ public class X_C_BPartner extends PO implements I_C_BPartner, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220504L;
+	private static final long serialVersionUID = 20220520L;
 
     /** Standard Constructor */
     public X_C_BPartner (Properties ctx, int C_BPartner_ID, String trxName)
@@ -152,6 +152,29 @@ public class X_C_BPartner extends PO implements I_C_BPartner, I_Persistent
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
+	}
+
+	/** Organization = ORG */
+	public static final String CODE_ORIGINAL_Organization = "ORG";
+	/** SALEMT = SALEMT */
+	public static final String CODE_ORIGINAL_SALEMT = "SALEMT";
+	/** OTHER = OTHER */
+	public static final String CODE_ORIGINAL_OTHER = "OTHER";
+	/** Department = DEPT */
+	public static final String CODE_ORIGINAL_Department = "DEPT";
+	/** Set Original.
+		@param Code_Original Original	  */
+	public void setCode_Original (String Code_Original)
+	{
+
+		set_Value (COLUMNNAME_Code_Original, Code_Original);
+	}
+
+	/** Get Original.
+		@return Original	  */
+	public String getCode_Original () 
+	{
+		return (String)get_Value(COLUMNNAME_Code_Original);
 	}
 
 	/** Set Fax.
@@ -296,6 +319,30 @@ public class X_C_BPartner extends PO implements I_C_BPartner, I_Persistent
 		return false;
 	}
 
+	/** Set Default.
+		@param IsDefault 
+		Default value
+	  */
+	public void setIsDefault (boolean IsDefault)
+	{
+		set_Value (COLUMNNAME_IsDefault, Boolean.valueOf(IsDefault));
+	}
+
+	/** Get Default.
+		@return Default value
+	  */
+	public boolean isDefault () 
+	{
+		Object oo = get_Value(COLUMNNAME_IsDefault);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
+	}
+
 	/** Set Employee.
 		@param IsEmployee 
 		Indicates if  this Business Partner is an employee
@@ -367,16 +414,19 @@ public class X_C_BPartner extends PO implements I_C_BPartner, I_Persistent
 
 	/** Set Key Original.
 		@param Key_Original Key Original	  */
-	public void setKey_Original (String Key_Original)
+	public void setKey_Original (int Key_Original)
 	{
-		set_Value (COLUMNNAME_Key_Original, Key_Original);
+		set_Value (COLUMNNAME_Key_Original, Integer.valueOf(Key_Original));
 	}
 
 	/** Get Key Original.
 		@return Key Original	  */
-	public String getKey_Original () 
+	public int getKey_Original () 
 	{
-		return (String)get_Value(COLUMNNAME_Key_Original);
+		Integer ii = (Integer)get_Value(COLUMNNAME_Key_Original);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
 	}
 
 	/** Set Logo.
@@ -458,27 +508,6 @@ public class X_C_BPartner extends PO implements I_C_BPartner, I_Persistent
 		return (String)get_Value(COLUMNNAME_Note);
 	}
 
-	/** EONE = EONE */
-	public static final String ORIGINAL_EONE = "EONE";
-	/** SALEMT = SALEMT */
-	public static final String ORIGINAL_SALEMT = "SALEMT";
-	/** OTHER = OTHER */
-	public static final String ORIGINAL_OTHER = "OTHER";
-	/** Set Original.
-		@param Original Original	  */
-	public void setOriginal (String Original)
-	{
-
-		set_Value (COLUMNNAME_Original, Original);
-	}
-
-	/** Get Original.
-		@return Original	  */
-	public String getOriginal () 
-	{
-		return (String)get_Value(COLUMNNAME_Original);
-	}
-
 	/** Set Personnel.
 		@param Personnel Personnel	  */
 	public void setPersonnel (String Personnel)
@@ -532,23 +561,6 @@ public class X_C_BPartner extends PO implements I_C_BPartner, I_Persistent
 			return "Y".equals(oo);
 		}
 		return false;
-	}
-
-	/** Set ReferenceKey.
-		@param ReferenceKey ReferenceKey	  */
-	public void setReferenceKey (int ReferenceKey)
-	{
-		set_Value (COLUMNNAME_ReferenceKey, Integer.valueOf(ReferenceKey));
-	}
-
-	/** Get ReferenceKey.
-		@return ReferenceKey	  */
-	public int getReferenceKey () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_ReferenceKey);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
 	}
 
 	/** Set Send EMail.

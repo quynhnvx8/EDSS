@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PhieuThuXuat" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="570" leftMargin="15" rightMargin="10" topMargin="35" bottomMargin="10" uuid="b037e993-16ab-4f5c-90d7-64d422018df7">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<style name="Bold_Left" hAlign="Left" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="true" isItalic="false" isUnderline="false" pdfFontName="TIMESBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box leftPadding="3"/>
+	</style>
+	<style name="Bold_Right" hAlign="Right" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="TIMESBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box rightPadding="3"/>
+	</style>
+	<style name="Bold_Center" hAlign="Center" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="true" isItalic="false" isUnderline="false" pdfFontName="TIMESBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+	<style name="Italic_Left" hAlign="Left" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="false" isItalic="true" isUnderline="false" pdfFontName="TIMESI.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box leftPadding="3"/>
+	</style>
+	<style name="Italic_Right" hAlign="Right" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="false" isItalic="true" isUnderline="false" pdfFontName="TIMESI.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box rightPadding="3"/>
+	</style>
+	<style name="Italic_Center" hAlign="Center" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="false" isItalic="true" isUnderline="false" pdfFontName="TIMESI.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+	<style name="Nomal_Left" hAlign="Left" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="false" isItalic="false" isUnderline="false" pdfFontName="TIMES.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box leftPadding="3"/>
+	</style>
+	<style name="Nomal_Right" hAlign="Right" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="false" isItalic="false" isUnderline="false" pdfFontName="TIMES.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box rightPadding="3"/>
+	</style>
+	<style name="Nomal_Center" hAlign="Center" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="false" isItalic="false" isUnderline="false" pdfFontName="TIMES.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+	<style name="BoldItalic_Left" hAlign="Left" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="true" isItalic="true" isUnderline="false" pdfFontName="TIMESBI.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box leftPadding="3"/>
+	</style>
+	<style name="BoldItalic_Right" hAlign="Right" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="true" isItalic="true" isUnderline="false" pdfFontName="TIMESBI.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box rightPadding="3"/>
+	</style>
+	<style name="BoldItalic_Center" hAlign="Center" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="true" isItalic="true" isUnderline="false" pdfFontName="TIMESBI.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RECORD_ID" class="java.lang.Integer"/>
+	<parameter name="ADDRESS" class="java.lang.String"/>
+	<parameter name="AD_ORG_NAME" class="java.lang.String"/>
+	<parameter name="TEMPAPPLY" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select ca.dateacct, coalesce(objectName,'') rsname, coalesce(address,'') address, coalesce(ca.description,'') description,coalesce(ca.documentno,'') documentno, (Amount+coalesce(TaxAmt,0)) amount,
+spell_number_vietnam((Amount+coalesce(TaxAmt,0)),0, cc.C_Currency_ID) doctien
+from m_inout ca
+    	inner join c_currency cc on ca.c_currency_id = cc.c_currency_id
+where ca.m_inout_id = $P{RECORD_ID}
+and ca.docstatus = 'CO';]]>
+	</queryString>
+	<field name="dateacct" class="java.sql.Timestamp"/>
+	<field name="rsname" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="documentno" class="java.lang.String"/>
+	<field name="amount" class="java.math.BigDecimal"/>
+	<field name="doctien" class="java.lang.String"/>
+	<title>
+		<band height="361">
+			<textField isBlankWhenNull="true" hyperlinkType="null">
+				<reportElement key="textField-2" x="111" y="66" width="318" height="16" uuid="835405af-59b8-4bc4-b2f4-7b056eb55c10"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" isItalic="true" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ngày " + ($F{dateacct}==null?"":(new SimpleDateFormat("dd").format($F{dateacct}) + " tháng " + new SimpleDateFormat("MM").format($F{dateacct}) + " năm " + new SimpleDateFormat("yyyy").format($F{dateacct})))]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-3" x="429" y="0" width="142" height="15" uuid="d27f25a7-5cde-449c-8f3f-5de375ed95c5"/>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="false" isItalic="true" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Mẫu số 01-TT]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true" hyperlinkType="null">
+				<reportElement key="textField-1" x="447" y="60" width="112" height="15" uuid="0e3a7882-b9e6-4e04-9c9d-d75a7de0304a"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{documentno}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-7" x="429" y="60" width="18" height="15" uuid="96e73699-3506-4b89-a655-685eb44bc373"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" isBold="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Số:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="429" y="75" width="130" height="26" uuid="fb212ded-9439-4b62-abeb-584f2162d636"/>
+				<subreportParameter name="RECORD_ID">
+					<subreportParameterExpression><![CDATA[$P{RECORD_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PhieuThuXuatSubreport0.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement key="staticText-15" x="0" y="101" width="130" height="16" uuid="f71f0212-40f5-4bd3-8840-67095f42a1bd"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Địa chỉ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-17" x="0" y="147" width="130" height="16" uuid="8ada86cf-c1c9-408b-9401-cb3ed8b0eecb"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Số tiền:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-18" x="0" y="179" width="130" height="16" uuid="86fb4bf8-3dbe-4593-b3ef-5b308b84cf41"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Kèm theo:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true" hyperlinkType="null">
+				<reportElement key="textField-5" x="130" y="85" width="281" height="16" uuid="8d302933-7cca-4eae-9450-6c53e89018a8"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rsname}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="null">
+				<reportElement key="textField-6" x="130" y="101" width="441" height="16" uuid="d0dd54f0-ec0c-47db-aba4-5e0347d5bd85"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="null">
+				<reportElement key="textField-7" x="130" y="117" width="441" height="30" uuid="a845c785-56c8-406d-a451-08b2cd5a4f1a"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true" hyperlinkType="null">
+				<reportElement key="textField-8" x="130" y="147" width="107" height="16" uuid="bf078b77-9b98-4b7e-8e2f-bfaa0416ee53"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" isBold="false" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-21" x="0" y="117" width="130" height="30" uuid="b2fd7f63-2ec5-46aa-b534-472374d9809e"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Lý do chi:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-32" x="0" y="306" width="182" height="16" uuid="a967ec3a-78b3-41fe-82cc-d439fc5c482c"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Đã nhận đủ số tiền (Viết bằng chữ): ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true" hyperlinkType="null">
+				<reportElement key="textField-14" x="362" y="204" width="209" height="16" uuid="2717d186-15a5-4960-b569-a2e70ef30fb7"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" isItalic="true" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ngày " + ($F{dateacct}==null?"":(new SimpleDateFormat("dd").format($F{dateacct}) + " tháng " + new SimpleDateFormat("MM").format($F{dateacct}) + " năm " + new SimpleDateFormat("yyyy").format($F{dateacct})))]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-43" x="0" y="163" width="130" height="16" uuid="360144ed-dcb1-4054-a0ca-2fe7fbde51a0"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Bằng chữ:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true" hyperlinkType="null">
+				<reportElement key="textField-17" x="130" y="163" width="441" height="16" uuid="e1523013-0614-48ab-a8a4-556ee26d51da"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" "+ $F{doctien}.toString() + "./."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-47" x="182" y="306" width="389" height="16" uuid="b128a5ab-7b0f-4348-8791-f99ff42764d9"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#999999"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="223" width="571" height="83" uuid="0601cd39-240a-4097-bb86-a7325bc58ab1"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "PhieuThuSubreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement key="staticText-33" positionType="FixRelativeToBottom" x="0" y="322" width="182" height="15" uuid="5f1fd974-d7d1-484c-81c4-577d300e5543"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[+ Tỷ giá ngoại tệ (vàng, bạc, đá quý):]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="15" width="341" height="15" uuid="eb696ac0-d413-49d1-99b0-5467d6fd63e3"/>
+				<textElement>
+					<font fontName="Times New Roman" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ADDRESS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="341" height="15" uuid="1e44c7dc-68e8-4754-b948-9d5d4ad01cda"/>
+				<textElement>
+					<font fontName="Times New Roman" isBold="true" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{AD_ORG_NAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-47" x="182" y="322" width="389" height="16" uuid="cda7e517-495e-4707-9e99-745c2220502e"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#999999"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-47" x="182" y="342" width="389" height="16" uuid="e1266577-09e6-47f0-bed6-5a29013210c7"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#999999"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-47" x="130" y="179" width="195" height="16" uuid="67db924e-c208-4341-8c54-e31f9a464862"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#999999"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-15" x="0" y="85" width="130" height="16" uuid="d4f65b40-27f2-4231-ad55-4546d0ac0eec"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Họ tên người nộp  tiền:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-18" x="325" y="179" width="246" height="16" uuid="6584b8bd-0f77-48ac-8153-054fac47bb34"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Chứng từ gốc.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-15" x="182" y="43" width="180" height="23" uuid="a530b06d-af65-4738-81b8-f185ef677a4c"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="16" isBold="true" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[PHIẾU THU]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-33" positionType="FixRelativeToBottom" x="0" y="340" width="182" height="16" uuid="bf703e02-b781-4f90-b992-200dd5b02165"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[+ Số tiền qui đổi:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-18" x="237" y="147" width="110" height="16" uuid="9d20c8dd-82bd-41f2-9d2c-25b74aaef75f"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[VNĐ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="429" y="15" width="142" height="45" uuid="db71f8f0-c272-4032-a45f-802e9d3e4681"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{TEMPAPPLY}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

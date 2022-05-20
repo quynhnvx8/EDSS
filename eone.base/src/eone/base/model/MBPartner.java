@@ -299,11 +299,11 @@ public class MBPartner extends X_C_BPartner
 	 * groupType = 'EMP'
 	 */
 	public static boolean createBPartner(int AD_Org_ID, int AD_Client_ID, String Code, String Name, 
-			int souce_id, String tableName, String groupType, boolean isInsert, String trxName) {
-		Object [] params = {Code, Name, souce_id, tableName};
+			int souce_id, String source_code, String groupType, boolean isInsert, String trxName) {
+		Object [] params = {Code, Name, souce_id, source_code};
 		if (isInsert)
 		{
-			String sqlUpdate = "UPDATE C_BPartner SET Value = ?, Name = ? WHERE ReferenceKey = ? And TableName = ?";
+			String sqlUpdate = "UPDATE C_BPartner SET Value = ?, Name = ? WHERE Key_Original = ? And Code_Original = ?";
 			int no = DB.executeUpdate(sqlUpdate, params, true, trxName);
 			if (no <= 0)
 			{
@@ -316,19 +316,43 @@ public class MBPartner extends X_C_BPartner
 				bp.setIsAutoCreate(true);
 				bp.setIsEmployee(true);
 				bp.setGroupType(groupType);
-				bp.setReferenceKey(souce_id);
-				bp.setTableName(tableName);
+				bp.setKey_Original(souce_id);
+				bp.setCode_Original(source_code);
 				bp.setProcessed(true);
 				return bp.save();
 			} else 
 				return true;
 		} else {
 			
-			String sql = "DELETE FROM C_BPartner WHERE ReferenceKey = ? And TableName = ?";
-			params = new Object [] {souce_id, tableName};
+			String sql = "DELETE FROM C_BPartner WHERE Key_Original = ? And Code_Original = ?";
+			params = new Object [] {souce_id, source_code};
 			int no = DB.executeUpdate(sql, params, true, trxName);
 			return no >= 0 ? true : false;
 		}
+	}
+	
+	public static MOrg getOrg_FromBPartner(Properties ctx, int C_BPartner_ID, String trxName) {
+		String whereClause = " AD_Org_ID = (SELECT NVL(Key_Original,0) FROM C_BPartner WHERE C_BPartner_ID = ?)";
+		MOrg value = new Query(ctx, X_AD_Org.Table_Name, whereClause, trxName)
+				.setParameters(C_BPartner_ID)
+				.first();
+		return value;
+	}
+	
+	public static MDepartment getDept_FromBPartner(Properties ctx, int C_BPartner_ID, String trxName) {
+		String whereClause = " AD_Department_ID = (SELECT NVL(Key_Original,0) FROM C_BPartner WHERE C_BPartner_ID = ?)";
+		MDepartment value = new Query(ctx, X_AD_Department.Table_Name, whereClause, trxName)
+				.setParameters(C_BPartner_ID)
+				.first();
+		return value;
+	}
+	
+	public static MBPartner getBPartner_FromOrgDept(Properties ctx, int source_id, String source_code, String trxName) {
+		String whereClause = " Key_Original = ? AND Code_Original = ?";
+		MBPartner value = new Query(ctx, X_C_BPartner.Table_Name, whereClause, trxName)
+				.setParameters(source_id, source_code)
+				.first();
+		return value;
 	}
 
 }	//	MBPartner

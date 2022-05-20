@@ -472,7 +472,8 @@ public final class MRole extends X_AD_Role
 			
 			if(X_C_ElementValue.Table_Name.equalsIgnoreCase(tableRoot) 
 					|| X_C_Account.Table_Name.equalsIgnoreCase(tableRoot)
-					|| X_A_Asset_Group.Table_Name.equalsIgnoreCase(tableRoot)) {
+					|| X_A_Asset_Group.Table_Name.equalsIgnoreCase(tableRoot)
+					|| X_PA_ReportLine.Table_Name.equalsIgnoreCase(tableRoot)) {
 				retSQL.append(" AND ");
 				if (!fullyQualified) {
 					retSQL

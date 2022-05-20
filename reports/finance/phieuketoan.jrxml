@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="phieuketoan" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4e5d1873-35c0-4e87-a0ed-5c073c41ca17">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="110"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="RECORD_ID" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -14,6 +14,7 @@
 	<queryString>
 		<![CDATA[select * from fn_phieuketoan($P{RECORD_ID})]]>
 	</queryString>
+	<field name="bangchu" class="java.lang.String"/>
 	<field name="stt" class="java.lang.Integer"/>
 	<field name="dono" class="java.lang.String"/>
 	<field name="dateacct" class="java.sql.Timestamp"/>
@@ -22,7 +23,6 @@
 	<field name="tentk" class="java.lang.String"/>
 	<field name="gtno" class="java.math.BigDecimal"/>
 	<field name="gtco" class="java.math.BigDecimal"/>
-	<field name="bangchu" class="java.lang.String"/>
 	<variable name="tongNo" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{gtno}]]></variableExpression>
 		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
@@ -34,18 +34,18 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="120" splitType="Stretch">
+		<band height="131" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="15" width="555" height="15" uuid="c439492c-2d56-44b9-985f-5662f33a0e18"/>
 				<textElement>
-					<font fontName="Times New Roman" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{ADDRESS}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="0" width="555" height="15" uuid="b67c0f91-839a-49c6-82b3-88a11c1cff35"/>
 				<textElement>
-					<font fontName="Times New Roman" isBold="true" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isBold="true" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{AD_ORG_NAME}]]></textFieldExpression>
 			</textField>
@@ -71,7 +71,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="10" isItalic="true" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isItalic="true" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Ngày " + ($F{dateacct}==null?"":(new SimpleDateFormat("dd").format($F{dateacct}) + " tháng " + new SimpleDateFormat("MM").format($F{dateacct}) + " năm " + new SimpleDateFormat("yyyy").format($F{dateacct})))]]></textFieldExpression>
 			</textField>
@@ -84,7 +84,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="10" isItalic="true" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isItalic="true" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Số: " + $F{dono}]]></textFieldExpression>
 			</textField>
@@ -93,11 +93,11 @@
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Dotted" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="10" isItalic="true" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isItalic="true" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Diễn giải: " + $F{noidung}]]></textFieldExpression>
 			</textField>
@@ -114,7 +114,7 @@
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" isBold="true"/>
+					<font fontName="Times New Roman" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[STT]]></text>
 			</staticText>
@@ -126,7 +126,7 @@
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" isBold="true"/>
+					<font fontName="Times New Roman" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tài khoản]]></text>
 			</staticText>
@@ -138,7 +138,7 @@
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" isBold="true"/>
+					<font fontName="Times New Roman" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tên tài khoản]]></text>
 			</staticText>
@@ -150,7 +150,7 @@
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" isBold="true"/>
+					<font fontName="Times New Roman" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nợ]]></text>
 			</staticText>
@@ -163,7 +163,7 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" isBold="true"/>
+					<font fontName="Times New Roman" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Có]]></text>
 			</staticText>
@@ -176,7 +176,7 @@
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" isBold="true"/>
+					<font fontName="Times New Roman" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[A]]></text>
 			</staticText>
@@ -190,7 +190,7 @@
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" isBold="true"/>
+					<font fontName="Times New Roman" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[B]]></text>
 			</staticText>
@@ -204,7 +204,7 @@
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" isBold="true"/>
+					<font fontName="Times New Roman" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[C]]></text>
 			</staticText>
@@ -218,7 +218,7 @@
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" isBold="true"/>
+					<font fontName="Times New Roman" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[1]]></text>
 			</staticText>
@@ -231,7 +231,7 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" isBold="true"/>
+					<font fontName="Times New Roman" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[2]]></text>
 			</staticText>
@@ -248,7 +248,7 @@
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="Times New Roman"/>
+					<font fontName="Times New Roman" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{stt}]]></textFieldExpression>
 			</textField>
@@ -262,7 +262,7 @@
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="Times New Roman"/>
+					<font fontName="Times New Roman" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sotk}]]></textFieldExpression>
 			</textField>
@@ -276,7 +276,7 @@
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement>
-					<font fontName="Times New Roman"/>
+					<font fontName="Times New Roman" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tentk}]]></textFieldExpression>
 			</textField>
@@ -290,9 +290,9 @@
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font fontName="Times New Roman"/>
+					<font fontName="Times New Roman" size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{gtno}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{gtno}.doubleValue()==0?null:$F{gtno}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="467" y="0" width="88" height="20" uuid="fc94a3ff-e8f3-4a9a-8011-c97c2b7b9726"/>
@@ -303,9 +303,9 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font fontName="Times New Roman"/>
+					<font fontName="Times New Roman" size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{gtco}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{gtco}.doubleValue()==0?null:$F{gtco}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -319,7 +319,7 @@
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font fontName="Times New Roman" isBold="true"/>
+					<font fontName="Times New Roman" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tổng cộng:]]></text>
 			</staticText>
@@ -332,7 +332,7 @@
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font fontName="Times New Roman" isBold="true"/>
+					<font fontName="Times New Roman" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -344,7 +344,7 @@
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font fontName="Times New Roman" isBold="true"/>
+					<font fontName="Times New Roman" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -358,7 +358,7 @@
 					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" isBold="true"/>
+					<font fontName="Times New Roman" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Người lập]]></text>
 			</staticText>
@@ -372,7 +372,7 @@
 					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" isBold="true"/>
+					<font fontName="Times New Roman" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Kế toán trường]]></text>
 			</staticText>
@@ -386,7 +386,7 @@
 					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" isBold="true"/>
+					<font fontName="Times New Roman" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Lãnh đạo]]></text>
 			</staticText>
@@ -400,7 +400,7 @@
 					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" isBold="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false"/>
 				</textElement>
 				<text><![CDATA[(Ký, họ tên)]]></text>
 			</staticText>
@@ -414,7 +414,7 @@
 					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" isBold="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false"/>
 				</textElement>
 				<text><![CDATA[(Ký, họ tên)]]></text>
 			</staticText>
@@ -428,7 +428,7 @@
 					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" isBold="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false"/>
 				</textElement>
 				<text><![CDATA[(Ký, họ tên)]]></text>
 			</staticText>
@@ -441,7 +441,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="10" isItalic="true" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="11" isItalic="true" pdfFontName="Times-Roman" pdfEncoding="&lt;Different Values&gt;" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Ngày " + ($F{dateacct}==null?"":(new SimpleDateFormat("dd").format($F{dateacct}) + " tháng " + new SimpleDateFormat("MM").format($F{dateacct}) + " năm " + new SimpleDateFormat("yyyy").format($F{dateacct})))]]></textFieldExpression>
 			</textField>
@@ -455,7 +455,7 @@
 					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement>
-					<font fontName="Times New Roman" isBold="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false"/>
 				</textElement>
 				<text><![CDATA[-Số tiền:]]></text>
 			</staticText>
@@ -469,7 +469,7 @@
 					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement>
-					<font fontName="Times New Roman" isBold="false"/>
+					<font fontName="Times New Roman" size="11" isBold="false"/>
 				</textElement>
 				<text><![CDATA[- Bằng chữ:]]></text>
 			</staticText>
@@ -481,7 +481,7 @@
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font fontName="Times New Roman" isBold="true"/>
+					<font fontName="Times New Roman" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{tongNo}]]></textFieldExpression>
 			</textField>
@@ -494,7 +494,7 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font fontName="Times New Roman" isBold="true"/>
+					<font fontName="Times New Roman" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{tongco}]]></textFieldExpression>
 			</textField>
@@ -508,7 +508,7 @@
 					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement>
-					<font fontName="Times New Roman" isUnderline="false"/>
+					<font fontName="Times New Roman" size="11" isUnderline="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{tongNo}]]></textFieldExpression>
 			</textField>
@@ -518,7 +518,7 @@
 					<bottomPen lineWidth="0.25" lineStyle="Dotted"/>
 				</box>
 				<textElement>
-					<font fontName="Times New Roman"/>
+					<font fontName="Times New Roman" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{bangchu}]]></textFieldExpression>
 			</textField>

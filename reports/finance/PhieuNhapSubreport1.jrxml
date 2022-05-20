@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PhieuNhapSubreport1" pageWidth="571" pageHeight="100" whenNoDataType="AllSectionsNoDetail" columnWidth="571" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a32218b6-2a1a-403e-9ea4-726a3278fa47">
+	<property name="ireport.zoom" value="1.4641000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Bold_Left" hAlign="Left" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="true" isItalic="false" isUnderline="false" pdfFontName="TIMESBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box leftPadding="3"/>
+	</style>
+	<style name="Bold_Right" hAlign="Right" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="TIMESBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box rightPadding="3"/>
+	</style>
+	<style name="Bold_Center" hAlign="Center" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="true" isItalic="false" isUnderline="false" pdfFontName="TIMESBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+	<style name="Italic_Left" hAlign="Left" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="false" isItalic="true" isUnderline="false" pdfFontName="TIMESI.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box leftPadding="3"/>
+	</style>
+	<style name="Italic_Right" hAlign="Right" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="false" isItalic="true" isUnderline="false" pdfFontName="TIMESI.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box rightPadding="3"/>
+	</style>
+	<style name="Italic_Center" hAlign="Center" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="false" isItalic="true" isUnderline="false" pdfFontName="TIMESI.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+	<style name="Nomal_Left" hAlign="Left" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="false" isItalic="false" isUnderline="false" pdfFontName="TIMES.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box leftPadding="3"/>
+	</style>
+	<style name="Nomal_Right" hAlign="Right" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="false" isItalic="false" isUnderline="false" pdfFontName="TIMES.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box rightPadding="3"/>
+	</style>
+	<style name="Nomal_Center" hAlign="Center" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="false" isItalic="false" isUnderline="false" pdfFontName="TIMES.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+	<style name="BoldItalic_Left" hAlign="Left" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="true" isItalic="true" isUnderline="false" pdfFontName="TIMESBI.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box leftPadding="3"/>
+	</style>
+	<style name="BoldItalic_Right" hAlign="Right" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="true" isItalic="true" isUnderline="false" pdfFontName="TIMESBI.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<box rightPadding="3"/>
+	</style>
+	<style name="BoldItalic_Center" hAlign="Center" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="true" isItalic="true" isUnderline="false" pdfFontName="TIMESBI.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<title>
+		<band height="38">
+			<textField>
+				<reportElement style="Italic_Center" x="0" y="14" width="150" height="15" uuid="be9bf627-63e3-4e46-8a65-8666fb594bea"/>
+				<box leftPadding="0"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Times New Roman" size="12" pdfFontName="Times-Roman" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(Ký, ghi rõ họ tên)"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-5" style="Bold_Center" x="0" y="0" width="150" height="14" uuid="903720c5-3fdd-43e3-b24b-a7658f501e23"/>
+				<box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfFontName="Times-Roman" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Người lập biểu"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-5" style="Bold_Center" x="150" y="0" width="141" height="14" uuid="922af518-e870-4d53-b4f8-9f2fb9bd58a8"/>
+				<box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfFontName="Times-Roman" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Người giao hàng"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-5" style="Bold_Center" x="291" y="0" width="136" height="14" uuid="2600f495-e8dc-4b43-a3ea-f657bdb58a13"/>
+				<box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfFontName="Times-Roman" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Thủ kho"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-5" style="Bold_Center" x="427" y="0" width="144" height="14" uuid="60ee30d9-c7d8-4457-8441-dc02d022e384"/>
+				<box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfFontName="Times-Roman" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Kế toán trưởng"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Italic_Center" x="150" y="15" width="141" height="15" uuid="aaadd8db-e756-4bfc-a491-6a6cdcaa9758"/>
+				<box leftPadding="0"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Times New Roman" size="12" pdfFontName="Times-Roman" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(Ký, ghi rõ họ tên)"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Italic_Center" x="291" y="14" width="136" height="15" uuid="4e735393-a8d6-4345-b7a9-6d6ed6ef9d0b"/>
+				<box leftPadding="0"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Times New Roman" size="12" pdfFontName="Times-Roman" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(Ký, ghi rõ họ tên)"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Italic_Center" x="427" y="14" width="144" height="15" uuid="28ef53d2-b75b-42e7-81d5-672a60b4f0e2"/>
+				<box leftPadding="0"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Times New Roman" size="12" pdfFontName="Times-Roman" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(Ký, ghi rõ họ tên)"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

@@ -769,8 +769,7 @@ public abstract class PO	implements Serializable, Comparator<Object>, Evaluatee,
 			if (p_info.getColumn(index).DisplayType == DisplayType.List &&
 				p_info.getColumn(index).AD_Reference_Value_ID > 0 &&
 				value instanceof String) {
-				if (MRefList.get(getCtx(), p_info.getColumn(index).AD_Reference_Value_ID,
-						(String) value, get_TrxName()) != null)
+				if (MRefList.get(getCtx(), p_info.getColumn(index).AD_Reference_Value_ID,(String) value, null) != null)
 					;
 				else {
 					StringBuilder validValues = new StringBuilder();

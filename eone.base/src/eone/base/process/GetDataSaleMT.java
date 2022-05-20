@@ -90,9 +90,9 @@ public class GetDataSaleMT extends SvrProcess
 				item = new MBPartner(getCtx());
 				int id = DB.getNextID(getCtx(), X_C_BPartner.Table_Name, get_TrxName());
 				item.setValue(rs.getString("customerCode"));
-				item.setKey_Original(item.getValue());//Luu key nay khong thay doi thuan tien cho viec doi chieu
+				//item.setKey_Original(item.getValue());//Luu key nay khong thay doi thuan tien cho viec doi chieu
 				item.setIsAutoCreate(false);
-				item.setOriginal(X_C_BPartner.ORIGINAL_SALEMT);
+				item.setCode_Original(X_C_BPartner.CODE_ORIGINAL_SALEMT);
 				
 				item.setName(rs.getString("lastName") + " " + rs.getString("firstName"));
 				item.setName2(item.getName());

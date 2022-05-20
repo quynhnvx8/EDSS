@@ -32,11 +32,14 @@
 	</style>
 	<style name="BoldItalic_Center" hAlign="Center" vAlign="Middle" isBlankWhenNull="true" fontName="Times New Roman" isBold="true" isItalic="true" isUnderline="false" pdfFontName="TIMESBI.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 	<queryString>
-		<![CDATA[select 1 a]]>
+		<![CDATA[]]>
 	</queryString>
-	<field name="a" class="java.lang.Integer"/>
+	<field name="rsname" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="documentno" class="java.lang.String"/>
 	<title>
-		<band height="29">
+		<band height="30">
 			<textField>
 				<reportElement style="Italic_Center" x="354" y="14" width="109" height="15" uuid="644749ab-571a-423c-b854-955ab5a29689"/>
 				<textElement verticalAlignment="Top">

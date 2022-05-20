@@ -97,7 +97,8 @@ public class MOrg extends X_AD_Org
 		
 		if (newRecord || is_ValueChanged("Value") || is_ValueChanged("Name") || isCreateBPartner()) {
 			if (!isSummary()) {
-				boolean ok = MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getValue(), getName(), getAD_Org_ID(), "AD_Org", X_C_BPartner.GROUPTYPE_Org, true, get_TrxName());
+				boolean ok = MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getValue(), getName(), getAD_Org_ID(), 
+						X_C_BPartner.CODE_ORIGINAL_Organization, X_C_BPartner.GROUPTYPE_Org, true, get_TrxName());
 				if (!ok)
 				{
 					log.saveError("Error!", "Create BPartner false!");
@@ -112,7 +113,8 @@ public class MOrg extends X_AD_Org
 				(!isActive() && is_ValueChanged("IsActive") && isCreateBPartner())
 			)
 		{
-			MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getValue(), getName(), getAD_Org_ID(), "AD_Org", "ORG", false, get_TrxName());
+			MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getValue(), getName(), getAD_Org_ID(), 
+					X_C_BPartner.CODE_ORIGINAL_Organization, X_C_BPartner.GROUPTYPE_Org, false, get_TrxName());
 		}
 		
 		if ((newRecord && isCreateWarehouse()) || is_ValueChanged("IsCreateWarehouse")) {
