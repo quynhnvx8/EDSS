@@ -185,7 +185,7 @@ public class MElementValue extends X_C_ElementValue
 	}	//	afterDelete
 	
 	public static MElementValue get(Properties ctx, int Account_ID) {
-		if (Account_ID > 0) {
+		if (Account_ID != 0) {
 			StringBuilder whereClause =  new StringBuilder(" C_ElementValue_ID=?");
 			ArrayList<Object> params = new ArrayList<Object>();
 			params.add(Account_ID);

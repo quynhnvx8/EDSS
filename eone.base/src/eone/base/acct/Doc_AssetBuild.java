@@ -97,6 +97,9 @@ public class Doc_AssetBuild extends Doc
 			return false;
 		}
 		f.setA_Asset_ID(header.getA_Asset_ID());
+		f.setA_Asset_Cr_ID(header.getA_Asset_ID());
+		if (line.getA_Asset_Cr_ID() > 0)
+			f.setA_Asset_Cr_ID(line.getA_Asset_Cr_ID());
 		f.setM_Product_ID(line.getM_Product_ID());
 		f.setM_Product_Cr_ID(line.getM_Product_ID());
 		f.setM_Warehouse_Cr_ID(line.getM_Warehouse_Cr_ID());

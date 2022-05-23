@@ -352,32 +352,4 @@ public class X_AD_Menu extends PO implements I_AD_Menu, I_Persistent
         return new KeyNamePair(get_ID(), getName());
     }
 
-	/** Finacial = FN */
-	public static final String ROLETYPE_Finacial = "FN";
-	/** Human Resource = HR */
-	public static final String ROLETYPE_HumanResource = "HR";
-	/** Asset = AS */
-	public static final String ROLETYPE_Asset = "AS";
-	/** Manufacturing = MA */
-	public static final String ROLETYPE_Manufacturing = "MA";
-	/** Document = DO */
-	public static final String ROLETYPE_Document = "DO";
-	/** System = SY */
-	public static final String ROLETYPE_System = "SY";
-	/** Administrator = AD */
-	public static final String ROLETYPE_Administrator = "AD";
-	/** Set Role Type.
-		@param RoleType Role Type	  */
-	public void setRoleType (String RoleType)
-	{
-
-		set_Value (COLUMNNAME_RoleType, RoleType);
-	}
-
-	/** Get Role Type.
-		@return Role Type	  */
-	public String getRoleType () 
-	{
-		return (String)get_Value(COLUMNNAME_RoleType);
-	}
 }

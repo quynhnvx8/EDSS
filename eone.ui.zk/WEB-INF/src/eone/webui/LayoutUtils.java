@@ -110,7 +110,7 @@ public final class LayoutUtils {
 		if (delayMs > 0) {
 			script.append("setTimeout(function() { ");
 		}
-		script.append("parent.eone.show_popup_window('#")
+		script.append("parent.window.eone.show_popup_window('#")
 			.append(ref.getUuid())
 			.append("','#")
 			.append(window.getUuid())
@@ -136,7 +136,7 @@ public final class LayoutUtils {
 		if (window.getPage() == null)
 			window.setPage(ref.getPage());
 		StringBuilder script = new StringBuilder();
-		script.append("parent.eone.show_popup_window('#")
+		script.append("parent.window.eone.show_popup_window('#")
 			.append(ref.getUuid())
 			.append("','#")
 			.append(window.getUuid())
@@ -155,7 +155,7 @@ public final class LayoutUtils {
 	 */
 	public static void positionWindow(Component ref, Window window, String position) {
 		StringBuilder script = new StringBuilder();
-		script.append("parent.eone.show_popup_window('#")
+		script.append("parent.window.eone.show_popup_window('#")
 			.append(ref.getUuid())
 			.append("','#")
 			.append(window.getUuid())
@@ -173,7 +173,7 @@ public final class LayoutUtils {
 	 */
 	public static void openEmbeddedWindow(Component ref, Window window, String position) {
 		StringBuilder script = new StringBuilder();
-		script.append("parent.eone.show_popup_window('#")
+		script.append("parent.window.eone.show_popup_window('#")
 			.append(ref.getUuid())
 			.append("','#")
 			.append(window.getUuid())

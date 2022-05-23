@@ -98,7 +98,7 @@ public class MDocTypeSub extends X_C_DocTypeSub
 		String sql = "Select count(1) From C_DocTypeSub Where C_DocType_ID = ? And C_DocTypeSub_ID != ? And IsDefault = 'Y'";
 		Object [] params = {getC_DocType_ID(), getC_DocTypeSub_ID()};
 		int no = DB.getSQLValue(get_TrxName(), sql, params);
-		if (no >= 1) {
+		if (no > 1) {
 			log.saveError("Error", "Exists set default");
 			return false;
 		}

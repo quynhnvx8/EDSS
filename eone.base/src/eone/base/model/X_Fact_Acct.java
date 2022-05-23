@@ -93,6 +93,25 @@ public class X_Fact_Acct extends PO implements I_Fact_Acct, I_Persistent
 			 return 0;
 		return ii.intValue();
 	}
+	
+	public void setA_Asset_Cr_ID (int A_Asset_Cr_ID)
+	{
+		if (A_Asset_Cr_ID < 1) 
+			set_ValueNoCheck (COLUMNNAME_A_Asset_Cr_ID, null);
+		else 
+			set_ValueNoCheck (COLUMNNAME_A_Asset_Cr_ID, Integer.valueOf(A_Asset_Cr_ID));
+	}
+
+	/** Get Asset.
+		@return Asset used internally or by customers
+	  */
+	public int getA_Asset_Cr_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_A_Asset_Cr_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
 
 	public eone.base.model.I_C_ElementValue getAccount_Cr() throws RuntimeException
     {
@@ -105,10 +124,8 @@ public class X_Fact_Acct extends PO implements I_Fact_Acct, I_Persistent
 	  */
 	public void setAccount_Cr_ID (int Account_Cr_ID)
 	{
-		if (Account_Cr_ID < 1) 
-			set_Value (COLUMNNAME_Account_Cr_ID, null);
-		else 
-			set_Value (COLUMNNAME_Account_Cr_ID, Integer.valueOf(Account_Cr_ID));
+		set_Value (COLUMNNAME_Account_Cr_ID, Integer.valueOf(Account_Cr_ID));
+			
 	}
 
 	/** Get Account Cr.
@@ -133,10 +150,8 @@ public class X_Fact_Acct extends PO implements I_Fact_Acct, I_Persistent
 	  */
 	public void setAccount_Dr_ID (int Account_Dr_ID)
 	{
-		if (Account_Dr_ID < 1) 
-			set_Value (COLUMNNAME_Account_Dr_ID, null);
-		else 
-			set_Value (COLUMNNAME_Account_Dr_ID, Integer.valueOf(Account_Dr_ID));
+		set_Value (COLUMNNAME_Account_Dr_ID, Integer.valueOf(Account_Dr_ID));
+			
 	}
 
 	/** Get Account Dr.

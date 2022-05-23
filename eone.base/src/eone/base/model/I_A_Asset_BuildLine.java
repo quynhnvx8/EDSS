@@ -49,6 +49,17 @@ public interface I_A_Asset_BuildLine
 	/** Get Line	  */
 	public int getA_Asset_BuildLine_ID();
 
+    /** Column name A_Asset_Cr_ID */
+    public static final String COLUMNNAME_A_Asset_Cr_ID = "A_Asset_Cr_ID";
+
+	/** Set Asset	  */
+	public void setA_Asset_Cr_ID (int A_Asset_Cr_ID);
+
+	/** Get Asset	  */
+	public int getA_Asset_Cr_ID();
+
+	public eone.base.model.I_A_Asset getA_Asset_Cr() throws RuntimeException;
+
     /** Column name Account_Cr_ID */
     public static final String COLUMNNAME_Account_Cr_ID = "Account_Cr_ID";
 
@@ -139,21 +150,6 @@ public interface I_A_Asset_BuildLine
 
 	public eone.base.model.I_C_DocTypeSub getC_DocTypeSub() throws RuntimeException;
 
-    /** Column name C_Tax_ID */
-    public static final String COLUMNNAME_C_Tax_ID = "C_Tax_ID";
-
-	/** Set Tax.
-	  * Tax identifier
-	  */
-	public void setC_Tax_ID (int C_Tax_ID);
-
-	/** Get Tax.
-	  * Tax identifier
-	  */
-	public int getC_Tax_ID();
-
-	public eone.base.model.I_C_Tax getC_Tax() throws RuntimeException;
-
     /** Column name C_TypeCost_ID */
     public static final String COLUMNNAME_C_TypeCost_ID = "C_TypeCost_ID";
 
@@ -191,37 +187,6 @@ public interface I_A_Asset_BuildLine
 	  * User who created this records
 	  */
 	public int getCreatedBy();
-
-    /** Column name DateInvoiced */
-    public static final String COLUMNNAME_DateInvoiced = "DateInvoiced";
-
-	/** Set Date Invoiced.
-	  * Date printed on Invoice
-	  */
-	public void setDateInvoiced (Timestamp DateInvoiced);
-
-	/** Get Date Invoiced.
-	  * Date printed on Invoice
-	  */
-	public Timestamp getDateInvoiced();
-
-    /** Column name InvoiceNo */
-    public static final String COLUMNNAME_InvoiceNo = "InvoiceNo";
-
-	/** Set InvoiceNo	  */
-	public void setInvoiceNo (String InvoiceNo);
-
-	/** Get InvoiceNo	  */
-	public String getInvoiceNo();
-
-    /** Column name InvoiceSymbol */
-    public static final String COLUMNNAME_InvoiceSymbol = "InvoiceSymbol";
-
-	/** Set InvoiceSymbol	  */
-	public void setInvoiceSymbol (String InvoiceSymbol);
-
-	/** Get InvoiceSymbol	  */
-	public String getInvoiceSymbol();
 
     /** Column name IsActive */
     public static final String COLUMNNAME_IsActive = "IsActive";

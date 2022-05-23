@@ -743,7 +743,6 @@ public class Login
 				+" (	 "
 				+" 	SELECT u.AD_User_ID,  "
 				+" 		STRING_AGG(DISTINCT r.AD_Tree_Menu_ID::text,',') listTree,  "
-				+" 		STRING_AGG(DISTINCT RoleType,',') RoleType,  "
 				+" 		STRING_AGG(DISTINCT RoleLevel,',') RoleLevel, "
 				+" 		STRING_AGG(DISTINCT r.AD_Role_ID::text,',') ListRole, "
 				+" 		CASE WHEN POSITION('Y' IN STRING_AGG(r.IsShowAcct,',')) > 0 THEN 'Y' ELSE 'N' END  IsShowAcct, "
@@ -765,7 +764,7 @@ public class Login
 				+" 		THEN (SELECT STRING_AGG(AD_Org_ID::text,',') FROM AD_Org WHERE IsActive = 'Y') "
 				+" 		ELSE (SELECT STRING_AGG(AD_Org_ID::text,',') FROM AD_User_OrgAccess uo Where uO.AD_User_ID = u.AD_User_ID And uo.IsActive = 'Y') END listOrg, "
 				+" 		(SELECT STRING_AGG(AD_Org_ID::text,',') FROM AD_User_OrgAccess uo Where uO.AD_User_ID = u.AD_User_ID And uo.IsReadOnly = 'Y' And uo.IsActive = 'Y') listOrgReadOnly, "
-				+" 		r.ListTree, r.RoleType, r.RoleLevel, r.ListRole, r.IsShowAcct, r.isShowPrice, r.isConfigAcct, r.isDelItem, "
+				+" 		r.ListTree, r.RoleLevel, r.ListRole, r.IsShowAcct, r.isShowPrice, r.isConfigAcct, r.isDelItem, "
 				+" 		r.IsAccessAllOrgs, r.IsDragDropMenu, r.IsCanExport, "
 				+"		COALESCE(u.isUserAdmin, 'N') IsUserAdmin, COALESCE(u.isUserSystem, 'N') IsUserSystem"//r.IsMasterRole, 
 				+" FROM AD_User u INNER JOIN tmp r ON u.AD_User_ID = r.AD_User_ID "
@@ -787,7 +786,6 @@ public class Login
 					Env.setContext(m_ctx, "#AD_Role_IDs", rs.getString("ListRole"));
 					Env.setContext(m_ctx, "#AD_Tree_IDs", rs.getString("ListTree"));
 					
-					Env.setContext(m_ctx, "#RoleType", rs.getString("RoleType"));
 					Env.setContext(m_ctx, "#RoleLevel", rs.getString("RoleLevel"));
 					Env.setContext(m_ctx, "#IsDelItem", rs.getString("IsDelItem"));
 					

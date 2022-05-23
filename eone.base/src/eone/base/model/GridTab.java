@@ -1449,7 +1449,13 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 	{
 		if (m_vo.IsReadOnly)
 			return false;
-		return m_vo.IsInsertRecord;		
+		
+		
+		if (m_vo.InsertLogic != null && m_vo.InsertLogic.length() > 0) {
+			return Evaluator.evaluateLogic(this, m_vo.InsertLogic);
+		}
+		
+		return m_vo.IsInsertRecord;
 	}	//	isInsertRecord
 
 	/**

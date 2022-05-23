@@ -255,14 +255,7 @@ public interface I_AD_Role
 	/** Get RoleLevel	  */
 	public String getRoleLevel();
 
-    /** Column name RoleType */
-    public static final String COLUMNNAME_RoleType = "RoleType";
-
-	/** Set Role Type	  */
-	public void setRoleType (String RoleType);
-
-	/** Get Role Type	  */
-	public String getRoleType();
+   
 
     /** Column name Updated */
     public static final String COLUMNNAME_Updated = "Updated";

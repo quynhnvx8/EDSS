@@ -235,14 +235,6 @@ public interface I_AD_Menu
 	  */
 	public String getName();
 
-    /** Column name RoleType */
-    public static final String COLUMNNAME_RoleType = "RoleType";
-
-	/** Set Role Type	  */
-	public void setRoleType (String RoleType);
-
-	/** Get Role Type	  */
-	public String getRoleType();
 
     /** Column name Updated */
     public static final String COLUMNNAME_Updated = "Updated";

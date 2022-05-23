@@ -18,7 +18,7 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220519L;
+	private static final long serialVersionUID = 20220523L;
 
     /** Standard Constructor */
     public X_C_DocType (Properties ctx, int C_DocType_ID, String trxName)
@@ -546,6 +546,10 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	public static final String DOCBASETYPE_152CreditTransfer = "152CRTR";
 	/** Export Transfer Warehouse = 15CRTR */
 	public static final String DOCBASETYPE_ExportTransferWarehouse = "15CRTR";
+	/** Fixed Asset To Land = FATL */
+	public static final String DOCBASETYPE_FixedAssetToLand = "FATL";
+	/** Land To Fixed Asset = LTFA */
+	public static final String DOCBASETYPE_LandToFixedAsset = "LTFA";
 	/** Set Document BaseType.
 		@param DocBaseType 
 		Logical type of document

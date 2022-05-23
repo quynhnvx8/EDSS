@@ -7,6 +7,7 @@ import java.util.logging.Level;
 
 import eone.base.process.DocAction;
 import eone.base.process.DocumentEngine;
+import eone.util.DB;
 
 
 public class MGeneral extends X_C_General implements DocAction
@@ -121,6 +122,19 @@ public class MGeneral extends X_C_General implements DocAction
 		return DocAction.STATUS_Completed;
 	}
 
+	
+	public void setProcessed (boolean processed)
+	{
+		super.setProcessed (processed);
+		if (get_ID() == 0)
+			return;
+		StringBuilder sql = new StringBuilder("UPDATE C_GeneralLine SET Processed='")
+			.append((processed ? "Y" : "N"))
+			.append("' WHERE C_General_ID=").append(getC_General_ID());
+		int noLine = DB.executeUpdate(sql.toString(), get_TrxName());
+		m_lines = null;
+		if (log.isLoggable(Level.FINE)) log.fine(processed + " - Lines=" + noLine);
+	}
 
 
 	@Override

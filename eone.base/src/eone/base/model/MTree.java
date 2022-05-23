@@ -190,6 +190,11 @@ public class MTree extends X_AD_Tree
 			//Nếu không hiển thị để phân quyền thì không cần lên hết trên menu
 			if (!m_ByRole)
 				sql.append(" AND tn.AD_Menu_ID IN (SELECT tn.Node_ID FROM AD_TreeNode tn WHERE ad_tree_id in ("+ adTreeIds +") AND IsDisplayed = 'Y')");
+			
+			//Nếu là User các công ty chỉ nhìn đc menu mà quản trị toàn hệ thống phân quyền cho thôi.
+			if (!Env.isUserSystem(getCtx())) {
+				sql.append(" AND tn.AD_Menu_ID IN (SELECT tn.Node_ID FROM AD_TreeNode tn WHERE AD_Tree_ID = (SELECT AD_Tree_ID FROM AD_Tree WHERE IsAdminClient = 'Y') AND IsDisplayed = 'Y')");
+			}
 			sql.append(" ORDER BY COALESCE(tn.Parent_ID, -1), tn.SeqNo");
 			
 		}
@@ -400,14 +405,6 @@ public class MTree extends X_AD_Tree
 			{
 				boolean hasWhere = sqlNode.indexOf(" WHERE ") != -1;
 				sqlNode.append(hasWhere ? " AND " : " WHERE ").append("m.IsActive='Y' ");
-			}
-			
-			String roleType = Env.getContext(getCtx(), "#RoleType");
-			if (roleType.indexOf(X_AD_Role.ROLETYPE_System) == 0 && Env.getAD_Client_ID(getCtx()) > 0) {
-				boolean hasWhere = sqlNode.indexOf(" WHERE ") != -1;
-				sqlNode.append(hasWhere ? " AND " : " WHERE ")
-					.append("m.RoleType !='SY' ");
-				
 			}
 			
 			

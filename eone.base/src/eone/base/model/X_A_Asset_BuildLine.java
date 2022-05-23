@@ -8,7 +8,6 @@ package eone.base.model;
 import eone.util.Env;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.util.Properties;
 
 /** Generated Model for A_Asset_BuildLine
@@ -20,7 +19,7 @@ public class X_A_Asset_BuildLine extends PO implements I_A_Asset_BuildLine, I_Pe
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220512L;
+	private static final long serialVersionUID = 20220523L;
 
     /** Standard Constructor */
     public X_A_Asset_BuildLine (Properties ctx, int A_Asset_BuildLine_ID, String trxName)
@@ -99,6 +98,31 @@ public class X_A_Asset_BuildLine extends PO implements I_A_Asset_BuildLine, I_Pe
 	public int getA_Asset_BuildLine_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_A_Asset_BuildLine_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	public eone.base.model.I_A_Asset getA_Asset_Cr() throws RuntimeException
+    {
+		return (eone.base.model.I_A_Asset)MTable.get(getCtx(), eone.base.model.I_A_Asset.Table_Name)
+			.getPO(getA_Asset_Cr_ID(), get_TrxName());	}
+
+	/** Set Asset.
+		@param A_Asset_Cr_ID Asset	  */
+	public void setA_Asset_Cr_ID (int A_Asset_Cr_ID)
+	{
+		if (A_Asset_Cr_ID < 1) 
+			set_ValueNoCheck (COLUMNNAME_A_Asset_Cr_ID, null);
+		else 
+			set_ValueNoCheck (COLUMNNAME_A_Asset_Cr_ID, Integer.valueOf(A_Asset_Cr_ID));
+	}
+
+	/** Get Asset.
+		@return Asset	  */
+	public int getA_Asset_Cr_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_A_Asset_Cr_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
@@ -233,34 +257,6 @@ public class X_A_Asset_BuildLine extends PO implements I_A_Asset_BuildLine, I_Pe
 		return ii.intValue();
 	}
 
-	public eone.base.model.I_C_Tax getC_Tax() throws RuntimeException
-    {
-		return (eone.base.model.I_C_Tax)MTable.get(getCtx(), eone.base.model.I_C_Tax.Table_Name)
-			.getPO(getC_Tax_ID(), get_TrxName());	}
-
-	/** Set Tax.
-		@param C_Tax_ID 
-		Tax identifier
-	  */
-	public void setC_Tax_ID (int C_Tax_ID)
-	{
-		if (C_Tax_ID < 1) 
-			set_Value (COLUMNNAME_C_Tax_ID, null);
-		else 
-			set_Value (COLUMNNAME_C_Tax_ID, Integer.valueOf(C_Tax_ID));
-	}
-
-	/** Get Tax.
-		@return Tax identifier
-	  */
-	public int getC_Tax_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_C_Tax_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
 	public eone.base.model.I_C_TypeCost getC_TypeCost() throws RuntimeException
     {
 		return (eone.base.model.I_C_TypeCost)MTable.get(getCtx(), eone.base.model.I_C_TypeCost.Table_Name)
@@ -309,51 +305,6 @@ public class X_A_Asset_BuildLine extends PO implements I_A_Asset_BuildLine, I_Pe
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
-	}
-
-	/** Set Date Invoiced.
-		@param DateInvoiced 
-		Date printed on Invoice
-	  */
-	public void setDateInvoiced (Timestamp DateInvoiced)
-	{
-		set_Value (COLUMNNAME_DateInvoiced, DateInvoiced);
-	}
-
-	/** Get Date Invoiced.
-		@return Date printed on Invoice
-	  */
-	public Timestamp getDateInvoiced () 
-	{
-		return (Timestamp)get_Value(COLUMNNAME_DateInvoiced);
-	}
-
-	/** Set InvoiceNo.
-		@param InvoiceNo InvoiceNo	  */
-	public void setInvoiceNo (String InvoiceNo)
-	{
-		set_Value (COLUMNNAME_InvoiceNo, InvoiceNo);
-	}
-
-	/** Get InvoiceNo.
-		@return InvoiceNo	  */
-	public String getInvoiceNo () 
-	{
-		return (String)get_Value(COLUMNNAME_InvoiceNo);
-	}
-
-	/** Set InvoiceSymbol.
-		@param InvoiceSymbol InvoiceSymbol	  */
-	public void setInvoiceSymbol (String InvoiceSymbol)
-	{
-		set_Value (COLUMNNAME_InvoiceSymbol, InvoiceSymbol);
-	}
-
-	/** Get InvoiceSymbol.
-		@return InvoiceSymbol	  */
-	public String getInvoiceSymbol () 
-	{
-		return (String)get_Value(COLUMNNAME_InvoiceSymbol);
 	}
 
 	public eone.base.model.I_M_Product getM_Product() throws RuntimeException

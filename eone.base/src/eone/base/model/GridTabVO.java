@@ -110,7 +110,7 @@ public class GridTabVO implements Evaluatee, Serializable
 			
 			if (rs.getString("IsInsertRecord").equals("N"))
 				vo.IsInsertRecord = false;
-			
+			vo.InsertLogic = rs.getString("InsertLogic");
 			//
 			vo.Description = rs.getString("Description");
 			if (vo.Description == null)
@@ -309,6 +309,7 @@ public class GridTabVO implements Evaluatee, Serializable
 	public  boolean     IsReadOnly = false;
 	/** Insert Record	*/
 	public 	boolean		IsInsertRecord = true;
+	public 	String 		InsertLogic;
 	/** Tree			*/
 	public  boolean	    HasTree = false;
 	/** Tree displayed on	*/
@@ -434,6 +435,7 @@ public class GridTabVO implements Evaluatee, Serializable
 		clone.IsSingleRow = IsSingleRow;
 		clone.IsReadOnly = IsReadOnly;
 		clone.IsInsertRecord = IsInsertRecord;
+		clone.InsertLogic = InsertLogic;
 		clone.HasTree = HasTree;
 		clone.TreeDisplayedOn = TreeDisplayedOn;
 		clone.AD_Table_ID = AD_Table_ID;

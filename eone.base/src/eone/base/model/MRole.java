@@ -408,7 +408,7 @@ public final class MRole extends X_AD_Role
 		//Client
 		if (!Env.isUserSystem(ctx)) {
 			
-			//String roleType = Env.getContext(ctx, "#RoleType");
+			
 			if (ACCESSLEVEL_Client == table.get_AccessLevel()) {
 				String listOrg = Env.getContext(ctx, "#AD_OrgAccess_ID");
 				if(listOrg != null && !listOrg.isEmpty())

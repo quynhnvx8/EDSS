@@ -422,34 +422,6 @@ public class X_AD_Role extends PO implements I_AD_Role, I_Persistent
 		return (String)get_Value(COLUMNNAME_RoleLevel);
 	}
 
-	/** Finacial = FN */
-	public static final String ROLETYPE_Finacial = "FN";
-	/** Human Resource = HR */
-	public static final String ROLETYPE_HumanResource = "HR";
-	/** Asset = AS */
-	public static final String ROLETYPE_Asset = "AS";
-	/** Manufacturing = MA */
-	public static final String ROLETYPE_Manufacturing = "MA";
-	/** Document = DO */
-	public static final String ROLETYPE_Document = "DO";
-	/** System = SY */
-	public static final String ROLETYPE_System = "SY";
-	/** Administrator = AD */
-	public static final String ROLETYPE_Administrator = "AD";
-	/** Set Role Type.
-		@param RoleType Role Type	  */
-	public void setRoleType (String RoleType)
-	{
-
-		set_Value (COLUMNNAME_RoleType, RoleType);
-	}
-
-	/** Get Role Type.
-		@return Role Type	  */
-	public String getRoleType () 
-	{
-		return (String)get_Value(COLUMNNAME_RoleType);
-	}
 
 	/** UserLevel AD_Reference_ID=226 */
 	public static final int USERLEVEL_AD_Reference_ID=226;
