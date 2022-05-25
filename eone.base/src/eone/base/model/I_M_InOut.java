@@ -4,10 +4,9 @@
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-
-import eone.util.KeyNamePair;
 
 /** Generated Interface for M_InOut
  *  @author EOne (generated) 
@@ -122,15 +121,6 @@ public interface I_M_InOut
 	  */
 	public int getAD_Org_ID();
 
-    /** Column name Address */
-    public static final String COLUMNNAME_Address = "Address";
-
-	/** Set Address	  */
-	public void setAddress (String Address);
-
-	/** Get Address	  */
-	public String getAddress();
-
     /** Column name Address1 */
     public static final String COLUMNNAME_Address1 = "Address1";
 
@@ -143,15 +133,6 @@ public interface I_M_InOut
 	  * Address line 1 for this location
 	  */
 	public String getAddress1();
-
-    /** Column name Age */
-    public static final String COLUMNNAME_Age = "Age";
-
-	/** Set Age	  */
-	public void setAge (String Age);
-
-	/** Get Age	  */
-	public String getAge();
 
     /** Column name Amount */
     public static final String COLUMNNAME_Amount = "Amount";
@@ -183,28 +164,6 @@ public interface I_M_InOut
 
 	/** Get Approved	  */
 	public String getApproved();
-
-    /** Column name Birthday */
-    public static final String COLUMNNAME_Birthday = "Birthday";
-
-	/** Set Birthday.
-	  * Birthday or Anniversary day
-	  */
-	public void setBirthday (Timestamp Birthday);
-
-	/** Get Birthday.
-	  * Birthday or Anniversary day
-	  */
-	public Timestamp getBirthday();
-
-    /** Column name BirthYear */
-    public static final String COLUMNNAME_BirthYear = "BirthYear";
-
-	/** Set BirthYear	  */
-	public void setBirthYear (int BirthYear);
-
-	/** Get BirthYear	  */
-	public int getBirthYear();
 
     /** Column name C_BPartner_Cr_ID */
     public static final String COLUMNNAME_C_BPartner_Cr_ID = "C_BPartner_Cr_ID";
@@ -401,24 +360,6 @@ public interface I_M_InOut
 	  */
 	public Timestamp getDateReceived();
 
-    /** Column name DebtMoney */
-    public static final String COLUMNNAME_DebtMoney = "DebtMoney";
-
-	/** Set DebtMoney	  */
-	public void setDebtMoney (BigDecimal DebtMoney);
-
-	/** Get DebtMoney	  */
-	public BigDecimal getDebtMoney();
-
-    /** Column name DebtTotal */
-    public static final String COLUMNNAME_DebtTotal = "DebtTotal";
-
-	/** Set DebtTotal	  */
-	public void setDebtTotal (BigDecimal DebtTotal);
-
-	/** Get DebtTotal	  */
-	public BigDecimal getDebtTotal();
-
     /** Column name Description */
     public static final String COLUMNNAME_Description = "Description";
 
@@ -471,37 +412,6 @@ public interface I_M_InOut
 	  */
 	public String getDocumentNo();
 
-    /** Column name Gender */
-    public static final String COLUMNNAME_Gender = "Gender";
-
-	/** Set Gender	  */
-	public void setGender (String Gender);
-
-	/** Get Gender	  */
-	public String getGender();
-
-    /** Column name HM_Parts_ID */
-    public static final String COLUMNNAME_HM_Parts_ID = "HM_Parts_ID";
-
-	/** Set Parts	  */
-	public void setHM_Parts_ID (int HM_Parts_ID);
-
-	/** Get Parts	  */
-	public int getHM_Parts_ID();
-
-	public I_HM_Parts getHM_Parts() throws RuntimeException;
-
-    /** Column name HM_Patient_ID */
-    public static final String COLUMNNAME_HM_Patient_ID = "HM_Patient_ID";
-
-	/** Set Patient	  */
-	public void setHM_Patient_ID (int HM_Patient_ID);
-
-	/** Get Patient	  */
-	public int getHM_Patient_ID();
-
-	public eone.base.model.I_HM_Patient getHM_Patient() throws RuntimeException;
-
     /** Column name HR_Employee_ID */
     public static final String COLUMNNAME_HR_Employee_ID = "HR_Employee_ID";
 
@@ -552,15 +462,6 @@ public interface I_M_InOut
 	  * The record is active in the system
 	  */
 	public boolean isActive();
-
-    /** Column name JobName */
-    public static final String COLUMNNAME_JobName = "JobName";
-
-	/** Set JobName	  */
-	public void setJobName (String JobName);
-
-	/** Get JobName	  */
-	public String getJobName();
 
     /** Column name M_InOut_ID */
     public static final String COLUMNNAME_M_InOut_ID = "M_InOut_ID";
@@ -623,19 +524,6 @@ public interface I_M_InOut
 	/** Get Original	  */
 	public String getOriginal();
 
-    /** Column name Phone */
-    public static final String COLUMNNAME_Phone = "Phone";
-
-	/** Set Phone.
-	  * Identifies a telephone number
-	  */
-	public void setPhone (String Phone);
-
-	/** Get Phone.
-	  * Identifies a telephone number
-	  */
-	public String getPhone();
-
     /** Column name Processed */
     public static final String COLUMNNAME_Processed = "Processed";
 
@@ -648,15 +536,6 @@ public interface I_M_InOut
 	  * The document has been processed
 	  */
 	public boolean isProcessed();
-
-    /** Column name RealMoney */
-    public static final String COLUMNNAME_RealMoney = "RealMoney";
-
-	/** Set RealMoney	  */
-	public void setRealMoney (BigDecimal RealMoney);
-
-	/** Get RealMoney	  */
-	public BigDecimal getRealMoney();
 
     /** Column name Ref_InOut_ID */
     public static final String COLUMNNAME_Ref_InOut_ID = "Ref_InOut_ID";

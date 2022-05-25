@@ -388,6 +388,7 @@ public class WritePDF {
                 cell.setHorizontalAlignment(item.getAlignment());
                 cell.setColspan(item.getColSpan());
                 cell.setPadding(4);
+                //cell.setBorderWidth(0.1f);
                 table.addCell(cell);
                 
             }

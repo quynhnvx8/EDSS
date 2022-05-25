@@ -118,7 +118,7 @@ public class MStockTrans extends X_M_StockTrans implements DocAction
 	@Override
 	public boolean processIt(String action, int AD_Window_ID) throws Exception {
 		m_processMsg = null;
-		DocumentEngine engine = new DocumentEngine (this, getDocStatus(), AD_Window_ID, false);
+		DocumentEngine engine = new DocumentEngine (this, getDocStatus(), AD_Window_ID, true);
 		return engine.processIt (action, getDocStatus());
 	}
 

@@ -5,13 +5,12 @@
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.Env;
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
-
-import eone.util.Env;
-import eone.util.KeyNamePair;
 
 /** Generated Model for M_InOut
  *  @author EOne (generated) 
@@ -22,7 +21,7 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220308L;
+	private static final long serialVersionUID = 20220525L;
 
     /** Standard Constructor */
     public X_M_InOut (Properties ctx, int M_InOut_ID, String trxName)
@@ -206,19 +205,6 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 		return ii.intValue();
 	}
 
-	/** Set Address.
-		@param Address Address	  */
-	public void setAddress (String Address)
-	{
-		throw new IllegalArgumentException ("Address is virtual column");	}
-
-	/** Get Address.
-		@return Address	  */
-	public String getAddress () 
-	{
-		return (String)get_Value(COLUMNNAME_Address);
-	}
-
 	/** Set Address 1.
 		@param Address1 
 		Address line 1 for this location
@@ -234,19 +220,6 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 	public String getAddress1 () 
 	{
 		return (String)get_Value(COLUMNNAME_Address1);
-	}
-
-	/** Set Age.
-		@param Age Age	  */
-	public void setAge (String Age)
-	{
-		throw new IllegalArgumentException ("Age is virtual column");	}
-
-	/** Get Age.
-		@return Age	  */
-	public String getAge () 
-	{
-		return (String)get_Value(COLUMNNAME_Age);
 	}
 
 	/** Set Amount.
@@ -297,39 +270,6 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 	public String getApproved () 
 	{
 		return (String)get_Value(COLUMNNAME_Approved);
-	}
-
-	/** Set Birthday.
-		@param Birthday 
-		Birthday or Anniversary day
-	  */
-	public void setBirthday (Timestamp Birthday)
-	{
-		set_ValueNoCheck (COLUMNNAME_Birthday, Birthday);
-	}
-
-	/** Get Birthday.
-		@return Birthday or Anniversary day
-	  */
-	public Timestamp getBirthday () 
-	{
-		return (Timestamp)get_Value(COLUMNNAME_Birthday);
-	}
-
-	/** Set BirthYear.
-		@param BirthYear BirthYear	  */
-	public void setBirthYear (int BirthYear)
-	{
-		throw new IllegalArgumentException ("BirthYear is virtual column");	}
-
-	/** Get BirthYear.
-		@return BirthYear	  */
-	public int getBirthYear () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_BirthYear);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
 	}
 
 	public eone.base.model.I_C_BPartner getC_BPartner_Cr() throws RuntimeException
@@ -456,9 +396,9 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 	public void setC_DocTypeSub_ID (int C_DocTypeSub_ID)
 	{
 		if (C_DocTypeSub_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_C_DocTypeSub_ID, null);
+			set_Value (COLUMNNAME_C_DocTypeSub_ID, null);
 		else 
-			set_ValueNoCheck (COLUMNNAME_C_DocTypeSub_ID, Integer.valueOf(C_DocTypeSub_ID));
+			set_Value (COLUMNNAME_C_DocTypeSub_ID, Integer.valueOf(C_DocTypeSub_ID));
 	}
 
 	/** Get Sub Document.
@@ -630,40 +570,6 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 		return (Timestamp)get_Value(COLUMNNAME_DateReceived);
 	}
 
-	/** Set DebtMoney.
-		@param DebtMoney DebtMoney	  */
-	public void setDebtMoney (BigDecimal DebtMoney)
-	{
-		set_Value (COLUMNNAME_DebtMoney, DebtMoney);
-	}
-
-	/** Get DebtMoney.
-		@return DebtMoney	  */
-	public BigDecimal getDebtMoney () 
-	{
-		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_DebtMoney);
-		if (bd == null)
-			 return Env.ZERO;
-		return bd;
-	}
-
-	/** Set DebtTotal.
-		@param DebtTotal DebtTotal	  */
-	public void setDebtTotal (BigDecimal DebtTotal)
-	{
-		set_Value (COLUMNNAME_DebtTotal, DebtTotal);
-	}
-
-	/** Get DebtTotal.
-		@return DebtTotal	  */
-	public BigDecimal getDebtTotal () 
-	{
-		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_DebtTotal);
-		if (bd == null)
-			 return Env.ZERO;
-		return bd;
-	}
-
 	/** Set Description.
 		@param Description 
 		Optional short description of the record
@@ -754,74 +660,6 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
         return new KeyNamePair(get_ID(), getDocumentNo());
     }
 
-	/** Female = F */
-	public static final String GENDER_Female = "F";
-	/** Male = M */
-	public static final String GENDER_Male = "M";
-	/** Set Gender.
-		@param Gender Gender	  */
-	public void setGender (String Gender)
-	{
-
-		throw new IllegalArgumentException ("Gender is virtual column");	}
-
-	/** Get Gender.
-		@return Gender	  */
-	public String getGender () 
-	{
-		return (String)get_Value(COLUMNNAME_Gender);
-	}
-
-	public I_HM_Parts getHM_Parts() throws RuntimeException
-    {
-		return (I_HM_Parts)MTable.get(getCtx(), I_HM_Parts.Table_Name)
-			.getPO(getHM_Parts_ID(), get_TrxName());	}
-
-	/** Set Parts.
-		@param HM_Parts_ID Parts	  */
-	public void setHM_Parts_ID (int HM_Parts_ID)
-	{
-		if (HM_Parts_ID < 1) 
-			set_Value (COLUMNNAME_HM_Parts_ID, null);
-		else 
-			set_Value (COLUMNNAME_HM_Parts_ID, Integer.valueOf(HM_Parts_ID));
-	}
-
-	/** Get Parts.
-		@return Parts	  */
-	public int getHM_Parts_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_HM_Parts_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_HM_Patient getHM_Patient() throws RuntimeException
-    {
-		return (eone.base.model.I_HM_Patient)MTable.get(getCtx(), eone.base.model.I_HM_Patient.Table_Name)
-			.getPO(getHM_Patient_ID(), get_TrxName());	}
-
-	/** Set Patient.
-		@param HM_Patient_ID Patient	  */
-	public void setHM_Patient_ID (int HM_Patient_ID)
-	{
-		if (HM_Patient_ID < 1) 
-			set_Value (COLUMNNAME_HM_Patient_ID, null);
-		else 
-			set_Value (COLUMNNAME_HM_Patient_ID, Integer.valueOf(HM_Patient_ID));
-	}
-
-	/** Get Patient.
-		@return Patient	  */
-	public int getHM_Patient_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_HM_Patient_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
 	public eone.base.model.I_HR_Employee getHR_Employee() throws RuntimeException
     {
 		return (eone.base.model.I_HR_Employee)MTable.get(getCtx(), eone.base.model.I_HR_Employee.Table_Name)
@@ -894,19 +732,6 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 	public String getInvoiceSymbol () 
 	{
 		return (String)get_Value(COLUMNNAME_InvoiceSymbol);
-	}
-
-	/** Set JobName.
-		@param JobName JobName	  */
-	public void setJobName (String JobName)
-	{
-		throw new IllegalArgumentException ("JobName is virtual column");	}
-
-	/** Get JobName.
-		@return JobName	  */
-	public String getJobName () 
-	{
-		return (String)get_Value(COLUMNNAME_JobName);
 	}
 
 	/** Set Shipment/Receipt.
@@ -1002,12 +827,14 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 		return (String)get_Value(COLUMNNAME_ObjectName);
 	}
 
-	/** EONE = EONE */
-	public static final String ORIGINAL_EONE = "EONE";
+	/** Organization = ORG */
+	public static final String ORIGINAL_Organization = "ORG";
 	/** SALEMT = SALEMT */
 	public static final String ORIGINAL_SALEMT = "SALEMT";
 	/** OTHER = OTHER */
 	public static final String ORIGINAL_OTHER = "OTHER";
+	/** Department = DEPT */
+	public static final String ORIGINAL_Department = "DEPT";
 	/** Set Original.
 		@param Original Original	  */
 	public void setOriginal (String Original)
@@ -1021,22 +848,6 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 	public String getOriginal () 
 	{
 		return (String)get_Value(COLUMNNAME_Original);
-	}
-
-	/** Set Phone.
-		@param Phone 
-		Identifies a telephone number
-	  */
-	public void setPhone (String Phone)
-	{
-		throw new IllegalArgumentException ("Phone is virtual column");	}
-
-	/** Get Phone.
-		@return Identifies a telephone number
-	  */
-	public String getPhone () 
-	{
-		return (String)get_Value(COLUMNNAME_Phone);
 	}
 
 	/** Set Processed.
@@ -1061,23 +872,6 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 			return "Y".equals(oo);
 		}
 		return false;
-	}
-
-	/** Set RealMoney.
-		@param RealMoney RealMoney	  */
-	public void setRealMoney (BigDecimal RealMoney)
-	{
-		set_Value (COLUMNNAME_RealMoney, RealMoney);
-	}
-
-	/** Get RealMoney.
-		@return RealMoney	  */
-	public BigDecimal getRealMoney () 
-	{
-		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_RealMoney);
-		if (bd == null)
-			 return Env.ZERO;
-		return bd;
 	}
 
 	/** Set Referenced Shipment.

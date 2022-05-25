@@ -257,12 +257,12 @@ public interface I_A_Asset
 	/** Set Disposed.
 	  * The asset is disposed
 	  */
-	public void setIsDisposed (boolean IsDisposed);
+	public void setIsDisposed (String IsDisposed);
 
 	/** Get Disposed.
 	  * The asset is disposed
 	  */
-	public boolean isDisposed();
+	public String getIsDisposed();
 
     /** Column name IsRecordUsed */
     public static final String COLUMNNAME_IsRecordUsed = "IsRecordUsed";

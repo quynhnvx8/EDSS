@@ -48,7 +48,7 @@ public class BuildDepreciation extends SvrProcess
 	{
 		MDepreciation de = MDepreciation.get(getCtx(), p_Record_ID);
 		//Lay danh sach tai san tinh khau hao
-		String sqlWhereAsset = "IsActive = 'Y' And IsDepreciated = 'Y' And COALESCE(IsDisposed,'N') != 'Y'"+
+		String sqlWhereAsset = "IsActive = 'Y' And IsDepreciated = 'Y' And IsDisposed = 'N'"+
 				" And COALESCE(IsTransferred,'N') != 'Y' "+
 				" And RemainAmt > 0 "+
 				" AND (PendingDate IS NULL OR PendingDate >= ?)"+

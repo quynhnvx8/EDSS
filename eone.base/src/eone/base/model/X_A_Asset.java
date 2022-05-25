@@ -20,7 +20,7 @@ public class X_A_Asset extends PO implements I_A_Asset, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220512L;
+	private static final long serialVersionUID = 20220524L;
 
     /** Standard Constructor */
     public X_A_Asset (Properties ctx, int A_Asset_ID, String trxName)
@@ -30,7 +30,8 @@ public class X_A_Asset extends PO implements I_A_Asset, I_Persistent
         {
 			setA_Asset_ID (0);
 			setIsDepreciated (false);
-			setIsDisposed (false);
+			setIsDisposed (null);
+// N
 			setName (null);
 			setProcessed (false);
 // N
@@ -370,28 +371,28 @@ public class X_A_Asset extends PO implements I_A_Asset, I_Persistent
 		return false;
 	}
 
+	/** None = N */
+	public static final String ISDISPOSED_None = "N";
+	/** Yes = Y */
+	public static final String ISDISPOSED_Yes = "Y";
+	/** Processing = P */
+	public static final String ISDISPOSED_Processing = "P";
 	/** Set Disposed.
 		@param IsDisposed 
 		The asset is disposed
 	  */
-	public void setIsDisposed (boolean IsDisposed)
+	public void setIsDisposed (String IsDisposed)
 	{
-		set_Value (COLUMNNAME_IsDisposed, Boolean.valueOf(IsDisposed));
+
+		set_Value (COLUMNNAME_IsDisposed, IsDisposed);
 	}
 
 	/** Get Disposed.
 		@return The asset is disposed
 	  */
-	public boolean isDisposed () 
+	public String getIsDisposed () 
 	{
-		Object oo = get_Value(COLUMNNAME_IsDisposed);
-		if (oo != null) 
-		{
-			 if (oo instanceof Boolean) 
-				 return ((Boolean)oo).booleanValue(); 
-			return "Y".equals(oo);
-		}
-		return false;
+		return (String)get_Value(COLUMNNAME_IsDisposed);
 	}
 
 	/** Set IsRecordUsed.
