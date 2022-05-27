@@ -1,17 +1,12 @@
 package eone.base.impexp;
 
-/**
- * @author Admin mode 15/03/2022
- */
-import static eone.base.model.SystemIDs.REFERENCE_DOCUMENTACTION;
-import static eone.base.model.SystemIDs.REFERENCE_PAYMENTRULE;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.nio.charset.Charset;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,7 +35,6 @@ import eone.base.IGridTabImporter;
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
 import eone.base.model.MColumn;
-import eone.base.model.MRefList;
 import eone.base.model.MTable;
 import eone.base.model.PO;
 import eone.exceptions.EONEException;
@@ -53,7 +47,6 @@ import eone.util.IProcessUI;
 import eone.util.Language;
 import eone.util.Msg;
 import eone.util.Trx;
-import eone.util.ValueNamePair;
 
 public class GridTabXLSXImporter implements IGridTabImporter {
 	private static final String ERROR_HEADER = "_ERROR_";
@@ -62,12 +55,9 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 	
 	private static Language languageDefault = Env.getLanguage(Env.getCtx());
 	private int BATCH_SIZE = 200;
-	private int AD_User_ID;
-	private Timestamp currentDate;
+	
 	int counter = 0;
 	List<String> lstHeader = new ArrayList<String>();
-
-	private HashMap<GridField, Object> hm_GridFieldDefaultValue = new HashMap<GridField, Object>();
 
 	private List<List<Object>> m_tmpRow = null;
 
@@ -75,12 +65,12 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 	private static CLogger log = CLogger.getCLogger(GridTabXLSXImporter.class);
 	
 	private boolean isInsert = false;
-	private int primaryKey = 0;
+	//private int primaryKey = 0;
 
 	public File fileImport(GridTab gridTab, List<GridTab> childs, InputStream filestream, Charset charset, String importMode) {
 		long start = System.currentTimeMillis();
-		Map<Integer, PO> mapTabPO = new HashMap<Integer, PO>();
 		Map<Integer, Integer> mapTabParent = new HashMap<Integer, Integer>();
+		
 		// doan nay tim ra quan he cha con cua cac tab
 		GridTab preTab = gridTab;
 		GridTab preParentTab = gridTab;
@@ -96,9 +86,7 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 
 		XSSFWorkbook mapReader = null;
 		XSSFSheet sheetReader = null;
-		AD_User_ID = Env.getAD_User_ID(Env.getCtx());
-		Date date = new Date();
-		currentDate = new Timestamp(date.getTime());
+		
 		List<String> lstKey = new ArrayList<String>();
 
 		//
@@ -107,12 +95,9 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 		File logFile = null;
 		PrintWriter errFileW = null;
 		PrintWriter logFileW = null;
-		//
-		PO masterRecord = null;
-		PO parentRecord = null;
+		
 		if (!gridTab.isInsertRecord() )
 			throw new EONEException("Insert record disabled for Tab");
-		Map<String, Object> mapDefaultValue = new HashMap<String, Object>();
 		LinkedHashMap<Integer, List<List<Object>>> mapValues = new LinkedHashMap<Integer, List<List<Object>>>();
 		
 		try {
@@ -154,6 +139,8 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 					readProcArray.add(null);
 					continue;
 				}
+				
+				//TODO Đến tab con là break. Vậy còn tab con xử lý ???
 				if (headName.indexOf(".") > 0) {
 					if (idx == 0) {
 						errFileW.close();
@@ -191,6 +178,8 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 			GridTab currentDetailTab = null;
 			// Mapping details
 			List<Integer> lstTabAdded = new ArrayList<Integer>();
+			
+			//TODO ĐỌc tiếp đoạn tab con 
 			for (int idx = indxDetail; idx < header.size(); idx++) {
 				String detailName = header.get(idx);
 				if (detailName != null && detailName.indexOf(".") > 0) {
@@ -200,6 +189,7 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 
 						if (currentDetailTab != null) {
 							// check out key per Tab
+							System.out.println("Vào đây ko");
 							if (!isThereKey) {
 								errFileW.close();
 								throw new EONEException(currentDetailTab.getTableName() + ": " + Msg.getMsg(Env.getCtx(), "NoKeyFound"));
@@ -278,7 +268,10 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 
 			// Line 3: Fix giá trị này do phụ thuộc vào file export
 			int rownum = 2;
-
+			Trx trx = null;
+			String trxName = "Import_" + gridTab.getTableName() + "_" + UUID.randomUUID();
+			trx = Trx.get(trxName, true);
+			
 			HashMap<Integer, MTable> mapTable = new HashMap<Integer, MTable>();
 			while (true) {
 				Map<String, Object> map = null;
@@ -334,16 +327,15 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 				logFileW = new PrintWriter(logFile, charset.name());
 				// write the header
 				logFileW.write(rawHeader + "\n");
-				// no errors found - process header and then details
-				boolean isMasterok = true;
 
 				boolean error = false;
-				Trx trx = null;
-				String trxName = "Import_" + gridTab.getTableName() + "_" + UUID.randomUUID();
-				trx = Trx.get(trxName, true);
+				
 				
 				//List<String> rowsTmpResult = new ArrayList<String>();
+				List<List<Object>> values = null;
+				
 				System.out.println("FOR ROWS STARTS...");
+				PO parent = null;
 				for (int idx = 0; idx < data.size(); idx++) {
 					lstHeader.clear();
 					String rawLine = rawData.get(idx);
@@ -367,25 +359,13 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 						}
 					}
 
-					if (!isMasterok && isDetail) {
-						rawLine = rawLine + Msg.getMsg(Env.getCtx(), "NotProccesed") +"\n";
-						//rowsTmpResult.add(rawLine);
-						continue;
-					}
+					
 					try {
 
-						if (!isDetail) {
-							
-							gridTab.getTableModel().setImportingMode(false, trxName);
-							
-							masterRecord = null;
-							//rowsTmpResult.clear();
-							isMasterok = true;
-						}
-
+						
 						for (Map.Entry<GridTab, Integer> tabIndex : sortedtTabMapIndexes.entrySet()) {
 							
-							primaryKey = 0;
+							//primaryKey = 0;
 							currentGridTab = tabIndex.getKey();
 							if (isDetail && gridTab.equals(currentGridTab)) {
 								currentColumn = indxDetail;
@@ -398,199 +378,90 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 								curTable = new MTable(Env.getCtx(), currentGridTab.getAD_Table_ID(), null);
 							}
 							PO po2 = curTable.getPO(0, trxName);
-							for (GridField gField : currentGridTab.getFields()) {
-								Object value = null;
-
-								Object defaultValue = null;
-								if (hm_GridFieldDefaultValue.containsKey(gField)) {
-									defaultValue = hm_GridFieldDefaultValue.get(gField);
-								} else {
-									defaultValue = gField.getDefault();
-									hm_GridFieldDefaultValue.put(gField, defaultValue); 
-								}
-								if (!gField.isVirtualColumn() && defaultValue != null) {
-									if (mapDefaultValue.containsKey(currentGridTab.getAD_Tab_ID() + gField.getColumnName())) {
-										value = mapDefaultValue.get(currentGridTab.getAD_Tab_ID() + gField.getColumnName());
-									} else {
-										value = defaultValue;
-										mapDefaultValue.put(currentGridTab.getAD_Tab_ID() + gField.getColumnName(),	value);
-									}
-									po2.set_ValueOfColumn(gField.getColumnName(), value);
-								}
-							}
-
-							// Assign master trx to its children
+							
+							
 							if (!gridTab.equals(currentGridTab)) {
-								currentGridTab.getTableModel().setImportingMode(true, trxName);
 								isDetail = true;
 							}
 
 							int j = tabIndex.getValue();
-							logMsg = null;//areValidKeysAndColumns(currentGridTab, data.get(idx), header, currentColumn, j, masterRecord, trx);
-
-							if (logMsg == null) {
-																
-								if (logMsg == null) {
-									if (mapTabParent.containsKey(currentGridTab.getAD_Tab_ID())) {
-										parentRecord = mapTabPO.get(mapTabParent.get(currentGridTab.getAD_Tab_ID()));
-									}
-									logMsg = proccessRow(currentGridTab, header, data.get(idx), currentColumn, j, parentRecord, trx);
-
-								}
-								copyGridTabToPO(currentGridTab, po2);
-
-								currentColumn = j + 1;
-								if (!(logMsg == null)) {
-									// Ignore row since there is no data
-									if ("NO_DATA_TO_IMPORT".equals(logMsg)) {
-										logMsg = "";
-										if (mapPO.containsKey(currentGridTab.getTabLevel()))
-											parentRecord = mapPO.get(currentGridTab.getTabLevel());
-										continue;
-									} else
-										error = true;
-								}
-							} 
+							
+							boolean isParent = proccessRowPO(currentGridTab, po2, header, data.get(idx), parent, currentColumn, j, trx);
+							
+							currentColumn = j + 1;
+							
 							if (!error) {
-								PO po;
-								//Code dung batch
-								
-								List<List<Object>> values = null;
-								if (mapValues.containsKey(currentGridTab.getAD_Table_ID())) {
-									values = mapValues.get(currentGridTab.getAD_Table_ID());
-								} else {
-									values = new ArrayList<List<Object>>();
-								}
-								int sequence = -1;
-								if (isInsert) {
-									sequence = DB.getNextID(currentGridTab.getTableName(), null);
-								} else {
-									sequence = primaryKey;
-								}
-								
-								if (po2.get_ColumnIndex("CreatedBy") >= 0)
-									po2.set_ValueNoCheck("CreatedBy", AD_User_ID);
-								if (po2.get_ColumnIndex("UpdatedBy") >= 0)
-									po2.set_ValueNoCheck("UpdatedBy", AD_User_ID);
-								if (po2.get_ColumnIndex("Updated") >= 0)
-									po2.set_ValueNoCheck("Updated", currentDate);
-								if (po2.get_ColumnIndex("Created") >= 0)
-									po2.set_ValueNoCheck("Created", currentDate);
-								if (po2.get_ColumnIndex("Processed") >= 0)
-									po2.set_ValueNoCheck("Processed", false);
-								if (po2.get_ColumnIndex("docstatus") >= 0)
-									po2.set_ValueNoCheck("docstatus", "DR");
-								
-								po2.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
-								po2.setAD_Client_ID(Env.getAD_Client_ID(Env.getCtx()));
-								po2.set_ValueNoCheck(currentGridTab.getKeyColumnName(), sequence);	
-								
-								List<String> colNames = null;
-								if(isInsert)
-									colNames = PO.getSqlInsert_Para(currentGridTab.getAD_Table_ID(), trxName);
-								else
-									colNames = PO.getSqlUpdate_Para(currentGridTab.getAD_Table_ID());
-								
-								List<Object> lstParam = PO.getBatchValueList(po2, colNames, currentGridTab.getAD_Table_ID(), trxName, sequence);
-								values.add(lstParam);
-								if (!mapValues.containsKey(currentGridTab.getAD_Table_ID())) {
-									mapValues.put(currentGridTab.getAD_Table_ID(), values);
-								}
-								if (values.size() >= BATCH_SIZE) {
-									for (Entry<Integer, List<List<Object>>> entry : mapValues.entrySet()) {
-										String sql = "";
-										if (isInsert)
-											sql = PO.getSqlInsert(entry.getKey(), null);
-										else
-											sql = PO.getSqlUpdate(entry.getKey());
-										if (entry.getValue().size() > 0) {
-											String err = DB.excuteBatch(sql, entry.getValue(), null);
-											if (err != null) {
-												try {
-													DB.rollback(false, null);
-												} catch (Exception e) {
+								//Có header
+								if (isParent) {
+									if (mapValues.containsKey(currentGridTab.getAD_Table_ID())) {
+										values = mapValues.get(currentGridTab.getAD_Table_ID());
+									} else {
+										values = new ArrayList<List<Object>>();
+									}
+									int sequence = -1;
+									/*TODO Không cho Update
+									if (isInsert) {
+										sequence = DB.getNextID(currentGridTab.getTableName(), trxName);
+									} else {
+										sequence = primaryKey;
+									}
+									*/
+									sequence = DB.getNextID(currentGridTab.getTableName(), trxName);
+									
+									po2.set_ValueNoCheck(currentGridTab.getKeyColumnName(), sequence);	
+									
+									List<String> colNames = null;
+									if(isInsert)
+										colNames = PO.getSqlInsert_Para(currentGridTab.getAD_Table_ID(), trxName);
+									else
+										colNames = PO.getSqlUpdate_Para(currentGridTab.getAD_Table_ID());
+									
+									List<Object> lstParam = PO.getBatchValueList(po2, colNames, currentGridTab.getAD_Table_ID(), trxName, sequence);
+									values.add(lstParam);
+									if (!mapValues.containsKey(currentGridTab.getAD_Table_ID())) {
+										mapValues.put(currentGridTab.getAD_Table_ID(), values);
+									}
+									if (values.size() >= BATCH_SIZE) {
+										for (Entry<Integer, List<List<Object>>> entry : mapValues.entrySet()) {
+											String sql = "";
+											if (isInsert)
+												sql = PO.getSqlInsert(entry.getKey(), trxName);
+											else
+												sql = PO.getSqlUpdate(entry.getKey());
+											if (entry.getValue().size() > 0) {
+												String err = DB.excuteBatch(sql, entry.getValue(), trxName);
+												if (err != null) {
+													try {
+														DB.rollback(false, trxName);
+													} catch (Exception e) {
+													}
 												}
 											}
 										}
-									}
-									mapValues.clear();
-								}
-								
-								po = po2;
-								//End batch
-								if (po != null && po.get_ValueAsInt(currentGridTab.getKeyColumnName()) > 0) {
-									if (currentGridTab.equals(gridTab)) {
-										masterRecord = po;
-										mapPO.clear();
-									} else {
-										if (mapPO.containsKey(currentGridTab.getTabLevel()))
-											mapPO.remove(currentGridTab.getTabLevel());
-										mapPO.put(currentGridTab.getTabLevel(), po);
-									}
-									parentRecord = po;
-									if (mapTabPO.containsKey(currentGridTab.getAD_Tab_ID())) {
-										mapTabPO.remove(currentGridTab.getAD_Tab_ID());
-										mapTabPO.put(currentGridTab.getAD_Tab_ID(), po);
-									} else {
-										mapTabPO.put(currentGridTab.getAD_Tab_ID(), po);
+										values.clear();
+										mapValues.clear();
 									}
 									
-								} else {
-									ValueNamePair ppE = CLogger.retrieveWarning();
-									if (ppE == null)
-										ppE = CLogger.retrieveError();
-
-									String info = null;
-
-									if (ppE != null)
-										info = ppE.getName();
-									if (info == null)
-										info = "";
-
-									logMsg = Msg.getMsg(Env.getCtx(), "Error") + " " + Msg.getMsg(Env.getCtx(), "SaveError") + " (" + info + ")";
-									currentGridTab.dataIgnore();
-
-									if (currentGridTab.equals(gridTab) && masterRecord == null) {
-										isMasterok = false;
+									
+									//End batch
+									
+									if (logMsg != null) {
 										rowResult.append(logMsg);
-										rowResult.append(" / ");
-										break;
-									}
-
-									if (!currentGridTab.equals(gridTab) && masterRecord != null) {
-										rowResult.append("<" + currentGridTab.getTableName() + ">: ");
-										rowResult.append(logMsg);
-										rowResult.append(" / ");
-										break;
+									} else {
+										rowResult.append("successed!");
 									}
 								}
-								if (logMsg != null) {
-									rowResult.append(logMsg);
-								} else {
-									rowResult.append("successed!");
-								}
-								
-							} else {
-								rowResult.append(logMsg);
-								
-								// Master Failed, thus details cannot be imported
-								if (currentGridTab.equals(gridTab) && masterRecord == null) {
-									isMasterok = false;
-									break;
-								}
-
-								if (!currentGridTab.equals(gridTab) && masterRecord != null) {
-									break;
-								}
-							}
+								//End có header
+								//Gán tab cha 
+								if (preParentTab.equals(currentGridTab) && isParent)
+									parent = po2;
+							} 
 						}
 					} catch (Exception e) {
 						rowResult.append(Msg.getMsg(Env.getCtx(), "Error") + " " + e);
 
 						error = true;
-						if (currentGridTab.equals(gridTab) && masterRecord == null)
-							isMasterok = false;
-
+						
 					} 
 					// write
 					rawLine = rawLine + rowResult.toString() + "\n";
@@ -606,18 +477,28 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 			for (Entry<Integer, List<List<Object>>> entry : mapValues.entrySet()) {
 				String sql = "";
 				if (isInsert)
-					sql = PO.getSqlInsert(entry.getKey(), null);
+					sql = PO.getSqlInsert(entry.getKey(), trxName);
 				else
 					sql = PO.getSqlUpdate(entry.getKey());
 				if (entry.getValue().size() > 0) {
-					String err = DB.excuteBatch(sql, entry.getValue(), null);
+					String err = DB.excuteBatch(sql, entry.getValue(), trxName);
 					if (err != null) {
 						try {
-							DB.rollback(false, null);
+							DB.rollback(false, trxName);
 						} catch (Exception e) {
+							
 						}
 					}
 				}
+			}
+			try {
+				DB.commit(true, trxName);
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			mapValues.clear();
 			tabMapIndexes = null;
@@ -640,9 +521,7 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 		}
 
 		lstKey.clear();
-		mapDefaultValue = null;
 		mapValues = null;
-		mapTabPO = null;
 		mapTabParent = null;
 
 		gridTab.dataRefreshAll();
@@ -728,285 +607,147 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 			return null;
 	}
 
-	private String proccessRow(GridTab gridTab, List<String> header, Map<String, Object> map, int startindx,
-			int endindx, PO masterRecord, Trx trx) {
-
-		String logMsg = null;
-		boolean isThereRow = false;
-		boolean checkline = false;
-		for (int i = startindx; i < endindx + 1; i++) {
-			Object value = map.get(header.get(i));
-			if (value != null) {
-				checkline = true;
+	private  boolean proccessRowPO(GridTab gridTab, PO tabCurrent, List<String> header, Map<String, Object> map, PO tabParent,
+			int startindx, int endindx, Trx trx) {
+		boolean check = true;
+		//Xử lý dữ liệu default mà không hiển thị lên form
+		for(int i = 0; i < gridTab.getFields().length; i++) {
+			GridField field = gridTab.getField(i);
+			if (field.isDisplayed())
+				continue;
+			
+			if (field.getDefault() != null && field.getDefault().toString().length() > 0 ) {
+				tabCurrent.set_ValueNoCheck(field.getColumnName(), field.getDefault());
+				//gridTab.setValue(field, field.getDefault());
+				
 			}
 		}
-		if (!checkline) {
-			return "NO_DATA_TO_IMPORT";
-		}
-		List<String> parentColumns = new ArrayList<String>();
 
 		for (int i = startindx; i < endindx + 1; i++) {
 			String columnName = header.get(i);
 			
 			Object value = map.get(header.get(i));
+			
+			
 			if (lstHeader.contains(columnName)) {
 				value = map.get("2" + header.get(i));
 			} else
 				lstHeader.add(columnName);
 			
 			boolean isDetail = false;
-			if ((header.get(i).indexOf(".") > 0) && (header.get(i).indexOf("[") > 0)) {
-				String foreignColumn = header.get(i).substring(header.get(i).indexOf("[") + 1, header.get(i).indexOf("]"));
-				String masterColumnName = header.get(i).substring(header.get(i).indexOf(".") + 1, header.get(i).indexOf("["));
-				if (masterColumnName.equalsIgnoreCase(foreignColumn) && masterRecord != null) {
-					value = masterRecord.get_Value(foreignColumn);
-				}
-			}
+			
 
 			boolean isKeyColumn = columnName.indexOf("/") > 0 || columnName.contains(gridTab.getTableName() + "_ID");
 			boolean isForeing = columnName.indexOf("[") > 0 && columnName.indexOf("]") > 0;
 			isDetail = columnName.indexOf(".") > 0;
 			columnName = getColumnName(isKeyColumn, isForeing, isDetail, columnName);
-			String foreignColumn = null;
+			
 			Object setValue = null;
 			
 			GridField field = gridTab.getField(columnName);
+			MColumn column = MColumn.get(Env.getCtx(), field.getAD_Column_ID());
+			
+			if ("DocumentNo".equals(column.getColumnName()) || "Value".equals(column.getColumnName())) {
+				if (value == null || value.toString().isEmpty()) {
+					check = false;
+				}
+			}
+			
+			/*TODO không nên cho update khi import
 			if (field.isKey()) {
 				if (value == null)
 					isInsert = true;
 				else
-					primaryKey = Integer.valueOf(value.toString());
+					primaryKey = Integer.valueOf(value.toString());				
 			}
+			*/
 			
-
-			if (value == null)
-				continue;
+			
+			if (value == null) {
+				if (tabParent == null)
+					continue;
+				else if (isForeing && !tabCurrent.equals(tabParent) && field.isParentColumn())
+					value = tabParent.get_ID();
+			}
 
 			if (columnName.endsWith("_ID") && "0".equals(value))
 				continue;
 
-			
-			if (isForeing)
-				foreignColumn = header.get(i).substring(header.get(i).indexOf("[") + 1, header.get(i).indexOf("]"));
 			if (isKeyColumn)
 				continue;
 
+			if (value == null) {
+				//logMsg = gridTab.setValue(field, null);
+				tabCurrent.set_ValueNoCheck(field.getColumnName(), null);
+				continue;
+			}
+			
+			String[] arrValue = value.toString().split(" - ");
+			Object foreignkey = arrValue[0];
+			if (foreignkey == null) {
+				foreignkey = "";
+			}
+			String idS = null;
 			
 			if (field.isParentValue() || field.isKey()) {
 
-				if ("(null)".equals(value.toString())) {
-					logMsg = Msg.getMsg(Env.getCtx(), "NoParentDelete", new Object[] { header.get(i) });
-					break;
-				}
+				
+				String foreignTable = column.getReferenceTableName();
+				
 
-				if (isForeing && masterRecord != null) {
-					Object foreignValue = masterRecord.get_Value(foreignColumn);
+				int id = -1;
 
-					if (foreignValue.equals(Integer.parseInt(value.toString()))) {
-						logMsg = gridTab.setValue(field, Integer.parseInt(value.toString())); // TODO:: Code cu cua no
-						if (logMsg.equals(""))
-							logMsg = null;
-						else
-							break;
-					} else {
-						if (value != null) {
-							logMsg = header.get(i) + " - " + Msg.getMsg(Env.getCtx(), "DiffParentValue",
-									new Object[] { masterRecord.get_Value(foreignColumn).toString(), value });
-							break;
-						}
-					}
-				} else if (masterRecord == null && isDetail) {
-
-					MColumn column = MColumn.get(Env.getCtx(), field.getAD_Column_ID());
-					String foreignTable = column.getReferenceTableName();
-					String idS = null;
-
-					String[] arrValue = value.toString().split(" - ");
-					Object foreignkey = arrValue[0];
-
-					int id = -1;
-
-					if ("AD_Ref_List".equals(foreignTable))
-						idS = foreignkey.toString();
-					else
-						id = Integer.valueOf(foreignkey.toString());
-
-					if (idS == null && id < 0)
-						return Msg.getMsg(Env.getCtx(), "ForeignNotResolved", new Object[] { header.get(i), value });
-
-					if (id >= 0) {
-						logMsg = gridTab.setValue(field, id);
-					} else if (idS != null) {
-						logMsg = gridTab.setValue(field, idS);
-					}
-					if (logMsg != null && logMsg.equals(""))
-						logMsg = null;
-					else
-						break;
-				}
-				parentColumns.add(columnName);
-				continue;
-			}
-
-			if (field.getColumnName().equalsIgnoreCase("CreatedBy")
-					|| field.getColumnName().equalsIgnoreCase("UpdatedBy")
-					|| field.getColumnName().equalsIgnoreCase("Created")
-					|| field.getColumnName().equalsIgnoreCase("Updated")) {
-				continue;
-			}
-
-			if (field.isVirtualColumn()) {
-
-				continue;
-			}
-
-			if ("(null)".equals(value.toString().trim())) {
-				logMsg = gridTab.setValue(field, null);
-
-				if (logMsg.equals(""))
-					logMsg = null;
+				if ("AD_Ref_List".equals(foreignTable))
+					idS = foreignkey.toString();
 				else
-					break;
+				{
+					if ("".equals(foreignkey) )
+						foreignkey = "0";
+					id = Integer.valueOf(foreignkey.toString());
+				}
+
+				if (id != 0) {
+					//logMsg = gridTab.setValue(field, id);
+					tabCurrent.set_ValueNoCheck(field.getColumnName(), id);
+				}
+				if (idS != null) {
+					//logMsg = gridTab.setValue(field, idS);
+					tabCurrent.set_ValueNoCheck(field.getColumnName(), idS);
+				}
+				
 			} else {
 
-				MColumn column = MColumn.get(Env.getCtx(), field.getAD_Column_ID());
+				
 				if (isForeing) {
 					String foreignTable = column.getReferenceTableName();
 
-					String[] arrValue = value.toString().split(" - ");
-					Object foreignkey = arrValue[0];
-
 					if ("AD_Ref_List".equals(foreignTable)) {
-						String idS = foreignkey.toString();
-						if (idS == null)
-							return Msg.getMsg(Env.getCtx(), "ForeignNotResolved", new Object[] { header.get(i), value });
-
+						idS = foreignkey.toString();
+						
 						setValue = idS;
-						isThereRow = true;
 					} else {
-
+						
 						int id = Integer.valueOf(foreignkey.toString());
-						if (id < 0)
-							return Msg.getMsg(Env.getCtx(), "ForeignNotResolved", new Object[] { header.get(i), value });
 						
 						setValue = id;
-						if (field.isParentValue() || field.isKey()) {
-							int actualId = (Integer) field.getValue();
-							if (actualId != id) {
-								logMsg = Msg.getMsg(Env.getCtx(), "ParentCannotChange", new Object[] { header.get(i) });
-								break;
-							}
-						}
-						isThereRow = true;
+						
 					}
 				} else {
 					if (value != null) {
 						if (value instanceof java.util.Date)
 							value = new Timestamp(((java.util.Date) value).getTime());
-
-						if (DisplayType.Payment == field.getDisplayType()) {
-							String oldValue = value.toString();
-							for (ValueNamePair pList : MRefList.getList(Env.getCtx(), REFERENCE_PAYMENTRULE, false)) {
-								if (pList.getName().equals(oldValue.toString())) {
-									oldValue = pList.getValue();
-									break;
-								}
-							}
-							if (!value.toString().equals(oldValue))
-								value = oldValue;
-							else
-								return Msg.getMsg(Env.getCtx(), "ForeignNotResolved", new Object[] { header.get(i), value });
-						} else if (DisplayType.Button == field.getDisplayType()) {
-							if (column.getAD_Reference_Value_ID() == REFERENCE_DOCUMENTACTION) {
-								String oldValue = value.toString();
-								for (ValueNamePair pList : MRefList.getList(Env.getCtx(), REFERENCE_DOCUMENTACTION, false)) {
-									if (pList.getName().equals(oldValue.toString())) {
-										oldValue = pList.getValue();
-										break;
-									}
-								}
-								if (!value.toString().equals(oldValue))
-									value = oldValue;
-								else
-									return Msg.getMsg(Env.getCtx(), "ForeignNotResolved", new Object[] { header.get(i), value });
-							} else {
-								return Msg.getMsg(Env.getCtx(), "Invalid") + " Column [" + column.getColumnName() + "]";
-							}
-						}
 						setValue = value;
-						isThereRow = true;
 					}
 				}
 
 				if (setValue != null) {
-					logMsg = gridTab.setValue(field, setValue); 
+					
+					tabCurrent.set_ValueNoCheck(field.getColumnName(),  setValue);
 				}
 
-				if (logMsg != null && logMsg.equals(""))
-					logMsg = null;
-				else
-					break;
 			}
 		}
-
-		boolean checkParentKey = parentColumns.size() != gridTab.getParentColumnNames().size();
-		if (isThereRow && logMsg == null && masterRecord != null && checkParentKey) {
-			for (String linkColumn : gridTab.getParentColumnNames()) {
-				String columnName = linkColumn;
-				Object setValue = masterRecord.get_Value(linkColumn);
-				// resolve missing key
-				if (setValue == null) {
-					columnName = null;
-					for (int j = startindx; j < endindx + 1; j++) {
-						if (header.get(j).contains(linkColumn)) {
-							columnName = header.get(j);
-							setValue = map.get(columnName);
-							break;
-						}
-					}
-					if (columnName != null) {
-						boolean isForeing = columnName.indexOf("[") > 0 && columnName.indexOf("]") > 0;
-
-						columnName = getColumnName(false, isForeing, true, columnName);
-
-						MColumn column = MColumn.get(Env.getCtx(), gridTab.getField(columnName).getAD_Column_ID());
-						if (isForeing) {
-							String foreignTable = column.getReferenceTableName();
-
-							String[] arrValue = setValue.toString().split(" - ");
-							Object foreignkey = arrValue[0];
-
-							if ("AD_Ref_List".equals(foreignTable)) {
-								String idS = foreignkey.toString();
-								if (idS == null)
-									return Msg.getMsg(Env.getCtx(), "ForeignNotResolved", new Object[] { columnName, setValue });
-
-								setValue = idS;
-							} else {
-								int id = Integer.valueOf(foreignkey.toString());
-								if (id < 0)
-									return Msg.getMsg(Env.getCtx(), "ForeignNotResolved", new Object[] { columnName, setValue });
-
-								setValue = id;
-							}
-						}
-					} else {
-						logMsg = "Key: " + linkColumn + " " + Msg.getMsg(Env.getCtx(), "NotFound");
-						break;
-					}
-				}
-				logMsg = gridTab.setValue(linkColumn, setValue); 
-				if (logMsg.equals(""))
-					logMsg = null;
-				else
-					continue;
-			}
-		}
-
-		if (logMsg == null && !isThereRow)
-			logMsg = "NO_DATA_TO_IMPORT";
-
-		return logMsg;
+		return check;
 	}
 
 	private CellProcessor getProccesorFromColumn(GridField field) {
@@ -1181,20 +922,6 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 
 		public int getDisplayType() {
 			return m_displayType;
-		}
-	}
-
-	private void copyGridTabToPO(GridTab gridTab, PO po) {
-		if (po == null)
-			return;
-		GridField[] fields = gridTab.getFields();
-		for (GridField field : fields) {
-			if (field.getColumnName().contains("_UU")) {
-				UUID uuid = UUID.randomUUID();
-				po.set_ValueNoCheck(field.getColumnName(), uuid.toString());
-			} else if (field.getValue() != null) {
-				po.set_ValueNoCheck(field.getColumnName(), field.getValue());
-			}
 		}
 	}
 

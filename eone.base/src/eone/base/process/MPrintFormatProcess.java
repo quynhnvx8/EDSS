@@ -1,11 +1,10 @@
 
-package eone.print;
+package eone.base.process;
 
 import java.math.BigDecimal;
 import java.util.logging.Level;
 
-import eone.base.process.ProcessInfoParameter;
-import eone.base.process.SvrProcess;
+import eone.print.MPrintFormat;
 
 /**
  * 	@author 	Quynhnv.x8

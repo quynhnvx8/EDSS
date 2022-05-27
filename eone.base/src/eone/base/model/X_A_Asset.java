@@ -20,7 +20,7 @@ public class X_A_Asset extends PO implements I_A_Asset, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220524L;
+	private static final long serialVersionUID = 20220525L;
 
     /** Standard Constructor */
     public X_A_Asset (Properties ctx, int A_Asset_ID, String trxName)
@@ -377,6 +377,8 @@ public class X_A_Asset extends PO implements I_A_Asset, I_Persistent
 	public static final String ISDISPOSED_Yes = "Y";
 	/** Processing = P */
 	public static final String ISDISPOSED_Processing = "P";
+	/** Mortgage = M */
+	public static final String ISDISPOSED_Mortgage = "M";
 	/** Set Disposed.
 		@param IsDisposed 
 		The asset is disposed

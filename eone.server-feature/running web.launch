@@ -346,13 +346,11 @@
         <setEntry value="eone.felix.webconsole@default:true"/>
         <setEntry value="eone.hazelcast.service@default:default"/>
         <setEntry value="eone.install@default:default"/>
-        <setEntry value="eone.report.jasper.library@default:false"/>
         <setEntry value="eone.report.jasper@default:default"/>
         <setEntry value="eone.server@default:true"/>
         <setEntry value="eone.ui.zk@default:true"/>
         <setEntry value="eone.ui@default:default"/>
         <setEntry value="eone.webservices@default:default"/>
-        <setEntry value="eone.zk.extra@default:default"/>
         <setEntry value="org.apache.ecs@default:default"/>
     </setAttribute>
     <booleanAttribute key="show_selected_only" value="false"/>

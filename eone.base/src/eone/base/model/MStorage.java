@@ -289,7 +289,6 @@ public class MStorage extends X_M_Storage
 	public static void reActivateFIFO(Properties ctx, int Record_ID, String trxName) {
 		String whereClause = "STRPOS(Note, '@"+ Record_ID +":') > 0";
 		List<MStorage> list = new Query(ctx, Table_Name, whereClause, trxName)
-				.setParameters(Record_ID)
 				.list();
 		String sqlUpdate = "UPDATE M_Storage SET AccumulateQty = ? WHERE M_Storage_ID = ?";
 		List<List<Object>> values = new ArrayList<List<Object>>();

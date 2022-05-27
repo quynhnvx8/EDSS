@@ -27,7 +27,7 @@ public class DefaultProcessFactory implements IProcessFactory {
 	@Override
 	public ProcessCall newProcessInstance(String className) {
 		ProcessCall process = null;
-		process = EquinoxExtensionLocator.instance().locate(ProcessCall.class, "org.adempiere.base.Process", className, null).getExtension();
+		process = EquinoxExtensionLocator.instance().locate(ProcessCall.class, "eone.base.Process", className, null).getExtension();
 		if (process == null) {
 			//Get Class
 			Class<?> processClass = null;

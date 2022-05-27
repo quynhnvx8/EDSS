@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -60,11 +61,11 @@ public class MPrintFormat extends X_AD_PrintFormat
 		getItems();
 	}	//	MPrintFormat
 
-	private static CCache<Integer,MPrintFormatItem[]> s_itemsHeader = new CCache<Integer,MPrintFormatItem[]>(Table_Name, 5);
-	private static CCache<Integer,MPrintFormatItem[]> s_itemsContent = new CCache<Integer,MPrintFormatItem[]>(Table_Name, 5);
-	private static CCache<Integer,MPrintFormatItem[]> s_itemsGroup = new CCache<Integer,MPrintFormatItem[]>(Table_Name, 5);
-	private static CCache<Integer,MPrintFormatItem[]> s_itemsFooter = new CCache<Integer,MPrintFormatItem[]>(Table_Name, 5);
-	private static CCache<Integer,MPrintFormatItem[]> s_itemsChart = new CCache<Integer,MPrintFormatItem[]>(Table_Name, 5);
+	private static CCache<Integer,MPrintFormatItem[]> s_itemsHeader = new CCache<Integer,MPrintFormatItem[]>(Table_Name, 30, 60);
+	private static CCache<Integer,MPrintFormatItem[]> s_itemsContent = new CCache<Integer,MPrintFormatItem[]>(Table_Name, 30, 60);
+	private static CCache<Integer,MPrintFormatItem[]> s_itemsGroup = new CCache<Integer,MPrintFormatItem[]>(Table_Name, 30, 60);
+	private static CCache<Integer,MPrintFormatItem[]> s_itemsFooter = new CCache<Integer,MPrintFormatItem[]>(Table_Name, 30, 60);
+	private static CCache<Integer,MPrintFormatItem[]> s_itemsChart = new CCache<Integer,MPrintFormatItem[]>(Table_Name, 30, 60);
 	
 	/** Items							*/
 	private MPrintFormatItem[]		m_itemsContent = null;
@@ -143,12 +144,12 @@ public class MPrintFormat extends X_AD_PrintFormat
 		
 	private void getItems()
 	{
-		if (s_itemsContent.containsKey(getAD_PrintFormat_ID()))
-			return;
-		ArrayList<MPrintFormatItem> lsHeader = new ArrayList<MPrintFormatItem>();
-		ArrayList<MPrintFormatItem> lsContent = new ArrayList<MPrintFormatItem>();
-		ArrayList<MPrintFormatItem> lsGroup = new ArrayList<MPrintFormatItem>();
-		ArrayList<MPrintFormatItem> lsFooter = new ArrayList<MPrintFormatItem>();
+		//if (s_itemsContent.containsKey(getAD_PrintFormat_ID()))
+		//	return;
+		List<MPrintFormatItem> lsHeader = new ArrayList<MPrintFormatItem>();
+		List<MPrintFormatItem> lsContent = new ArrayList<MPrintFormatItem>();
+		List<MPrintFormatItem> lsGroup = new ArrayList<MPrintFormatItem>();
+		List<MPrintFormatItem> lsFooter = new ArrayList<MPrintFormatItem>();
 		
 		ArrayList<MPrintFormatItem> lsChart = new ArrayList<MPrintFormatItem>();
 		
@@ -207,6 +208,8 @@ public class MPrintFormat extends X_AD_PrintFormat
 		s_itemsFooter.put(getAD_PrintFormat_ID(), m_itemsFooter);
 		s_itemsGroup.put(getAD_PrintFormat_ID(), m_itemsGroup);
 		s_itemsChart.put(getAD_PrintFormat_ID(), m_itemsChart);
+		
+		//m_itemsHeader = s_itemsHeader.get(getAD_PrintFormat_ID());
 		
 		//s_formula.put(getAD_PrintFormat_ID(), formula);
 	}
@@ -423,7 +426,7 @@ public class MPrintFormat extends X_AD_PrintFormat
 	}
 	
 	/** Cached Formats						*/
-	static private CCache<Integer,MPrintFormat> s_formats = new CCache<Integer,MPrintFormat>(Table_Name, 30);
+	static private CCache<Integer,MPrintFormat> s_formats = new CCache<Integer,MPrintFormat>(Table_Name, 60, 30);
 
 	/**
 	 * 	Get Format
@@ -444,7 +447,7 @@ public class MPrintFormat extends X_AD_PrintFormat
 			if (pf.get_ID() <= 0)
 				pf = null;
 			else
-				s_formats.put(key, pf);
+				;//s_formats.put(key, pf);
 		}
 
 		return pf;

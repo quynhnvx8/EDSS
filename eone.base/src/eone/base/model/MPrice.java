@@ -4,9 +4,7 @@ import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import eone.util.DB;
@@ -32,8 +30,6 @@ public class MPrice extends X_M_Price
 	}
 	
 	
-	private Map<Integer, MPrice> data = null;
-	
 	@Override
 	protected boolean beforeSave(boolean newRecord) {
 		if (is_ValueChanged(X_M_Price.COLUMNNAME_ValidFrom) || is_ValueChanged(X_M_Price.COLUMNNAME_ValidTo)) {
@@ -51,12 +47,12 @@ public class MPrice extends X_M_Price
 		}
 		
 		if (is_ValueChanged("Processed") ) {
-			data = getPriceCurrent(getCtx(), get_TrxName(), getM_Product_ID(), getM_Price_ID());
+			MPrice data = getPriceCurrent(getCtx(), get_TrxName(), getM_Product_ID());
 			BigDecimal pricePO = getPricePO();
 			BigDecimal priceSO = getPriceSO();
-			if(data.size() > 0) {
-				pricePO = data.get(getM_Product_ID()).getPricePO();
-				priceSO = data.get(getM_Product_ID()).getPriceSO();
+			if(data != null) {
+				pricePO = data.getPricePO();
+				priceSO = data.getPriceSO();
 			}
 			
 			updateProduct(pricePO, priceSO);
@@ -64,32 +60,26 @@ public class MPrice extends X_M_Price
 		return true;
 	}
 
-	public static Map<Integer, MPrice> getPriceCurrent(Properties ctx, String trxName, int M_Product_ID, int M_Price_ID) {
-		String whereClause = " AD_Client_ID=? AND M_Product_ID = ? AND Processed = 'Y'";
-		if(M_Price_ID > 0) {
-			whereClause = whereClause + " AND M_Price_ID != " + M_Price_ID;
-		}
+	public static MPrice getPriceCurrent(Properties ctx, String trxName, int M_Product_ID) {
+		String whereClause = " M_Product_ID = ? ";
 		List<MPrice> retValue = new Query(ctx,I_M_Price.Table_Name,whereClause,trxName)
-		.setParameters(Env.getAD_Client_ID(ctx), M_Product_ID)
+		.setParameters(M_Product_ID)
 		.setOrderBy(" M_Product_ID, ValidFrom DESC")
 		.list();
-		Map<Integer, MPrice> data = new HashMap<Integer, MPrice>();
-		Timestamp validFrom = null;
-		Timestamp validCurr = null;
-		for(int i = 0; i < retValue.size(); i++) {
-			if(data.containsKey(M_Product_ID)) {
-				validCurr = data.get(M_Product_ID).getValidFrom();
-				validFrom = retValue.get(i).getValidFrom();
-				if(validFrom.compareTo(validCurr) > 0) {
-					data.put(M_Product_ID, retValue.get(i));					
-				}
-			} else {
-				data.put(M_Product_ID, retValue.get(i));
-				validFrom = null;
-				validCurr = null;
-			}
-		}
-		return data;
+		if (retValue.size() > 0)
+			return retValue.get(0);
+		return null;
+	}
+	
+	public static MPrice getPriceByDate(Properties ctx, String trxName, int M_Product_ID, Timestamp dateAcct) {
+		String whereClause = " M_Product_ID = ? AND ValidFrom <= ? AND (ValidTo >= ? OR ValidTo IS NULL) ";
+		List<MPrice> retValue = new Query(ctx,I_M_Price.Table_Name,whereClause,trxName)
+		.setParameters(M_Product_ID, dateAcct, dateAcct)
+		.setOrderBy(" M_Product_ID, ValidFrom DESC")
+		.list();
+		if (retValue.size() > 0)
+			return retValue.get(0);
+		return null;
 	}
 
 	public static MPrice get (Properties ctx, int M_Price_ID, String trxName)

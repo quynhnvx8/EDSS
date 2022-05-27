@@ -28,6 +28,7 @@ import org.apache.cxf.jaxrs.provider.xmlbeans.XMLBeansElementProvider;
 import org.apache.xmlbeans.XmlObject;
 import org.codehaus.jettison.mapped.Configuration;
 import org.codehaus.jettison.mapped.MappedXMLOutputFactory;
+import org.springframework.stereotype.Controller;
 
 import eone.jettison.mapped.CustomMappedNamespaceConvention;
 import eone.jettison.mapped.MappedXMLInputFactory;
@@ -35,6 +36,7 @@ import eone.jettison.mapped.MappedXMLInputFactory;
 /**
  * JSON provider for XMLBeans data objects.
  */
+@Controller
 @Produces("application/json")
 @Consumes("application/json")
 @Provider

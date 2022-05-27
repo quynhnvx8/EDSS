@@ -12,26 +12,13 @@
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-	<!-- JAX-RS -->
-	<jaxrs:server id="idempiereRest" address="/rest">
-		<jaxrs:serviceBeans>
-			<ref bean="ModelADServiceBean" />
-			<ref bean="demoRest" />
-			<ref bean="CompositeServiceBean" />
-		</jaxrs:serviceBeans>
+	<!-- JAX-RS 
+	<jaxrs:server id="EONERest" address="/rest">
 		<jaxrs:providers>
-			<ref bean="xmlBeansProvider" />
 			<ref bean="xmlBeansJSONProvider" />
 		</jaxrs:providers>
 	</jaxrs:server>
 
-	<bean id="ModelADServiceBean" class="eone.adinterface.ModelADServiceImpl" />
-	<bean id="CompositeServiceBean" class="com.trekglobal.ws.CompositeServiceImpl" />
-
-	<bean id="xmlBeansProvider" class="org.apache.cxf.jaxrs.provider.xmlbeans.XMLBeansElementProvider" />
-		
 	<bean id="xmlBeansJSONProvider" class="eone.jaxrs.provider.xmlbeans.XMLBeansJSONProvider" />
-	
-	<bean id="demoRest" class="eone.adinterface.DemoRest" />
-	
+	-->
 </beans>

@@ -12,6 +12,7 @@ import eone.base.model.GridTab;
 import eone.base.model.MDocType;
 import eone.base.model.MInOut;
 import eone.base.model.MInOutLine;
+import eone.base.model.MPrice;
 import eone.base.model.MProduct;
 import eone.base.model.MStorage;
 import eone.base.model.MTax;
@@ -129,7 +130,7 @@ public class CalloutInOut extends CalloutEngine
 		}
 		
 		//Nhap don gia hoac so luong
-		
+		BigDecimal pricePO = Env.ZERO;
 		if (MDocType.DOCTYPE_Output.equals(mDocType.getDocType())) {
 			
 			//Lay kho xuat (Kho co)
@@ -143,6 +144,16 @@ public class CalloutInOut extends CalloutEngine
 			
 			//Lấy giá xuất vật tư hàng hóa trong bảng M_Storage
 			price = MStorage.getPriceStorage(M_Product_ID, M_Warehouse_ID, dateAcct, null, qty);
+			pricePO = price;
+			
+			//Nếu là bán hàng
+			if (MDocType.DOCBASETYPE_ExportWarehouseForSell.equals(mDocType.getDocBaseType())) {
+				
+				MPrice priceSell = MPrice.getPriceByDate(ctx, null, M_Product_ID, dateAcct);
+				if (priceSell != null) {
+					price = priceSell.getPriceSO();
+				}
+			} 
 			
 			if (price.compareTo(Env.ZERO) > 0) {
 				
@@ -150,7 +161,7 @@ public class CalloutInOut extends CalloutEngine
 				p_Amount = p_Amount.setScale(Env.getScaleFinal(), RoundingMode.HALF_UP);
 			
 				mTab.setValue(MInOutLine.COLUMNNAME_Price, price);
-				mTab.setValue(MInOutLine.COLUMNNAME_PricePO, price);
+				mTab.setValue(MInOutLine.COLUMNNAME_PricePO, pricePO);
 				mTab.setValue(MInOutLine.COLUMNNAME_Amount, p_Amount);
 				
 			} 

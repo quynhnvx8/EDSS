@@ -2226,6 +2226,23 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 		return ""; // processFieldChange (field); // here we don't need to call processFieldChange, it was called on GridController.dataStatusChanged
 	}   //  setValue
 
+	
+	public String setValueImport (GridField field, Object value, int row)
+	{
+		if (field == null)
+			return "NoField";
+
+		if (log.isLoggable(Level.FINE)) log.fine(field.getColumnName() + "=" + value + " - Row=" + m_currentRow);
+
+		if (DisplayType.isID(field.getDisplayType()) && value instanceof Integer && ((Integer)value).intValue() < 0)
+			value = null;
+
+		int col = m_mTable.findColumn(field.getColumnName());
+		m_mTable.setValueAt(value, row, col, false);
+		//
+		return ""; // processFieldChange (field); // here we don't need to call processFieldChange, it was called on GridController.dataStatusChanged
+	}
+	
 	/**
 	 * 	Is Processed
 	 *	@return true if current record is processed

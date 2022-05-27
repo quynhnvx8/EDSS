@@ -30,7 +30,6 @@ import org.apache.ecs.xhtml.td;
 import org.apache.ecs.xhtml.th;
 import org.apache.ecs.xhtml.tr;
 
-import eone.base.model.MProcess;
 import eone.base.model.PrintInfo;
 import eone.base.process.ProcessInfo;
 import eone.exceptions.EONEException;
@@ -525,11 +524,10 @@ public class ReportEngine implements PrintServiceAttributeListener
 	static public ReportEngine get (Properties ctx, ProcessInfo pi, HashMap<String, Object> m_params)
 	{
 		
-		MProcess process = MProcess.get(Env.getCtx(), pi.getAD_Process_ID());
-		MPrintFormat format = MPrintFormat.get(Env.getCtx(), process.getAD_PrintFormat_ID(), false);
+		//MProcess process = MProcess.get(Env.getCtx(), pi.getAD_Process_ID());
+		//MPrintFormat format = MPrintFormat.get(Env.getCtx(), process.getAD_PrintFormat_ID(), false);
 		
-		//format.setTranslationLanguage(format.getLanguage());
-		//
+		MPrintFormat format = (MPrintFormat) m_params.get("MPrintFormat");
 		PrintInfo info = new PrintInfo (pi);
 		
 		return new ReportEngine(ctx, format, info, pi.isSummary(), pi.getTransactionName(), m_params);

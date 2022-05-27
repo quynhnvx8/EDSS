@@ -439,7 +439,7 @@ public class WritePDF {
     				String columnName = arrs[v].trim().substring(0, arrs[v].lastIndexOf("%"));
         			for(int r = 0; r < arrItem.size(); r++) {
             			if(columnName.equalsIgnoreCase(arrItem.get(r).getColumnName())) {
-            				Object value = arrItem.get(r).getValueDisplay(Env.getLanguage(Env.getCtx()));
+            				Object value = arrItem.get(r).getValueDisplay(language);
             				if (value == null || "".equals(value.toString())) {
             					value = "...";
             				}

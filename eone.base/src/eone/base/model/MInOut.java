@@ -18,6 +18,14 @@ import eone.util.Env;
 public class MInOut extends X_M_InOut implements DocAction
 {
 
+	@Override
+	protected boolean afterDelete(boolean success) {
+		String sql = "DELETE M_InOutLine WHERE M_InOut_ID = ?";
+		DB.executeUpdate(sql, getM_InOut_ID(), get_TrxName());
+		return super.afterDelete(success);
+	}
+
+
 	private static final long serialVersionUID = 1226522383231204912L;
 
 	private static CCache<Integer,MInOut>		s_cache	= new CCache<Integer,MInOut>(Table_Name, 5);
