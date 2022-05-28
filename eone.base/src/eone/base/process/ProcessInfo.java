@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import eone.base.model.PO;
+import eone.print.ParameterReport;
 import eone.print.PrintDataItem;
 import eone.util.DisplayType;
 import eone.util.Env;
@@ -96,8 +97,19 @@ public class ProcessInfo implements Serializable
 	
 	//Lay du lieu tu ProcedureName mapping theo PrintFormatItem
 	private List<ArrayList<PrintDataItem>> dataQueryC = null; //Content
+	private List<ParameterReport> dataQueryParam = null; //Content
+	
+
 	private List<ArrayList<PrintDataItem>> dataQueryH = null; //Header
 	private List<ArrayList<PrintDataItem>> dataQueryF = null; //Footer
+	
+	public List<ParameterReport> getDataQueryParam() {
+		return dataQueryParam;
+	}
+
+	public void setDataQueryParam(List<ParameterReport> dataQueryParam) {
+		this.dataQueryParam = dataQueryParam;
+	}
 	
 	private List<Object []> dataChart = null; //Footer
 	
@@ -182,7 +194,6 @@ public class ProcessInfo implements Serializable
 		this.columnCountQuery = columnCountQuery;
 	}
 	
-	//Quynhnv.x8 End add.
 	
 	/*	General Data Object			*/
 	private Serializable		m_SerializableObject = null;

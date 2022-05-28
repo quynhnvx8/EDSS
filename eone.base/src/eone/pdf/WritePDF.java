@@ -53,6 +53,7 @@ import eone.print.CPaper;
 import eone.print.MPrintFormat;
 import eone.print.MPrintFormatItem;
 import eone.print.MPrintPaper;
+import eone.print.ParameterReport;
 import eone.print.PrintDataItem;
 import eone.util.Env;
 import eone.util.Language;
@@ -72,13 +73,116 @@ public class WritePDF {
 		
 	}
 	
-	//public static final String FONT = EOne.getEOneHome() + File.separator + "arial.ttf";
+	private static float [] widthTable = null;
+    private static int countColumn = 0;
+    private static int countRow = 0;
+    private static int windowNo = 0;
+    private static List<ArrayList<PrintDataItem>> dataQuery = null;
+    private static List<ParameterReport> dataQueryParam = null;
+    private static List<Object []> dataChart = null;
+    private static List<ArrayList<PrintDataItem>> dataHeader = null;
+    private static MPrintFormatItem [] items = null;
+    private static List<ArrayList<PrintDataItem>> dataFooter = null;
+    private static MPrintFormatItem [] header = null;
+    private static MPrintFormatItem [] footer = null;
+    private static Font smallfont = null;
+    private static Font smallBold = null;
+    private static Font fontFinal = null;
+    private static Language language = null;
+   
+    private static double widthBase = 0;
+    private static int maxRow = 0;
+	
 
 	public static final String FONT = EOne.getEOneHome() + File.separator + "jettyhome" + File.separator + "Times_New_Roman.ttf";
 	
+	 private  void writePDF(OutputStream output, MPrintFormat format, HashMap<String, Object> m_params)//Pageable pageable, 
+		{
+			try {
+				
+				ProcessInfo pi = (ProcessInfo)m_params.get("ProcessInfo");
+				widthTable = pi.getWidthTable();
+				
+				countColumn = pi.getColumnCountQuery();
+				countRow = pi.getRowCountQuery();
+				dataQuery = pi.getDataQueryC();
+				dataQueryParam = pi.getDataQueryParam();
+				dataHeader = pi.getDataQueryH();
+				dataFooter = pi.getDataQueryF();
+				dataChart = pi.getDataChart();
+				maxRow = pi.getMaxRow();
+				
+				windowNo = (int)m_params.get("WindowNo");
+				
+				MPrintPaper paper = MPrintPaper.get(format.getAD_PrintPaper_ID());
+				CPaper cPaper = paper.getCPaper();
+				Background event = new Background();
+	            final PageFormat pf = cPaper.getPageFormat();
+	            widthBase = pf.getWidth();
+	            final Document document = new Document(new Rectangle((int) pf.getWidth(), (int) pf.getHeight()));
+	            
+	            final PdfWriter writer = PdfWriter.getInstance(document, output);
+	            writer.setPdfVersion(PdfWriter.VERSION_1_2);
+	            
+	            writer.setPageEvent(event);
+	            
+	            document.open();
+	            
+	            String fontDir = getFont(FONT);
+	            BaseFont courier = BaseFont.createFont(fontDir,  BaseFont.IDENTITY_H , BaseFont.EMBEDDED);
+	            smallfont = new Font(courier,10, Font.NORMAL);
+	            smallBold = new Font(courier,10, Font.BOLD);
+	            
+	            PdfPTable table = new PdfPTable(countColumn);
+	            
+	            items = format.getItemContent();
+	            header = format.getItemHeader();
+	            footer = format.getItemFooter();
+	            language = format.getLanguage();
+	            
+	            table.setTotalWidth(widthTable);
+	            table.setLockedWidth(true);
+	            
+	            //Create header Report
+	            createHeader(table, m_params, format, courier, countColumn);
+	            table.setTotalWidth(widthTable);
+	            document.add(table);
+	            //document.newPage();
+	            // first row: add header
+	            table = new PdfPTable(countColumn);
+	            table.setTotalWidth(widthTable);
+	            table.setLockedWidth(true);
+	            createHeaderTable(table);
+	            document.add(table);
+	            table.setHeaderRows(maxRow);
+	            table.setSkipFirstHeader(true);
+	            
+	            //For all row. Bao gồm content báo cáo và Footer báo cáo
+	            createContent(table);
+	            //End For all row
+	            
+	    		document.add(table);
+	    		
+	            //Create Chân ký báo cáo
+	    		table = createTitleSigned(m_params, courier, items);
+	    		if (table != null)
+	    			document.add(table);
+
+	    		//Vẽ biểu đồ trên trang mới
+	    		if (format.isShowChart() && dataChart != null && dataChart.size() > 0) {
+	    			document.newPage();
+	        		writeChartToPDF(writer, document, (int) pf.getWidth(), (int) pf.getHeight(), format);
+	        		
+	    		}
+	    		
+	    		document.close();
+	        } catch (Exception e) {
+	            throw new EONEException(e);
+	        }
+		}
 	//Create Header
 	private void createHeader(PdfPTable table, HashMap<String, Object> m_params, MPrintFormat format, BaseFont courier, int columnCount) {
-		//MClientInfo ci = MClientInfo.get(Env.getCtx());
+		
 		PdfPCell cell = null;
 		Font smallfont = new Font(courier,10, Font.BOLD);
 		//Fill Company And Address.
@@ -230,7 +334,7 @@ public class WritePDF {
 	}//End Create Header
 	
 	//Create Footer
-	private static PdfPTable createFooter(HashMap<String, Object> m_params, MPrintFormat format, BaseFont courier, MPrintFormatItem [] items) {
+	private static PdfPTable createTitleSigned(HashMap<String, Object> m_params, BaseFont courier, MPrintFormatItem [] items) {
 		PdfPTable table;
 		MConfigSignReport [] listSign = (MConfigSignReport []) m_params.get("SIGNREPORT");
 		int columnSign = listSign.length;
@@ -327,26 +431,11 @@ public class WritePDF {
         return null;
     }
     
-    private static float [] widthTable = null;
-    private static int countColumn = 0;
-    private static int countRow = 0;
-    private static int windowNo = 0;
-    private static List<ArrayList<PrintDataItem>> dataQuery = null;
-    private static List<Object []> dataChart = null;
-    private static List<ArrayList<PrintDataItem>> dataHeader = null;
-    private static List<ArrayList<PrintDataItem>> dataFooter = null;
-    private static MPrintFormatItem [] items = null;
-    private static MPrintFormatItem [] header = null;
-    private static MPrintFormatItem [] footer = null;
-    private static Font smallfont = null;
-    private static Language language = null;
-    //private static int rowRepeat = 0;
-    private static double widthBase = 0;
-    private static int maxRow = 0;
+    
     
     private static void createHeaderTable(PdfPTable table) {
-    	PdfPCell cell = null;
     	
+    	PdfPCell cell = null;
     	for(int r = 1; r <= maxRow; r++) {
     		for(int c = 0; c < items.length; c++) {
             	MPrintFormatItem item = items[c];
@@ -368,29 +457,61 @@ public class WritePDF {
             	}
             }            
     	}
-        
+       
     }
     
+   
     
     private  void createContent(PdfPTable table) {
     	PdfPCell cell = null;
     	
     	for(int row = 0; row < countRow; row ++) {
         	ArrayList<PrintDataItem> arrItem = dataQuery.get(row);
-        	
+        	int border = 1;
+        	ParameterReport sParams = new ParameterReport();
+        	boolean isHeader = false;
+        	boolean isBold = false;
+        	if (dataQueryParam.size() > 0) {
+        		
+        		sParams = dataQueryParam.get(row);
+        		isBold = sParams.isBold();
+        		border = sParams.getBorder();
+        		isHeader = sParams.isHeader();
+        		
+        	}
+    		
         	//
-        	for(int c = 0; c < arrItem.size(); c++) {  
+        	for(int c = 0; c < arrItem.size(); c++) {
+        		
         		PrintDataItem item = arrItem.get(c);
         		Object value = item.getValueDisplay(Env.getLanguage(Env.getCtx()));
-            	cell = new PdfPCell(new Phrase((String) value, smallfont));
+        		if (isHeader) {
+        			Object valueHeader = getNameHeader(item, sParams);
+        			if (valueHeader != null)
+        				value = valueHeader;
+        		}
+        		if (isBold)
+        			fontFinal = smallBold;
+        		else
+        			fontFinal = smallfont;
+        		
+        		if (value != null && "0".equals(value.toString()))
+        			value = null;
+        		
+            	cell = new PdfPCell(new Phrase((String) value, fontFinal));
                 cell.setNoWrap(false);
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 cell.setHorizontalAlignment(item.getAlignment());
+                if (isHeader) {
+                	cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                	cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+                }
                 cell.setColspan(item.getColSpan());
                 cell.setPadding(4);
-                //cell.setBorderWidth(0.1f);
+                cell.setBorderWidth(border);
                 table.addCell(cell);
                 
+                c = c + item.getColSpan() - 1;
             }
         }
     	
@@ -425,6 +546,29 @@ public class WritePDF {
             table.addCell(cell); 
         }
         
+    }
+    
+    private Object getNameHeader(PrintDataItem item , ParameterReport sParams) {
+    	String colName = item.getColumnName();
+    	if ("Amt1".equals(colName))
+    		return sParams.getResult1();
+    	if ("Amt2".equals(colName))
+    		return sParams.getResult2();
+    	if ("Amt3".equals(colName))
+    		return sParams.getResult3();
+    	if ("Amt4".equals(colName))
+    		return sParams.getResult4();
+    	if ("Amt5".equals(colName))
+    		return sParams.getResult5();
+    	if ("Amt6".equals(colName))
+    		return sParams.getResult6();
+    	if ("Amt7".equals(colName))
+    		return sParams.getResult7();
+    	if ("Amt8".equals(colName))
+    		return sParams.getResult8();
+    	if ("Amt9".equals(colName))
+    		return sParams.getResult9();
+    	return null;
     }
     
     private String getContextHeader(String name) {
@@ -481,87 +625,7 @@ public class WritePDF {
     	return name;
     }
     
-    private  void writePDF(OutputStream output, MPrintFormat format, HashMap<String, Object> m_params)//Pageable pageable, 
-	{
-		try {
-			
-			ProcessInfo pi = (ProcessInfo)m_params.get("ProcessInfo");
-			widthTable = pi.getWidthTable();
-			countColumn = pi.getColumnCountQuery();
-			countRow = pi.getRowCountQuery();
-			dataQuery = pi.getDataQueryC();
-			dataHeader = pi.getDataQueryH();
-			dataFooter = pi.getDataQueryF();
-			dataChart = pi.getDataChart();
-			maxRow = pi.getMaxRow();
-			windowNo = (int)m_params.get("WindowNo");
-			
-			MPrintPaper paper = MPrintPaper.get(format.getAD_PrintPaper_ID());
-			CPaper cPaper = paper.getCPaper();
-			Background event = new Background();
-            final PageFormat pf = cPaper.getPageFormat();
-            widthBase = pf.getWidth();
-            final Document document = new Document(new Rectangle((int) pf.getWidth(), (int) pf.getHeight()));
-            
-            final PdfWriter writer = PdfWriter.getInstance(document, output);
-            writer.setPdfVersion(PdfWriter.VERSION_1_2);
-            
-            writer.setPageEvent(event);
-            
-            document.open();
-            //document.setMargins(36, 36, 36, 36);
-            //MAttachment attact = format.getAttachment();
-            //String fileName = attact.getEntryName(0);
-            String fontDir = getFont(FONT);
-            BaseFont courier = BaseFont.createFont(fontDir,  BaseFont.IDENTITY_H , BaseFont.EMBEDDED);
-            smallfont = new Font(courier,10, Font.NORMAL);
-            
-            PdfPTable table = new PdfPTable(countColumn);
-            
-            items = format.getItemContent();
-            header = format.getItemHeader();
-            footer = format.getItemFooter();
-            language = format.getLanguage();
-            
-            table.setTotalWidth(widthTable);
-            table.setLockedWidth(true);
-            
-            //Create header Report
-            createHeader(table, m_params, format, courier, countColumn); 
-            document.add(table);
-            //document.newPage();
-            // first row: add header
-            table = new PdfPTable(countColumn);
-            table.setTotalWidth(widthTable);
-            table.setLockedWidth(true);
-            createHeaderTable(table);
-            document.add(table);
-            table.setHeaderRows(maxRow);
-            table.setSkipFirstHeader(true);
-            
-            //For all row
-            createContent(table);
-            //End For all row
-    		document.add(table);
-    		
-            //Create Footer
-    		
-    		table = createFooter(m_params, format, courier, items);
-    		if (table != null)
-    			document.add(table);
-
-    		//Vẽ biểu đồ trên trang mới
-    		if (format.isShowChart() && dataChart != null && dataChart.size() > 0) {
-    			document.newPage();
-        		writeChartToPDF(writer, document, (int) pf.getWidth(), (int) pf.getHeight(), format);
-        		
-    		}
-    		
-    		document.close();
-        } catch (Exception e) {
-            throw new EONEException(e);
-        }
-	}
+   
     
     public static String getFont(String name){
     	

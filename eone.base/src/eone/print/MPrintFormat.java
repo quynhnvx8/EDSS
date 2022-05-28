@@ -66,6 +66,7 @@ public class MPrintFormat extends X_AD_PrintFormat
 	private static CCache<Integer,MPrintFormatItem[]> s_itemsGroup = new CCache<Integer,MPrintFormatItem[]>(Table_Name, 30, 60);
 	private static CCache<Integer,MPrintFormatItem[]> s_itemsFooter = new CCache<Integer,MPrintFormatItem[]>(Table_Name, 30, 60);
 	private static CCache<Integer,MPrintFormatItem[]> s_itemsChart = new CCache<Integer,MPrintFormatItem[]>(Table_Name, 30, 60);
+	//private static CCache<Integer,Map<String, ArrayList<MPrintFormatItem>>> s_itemTable = new CCache<Integer,Map<String, ArrayList<MPrintFormatItem>>>(Table_Name, 30, 60);
 	
 	/** Items							*/
 	private MPrintFormatItem[]		m_itemsContent = null;
@@ -73,6 +74,7 @@ public class MPrintFormat extends X_AD_PrintFormat
 	private MPrintFormatItem[]		m_itemsHeader = null;
 	private MPrintFormatItem[]		m_itemsFooter = null;
 	private MPrintFormatItem[]		m_itemsChart = null;
+	
 	
 	private Map<String, String> formula = new HashMap<String, String>();
 	
@@ -116,6 +118,7 @@ public class MPrintFormat extends X_AD_PrintFormat
 		return m_itemsChart;
 	}
 	
+	
 	private Language 				m_language;
 	
 	private static CLogger			s_log = CLogger.getCLogger (MPrintFormat.class);
@@ -141,11 +144,10 @@ public class MPrintFormat extends X_AD_PrintFormat
 		}
 	}	//	getLanguage
 
-		
+	
 	private void getItems()
 	{
-		//if (s_itemsContent.containsKey(getAD_PrintFormat_ID()))
-		//	return;
+		
 		List<MPrintFormatItem> lsHeader = new ArrayList<MPrintFormatItem>();
 		List<MPrintFormatItem> lsContent = new ArrayList<MPrintFormatItem>();
 		List<MPrintFormatItem> lsGroup = new ArrayList<MPrintFormatItem>();
@@ -164,6 +166,7 @@ public class MPrintFormat extends X_AD_PrintFormat
 			pstmt = DB.prepareStatement(sql, get_TrxName());
 			pstmt.setInt(1, get_ID());
 			rs = pstmt.executeQuery();
+			
 			while (rs.next())
 			{
 				MPrintFormatItem pfi = new MPrintFormatItem(p_ctx, rs, get_TrxName());
@@ -176,8 +179,9 @@ public class MPrintFormat extends X_AD_PrintFormat
 				else if(pfi.isGroupBy())
 					lsGroup.add(pfi);
 				else if(pfi.isChart())
-					lsChart.add(pfi);
+					lsChart.add(pfi);				
 			}
+			
 		}
 		catch (SQLException e)
 		{
@@ -209,9 +213,6 @@ public class MPrintFormat extends X_AD_PrintFormat
 		s_itemsGroup.put(getAD_PrintFormat_ID(), m_itemsGroup);
 		s_itemsChart.put(getAD_PrintFormat_ID(), m_itemsChart);
 		
-		//m_itemsHeader = s_itemsHeader.get(getAD_PrintFormat_ID());
-		
-		//s_formula.put(getAD_PrintFormat_ID(), formula);
 	}
 	
 	

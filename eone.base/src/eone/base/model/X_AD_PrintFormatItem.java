@@ -5,10 +5,9 @@
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.sql.ResultSet;
 import java.util.Properties;
-
-import eone.util.KeyNamePair;
 
 /** Generated Model for AD_PrintFormatItem
  *  @author EOne (generated) 
@@ -19,7 +18,7 @@ public class X_AD_PrintFormatItem extends PO implements I_AD_PrintFormatItem, I_
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220302L;
+	private static final long serialVersionUID = 20220528L;
 
     /** Standard Constructor */
     public X_AD_PrintFormatItem (Properties ctx, int AD_PrintFormatItem_ID, String trxName)
@@ -279,10 +278,10 @@ public class X_AD_PrintFormatItem extends PO implements I_AD_PrintFormatItem, I_
 	public static final int FIELDALIGNMENTTYPE_AD_Reference_ID=253;
 	/** Default = D */
 	public static final String FIELDALIGNMENTTYPE_Default = "D";
-	/** Leading (left) = L */
-	public static final String FIELDALIGNMENTTYPE_LeadingLeft = "L";
-	/** Trailing (right) = T */
-	public static final String FIELDALIGNMENTTYPE_TrailingRight = "T";
+	/** Left = L */
+	public static final String FIELDALIGNMENTTYPE_Left = "L";
+	/** Right = T */
+	public static final String FIELDALIGNMENTTYPE_Right = "T";
 	/** Block = B */
 	public static final String FIELDALIGNMENTTYPE_Block = "B";
 	/** Center = C */
@@ -671,6 +670,8 @@ public class X_AD_PrintFormatItem extends PO implements I_AD_PrintFormatItem, I_
 	public static final String PRINTAREATYPE_GroupBy = "O";
 	/** Chart = A */
 	public static final String PRINTAREATYPE_Chart = "A";
+	/** Parameter = P */
+	public static final String PRINTAREATYPE_Parameter = "P";
 	/** Set Area.
 		@param PrintAreaType 
 		Print Area

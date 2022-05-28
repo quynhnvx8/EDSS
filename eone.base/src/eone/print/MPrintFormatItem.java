@@ -172,12 +172,12 @@ public class MPrintFormatItem extends X_AD_PrintFormatItem
 	
 	public boolean isFieldAlignLeft()
 	{
-		return getFieldAlignmentType().equals(FIELDALIGNMENTTYPE_LeadingLeft);
+		return getFieldAlignmentType().equals(FIELDALIGNMENTTYPE_Left);
 	}
 	
 	public boolean isFieldAlignRight()
 	{
-		return getFieldAlignmentType().equals(FIELDALIGNMENTTYPE_TrailingRight);
+		return getFieldAlignmentType().equals(FIELDALIGNMENTTYPE_Right);
 	}
 	/**
 	 * 	Field Align Block
@@ -208,6 +208,8 @@ public class MPrintFormatItem extends X_AD_PrintFormatItem
 	{
 		return getPrintAreaType().equals(PRINTAREATYPE_Content);
 	}
+	
+	
 	
 	public boolean isGroupBy()
 	{

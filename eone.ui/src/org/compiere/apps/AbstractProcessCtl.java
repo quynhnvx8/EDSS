@@ -30,6 +30,7 @@ import eone.db.CConnection;
 import eone.interfaces.Server;
 import eone.print.MPrintFormat;
 import eone.print.MPrintFormatItem;
+import eone.print.ParameterReport;
 import eone.print.PrintDataItem;
 import eone.util.CLogger;
 import eone.util.DB;
@@ -422,10 +423,12 @@ public abstract class AbstractProcessCtl implements Runnable
         String sqlProc = Env.parseContext(Env.getCtx(), windowno, sql, false);
         PreparedStatement ps = null;
         ArrayList<PrintDataItem> arrC = null;
+        ParameterReport sPara = null;
         ArrayList<PrintDataItem> arrG = null;
         ArrayList<PrintDataItem> arrH = null;
         ArrayList<PrintDataItem> arrF = null;
         List<ArrayList<PrintDataItem>> arrsC = new ArrayList<ArrayList<PrintDataItem>>();
+        List<ParameterReport> sParas = new ArrayList<ParameterReport>();
         List<ArrayList<PrintDataItem>> arrsH = new ArrayList<ArrayList<PrintDataItem>>();
         List<ArrayList<PrintDataItem>> arrsF = new ArrayList<ArrayList<PrintDataItem>>();
         
@@ -440,6 +443,7 @@ public abstract class AbstractProcessCtl implements Runnable
 		MPrintFormatItem [] itemsH = format.getItemHeader();
 		MPrintFormatItem [] itemsF = format.getItemFooter();
 		MPrintFormatItem [] itemsR = null;
+		
 		if (format.isShowChart()) {
 			itemsR = format.getItemChart();
 		}
@@ -507,12 +511,49 @@ public abstract class AbstractProcessCtl implements Runnable
 				//Đang cấu hình chỉ 1 group
 				MPrintFormatItem itemG = null;
 				BigDecimal valueRowOld = null;
+				Map<String, BigDecimal> balances = new HashMap<String, BigDecimal>(); 
+				
 				if(itemsG != null && itemsG.length > 0)
 					itemG = itemsG[0];
 				
 				ResultSet rsC = (ResultSet) rs.getObject(2);
+				String ColSpanReport = "";
+				Map<String, Integer> mapColSpan = new HashMap<String, Integer>();
+				String colSpanReportOld = ""; //Dùng để dánh dấu xem đã sang cấu hình colspan khác chưa thì mới xử lý
+				boolean isColspanConfig = true;
+				//int inc = 0;
 				while (rsC.next()) {
 					dataRow = new HashMap<String, Object>();
+					//inc++;
+					//Đoạn này xử lý lấy ColSpan được cấu hình để đẩy vào các Col thay vì cấu hình trên PrintFormat.
+					if (isColspanConfig) {
+						sPara = processRow(rsC);
+						try {
+							ColSpanReport = rsC.getString("ColSpanReport");
+							if (ColSpanReport == null)
+								ColSpanReport = "";
+							
+						}catch (Exception e) {
+							isColspanConfig = false;
+							ColSpanReport = "";
+							sPara = null;
+						}
+					}
+					String [] arrColSpan = null;
+					
+					
+					//Có giá trị colspan và khi thay đổi giá trị cấu hình theo từng dòng
+					
+					if (!ColSpanReport.isBlank() && !colSpanReportOld.equalsIgnoreCase(ColSpanReport)) {
+						mapColSpan = new HashMap<String, Integer>();
+						arrColSpan = ColSpanReport.split(",");
+						for(int s = 0; s < arrColSpan.length; s ++) {
+							String [] item = arrColSpan[s].trim().split("-");
+							mapColSpan.put(item[0].trim(), Integer.valueOf(item[1].toString()));
+						}
+						colSpanReportOld = ColSpanReport;
+					}
+					
 					//add group
 					int nextcol = 0;
 					if (itemsG != null && itemsG.length > 0) {
@@ -552,6 +593,8 @@ public abstract class AbstractProcessCtl implements Runnable
 					
 					
 					arrC = new ArrayList<PrintDataItem>();
+					
+					
 					for(int i = 0; i < itemsC.length; i++) {
 						MPrintFormatItem item = itemsC[i];
 						
@@ -561,17 +604,33 @@ public abstract class AbstractProcessCtl implements Runnable
 							if (item.isNumber()) {
 								dataRow.put(item.getColumnName(), element);
 			        		}
+							
+							
+							
 							//Tinh toan doi voi cot dat cong thuc de day vao List data truoc khi view bao cao.
 							if (item.isBalanceFinal() && item.getFormulaSetup() != "") {
+								if (balances.containsKey(item.getColumnName()))
+									valueRowOld = balances.get(item.getColumnName());
 			        			balance = getBalanceRow(dataRow, item.getFormulaSetup(), item.getColumnName(), rowCount, valueRowOld); 
 			        			element = balance;
-			        			valueRowOld = balance;			        			
+			        			valueRowOld = balance;
+			        			balances.put(item.getColumnName(), valueRowOld);
+			        			valueRowOld = Env.ZERO;
 			        		}
 							
+							//ĐOạn này set lại colspan
+							if (mapColSpan.size() > 0 && mapColSpan.containsKey(item.getColumnName())) {
+								int colspan = mapColSpan.get(item.getColumnName());
+								if (colspan > 0)
+									item.setColumnSpan(colspan);
+							}
 							arrC.add(addNewItem(item, element));
+								
 							//Add do rong cua cac cot
-							if (rowCount == 0)
+							if (rowCount == 0) {
 								arrWidth.add((float)itemsC[i].getMaxWidth());
+									
+							}
 						}
 						
 						if (Integer.parseInt(item.getOrderRowHeader()) > maxRow && !item.isGroupBy()) {
@@ -579,6 +638,8 @@ public abstract class AbstractProcessCtl implements Runnable
 						}
 					}
 					arrsC.add(arrC);
+					if (sPara != null)
+						sParas.add(sPara);
 					rowCount++;
 				}
 				rsC.close();
@@ -706,8 +767,13 @@ public abstract class AbstractProcessCtl implements Runnable
 			retValue[i] = (float)arrWidth.get(i);
 		}
 		
+		//Nếu có đa template thì ko đặt maxRow này nữa, giá trị này phục vụ cho việc trừ dòng đầu tiên báo cáo.
+		if (sParas.size() > 0)
+			maxRow = 0;
 		m_pi.setWidthTable(retValue);
 		m_pi.setDataQueryC(arrsC);
+		m_pi.setDataQueryParam(sParas);
+		
 		m_pi.setDataChart(arrsChart);
 		m_pi.setDataQueryH(arrsH);
 		m_pi.setDataQueryF(arrsF);
@@ -717,6 +783,49 @@ public abstract class AbstractProcessCtl implements Runnable
 		m_pi.setDataGroup(dataGroup);
 	}
 	
+	
+	private ParameterReport processRow(ResultSet rs){
+		ParameterReport data = new ParameterReport();
+		try {
+			String result1 = rs.getString("Result1");
+			String result2 = rs.getString("Result2");
+			String result3 = rs.getString("Result3");
+			String result4 = rs.getString("Result4");
+			String result5 = rs.getString("Result5");
+			String result6 = rs.getString("Result6");
+			String result7 = rs.getString("Result7");
+			String result8 = rs.getString("Result8");
+			String result9 = rs.getString("Result9");
+			String tableTemp = rs.getString("TableTemp");
+			
+			String bold = rs.getString("IsBold");
+			if (bold == null)
+				bold = "N";
+			String sborder = rs.getString("IsBorder");
+			if (sborder == null)
+				sborder = "N";
+			String header = rs.getString("IsHeader");
+			if (header == null)
+				header = "N";
+			data.setBold("N".equals(bold) ? false : true);
+			data.setBorder("N".equals(sborder) ? 0 : 1);
+			data.setHeader("N".equals(header) ? false : true);
+			data.setResult1(result1);
+			data.setResult2(result2);
+			data.setResult3(result3);
+			data.setResult4(result4);
+			data.setResult5(result5);
+			data.setResult6(result6);
+			data.setResult7(result7);
+			data.setResult8(result8);
+			data.setResult9(result9);
+			data.setTableTemp(tableTemp);
+		} catch (SQLException e) {
+			
+		}
+		
+		return data;
+	}
 	
 
 	private PrintDataItem addNewItem(MPrintFormatItem item, Serializable element) {
@@ -739,7 +848,8 @@ public abstract class AbstractProcessCtl implements Runnable
 				item.getFieldSumGroup(),	//Tính tổng theo group
 				item.getNumLines(),
 				item.getColumnSpan(),
-				item.isBreakPage()
+				item.isBreakPage(),
+				item.getPrintAreaType()
 				);
 	}
 	

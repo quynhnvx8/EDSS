@@ -64,7 +64,7 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 	/** Logger */
 	private static CLogger log = CLogger.getCLogger(GridTabXLSXImporter.class);
 	
-	private boolean isInsert = false;
+	//private boolean isInsert = false;
 	//private int primaryKey = 0;
 
 	public File fileImport(GridTab gridTab, List<GridTab> childs, InputStream filestream, Charset charset, String importMode) {
@@ -411,11 +411,13 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 									po2.set_ValueNoCheck(currentGridTab.getKeyColumnName(), sequence);	
 									
 									List<String> colNames = null;
+									/*
 									if(isInsert)
 										colNames = PO.getSqlInsert_Para(currentGridTab.getAD_Table_ID(), trxName);
 									else
 										colNames = PO.getSqlUpdate_Para(currentGridTab.getAD_Table_ID());
-									
+									*/
+									colNames = PO.getSqlInsert_Para(currentGridTab.getAD_Table_ID(), trxName);
 									List<Object> lstParam = PO.getBatchValueList(po2, colNames, currentGridTab.getAD_Table_ID(), trxName, sequence);
 									values.add(lstParam);
 									if (!mapValues.containsKey(currentGridTab.getAD_Table_ID())) {
@@ -424,10 +426,13 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 									if (values.size() >= BATCH_SIZE) {
 										for (Entry<Integer, List<List<Object>>> entry : mapValues.entrySet()) {
 											String sql = "";
+											/*
 											if (isInsert)
 												sql = PO.getSqlInsert(entry.getKey(), trxName);
 											else
 												sql = PO.getSqlUpdate(entry.getKey());
+												*/
+											sql = PO.getSqlInsert(entry.getKey(), trxName);
 											if (entry.getValue().size() > 0) {
 												String err = DB.excuteBatch(sql, entry.getValue(), trxName);
 												if (err != null) {
@@ -476,10 +481,13 @@ public class GridTabXLSXImporter implements IGridTabImporter {
 
 			for (Entry<Integer, List<List<Object>>> entry : mapValues.entrySet()) {
 				String sql = "";
+				/*
 				if (isInsert)
 					sql = PO.getSqlInsert(entry.getKey(), trxName);
 				else
 					sql = PO.getSqlUpdate(entry.getKey());
+				*/
+				sql = PO.getSqlInsert(entry.getKey(), trxName);
 				if (entry.getValue().size() > 0) {
 					String err = DB.excuteBatch(sql, entry.getValue(), trxName);
 					if (err != null) {
