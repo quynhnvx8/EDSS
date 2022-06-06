@@ -365,8 +365,8 @@ public abstract class AbstractProcessCtl implements Runnable
 						if (rowCount == 0)
 							arrWidth.add((float)itemsC[i].getMaxWidth());
 					}
-					if (item.getNumLines() > maxRow) {
-						maxRow = item.getNumLines();
+					if (Integer.parseInt(item.getOrderRowHeader()) > maxRow && !item.isGroupBy()) {
+						maxRow = Integer.parseInt(item.getOrderRowHeader());
 					}
 				}
 				arrsC.add(arrC);
@@ -395,8 +395,8 @@ public abstract class AbstractProcessCtl implements Runnable
 					arrWidth.add((float)itemsC[i].getMaxWidth());
 						
 				}
-				if (item.getNumLines() > maxRow) {
-					maxRow = item.getNumLines();
+				if (Integer.parseInt(item.getOrderRowHeader()) > maxRow && !item.isGroupBy()) {
+					maxRow = Integer.parseInt(item.getOrderRowHeader());
 				}
 			}
 			arrsC.add(arrC);
@@ -597,7 +597,7 @@ public abstract class AbstractProcessCtl implements Runnable
 					
 					for(int i = 0; i < itemsC.length; i++) {
 						MPrintFormatItem item = itemsC[i];
-						
+						//item.setNumLines(0);
 						if (item.isMapColumnSelectSQL() && item.isPrinted()){
 							element = (Serializable) rsC.getObject(item.getName());
 							
@@ -624,6 +624,20 @@ public abstract class AbstractProcessCtl implements Runnable
 								if (colspan > 0)
 									item.setColumnSpan(colspan);
 							}
+							
+							//Đoạn set RowSpan
+							/*
+							item.setNumLines(1);
+							if (mapColSpan.size() > 0 && mapColSpan.containsKey("RowSpan:"+ item.getColumnName())) {
+								int rowspan = mapColSpan.get("RowSpan:"+item.getColumnName());
+								if (rowspan > 1)
+									item.setNumLines(rowspan);
+							}
+							if (item.getNumLines() == 2) {
+								
+								System.out.println(element);
+							}
+							*/
 							arrC.add(addNewItem(item, element));
 								
 							//Add do rong cua cac cot
@@ -786,43 +800,107 @@ public abstract class AbstractProcessCtl implements Runnable
 	
 	private ParameterReport processRow(ResultSet rs){
 		ParameterReport data = new ParameterReport();
+
+		String result1 = "";
 		try {
-			String result1 = rs.getString("Result1");
-			String result2 = rs.getString("Result2");
-			String result3 = rs.getString("Result3");
-			String result4 = rs.getString("Result4");
-			String result5 = rs.getString("Result5");
-			String result6 = rs.getString("Result6");
-			String result7 = rs.getString("Result7");
-			String result8 = rs.getString("Result8");
-			String result9 = rs.getString("Result9");
-			String tableTemp = rs.getString("TableTemp");
-			
-			String bold = rs.getString("IsBold");
-			if (bold == null)
-				bold = "N";
-			String sborder = rs.getString("IsBorder");
-			if (sborder == null)
-				sborder = "N";
-			String header = rs.getString("IsHeader");
-			if (header == null)
-				header = "N";
-			data.setBold("N".equals(bold) ? false : true);
-			data.setBorder("N".equals(sborder) ? 0 : 1);
-			data.setHeader("N".equals(header) ? false : true);
-			data.setResult1(result1);
-			data.setResult2(result2);
-			data.setResult3(result3);
-			data.setResult4(result4);
-			data.setResult5(result5);
-			data.setResult6(result6);
-			data.setResult7(result7);
-			data.setResult8(result8);
-			data.setResult9(result9);
-			data.setTableTemp(tableTemp);
-		} catch (SQLException e) {
-			
-		}
+			result1 = rs.getString("Result1");
+	    }
+	    catch(SQLException e) {
+	        
+	    }
+		String result2 = "";
+		try {
+			result2 = rs.getString("Result2");
+	    }
+	    catch(SQLException e) {
+	        
+	    }
+		String result3 = "";
+		try {
+			result3 = rs.getString("Result3");
+	    }
+	    catch(SQLException e) {
+	        
+	    }
+		String result4 = "";
+		try {
+			result4 = rs.getString("Result4");
+	    }
+	    catch(SQLException e) {
+	        
+	    }
+		String result5 = "";
+		try {
+			result5 = rs.getString("Result5");
+	    }
+	    catch(SQLException e) {
+	        
+	    }
+		String result6 = "";
+		try {
+			result6 = rs.getString("Result6");
+	    }
+	    catch(SQLException e) {
+	        
+	    }
+		String result7 = "";
+		try {
+			result7 = rs.getString("Result7");
+	    }
+	    catch(SQLException e) {
+	        
+	    }
+		String result8 = "";
+		try {
+			result8 = rs.getString("Result8");
+	    }
+	    catch(SQLException e) {
+	        
+	    }
+		String result9 = "";
+		try {
+			result9 = rs.getString("Result9");
+	    }
+	    catch(SQLException e) {
+	        
+	    }
+		
+		String bold = "N";
+		try {
+			bold = rs.getString("IsBold");
+	    }
+	    catch(SQLException e) {
+	        
+	    }
+		
+		String sborder = "N";
+		try {
+			sborder = rs.getString("IsBorder");
+	    }
+	    catch(SQLException e) {
+	        
+	    }
+		
+		String header = "N";
+		try {
+			header = rs.getString("IsHeader");
+	    }
+	    catch(SQLException e) {
+	        
+	    }
+		
+		data.setBold("N".equals(bold) ? false : true);
+		data.setBorder("N".equals(sborder) ? 0 : 1);
+		data.setHeader("N".equals(header) ? false : true);
+		data.setResult1(result1);
+		data.setResult2(result2);
+		data.setResult3(result3);
+		data.setResult4(result4);
+		data.setResult5(result5);
+		data.setResult6(result6);
+		data.setResult7(result7);
+		data.setResult8(result8);
+		data.setResult9(result9);
 		
 		return data;
 	}

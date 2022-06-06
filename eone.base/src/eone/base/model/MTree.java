@@ -193,7 +193,7 @@ public class MTree extends X_AD_Tree
 			
 			//Nếu là User các công ty chỉ nhìn đc menu mà quản trị toàn hệ thống phân quyền cho thôi.
 			if (!Env.isUserSystem(getCtx())) {
-				sql.append(" AND tn.AD_Menu_ID IN (SELECT tn.Node_ID FROM AD_TreeNode tn WHERE AD_Tree_ID = (SELECT AD_Tree_ID FROM AD_Tree WHERE IsAdminClient = 'Y') AND IsDisplayed = 'Y')");
+				sql.append(" AND tn.AD_Menu_ID IN (SELECT tn.Node_ID FROM AD_TreeNode tn WHERE AD_Tree_ID IN (SELECT AD_Tree_ID FROM AD_Tree WHERE IsAdminClient = 'Y') AND IsDisplayed = 'Y')");
 			}
 			sql.append(" ORDER BY COALESCE(tn.Parent_ID, -1), tn.SeqNo");
 			

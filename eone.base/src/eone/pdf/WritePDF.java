@@ -464,14 +464,13 @@ public class WritePDF {
     
     private  void createContent(PdfPTable table) {
     	PdfPCell cell = null;
-    	
     	for(int row = 0; row < countRow; row ++) {
         	ArrayList<PrintDataItem> arrItem = dataQuery.get(row);
         	int border = 1;
         	ParameterReport sParams = new ParameterReport();
         	boolean isHeader = false;
         	boolean isBold = false;
-        	if (dataQueryParam.size() > 0) {
+        	if (dataQueryParam != null && dataQueryParam.size() > 0) {
         		
         		sParams = dataQueryParam.get(row);
         		isBold = sParams.isBold();
@@ -495,9 +494,6 @@ public class WritePDF {
         		else
         			fontFinal = smallfont;
         		
-        		if (value != null && "0".equals(value.toString()))
-        			value = null;
-        		
             	cell = new PdfPCell(new Phrase((String) value, fontFinal));
                 cell.setNoWrap(false);
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -507,8 +503,11 @@ public class WritePDF {
                 	cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
                 }
                 cell.setColspan(item.getColSpan());
+                
+                
                 cell.setPadding(4);
                 cell.setBorderWidth(border);
+                
                 table.addCell(cell);
                 
                 c = c + item.getColSpan() - 1;

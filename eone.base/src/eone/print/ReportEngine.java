@@ -42,23 +42,10 @@ import eone.util.Util;
 public class ReportEngine implements PrintServiceAttributeListener
 {
 	
-	public ReportEngine (Properties ctx, MPrintFormat pf, PrintInfo info, HashMap<String, Object> params)
-	{
-		this(ctx, pf, info, null, params);
-	}	//	ReportEngine
-	
-
-	public ReportEngine (Properties ctx, MPrintFormat pf, PrintInfo info, boolean isSummary, HashMap<String, Object> params)
-	{
-		this(ctx, pf, info, isSummary, null, params);
-	}	//	ReportEngine
-	
-
 	public ReportEngine (Properties ctx, MPrintFormat pf, PrintInfo info, String trxName, HashMap<String, Object> params){
 		this(ctx, pf, info, false, trxName, params);
 	}
 	
-
 	public ReportEngine (Properties ctx, MPrintFormat pf, PrintInfo info, boolean isSummary, String trxName, HashMap<String, Object> m_params)
 	{
 		m_summary = isSummary;
@@ -71,7 +58,6 @@ public class ReportEngine implements PrintServiceAttributeListener
 		//
 		m_printFormat = pf;
 		m_info = info;
-		//m_trxName = trxName;
 		setParams(m_params);
 		
 	}	//	ReportEngine
@@ -87,8 +73,6 @@ public class ReportEngine implements PrintServiceAttributeListener
 	public MPrintFormat	m_printFormat;
 	/** Print Info				*/
 	private PrintInfo		m_info;
-	
-	private String			m_printerName = Ini.getProperty(Ini.P_PRINTER);	
 	
 	/** Where filter */
 	private String 			m_whereExtended = null;
@@ -203,31 +187,9 @@ public class ReportEngine implements PrintServiceAttributeListener
 	{
 		
 		if (log.isLoggable(Level.FINE)) log.fine("attributeUpdate - " + psae);
-	//	PrintUtil.dump (psae.getAttributes());
-	}	//	attributeUpdate
+	}
 
 
-	
-	/**
-	 * 	Set Printer (name)
-	 * 	@param printerName valid printer name
-	 */
-	public void setPrinterName(String printerName)
-	{
-		if (printerName == null)
-			m_printerName = Ini.getProperty(Ini.P_PRINTER);
-		else
-			m_printerName = printerName;
-	}	//	setPrinterName
-
-
-	public String getPrinterName()
-	{
-		return m_printerName;
-	}	//	getPrinterName
-
-
-	
 	public boolean createHTML (Writer writer, boolean onlyTable, IHTMLExtension extension, boolean isExport)
 	{
 		try
@@ -283,7 +245,6 @@ public class ReportEngine implements PrintServiceAttributeListener
 			
 			if (doc != null)
 			{
-				//IDEMPIERE-4113
 				mapCssInfo.clear();
 				MPrintFormatItem item = null;
 				int printColIndex = -1;
@@ -300,9 +261,7 @@ public class ReportEngine implements PrintServiceAttributeListener
 				
 				StringBuilder styleBuild = new StringBuilder();
 								
-				//MPrintFont printFont = MPrintFont.get(m_printFormat.getAD_PrintFont_ID());
 				Font base = Font.decode("sansserif-PLAIN-10");
-				//Font base = printFont.getFont();
 				Font newFont = new Font(base.getName(), Font.PLAIN, base.getSize()-1);
 				CSSInfo cssInfo = new CSSInfo(newFont, null);
 				styleBuild.append(".tr-level-1 td").append(cssInfo.getCssRule());
@@ -523,9 +482,6 @@ public class ReportEngine implements PrintServiceAttributeListener
 	 */
 	static public ReportEngine get (Properties ctx, ProcessInfo pi, HashMap<String, Object> m_params)
 	{
-		
-		//MProcess process = MProcess.get(Env.getCtx(), pi.getAD_Process_ID());
-		//MPrintFormat format = MPrintFormat.get(Env.getCtx(), process.getAD_PrintFormat_ID(), false);
 		
 		MPrintFormat format = (MPrintFormat) m_params.get("MPrintFormat");
 		PrintInfo info = new PrintInfo (pi);

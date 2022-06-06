@@ -425,7 +425,7 @@ public class Process {
 		}
 		PrintInfo info = new PrintInfo(pi);
 
-		ReportEngine re = new ReportEngine(Env.getCtx(), format, info, null);
+		ReportEngine re = new ReportEngine(Env.getCtx(), format, info, null, null);
 		//new Viewer(re);
 		return re;
 	}

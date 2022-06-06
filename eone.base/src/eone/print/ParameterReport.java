@@ -2,13 +2,7 @@ package eone.print;
 
 public class ParameterReport {
 	private boolean isBold;
-	private String tableTemp;
-	public String getTableTemp() {
-		return tableTemp;
-	}
-	public void setTableTemp(String tableTemp) {
-		this.tableTemp = tableTemp;
-	}
+	
 	public boolean isBold() {
 		return isBold;
 	}

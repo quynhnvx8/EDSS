@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -186,7 +185,8 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 		m_params = re.getParams();
 		String titleReport = m_params.get("ReportName").toString();
 		m_isCanExport = true;
-		
+		//String export = Env.getContext(m_ctx, "#IsCanExport");
+		//m_isCanExport =  "Y".equals(Env.getContext(m_ctx, "#IsCanExport")) ? true : false;
 		setTitle(Util.cleanAmp(Msg.getMsg(Env.getCtx(), "Report") + ": " + titleReport));
 		Spreadsheet sheet = new Spreadsheet();
 		sheet.setSrc(null);
@@ -232,13 +232,9 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 		ZKUpdateUtil.setWidth(toolBar, "100%");
 		
 		previewType.setMold("select");
-		previewType.appendItem("HTML", "HTML");
 		previewType.appendItem("PDF", "PDF");
+		previewType.appendItem("HTML", "HTML");
 		
-		if ( m_isCanExport )
-		{
-			previewType.appendItem("XLSX", "XLSX");
-		}
 		
 		toolBar.appendChild(previewType);		
 		previewType.addEventListener(Events.ON_SELECT, this);
@@ -250,9 +246,9 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 		if (m_reportEngine.getReportType() != null)
 		{
 			if (m_reportEngine.getReportType().equals("PDF"))
+				pTypeIndex = 0;
+			else if (m_reportEngine.getReportType().equals("HTML"))
 				pTypeIndex = 1;
-			else if (m_reportEngine.getReportType().equals("XLSX") && m_isCanExport)
-				pTypeIndex = 2;
 		}
 		else
 		{
@@ -260,12 +256,10 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
     		String type = "PDF";
     			
     		if ("HTML".equals(type)) {
-    			pTypeIndex = 0;
-    		} else if ("PDF".equals(type)) {
     			pTypeIndex = 1;
-    		} else if ("XLSX".equals(type) && m_isCanExport) {
-    			pTypeIndex = 2;
-    		}
+    		} else if ("PDF".equals(type)) {
+    			pTypeIndex = 0;
+    		} 
 		}
 		
 		previewType.setSelectedIndex(pTypeIndex);
@@ -286,7 +280,7 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 		if (toolbarPopup == null)
 			toolBar.appendChild(new Separator("vertical"));
 		
-		m_isCanExport = false;
+		//m_isCanExport = true;
 		if ( m_isCanExport )
 		{
 			bExport.setName("Export");
@@ -393,8 +387,6 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 			future = EOne.getThreadPoolExecutor().submit(new DesktopRunnable(new PDFRendererRunnable(this),getDesktop()));
 		} else if ("HTML".equals(previewType.getSelectedItem().getValue())) {
 			future = EOne.getThreadPoolExecutor().submit(new DesktopRunnable(new HTMLRendererRunnable(this),getDesktop()));
-		} else if ("XLSX".equals(previewType.getSelectedItem().getValue())) {			
-			future = EOne.getThreadPoolExecutor().submit(new DesktopRunnable(new XLSXRendererRunnable(this),getDesktop()));
 		}		
 	}
 	
@@ -504,7 +496,7 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 		
 		if(event.getTarget().getId().equals(ConfirmPanel.A_CANCEL))
 			winExportFile.onClose();
-		else if(event.getTarget().getId().equals(ConfirmPanel.A_OK))			
+		else if(event.getTarget() == bExport)			
 			exportFile();
 		else if(event.getName().equals(Events.ON_CLICK) || event.getName().equals(Events.ON_SELECT)) 
 			actionPerformed(event);
@@ -600,10 +592,11 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 			cboType.setMold("select");
 			
 			cboType.getItems().clear();			
-			ListItem li = cboType.appendItem("pdf" + " - " + Msg.getMsg(Env.getCtx(), "FilePDF"), "pdf");
-			cboType.appendItem("html" + " - " + Msg.getMsg(Env.getCtx(), "FileHTML"), "html");
-			cboType.appendItem("xlsx" + " - " + Msg.getMsg(Env.getCtx(), "FileXLSX"), "xlsx");
+			ListItem li = cboType.appendItem("XLSX", "XLSX");
+			cboType.appendItem("HTML", "HTML");
+			cboType.appendItem("PDF", "PDF");
 			cboType.setSelectedItem(li);
+			cboType.setSelectedIndex(0);
 			
 			Hbox hb = new Hbox();
 			hb.setSclass("dialog-content");			
@@ -633,50 +626,15 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 	{
 		try
 		{
-			ListItem li = cboType.getSelectedItem();
-			if(li == null || li.getValue() == null)
-			{
-				FDialog.error(m_WindowNo, winExportFile, "FileInvalidExtension");
-				return;
-			}
-			
-			String ext = li.getValue().toString();
-			
-			byte[] data = null;
-			File inputFile = null;
-									
-			if (ext.equals("pdf"))
-			{
-				data = m_reportEngine.createPDFData();
-			}
-			else if (ext.equals("html") || ext.equals("htm"))
-			{
-				StringWriter sw = new StringWriter();							
-				String contextPath = Executions.getCurrent().getContextPath();
-				m_reportEngine.createHTML(sw, false, new HTMLExtension(contextPath, "rp", this.getUuid()), true);
-				data = sw.getBuffer().toString().getBytes();	
-			}
-			else if (ext.equals("xlsx"))
-			{
-				inputFile = File.createTempFile("Export", ".xlsx");							
-				//m_reportEngine.createXLSX(inputFile);
-				PrintDataXLSXExporter exp = new PrintDataXLSXExporter(m_params, m_reportEngine.m_printFormat);
-				exp.export(inputFile, true);
-			}
-			
-			else
-			{
-				FDialog.error(m_WindowNo, winExportFile, "FileInvalidExtension");
-				return;
-			}
 
-			winExportFile.onClose();
-			AMedia media = null;
-			if (data != null)
-				media = new AMedia(m_reportEngine.getName() + "." + ext, null, "application/octet-stream", data);
-			else
-				media = new AMedia(m_reportEngine.getName() + "." + ext, null, "application/octet-stream", inputFile, true);
-			Filedownload.save(media, m_reportEngine.getName() + "." + ext);
+			File inputFile = null;
+			inputFile = File.createTempFile("Export", ".xlsx");							
+			//m_reportEngine.createXLSX(inputFile);
+			PrintDataXLSXExporter exp = new PrintDataXLSXExporter(m_params, m_reportEngine.m_printFormat);
+			exp.export(inputFile, true);
+			
+			AMedia media = new AMedia(m_reportEngine.getName(), "xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", inputFile, true);
+			Filedownload.save(media, m_reportEngine.getName() + ".xlsx");
 		}
 		catch (Exception e)
 		{

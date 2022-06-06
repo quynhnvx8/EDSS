@@ -343,7 +343,7 @@ public final class MRole extends X_AD_Role
 	
 	
 		
-	public boolean isCanExport (int AD_Table_ID)
+	public boolean isCanExport ()
 	{
 		return Env.getContext(getCtx(), "#IsCanExport") == "Y" ? true : false;
 	}	//	isCanExport
