@@ -1553,6 +1553,8 @@ DataStatusListener, IADTabpanel, IdSpace, IFieldEditorContainer
 			int parentID = root.getNode_ID();
 			DefaultTreeNode<Object> parentNode = null;
 			if (isTreeDrivenByValue()) {
+				//int node_id = gridTab.getCurrentRow();
+				//Object node = gridTab.getValue(node_id-1, "AD_Menu_ID");
 				String value = gridTab.getValue("Value").toString();
 				parentID = PO.retrieveIdOfParentValue(value, getTableName(), Env.getAD_Client_ID(Env.getCtx()), null);
 				parentNode = model.find(treeNode, parentID);

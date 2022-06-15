@@ -47,7 +47,8 @@ public class MConfig extends X_HR_Config
 		
 		Map<String, Object> dataColumn = new HashMap<String, Object>();
 		dataColumn.put(COLUMNNAME_Name, getName());
-		boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_HR_Config_ID, getHR_Config_ID());
+		dataColumn.put(COLUMNNAME_AD_Client_ID, Env.getAD_Client_ID(getCtx()));
+		boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_HR_Config_ID, getHR_Config_ID(), get_TrxName());
 		dataColumn = null;
 		if (!check) {
 			log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": " + COLUMNNAME_HR_Config_ID);

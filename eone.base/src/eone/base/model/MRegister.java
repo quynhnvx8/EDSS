@@ -55,7 +55,7 @@ public class MRegister extends X_AD_Register
 		Map<String, Object> dataColumn = new HashMap<String, Object>();
 		dataColumn.put(COLUMNNAME_AD_Register_ID, getAD_Register_ID());
 		dataColumn.put(COLUMNNAME_EMail, getEMail());
-		boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_AD_Register_ID, getAD_Register_ID());
+		boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_AD_Register_ID, getAD_Register_ID(), get_TrxName());
 		
 		if (!check) {
 			log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": " + COLUMNNAME_Domain);
@@ -65,7 +65,7 @@ public class MRegister extends X_AD_Register
 		dataColumn.clear();
 		dataColumn.put(COLUMNNAME_AD_Register_ID, getAD_Register_ID());
 		dataColumn.put(COLUMNNAME_TaxID, getTaxID());
-		check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_AD_Register_ID, getAD_Register_ID());
+		check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_AD_Register_ID, getAD_Register_ID(), get_TrxName());
 		
 		if (!check) {
 			log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": " + COLUMNNAME_TaxID);

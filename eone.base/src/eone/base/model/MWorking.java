@@ -62,7 +62,7 @@ public class MWorking extends X_HR_Working
 		Map<String, Object> dataColumn = new HashMap<String, Object>();
 		dataColumn.put(COLUMNNAME_IsSelected, true);
 		dataColumn.put(COLUMNNAME_HR_Employee_ID, getHR_Employee_ID());
-		boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_HR_Working_ID, getHR_Working_ID());
+		boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_HR_Working_ID, getHR_Working_ID(), get_TrxName());
 		if (!check && isSelected()) {
 			log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": " + COLUMNNAME_IsSelected);
 			return false;

@@ -64,7 +64,7 @@ public class MSafetyStock extends X_M_SafetyStock implements DocAction
 			Map<String, Object> dataColumn = new HashMap<String, Object>();
 			dataColumn.put(COLUMNNAME_C_Year_ID, getC_Year_ID());
 			dataColumn.put(COLUMNNAME_AD_Department_ID, getAD_Department_ID());
-			boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_M_SafetyStock_ID, getM_SafetyStock_ID());
+			boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_M_SafetyStock_ID, getM_SafetyStock_ID(), get_TrxName());
 			if (!check) {
 				log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": Shop, Year!");
 				return false;

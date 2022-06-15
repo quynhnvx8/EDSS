@@ -98,7 +98,7 @@ public class MHoliday extends X_HR_Holiday
 		if (getYearHoliday() != 0) {
 			dataColumn.put(COLUMNNAME_YearHoliday, getYearHoliday());
 		}
-		boolean checkdouble = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_HR_Holiday_ID, getHR_Holiday_ID());
+		boolean checkdouble = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_HR_Holiday_ID, getHR_Holiday_ID(), get_TrxName());
 		dataColumn = null;
 		if (!checkdouble) {
 			log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": " + 

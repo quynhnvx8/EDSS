@@ -14,6 +14,7 @@
 package eone.webui.editor;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 
@@ -22,7 +23,11 @@ import org.zkoss.zk.ui.event.Events;
 
 import eone.base.model.GridField;
 import eone.util.CLogger;
+import eone.util.DisplayType;
+import eone.util.Env;
+import eone.util.Language;
 import eone.webui.ValuePreference;
+import eone.webui.apps.AEnv;
 import eone.webui.component.Timebox;
 import eone.webui.event.ContextMenuEvent;
 import eone.webui.event.ContextMenuListener;
@@ -52,6 +57,7 @@ public class WTimeEditor extends WEditor implements ContextMenuListener
    public WTimeEditor(GridField gridField)
    {
 	   this(gridField, false, null);
+	   this.displayType = gridField.getDisplayType();
    }
    
     /**
@@ -78,6 +84,7 @@ public class WTimeEditor extends WEditor implements ContextMenuListener
 			String title)
 	{
 		super(new Timebox(), columnName, title, null, mandatory, readonly, updateable);
+		this.displayType = gridField.getDisplayType();
 		init();
 	}
 
@@ -99,15 +106,19 @@ public class WTimeEditor extends WEditor implements ContextMenuListener
 	{
 		super(new Timebox(), label, description, mandatory, readonly, updateable);
 		setColumnName("Time");
+		this.displayType = gridField.getDisplayType();
 		init();
 	}
 
 	public WTimeEditor()
 	{
 		this("Time", "Time", false, false, true);
+		this.displayType = gridField.getDisplayType();
 		init();
 	}   // VDate
 
+	private int displayType;
+	
 	private void init()
 	{
 		getComponent().setCols(10);
@@ -116,6 +127,13 @@ public class WTimeEditor extends WEditor implements ContextMenuListener
 		addChangeLogMenu(popupMenu);
 		if (gridField != null)
 			getComponent().setPlaceholder(gridField.getPlaceholder());
+		
+		Language lang = AEnv.getLanguage(Env.getCtx());
+		SimpleDateFormat format = DisplayType.getDateFormat(displayType, lang);
+		if (gridField != null && gridField.getFormatPattern() != null)
+			getComponent().setFormat(gridField.getFormatPattern());
+		else
+			getComponent().setFormat(format.toPattern());
 	}
 	
 	public void onEvent(Event event)

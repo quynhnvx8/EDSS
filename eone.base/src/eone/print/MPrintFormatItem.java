@@ -311,7 +311,7 @@ public class MPrintFormatItem extends X_AD_PrintFormatItem
 		Map<String, Object> dataColumn = new HashMap<String, Object>();
 		dataColumn.put(COLUMNNAME_ChartColumn, getChartColumn());
 		dataColumn.put(COLUMNNAME_AD_PrintFormat_ID, getAD_PrintFormat_ID());
-		boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_AD_PrintFormatItem_ID, getAD_PrintFormatItem_ID());
+		boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_AD_PrintFormatItem_ID, getAD_PrintFormatItem_ID(), get_TrxName());
 		if (!check && is_ValueChanged(X_AD_PrintFormatItem.COLUMNNAME_ChartColumn) && !"NONE".equals(getChartColumn())) {
 			log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": " + COLUMNNAME_ChartColumn);
 			return false;

@@ -64,7 +64,7 @@ public class MSaleDay extends X_C_SaleDay implements DocAction
 			Map<String, Object> dataColumn = new HashMap<String, Object>();
 			dataColumn.put(COLUMNNAME_C_Year_ID, getC_Year_ID());
 			dataColumn.put(COLUMNNAME_AD_Department_ID, getAD_Department_ID());
-			boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_C_SaleDay_ID, getC_SaleDay_ID());
+			boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_C_SaleDay_ID, getC_SaleDay_ID(), get_TrxName());
 			if (!check) {
 				log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": Shop, Year!");
 				return false;

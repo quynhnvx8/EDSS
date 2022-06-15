@@ -63,7 +63,7 @@ public class MFamilyTies extends X_HR_FamilyTies
 		Map<String, Object> dataColumn = new HashMap<String, Object>();
 		dataColumn.put(COLUMNNAME_Name, getName());
 		dataColumn.put(COLUMNNAME_HR_ItemLine_24_ID, getHR_ItemLine_24_ID());
-		boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_HR_FamilyTies_ID, getHR_FamilyTies_ID());
+		boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_HR_FamilyTies_ID, getHR_FamilyTies_ID(), get_TrxName());
 		dataColumn = null;
 		if (!check) {
 			log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": " + COLUMNNAME_Name);

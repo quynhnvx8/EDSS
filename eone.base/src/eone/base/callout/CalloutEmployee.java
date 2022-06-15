@@ -1,18 +1,22 @@
 
 package eone.base.callout;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import eone.base.model.CalloutEngine;
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
 import eone.base.model.MSalaryTableLine;
+import eone.base.model.X_HR_Employee;
 import eone.base.model.X_HR_SalaryExtra;
 import eone.base.model.X_HR_SalaryTableLine;
+import eone.util.DB;
 import eone.util.Env;
 
-//eone.base.model.CalloutEmployee.fillSalaryExtra
-
+//eone.base.callout.CalloutEmployee.fillSalaryExtra 
+//eone.base.callout.CalloutEmployee.fillCodeEmployee 
 public class CalloutEmployee extends CalloutEngine
 {
 
@@ -53,6 +57,28 @@ public class CalloutEmployee extends CalloutEngine
 			}
 			
 		} 
+		
+		return "";
+	}
+	
+	public String fillCodeEmployee (Properties ctx, int WindowNo, GridTab mTab, GridField mField, Object value)
+	{
+		if (isCalloutActive())	
+			return "";
+		
+		int AD_Client_ID = Env.getAD_Client_ID(ctx);
+		
+		String sql = "Select max(Code) from hr_employee where AD_Client_ID = ? ";
+		List<Object> params = new ArrayList<Object>();
+		params.add(AD_Client_ID);
+		
+		String code = "000001";
+		int retNumber = DB.getSQLValue(null, sql, params);
+		if (retNumber > 0) {
+			code =  Env.numToChar(++retNumber, 6);
+		}
+		
+		mTab.setValue(X_HR_Employee.COLUMNNAME_Code, code);
 		
 		return "";
 	}

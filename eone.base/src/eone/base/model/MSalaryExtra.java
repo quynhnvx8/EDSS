@@ -69,7 +69,7 @@ public class MSalaryExtra extends X_HR_SalaryExtra
 		
 		Map<String, Object> dataColumn = new HashMap<String, Object>();
 		dataColumn.put(COLUMNNAME_HR_SalaryTable_ID, getHR_SalaryTable_ID());
-		boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_HR_SalaryExtra_ID, getHR_SalaryExtra_ID());
+		boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_HR_SalaryExtra_ID, getHR_SalaryExtra_ID(), get_TrxName());
 		
 		if (!check) {
 			log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": " + COLUMNNAME_HR_SalaryTable_ID);
@@ -78,7 +78,7 @@ public class MSalaryExtra extends X_HR_SalaryExtra
 		
 		dataColumn.clear();
 		dataColumn.put(COLUMNNAME_HR_SalaryTableLine_ID, getHR_SalaryTableLine_ID());
-		check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_HR_SalaryExtra_ID, getHR_SalaryExtra_ID());
+		check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_HR_SalaryExtra_ID, getHR_SalaryExtra_ID(), get_TrxName());
 		dataColumn = null;
 		if (!check) {
 			log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": " + COLUMNNAME_HR_SalaryTableLine_ID);

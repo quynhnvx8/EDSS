@@ -54,6 +54,7 @@
 								    <version>1.4.1</version>									
 								</artifactItem>
 							</artifactItems>
+							
 							<outputDirectory>WEB-INF/lib</outputDirectory>
 							<stripVersion>true</stripVersion>
 							<overWriteReleases>true</overWriteReleases>

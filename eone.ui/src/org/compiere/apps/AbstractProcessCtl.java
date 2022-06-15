@@ -411,9 +411,14 @@ public abstract class AbstractProcessCtl implements Runnable
 		
 		m_pi.setWidthTable(retValue);
 		m_pi.setDataQueryC(arrsC);
+		m_pi.setDataQueryH(arrsH);
+		m_pi.setDataQueryF(arrsF);
 		m_pi.setRowCountQuery(rowCount);
 		m_pi.setColumnCountQuery(arrWidth.size());
 		m_pi.setMaxRow(maxRow);
+		m_pi.setItemsC(itemsC);
+		m_pi.setItemsF(itemsF);
+		m_pi.setItemsH(itemsH);
 	}
 	
 	private void getDataExcute(String sql, MPrintFormat  format)
@@ -562,9 +567,14 @@ public abstract class AbstractProcessCtl implements Runnable
 						String groupName = itemG.getName();
 						if (!dataGroup.containsKey(groupName + "-o0o-"+ element) && element != null) {
 							arrG = new ArrayList<PrintDataItem>();
-							arrG.add(addNewItem(itemG, element));
 							
-							nextcol = nextcol + itemG.getColumnSpan();
+							arrG.add(addNewItem(itemG, element, itemG.getColumnSpan()));
+							nextcol++;
+							while (nextcol < itemG.getColumnSpan()) {
+								arrG.add(addNewItem(itemG, null, 1));
+								nextcol++;
+							}
+							//nextcol = nextcol + itemG.getColumnSpan();
 							//End 
 							String [] obj = itemG.getFieldSumGroup().split(";");
 							if (obj.length > 0) {
@@ -578,14 +588,15 @@ public abstract class AbstractProcessCtl implements Runnable
 									objGroup.put(forColSum, rsC.getBigDecimal(""+ colGroup +""));
 									
 									//add vao arr cua group
-									arrG.add(addNewItem(itemG, (Serializable)rsC.getBigDecimal(""+ colGroup +"")));
+									Serializable valGroup = (Serializable)rsC.getBigDecimal(""+ colGroup +"");
+									
+									arrG.add(addNewItem(itemG, valGroup, 1));
+									
 									nextcol++;
 								}
 								dataGroup.put(groupName + "-o0o-"+ element, objGroup);
 							}
-							if (nextcol < itemsC.length) {
-								arrG.add(null);
-							}
+							
 							arrsC.add(arrG);
 							countGroup++;
 						}								
@@ -625,19 +636,7 @@ public abstract class AbstractProcessCtl implements Runnable
 									item.setColumnSpan(colspan);
 							}
 							
-							//Đoạn set RowSpan
-							/*
-							item.setNumLines(1);
-							if (mapColSpan.size() > 0 && mapColSpan.containsKey("RowSpan:"+ item.getColumnName())) {
-								int rowspan = mapColSpan.get("RowSpan:"+item.getColumnName());
-								if (rowspan > 1)
-									item.setNumLines(rowspan);
-							}
-							if (item.getNumLines() == 2) {
-								
-								System.out.println(element);
-							}
-							*/
+							
 							arrC.add(addNewItem(item, element));
 								
 							//Add do rong cua cac cot
@@ -795,6 +794,10 @@ public abstract class AbstractProcessCtl implements Runnable
 		m_pi.setColumnCountQuery(arrWidth.size());
 		m_pi.setMaxRow(maxRow);
 		m_pi.setDataGroup(dataGroup);
+		
+		m_pi.setItemsC(itemsC);
+		m_pi.setItemsF(itemsF);
+		m_pi.setItemsH(itemsH);
 	}
 	
 	
@@ -926,6 +929,31 @@ public abstract class AbstractProcessCtl implements Runnable
 				item.getFieldSumGroup(),	//Tính tổng theo group
 				item.getNumLines(),
 				item.getColumnSpan(),
+				item.isBreakPage(),
+				item.getPrintAreaType()
+				);
+	}
+	
+	private PrintDataItem addNewItem(MPrintFormatItem item, Serializable element, int colSpan) {
+		return new PrintDataItem(
+				item.getName(), 			//Ten cot
+				element, 					//Gia tri cua cot
+				item.getAD_Reference_ID(), 	//kieu hien thi
+				item.getFormatPattern(),	//Dinh dang hien thi
+				item.getZoomLogic(), 		//zoom den ban ghi goc
+				item.getAlignment(), 		//Can trai, phai, giua
+				item.getFormulaSetup(),		//thiet lap cong thuc tinh so du
+				
+				item.isGroupBy(), 			//Co phan nhom hay khong	
+				item.isSummarized(), 		//Co cong tong bao cao hay khong
+				item.isCountedGroup(),		//Dem so luong ban ghi cua nhom
+				item.isBalanceFinal(),		//So du cuoi ky
+				
+				item.getTableName(),		//Ten bang can de zoom theo dieu kien ZoomLogic	
+				item.getRotationText(),		//Huong chu tren header cua bao cao
+				item.getFieldSumGroup(),	//Tính tổng theo group
+				item.getNumLines(),
+				colSpan,
 				item.isBreakPage(),
 				item.getPrintAreaType()
 				);

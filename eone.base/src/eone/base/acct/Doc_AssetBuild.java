@@ -6,9 +6,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
+import eone.base.model.MAsset;
 import eone.base.model.MAssetBuild;
 import eone.base.model.MAssetBuildLine;
 import eone.base.model.MElementValue;
+import eone.base.model.MPeriodPayment;
 
 
 public class Doc_AssetBuild extends Doc
@@ -97,6 +99,15 @@ public class Doc_AssetBuild extends Doc
 			return false;
 		}
 		f.setA_Asset_ID(header.getA_Asset_ID());
+		if (header.getA_Asset_ID() > 0) {
+			MAsset ass = MAsset.get(getCtx(), header.getA_Asset_ID(), getTrxName());
+			int c_periodpayment_id = -1;
+			if (ass.getUseLifes().compareTo(new BigDecimal("12")) > 0)
+				c_periodpayment_id = MPeriodPayment.get(getCtx(), "013", getTrxName()).getC_PeriodPayment_ID();
+			else
+				c_periodpayment_id = MPeriodPayment.get(getCtx(), "012", getTrxName()).getC_PeriodPayment_ID();
+			f.setC_PeriodPayment_ID(c_periodpayment_id);
+		}
 		f.setA_Asset_Cr_ID(header.getA_Asset_ID());
 		if (line.getA_Asset_Cr_ID() > 0)
 			f.setA_Asset_Cr_ID(line.getA_Asset_Cr_ID());

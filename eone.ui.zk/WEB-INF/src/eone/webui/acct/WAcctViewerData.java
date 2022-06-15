@@ -406,6 +406,10 @@ public class WAcctViewerData
 		rc.setColSize(140);
 		m_rcolumn.add(rc);
 		
+		rc = new RColumn(ctx, X_Fact_Acct.COLUMNNAME_C_PeriodPayment_ID, DisplayType.TableDir);
+		rc.setColSize(140);
+		m_rcolumn.add(rc);
+		
 		//Debit Warehouse
 		if (Env.DisProduct) {
 			rc = new RColumn(ctx, X_Fact_Acct.COLUMNNAME_M_Product_ID, DisplayType.TableDir);

@@ -636,7 +636,7 @@ public class MTree extends X_AD_Tree
 			Map<String, Object> dataColumn = new HashMap<String, Object>();
 			dataColumn.put(COLUMNNAME_AD_Tree_ID, getAD_Tree_ID());
 			dataColumn.put(COLUMNNAME_IsAdminClient, isAdminClient());
-			boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_AD_Tree_ID, getAD_Tree_ID());
+			boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_AD_Tree_ID, getAD_Tree_ID(), get_TrxName());
 			
 			if (!check) {
 				log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": " + COLUMNNAME_IsAdminClient);

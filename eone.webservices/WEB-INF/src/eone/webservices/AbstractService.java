@@ -159,7 +159,7 @@ public class AbstractService {
 						null)
 						.setOnlyActiveRecords(true)
 						.setParameters(m_cs.getAD_Client_ID(), m_webservice.getWS_WebService_ID(), m_webservicemethod.getWS_WebServiceMethod_ID(), serviceTypeValue)
-						.setOrderBy("AD_Client_ID DESC") // IDEMPIERE-3394 give precedence to tenant defined if there are system+tenant
+						.setOrderBy("AD_Client_ID DESC") 
 						.first();
 				if (m_webservicetype != null) {
 					s_WebServiceTypeCache.put(key, m_webservicetype);

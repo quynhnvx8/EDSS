@@ -36,7 +36,7 @@ public class MPackagePrice extends X_AD_PackagePrice
 		
 		Map<String, Object> dataColumn = new HashMap<String, Object>();
 		dataColumn.put(COLUMNNAME_Price, getPrice());
-		boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_AD_PackagePrice_ID, getAD_PackagePrice_ID());
+		boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_AD_PackagePrice_ID, getAD_PackagePrice_ID(), get_TrxName());
 		
 		if (!check) {
 			log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": " + COLUMNNAME_Price);

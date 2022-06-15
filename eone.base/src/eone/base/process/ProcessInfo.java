@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import eone.base.model.PO;
+import eone.print.MPrintFormatItem;
 import eone.print.ParameterReport;
 import eone.print.PrintDataItem;
 import eone.util.DisplayType;
@@ -87,6 +88,34 @@ public class ProcessInfo implements Serializable
 		this.m_JasperReport = m_JasperReport;
 	}
 
+	public MPrintFormatItem[] getItemsC() {
+		return itemsC;
+	}
+
+	public void setItemsC(MPrintFormatItem[] itemsC) {
+		this.itemsC = itemsC;
+	}
+
+	public MPrintFormatItem[] getItemsH() {
+		return itemsH;
+	}
+
+	public void setItemsH(MPrintFormatItem[] itemsH) {
+		this.itemsH = itemsH;
+	}
+
+	public MPrintFormatItem[] getItemsF() {
+		return itemsF;
+	}
+
+	public void setItemsF(MPrintFormatItem[] itemsF) {
+		this.itemsF = itemsF;
+	}
+
+	private MPrintFormatItem [] itemsC;
+	private MPrintFormatItem [] itemsH;
+	private MPrintFormatItem [] itemsF;
+	
 	private String 			m_JasperReport = "";
 
 	//Quynhnv.x8 add.

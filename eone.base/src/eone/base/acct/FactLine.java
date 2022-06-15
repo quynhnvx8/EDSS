@@ -22,6 +22,10 @@ public final class FactLine extends X_Fact_Acct
 		setAmountConvert (Env.ZERO);
 		setAD_Table_ID (AD_Table_ID);
 		setRecord_ID (Record_ID);
+		int c_periodPayment_id = getC_PeriodPayment_ID();
+		if (c_periodPayment_id <= 0) {
+			setC_PeriodPayment_ID(1);
+		}
 		setLine_ID (Line_ID);
 	}   //  FactLine
 

@@ -519,6 +519,25 @@ public class X_Fact_Acct extends PO implements I_Fact_Acct, I_Persistent
 			 return 0;
 		return ii.intValue();
 	}
+	
+	public void setC_PeriodPayment_ID (int C_PeriodPayment_ID)
+	{
+		if (C_PeriodPayment_ID < 0) 
+			set_ValueNoCheck (COLUMNNAME_C_PeriodPayment_ID, null);
+		else 
+			set_ValueNoCheck (COLUMNNAME_C_PeriodPayment_ID, Integer.valueOf(C_PeriodPayment_ID));
+	}
+
+	/** Get Document Type.
+		@return Document type or rules
+	  */
+	public int getC_PeriodPayment_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_C_PeriodPayment_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
 
 	public eone.base.model.I_C_DocTypeSub getC_DocTypeSub() throws RuntimeException
     {

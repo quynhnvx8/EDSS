@@ -27,7 +27,7 @@ public class MSaleDayLine extends X_C_SaleDayLine
 		if (newRecord || is_ValueChanged(COLUMNNAME_C_Period_ID)) {
 			Map<String, Object> dataColumn = new HashMap<String, Object>();
 			dataColumn.put(COLUMNNAME_C_Period_ID, getC_Period_ID());
-			boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_C_SaleDayLine_ID, getC_SaleDayLine_ID());
+			boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_C_SaleDayLine_ID, getC_SaleDayLine_ID(), get_TrxName());
 			if (!check) {
 				log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": Month!");
 				return false;

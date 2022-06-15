@@ -2014,7 +2014,7 @@ public abstract class PO	implements Serializable, Comparator<Object>, Evaluatee,
 	 * Add 23/10/2020
 	 * dataColumn: Key: ColumnName; Value: Gia tri can kiem tra.
 	 */
-	public static boolean isCheckDoubleValue(String tableName, Map<String, Object> dataColumn, String PrimaryKey, int Record_ID) {
+	public static boolean isCheckDoubleValue(String tableName, Map<String, Object> dataColumn, String PrimaryKey, int Record_ID, String trxName) {
 		
 		String sql = "Select count(1) From " + tableName + " Where " + PrimaryKey + "!= ? And IsActive = 'Y'";
 		List<Object> params = new ArrayList<Object>();
@@ -2030,7 +2030,7 @@ public abstract class PO	implements Serializable, Comparator<Object>, Evaluatee,
 		}
 		sql = sql + whereClause;
 		
-		int no = DB.getSQLValue(null, sql, params);
+		int no = DB.getSQLValue(trxName, sql, params);
 		if (no > 0)
 			return false;
 		return true;

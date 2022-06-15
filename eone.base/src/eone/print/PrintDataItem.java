@@ -256,9 +256,10 @@ public class PrintDataItem implements Serializable
 			;
 		else if (language != null)	//	Optional formatting of Numbers and Dates
 		{
-			if (DisplayType.isNumeric(m_displayType)) {
+			if (DisplayType.isNumeric(m_displayType) || m_value instanceof BigDecimal ) {
 				retValue = DisplayType.getNumberFormat(m_displayType, language, m_formatPattern).format(m_value);
-				if ("0".equals(retValue))
+				
+				if ("0".equals(retValue) || "0.0".equals(retValue))
 					retValue = null;
 			} else if (DisplayType.isDate(m_displayType)) {
 				retValue = DisplayType.getDateFormat(m_displayType, language, m_formatPattern).format(m_value);

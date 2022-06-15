@@ -225,7 +225,7 @@ public final class MRole extends X_AD_Role
 			Map<String, Object> dataColumn = new HashMap<String, Object>();
 			dataColumn.put(COLUMNNAME_AD_Role_ID, getAD_Role_ID());
 			dataColumn.put(COLUMNNAME_IsAdminClient, isAdminClient());
-			boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_AD_Role_ID, getAD_Role_ID());
+			boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_AD_Role_ID, getAD_Role_ID(), get_TrxName());
 			
 			if (!check) {
 				log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": " + COLUMNNAME_IsAdminClient);

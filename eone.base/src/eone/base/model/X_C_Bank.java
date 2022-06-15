@@ -5,12 +5,11 @@
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.Env;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
-
-import eone.util.Env;
 
 /** Generated Model for C_Bank
  *  @author EOne (generated) 
@@ -21,7 +20,7 @@ public class X_C_Bank extends PO implements I_C_Bank, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20211227L;
+	private static final long serialVersionUID = 20220613L;
 
     /** Standard Constructor */
     public X_C_Bank (Properties ctx, int C_Bank_ID, String trxName)

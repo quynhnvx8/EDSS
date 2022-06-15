@@ -82,7 +82,7 @@ public class MPatient extends X_HM_Patient implements DocAction
 			dataColumn.put(COLUMNNAME_HM_District_ID, getHM_District_ID());
 			dataColumn.put(COLUMNNAME_HM_Wards_ID, getHM_Wards_ID());
 			dataColumn.put(COLUMNNAME_BirthYear, getBirthYear());
-			boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_HM_Patient_ID, getHM_Patient_ID());
+			boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_HM_Patient_ID, getHM_Patient_ID(), get_TrxName());
 			if (!check) {
 				log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": Name, Province, District, Wards, BirthYear!");
 				return false;

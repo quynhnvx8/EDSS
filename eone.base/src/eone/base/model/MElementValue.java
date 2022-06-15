@@ -152,8 +152,8 @@ public class MElementValue extends X_C_ElementValue
 	protected boolean beforeSave (boolean newRecord)
 	{
 		if (newRecord || is_ValueChanged("Value") || is_ValueChanged("IsActive")) {
-			List<MElementValue> relValue = new Query(getCtx(), Table_Name, "C_ElementValue_ID != ? And (Value = ?) And AD_Client_ID = ? And IsActive = 'Y'", get_TrxName())
-					.setParameters(getC_ElementValue_ID(), getValue(), getAD_Client_ID())
+			List<MElementValue> relValue = new Query(getCtx(), Table_Name, "C_ElementValue_ID != ? And (Value = ?) And C_Element_ID = ? And IsActive = 'Y'", get_TrxName())
+					.setParameters(getC_ElementValue_ID(), getValue(), getC_Element_ID())
 					.list();
 			if (relValue.size() >= 1) {
 				log.saveError("Error", Msg.getMsg(getCtx(), "ValueOrNameExists"));//ValueExists, NameExists

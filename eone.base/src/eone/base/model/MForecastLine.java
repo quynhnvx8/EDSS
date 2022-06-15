@@ -28,7 +28,7 @@ public class MForecastLine extends X_M_ForecastLine
 			Map<String, Object> dataColumn = new HashMap<String, Object>();
 			dataColumn.put(COLUMNNAME_C_Period_ID, getC_Period_ID());
 			dataColumn.put(COLUMNNAME_M_Product_ID, getM_Product_ID());
-			boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_M_ForecastLine_ID, getM_ForecastLine_ID());
+			boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_M_ForecastLine_ID, getM_ForecastLine_ID(), get_TrxName());
 			if (!check) {
 				log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": Month, Product, Category!");
 				return false;

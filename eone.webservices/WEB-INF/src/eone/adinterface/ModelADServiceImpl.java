@@ -38,11 +38,6 @@ import org.idempiere.adInterface.x10.StandardResponse;
 import org.idempiere.adInterface.x10.StandardResponseDocument;
 import org.idempiere.adInterface.x10.WindowTabData;
 import org.idempiere.adInterface.x10.WindowTabDataDocument;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import eone.base.model.I_AD_Column;
@@ -75,26 +70,7 @@ import eone.webservices.fault.IdempiereServiceFault;
 @WebService(endpointInterface="eone.adinterface.ModelADService", serviceName="ModelADService",targetNamespace="http://dssvn.com")
 public class ModelADServiceImpl extends AbstractService implements ModelADService {
 	
-	//@RequestMapping(value = "/new", method = RequestMethod.GET)
-	@GetMapping(value = "/new")
-	public Object getData(@RequestBody Object obj) {
-		return obj;
-	}
 	
-	@PutMapping(value = "/new")
-	public Object updateDate(@RequestBody Object obj) {
-		return obj;
-	}
-	
-	@DeleteMapping(value = "/new")
-	public void deleteData (@RequestBody long [] ids) {
-		
-	}
-	
-	@PostMapping(value = "/new")
-	public Object insertDate(@RequestBody Object obj) {
-		return obj;
-	}
 
 	private static final CLogger	log = CLogger.getCLogger(ModelADServiceImpl.class);
 	
@@ -575,8 +551,8 @@ public class ModelADServiceImpl extends AbstractService implements ModelADServic
 	private void validateCRUD(ModelCRUD modelCRUD) {
 		modelCRUD.setTableName(validateParameter("TableName", modelCRUD.getTableName()));
 		modelCRUD.setRecordID(validateParameter("RecordID", modelCRUD.getRecordID()));
-		modelCRUD.setFilter(validateParameter("Filter", modelCRUD.getFilter()));
-		modelCRUD.setAction(validateParameter("Action", modelCRUD.getAction(), ModelCRUD.Action.Enum.table));
+		//modelCRUD.setFilter(validateParameter("Filter", modelCRUD.getFilter()));
+		//modelCRUD.setAction(validateParameter("Action", modelCRUD.getAction(), ModelCRUD.Action.Enum.table));
 	}
 
 	public StandardResponseDocument createData(ModelCRUDRequestDocument req) {

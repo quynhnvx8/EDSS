@@ -4,10 +4,9 @@
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-
-import eone.util.KeyNamePair;
 
 /** Generated Interface for C_Cash
  *  @author EOne (generated) 
@@ -459,6 +458,19 @@ public interface I_C_Cash
 	  * Document sequence number of the document
 	  */
 	public String getDocumentNo();
+
+    /** Column name IncludeDoc */
+    public static final String COLUMNNAME_IncludeDoc = "IncludeDoc";
+
+	/** Set IncludeDoc.
+	  * Document sequence number of the document
+	  */
+	public void setIncludeDoc (String IncludeDoc);
+
+	/** Get IncludeDoc.
+	  * Document sequence number of the document
+	  */
+	public String getIncludeDoc();
 
     /** Column name IncludeTax */
     public static final String COLUMNNAME_IncludeTax = "IncludeTax";

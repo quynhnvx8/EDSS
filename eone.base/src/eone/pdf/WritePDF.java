@@ -135,9 +135,9 @@ public class WritePDF {
 	            
 	            PdfPTable table = new PdfPTable(countColumn);
 	            
-	            items = format.getItemContent();
-	            header = format.getItemHeader();
-	            footer = format.getItemFooter();
+	            items = pi.getItemsC();
+	            header = pi.getItemsH();
+	            footer = pi.getItemsF();
 	            language = format.getLanguage();
 	            
 	            table.setTotalWidth(widthTable);
@@ -299,37 +299,39 @@ public class WritePDF {
         //Fill Currency.
         
 
-        
-		for( int i = 0; i < header.length; i++) {			
-			cell = new PdfPCell(new Phrase("", smallfont));
-            cell.setNoWrap(false);
-            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            cell.setBorder(Rectangle.NO_BORDER);
-            cell.setColspan(1);
-            cell.setPadding(4);
-            table.addCell(cell);
-            
-        	MPrintFormatItem item = header[i];
-        	String name = item.getName(language, windowNo);
-        	if (name.contains("@")) {
-        		name = Env.parseContext(Env.getCtx(), windowNo, name, false);
-        	}
-        	
-        	//Replace
-        	name = getContextHeader(name);
-        	//
-        	
-        	cell = new PdfPCell(new Phrase((String) name, smallfont));
-        	cell.setNoWrap(false);
-            cell.setVerticalAlignment(Element.ALIGN_LEFT);
-            cell.setHorizontalAlignment(Element.ALIGN_MIDDLE);
-            cell.setBorder(Rectangle.NO_BORDER);
-            //cell.setRowspan(item.getNumLines());
-            cell.setColspan(columnCount - 1);
-            cell.setPadding(4);
-            table.addCell(cell); 
+        if (header != null) {
+        	for( int i = 0; i < header.length; i++) {			
+    			cell = new PdfPCell(new Phrase("", smallfont));
+                cell.setNoWrap(false);
+                cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setBorder(Rectangle.NO_BORDER);
+                cell.setColspan(1);
+                cell.setPadding(4);
+                table.addCell(cell);
+                
+            	MPrintFormatItem item = header[i];
+            	String name = item.getName(language, windowNo);
+            	if (name.contains("@")) {
+            		name = Env.parseContext(Env.getCtx(), windowNo, name, false);
+            	}
+            	
+            	//Replace
+            	name = getContextHeader(name);
+            	//
+            	
+            	cell = new PdfPCell(new Phrase((String) name, smallfont));
+            	cell.setNoWrap(false);
+                cell.setVerticalAlignment(Element.ALIGN_LEFT);
+                cell.setHorizontalAlignment(Element.ALIGN_MIDDLE);
+                cell.setBorder(Rectangle.NO_BORDER);
+                //cell.setRowspan(item.getNumLines());
+                cell.setColspan(columnCount - 1);
+                cell.setPadding(4);
+                table.addCell(cell); 
+            }
         }
+		
 	//}//End cau hinh header
 	}//End Create Header
 	

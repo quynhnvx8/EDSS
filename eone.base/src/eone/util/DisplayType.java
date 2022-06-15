@@ -488,7 +488,7 @@ public final class DisplayType
 			
 			format.setMaximumIntegerDigits(MAX_DIGITS);
 			format.setMaximumFractionDigits(MAX_FRACTION);
-			format.setMinimumFractionDigits(1);
+			format.setMinimumFractionDigits(0);
 		}
 		return format;
 	}	//	getDecimalFormat

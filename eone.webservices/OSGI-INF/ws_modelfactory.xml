@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="eone.model.WS_ModelFactory">
-   <implementation class="eone.model.WS_ModelFactory"/>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="eone.model.WS_ModelFactory">
    <property name="service.ranking" type="Integer" value="5"/>
    <service>
       <provide interface="eone.base.IModelFactory"/>
    </service>
+   <implementation class="eone.model.WS_ModelFactory"/>
 </scr:component>

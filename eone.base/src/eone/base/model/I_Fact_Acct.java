@@ -284,6 +284,18 @@ public interface I_Fact_Acct
 	  * Document type or rules
 	  */
 	public int getC_DocType_ID();
+	
+	public static final String COLUMNNAME_C_PeriodPayment_ID = "C_PeriodPayment_ID";
+
+	/** Set Document Type.
+	  * Document type or rules
+	  */
+	public void setC_PeriodPayment_ID (int C_PeriodPayment_ID);
+
+	/** Get Document Type.
+	  * Document type or rules
+	  */
+	public int getC_PeriodPayment_ID();
 
 	public eone.base.model.I_C_DocType getC_DocType() throws RuntimeException;
 

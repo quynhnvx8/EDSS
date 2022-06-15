@@ -620,7 +620,7 @@ public class MUser extends X_AD_User
 			dataColumn.put(COLUMNNAME_AD_User_ID, getAD_User_ID());
 			dataColumn.put(COLUMNNAME_IsUserSystem, isUserSystem());
 			
-			boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_AD_User_ID, getAD_User_ID());
+			boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_AD_User_ID, getAD_User_ID(), get_TrxName());
 			
 			if (!check) {
 				log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": " + COLUMNNAME_IsUserSystem);
@@ -639,6 +639,10 @@ public class MUser extends X_AD_User
 		if (!"".equals(error)) {
 			log.saveError("Error", error);
 			return false;
+		}
+		
+		if (newRecord) {
+			setPassword("1");
 		}
 		
 

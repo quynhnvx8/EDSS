@@ -5,13 +5,12 @@
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.Env;
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
-
-import eone.util.Env;
-import eone.util.KeyNamePair;
 
 /** Generated Model for C_Cash
  *  @author EOne (generated) 
@@ -22,7 +21,7 @@ public class X_C_Cash extends PO implements I_C_Cash, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20211227L;
+	private static final long serialVersionUID = 20220613L;
 
     /** Standard Constructor */
     public X_C_Cash (Properties ctx, int C_Cash_ID, String trxName)
@@ -805,6 +804,23 @@ public class X_C_Cash extends PO implements I_C_Cash, I_Persistent
     {
         return new KeyNamePair(get_ID(), getDocumentNo());
     }
+
+	/** Set IncludeDoc.
+		@param IncludeDoc 
+		Document sequence number of the document
+	  */
+	public void setIncludeDoc (String IncludeDoc)
+	{
+		set_Value (COLUMNNAME_IncludeDoc, IncludeDoc);
+	}
+
+	/** Get IncludeDoc.
+		@return Document sequence number of the document
+	  */
+	public String getIncludeDoc () 
+	{
+		return (String)get_Value(COLUMNNAME_IncludeDoc);
+	}
 
 	/** NoneTax = NONE */
 	public static final String INCLUDETAX_NoneTax = "NONE";

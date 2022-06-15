@@ -39,7 +39,7 @@ public class MTimekeeperMap extends X_HR_TimekeeperMap
 		
 		Map<String, Object> dataColumn = new HashMap<String, Object>();
 		dataColumn.put(COLUMNNAME_Name, getName());
-		boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_HR_TimekeeperMap_ID, getHR_TimekeeperMap_ID());
+		boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_HR_TimekeeperMap_ID, getHR_TimekeeperMap_ID(), get_TrxName());
 		dataColumn = null;
 		if (!check) {
 			log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": " + getName());

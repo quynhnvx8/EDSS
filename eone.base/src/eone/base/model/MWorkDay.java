@@ -95,27 +95,28 @@ public class MWorkDay extends X_HR_WorkDay
 		
 		Map<String, Object> dataColumn = new HashMap<String, Object>();
 		dataColumn.put(COLUMNNAME_Name, getName());
-		boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_HR_WorkDay_ID, getHR_WorkDay_ID());
+		dataColumn.put(COLUMNNAME_AD_Client_ID, Env.getAD_Client_ID(getCtx()));
+		boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_HR_WorkDay_ID, getHR_WorkDay_ID(), get_TrxName());
 		dataColumn = null;
 		if (!check) {
 			log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": " + getName());
 			return false;
 		}
 		
-		if (getStartTime().compareTo(getEndTime()) > 0) {
+		if (getStartTime() != null && getEndTime() != null && getStartTime().compareTo(getEndTime()) > 0) {
 			log.saveError("Error", "StartTime must be less than EndTime");
 			return false;
 		}
 		
-		if (getStartTime1().compareTo(getEndTime1()) > 0) {
+		if (getStartTime1() != null && getEndTime1() != null && getStartTime1().compareTo(getEndTime1()) > 0) {
 			log.saveError("Error", "StartTime must be less than EndTime");
 			return false;
 		}
-		if (getStartTime2().compareTo(getEndTime2()) > 0) {
+		if (getStartTime2() != null && getEndTime2() != null && getStartTime2().compareTo(getEndTime2()) > 0) {
 			log.saveError("Error", "StartTime must be less than EndTime");
 			return false;
 		}
-		if (getStartTime3().compareTo(getEndTime3()) > 0) {
+		if (getStartTime3() != null && getEndTime3() != null && getStartTime3().compareTo(getEndTime3()) > 0) {
 			//log.saveError("Error", "StartTime must be less than EndTime");
 			//return false;
 		}

@@ -69,7 +69,7 @@ public class MTaxPersonal extends X_HR_TaxPersonal
 		
 		Map<String, Object> dataColumn = new HashMap<String, Object>();
 		dataColumn.put(COLUMNNAME_MinValue, getMinValue());
-		boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_HR_TaxPersonal_ID, getHR_TaxPersonal_ID());
+		boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_HR_TaxPersonal_ID, getHR_TaxPersonal_ID(), get_TrxName());
 		dataColumn = null;
 		if (!check) {
 			log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": " + COLUMNNAME_MinValue);

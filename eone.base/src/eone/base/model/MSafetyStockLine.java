@@ -30,7 +30,7 @@ public class MSafetyStockLine extends X_M_SafetyStockLine
 			dataColumn.put(COLUMNNAME_M_Product_ID, getM_Product_ID());
 			if (getCategory() != null)
 				dataColumn.put(COLUMNNAME_Category, getCategory());
-			boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_M_SafetyStockLine_ID, getM_SafetyStockLine_ID());
+			boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_M_SafetyStockLine_ID, getM_SafetyStockLine_ID(), get_TrxName());
 			if (!check) {
 				log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": Month, Product, Category!");
 				return false;
