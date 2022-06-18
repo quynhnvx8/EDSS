@@ -828,6 +828,24 @@ public class TimeUtil
 		}
 		return new Timestamp(gc.getTimeInMillis());
 	}
+	
+	@SuppressWarnings("deprecation")
+	public static Long getNumberOnCalander(Timestamp fromDate, Timestamp toDate, String value) {
+        
+		long milliseconds = toDate.getTime() - fromDate.getTime();
+        if (value.equals("second"))
+            return milliseconds / 1000;
+        if (value.equals("minute"))
+            return milliseconds / 1000 / 60;
+        if (value.equals("hours"))
+            return milliseconds / 1000 / 3600;
+        if (value.equals("days"))
+            return milliseconds / 1000 / 3600 / 24;
+        if (value.equals("months"))
+            return milliseconds / 1000 / 3600 / 24 / 12;
+        else
+            return new Long(999999999);
+    }
 
 	
 	/**

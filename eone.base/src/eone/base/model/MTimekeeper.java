@@ -13,6 +13,14 @@ import eone.util.DB;
 
 public class MTimekeeper extends X_HR_Timekeeper implements DocAction
 {
+	@Override
+	protected boolean afterDelete(boolean success) {
+		String sqlDel = "DELETE FROM HR_TimekeeperLine WHERE HR_Timekeeper_ID = ?";
+		DB.executeUpdate(sqlDel, getHR_Timekeeper_ID(), get_TrxName());
+		return super.afterDelete(success);
+	}
+
+
 	/**
 	 * 
 	 */

@@ -1,16 +1,15 @@
 /******************************************************************************
- * Product: EOoe ERP & CRM Smart Business Solution	                        *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
  * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.Env;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
-
-import eone.util.Env;
 
 /** Generated Model for HR_ContractLabor
  *  @author EOne (generated) 
@@ -21,7 +20,7 @@ public class X_HR_ContractLabor extends PO implements I_HR_ContractLabor, I_Pers
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20210727L;
+	private static final long serialVersionUID = 20220616L;
 
     /** Standard Constructor */
     public X_HR_ContractLabor (Properties ctx, int HR_ContractLabor_ID, String trxName)
@@ -39,7 +38,7 @@ public class X_HR_ContractLabor extends PO implements I_HR_ContractLabor, I_Pers
     }
 
     /** AccessLevel
-      * @return 3 - Client - Org 
+      * @return 7 - System - Client - Org 
       */
     protected int get_AccessLevel()
     {
@@ -59,23 +58,6 @@ public class X_HR_ContractLabor extends PO implements I_HR_ContractLabor, I_Pers
         .append(get_ID()).append("]");
       return sb.toString();
     }
-
-	/** Set Allowance.
-		@param Allowance Allowance	  */
-	public void setAllowance (BigDecimal Allowance)
-	{
-		set_Value (COLUMNNAME_Allowance, Allowance);
-	}
-
-	/** Get Allowance.
-		@return Allowance	  */
-	public BigDecimal getAllowance () 
-	{
-		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_Allowance);
-		if (bd == null)
-			 return Env.ZERO;
-		return bd;
-	}
 
 	/** Set Content.
 		@param ContentText Content	  */
@@ -176,9 +158,9 @@ public class X_HR_ContractLabor extends PO implements I_HR_ContractLabor, I_Pers
 		return ii.intValue();
 	}
 
-	public I_HR_Employee getHR_Employee() throws RuntimeException
+	public eone.base.model.I_HR_Employee getHR_Employee() throws RuntimeException
     {
-		return (I_HR_Employee)MTable.get(getCtx(), I_HR_Employee.Table_Name)
+		return (eone.base.model.I_HR_Employee)MTable.get(getCtx(), eone.base.model.I_HR_Employee.Table_Name)
 			.getPO(getHR_Employee_ID(), get_TrxName());	}
 
 	/** Set Employee.
@@ -201,9 +183,9 @@ public class X_HR_ContractLabor extends PO implements I_HR_ContractLabor, I_Pers
 		return ii.intValue();
 	}
 
-	public I_HR_ItemLine getHR_ItemLine_05() throws RuntimeException
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_05() throws RuntimeException
     {
-		return (I_HR_ItemLine)MTable.get(getCtx(), I_HR_ItemLine.Table_Name)
+		return (eone.base.model.I_HR_ItemLine)MTable.get(getCtx(), eone.base.model.I_HR_ItemLine.Table_Name)
 			.getPO(getHR_ItemLine_05_ID(), get_TrxName());	}
 
 	/** Set Jobs.
@@ -226,9 +208,9 @@ public class X_HR_ContractLabor extends PO implements I_HR_ContractLabor, I_Pers
 		return ii.intValue();
 	}
 
-	public I_HR_ItemLine getHR_ItemLine_20() throws RuntimeException
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_20() throws RuntimeException
     {
-		return (I_HR_ItemLine)MTable.get(getCtx(), I_HR_ItemLine.Table_Name)
+		return (eone.base.model.I_HR_ItemLine)MTable.get(getCtx(), eone.base.model.I_HR_ItemLine.Table_Name)
 			.getPO(getHR_ItemLine_20_ID(), get_TrxName());	}
 
 	/** Set Item Line 20.
@@ -251,9 +233,9 @@ public class X_HR_ContractLabor extends PO implements I_HR_ContractLabor, I_Pers
 		return ii.intValue();
 	}
 
-	public I_HR_ItemLine getHR_ItemLine_28() throws RuntimeException
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_28() throws RuntimeException
     {
-		return (I_HR_ItemLine)MTable.get(getCtx(), I_HR_ItemLine.Table_Name)
+		return (eone.base.model.I_HR_ItemLine)MTable.get(getCtx(), eone.base.model.I_HR_ItemLine.Table_Name)
 			.getPO(getHR_ItemLine_28_ID(), get_TrxName());	}
 
 	/** Set Item Line 28.
@@ -271,31 +253,6 @@ public class X_HR_ContractLabor extends PO implements I_HR_ContractLabor, I_Pers
 	public int getHR_ItemLine_28_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_HR_ItemLine_28_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public I_HR_ItemLine getHR_ItemLine_41() throws RuntimeException
-    {
-		return (I_HR_ItemLine)MTable.get(getCtx(), I_HR_ItemLine.Table_Name)
-			.getPO(getHR_ItemLine_41_ID(), get_TrxName());	}
-
-	/** Set HR_ItemLine_41_ID.
-		@param HR_ItemLine_41_ID HR_ItemLine_41_ID	  */
-	public void setHR_ItemLine_41_ID (int HR_ItemLine_41_ID)
-	{
-		if (HR_ItemLine_41_ID < 1) 
-			set_Value (COLUMNNAME_HR_ItemLine_41_ID, null);
-		else 
-			set_Value (COLUMNNAME_HR_ItemLine_41_ID, Integer.valueOf(HR_ItemLine_41_ID));
-	}
-
-	/** Get HR_ItemLine_41_ID.
-		@return HR_ItemLine_41_ID	  */
-	public int getHR_ItemLine_41_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_HR_ItemLine_41_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
@@ -361,40 +318,6 @@ public class X_HR_ContractLabor extends PO implements I_HR_ContractLabor, I_Pers
 			return "Y".equals(oo);
 		}
 		return false;
-	}
-
-	/** Set SalaryPercent.
-		@param SalaryPercent SalaryPercent	  */
-	public void setSalaryPercent (BigDecimal SalaryPercent)
-	{
-		set_Value (COLUMNNAME_SalaryPercent, SalaryPercent);
-	}
-
-	/** Get SalaryPercent.
-		@return SalaryPercent	  */
-	public BigDecimal getSalaryPercent () 
-	{
-		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_SalaryPercent);
-		if (bd == null)
-			 return Env.ZERO;
-		return bd;
-	}
-
-	/** Set SalaryRate.
-		@param SalaryRate SalaryRate	  */
-	public void setSalaryRate (BigDecimal SalaryRate)
-	{
-		set_Value (COLUMNNAME_SalaryRate, SalaryRate);
-	}
-
-	/** Get SalaryRate.
-		@return SalaryRate	  */
-	public BigDecimal getSalaryRate () 
-	{
-		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_SalaryRate);
-		if (bd == null)
-			 return Env.ZERO;
-		return bd;
 	}
 
 	/** Set Start Time.

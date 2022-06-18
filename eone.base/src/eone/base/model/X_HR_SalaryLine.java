@@ -1,30 +1,17 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.Env;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-import eone.util.Env;
-
 /** Generated Model for HR_SalaryLine
- *  @author iDempiere (generated) 
+ *  @author EOne (generated) 
  *  @version Version 1.0 - $Id$ */
 public class X_HR_SalaryLine extends PO implements I_HR_SalaryLine, I_Persistent 
 {
@@ -32,7 +19,7 @@ public class X_HR_SalaryLine extends PO implements I_HR_SalaryLine, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20201029L;
+	private static final long serialVersionUID = 20220618L;
 
     /** Standard Constructor */
     public X_HR_SalaryLine (Properties ctx, int HR_SalaryLine_ID, String trxName)
@@ -99,9 +86,9 @@ public class X_HR_SalaryLine extends PO implements I_HR_SalaryLine, I_Persistent
 		return ii.intValue();
 	}
 
-	public I_HR_Employee getHR_Employee() throws RuntimeException
+	public eone.base.model.I_HR_Employee getHR_Employee() throws RuntimeException
     {
-		return (I_HR_Employee)MTable.get(getCtx(), I_HR_Employee.Table_Name)
+		return (eone.base.model.I_HR_Employee)MTable.get(getCtx(), eone.base.model.I_HR_Employee.Table_Name)
 			.getPO(getHR_Employee_ID(), get_TrxName());	}
 
 	/** Set Employee.
@@ -124,9 +111,9 @@ public class X_HR_SalaryLine extends PO implements I_HR_SalaryLine, I_Persistent
 		return ii.intValue();
 	}
 
-	public I_HR_Salary getHR_Salary() throws RuntimeException
+	public eone.base.model.I_HR_Salary getHR_Salary() throws RuntimeException
     {
-		return (I_HR_Salary)MTable.get(getCtx(), I_HR_Salary.Table_Name)
+		return (eone.base.model.I_HR_Salary)MTable.get(getCtx(), eone.base.model.I_HR_Salary.Table_Name)
 			.getPO(getHR_Salary_ID(), get_TrxName());	}
 
 	/** Set Salary.
@@ -215,6 +202,74 @@ public class X_HR_SalaryLine extends PO implements I_HR_SalaryLine, I_Persistent
 	public BigDecimal getInsua_Unemployee () 
 	{
 		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_Insua_Unemployee);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
+	}
+
+	/** Set OnionFee Amt.
+		@param OnionFeeAmt OnionFee Amt	  */
+	public void setOnionFeeAmt (BigDecimal OnionFeeAmt)
+	{
+		set_Value (COLUMNNAME_OnionFeeAmt, OnionFeeAmt);
+	}
+
+	/** Get OnionFee Amt.
+		@return OnionFee Amt	  */
+	public BigDecimal getOnionFeeAmt () 
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_OnionFeeAmt);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
+	}
+
+	/** Set Organization Insurance Health.
+		@param Org_Insua_Health Organization Insurance Health	  */
+	public void setOrg_Insua_Health (BigDecimal Org_Insua_Health)
+	{
+		set_Value (COLUMNNAME_Org_Insua_Health, Org_Insua_Health);
+	}
+
+	/** Get Organization Insurance Health.
+		@return Organization Insurance Health	  */
+	public BigDecimal getOrg_Insua_Health () 
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_Org_Insua_Health);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
+	}
+
+	/** Set Organization Insurance Social.
+		@param Org_Insua_Social Organization Insurance Social	  */
+	public void setOrg_Insua_Social (BigDecimal Org_Insua_Social)
+	{
+		set_Value (COLUMNNAME_Org_Insua_Social, Org_Insua_Social);
+	}
+
+	/** Get Organization Insurance Social.
+		@return Organization Insurance Social	  */
+	public BigDecimal getOrg_Insua_Social () 
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_Org_Insua_Social);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
+	}
+
+	/** Set Organization Insurance Unmeployment.
+		@param Org_Insua_Unemployee Organization Insurance Unmeployment	  */
+	public void setOrg_Insua_Unemployee (BigDecimal Org_Insua_Unemployee)
+	{
+		set_Value (COLUMNNAME_Org_Insua_Unemployee, Org_Insua_Unemployee);
+	}
+
+	/** Get Organization Insurance Unmeployment.
+		@return Organization Insurance Unmeployment	  */
+	public BigDecimal getOrg_Insua_Unemployee () 
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_Org_Insua_Unemployee);
 		if (bd == null)
 			 return Env.ZERO;
 		return bd;

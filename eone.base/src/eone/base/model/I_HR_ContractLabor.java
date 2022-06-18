@@ -1,13 +1,12 @@
 /******************************************************************************
- * Product: EOoe ERP & CRM Smart Business Solution	                        *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
  * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-
-import eone.util.KeyNamePair;
 
 /** Generated Interface for HR_ContractLabor
  *  @author EOne (generated) 
@@ -24,9 +23,9 @@ public interface I_HR_ContractLabor
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 3 - Client - Org 
+    /** AccessLevel = 7 - System - Client - Org 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(3);
+    BigDecimal accessLevel = BigDecimal.valueOf(7);
 
     /** Load Meta Data */
 
@@ -50,15 +49,6 @@ public interface I_HR_ContractLabor
 	  * Organizational entity within client
 	  */
 	public int getAD_Org_ID();
-
-    /** Column name Allowance */
-    public static final String COLUMNNAME_Allowance = "Allowance";
-
-	/** Set Allowance	  */
-	public void setAllowance (BigDecimal Allowance);
-
-	/** Get Allowance	  */
-	public BigDecimal getAllowance();
 
     /** Column name ContentText */
     public static final String COLUMNNAME_ContentText = "ContentText";
@@ -151,7 +141,7 @@ public interface I_HR_ContractLabor
 	/** Get Employee	  */
 	public int getHR_Employee_ID();
 
-	public I_HR_Employee getHR_Employee() throws RuntimeException;
+	public eone.base.model.I_HR_Employee getHR_Employee() throws RuntimeException;
 
     /** Column name HR_ItemLine_05_ID */
     public static final String COLUMNNAME_HR_ItemLine_05_ID = "HR_ItemLine_05_ID";
@@ -162,7 +152,7 @@ public interface I_HR_ContractLabor
 	/** Get Jobs	  */
 	public int getHR_ItemLine_05_ID();
 
-	public I_HR_ItemLine getHR_ItemLine_05() throws RuntimeException;
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_05() throws RuntimeException;
 
     /** Column name HR_ItemLine_20_ID */
     public static final String COLUMNNAME_HR_ItemLine_20_ID = "HR_ItemLine_20_ID";
@@ -173,7 +163,7 @@ public interface I_HR_ContractLabor
 	/** Get Item Line 20	  */
 	public int getHR_ItemLine_20_ID();
 
-	public I_HR_ItemLine getHR_ItemLine_20() throws RuntimeException;
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_20() throws RuntimeException;
 
     /** Column name HR_ItemLine_28_ID */
     public static final String COLUMNNAME_HR_ItemLine_28_ID = "HR_ItemLine_28_ID";
@@ -184,18 +174,7 @@ public interface I_HR_ContractLabor
 	/** Get Item Line 28	  */
 	public int getHR_ItemLine_28_ID();
 
-	public I_HR_ItemLine getHR_ItemLine_28() throws RuntimeException;
-
-    /** Column name HR_ItemLine_41_ID */
-    public static final String COLUMNNAME_HR_ItemLine_41_ID = "HR_ItemLine_41_ID";
-
-	/** Set HR_ItemLine_41_ID	  */
-	public void setHR_ItemLine_41_ID (int HR_ItemLine_41_ID);
-
-	/** Get HR_ItemLine_41_ID	  */
-	public int getHR_ItemLine_41_ID();
-
-	public I_HR_ItemLine getHR_ItemLine_41() throws RuntimeException;
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_28() throws RuntimeException;
 
     /** Column name IsActive */
     public static final String COLUMNNAME_IsActive = "IsActive";
@@ -240,24 +219,6 @@ public interface I_HR_ContractLabor
 	  * The document has been processed
 	  */
 	public boolean isProcessed();
-
-    /** Column name SalaryPercent */
-    public static final String COLUMNNAME_SalaryPercent = "SalaryPercent";
-
-	/** Set SalaryPercent	  */
-	public void setSalaryPercent (BigDecimal SalaryPercent);
-
-	/** Get SalaryPercent	  */
-	public BigDecimal getSalaryPercent();
-
-    /** Column name SalaryRate */
-    public static final String COLUMNNAME_SalaryRate = "SalaryRate";
-
-	/** Set SalaryRate	  */
-	public void setSalaryRate (BigDecimal SalaryRate);
-
-	/** Get SalaryRate	  */
-	public BigDecimal getSalaryRate();
 
     /** Column name StartTime */
     public static final String COLUMNNAME_StartTime = "StartTime";

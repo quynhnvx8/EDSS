@@ -172,6 +172,10 @@ public class MDayOff extends X_HR_DayOff implements DocAction
 		}
 		return null;
 	}
+	
+	public void updateVacationDay(boolean isComplete) {
+		
+	}
 
 	@Override
 	public int getAD_Window_ID() {

@@ -340,7 +340,7 @@ public abstract class Lookup extends AbstractListModel<Object>
 	 *  @return String
 	 */
 	public abstract String getDisplay (Object key);
-
+	
 	/**
 	 *	Get Object of Key Value
 	 *  @param key key

@@ -5,13 +5,12 @@
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.Env;
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
-
-import eone.util.Env;
-import eone.util.KeyNamePair;
 
 /** Generated Model for C_General
  *  @author EOne (generated) 
@@ -22,7 +21,7 @@ public class X_C_General extends PO implements I_C_General, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220305L;
+	private static final long serialVersionUID = 20220618L;
 
     /** Standard Constructor */
     public X_C_General (Properties ctx, int C_General_ID, String trxName)
@@ -228,6 +227,34 @@ public class X_C_General extends PO implements I_C_General, I_Persistent
 		return ii.intValue();
 	}
 
+	public eone.base.model.I_C_Period getC_Period() throws RuntimeException
+    {
+		return (eone.base.model.I_C_Period)MTable.get(getCtx(), eone.base.model.I_C_Period.Table_Name)
+			.getPO(getC_Period_ID(), get_TrxName());	}
+
+	/** Set Period.
+		@param C_Period_ID 
+		Period of the Calendar
+	  */
+	public void setC_Period_ID (int C_Period_ID)
+	{
+		if (C_Period_ID < 1) 
+			set_Value (COLUMNNAME_C_Period_ID, null);
+		else 
+			set_Value (COLUMNNAME_C_Period_ID, Integer.valueOf(C_Period_ID));
+	}
+
+	/** Get Period.
+		@return Period of the Calendar
+	  */
+	public int getC_Period_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_C_Period_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
 	/** Set Canceled.
 		@param Canceled Canceled	  */
 	public void setCanceled (String Canceled)
@@ -364,6 +391,27 @@ public class X_C_General extends PO implements I_C_General, I_Persistent
 	public boolean isProcessed () 
 	{
 		Object oo = get_Value(COLUMNNAME_Processed);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
+	}
+
+	/** Set Process Now.
+		@param Processing Process Now	  */
+	public void setProcessing (boolean Processing)
+	{
+		set_Value (COLUMNNAME_Processing, Boolean.valueOf(Processing));
+	}
+
+	/** Get Process Now.
+		@return Process Now	  */
+	public boolean isProcessing () 
+	{
+		Object oo = get_Value(COLUMNNAME_Processing);
 		if (oo != null) 
 		{
 			 if (oo instanceof Boolean) 

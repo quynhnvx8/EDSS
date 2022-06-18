@@ -1,31 +1,18 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.Env;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
 
-import eone.util.Env;
-
 /** Generated Model for HR_Payroll
- *  @author iDempiere (generated) 
+ *  @author EOne (generated) 
  *  @version Version 1.0 - $Id$ */
 public class X_HR_Payroll extends PO implements I_HR_Payroll, I_Persistent 
 {
@@ -33,7 +20,7 @@ public class X_HR_Payroll extends PO implements I_HR_Payroll, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20201026L;
+	private static final long serialVersionUID = 20220616L;
 
     /** Standard Constructor */
     public X_HR_Payroll (Properties ctx, int HR_Payroll_ID, String trxName)
@@ -51,7 +38,7 @@ public class X_HR_Payroll extends PO implements I_HR_Payroll, I_Persistent
     }
 
     /** AccessLevel
-      * @return 3 - Client - Org 
+      * @return 7 - System - Client - Org 
       */
     protected int get_AccessLevel()
     {
@@ -134,9 +121,9 @@ public class X_HR_Payroll extends PO implements I_HR_Payroll, I_Persistent
 		return (String)get_Value(COLUMNNAME_Description);
 	}
 
-	public I_HR_Employee getHR_Employee() throws RuntimeException
+	public eone.base.model.I_HR_Employee getHR_Employee() throws RuntimeException
     {
-		return (I_HR_Employee)MTable.get(getCtx(), I_HR_Employee.Table_Name)
+		return (eone.base.model.I_HR_Employee)MTable.get(getCtx(), eone.base.model.I_HR_Employee.Table_Name)
 			.getPO(getHR_Employee_ID(), get_TrxName());	}
 
 	/** Set Employee.
@@ -159,9 +146,9 @@ public class X_HR_Payroll extends PO implements I_HR_Payroll, I_Persistent
 		return ii.intValue();
 	}
 
-	public I_HR_ItemLine getHR_ItemLine_05() throws RuntimeException
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_05() throws RuntimeException
     {
-		return (I_HR_ItemLine)MTable.get(getCtx(), I_HR_ItemLine.Table_Name)
+		return (eone.base.model.I_HR_ItemLine)MTable.get(getCtx(), eone.base.model.I_HR_ItemLine.Table_Name)
 			.getPO(getHR_ItemLine_05_ID(), get_TrxName());	}
 
 	/** Set Jobs.
@@ -184,9 +171,9 @@ public class X_HR_Payroll extends PO implements I_HR_Payroll, I_Persistent
 		return ii.intValue();
 	}
 
-	public I_HR_ItemLine getHR_ItemLine_15() throws RuntimeException
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_15() throws RuntimeException
     {
-		return (I_HR_ItemLine)MTable.get(getCtx(), I_HR_ItemLine.Table_Name)
+		return (eone.base.model.I_HR_ItemLine)MTable.get(getCtx(), eone.base.model.I_HR_ItemLine.Table_Name)
 			.getPO(getHR_ItemLine_15_ID(), get_TrxName());	}
 
 	/** Set Payroll Form.
@@ -204,6 +191,31 @@ public class X_HR_Payroll extends PO implements I_HR_Payroll, I_Persistent
 	public int getHR_ItemLine_15_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_HR_ItemLine_15_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_19() throws RuntimeException
+    {
+		return (eone.base.model.I_HR_ItemLine)MTable.get(getCtx(), eone.base.model.I_HR_ItemLine.Table_Name)
+			.getPO(getHR_ItemLine_19_ID(), get_TrxName());	}
+
+	/** Set Payment Source .
+		@param HR_ItemLine_19_ID Payment Source 	  */
+	public void setHR_ItemLine_19_ID (int HR_ItemLine_19_ID)
+	{
+		if (HR_ItemLine_19_ID < 1) 
+			set_Value (COLUMNNAME_HR_ItemLine_19_ID, null);
+		else 
+			set_Value (COLUMNNAME_HR_ItemLine_19_ID, Integer.valueOf(HR_ItemLine_19_ID));
+	}
+
+	/** Get Payment Source .
+		@return Payment Source 	  */
+	public int getHR_ItemLine_19_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_HR_ItemLine_19_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
@@ -229,9 +241,9 @@ public class X_HR_Payroll extends PO implements I_HR_Payroll, I_Persistent
 		return ii.intValue();
 	}
 
-	public I_HR_SalaryTable getHR_SalaryTable() throws RuntimeException
+	public eone.base.model.I_HR_SalaryTable getHR_SalaryTable() throws RuntimeException
     {
-		return (I_HR_SalaryTable)MTable.get(getCtx(), I_HR_SalaryTable.Table_Name)
+		return (eone.base.model.I_HR_SalaryTable)MTable.get(getCtx(), eone.base.model.I_HR_SalaryTable.Table_Name)
 			.getPO(getHR_SalaryTable_ID(), get_TrxName());	}
 
 	/** Set Salary Table .
@@ -254,9 +266,9 @@ public class X_HR_Payroll extends PO implements I_HR_Payroll, I_Persistent
 		return ii.intValue();
 	}
 
-	public I_HR_SalaryTableLine getHR_SalaryTableLine() throws RuntimeException
+	public eone.base.model.I_HR_SalaryTableLine getHR_SalaryTableLine() throws RuntimeException
     {
-		return (I_HR_SalaryTableLine)MTable.get(getCtx(), I_HR_SalaryTableLine.Table_Name)
+		return (eone.base.model.I_HR_SalaryTableLine)MTable.get(getCtx(), eone.base.model.I_HR_SalaryTableLine.Table_Name)
 			.getPO(getHR_SalaryTableLine_ID(), get_TrxName());	}
 
 	/** Set Table Salary Line.
@@ -423,6 +435,23 @@ public class X_HR_Payroll extends PO implements I_HR_Payroll, I_Persistent
 		return bd;
 	}
 
+	/** Set SalaryInsurance.
+		@param SalaryInsurance SalaryInsurance	  */
+	public void setSalaryInsurance (BigDecimal SalaryInsurance)
+	{
+		set_Value (COLUMNNAME_SalaryInsurance, SalaryInsurance);
+	}
+
+	/** Get SalaryInsurance.
+		@return SalaryInsurance	  */
+	public BigDecimal getSalaryInsurance () 
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_SalaryInsurance);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
+	}
+
 	/** Set SalaryPercent.
 		@param SalaryPercent SalaryPercent	  */
 	public void setSalaryPercent (BigDecimal SalaryPercent)
@@ -435,6 +464,23 @@ public class X_HR_Payroll extends PO implements I_HR_Payroll, I_Persistent
 	public BigDecimal getSalaryPercent () 
 	{
 		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_SalaryPercent);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
+	}
+
+	/** Set SalaryPosition.
+		@param SalaryPosition SalaryPosition	  */
+	public void setSalaryPosition (BigDecimal SalaryPosition)
+	{
+		set_Value (COLUMNNAME_SalaryPosition, SalaryPosition);
+	}
+
+	/** Get SalaryPosition.
+		@return SalaryPosition	  */
+	public BigDecimal getSalaryPosition () 
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_SalaryPosition);
 		if (bd == null)
 			 return Env.ZERO;
 		return bd;

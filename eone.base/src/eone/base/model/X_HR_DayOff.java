@@ -1,31 +1,18 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.Env;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
 
-import eone.util.Env;
-
 /** Generated Model for HR_DayOff
- *  @author iDempiere (generated) 
+ *  @author EOne (generated) 
  *  @version Version 1.0 - $Id$ */
 public class X_HR_DayOff extends PO implements I_HR_DayOff, I_Persistent 
 {
@@ -33,7 +20,7 @@ public class X_HR_DayOff extends PO implements I_HR_DayOff, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20201225L;
+	private static final long serialVersionUID = 20220616L;
 
     /** Standard Constructor */
     public X_HR_DayOff (Properties ctx, int HR_DayOff_ID, String trxName)
@@ -72,9 +59,9 @@ public class X_HR_DayOff extends PO implements I_HR_DayOff, I_Persistent
       return sb.toString();
     }
 
-	public I_AD_Department getAD_Department() throws RuntimeException
+	public eone.base.model.I_AD_Department getAD_Department() throws RuntimeException
     {
-		return (I_AD_Department)MTable.get(getCtx(), I_AD_Department.Table_Name)
+		return (eone.base.model.I_AD_Department)MTable.get(getCtx(), eone.base.model.I_AD_Department.Table_Name)
 			.getPO(getAD_Department_ID(), get_TrxName());	}
 
 	/** Set Department.
@@ -167,40 +154,10 @@ public class X_HR_DayOff extends PO implements I_HR_DayOff, I_Persistent
 		return (Timestamp)get_Value(COLUMNNAME_DateEffective);
 	}
 
-	/** NP4 = P4 */
-	public static final String DAYOFFTYPE_NP4 = "P4";
-	/** KLCP = KL */
-	public static final String DAYOFFTYPE_KLCP = "KL";
-	/** CO = CO */
-	public static final String DAYOFFTYPE_CO = "CO";
-	/** NL = NL */
-	public static final String DAYOFFTYPE_NL = "NL";
-	/** NO = NO */
-	public static final String DAYOFFTYPE_NO = "NO";
-	/** HH = HH */
-	public static final String DAYOFFTYPE_HH = "HH";
-	/** TS = TS */
-	public static final String DAYOFFTYPE_TS = "TS";
-	/** W8 = W8 */
-	public static final String DAYOFFTYPE_W8 = "W8";
-	/** W4 = W4 */
-	public static final String DAYOFFTYPE_W4 = "W4";
-	/** CT = CT */
-	public static final String DAYOFFTYPE_CT = "CT";
-	/** HO = HO */
-	public static final String DAYOFFTYPE_HO = "HO";
-	/** KLKP = KP */
-	public static final String DAYOFFTYPE_KLKP = "KP";
-	/** WT4 = T4 */
-	public static final String DAYOFFTYPE_WT4 = "T4";
-	/** WT8 = T8 */
-	public static final String DAYOFFTYPE_WT8 = "T8";
-	/** WL8 = L8 */
-	public static final String DAYOFFTYPE_WL8 = "L8";
-	/** WL4 = L4 */
-	public static final String DAYOFFTYPE_WL4 = "L4";
-	/** NP8 = P8 */
-	public static final String DAYOFFTYPE_NP8 = "P8";
+	/** Register Dayoff = DayOff */
+	public static final String DAYOFFTYPE_RegisterDayoff = "DayOff";
+	/** Register Working = Working */
+	public static final String DAYOFFTYPE_RegisterWorking = "Working";
 	/** Set DayOffType.
 		@param DayOffType DayOffType	  */
 	public void setDayOffType (String DayOffType)
@@ -318,9 +275,9 @@ public class X_HR_DayOff extends PO implements I_HR_DayOff, I_Persistent
 		return ii.intValue();
 	}
 
-	public I_HR_Employee getHR_Employee() throws RuntimeException
+	public eone.base.model.I_HR_Employee getHR_Employee() throws RuntimeException
     {
-		return (I_HR_Employee)MTable.get(getCtx(), I_HR_Employee.Table_Name)
+		return (eone.base.model.I_HR_Employee)MTable.get(getCtx(), eone.base.model.I_HR_Employee.Table_Name)
 			.getPO(getHR_Employee_ID(), get_TrxName());	}
 
 	/** Set Employee.

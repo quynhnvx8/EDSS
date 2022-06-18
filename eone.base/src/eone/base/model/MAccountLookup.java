@@ -199,5 +199,4 @@ public final class MAccountLookup extends Lookup implements Serializable
 		//  Sort & return
 		return list;
 	}   //  getData
-
 }	//	MAccountLookup

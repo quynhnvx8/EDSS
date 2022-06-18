@@ -82,6 +82,9 @@ public final class MLookup extends Lookup implements Serializable
 
 	/** Storage of data  Key-NamePair	*/
 	private volatile LinkedHashMap<Object,Object>	m_lookup = new LinkedHashMap<Object,Object>();
+	
+	//Bổ sung giá trị này, để lấy giá trị default nếu cấu hình mà ko cần phải setcallout
+	private static volatile LinkedHashMap<Object,Object>	m_default = new LinkedHashMap<Object,Object>();
 	/** The Data Loader                 */
 	private MLoader				m_loader;
 	//
@@ -121,6 +124,10 @@ public final class MLookup extends Lookup implements Serializable
 		if (m_lookup != null)
 			m_lookup.clear();
 		m_lookup = null;
+		
+		if (m_default != null) 
+			m_default.clear();
+		m_default = null;
 		if (m_lookupDirect != null)
 			m_lookupDirect.clear();
 		m_lookupDirect = null;
@@ -130,6 +137,11 @@ public final class MLookup extends Lookup implements Serializable
 		super.dispose();
 	}   //  dispose
 
+	
+	public static LinkedHashMap<Object,Object> getDefault() {
+		return m_default;
+	}
+	
 	/**
 	 *  Wait until async Load Complete
 	 */
@@ -979,9 +991,17 @@ public final class MLookup extends Lookup implements Serializable
 		 */
 		protected void doRun()
 		{
+			boolean isExistDefault = false;
 			long startTime = System.currentTimeMillis();
 			StringBuilder sql = new StringBuilder().append(m_info.Query);
-
+			
+			MTable objTable = MTable.get(Env.getCtx(), m_info.TableName);
+			if (objTable.getColumn("IsDefault") != null) {
+				isExistDefault = true;
+				String sqlSelect  = sql.substring(0, sql.indexOf(" FROM ")) + "," +  m_info.TableName + ".IsDefault";
+				String sqlWhere = sql.substring(sql.indexOf(" FROM "));
+				sql = new StringBuilder(sqlSelect).append(sqlWhere);
+			}
 			if (isShortList())
 			{
 				// Adding ", IsShortList" to the sql SELECT clause
@@ -1146,6 +1166,14 @@ public final class MLookup extends Lookup implements Serializable
 						KeyNamePair p = new KeyNamePair(key, name.toString());
 						m_lookup.put(Integer.valueOf(key), p);
 						knpCache.add(p);
+						
+						//Lấy giá trị default
+						if (isExistDefault) {
+							boolean isDefault = rs.getString(5).equals("Y");
+							if (isDefault) {
+								m_default.put(m_info.Column_ID, key);
+							}
+						}
 					}
 					else
 					{
@@ -1154,6 +1182,8 @@ public final class MLookup extends Lookup implements Serializable
 						m_lookup.put(value, p);
 						vnpCache.add(p);
 					}
+					
+					
 				}				
 			}
 			catch (SQLException e)

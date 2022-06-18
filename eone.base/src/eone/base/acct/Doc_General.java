@@ -68,7 +68,6 @@ public class Doc_General extends Doc
 			f.setC_TypeRevenue_ID(line.getC_TypeRevenue_ID());
 			
 			
-			
 			f.setC_BPartner_Cr_ID(line.getC_BPartner_Cr_ID());
 			f.setC_BPartner_Dr_ID(line.getC_BPartner_Dr_ID());
 			

@@ -407,6 +407,12 @@ public class POInfo implements Serializable
 			&& m_columns[index].ColumnSQL.startsWith("@SQL=");
 	}   //  isVirtualUIColumn
 	
+	
+	public boolean isButton(int index) {
+		if (m_columns[index].DisplayType == DisplayType.Button)
+			return true;
+		return false;
+	}
 	/**
 	 *  Is Column Virtual Search?
 	 *  @param index index

@@ -103,12 +103,53 @@ public class CalculateSalary extends SvrProcess {
 		
 		//Lay cac thong tin cau hinh
 		Map<String, MConfig> hrConfig = MConfig.getAllItem(getCtx(), get_TrxName(), Env.getAD_Client_ID(getCtx()));
-		BigDecimal healthInsurance = 		hrConfig.get(X_HR_Config.NAME_HealthInsurance).getValueNumber();
-		BigDecimal socialInsurance = 		hrConfig.get(X_HR_Config.NAME_SocialInsurance).getValueNumber();
-		BigDecimal unemploymentInsurance = 	hrConfig.get(X_HR_Config.NAME_UnemploymentInsurance).getValueNumber();
-		BigDecimal personalDeduction = 		hrConfig.get(X_HR_Config.NAME_PersonalDeduction).getValueNumber();
-		BigDecimal dependentDeduction = 	hrConfig.get(X_HR_Config.NAME_DependentDeduction).getValueNumber();
-		BigDecimal baseSalary = 			hrConfig.get(X_HR_Config.NAME_BaseSalaryPay).getValueNumber();
+		
+		//Bảo hiểm y tế
+		BigDecimal healthInsurance = Env.ZERO;
+		if (hrConfig.containsKey(X_HR_Config.NAME_IndividualHealthInsurance))
+			healthInsurance = hrConfig.get(X_HR_Config.NAME_IndividualHealthInsurance).getValueNumber();
+		
+		//Bảo hiểm xã hội
+		BigDecimal socialInsurance = 		Env.ZERO;
+		if (hrConfig.containsKey(X_HR_Config.NAME_IndividualSocialInsurance))
+			socialInsurance = 		hrConfig.get(X_HR_Config.NAME_IndividualSocialInsurance).getValueNumber();
+		
+		//Bảo hiểm thất nghiệp
+		BigDecimal unemploymentInsurance = 	Env.ZERO;
+		if (hrConfig.containsKey(X_HR_Config.NAME_UnemploymentInsurance))
+			unemploymentInsurance = 	hrConfig.get(X_HR_Config.NAME_UnemploymentInsurance).getValueNumber();
+		
+		//Giảm trừ cá nhân
+		BigDecimal personalDeduction = 		Env.ZERO;
+		if (hrConfig.containsKey(X_HR_Config.NAME_PersonalDeduction))
+			personalDeduction = 		hrConfig.get(X_HR_Config.NAME_PersonalDeduction).getValueNumber();
+		
+		//Giảm trừ người phụ thuộc
+		BigDecimal dependentDeduction = 	Env.ZERO;
+		if (hrConfig.containsKey(X_HR_Config.NAME_DependentDeduction))
+			dependentDeduction = 	hrConfig.get(X_HR_Config.NAME_DependentDeduction).getValueNumber();
+		
+		//Lương cơ bản
+		BigDecimal baseSalary = 			Env.ZERO;
+		if (hrConfig.containsKey(X_HR_Config.NAME_BaseSalaryPay))
+			baseSalary = 			hrConfig.get(X_HR_Config.NAME_BaseSalaryPay).getValueNumber();
+		
+		//Phần dành cho doanh nghiệp
+		//Doanh nghiệp: Phí công đoàn
+		
+		BigDecimal unionFee = 				Env.ZERO;
+		if (hrConfig.containsKey(X_HR_Config.NAME_UnionFee))
+			unionFee = hrConfig.get(X_HR_Config.NAME_UnionFee).getValueNumber();
+		//Doanh nghiệp: Bảo hiểm y tế
+		BigDecimal ohealthInsurance = Env.ZERO;
+		if (hrConfig.containsKey(X_HR_Config.NAME_OrganizationHealthInsurance))
+			ohealthInsurance = hrConfig.get(X_HR_Config.NAME_OrganizationHealthInsurance).getValueNumber();
+		
+		//Doanh nghiệp: Bảo hiểm xã hội
+		BigDecimal osocialInsurance = 		Env.ZERO;
+		if (hrConfig.containsKey(X_HR_Config.NAME_OrganizationSocialInsurance))
+			osocialInsurance = 		hrConfig.get(X_HR_Config.NAME_OrganizationSocialInsurance).getValueNumber();
+		
 		
 		//So nguoi phu thuoc
 		Map<Integer, BigDecimal> listDependent = MFamilyTies.getAllItem(getCtx(), salary.getAD_Client_ID(), salary.getC_Period_ID());
@@ -127,6 +168,8 @@ public class CalculateSalary extends SvrProcess {
 			
 			line = entry.getValue();
 			
+			BigDecimal salaryInsurance = Env.ZERO;
+			
 			if (listItems.containsKey(line.getHR_Employee_ID())) {
 				params = new ArrayList<Object>();
 				
@@ -134,35 +177,44 @@ public class CalculateSalary extends SvrProcess {
 				payroll = listItems.get(line.getHR_Employee_ID());
 				
 				
-				//Luong 1 ngay cong di lam
-				salaryOneDay = payroll.getSalaryBase()
-						.multiply(payroll.getSalaryRate())
-						.divide(new BigDecimal(line.getWorkdaySTD()), 2, RoundingMode.HALF_UP);
-				
 				line.setSalaryBase(payroll.getSalaryBase());
 				
 				//Tong ngay cong tinh luong: di lam + nghi phep + nghi le
 				totalWorkSalary = line.getTotalWorkDay().add(line.getTotalDayOff());
 				
+				//Luong 1 ngay cong di lam
+				salaryOneDay = payroll.getSalaryBase()
+						.multiply(payroll.getSalaryPercent()).divide(Env.ONEHUNDRED, 0, RoundingMode.HALF_UP)
+						.divide(new BigDecimal(line.getWorkdaySTD()), 2, RoundingMode.HALF_UP);
+				
+				//Nếu có hệ số lương thì nhân thêm hệ số lương
+				if (payroll.getSalaryRate().compareTo(Env.ZERO) > 0) {
+					salaryOneDay = salaryOneDay.multiply(payroll.getSalaryRate());
+				}
+				
 				//Neu tong cong di lam vuot cong chuan thi lay bang cong chuan.
 				if (totalWorkSalary.compareTo(new BigDecimal(line.getWorkdaySTD())) > 0) {
 					totalWorkSalary = new BigDecimal(line.getWorkdaySTD());
+					totalSalaryWorkDay = payroll.getSalaryBase();
+				} else {
+					//Tong luong di lam + nghi phep
+					totalSalaryWorkDay = salaryOneDay.multiply(totalWorkSalary);
 				}
-				
-				//Tong luong di lam + nghi phep
-				totalSalaryWorkDay = salaryOneDay.multiply(totalWorkSalary);
-				
-				//Nhan them voi ty le huong luong
-				totalSalaryWorkDay = totalSalaryWorkDay.multiply(payroll.getSalaryPercent()).divide(Env.ONEHUNDRED);
 				
 				//Tinh luong lam them: (Ngay thuong + Ngay le ) * Luong 1 ngay. (Trong nay da tinh ty le huong roi)
 				totalSalaryWorkExtra = (line.getTotalWorkExtra().add(line.getTotalWorkExtraHoliday())).multiply(salaryOneDay);
 				
+				//Nhan them voi ty le huong luong
+				totalSalaryWorkDay = totalSalaryWorkDay.multiply(payroll.getSalaryPercent()).divide(Env.ONEHUNDRED);
+				
 				//Tinh tong cac loai luong:
 				totalSalaryPart1 = totalSalaryWorkDay.add(totalSalaryExtra).add(totalSalaryWorkExtra);
+				
 				line.setSalaryPart1(totalSalaryPart1.setScale(Env.getScaleFinal(), RoundingMode.HALF_UP));
 				
-				line.setSalaryPosition(Env.ZERO);
+				//Lương chức vụ
+				line.setSalaryPosition(payroll.getSalaryPosition());
+				
 				line.setSalaryProduction(Env.ZERO);
 				
 				//Tinh luong phu cap
@@ -171,7 +223,7 @@ public class CalculateSalary extends SvrProcess {
 					for(int i = 0; i < listExtra.size(); i++) {
 						extra = listExtra.get(i);
 						String str = extra.getFormulaSetup();
-						if (extra.getFormulaSetup().contains("@BaseSalary@")) {
+						if (extra.getFormulaSetup().contains("@SalaryBase@")) {
 							str = baseSalary.toString();
 						}
 						BigDecimal value = Env.ZERO;
@@ -186,9 +238,24 @@ public class CalculateSalary extends SvrProcess {
 						.add(line.getSalaryProduction())
 						.add(line.getSalaryExtra()));
 				
-				line.setInsua_Health(line.getSalaryGross().multiply(healthInsurance).divide(Env.ONEHUNDRED, 0, RoundingMode.HALF_UP));
-				line.setInsua_Social(line.getSalaryGross().multiply(socialInsurance).divide(Env.ONEHUNDRED, 0, RoundingMode.HALF_UP));
-				line.setInsua_Unemployee(line.getSalaryGross().multiply(unemploymentInsurance).divide(Env.ONEHUNDRED, 0, RoundingMode.HALF_UP));
+				//Nếu có lương tính bảo hiểm riêng thì lấy theo giá trị tính bảo hiểm
+				salaryInsurance = line.getSalaryGross();
+				if (payroll.getSalaryInsurance().compareTo(Env.ZERO) > 0) {
+					salaryInsurance = payroll.getSalaryInsurance()
+							.multiply(totalWorkSalary)
+							.divide(new BigDecimal(line.getWorkdaySTD()), 0, RoundingMode.HALF_UP);
+				}
+				
+				line.setInsua_Health(salaryInsurance.multiply(healthInsurance).divide(Env.ONEHUNDRED, 0, RoundingMode.HALF_UP));
+				line.setInsua_Social(salaryInsurance.multiply(socialInsurance).divide(Env.ONEHUNDRED, 0, RoundingMode.HALF_UP));
+				line.setInsua_Unemployee(salaryInsurance.multiply(unemploymentInsurance).divide(Env.ONEHUNDRED, 0, RoundingMode.HALF_UP));
+				
+				//Tính cho doanh nghiệp
+				line.setOrg_Insua_Health(salaryInsurance.multiply(ohealthInsurance).divide(Env.ONEHUNDRED, 0, RoundingMode.HALF_UP));
+				line.setOrg_Insua_Social(salaryInsurance.multiply(osocialInsurance).divide(Env.ONEHUNDRED, 0, RoundingMode.HALF_UP));
+				line.setOrg_Insua_Unemployee(salaryInsurance.multiply(unemploymentInsurance).divide(Env.ONEHUNDRED, 0, RoundingMode.HALF_UP));
+				line.setOnionFeeAmt(salaryInsurance.multiply(unionFee).divide(Env.ONEHUNDRED, 0, RoundingMode.HALF_UP));
+				
 				
 				//Tinh so nguoi phu thuoc
 				if (listDependent.containsKey(line.getHR_Employee_ID()))
@@ -219,7 +286,7 @@ public class CalculateSalary extends SvrProcess {
 				line.setAD_Client_ID(Env.getAD_Client_ID(Env.getCtx()));
 				//Add du lieu vao list de update thoe batch
 				
-				List<String> colNames = PO.getSqlInsert_Para(X_HR_SalaryLine.Table_ID, get_TrxName());
+				List<String> colNames = PO.getSqlUpdate_Para(X_HR_SalaryLine.Table_ID);
 				params = PO.getBatchValueList(line, colNames, I_HR_SalaryLine.Table_ID, get_TrxName(), line.getHR_SalaryLine_ID());
 				values.add(params);
 				
@@ -236,7 +303,7 @@ public class CalculateSalary extends SvrProcess {
 				}
 			}
 		}
-		/*
+		
 		if (values.size() > 0) {
 			String err = DB.excuteBatch(sqlUpdate, values, get_TrxName());
 			if(err != null) {
@@ -247,7 +314,7 @@ public class CalculateSalary extends SvrProcess {
 			}
 			values.clear();
 		}
-		*/
+		
 		listEmployees.clear();
 		hrConfig.clear();
 		listItems.clear();

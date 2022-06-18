@@ -1,30 +1,17 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.Env;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-import eone.util.Env;
-
 /** Generated Model for HR_Config
- *  @author iDempiere (generated) 
+ *  @author EOne (generated) 
  *  @version Version 1.0 - $Id$ */
 public class X_HR_Config extends PO implements I_HR_Config, I_Persistent 
 {
@@ -32,7 +19,7 @@ public class X_HR_Config extends PO implements I_HR_Config, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20201030L;
+	private static final long serialVersionUID = 20220616L;
 
     /** Standard Constructor */
     public X_HR_Config (Properties ctx, int HR_Config_ID, String trxName)
@@ -50,7 +37,7 @@ public class X_HR_Config extends PO implements I_HR_Config, I_Persistent
     }
 
     /** AccessLevel
-      * @return 3 - Client - Org 
+      * @return 7 - System - Client - Org 
       */
     protected int get_AccessLevel()
     {
@@ -101,20 +88,24 @@ public class X_HR_Config extends PO implements I_HR_Config, I_Persistent
 	public static final String NAME_FemaleRetireAge = "FemaleRetireAge";
 	/** WorkingTimeStandard = WorkingTimeStandard */
 	public static final String NAME_WorkingTimeStandard = "WorkingTimeStandard";
-	/** HealthInsurance = HealthInsurance */
-	public static final String NAME_HealthInsurance = "HealthInsurance";
+	/** Individual Health Insurance = IN_HealthInsurance */
+	public static final String NAME_IndividualHealthInsurance = "IN_HealthInsurance";
 	/** UnemploymentInsurance = UnemploymentInsurance */
 	public static final String NAME_UnemploymentInsurance = "UnemploymentInsurance";
-	/** SocialInsurance = SocialInsurance */
-	public static final String NAME_SocialInsurance = "SocialInsurance";
+	/** Individual Social Insurance = IN_SocialInsurance */
+	public static final String NAME_IndividualSocialInsurance = "IN_SocialInsurance";
 	/** PersonalDeduction = PersonalDeduction */
 	public static final String NAME_PersonalDeduction = "PersonalDeduction";
 	/** DependentDeduction = DependentDeduction */
 	public static final String NAME_DependentDeduction = "DependentDeduction";
+	/** Organization Social Insurance = OR_SocialInsurance */
+	public static final String NAME_OrganizationSocialInsurance = "OR_SocialInsurance";
+	/** Organization Health Insurance = OR_HealthInsurance */
+	public static final String NAME_OrganizationHealthInsurance = "OR_HealthInsurance";
+	/** Union Fee = UinonFee */
+	public static final String NAME_UnionFee = "UinonFee";
 	/** Set Name.
-		@param Name 
-		Alphanumeric identifier of the entity
-	  */
+		@param Name Name	  */
 	public void setName (String Name)
 	{
 
@@ -122,8 +113,7 @@ public class X_HR_Config extends PO implements I_HR_Config, I_Persistent
 	}
 
 	/** Get Name.
-		@return Alphanumeric identifier of the entity
-	  */
+		@return Name	  */
 	public String getName () 
 	{
 		return (String)get_Value(COLUMNNAME_Name);

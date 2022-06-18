@@ -20,7 +20,6 @@ import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Center;
-import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Hlayout;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
@@ -30,6 +29,7 @@ import org.zkoss.zul.West;
 
 import eone.base.model.I_C_BPartner;
 import eone.base.model.I_C_ElementValue;
+import eone.base.model.I_C_PeriodPayment;
 import eone.base.model.MColumn;
 import eone.base.model.MFactAcct;
 import eone.base.model.MLookup;
@@ -44,7 +44,6 @@ import eone.util.TimeUtil;
 import eone.webui.component.Button;
 import eone.webui.component.Column;
 import eone.webui.component.Columns;
-import eone.webui.component.ComboItem;
 import eone.webui.component.ConfirmPanel;
 import eone.webui.component.Datebox;
 import eone.webui.component.Grid;
@@ -59,6 +58,7 @@ import eone.webui.component.Textbox;
 import eone.webui.component.WListbox;
 import eone.webui.component.Window;
 import eone.webui.editor.WSearchEditor;
+import eone.webui.editor.WTableDirEditor;
 import eone.webui.event.WTableModelEvent;
 import eone.webui.event.WTableModelListener;
 import eone.webui.panel.ADForm;
@@ -92,8 +92,8 @@ public class WupdateLongterm extends Window implements IFormController, EventLis
 	private Label lBPartner = new Label();
 	private WSearchEditor selBPartner;
 	
-	private Combobox			cbListDuration;
-	private Label				lbListDuration;
+	private Label lbListDuration = new Label();
+	private WTableDirEditor cbListDuration;
 	
 	private ConfirmPanel 		confirmPanel;
 	
@@ -128,6 +128,7 @@ public class WupdateLongterm extends Window implements IFormController, EventLis
 		String sqlFrom = 
 				" Fact_Acct "
 				+ " LEFT JOIN C_ElementValue adr ON Fact_Acct.Account_Dr_ID = adr.C_ElementValue_ID "
+				+ " LEFT JOIN C_PeriodPayment period ON Fact_Acct.C_PeriodPayment_ID = period.C_PeriodPayment_ID "
 				+ " LEFT JOIN C_ElementValue acr ON Fact_Acct.Account_Cr_ID = acr.C_ElementValue_ID "
 				+ " LEFT JOIN C_BPartner pdr ON Fact_Acct.C_BPartner_Dr_ID = pdr.C_BPartner_ID "
 				+ " LEFT JOIN C_BPartner pcr ON Fact_Acct.C_BPartner_Cr_ID = pcr.C_BPartner_ID ";
@@ -146,7 +147,7 @@ public class WupdateLongterm extends Window implements IFormController, EventLis
 		m_selectedLayout[m_infoColumn++] = new WInfo_Column(Msg.translate(Env.getCtx(), MFactAcct.COLUMNNAME_DateAcct), MFactAcct.Table_Name + "." + MFactAcct.COLUMNNAME_DateAcct, Date.class);
 		m_selectedLayout[m_infoColumn++] = new WInfo_Column(Msg.translate(Env.getCtx(), MFactAcct.COLUMNNAME_Amount), MFactAcct.Table_Name + "." + MFactAcct.COLUMNNAME_Amount, BigDecimal.class);
 		m_selectedLayout[m_infoColumn++] = new WInfo_Column(Msg.translate(Env.getCtx(), MFactAcct.COLUMNNAME_AmountConvert), MFactAcct.Table_Name + "." + MFactAcct.COLUMNNAME_AmountConvert, BigDecimal.class);
-		m_selectedLayout[m_infoColumn++] = new WInfo_Column(Msg.translate(Env.getCtx(), MFactAcct.COLUMNNAME_ListDuration), MFactAcct.Table_Name +  "." + MFactAcct.COLUMNNAME_ListDuration, String.class);
+		m_selectedLayout[m_infoColumn++] = new WInfo_Column(Msg.translate(Env.getCtx(), MFactAcct.COLUMNNAME_C_PeriodPayment_ID), "period" +  "." + I_C_PeriodPayment.COLUMNNAME_Name, String.class);
 		m_selectedLayout[m_infoColumn++] = new WInfo_Column(Msg.translate(Env.getCtx(), MFactAcct.COLUMNNAME_Description), MFactAcct.Table_Name +  "." + MFactAcct.COLUMNNAME_Description, String.class);
 		m_selectedLayout[m_infoColumn++] = new WInfo_Column(Msg.translate(Env.getCtx(), MFactAcct.COLUMNNAME_Account_Dr_ID), "adr" + "." + I_C_ElementValue.COLUMNNAME_Value, String.class);
 		m_selectedLayout[m_infoColumn++] = new WInfo_Column(Msg.translate(Env.getCtx(), MFactAcct.COLUMNNAME_Account_Cr_ID), "acr" + "." + I_C_ElementValue.COLUMNNAME_Value, String.class);
@@ -254,16 +255,10 @@ public class WupdateLongterm extends Window implements IFormController, EventLis
 		selBPartner = new WSearchEditor("C_BPartner_ID", false, false, true, mLookup);
 		ZKUpdateUtil.setWidth(selBPartner.getComponent(), "90%");
 		
-		lbListDuration = new Label(Msg.translate(Env.getCtx(), "ListDuration"));
-		
-		ComboItem item = null;
-		cbListDuration = new Combobox("---- "+ Msg.translate(Env.getCtx(), "Select") + " ----");
-		item =new ComboItem("---- "+ Msg.translate(Env.getCtx(), "Select") + " ----", "00");
-		cbListDuration.appendChild(item);
-		item =new ComboItem(Msg.translate(Env.getCtx(), "ShortTeam"), "01");
-		cbListDuration.appendChild(item);
-		item =new ComboItem(Msg.translate(Env.getCtx(), "LongTeam"), "02");
-		cbListDuration.appendChild(item);
+		lbListDuration.setValue(Msg.translate(Env.getCtx(), "C_PeriodPayment_ID"));
+		mLookup = MLookupFactory.get(Env.getCtx(), 0, 0, MColumn.getColumn_ID("C_PeriodPayment", "C_PeriodPayment_ID"), DisplayType.Table);
+		cbListDuration = new WTableDirEditor("AD_Org_ID", false, false, true, mLookup);
+		ZKUpdateUtil.setWidth(cbListDuration.getComponent(), "90%");
 		
 		
 		btnSearch = new Button(Msg.translate(Env.getCtx(), "Search"));
@@ -332,7 +327,7 @@ public class WupdateLongterm extends Window implements IFormController, EventLis
 		row.appendChild(hlayout);
 		
 		row.appendChild(lbListDuration);
-		row.appendChild(cbListDuration);
+		row.appendChild(cbListDuration.getComponent());
 		
 		row = rows.newRow();
 		
@@ -429,18 +424,15 @@ public class WupdateLongterm extends Window implements IFormController, EventLis
 			i ++;
 		}
 		
-		String listDuration = "00";
+		int C_PeriodPayment_ID = 0;
 		
-		if ("01".equals(cbListDuration.getSelectedItem().getValue())) {
-			listDuration = "12";
+		if (cbListDuration.getComponent().getSelectedItem().getValue() != null) {
+			C_PeriodPayment_ID = Integer.parseInt(cbListDuration.getComponent().getSelectedItem().getValue());
 		}
 		
-		if ("02".equals(cbListDuration.getSelectedItem().getValue())) {
-			listDuration = "13";
-		}
 		
 		if (!listID.isEmpty()) {
-			String sql = "UPDATE Fact_Acct Set ListDuration = '"+ listDuration +"' Where Fact_Acct_ID in (" + listID + ")";
+			String sql = "UPDATE Fact_Acct Set ListDuration = "+ C_PeriodPayment_ID +" Where Fact_Acct_ID in (" + listID + ")";
 			DB.executeUpdate(sql);
 		}
 		
@@ -517,13 +509,6 @@ public class WupdateLongterm extends Window implements IFormController, EventLis
 			whereClause.append(" AND Fact_Acct.DateAcct <= ").append(DB.TO_DATE(toDate));
 		}
 		
-		if ("01".equals(cbListDuration.getSelectedItem().getValue())) {
-			whereClause.append(" AND ").append(" TO_NUMBER(Fact_Acct.ListDuration, '99G999D9S')  <= 12");
-		}
-		
-		if ("02".equals(cbListDuration.getSelectedItem().getValue())) {
-			whereClause.append(" AND ").append(" TO_NUMBER(Fact_Acct.ListDuration, '99G999D9S') > 12");
-		}
 		
 		return whereClause.toString();
 	}

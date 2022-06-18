@@ -10,6 +10,7 @@ import eone.base.model.MDayOff;
 import eone.base.model.MDayOffLine;
 import eone.base.model.MHoliday;
 import eone.base.model.MTimekeeperMap;
+import eone.base.model.MVacationDay;
 import eone.base.model.MWorkDay;
 import eone.base.model.PO;
 import eone.base.model.X_HR_DayOffLine;
@@ -34,11 +35,17 @@ public class CreateDayOffLine extends SvrProcess {
 		String sqlDel = "Delete from HR_DayOffLine Where HR_DayOff_ID = ?";
 		DB.executeUpdate(sqlDel, getRecord_ID(), get_TrxName());
 		
+		MDayOff dayoff = MDayOff.get(getCtx(), getRecord_ID(), get_TrxName());
+		
 		double dayOffStandard = 12;//TODO: Tinh toan them cho cau hinh ngay nghi phep de lay gia tri nay
+		
+		MVacationDay vacantEmployee = MVacationDay.getVacantEmployee(getCtx(), dayoff.getHR_Employee_ID(), dayoff.getStartTime(), get_TrxName());
+		if (vacantEmployee != null && vacantEmployee.getRemainQty().compareTo(Env.ZERO) > 0)
+			dayOffStandard = Double.parseDouble(vacantEmployee.getRemainQty().toString());
 		
 		Map<String, MTimekeeperMap> listItems = MTimekeeperMap.getAllItems(getCtx(), get_TrxName());
 		List<List<Object>> values = new ArrayList<List<Object>>();
-		MDayOff dayoff = MDayOff.get(getCtx(), getRecord_ID(), get_TrxName());
+		
 		int daybetween = TimeUtil.getDaysBetween(dayoff.getStartTime(), dayoff.getEndTime());
 		Timestamp dayInc = dayoff.getStartTime();
 		MDayOffLine line = null;
@@ -62,14 +69,19 @@ public class CreateDayOffLine extends SvrProcess {
 			if (listHoliday.containsKey(dayInc)) {
 				line.setDayOffType(X_HR_DayOffLine.DAYOFFTYPE_NL);
 			} else {
-				if (listItems.containsKey(dayoff.getDayOffType()) 
-						&& listItems.get(dayoff.getDayOffType()).isPaidDayoff()
-						&& dayOffStandard > 0) 
+				if (dayOffStandard > 0) 
 				{
-					line.setDayOffType(dayoff.getDayOffType());
-					dayOffStandard -= Double.parseDouble(listItems.get(dayoff.getDayOffType()).getValueNumber().toString());					
+					Long hour = TimeUtil.getNumberOnCalander(dayoff.getStartTime(), dayoff.getEndTime(), "hours");
+					if (hour <= 4) {
+						line.setDayOffType(X_HR_DayOffLine.DAYOFFTYPE_P4);
+						dayOffStandard = dayOffStandard - 0.5;
+					} else {
+						line.setDayOffType(X_HR_DayOffLine.DAYOFFTYPE_P8);
+						dayOffStandard = dayOffStandard - 1;
+					}
+										
 				} else {
-					line.setDayOffType(X_HR_DayOffLine.DAYOFFTYPE_KLCP);
+					line.setDayOffType(X_HR_DayOffLine.DAYOFFTYPE_KL);
 				}
 			}//End ngay le
 			

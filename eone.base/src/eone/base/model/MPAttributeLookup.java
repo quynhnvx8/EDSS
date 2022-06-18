@@ -187,5 +187,4 @@ public class MPAttributeLookup extends Lookup
 	{
 		return "M_AttributeSetInstance_ID";
 	}	//	getColumnName
-
 }	//	MPAttribute

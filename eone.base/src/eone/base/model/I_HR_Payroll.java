@@ -1,28 +1,15 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import eone.util.KeyNamePair;
-
 /** Generated Interface for HR_Payroll
- *  @author iDempiere (generated) 
+ *  @author EOne (generated) 
  *  @version Version 1.0
  */
 public interface I_HR_Payroll 
@@ -36,9 +23,9 @@ public interface I_HR_Payroll
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 3 - Client - Org 
+    /** AccessLevel = 7 - System - Client - Org 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(3);
+    BigDecimal accessLevel = BigDecimal.valueOf(7);
 
     /** Load Meta Data */
 
@@ -132,7 +119,7 @@ public interface I_HR_Payroll
 	/** Get Employee	  */
 	public int getHR_Employee_ID();
 
-	public I_HR_Employee getHR_Employee() throws RuntimeException;
+	public eone.base.model.I_HR_Employee getHR_Employee() throws RuntimeException;
 
     /** Column name HR_ItemLine_05_ID */
     public static final String COLUMNNAME_HR_ItemLine_05_ID = "HR_ItemLine_05_ID";
@@ -143,7 +130,7 @@ public interface I_HR_Payroll
 	/** Get Jobs	  */
 	public int getHR_ItemLine_05_ID();
 
-	public I_HR_ItemLine getHR_ItemLine_05() throws RuntimeException;
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_05() throws RuntimeException;
 
     /** Column name HR_ItemLine_15_ID */
     public static final String COLUMNNAME_HR_ItemLine_15_ID = "HR_ItemLine_15_ID";
@@ -154,7 +141,18 @@ public interface I_HR_Payroll
 	/** Get Payroll Form	  */
 	public int getHR_ItemLine_15_ID();
 
-	public I_HR_ItemLine getHR_ItemLine_15() throws RuntimeException;
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_15() throws RuntimeException;
+
+    /** Column name HR_ItemLine_19_ID */
+    public static final String COLUMNNAME_HR_ItemLine_19_ID = "HR_ItemLine_19_ID";
+
+	/** Set Payment Source 	  */
+	public void setHR_ItemLine_19_ID (int HR_ItemLine_19_ID);
+
+	/** Get Payment Source 	  */
+	public int getHR_ItemLine_19_ID();
+
+	public eone.base.model.I_HR_ItemLine getHR_ItemLine_19() throws RuntimeException;
 
     /** Column name HR_Payroll_ID */
     public static final String COLUMNNAME_HR_Payroll_ID = "HR_Payroll_ID";
@@ -174,7 +172,7 @@ public interface I_HR_Payroll
 	/** Get Salary Table 	  */
 	public int getHR_SalaryTable_ID();
 
-	public I_HR_SalaryTable getHR_SalaryTable() throws RuntimeException;
+	public eone.base.model.I_HR_SalaryTable getHR_SalaryTable() throws RuntimeException;
 
     /** Column name HR_SalaryTableLine_ID */
     public static final String COLUMNNAME_HR_SalaryTableLine_ID = "HR_SalaryTableLine_ID";
@@ -185,7 +183,7 @@ public interface I_HR_Payroll
 	/** Get Table Salary Line	  */
 	public int getHR_SalaryTableLine_ID();
 
-	public I_HR_SalaryTableLine getHR_SalaryTableLine() throws RuntimeException;
+	public eone.base.model.I_HR_SalaryTableLine getHR_SalaryTableLine() throws RuntimeException;
 
     /** Column name IncentiveRate */
     public static final String COLUMNNAME_IncentiveRate = "IncentiveRate";
@@ -267,6 +265,15 @@ public interface I_HR_Payroll
 	/** Get SalaryBase	  */
 	public BigDecimal getSalaryBase();
 
+    /** Column name SalaryInsurance */
+    public static final String COLUMNNAME_SalaryInsurance = "SalaryInsurance";
+
+	/** Set SalaryInsurance	  */
+	public void setSalaryInsurance (BigDecimal SalaryInsurance);
+
+	/** Get SalaryInsurance	  */
+	public BigDecimal getSalaryInsurance();
+
     /** Column name SalaryPercent */
     public static final String COLUMNNAME_SalaryPercent = "SalaryPercent";
 
@@ -275,6 +282,15 @@ public interface I_HR_Payroll
 
 	/** Get SalaryPercent	  */
 	public BigDecimal getSalaryPercent();
+
+    /** Column name SalaryPosition */
+    public static final String COLUMNNAME_SalaryPosition = "SalaryPosition";
+
+	/** Set SalaryPosition	  */
+	public void setSalaryPosition (BigDecimal SalaryPosition);
+
+	/** Get SalaryPosition	  */
+	public BigDecimal getSalaryPosition();
 
     /** Column name SalaryRate */
     public static final String COLUMNNAME_SalaryRate = "SalaryRate";

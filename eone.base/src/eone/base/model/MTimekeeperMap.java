@@ -72,9 +72,9 @@ public class MTimekeeperMap extends X_HR_TimekeeperMap
 	public static Map<String, MTimekeeperMap> getAllItems (Properties ctx, String trxName)
 	{
 		Map<String, MTimekeeperMap> list = new HashMap<String, MTimekeeperMap>();
-		final String whereClause = "IsActive = 'Y' And AD_Client_ID = ?";
+		String whereClause = "IsActive = 'Y'";
+		
 		List<MTimekeeperMap> retValue = new Query(ctx, Table_Name,whereClause,trxName)
-				.setParameters(Env.getAD_Client_ID(ctx))
 				.list();
 		for(int i = 0; i < retValue.size(); i++) {
 			list.put(retValue.get(i).getName(), retValue.get(i));
@@ -97,53 +97,22 @@ public class MTimekeeperMap extends X_HR_TimekeeperMap
 		return s_cache.get(name);
 	}
 	
-	/*
-	 * Ham kiem tra nghi phep duoc huong luong
-	 */
-	public boolean isPaidDayoff() {
-		if (getTypeTimeKeeper().equalsIgnoreCase(TYPETIMEKEEPER_NghiPhepCoLuong))
-			return true;
-		if (getTypeTimeKeeper().equalsIgnoreCase(TYPETIMEKEEPER_NghiPhepCoLuong))
-			return true;
-		if (getTypeTimeKeeper().equalsIgnoreCase(TYPETIMEKEEPER_NghiLe))
+	
+	
+	//Làm ngày thường
+	public boolean isWorkingDayNormal() {
+		if (getTypeTimeKeeper().equalsIgnoreCase(TYPETIMEKEEPER_HaveASalary))
 			return true;
 		return false;
 	}
 	
-	public boolean isWorkDay() {
-		if (getTypeTimeKeeper().equalsIgnoreCase(TYPETIMEKEEPER_LamMacDinh))
-			return true;
-		if (getTypeTimeKeeper().equalsIgnoreCase(TYPETIMEKEEPER_NghiLe))
-			return true;
-		return false;
-	}
 	
-	public boolean isDayOffPermistion() {
-		if (getTypeTimeKeeper().equalsIgnoreCase(TYPETIMEKEEPER_NghiPhepCoLuong))
-			return true;
-		return false;
-	}
 	
 	/*
-	 * Ham kiem tra nghi phep khong duoc huong luong
+	 * Ham kiem tra nghi thai san, hoặc nghỉ bảo hiểm
 	 */
-	public boolean isNotPaidDayoffPemission() {
-		if (getTypeTimeKeeper().equalsIgnoreCase(TYPETIMEKEEPER_NghiKhongLuongCoPhep))
-			return true;
-		return false;
-	}
-	
-	public boolean isNotPaidDayoffUnPermistion() {
-		if (getTypeTimeKeeper().equalsIgnoreCase(TYPETIMEKEEPER_NghiKhongLuongKhongPhep))
-			return true;
-		return false;
-	}
-	
-	/*
-	 * Ham kiem tra nghi thai san
-	 */
-	public boolean isMartenityDayoff() {
-		if (getTypeTimeKeeper().equalsIgnoreCase(TYPETIMEKEEPER_NghiThaiSan))
+	public boolean isInsurancePaidSalary() {
+		if (getTypeTimeKeeper().equalsIgnoreCase(TYPETIMEKEEPER_InsuranceSalary))
 			return true;
 		return false;
 	}
@@ -151,8 +120,8 @@ public class MTimekeeperMap extends X_HR_TimekeeperMap
 	/*
 	 * Ham kiem tra di lam them ngay thuong
 	 */
-	public boolean isWorkingNormal() {
-		if (getTypeTimeKeeper().equalsIgnoreCase(TYPETIMEKEEPER_LamThemThuong))
+	public boolean isOverWorkingNormal() {
+		if (getTypeTimeKeeper().equalsIgnoreCase(TYPETIMEKEEPER_OvertimeOnWeekdays))
 			return true;
 		return false;
 	}
@@ -160,8 +129,8 @@ public class MTimekeeperMap extends X_HR_TimekeeperMap
 	/*
 	 * Ham kiem tra di lam them ngay le
 	 */
-	public boolean isWorkingHoliday() {
-		if (getTypeTimeKeeper().equalsIgnoreCase(TYPETIMEKEEPER_LamThemLe))
+	public boolean isOverWorkingHoliday() {
+		if (getTypeTimeKeeper().equalsIgnoreCase(TYPETIMEKEEPER_OvertimeOnHoliday))
 			return true;
 		return false;
 	}

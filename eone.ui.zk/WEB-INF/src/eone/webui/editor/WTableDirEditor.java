@@ -189,7 +189,7 @@ ContextMenuListener, IZoomableEditor
         getComponent().setAutodrop(false);
         getComponent().setInstantSelect(false);
     	getComponent().addEventListener(Events.ON_BLUR, this);
-        if (getComponent() instanceof EditorAutoComplete) {
+    	if (getComponent() instanceof EditorAutoComplete) {
         	;
         } else {
         	getComponent().addScrollSelectedIntoViewListener();

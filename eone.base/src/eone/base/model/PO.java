@@ -2577,10 +2577,11 @@ public abstract class PO	implements Serializable, Comparator<Object>, Evaluatee,
 		{
 			Object value = get_Value(i);
 			//	Don't insert NULL values (allows Database defaults)
-			if (value == null
-				|| p_info.isVirtualColumn(i))
+			if (value == null || p_info.isVirtualColumn(i))
 				continue;
-
+			if (p_info.isButton(i)) {
+				continue;
+			}
 			//	Display Type
 			int dt = p_info.getColumnDisplayType(i);
 			if (DisplayType.isLOB(dt))
@@ -2628,6 +2629,7 @@ public abstract class PO	implements Serializable, Comparator<Object>, Evaluatee,
 			{				
 				try
 				{
+					
 					if (c == Object.class) //  may have need to deal with null values differently
 						sqlValues.append (saveNewSpecial (value, i));
 					else if (value == null || value.equals (Null.NULL))

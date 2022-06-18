@@ -2,10 +2,14 @@ package eone.base.model;
 
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import eone.util.CCache;
+import eone.util.Env;
+import eone.util.Msg;
 import eone.util.TimeUtil;
 
 public class MTimekeeperLine extends X_HR_TimekeeperLine
@@ -47,6 +51,17 @@ public class MTimekeeperLine extends X_HR_TimekeeperLine
 			log.saveError("Error", "Record Approved");
 			return false;
 		}
+		
+		Map<String, Object> dataColumn = new HashMap<String, Object>();
+		dataColumn.put(COLUMNNAME_HR_Employee_ID, getHR_Employee_ID());
+		dataColumn.put(COLUMNNAME_C_Period_ID, getC_Period_ID());
+		boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_HR_TimekeeperLine_ID, getHR_TimekeeperLine_ID(), get_TrxName());
+		dataColumn = null;
+		if (!check) {
+			log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": " + COLUMNNAME_HR_Employee_ID);
+			return false;
+		}
+		
 		if (getDateApproved() != null) {
 			int day = TimeUtil.getDaySel(getDateApproved());
 			if (getDateApproved() != null && is_ValueChanged(COLUMNNAME_Day01) && day > 1) {

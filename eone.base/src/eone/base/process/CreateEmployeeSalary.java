@@ -71,9 +71,9 @@ public class CreateEmployeeSalary extends SvrProcess {
 				lineObj = listTimekeeper.get(HR_Employee_ID);
 				for(Map.Entry<MTimekeeperMap, Double> entry : lineObj.entrySet()) {
 					item = entry.getKey();
-					if (item.isWorkDay() && entry.getValue() != 0)
+					if (item.isWorkingDayNormal() && entry.getValue() != 0)
 						totalStandard = totalStandard.add(new BigDecimal(entry.getValue().toString()));
-					
+					/*
 					if (item.isDayOffPermistion() && entry.getValue() != 0)
 						totalDayoffPermission = totalDayoffPermission.add(new BigDecimal(entry.getValue().toString()));
 					
@@ -82,14 +82,14 @@ public class CreateEmployeeSalary extends SvrProcess {
 					
 					if (item.isNotPaidDayoffUnPermistion() && entry.getValue() != 0)
 						totalNotPaidOffUnPermisstion = totalNotPaidOffUnPermisstion.add(new BigDecimal(entry.getValue().toString()));
-					
-					if (item.isWorkingNormal() && entry.getValue() != 0)
+					*/
+					if (item.isOverWorkingNormal() && entry.getValue() != 0)
 						totalWorkExtra = totalWorkExtra.add(new BigDecimal(entry.getValue().toString()));
 					
-					if (item.isWorkingHoliday() && entry.getValue() != 0)
+					if (item.isOverWorkingHoliday() && entry.getValue() != 0)
 						totalWorkExtraHoliday = totalWorkExtraHoliday.add(new BigDecimal(entry.getValue().toString()));
 					
-					if (item.isMartenityDayoff() && entry.getValue() != 0)
+					if (item.isInsurancePaidSalary() && entry.getValue() != 0)
 						totalDayMartenity = totalDayMartenity.add(new BigDecimal(entry.getValue().toString()));
 					
 				}
@@ -131,7 +131,7 @@ public class CreateEmployeeSalary extends SvrProcess {
 				"Select hr_employee_id, \r\n" + 
 				"	concat_ws(',',day01,day02,day03,day04,day05,day06,day07,day08,day09,day10,\r\n" + 
 				"			  day11,day12,day13,day14,day15,day16,day17,day18,day19,day20,\r\n" + 
-				"			  day21,day22,day23,day23,day24,day25,day26,day27,day28,day29,day30,day31) as keeper \r\n" + 
+				"			  day21,day22,day23,day24,day25,day26,day27,day28,day29,day30,day31) as keeper \r\n" + 
 				"From hr_timekeeperline l \r\n" + 
 				"	Inner Join hr_timekeeper h On l.hr_timekeeper_id = h.hr_timekeeper_id\r\n" + 
 				"where h.c_period_id = ? and h.ad_client_id = ?";

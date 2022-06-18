@@ -5,11 +5,10 @@
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.Env;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.util.Properties;
-
-import eone.util.Env;
 
 /** Generated Model for C_GeneralLine
  *  @author EOne (generated) 
@@ -20,7 +19,7 @@ public class X_C_GeneralLine extends PO implements I_C_GeneralLine, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220308L;
+	private static final long serialVersionUID = 20220618L;
 
     /** Standard Constructor */
     public X_C_GeneralLine (Properties ctx, int C_GeneralLine_ID, String trxName)
@@ -512,6 +511,23 @@ public class X_C_GeneralLine extends PO implements I_C_GeneralLine, I_Persistent
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
+	}
+
+	/** Set Description.
+		@param Description 
+		Optional short description of the record
+	  */
+	public void setDescription (String Description)
+	{
+		set_Value (COLUMNNAME_Description, Description);
+	}
+
+	/** Get Description.
+		@return Optional short description of the record
+	  */
+	public String getDescription () 
+	{
+		return (String)get_Value(COLUMNNAME_Description);
 	}
 
 	public eone.base.model.I_PA_ReportLine getPA_ReportLine() throws RuntimeException

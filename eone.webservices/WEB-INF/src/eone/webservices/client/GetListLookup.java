@@ -216,4 +216,5 @@ public class GetListLookup extends Lookup {
 			m_refreshing = false;
 		}
 	}	//	refresh
+
 }

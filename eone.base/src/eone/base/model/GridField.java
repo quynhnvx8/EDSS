@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Properties;
 import java.util.StringTokenizer;
@@ -446,9 +447,13 @@ public class GridField
 		m_inserting = inserting;
 	}   //  setInserting
 
+	LinkedHashMap<Object,Object> defaults = MLookup.getDefault();
 	
 	public Object getDefault()
 	{
+		if (defaults != null && defaults.size() > 0 && defaults.containsKey(m_vo.AD_Column_ID)) {
+			return defaults.get(m_vo.AD_Column_ID);
+		}
 		if (isIgnoreDefault())
 			return null;
 		
@@ -474,7 +479,7 @@ public class GridField
 		
 		if (seqGetDefaultValue == null)
 			throw new EONEException ("seq define for get default value has wrong value");
-
+		
 		return getDefault (seqGetDefaultValue);
 	}
 	

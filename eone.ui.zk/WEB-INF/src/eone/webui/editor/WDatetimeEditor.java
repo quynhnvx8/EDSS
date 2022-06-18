@@ -1,15 +1,4 @@
-/******************************************************************************
- * Copyright (C) 2008 Low Heng Sin                                            *
- * This program is free software; you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY; without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program; if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- *****************************************************************************/
+
 package eone.webui.editor;
 
 import java.sql.Timestamp;
@@ -31,10 +20,7 @@ import eone.webui.event.ContextMenuListener;
 import eone.webui.event.ValueChangeEvent;
 import eone.webui.window.WFieldRecordInfo;
 
-/**
- *
- * @author Low Heng Sin
- */
+
 public class WDatetimeEditor extends WEditor implements ContextMenuListener
 {
 	private static final String[] LISTENER_EVENTS = {Events.ON_CHANGE, Events.ON_OK};
@@ -116,6 +102,12 @@ public class WDatetimeEditor extends WEditor implements ContextMenuListener
 		addChangeLogMenu(popupMenu);
 		if (gridField != null)
 			getComponent().getDatebox().setPlaceholder(gridField.getPlaceholder());
+		
+		if (gridField != null && gridField.getFormatPattern() != null) 
+			getComponent().getDatebox().setFormat(gridField.getFormatPattern());//
+		else {
+			getComponent().getDatebox().setFormat("dd-MM-yyyy");
+		}
 	}
 
 	public void onEvent(Event event)
@@ -171,6 +163,7 @@ public class WDatetimeEditor extends WEditor implements ContextMenuListener
     		LocalDateTime localTime =((Timestamp)value).toLocalDateTime();
     		getComponent().getDatebox().setValueInLocalDateTime(localTime);
     		getComponent().getTimebox().setValueInLocalDateTime(localTime);
+    		getComponent().getTimebox().setFormat("HH:mm");
             oldValue = (Timestamp)value;
         }
     	else
