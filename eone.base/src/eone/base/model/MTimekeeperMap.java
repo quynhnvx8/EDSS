@@ -134,4 +134,10 @@ public class MTimekeeperMap extends X_HR_TimekeeperMap
 			return true;
 		return false;
 	}
+	
+	public boolean isWorkdayProduct() {
+		if (getTypeTimeKeeper().equalsIgnoreCase(TYPETIMEKEEPER_WorkdayProduct))
+			return true;
+		return false;
+	}
 }

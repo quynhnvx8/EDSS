@@ -340,6 +340,15 @@ public interface I_HR_SalaryLine
 	/** Get TotalWorkDay	  */
 	public BigDecimal getTotalWorkDay();
 
+    /** Column name TotalWorkDayProduction */
+    public static final String COLUMNNAME_TotalWorkDayProduction = "TotalWorkDayProduction";
+
+	/** Set Total WorkDay Production	  */
+	public void setTotalWorkDayProduction (BigDecimal TotalWorkDayProduction);
+
+	/** Get Total WorkDay Production	  */
+	public BigDecimal getTotalWorkDayProduction();
+
     /** Column name TotalWorkExtra */
     public static final String COLUMNNAME_TotalWorkExtra = "TotalWorkExtra";
 

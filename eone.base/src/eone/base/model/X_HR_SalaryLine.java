@@ -557,6 +557,23 @@ public class X_HR_SalaryLine extends PO implements I_HR_SalaryLine, I_Persistent
 		return bd;
 	}
 
+	/** Set Total WorkDay Production.
+		@param TotalWorkDayProduction Total WorkDay Production	  */
+	public void setTotalWorkDayProduction (BigDecimal TotalWorkDayProduction)
+	{
+		set_Value (COLUMNNAME_TotalWorkDayProduction, TotalWorkDayProduction);
+	}
+
+	/** Get Total WorkDay Production.
+		@return Total WorkDay Production	  */
+	public BigDecimal getTotalWorkDayProduction () 
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_TotalWorkDayProduction);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
+	}
+
 	/** Set TotalWorkExtra.
 		@param TotalWorkExtra TotalWorkExtra	  */
 	public void setTotalWorkExtra (BigDecimal TotalWorkExtra)

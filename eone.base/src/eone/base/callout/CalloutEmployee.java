@@ -8,8 +8,10 @@ import java.util.Properties;
 import eone.base.model.CalloutEngine;
 import eone.base.model.GridField;
 import eone.base.model.GridTab;
+import eone.base.model.MSalaryTable;
 import eone.base.model.MSalaryTableLine;
 import eone.base.model.X_HR_Employee;
+import eone.base.model.X_HR_Payroll;
 import eone.base.model.X_HR_SalaryExtra;
 import eone.base.model.X_HR_SalaryTableLine;
 import eone.util.DB;
@@ -56,6 +58,41 @@ public class CalloutEmployee extends CalloutEngine
 				mTab.setValue(X_HR_SalaryTableLine.COLUMNNAME_Percent, Env.ONE);
 			}
 			
+		} 
+		
+		return "";
+	}
+	
+	//eone.base.callout.CalloutEmployee.fillSalaryTable 
+	public String fillSalaryTable (Properties ctx, int WindowNo, GridTab mTab, GridField mField, Object value)
+	{
+		if (isCalloutActive())	
+			return "";
+
+		int HR_SalaryTable_ID = 0;
+		if (value != null)
+			HR_SalaryTable_ID = Integer.valueOf(value.toString());
+		MSalaryTable table = MSalaryTable.get(ctx, HR_SalaryTable_ID);
+		if (table != null) {
+			mTab.setValue(X_HR_Payroll.COLUMNNAME_SalaryBase, table.getSalaryBase());
+			mTab.setValue(X_HR_Payroll.COLUMNNAME_SalaryInsurance, table.getSalaryBase());
+			
+		}
+		return "";
+	}
+	
+	//eone.base.callout.CalloutEmployee.fillSalaryTableLine 
+	public String fillSalaryTableLine (Properties ctx, int WindowNo, GridTab mTab, GridField mField, Object value)
+	{
+		if (isCalloutActive())	
+			return "";
+		int HR_SalaryTableLine_ID = 0;
+		if (value != null)
+			HR_SalaryTableLine_ID = Integer.valueOf(value.toString());
+		MSalaryTableLine line = MSalaryTableLine.get(ctx, HR_SalaryTableLine_ID, null);
+		
+		if (line != null ) {
+			mTab.setValue(X_HR_Payroll.COLUMNNAME_SalaryRate, line.getPercent());
 		} 
 		
 		return "";

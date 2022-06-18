@@ -30,7 +30,7 @@ public class MSalaryTable extends X_HR_SalaryTable
 	public static MSalaryTable get (Properties ctx, int HR_SalaryTable_ID, String trxName)
 	{
 		final String whereClause = "HR_SalaryTable_ID=? AND AD_Client_ID=?";
-		MSalaryTable retValue = new Query(ctx,I_HR_Salary.Table_Name,whereClause,trxName)
+		MSalaryTable retValue = new Query(ctx,Table_Name,whereClause,trxName)
 		.setParameters(HR_SalaryTable_ID,Env.getAD_Client_ID(ctx))
 		.firstOnly();
 		return retValue;

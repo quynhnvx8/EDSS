@@ -176,8 +176,10 @@ public class CalculateSalary extends SvrProcess {
 				//Thong tin luong
 				payroll = listItems.get(line.getHR_Employee_ID());
 				
-				
-				line.setSalaryBase(payroll.getSalaryBase());
+				if (payroll.getSalaryRate().compareTo(Env.ZERO) > 0) {
+					line.setSalaryBase(payroll.getSalaryBase().multiply(payroll.getSalaryRate()));				
+				} else
+					line.setSalaryBase(payroll.getSalaryBase());
 				
 				//Tong ngay cong tinh luong: di lam + nghi phep + nghi le
 				totalWorkSalary = line.getTotalWorkDay().add(line.getTotalDayOff());

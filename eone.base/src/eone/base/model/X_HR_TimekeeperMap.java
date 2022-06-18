@@ -19,7 +19,7 @@ public class X_HR_TimekeeperMap extends PO implements I_HR_TimekeeperMap, I_Pers
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220616L;
+	private static final long serialVersionUID = 20220618L;
 
     /** Standard Constructor */
     public X_HR_TimekeeperMap (Properties ctx, int HR_TimekeeperMap_ID, String trxName)
@@ -180,6 +180,8 @@ public class X_HR_TimekeeperMap extends PO implements I_HR_TimekeeperMap, I_Pers
 	public static final String TYPETIMEKEEPER_OvertimeOnHoliday = "OH";
 	/** Overtime On Weekdays = OW */
 	public static final String TYPETIMEKEEPER_OvertimeOnWeekdays = "OW";
+	/** Workday Product = WP */
+	public static final String TYPETIMEKEEPER_WorkdayProduct = "WP";
 	/** Set TypeTimeKeeper.
 		@param TypeTimeKeeper TypeTimeKeeper	  */
 	public void setTypeTimeKeeper (String TypeTimeKeeper)

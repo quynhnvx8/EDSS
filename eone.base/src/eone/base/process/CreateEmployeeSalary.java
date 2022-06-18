@@ -56,6 +56,7 @@ public class CreateEmployeeSalary extends SvrProcess {
 		BigDecimal totalWorkExtra;					//Tong ngay ngay thuong di lam them
 		BigDecimal totalWorkExtraHoliday;			//Tong ngay le di lam them
 		BigDecimal totalDayMartenity;				//Tong ngay nghi thai san
+		BigDecimal totalWorkdayProduct;				//Tổng công làm theo sản phẩm
 		while (rs.next()) {
 			totalStandard = Env.ZERO;
 			totalDayoffPermission = Env.ZERO;
@@ -64,6 +65,7 @@ public class CreateEmployeeSalary extends SvrProcess {
 			totalWorkExtra = Env.ZERO;
 			totalWorkExtraHoliday = Env.ZERO;
 			totalDayMartenity = Env.ZERO;
+			totalWorkdayProduct = Env.ZERO;
 			
 			HR_Employee_ID = rs.getInt("HR_Employee_ID");
 			if (listTimekeeper.containsKey(HR_Employee_ID))
@@ -83,6 +85,9 @@ public class CreateEmployeeSalary extends SvrProcess {
 					if (item.isNotPaidDayoffUnPermistion() && entry.getValue() != 0)
 						totalNotPaidOffUnPermisstion = totalNotPaidOffUnPermisstion.add(new BigDecimal(entry.getValue().toString()));
 					*/
+					if (item.isWorkdayProduct() && entry.getValue() != null)
+						totalWorkdayProduct = totalWorkdayProduct.add(new BigDecimal(entry.getValue().toString()));
+					
 					if (item.isOverWorkingNormal() && entry.getValue() != 0)
 						totalWorkExtra = totalWorkExtra.add(new BigDecimal(entry.getValue().toString()));
 					
@@ -111,6 +116,7 @@ public class CreateEmployeeSalary extends SvrProcess {
 				line.setTotalWorkExtra(totalWorkExtra);						//Lam them ngay thuong
 				line.setTotalWorkExtraHoliday(totalWorkExtraHoliday);		//Lam them ngay le
 				line.setTotalDayMartenity(totalDayMartenity);				//Ngay nghi thai san
+				line.setTotalWorkDayProduction(totalWorkdayProduct); 		//Ngày công làm theo sản phẩm
 				if (!line.save())
 					return "Create false";
 			}

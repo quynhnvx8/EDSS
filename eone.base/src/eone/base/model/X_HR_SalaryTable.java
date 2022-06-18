@@ -1,27 +1,17 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.Env;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.util.Properties;
 
 /** Generated Model for HR_SalaryTable
- *  @author iDempiere (generated) 
+ *  @author EOne (generated) 
  *  @version Version 1.0 - $Id$ */
 public class X_HR_SalaryTable extends PO implements I_HR_SalaryTable, I_Persistent 
 {
@@ -29,7 +19,7 @@ public class X_HR_SalaryTable extends PO implements I_HR_SalaryTable, I_Persiste
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20201026L;
+	private static final long serialVersionUID = 20220618L;
 
     /** Standard Constructor */
     public X_HR_SalaryTable (Properties ctx, int HR_SalaryTable_ID, String trxName)
@@ -47,7 +37,7 @@ public class X_HR_SalaryTable extends PO implements I_HR_SalaryTable, I_Persiste
     }
 
     /** AccessLevel
-      * @return 3 - Client - Org 
+      * @return 7 - System - Client - Org 
       */
     protected int get_AccessLevel()
     {
@@ -147,17 +137,14 @@ public class X_HR_SalaryTable extends PO implements I_HR_SalaryTable, I_Persiste
 	}
 
 	/** Set Name.
-		@param Name 
-		Alphanumeric identifier of the entity
-	  */
+		@param Name Name	  */
 	public void setName (String Name)
 	{
 		set_Value (COLUMNNAME_Name, Name);
 	}
 
 	/** Get Name.
-		@return Alphanumeric identifier of the entity
-	  */
+		@return Name	  */
 	public String getName () 
 	{
 		return (String)get_Value(COLUMNNAME_Name);
@@ -184,6 +171,23 @@ public class X_HR_SalaryTable extends PO implements I_HR_SalaryTable, I_Persiste
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
+	}
+
+	/** Set SalaryBase.
+		@param SalaryBase SalaryBase	  */
+	public void setSalaryBase (BigDecimal SalaryBase)
+	{
+		set_Value (COLUMNNAME_SalaryBase, SalaryBase);
+	}
+
+	/** Get SalaryBase.
+		@return SalaryBase	  */
+	public BigDecimal getSalaryBase () 
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_SalaryBase);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
 	}
 
 	/** Set Sequence.
