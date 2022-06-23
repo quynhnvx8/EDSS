@@ -1,18 +1,6 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
@@ -21,7 +9,7 @@ import java.sql.ResultSet;
 import java.util.Properties;
 
 /** Generated Model for C_TransferConfigLine
- *  @author iDempiere (generated) 
+ *  @author EOne (generated) 
  *  @version Version 1.0 - $Id$ */
 public class X_C_TransferConfigLine extends PO implements I_C_TransferConfigLine, I_Persistent 
 {
@@ -29,7 +17,7 @@ public class X_C_TransferConfigLine extends PO implements I_C_TransferConfigLine
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200921L;
+	private static final long serialVersionUID = 20220622L;
 
     /** Standard Constructor */
     public X_C_TransferConfigLine (Properties ctx, int C_TransferConfigLine_ID, String trxName)
@@ -47,7 +35,7 @@ public class X_C_TransferConfigLine extends PO implements I_C_TransferConfigLine
     }
 
     /** AccessLevel
-      * @return 3 - Client - Org 
+      * @return 4 - System 
       */
     protected int get_AccessLevel()
     {
@@ -114,9 +102,24 @@ public class X_C_TransferConfigLine extends PO implements I_C_TransferConfigLine
 		return ii.intValue();
 	}
 
-	public I_C_TransferConfig getC_TransferConfig() throws RuntimeException
+	/** Set Account Reciprocal All.
+		@param Account_RA_ID Account Reciprocal All	  */
+	public void setAccount_RA_ID (String Account_RA_ID)
+	{
+
+		set_Value (COLUMNNAME_Account_RA_ID, Account_RA_ID);
+	}
+
+	/** Get Account Reciprocal All.
+		@return Account Reciprocal All	  */
+	public String getAccount_RA_ID () 
+	{
+		return (String)get_Value(COLUMNNAME_Account_RA_ID);
+	}
+
+	public eone.base.model.I_C_TransferConfig getC_TransferConfig() throws RuntimeException
     {
-		return (I_C_TransferConfig)MTable.get(getCtx(), I_C_TransferConfig.Table_Name)
+		return (eone.base.model.I_C_TransferConfig)MTable.get(getCtx(), eone.base.model.I_C_TransferConfig.Table_Name)
 			.getPO(getC_TransferConfig_ID(), get_TrxName());	}
 
 	/** Set Transfer Config.
@@ -159,14 +162,31 @@ public class X_C_TransferConfigLine extends PO implements I_C_TransferConfigLine
 		return ii.intValue();
 	}
 
-	/** Credit = CRED */
-	public static final String METHODTRANSFER_Credit = "CRED";
-	/** Debit = DEDT */
-	public static final String METHODTRANSFER_Debit = "DEDT";
-	/** Balance Debit = BADR */
-	public static final String METHODTRANSFER_BalanceDebit = "BADR";
-	/** Balance Credit = BACR */
-	public static final String METHODTRANSFER_BalanceCredit = "BACR";
+	/** Set Description.
+		@param Description 
+		Optional short description of the record
+	  */
+	public void setDescription (String Description)
+	{
+		set_Value (COLUMNNAME_Description, Description);
+	}
+
+	/** Get Description.
+		@return Optional short description of the record
+	  */
+	public String getDescription () 
+	{
+		return (String)get_Value(COLUMNNAME_Description);
+	}
+
+	/** Incurred Credit = PSCO */
+	public static final String METHODTRANSFER_IncurredCredit = "PSCO";
+	/** Incurred Debit = PSNO */
+	public static final String METHODTRANSFER_IncurredDebit = "PSNO";
+	/** Balance Debit = DUNO */
+	public static final String METHODTRANSFER_BalanceDebit = "DUNO";
+	/** Balance Credit = DUCO */
+	public static final String METHODTRANSFER_BalanceCredit = "DUCO";
 	/** ABSValue = ABSV */
 	public static final String METHODTRANSFER_ABSValue = "ABSV";
 	/** Set MethodTransfer.
@@ -199,5 +219,26 @@ public class X_C_TransferConfigLine extends PO implements I_C_TransferConfigLine
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
+	}
+
+	/** AND = AND */
+	public static final String TYPESELECT_AND = "AND";
+	/** NOT = NOT */
+	public static final String TYPESELECT_NOT = "NOT";
+	/** NONE = NONE */
+	public static final String TYPESELECT_NONE = "NONE";
+	/** Set TypeSelect.
+		@param TypeSelect TypeSelect	  */
+	public void setTypeSelect (String TypeSelect)
+	{
+
+		set_Value (COLUMNNAME_TypeSelect, TypeSelect);
+	}
+
+	/** Get TypeSelect.
+		@return TypeSelect	  */
+	public String getTypeSelect () 
+	{
+		return (String)get_Value(COLUMNNAME_TypeSelect);
 	}
 }

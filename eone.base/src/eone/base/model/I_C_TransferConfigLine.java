@@ -1,28 +1,15 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import eone.util.KeyNamePair;
-
 /** Generated Interface for C_TransferConfigLine
- *  @author iDempiere (generated) 
+ *  @author EOne (generated) 
  *  @version Version 1.0
  */
 public interface I_C_TransferConfigLine 
@@ -36,9 +23,9 @@ public interface I_C_TransferConfigLine
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 3 - Client - Org 
+    /** AccessLevel = 4 - System 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(3);
+    BigDecimal accessLevel = BigDecimal.valueOf(4);
 
     /** Load Meta Data */
 
@@ -70,6 +57,15 @@ public interface I_C_TransferConfigLine
 
 	public eone.base.model.I_C_ElementValue getAccount_Dr() throws RuntimeException;
 
+    /** Column name Account_RA_ID */
+    public static final String COLUMNNAME_Account_RA_ID = "Account_RA_ID";
+
+	/** Set Account Reciprocal All	  */
+	public void setAccount_RA_ID (String Account_RA_ID);
+
+	/** Get Account Reciprocal All	  */
+	public String getAccount_RA_ID();
+
     /** Column name AD_Client_ID */
     public static final String COLUMNNAME_AD_Client_ID = "AD_Client_ID";
 
@@ -100,7 +96,7 @@ public interface I_C_TransferConfigLine
 	/** Get Transfer Config	  */
 	public int getC_TransferConfig_ID();
 
-	public I_C_TransferConfig getC_TransferConfig() throws RuntimeException;
+	public eone.base.model.I_C_TransferConfig getC_TransferConfig() throws RuntimeException;
 
     /** Column name C_TransferConfigLine_ID */
     public static final String COLUMNNAME_C_TransferConfigLine_ID = "C_TransferConfigLine_ID";
@@ -126,6 +122,19 @@ public interface I_C_TransferConfigLine
 	  * User who created this records
 	  */
 	public int getCreatedBy();
+
+    /** Column name Description */
+    public static final String COLUMNNAME_Description = "Description";
+
+	/** Set Description.
+	  * Optional short description of the record
+	  */
+	public void setDescription (String Description);
+
+	/** Get Description.
+	  * Optional short description of the record
+	  */
+	public String getDescription();
 
     /** Column name IsActive */
     public static final String COLUMNNAME_IsActive = "IsActive";
@@ -157,6 +166,15 @@ public interface I_C_TransferConfigLine
 
 	/** Get OrderCalculate	  */
 	public int getOrderCalculate();
+
+    /** Column name TypeSelect */
+    public static final String COLUMNNAME_TypeSelect = "TypeSelect";
+
+	/** Set TypeSelect	  */
+	public void setTypeSelect (String TypeSelect);
+
+	/** Get TypeSelect	  */
+	public String getTypeSelect();
 
     /** Column name Updated */
     public static final String COLUMNNAME_Updated = "Updated";
