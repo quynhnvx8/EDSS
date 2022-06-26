@@ -318,7 +318,7 @@ public class GetDataSaleMT extends SvrProcess
 		
 		for(int n = 0; n < arrID.size(); n++) {
 			item = new MInOut(getCtx(), arrID.get(n), get_TrxName());
-			item.processIt(DocAction.ACTION_Complete, 0);
+			item.processIt(DocAction.STATUS_Completed, 0);
 		}
 	}
 	
@@ -482,7 +482,7 @@ public class GetDataSaleMT extends SvrProcess
 		
 		for(int n = 0; n < arrID.size(); n++) {
 			item = new MInOut(getCtx(), arrID.get(n), get_TrxName());
-			item.processIt(DocAction.ACTION_Complete, 0);
+			item.processIt(DocAction.STATUS_Completed, 0);
 		}
 	}
 }	

@@ -19,7 +19,7 @@ public class X_HR_SalaryLine extends PO implements I_HR_SalaryLine, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220618L;
+	private static final long serialVersionUID = 20220626L;
 
     /** Standard Constructor */
     public X_HR_SalaryLine (Properties ctx, int HR_SalaryLine_ID, String trxName)
@@ -472,6 +472,23 @@ public class X_HR_SalaryLine extends PO implements I_HR_SalaryLine, I_Persistent
 		return bd;
 	}
 
+	/** Set Total Day Insurance.
+		@param TotalDayInsurance Total Day Insurance	  */
+	public void setTotalDayInsurance (BigDecimal TotalDayInsurance)
+	{
+		set_Value (COLUMNNAME_TotalDayInsurance, TotalDayInsurance);
+	}
+
+	/** Get Total Day Insurance.
+		@return Total Day Insurance	  */
+	public BigDecimal getTotalDayInsurance () 
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_TotalDayInsurance);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
+	}
+
 	/** Set TotalDayMartenity.
 		@param TotalDayMartenity TotalDayMartenity	  */
 	public void setTotalDayMartenity (BigDecimal TotalDayMartenity)
@@ -591,6 +608,23 @@ public class X_HR_SalaryLine extends PO implements I_HR_SalaryLine, I_Persistent
 		return bd;
 	}
 
+	/** Set Total WorkExtra Evening.
+		@param TotalWorkExtraEvening Total WorkExtra Evening	  */
+	public void setTotalWorkExtraEvening (BigDecimal TotalWorkExtraEvening)
+	{
+		set_Value (COLUMNNAME_TotalWorkExtraEvening, TotalWorkExtraEvening);
+	}
+
+	/** Get Total WorkExtra Evening.
+		@return Total WorkExtra Evening	  */
+	public BigDecimal getTotalWorkExtraEvening () 
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_TotalWorkExtraEvening);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
+	}
+
 	/** Set TotalWorkExtraHoliday.
 		@param TotalWorkExtraHoliday TotalWorkExtraHoliday	  */
 	public void setTotalWorkExtraHoliday (BigDecimal TotalWorkExtraHoliday)
@@ -603,6 +637,23 @@ public class X_HR_SalaryLine extends PO implements I_HR_SalaryLine, I_Persistent
 	public BigDecimal getTotalWorkExtraHoliday () 
 	{
 		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_TotalWorkExtraHoliday);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
+	}
+
+	/** Set Total WorkExtra Weeken.
+		@param TotalWorkExtraWeeken Total WorkExtra Weeken	  */
+	public void setTotalWorkExtraWeeken (BigDecimal TotalWorkExtraWeeken)
+	{
+		set_Value (COLUMNNAME_TotalWorkExtraWeeken, TotalWorkExtraWeeken);
+	}
+
+	/** Get Total WorkExtra Weeken.
+		@return Total WorkExtra Weeken	  */
+	public BigDecimal getTotalWorkExtraWeeken () 
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_TotalWorkExtraWeeken);
 		if (bd == null)
 			 return Env.ZERO;
 		return bd;

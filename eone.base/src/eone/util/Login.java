@@ -836,6 +836,7 @@ public class Login
 		Env.setContext(m_ctx, "#TDate", TimeUtil.getDayLastMonth(ts));
 		Env.setContext(m_ctx, "#FYDate", TimeUtil.getDayFirstYear(ts));
 		Env.setContext(m_ctx, "#LYDate", TimeUtil.getDayLastYear(ts));
+		//Env.setContext(m_ctx, "#IsWorkshop", Env.isCheckWorkshop());
 		
 		//Config from database
 		ItemDisplayLogic 	itemDis = new ItemDisplayLogic();

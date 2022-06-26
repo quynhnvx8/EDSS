@@ -855,6 +855,32 @@ public final class DB
     	}
     	return retValue;
     }
+    
+    public static String getSQLValueStringEx (String trxName, String sql)
+    {
+    	String retValue = null;
+    	PreparedStatement pstmt = null;
+    	ResultSet rs = null;
+    	try
+    	{
+    		pstmt = prepareStatement(sql, trxName);
+    		rs = pstmt.executeQuery();
+    		if (rs.next())
+    			retValue = rs.getString(1);
+    		else
+    			if (log.isLoggable(Level.FINE)) log.fine("No Value " + sql);
+    	}
+    	catch (SQLException e)
+    	{
+    		throw new DBException(e, sql);
+    	}
+    	finally
+    	{
+    		close(rs, pstmt);
+    		rs = null; pstmt = null;
+    	}
+    	return retValue;
+    }
 
     
     public static String getSQLValueStringEx (String trxName, String sql, List<Object> params)

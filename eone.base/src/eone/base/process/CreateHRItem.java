@@ -30,8 +30,9 @@ public class CreateHRItem extends SvrProcess {
 
 	@Override
 	protected String doIt() throws Exception {
-		String whereClause = " AD_Client_ID = 0";
+		String whereClause = " AD_Client_ID = 0 AND Value NOT IN (SELECT Value FROM HR_Item WHERE AD_Client_ID = ?)";
 		List<X_HR_Item> retValue = new Query(getCtx(), X_HR_Item.Table_Name, whereClause, get_TrxName(), true)
+				.setParameters(AD_Client_ID)
 				.list();
 		if (retValue != null) {
 			X_HR_Item item = null;

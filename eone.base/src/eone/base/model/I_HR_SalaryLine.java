@@ -295,6 +295,15 @@ public interface I_HR_SalaryLine
 	  */
 	public BigDecimal getTaxAmt();
 
+    /** Column name TotalDayInsurance */
+    public static final String COLUMNNAME_TotalDayInsurance = "TotalDayInsurance";
+
+	/** Set Total Day Insurance	  */
+	public void setTotalDayInsurance (BigDecimal TotalDayInsurance);
+
+	/** Get Total Day Insurance	  */
+	public BigDecimal getTotalDayInsurance();
+
     /** Column name TotalDayMartenity */
     public static final String COLUMNNAME_TotalDayMartenity = "TotalDayMartenity";
 
@@ -358,6 +367,15 @@ public interface I_HR_SalaryLine
 	/** Get TotalWorkExtra	  */
 	public BigDecimal getTotalWorkExtra();
 
+    /** Column name TotalWorkExtraEvening */
+    public static final String COLUMNNAME_TotalWorkExtraEvening = "TotalWorkExtraEvening";
+
+	/** Set Total WorkExtra Evening	  */
+	public void setTotalWorkExtraEvening (BigDecimal TotalWorkExtraEvening);
+
+	/** Get Total WorkExtra Evening	  */
+	public BigDecimal getTotalWorkExtraEvening();
+
     /** Column name TotalWorkExtraHoliday */
     public static final String COLUMNNAME_TotalWorkExtraHoliday = "TotalWorkExtraHoliday";
 
@@ -366,6 +384,15 @@ public interface I_HR_SalaryLine
 
 	/** Get TotalWorkExtraHoliday	  */
 	public BigDecimal getTotalWorkExtraHoliday();
+
+    /** Column name TotalWorkExtraWeeken */
+    public static final String COLUMNNAME_TotalWorkExtraWeeken = "TotalWorkExtraWeeken";
+
+	/** Set Total WorkExtra Weeken	  */
+	public void setTotalWorkExtraWeeken (BigDecimal TotalWorkExtraWeeken);
+
+	/** Get Total WorkExtra Weeken	  */
+	public BigDecimal getTotalWorkExtraWeeken();
 
     /** Column name Updated */
     public static final String COLUMNNAME_Updated = "Updated";

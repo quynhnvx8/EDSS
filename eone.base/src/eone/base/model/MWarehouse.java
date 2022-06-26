@@ -2,12 +2,15 @@
 package eone.base.model;
 
 import java.sql.ResultSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import eone.util.CCache;
 import eone.util.DB;
 import eone.util.Env;
+import eone.util.Msg;
 
 
 public class MWarehouse extends X_M_Warehouse
@@ -121,6 +124,15 @@ public class MWarehouse extends X_M_Warehouse
 	@Override
 	protected boolean beforeSave(boolean newRecord) 
 	{
+		Map<String, Object> dataColumn = new HashMap<String, Object>();
+		dataColumn.put(COLUMNNAME_Value, getValue());
+		dataColumn.put(COLUMNNAME_AD_Client_ID, Env.getAD_Client_ID(getCtx()));
+		boolean check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_M_Warehouse_ID, getM_Warehouse_ID(), get_TrxName());
+		dataColumn = null;
+		if (!check) {
+			log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": " + getValue());
+			return false;
+		}
 		
 		if (isDefault()) {
 			List<MWarehouse> relValue = new Query(getCtx(), Table_Name, "AD_Org_ID = ? And IsDefault = 'Y' And M_Warehouse_ID != ? and M_Warehouse_ID > 0", get_TrxName())
@@ -135,7 +147,7 @@ public class MWarehouse extends X_M_Warehouse
 	}
 	
 	/**
-	 * 	After Save
+	 * 	After Save	
 	 *	@param newRecord new
 	 *	@param success success
 	 *	@return success

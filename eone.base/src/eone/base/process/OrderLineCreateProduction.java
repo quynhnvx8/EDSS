@@ -106,7 +106,7 @@ public class OrderLineCreateProduction extends SvrProcess
 
 		production.saveEx();
 		
-		production.createLines(false);
+		
 		production.saveEx();
 
 		String msg = Msg.parseTranslation(getCtx(), "@M_Production_ID@ @Created@ " + production.getDocumentNo());

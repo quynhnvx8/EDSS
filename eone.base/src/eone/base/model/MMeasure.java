@@ -25,10 +25,7 @@ import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 
-import javax.script.ScriptEngine;
-
 import eone.apps.graph.GraphColumn;
-import eone.exceptions.EONEException;
 import eone.util.CCache;
 import eone.util.DB;
 import eone.util.Env;
@@ -444,70 +441,32 @@ public class MMeasure extends X_PA_Measure
 		for (MGoal goal:goals)
 		{
 			BigDecimal amt = Env.ZERO;
-			PO po = new MTable(getCtx(),get_Table_ID(),get_TrxName()).getPO(get_ID(), get_TrxName());
 			StringTokenizer st = new StringTokenizer(getCalculationClass(), ";,", false);
 			while (st.hasMoreTokens())      //  for each class
 			{
 				String cmd = st.nextToken().trim();	
 				StringBuilder retValue = new StringBuilder();
-				if (cmd.toLowerCase().startsWith(MRule.SCRIPT_PREFIX)) {
-					
-					MRule rule = MRule.get(getCtx(), cmd.substring(MRule.SCRIPT_PREFIX.length()));
-					if (rule == null) {
-						retValue = new StringBuilder("Script ").append(cmd).append(" not found"); 
-						log.log(Level.SEVERE, retValue.toString());
-						break;
-					}
-					if ( !  (rule.getEventType().equals(MRule.EVENTTYPE_MeasureForPerformanceAnalysis) 
-						  && rule.getRuleType().equals(MRule.RULETYPE_JSR223ScriptingAPIs))) {
-						retValue = new StringBuilder("Script ").append(cmd)
-							.append(" must be of type JSR 223 and event measure"); 
-						log.log(Level.SEVERE, retValue.toString());
-						break;
-					}
-					ScriptEngine engine = rule.getScriptEngine();
-					if (engine == null) {
-						throw new EONEException("Engine not found: " + rule.getEngineName());
-					}
-					MRule.setContext(engine, po.getCtx(), 0);
-					engine.put(MRule.ARGUMENTS_PREFIX + "Ctx", po.getCtx());
-					engine.put(MRule.ARGUMENTS_PREFIX + "PO", po);
-					try 
-					{
-						Object value =  engine.eval(rule.getScript());
-						amt = (BigDecimal)value;
-					}
-					catch (Exception e)
-					{
-						log.log(Level.SEVERE, "", e);
-						retValue = 	new StringBuilder("Script Invalid: ").append(e.toString());
-						return false;
-					}	
-				} 
-				else 
+				MeasureInterface custom = null;
+				try
 				{
-					MeasureInterface custom = null;
-					try
-					{
-						Class<?> clazz = Class.forName(cmd);
-						custom = (MeasureInterface)clazz.getDeclaredConstructor().newInstance();
-					}
-					catch (Exception e)
-					{
-						log.log(Level.SEVERE, "No custom measure class "
-								+ cmd + " - " + e.toString(), e);
-						return false;
-					}
-					
-					try
-					{
-						amt = custom.getValue();
-					}
-					catch (Exception e)
-					{
-						log.log(Level.SEVERE, custom.toString(), e);
-						return false;
-					}					
+					Class<?> clazz = Class.forName(cmd);
+					custom = (MeasureInterface)clazz.getDeclaredConstructor().newInstance();
+				}
+				catch (Exception e)
+				{
+					log.log(Level.SEVERE, "No custom measure class "
+							+ cmd + " - " + e.toString(), e);
+					return false;
+				}
+				
+				try
+				{
+					amt = custom.getValue();
+				}
+				catch (Exception e)
+				{
+					log.log(Level.SEVERE, custom.toString(), e);
+					return false;
 				}			
 				
 				if (!Util.isEmpty(retValue.toString()))		//	interrupt on first error

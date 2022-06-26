@@ -75,22 +75,6 @@ public class MProductionLine extends X_M_ProductionLine {
 		if (productionParent == null && getM_Production_ID() > 0)
 			productionParent = new MProduction(getCtx(), getM_Production_ID(), get_TrxName());
 
-		if (getM_Production_ID() > 0) 
-		{
-			if ( productionParent.getM_Product_ID() == getM_Product_ID() && productionParent.getProductionQty().signum() == getMovementQty().signum())
-				setIsEndProduct(true);
-			else 
-				setIsEndProduct(false);
-		} 
-		else 
-		{
-			I_M_ProductionPlan plan = getM_ProductionPlan();
-			if (plan.getM_Product_ID() == getM_Product_ID() && plan.getProductionQty().signum() == getMovementQty().signum())
-				setIsEndProduct(true);
-			else 
-				setIsEndProduct(false);
-		}
-		
 		
 		
 		if ( !isEndProduct() )

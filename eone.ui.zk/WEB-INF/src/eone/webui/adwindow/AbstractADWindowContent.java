@@ -3538,10 +3538,10 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 				doc = (DocAction)po;
 				//
 				try {
-					success = doc.processIt (DocAction.ACTION_Complete, AD_Window_ID);	
+					success = doc.processIt (DocAction.STATUS_Completed, AD_Window_ID);	
 					processMsg = doc.getProcessMsg();
 					m_docStatus = doc.getDocStatus();
-					if(m_docStatus == null || !m_docStatus.equals(DocAction.STATUS_Completed)) {
+					if(m_docStatus == null) {
 						processMsg = doc.getProcessMsg();
 						FDialog.error(curWindowNo, parent, processMsg);
 						return;
@@ -3651,8 +3651,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 	                                Trx trx = Trx.get(trxName, true);
 	                                try {
 	                                    po.set_TrxName(trxName);
-	                                    //isComplete = DocumentEngine.processIt(doc, DocumentEngine.ACTION_ReActivate);
-	                                    isComplete = doc.processIt (DocAction.ACTION_ReActivate, AD_Window_ID);
+	                                    isComplete = doc.processIt (DocAction.STATUS_ReActivate, AD_Window_ID);
 	                                  
 	                                    if (!isComplete)
 	                                        m_processMsg = doc.getProcessMsg();
@@ -3697,8 +3696,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
                         Trx trx = Trx.get(trxName, true);
                         try {
                             po.set_TrxName(trxName);
-                            //isComplete = DocumentEngine.processIt(doc, DocumentEngine.ACTION_ReActivate);
-                            isComplete = doc.processIt (DocAction.ACTION_ReActivate, AD_Window_ID);
+                            isComplete = doc.processIt (DocAction.STATUS_ReActivate, AD_Window_ID);
                           
                             if (!isComplete)
                                 m_processMsg = doc.getProcessMsg();

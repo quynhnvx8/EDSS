@@ -10,11 +10,13 @@ import eone.util.CLogger;
 
 public interface DocAction
 {
-	public static final String ACTION_Complete = "CO";
-	public static final String ACTION_ReActivate = "RE";
+	public static final String STATUS_ReActivate = "RA";
 	public static final String STATUS_Drafted = "DR";
 	public static final String STATUS_Inprogress = "IP";
 	public static final String STATUS_Completed = "CO";
+	public static final String STATUS_Pending = "PE";
+	public static final String STATUS_Reject = "RE";
+	
 	public static final String SIGNSTATUS_None 		= "NON";
 	public static final String SIGNSTATUS_Approved 	= "APP";
 	public static final String SIGNSTATUS_Cancel 	= "CAN";

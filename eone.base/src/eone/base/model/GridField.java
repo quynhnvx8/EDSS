@@ -451,9 +451,6 @@ public class GridField
 	
 	public Object getDefault()
 	{
-		if (defaults != null && defaults.size() > 0 && defaults.containsKey(m_vo.AD_Column_ID)) {
-			return defaults.get(m_vo.AD_Column_ID);
-		}
 		if (isIgnoreDefault())
 			return null;
 		
@@ -463,6 +460,10 @@ public class GridField
 		
 		if ((defaultValue = getDefault (orderGetDefault)) != null){
 			return defaultValue;
+		} else {
+			if (defaults != null && defaults.size() > 0 && defaults.containsKey(m_vo.AD_Column_ID)) {
+				return defaults.get(m_vo.AD_Column_ID);
+			}
 		}
 		
 		if (log.isLoggable(Level.FINE)) log.fine("[NONE] " + m_vo.ColumnName);

@@ -1,29 +1,16 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import eone.util.KeyNamePair;
-
 /** Generated Interface for M_BOMProduct
- *  @author iDempiere (generated) 
- *  @version Release 7.1
+ *  @author EOne (generated) 
+ *  @version Version 1.0
  */
 public interface I_M_BOMProduct 
 {
@@ -36,9 +23,9 @@ public interface I_M_BOMProduct
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 3 - Client - Org 
+    /** AccessLevel = 7 - System - Client - Org 
      */
-    BigDecimal accessLevel = BigDecimal.valueOf(3);
+    BigDecimal accessLevel = BigDecimal.valueOf(7);
 
     /** Load Meta Data */
 
@@ -88,6 +75,21 @@ public interface I_M_BOMProduct
 	  * Bill of Materials Quantity
 	  */
 	public BigDecimal getBOMQty();
+
+    /** Column name C_UOM_ID */
+    public static final String COLUMNNAME_C_UOM_ID = "C_UOM_ID";
+
+	/** Set UOM.
+	  * Unit of Measure
+	  */
+	public void setC_UOM_ID (int C_UOM_ID);
+
+	/** Get UOM.
+	  * Unit of Measure
+	  */
+	public int getC_UOM_ID();
+
+	public eone.base.model.I_C_UOM getC_UOM() throws RuntimeException;
 
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
@@ -144,32 +146,6 @@ public interface I_M_BOMProduct
 	  */
 	public boolean isActive();
 
-    /** Column name IsPhantom */
-    public static final String COLUMNNAME_IsPhantom = "IsPhantom";
-
-	/** Set Phantom.
-	  * Phantom Component
-	  */
-	public void setIsPhantom (boolean IsPhantom);
-
-	/** Get Phantom.
-	  * Phantom Component
-	  */
-	public boolean isPhantom();
-
-    /** Column name LeadTimeOffset */
-    public static final String COLUMNNAME_LeadTimeOffset = "LeadTimeOffset";
-
-	/** Set Lead Time Offset.
-	  * Optional Lead Time offset before starting production
-	  */
-	public void setLeadTimeOffset (int LeadTimeOffset);
-
-	/** Get Lead Time Offset.
-	  * Optional Lead Time offset before starting production
-	  */
-	public int getLeadTimeOffset();
-
     /** Column name Line */
     public static final String COLUMNNAME_Line = "Line";
 
@@ -182,34 +158,6 @@ public interface I_M_BOMProduct
 	  * Unique line for this document
 	  */
 	public int getLine();
-
-    /** Column name M_AttributeSetInstance_ID */
-    public static final String COLUMNNAME_M_AttributeSetInstance_ID = "M_AttributeSetInstance_ID";
-
-	/** Set Attribute Set Instance.
-	  * Product Attribute Set Instance
-	  */
-	public void setM_AttributeSetInstance_ID (int M_AttributeSetInstance_ID);
-
-	/** Get Attribute Set Instance.
-	  * Product Attribute Set Instance
-	  */
-	public int getM_AttributeSetInstance_ID();
-
-
-    /** Column name M_BOMAlternative_ID */
-    public static final String COLUMNNAME_M_BOMAlternative_ID = "M_BOMAlternative_ID";
-
-	/** Set Alternative Group.
-	  * Product BOM Alternative Group
-	  */
-	public void setM_BOMAlternative_ID (int M_BOMAlternative_ID);
-
-	/** Get Alternative Group.
-	  * Product BOM Alternative Group
-	  */
-	public int getM_BOMAlternative_ID();
-
 
     /** Column name M_BOM_ID */
     public static final String COLUMNNAME_M_BOM_ID = "M_BOM_ID";
@@ -239,58 +187,33 @@ public interface I_M_BOMProduct
 	  */
 	public int getM_BOMProduct_ID();
 
-    /** Column name M_BOMProduct_UU */
-    public static final String COLUMNNAME_M_BOMProduct_UU = "M_BOMProduct_UU";
+    /** Column name M_Product_ID */
+    public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 
-	/** Set M_BOMProduct_UU	  */
-	public void setM_BOMProduct_UU (String M_BOMProduct_UU);
-
-	/** Get M_BOMProduct_UU	  */
-	public String getM_BOMProduct_UU();
-
-    /** Column name M_ChangeNotice_ID */
-    public static final String COLUMNNAME_M_ChangeNotice_ID = "M_ChangeNotice_ID";
-
-	/** Set Change Notice.
-	  * Bill of Materials (Engineering) Change Notice (Version)
+	/** Set Product.
+	  * Product, Service, Item
 	  */
-	public void setM_ChangeNotice_ID (int M_ChangeNotice_ID);
+	public void setM_Product_ID (int M_Product_ID);
 
-	/** Get Change Notice.
-	  * Bill of Materials (Engineering) Change Notice (Version)
+	/** Get Product.
+	  * Product, Service, Item
 	  */
-	public int getM_ChangeNotice_ID();
+	public int getM_Product_ID();
 
+	public eone.base.model.I_M_Product getM_Product() throws RuntimeException;
 
-    /** Column name M_ProductBOM_ID */
-    public static final String COLUMNNAME_M_ProductBOM_ID = "M_ProductBOM_ID";
+    /** Column name Processed */
+    public static final String COLUMNNAME_Processed = "Processed";
 
-	/** Set BOM Product.
-	  * Bill of Material Component Product
+	/** Set Processed.
+	  * The document has been processed
 	  */
-	public void setM_ProductBOM_ID (int M_ProductBOM_ID);
+	public void setProcessed (boolean Processed);
 
-	/** Get BOM Product.
-	  * Bill of Material Component Product
+	/** Get Processed.
+	  * The document has been processed
 	  */
-	public int getM_ProductBOM_ID();
-
-	public eone.base.model.I_M_Product getM_ProductBOM() throws RuntimeException;
-
-    /** Column name M_ProductOperation_ID */
-    public static final String COLUMNNAME_M_ProductOperation_ID = "M_ProductOperation_ID";
-
-	/** Set Product Operation.
-	  * Product Manufacturing Operation
-	  */
-	public void setM_ProductOperation_ID (int M_ProductOperation_ID);
-
-	/** Get Product Operation.
-	  * Product Manufacturing Operation
-	  */
-	public int getM_ProductOperation_ID();
-
-	public eone.base.model.I_M_ProductOperation getM_ProductOperation() throws RuntimeException;
+	public boolean isProcessed();
 
     /** Column name SeqNo */
     public static final String COLUMNNAME_SeqNo = "SeqNo";

@@ -22,7 +22,6 @@ import java.util.Properties;
 
 import eone.util.CCache;
 import eone.util.CLogger;
-import eone.util.Msg;
 
 /**
  * 	BOM Model
@@ -96,13 +95,7 @@ public class MBOM extends X_M_BOM
 	public MBOM (Properties ctx, int M_BOM_ID, String trxName)
 	{
 		super (ctx, M_BOM_ID, trxName);
-		if (M_BOM_ID == 0)
-		{
-		//	setM_Product_ID (0);
-		//	setName (null);
-			setBOMType (BOMTYPE_CurrentActive);	// A
-			setBOMUse (BOMUSE_Master);	// A
-		}
+		
 	}	//	MBOM
 
 	/**
@@ -123,40 +116,6 @@ public class MBOM extends X_M_BOM
 	 */
 	protected boolean beforeSave (boolean newRecord)
 	{
-		//	BOM Type
-		if (newRecord || is_ValueChanged("BOMType"))
-		{
-			//	Only one Current Active
-			if (getBOMType().equals(BOMTYPE_CurrentActive))
-			{
-				StringBuilder msgofp = new StringBuilder("BOMType='A' AND BOMUse='").append(getBOMUse()).append("' AND IsActive='Y'");
-				MBOM[] boms = getOfProduct(getCtx(), getM_Product_ID(), get_TrxName(),msgofp.toString());
-				if (boms.length == 0	//	only one = this 
-					|| (boms.length == 1 && boms[0].getM_BOM_ID() == getM_BOM_ID()))
-					;
-				else
-				{
-					log.saveError("Error", Msg.parseTranslation(getCtx(), 
-						"Can only have one Current Active BOM for Product BOM Use (" + getBOMType() + ")"));
-					return false;
-				}
-			}
-			//	Only one MTO
-			else if (getBOMType().equals(BOMTYPE_Make_To_Order))
-			{
-				MBOM[] boms = getOfProduct(getCtx(), getM_Product_ID(), get_TrxName(), 
-					"IsActive='Y'");
-				if (boms.length == 0	//	only one = this 
-					|| (boms.length == 1 && boms[0].getM_BOM_ID() == getM_BOM_ID()))
-					;
-				else
-				{
-					log.saveError("Error", Msg.parseTranslation(getCtx(), 
-						"Can only have single Make-to-Order BOM for Product"));
-					return false;
-				}
-			}
-		}	//	BOM Type
 		
 		return true;
 	}	//	beforeSave

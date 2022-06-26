@@ -610,27 +610,6 @@ public interface I_Fact_Acct
 
 	public eone.base.model.I_M_Warehouse getM_Warehouse_Dr() throws RuntimeException;
 
-    /** Column name M_Workshop_Cr_ID */
-    public static final String COLUMNNAME_M_Workshop_Cr_ID = "M_Workshop_Cr_ID";
-
-	/** Set Workshop Cr	  */
-	public void setM_Workshop_Cr_ID (int M_Workshop_Cr_ID);
-
-	/** Get Workshop Cr	  */
-	public int getM_Workshop_Cr_ID();
-
-	public eone.base.model.I_M_Workshop getM_Workshop_Cr() throws RuntimeException;
-
-    /** Column name M_Workshop_ID */
-    public static final String COLUMNNAME_M_Workshop_ID = "M_Workshop_ID";
-
-	/** Set Workshop	  */
-	public void setM_Workshop_ID (int M_Workshop_ID);
-
-	/** Get Workshop	  */
-	public int getM_Workshop_ID();
-
-	public eone.base.model.I_M_Workshop getM_Workshop() throws RuntimeException;
 
     /** Column name PA_ReportLine_ID */
     public static final String COLUMNNAME_PA_ReportLine_ID = "PA_ReportLine_ID";

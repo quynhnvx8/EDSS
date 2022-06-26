@@ -132,7 +132,7 @@ public class DocumentEngine implements DocAction
 			}
 			return ok;
 		}
-		if (ACTION_ReActivate.equals(m_action))
+		if (STATUS_ReActivate.equals(m_action))
 			return reActivateIt();
 		
 		return false;
@@ -142,7 +142,7 @@ public class DocumentEngine implements DocAction
 	
 	public String completeIt()
 	{
-		if (!isValidAction(ACTION_Complete))
+		if (!isValidAction(STATUS_Completed))
 			return m_status;
 		if (m_document != null)
 		{
@@ -169,7 +169,7 @@ public class DocumentEngine implements DocAction
 	
 	public boolean reActivateIt()
 	{
-		if (!isValidAction(ACTION_ReActivate))
+		if (!isValidAction(STATUS_ReActivate))
 			return false;
 		if (m_document != null)
 		{
@@ -202,14 +202,14 @@ public class DocumentEngine implements DocAction
 	{
 		
 		if (isDrafted())
-			return new String[] {ACTION_Complete, STATUS_Inprogress};
+			return new String[] {STATUS_Completed, STATUS_Inprogress};
 
 		
 		if (isCompleted())
-			return new String[] {ACTION_ReActivate};
+			return new String[] {STATUS_ReActivate};
 		
 		if (isInprogress())
-			return new String[] {ACTION_Complete};
+			return new String[] {STATUS_Completed, STATUS_Inprogress};
 
 		return new String[] {};
 	}	//	getActionOptions
@@ -350,7 +350,7 @@ public class DocumentEngine implements DocAction
 
 		if (docStatus.equals(DocumentEngine.STATUS_Drafted))
 		{
-			options[index++] = DocumentEngine.ACTION_Complete;
+			options[index++] = DocumentEngine.STATUS_Completed;
 		}
 		
 

@@ -53,19 +53,30 @@ public class CreateEmployeeSalary extends SvrProcess {
 		BigDecimal totalDayoffPermission;			//Tong ngay nghi phep duoc huong luong.
 		BigDecimal totalNotPaidOffPermistion;		//Tong ngay nghi phep khong duoc huong luong
 		BigDecimal totalNotPaidOffUnPermisstion;	//Tong ngay nghi khong phep va khong duoc huong luong
-		BigDecimal totalWorkExtra;					//Tong ngay ngay thuong di lam them
-		BigDecimal totalWorkExtraHoliday;			//Tong ngay le di lam them
+		
 		BigDecimal totalDayMartenity;				//Tong ngay nghi thai san
+		BigDecimal totalDayInsurance;				//Tong ngay nghi bảo hiểm
 		BigDecimal totalWorkdayProduct;				//Tổng công làm theo sản phẩm
+		
+		BigDecimal totalWorkExtraHoliday;			//Tong ngay le di lam them
+		BigDecimal totalWorkExtraWeeken;			//Tổng công làm theo sản phẩm
+		BigDecimal totalWorkExtraNormal;			//Tong ngay le di lam them
+		BigDecimal totalWorkExtraEvening;			//Tong ngay le di lam them
+		
 		while (rs.next()) {
 			totalStandard = Env.ZERO;
 			totalDayoffPermission = Env.ZERO;
 			totalNotPaidOffPermistion = Env.ZERO;
 			totalNotPaidOffUnPermisstion = Env.ZERO;
-			totalWorkExtra = Env.ZERO;
-			totalWorkExtraHoliday = Env.ZERO;
+			
 			totalDayMartenity = Env.ZERO;
+			totalDayInsurance = Env.ZERO;
 			totalWorkdayProduct = Env.ZERO;
+			
+			totalWorkExtraHoliday = Env.ZERO;
+			totalWorkExtraWeeken = Env.ZERO;
+			totalWorkExtraNormal = Env.ZERO;
+			totalWorkExtraEvening = Env.ZERO;
 			
 			HR_Employee_ID = rs.getInt("HR_Employee_ID");
 			if (listTimekeeper.containsKey(HR_Employee_ID))
@@ -88,14 +99,22 @@ public class CreateEmployeeSalary extends SvrProcess {
 					if (item.isWorkdayProduct() && entry.getValue() != null)
 						totalWorkdayProduct = totalWorkdayProduct.add(new BigDecimal(entry.getValue().toString()));
 					
-					if (item.isOverWorkingNormal() && entry.getValue() != 0)
-						totalWorkExtra = totalWorkExtra.add(new BigDecimal(entry.getValue().toString()));
-					
-					if (item.isOverWorkingHoliday() && entry.getValue() != 0)
-						totalWorkExtraHoliday = totalWorkExtraHoliday.add(new BigDecimal(entry.getValue().toString()));
 					
 					if (item.isInsurancePaidSalary() && entry.getValue() != 0)
+						totalDayInsurance = totalDayInsurance.add(new BigDecimal(entry.getValue().toString()));
+					
+					if (item.isMeternitySalary() && entry.getValue() != 0)
 						totalDayMartenity = totalDayMartenity.add(new BigDecimal(entry.getValue().toString()));
+					
+					//Làm thêm
+					if (item.isOverWorkingHoliday() && entry.getValue() != 0)
+						totalWorkExtraHoliday = totalWorkExtraHoliday.add(new BigDecimal(entry.getValue().toString()));
+					if (item.isOverWorkingWeekday() && entry.getValue() != 0)
+						totalWorkExtraWeeken = totalWorkExtraWeeken.add(new BigDecimal(entry.getValue().toString()));
+					if (item.isOverWorkingNormal() && entry.getValue() != 0)
+						totalWorkExtraNormal = totalWorkExtraNormal.add(new BigDecimal(entry.getValue().toString()));
+					if (item.isOverWorkingEvening() && entry.getValue() != 0)
+						totalWorkExtraEvening = totalWorkExtraEvening.add(new BigDecimal(entry.getValue().toString()));
 					
 				}
 				if (employeeExists.containsKey(HR_Employee_ID)) {
@@ -113,9 +132,14 @@ public class CreateEmployeeSalary extends SvrProcess {
 				line.setTotalDayOff(totalDayoffPermission); 				//Nghi phep => ngay phep duoc tru di.
 				line.setTotalDayOffNone(totalNotPaidOffPermistion);			//Nghi khong luong co phep => Ngay phep giu nguyen
 				line.setTotalDayOffUnNotice(totalNotPaidOffUnPermisstion);	//Nghi khong luong khong phep
-				line.setTotalWorkExtra(totalWorkExtra);						//Lam them ngay thuong
+				
+				line.setTotalWorkExtra(totalWorkExtraNormal);				//Lam them ngay thuong
 				line.setTotalWorkExtraHoliday(totalWorkExtraHoliday);		//Lam them ngay le
+				line.setTotalWorkExtraWeeken(totalWorkExtraWeeken);
+				line.setTotalWorkExtraEvening(totalWorkExtraEvening);
+				
 				line.setTotalDayMartenity(totalDayMartenity);				//Ngay nghi thai san
+				line.setTotalDayInsurance(totalDayInsurance); 				//Ngày nghỉ bảo hiểm
 				line.setTotalWorkDayProduction(totalWorkdayProduct); 		//Ngày công làm theo sản phẩm
 				if (!line.save())
 					return "Create false";

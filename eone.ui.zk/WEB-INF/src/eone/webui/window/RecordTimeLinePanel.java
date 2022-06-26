@@ -341,10 +341,10 @@ public class RecordTimeLinePanel extends Vlayout {
 			MUser user, String fromStatus, String toStatus, int windowNo) {
 		String docAction = null;
 		if (DocAction.STATUS_Completed.equals(toStatus)) {
-			docAction = DocAction.ACTION_Complete;
+			docAction = DocAction.STATUS_Completed;
 		} else {
 			if (DocAction.STATUS_Completed.equals(fromStatus)) {
-				docAction = DocAction.ACTION_ReActivate;
+				docAction = DocAction.STATUS_ReActivate;
 			}
 		}
 		

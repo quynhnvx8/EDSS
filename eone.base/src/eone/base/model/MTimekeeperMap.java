@@ -109,7 +109,7 @@ public class MTimekeeperMap extends X_HR_TimekeeperMap
 	
 	
 	/*
-	 * Ham kiem tra nghi thai san, hoặc nghỉ bảo hiểm
+	 * Ham kiem tra nghi ốm hoặc chăm người ốm
 	 */
 	public boolean isInsurancePaidSalary() {
 		if (getTypeTimeKeeper().equalsIgnoreCase(TYPETIMEKEEPER_InsuranceSalary))
@@ -118,10 +118,37 @@ public class MTimekeeperMap extends X_HR_TimekeeperMap
 	}
 	
 	/*
+	 * Ham kiem tra nghi thai san
+	 */
+	public boolean isMeternitySalary() {
+		if (getTypeTimeKeeper().equalsIgnoreCase(TYPETIMEKEEPER_MeternityTime))
+			return true;
+		return false;
+	}
+	
+	/*
+	 * Ham kiem tra di lam them ngay thuong
+	 */
+	public boolean isOverWorkingWeekday() {
+		if (getTypeTimeKeeper().equalsIgnoreCase(TYPETIMEKEEPER_OvertimeOnWeekdays))
+			return true;
+		return false;
+	}
+	
+	/*
+	 * Ham kiem tra di lam them ngay thuong
+	 */
+	public boolean isOverWorkingEvening() {
+		if (getTypeTimeKeeper().equalsIgnoreCase(TYPETIMEKEEPER_Overnight))
+			return true;
+		return false;
+	}
+	
+	/*
 	 * Ham kiem tra di lam them ngay thuong
 	 */
 	public boolean isOverWorkingNormal() {
-		if (getTypeTimeKeeper().equalsIgnoreCase(TYPETIMEKEEPER_OvertimeOnWeekdays))
+		if (getTypeTimeKeeper().equalsIgnoreCase(TYPETIMEKEEPER_OvertimeOnNormal))
 			return true;
 		return false;
 	}

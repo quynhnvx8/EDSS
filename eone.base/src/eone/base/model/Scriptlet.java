@@ -381,7 +381,7 @@ public class Scriptlet
 	 */
 	private String convertKey (String key)
 	{
-		return MRule.convertKey(key, m_windowNo);
+		return Env.convertKey(key, m_windowNo);
 	}   //  convertKey
 
 	/**

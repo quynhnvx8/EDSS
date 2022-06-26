@@ -5,13 +5,10 @@
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
-import java.math.BigDecimal;
+import eone.util.KeyNamePair;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
-
-import eone.util.Env;
-import eone.util.KeyNamePair;
 
 /** Generated Model for M_Production
  *  @author EOne (generated) 
@@ -22,7 +19,7 @@ public class X_M_Production extends PO implements I_M_Production, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20211227L;
+	private static final long serialVersionUID = 20220624L;
 
     /** Standard Constructor */
     public X_M_Production (Properties ctx, int M_Production_ID, String trxName)
@@ -31,12 +28,10 @@ public class X_M_Production extends PO implements I_M_Production, I_Persistent
       /** if (M_Production_ID == 0)
         {
 			setDateAcct (new Timestamp( System.currentTimeMillis() ));
+// @#Date@
 			setDocumentNo (null);
-			setIsCreated (false);
 			setM_Production_ID (0);
 			setProcessed (false);
-			setProductionQty (Env.ZERO);
-// 0
         } */
     }
 
@@ -68,6 +63,20 @@ public class X_M_Production extends PO implements I_M_Production, I_Persistent
       return sb.toString();
     }
 
+	/** Set Approved.
+		@param Approved Approved	  */
+	public void setApproved (String Approved)
+	{
+		set_Value (COLUMNNAME_Approved, Approved);
+	}
+
+	/** Get Approved.
+		@return Approved	  */
+	public String getApproved () 
+	{
+		return (String)get_Value(COLUMNNAME_Approved);
+	}
+
 	public eone.base.model.I_C_BPartner getC_BPartner() throws RuntimeException
     {
 		return (eone.base.model.I_C_BPartner)MTable.get(getCtx(), eone.base.model.I_C_BPartner.Table_Name)
@@ -80,9 +89,9 @@ public class X_M_Production extends PO implements I_M_Production, I_Persistent
 	public void setC_BPartner_ID (int C_BPartner_ID)
 	{
 		if (C_BPartner_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_C_BPartner_ID, null);
+			set_Value (COLUMNNAME_C_BPartner_ID, null);
 		else 
-			set_ValueNoCheck (COLUMNNAME_C_BPartner_ID, Integer.valueOf(C_BPartner_ID));
+			set_Value (COLUMNNAME_C_BPartner_ID, Integer.valueOf(C_BPartner_ID));
 	}
 
 	/** Get Business Partner .
@@ -96,29 +105,107 @@ public class X_M_Production extends PO implements I_M_Production, I_Persistent
 		return ii.intValue();
 	}
 
-	public eone.base.model.I_C_OrderLine getC_OrderLine() throws RuntimeException
+	public eone.base.model.I_C_Construction getC_Construction() throws RuntimeException
     {
-		return (eone.base.model.I_C_OrderLine)MTable.get(getCtx(), eone.base.model.I_C_OrderLine.Table_Name)
-			.getPO(getC_OrderLine_ID(), get_TrxName());	}
+		return (eone.base.model.I_C_Construction)MTable.get(getCtx(), eone.base.model.I_C_Construction.Table_Name)
+			.getPO(getC_Construction_ID(), get_TrxName());	}
 
-	/** Set Sales Order Line.
-		@param C_OrderLine_ID 
-		Sales Order Line
-	  */
-	public void setC_OrderLine_ID (int C_OrderLine_ID)
+	/** Set Construction.
+		@param C_Construction_ID Construction	  */
+	public void setC_Construction_ID (int C_Construction_ID)
 	{
-		if (C_OrderLine_ID < 1) 
-			set_Value (COLUMNNAME_C_OrderLine_ID, null);
+		if (C_Construction_ID < 1) 
+			set_Value (COLUMNNAME_C_Construction_ID, null);
 		else 
-			set_Value (COLUMNNAME_C_OrderLine_ID, Integer.valueOf(C_OrderLine_ID));
+			set_Value (COLUMNNAME_C_Construction_ID, Integer.valueOf(C_Construction_ID));
 	}
 
-	/** Get Sales Order Line.
-		@return Sales Order Line
-	  */
-	public int getC_OrderLine_ID () 
+	/** Get Construction.
+		@return Construction	  */
+	public int getC_Construction_ID () 
 	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_C_OrderLine_ID);
+		Integer ii = (Integer)get_Value(COLUMNNAME_C_Construction_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	public eone.base.model.I_C_Contract getC_Contract() throws RuntimeException
+    {
+		return (eone.base.model.I_C_Contract)MTable.get(getCtx(), eone.base.model.I_C_Contract.Table_Name)
+			.getPO(getC_Contract_ID(), get_TrxName());	}
+
+	/** Set Contract.
+		@param C_Contract_ID Contract	  */
+	public void setC_Contract_ID (int C_Contract_ID)
+	{
+		if (C_Contract_ID < 1) 
+			set_ValueNoCheck (COLUMNNAME_C_Contract_ID, null);
+		else 
+			set_ValueNoCheck (COLUMNNAME_C_Contract_ID, Integer.valueOf(C_Contract_ID));
+	}
+
+	/** Get Contract.
+		@return Contract	  */
+	public int getC_Contract_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_C_Contract_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	public eone.base.model.I_C_DocType getC_DocType() throws RuntimeException
+    {
+		return (eone.base.model.I_C_DocType)MTable.get(getCtx(), eone.base.model.I_C_DocType.Table_Name)
+			.getPO(getC_DocType_ID(), get_TrxName());	}
+
+	/** Set Document Type.
+		@param C_DocType_ID 
+		Document type or rules
+	  */
+	public void setC_DocType_ID (int C_DocType_ID)
+	{
+		if (C_DocType_ID < 0) 
+			set_ValueNoCheck (COLUMNNAME_C_DocType_ID, null);
+		else 
+			set_ValueNoCheck (COLUMNNAME_C_DocType_ID, Integer.valueOf(C_DocType_ID));
+	}
+
+	/** Get Document Type.
+		@return Document type or rules
+	  */
+	public int getC_DocType_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_C_DocType_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	public eone.base.model.I_C_Order getC_Order() throws RuntimeException
+    {
+		return (eone.base.model.I_C_Order)MTable.get(getCtx(), eone.base.model.I_C_Order.Table_Name)
+			.getPO(getC_Order_ID(), get_TrxName());	}
+
+	/** Set Order.
+		@param C_Order_ID 
+		Order
+	  */
+	public void setC_Order_ID (int C_Order_ID)
+	{
+		if (C_Order_ID < 1) 
+			set_ValueNoCheck (COLUMNNAME_C_Order_ID, null);
+		else 
+			set_ValueNoCheck (COLUMNNAME_C_Order_ID, Integer.valueOf(C_Order_ID));
+	}
+
+	/** Get Order.
+		@return Order
+	  */
+	public int getC_Order_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_C_Order_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
@@ -152,24 +239,18 @@ public class X_M_Production extends PO implements I_M_Production, I_Persistent
 		return ii.intValue();
 	}
 
-	
-	public void setC_ProjectPhase_ID (int C_ProjectPhase_ID)
+	/** Set Canceled.
+		@param Canceled Canceled	  */
+	public void setCanceled (String Canceled)
 	{
-		if (C_ProjectPhase_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_C_ProjectPhase_ID, null);
-		else 
-			set_ValueNoCheck (COLUMNNAME_C_ProjectPhase_ID, Integer.valueOf(C_ProjectPhase_ID));
+		set_Value (COLUMNNAME_Canceled, Canceled);
 	}
 
-	/** Get Project Phase.
-		@return Phase of a Project
-	  */
-	public int getC_ProjectPhase_ID () 
+	/** Get Canceled.
+		@return Canceled	  */
+	public String getCanceled () 
 	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_C_ProjectPhase_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
+		return (String)get_Value(COLUMNNAME_Canceled);
 	}
 
 	/** Set Create lines from.
@@ -223,30 +304,6 @@ public class X_M_Production extends PO implements I_M_Production, I_Persistent
 		return (String)get_Value(COLUMNNAME_Description);
 	}
 
-	/** DocAction AD_Reference_ID=135 */
-	public static final int DOCACTION_AD_Reference_ID=135;
-	/** Complete = CO */
-	public static final String DOCACTION_Complete = "CO";
-	/** Re-activate = RE */
-	public static final String DOCACTION_Re_Activate = "RE";
-	/** Set Document Action.
-		@param DocAction 
-		The targeted status of the document
-	  */
-	public void setDocAction (String DocAction)
-	{
-
-		set_Value (COLUMNNAME_DocAction, DocAction);
-	}
-
-	/** Get Document Action.
-		@return The targeted status of the document
-	  */
-	public String getDocAction () 
-	{
-		return (String)get_Value(COLUMNNAME_DocAction);
-	}
-
 	/** DocStatus AD_Reference_ID=131 */
 	public static final int DOCSTATUS_AD_Reference_ID=131;
 	/** Drafted = DR */
@@ -257,6 +314,8 @@ public class X_M_Production extends PO implements I_M_Production, I_Persistent
 	public static final String DOCSTATUS_InProgress = "IP";
 	/** Reject = RE */
 	public static final String DOCSTATUS_Reject = "RE";
+	/** Pending = PE */
+	public static final String DOCSTATUS_Pending = "PE";
 	/** Set Document Status.
 		@param DocStatus 
 		The current status of the document
@@ -300,55 +359,6 @@ public class X_M_Production extends PO implements I_M_Production, I_Persistent
         return new KeyNamePair(get_ID(), getDocumentNo());
     }
 
-	/** Set Records created.
-		@param IsCreated Records created	  */
-	public void setIsCreated (boolean IsCreated)
-	{
-		set_Value (COLUMNNAME_IsCreated, Boolean.valueOf(IsCreated));
-	}
-
-	/** Get Records created.
-		@return Records created	  */
-	public boolean isCreated () 
-	{
-		Object oo = get_Value(COLUMNNAME_IsCreated);
-		if (oo != null) 
-		{
-			 if (oo instanceof Boolean) 
-				 return ((Boolean)oo).booleanValue(); 
-			return "Y".equals(oo);
-		}
-		return false;
-	}
-
-	public eone.base.model.I_M_Product getM_Product() throws RuntimeException
-    {
-		return (eone.base.model.I_M_Product)MTable.get(getCtx(), eone.base.model.I_M_Product.Table_Name)
-			.getPO(getM_Product_ID(), get_TrxName());	}
-
-	/** Set Product.
-		@param M_Product_ID 
-		Product, Service, Item
-	  */
-	public void setM_Product_ID (int M_Product_ID)
-	{
-		if (M_Product_ID < 1) 
-			set_Value (COLUMNNAME_M_Product_ID, null);
-		else 
-			set_Value (COLUMNNAME_M_Product_ID, Integer.valueOf(M_Product_ID));
-	}
-
-	/** Get Product.
-		@return Product, Service, Item
-	  */
-	public int getM_Product_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_M_Product_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
 	/** Set Production.
 		@param M_Production_ID 
 		Plan for producing a product
@@ -372,46 +382,15 @@ public class X_M_Production extends PO implements I_M_Production, I_Persistent
 		return ii.intValue();
 	}
 
-	public eone.base.model.I_M_Warehouse getM_Warehouse() throws RuntimeException
-    {
-		return (eone.base.model.I_M_Warehouse)MTable.get(getCtx(), eone.base.model.I_M_Warehouse.Table_Name)
-			.getPO(getM_Warehouse_ID(), get_TrxName());	}
-
-	/** Set Warehouse.
-		@param M_Warehouse_ID 
-		Storage Warehouse and Service Point
-	  */
-	public void setM_Warehouse_ID (int M_Warehouse_ID)
-	{
-		if (M_Warehouse_ID < 1) 
-			set_Value (COLUMNNAME_M_Warehouse_ID, null);
-		else 
-			set_Value (COLUMNNAME_M_Warehouse_ID, Integer.valueOf(M_Warehouse_ID));
-	}
-
-	/** Get Warehouse.
-		@return Storage Warehouse and Service Point
-	  */
-	public int getM_Warehouse_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_M_Warehouse_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
 	/** Set Name.
-		@param Name 
-		Alphanumeric identifier of the entity
-	  */
+		@param Name Name	  */
 	public void setName (String Name)
 	{
 		set_Value (COLUMNNAME_Name, Name);
 	}
 
 	/** Get Name.
-		@return Alphanumeric identifier of the entity
-	  */
+		@return Name	  */
 	public String getName () 
 	{
 		return (String)get_Value(COLUMNNAME_Name);
@@ -439,46 +418,5 @@ public class X_M_Production extends PO implements I_M_Production, I_Persistent
 			return "Y".equals(oo);
 		}
 		return false;
-	}
-
-	/** Set Process Now.
-		@param Processing Process Now	  */
-	public void setProcessing (boolean Processing)
-	{
-		set_Value (COLUMNNAME_Processing, Boolean.valueOf(Processing));
-	}
-
-	/** Get Process Now.
-		@return Process Now	  */
-	public boolean isProcessing () 
-	{
-		Object oo = get_Value(COLUMNNAME_Processing);
-		if (oo != null) 
-		{
-			 if (oo instanceof Boolean) 
-				 return ((Boolean)oo).booleanValue(); 
-			return "Y".equals(oo);
-		}
-		return false;
-	}
-
-	/** Set Production Quantity.
-		@param ProductionQty 
-		Quantity of products to produce
-	  */
-	public void setProductionQty (BigDecimal ProductionQty)
-	{
-		set_Value (COLUMNNAME_ProductionQty, ProductionQty);
-	}
-
-	/** Get Production Quantity.
-		@return Quantity of products to produce
-	  */
-	public BigDecimal getProductionQty () 
-	{
-		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_ProductionQty);
-		if (bd == null)
-			 return Env.ZERO;
-		return bd;
 	}
 }

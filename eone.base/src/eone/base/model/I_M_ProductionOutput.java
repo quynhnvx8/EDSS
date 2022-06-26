@@ -8,18 +8,18 @@ import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-/** Generated Interface for M_BOM
+/** Generated Interface for M_ProductionOutput
  *  @author EOne (generated) 
  *  @version Version 1.0
  */
-public interface I_M_BOM 
+public interface I_M_ProductionOutput 
 {
 
-    /** TableName=M_BOM */
-    public static final String Table_Name = "M_BOM";
+    /** TableName=M_ProductionOutput */
+    public static final String Table_Name = "M_ProductionOutput";
 
-    /** AD_Table_ID=798 */
-    public static final int Table_ID = 798;
+    /** AD_Table_ID=1200446 */
+    public static final int Table_ID = MTable.getTable_ID(Table_Name);
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
@@ -50,15 +50,6 @@ public interface I_M_BOM
 	  */
 	public int getAD_Org_ID();
 
-    /** Column name Approved */
-    public static final String COLUMNNAME_Approved = "Approved";
-
-	/** Set Approved	  */
-	public void setApproved (String Approved);
-
-	/** Get Approved	  */
-	public String getApproved();
-
     /** Column name C_UOM_ID */
     public static final String COLUMNNAME_C_UOM_ID = "C_UOM_ID";
 
@@ -73,15 +64,6 @@ public interface I_M_BOM
 	public int getC_UOM_ID();
 
 	public eone.base.model.I_C_UOM getC_UOM() throws RuntimeException;
-
-    /** Column name Canceled */
-    public static final String COLUMNNAME_Canceled = "Canceled";
-
-	/** Set Canceled	  */
-	public void setCanceled (String Canceled);
-
-	/** Get Canceled	  */
-	public String getCanceled();
 
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
@@ -112,32 +94,6 @@ public interface I_M_BOM
 	  */
 	public String getDescription();
 
-    /** Column name DocStatus */
-    public static final String COLUMNNAME_DocStatus = "DocStatus";
-
-	/** Set Document Status.
-	  * The current status of the document
-	  */
-	public void setDocStatus (String DocStatus);
-
-	/** Get Document Status.
-	  * The current status of the document
-	  */
-	public String getDocStatus();
-
-    /** Column name Help */
-    public static final String COLUMNNAME_Help = "Help";
-
-	/** Set Comment/Help.
-	  * Comment or Hint
-	  */
-	public void setHelp (String Help);
-
-	/** Get Comment/Help.
-	  * Comment or Hint
-	  */
-	public String getHelp();
-
     /** Column name IsActive */
     public static final String COLUMNNAME_IsActive = "IsActive";
 
@@ -151,18 +107,18 @@ public interface I_M_BOM
 	  */
 	public boolean isActive();
 
-    /** Column name M_BOM_ID */
-    public static final String COLUMNNAME_M_BOM_ID = "M_BOM_ID";
+    /** Column name IsEndProduct */
+    public static final String COLUMNNAME_IsEndProduct = "IsEndProduct";
 
-	/** Set BOM.
-	  * Bill of Material
+	/** Set End Product.
+	  * End Product of production
 	  */
-	public void setM_BOM_ID (int M_BOM_ID);
+	public void setIsEndProduct (boolean IsEndProduct);
 
-	/** Get BOM.
-	  * Bill of Material
+	/** Get End Product.
+	  * End Product of production
 	  */
-	public int getM_BOM_ID();
+	public boolean isEndProduct();
 
     /** Column name M_Product_ID */
     public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
@@ -179,24 +135,72 @@ public interface I_M_BOM
 
 	public eone.base.model.I_M_Product getM_Product() throws RuntimeException;
 
-    /** Column name M_Workshop_ID */
+    /** Column name M_Production_ID */
+    public static final String COLUMNNAME_M_Production_ID = "M_Production_ID";
+
+	/** Set Production.
+	  * Plan for producing a product
+	  */
+	public void setM_Production_ID (int M_Production_ID);
+
+	/** Get Production.
+	  * Plan for producing a product
+	  */
+	public int getM_Production_ID();
+
+	public eone.base.model.I_M_Production getM_Production() throws RuntimeException;
+
+    /** Column name M_ProductionOutput_ID */
+    public static final String COLUMNNAME_M_ProductionOutput_ID = "M_ProductionOutput_ID";
+
+	/** Set Production Output	  */
+	public void setM_ProductionOutput_ID (int M_ProductionOutput_ID);
+
+	/** Get Production Output	  */
+	public int getM_ProductionOutput_ID();
+
+    /** Column name M_ProductionPlan_ID */
+    public static final String COLUMNNAME_M_ProductionPlan_ID = "M_ProductionPlan_ID";
+
+	/** Set Production Plan.
+	  * Plan for how a product is produced
+	  */
+	public void setM_ProductionPlan_ID (int M_ProductionPlan_ID);
+
+	/** Get Production Plan.
+	  * Plan for how a product is produced
+	  */
+	public int getM_ProductionPlan_ID();
+
+	public eone.base.model.I_M_ProductionPlan getM_ProductionPlan() throws RuntimeException;
+
+    /** Column name M_Warehouse_ID */
     public static final String COLUMNNAME_M_Warehouse_ID = "M_Warehouse_ID";
 
-	/** Set Workshop	  */
+	/** Set Warehouse.
+	  * Storage Warehouse and Service Point
+	  */
 	public void setM_Warehouse_ID (int M_Warehouse_ID);
 
-	/** Get Workshop	  */
+	/** Get Warehouse.
+	  * Storage Warehouse and Service Point
+	  */
 	public int getM_Warehouse_ID();
 
-	
-    /** Column name Name */
-    public static final String COLUMNNAME_Name = "Name";
+	public eone.base.model.I_M_Warehouse getM_Warehouse() throws RuntimeException;
 
-	/** Set Name	  */
-	public void setName (String Name);
+    /** Column name PlannedQty */
+    public static final String COLUMNNAME_PlannedQty = "PlannedQty";
 
-	/** Get Name	  */
-	public String getName();
+	/** Set Planned Quantity.
+	  * Planned quantity for this project
+	  */
+	public void setPlannedQty (BigDecimal PlannedQty);
+
+	/** Get Planned Quantity.
+	  * Planned quantity for this project
+	  */
+	public BigDecimal getPlannedQty();
 
     /** Column name Processed */
     public static final String COLUMNNAME_Processed = "Processed";
@@ -211,14 +215,40 @@ public interface I_M_BOM
 	  */
 	public boolean isProcessed();
 
-    /** Column name Processing */
-    public static final String COLUMNNAME_Processing = "Processing";
+    /** Column name QtyAvailable */
+    public static final String COLUMNNAME_QtyAvailable = "QtyAvailable";
 
-	/** Set Process Now	  */
-	public void setProcessing (boolean Processing);
+	/** Set Available Quantity.
+	  * Available Quantity (On Hand - Reserved)
+	  */
+	public void setQtyAvailable (BigDecimal QtyAvailable);
 
-	/** Get Process Now	  */
-	public boolean isProcessing();
+	/** Get Available Quantity.
+	  * Available Quantity (On Hand - Reserved)
+	  */
+	public BigDecimal getQtyAvailable();
+
+    /** Column name QtyBook */
+    public static final String COLUMNNAME_QtyBook = "QtyBook";
+
+	/** Set Quantity book.
+	  * Book Quantity
+	  */
+	public void setQtyBook (BigDecimal QtyBook);
+
+	/** Get Quantity book.
+	  * Book Quantity
+	  */
+	public BigDecimal getQtyBook();
+
+    /** Column name QtyUsed */
+    public static final String COLUMNNAME_QtyUsed = "QtyUsed";
+
+	/** Set Quantity Used	  */
+	public void setQtyUsed (BigDecimal QtyUsed);
+
+	/** Get Quantity Used	  */
+	public BigDecimal getQtyUsed();
 
     /** Column name Updated */
     public static final String COLUMNNAME_Updated = "Updated";
@@ -235,30 +265,4 @@ public interface I_M_BOM
 	  * User who updated this records
 	  */
 	public int getUpdatedBy();
-
-    /** Column name ValidFrom */
-    public static final String COLUMNNAME_ValidFrom = "ValidFrom";
-
-	/** Set Valid from.
-	  * Valid from including this date (first day)
-	  */
-	public void setValidFrom (Timestamp ValidFrom);
-
-	/** Get Valid from.
-	  * Valid from including this date (first day)
-	  */
-	public Timestamp getValidFrom();
-
-    /** Column name ValidTo */
-    public static final String COLUMNNAME_ValidTo = "ValidTo";
-
-	/** Set Valid to.
-	  * Valid to including this date (last day)
-	  */
-	public void setValidTo (Timestamp ValidTo);
-
-	/** Get Valid to.
-	  * Valid to including this date (last day)
-	  */
-	public Timestamp getValidTo();
 }

@@ -991,13 +991,11 @@ public abstract class AbstractProcessCtl implements Runnable
 		boolean started = false;
 		
 		boolean clientOnly = false;
-		if (! m_pi.getClassName().toLowerCase().startsWith(MRule.SCRIPT_PREFIX)) {
-			try {
-				Class<?> processClass = Class.forName(m_pi.getClassName());
-				if (ClientProcess.class.isAssignableFrom(processClass))
-					clientOnly = true;
-			} catch (Exception e) {}
-		}
+		try {
+			Class<?> processClass = Class.forName(m_pi.getClassName());
+			if (ClientProcess.class.isAssignableFrom(processClass))
+				clientOnly = true;
+		} catch (Exception e) {}
 		
 		if (m_IsServerProcess && !clientOnly)
 		{

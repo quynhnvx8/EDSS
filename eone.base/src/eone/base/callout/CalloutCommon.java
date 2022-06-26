@@ -28,6 +28,22 @@ import eone.util.Env;
 //eone.base.callout.CalloutCommon.getC_Element
 public class CalloutCommon extends CalloutEngine
 {
+	public String calculateCommon(Properties ctx, int WindowNo, GridTab mTab, GridField mField, Object value)
+	{
+		if (isCalloutActive())		//	assuming it is resetting value
+			return "";
+		Object objValue = value;
+		if (objValue == null)
+			return "";
+		int Account_ID = Integer.parseInt(objValue.toString());
+		MElementValue e = MElementValue.get(ctx, Account_ID);
+		
+		if (e != null) {
+			mTab.setValue("C_Element_ID", e.getC_Element_ID());
+		}
+		
+		return "";
+	}
 	
 	public String cal_From_Curr_To_Rate (Properties ctx, int WindowNo, GridTab mTab, GridField mField, Object value)
 	{

@@ -19,7 +19,7 @@ public class X_HR_TimekeeperMap extends PO implements I_HR_TimekeeperMap, I_Pers
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220618L;
+	private static final long serialVersionUID = 20220626L;
 
     /** Standard Constructor */
     public X_HR_TimekeeperMap (Properties ctx, int HR_TimekeeperMap_ID, String trxName)
@@ -103,8 +103,8 @@ public class X_HR_TimekeeperMap extends PO implements I_HR_TimekeeperMap, I_Pers
 	public static final String NAME_CO = "CO";
 	/** L8 = L8 */
 	public static final String NAME_L8 = "L8";
-	/** NO = NO */
-	public static final String NAME_NO = "NO";
+	/** OO = OO */
+	public static final String NAME_OO = "OO";
 	/** SP = SP */
 	public static final String NAME_SP = "SP";
 	/** TS = TS */
@@ -182,6 +182,10 @@ public class X_HR_TimekeeperMap extends PO implements I_HR_TimekeeperMap, I_Pers
 	public static final String TYPETIMEKEEPER_OvertimeOnWeekdays = "OW";
 	/** Workday Product = WP */
 	public static final String TYPETIMEKEEPER_WorkdayProduct = "WP";
+	/** Overtime On Normal = ON */
+	public static final String TYPETIMEKEEPER_OvertimeOnNormal = "ON";
+	/** Overnight = OV */
+	public static final String TYPETIMEKEEPER_Overnight = "OV";
 	/** Set TypeTimeKeeper.
 		@param TypeTimeKeeper TypeTimeKeeper	  */
 	public void setTypeTimeKeeper (String TypeTimeKeeper)

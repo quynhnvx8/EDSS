@@ -8,18 +8,18 @@ import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-/** Generated Interface for M_BOM
+/** Generated Interface for M_ProductionInput
  *  @author EOne (generated) 
  *  @version Version 1.0
  */
-public interface I_M_BOM 
+public interface I_M_ProductionInput 
 {
 
-    /** TableName=M_BOM */
-    public static final String Table_Name = "M_BOM";
+    /** TableName=M_ProductionInput */
+    public static final String Table_Name = "M_ProductionInput";
 
-    /** AD_Table_ID=798 */
-    public static final int Table_ID = 798;
+    /** AD_Table_ID=1200445 */
+    public static final int Table_ID = MTable.getTable_ID(Table_Name);
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
@@ -50,39 +50,6 @@ public interface I_M_BOM
 	  */
 	public int getAD_Org_ID();
 
-    /** Column name Approved */
-    public static final String COLUMNNAME_Approved = "Approved";
-
-	/** Set Approved	  */
-	public void setApproved (String Approved);
-
-	/** Get Approved	  */
-	public String getApproved();
-
-    /** Column name C_UOM_ID */
-    public static final String COLUMNNAME_C_UOM_ID = "C_UOM_ID";
-
-	/** Set UOM.
-	  * Unit of Measure
-	  */
-	public void setC_UOM_ID (int C_UOM_ID);
-
-	/** Get UOM.
-	  * Unit of Measure
-	  */
-	public int getC_UOM_ID();
-
-	public eone.base.model.I_C_UOM getC_UOM() throws RuntimeException;
-
-    /** Column name Canceled */
-    public static final String COLUMNNAME_Canceled = "Canceled";
-
-	/** Set Canceled	  */
-	public void setCanceled (String Canceled);
-
-	/** Get Canceled	  */
-	public String getCanceled();
-
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
 
@@ -112,32 +79,6 @@ public interface I_M_BOM
 	  */
 	public String getDescription();
 
-    /** Column name DocStatus */
-    public static final String COLUMNNAME_DocStatus = "DocStatus";
-
-	/** Set Document Status.
-	  * The current status of the document
-	  */
-	public void setDocStatus (String DocStatus);
-
-	/** Get Document Status.
-	  * The current status of the document
-	  */
-	public String getDocStatus();
-
-    /** Column name Help */
-    public static final String COLUMNNAME_Help = "Help";
-
-	/** Set Comment/Help.
-	  * Comment or Hint
-	  */
-	public void setHelp (String Help);
-
-	/** Get Comment/Help.
-	  * Comment or Hint
-	  */
-	public String getHelp();
-
     /** Column name IsActive */
     public static final String COLUMNNAME_IsActive = "IsActive";
 
@@ -150,19 +91,6 @@ public interface I_M_BOM
 	  * The record is active in the system
 	  */
 	public boolean isActive();
-
-    /** Column name M_BOM_ID */
-    public static final String COLUMNNAME_M_BOM_ID = "M_BOM_ID";
-
-	/** Set BOM.
-	  * Bill of Material
-	  */
-	public void setM_BOM_ID (int M_BOM_ID);
-
-	/** Get BOM.
-	  * Bill of Material
-	  */
-	public int getM_BOM_ID();
 
     /** Column name M_Product_ID */
     public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
@@ -179,24 +107,40 @@ public interface I_M_BOM
 
 	public eone.base.model.I_M_Product getM_Product() throws RuntimeException;
 
-    /** Column name M_Workshop_ID */
+    /** Column name M_ProductionInput_ID */
+    public static final String COLUMNNAME_M_ProductionInput_ID = "M_ProductionInput_ID";
+
+	/** Set Production Input	  */
+	public void setM_ProductionInput_ID (int M_ProductionInput_ID);
+
+	/** Get Production Input	  */
+	public int getM_ProductionInput_ID();
+
+    /** Column name M_ProductionOutput_ID */
+    public static final String COLUMNNAME_M_ProductionOutput_ID = "M_ProductionOutput_ID";
+
+	/** Set Production Output	  */
+	public void setM_ProductionOutput_ID (int M_ProductionOutput_ID);
+
+	/** Get Production Output	  */
+	public int getM_ProductionOutput_ID();
+
+	public eone.base.model.I_M_ProductionOutput getM_ProductionOutput() throws RuntimeException;
+
+    /** Column name M_Warehouse_ID */
     public static final String COLUMNNAME_M_Warehouse_ID = "M_Warehouse_ID";
 
-	/** Set Workshop	  */
+	/** Set Warehouse.
+	  * Storage Warehouse and Service Point
+	  */
 	public void setM_Warehouse_ID (int M_Warehouse_ID);
 
-	/** Get Workshop	  */
+	/** Get Warehouse.
+	  * Storage Warehouse and Service Point
+	  */
 	public int getM_Warehouse_ID();
 
-	
-    /** Column name Name */
-    public static final String COLUMNNAME_Name = "Name";
-
-	/** Set Name	  */
-	public void setName (String Name);
-
-	/** Get Name	  */
-	public String getName();
+	public eone.base.model.I_M_Warehouse getM_Warehouse() throws RuntimeException;
 
     /** Column name Processed */
     public static final String COLUMNNAME_Processed = "Processed";
@@ -211,14 +155,27 @@ public interface I_M_BOM
 	  */
 	public boolean isProcessed();
 
-    /** Column name Processing */
-    public static final String COLUMNNAME_Processing = "Processing";
+    /** Column name Qty */
+    public static final String COLUMNNAME_Qty = "Qty";
 
-	/** Set Process Now	  */
-	public void setProcessing (boolean Processing);
+	/** Set Quantity.
+	  * Quantity
+	  */
+	public void setQty (BigDecimal Qty);
 
-	/** Get Process Now	  */
-	public boolean isProcessing();
+	/** Get Quantity.
+	  * Quantity
+	  */
+	public BigDecimal getQty();
+
+    /** Column name QtyOne */
+    public static final String COLUMNNAME_QtyOne = "QtyOne";
+
+	/** Set Qty of One	  */
+	public void setQtyOne (BigDecimal QtyOne);
+
+	/** Get Qty of One	  */
+	public BigDecimal getQtyOne();
 
     /** Column name Updated */
     public static final String COLUMNNAME_Updated = "Updated";
@@ -235,30 +192,4 @@ public interface I_M_BOM
 	  * User who updated this records
 	  */
 	public int getUpdatedBy();
-
-    /** Column name ValidFrom */
-    public static final String COLUMNNAME_ValidFrom = "ValidFrom";
-
-	/** Set Valid from.
-	  * Valid from including this date (first day)
-	  */
-	public void setValidFrom (Timestamp ValidFrom);
-
-	/** Get Valid from.
-	  * Valid from including this date (first day)
-	  */
-	public Timestamp getValidFrom();
-
-    /** Column name ValidTo */
-    public static final String COLUMNNAME_ValidTo = "ValidTo";
-
-	/** Set Valid to.
-	  * Valid to including this date (last day)
-	  */
-	public void setValidTo (Timestamp ValidTo);
-
-	/** Get Valid to.
-	  * Valid to including this date (last day)
-	  */
-	public Timestamp getValidTo();
 }

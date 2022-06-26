@@ -2087,7 +2087,15 @@ public final class Env
     	}
     	return Env.ZERO;
     }
-    
+    /* PHẦN NÀY BỎ. DO PHÂN XƯỞNG VÀ KHO NÓ CÙNG LOGIC QUẢN LÝ
+    public static String isCheckWorkshop() {
+    	String sql = "Select Count(1) FROM M_Workshop WHERE IsActive = 'Y' AND AD_Client_ID = ?";
+    	int no = DB.getSQLValue(null, sql, Env.getAD_Client_ID(getCtx()));
+    	if (no > 0)
+    		return "Y";
+    	return "N";
+    }
+    */
     /**
      * Convert formula String to value: Ex: (1+2)*3-3 = 6
      */
@@ -2251,5 +2259,26 @@ public final class Env
 		out.append(QUOTE);		//	'
 		//
 		return out.toString();
+	}
+	
+	public static String convertKey (String key, int m_windowNo)
+	{
+		String k = m_windowNo + "|";
+		if (key.startsWith(k))
+		{
+			String retValue = "W_" + key.substring(k.length());
+			retValue = Util.replace(retValue, "|", "_");
+			return retValue;
+		}
+		else
+		{
+			String retValue = null;
+			if (key.startsWith("#"))
+				retValue = "G_" + key.substring(1);
+			else
+				retValue = key;
+			retValue = Util.replace(retValue, "#", "_");
+			return retValue;
+		}
 	}
 }   //  Env

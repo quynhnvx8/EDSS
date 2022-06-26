@@ -1,39 +1,26 @@
 /******************************************************************************
- * Product: iDempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2012 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software, you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY, without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program, if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.compiere.org/license.html           *
+ * Product: EONE ERP & CRM Smart Business Solution	                        *
+ * Copyright (C) 2020, Inc. All Rights Reserved.				                *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
 package eone.base.model;
 
+import eone.util.Env;
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-import eone.util.Env;
-import eone.util.KeyNamePair;
-
 /** Generated Model for M_BOMProduct
- *  @author iDempiere (generated) 
- *  @version Release 7.1 - $Id$ */
+ *  @author EOne (generated) 
+ *  @version Version 1.0 - $Id$ */
 public class X_M_BOMProduct extends PO implements I_M_BOMProduct, I_Persistent 
 {
 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20220623L;
 
     /** Standard Constructor */
     public X_M_BOMProduct (Properties ctx, int M_BOMProduct_ID, String trxName)
@@ -45,8 +32,6 @@ public class X_M_BOMProduct extends PO implements I_M_BOMProduct, I_Persistent
 // S
 			setBOMQty (Env.ZERO);
 // 1
-			setIsPhantom (false);
-			setLeadTimeOffset (0);
 			setLine (0);
 // @SQL=SELECT NVL(MAX(Line),0)+10 AS DefaultValue FROM M_BOMProduct WHERE M_BOM_ID=@M_BOM_ID@
 			setM_BOM_ID (0);
@@ -61,7 +46,7 @@ public class X_M_BOMProduct extends PO implements I_M_BOMProduct, I_Persistent
     }
 
     /** AccessLevel
-      * @return 3 - Client - Org 
+      * @return 7 - System - Client - Org 
       */
     protected int get_AccessLevel()
     {
@@ -84,16 +69,20 @@ public class X_M_BOMProduct extends PO implements I_M_BOMProduct, I_Persistent
 
 	/** BOMProductType AD_Reference_ID=349 */
 	public static final int BOMPRODUCTTYPE_AD_Reference_ID=349;
-	/** Standard Product = S */
-	public static final String BOMPRODUCTTYPE_StandardProduct = "S";
-	/** Optional Product = O */
-	public static final String BOMPRODUCTTYPE_OptionalProduct = "O";
-	/** Alternative = A */
-	public static final String BOMPRODUCTTYPE_Alternative = "A";
-	/** Alternative (Default) = D */
-	public static final String BOMPRODUCTTYPE_AlternativeDefault = "D";
-	/** Outside Processing = X */
-	public static final String BOMPRODUCTTYPE_OutsideProcessing = "X";
+	/** Labor = L */
+	public static final String BOMPRODUCTTYPE_Labor = "L";
+	/** Production = P */
+	public static final String BOMPRODUCTTYPE_Production = "P";
+	/** Master Materials = M */
+	public static final String BOMPRODUCTTYPE_MasterMaterials = "M";
+	/** Secondary Materials = S */
+	public static final String BOMPRODUCTTYPE_SecondaryMaterials = "S";
+	/** Depreciation = D */
+	public static final String BOMPRODUCTTYPE_Depreciation = "D";
+	/** Maintenance = U */
+	public static final String BOMPRODUCTTYPE_Maintenance = "U";
+	/** Cost Other = C */
+	public static final String BOMPRODUCTTYPE_CostOther = "C";
 	/** Set Component Type.
 		@param BOMProductType 
 		BOM Product Type
@@ -132,6 +121,34 @@ public class X_M_BOMProduct extends PO implements I_M_BOMProduct, I_Persistent
 		return bd;
 	}
 
+	public eone.base.model.I_C_UOM getC_UOM() throws RuntimeException
+    {
+		return (eone.base.model.I_C_UOM)MTable.get(getCtx(), eone.base.model.I_C_UOM.Table_Name)
+			.getPO(getC_UOM_ID(), get_TrxName());	}
+
+	/** Set UOM.
+		@param C_UOM_ID 
+		Unit of Measure
+	  */
+	public void setC_UOM_ID (int C_UOM_ID)
+	{
+		if (C_UOM_ID < 1) 
+			set_ValueNoCheck (COLUMNNAME_C_UOM_ID, null);
+		else 
+			set_ValueNoCheck (COLUMNNAME_C_UOM_ID, Integer.valueOf(C_UOM_ID));
+	}
+
+	/** Get UOM.
+		@return Unit of Measure
+	  */
+	public int getC_UOM_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_C_UOM_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
 	/** Set Description.
 		@param Description 
 		Optional short description of the record
@@ -166,50 +183,6 @@ public class X_M_BOMProduct extends PO implements I_M_BOMProduct, I_Persistent
 		return (String)get_Value(COLUMNNAME_Help);
 	}
 
-	/** Set Phantom.
-		@param IsPhantom 
-		Phantom Component
-	  */
-	public void setIsPhantom (boolean IsPhantom)
-	{
-		set_Value (COLUMNNAME_IsPhantom, Boolean.valueOf(IsPhantom));
-	}
-
-	/** Get Phantom.
-		@return Phantom Component
-	  */
-	public boolean isPhantom () 
-	{
-		Object oo = get_Value(COLUMNNAME_IsPhantom);
-		if (oo != null) 
-		{
-			 if (oo instanceof Boolean) 
-				 return ((Boolean)oo).booleanValue(); 
-			return "Y".equals(oo);
-		}
-		return false;
-	}
-
-	/** Set Lead Time Offset.
-		@param LeadTimeOffset 
-		Optional Lead Time offset before starting production
-	  */
-	public void setLeadTimeOffset (int LeadTimeOffset)
-	{
-		set_Value (COLUMNNAME_LeadTimeOffset, Integer.valueOf(LeadTimeOffset));
-	}
-
-	/** Get Lead Time Offset.
-		@return Optional Lead Time offset before starting production
-	  */
-	public int getLeadTimeOffset () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_LeadTimeOffset);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
 	/** Set Line No.
 		@param Line 
 		Unique line for this document
@@ -237,54 +210,6 @@ public class X_M_BOMProduct extends PO implements I_M_BOMProduct, I_Persistent
     {
         return new KeyNamePair(get_ID(), String.valueOf(getLine()));
     }
-
-	
-	/** Set Attribute Set Instance.
-		@param M_AttributeSetInstance_ID 
-		Product Attribute Set Instance
-	  */
-	public void setM_AttributeSetInstance_ID (int M_AttributeSetInstance_ID)
-	{
-		if (M_AttributeSetInstance_ID < 0) 
-			set_Value (COLUMNNAME_M_AttributeSetInstance_ID, null);
-		else 
-			set_Value (COLUMNNAME_M_AttributeSetInstance_ID, Integer.valueOf(M_AttributeSetInstance_ID));
-	}
-
-	/** Get Attribute Set Instance.
-		@return Product Attribute Set Instance
-	  */
-	public int getM_AttributeSetInstance_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_M_AttributeSetInstance_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	
-	/** Set Alternative Group.
-		@param M_BOMAlternative_ID 
-		Product BOM Alternative Group
-	  */
-	public void setM_BOMAlternative_ID (int M_BOMAlternative_ID)
-	{
-		if (M_BOMAlternative_ID < 1) 
-			set_Value (COLUMNNAME_M_BOMAlternative_ID, null);
-		else 
-			set_Value (COLUMNNAME_M_BOMAlternative_ID, Integer.valueOf(M_BOMAlternative_ID));
-	}
-
-	/** Get Alternative Group.
-		@return Product BOM Alternative Group
-	  */
-	public int getM_BOMAlternative_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_M_BOMAlternative_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
 
 	public eone.base.model.I_M_BOM getM_BOM() throws RuntimeException
     {
@@ -337,98 +262,56 @@ public class X_M_BOMProduct extends PO implements I_M_BOMProduct, I_Persistent
 		return ii.intValue();
 	}
 
-	/** Set M_BOMProduct_UU.
-		@param M_BOMProduct_UU M_BOMProduct_UU	  */
-	public void setM_BOMProduct_UU (String M_BOMProduct_UU)
-	{
-		set_Value (COLUMNNAME_M_BOMProduct_UU, M_BOMProduct_UU);
-	}
-
-	/** Get M_BOMProduct_UU.
-		@return M_BOMProduct_UU	  */
-	public String getM_BOMProduct_UU () 
-	{
-		return (String)get_Value(COLUMNNAME_M_BOMProduct_UU);
-	}
-
-	
-	/** Set Change Notice.
-		@param M_ChangeNotice_ID 
-		Bill of Materials (Engineering) Change Notice (Version)
-	  */
-	public void setM_ChangeNotice_ID (int M_ChangeNotice_ID)
-	{
-		if (M_ChangeNotice_ID < 1) 
-			set_Value (COLUMNNAME_M_ChangeNotice_ID, null);
-		else 
-			set_Value (COLUMNNAME_M_ChangeNotice_ID, Integer.valueOf(M_ChangeNotice_ID));
-	}
-
-	/** Get Change Notice.
-		@return Bill of Materials (Engineering) Change Notice (Version)
-	  */
-	public int getM_ChangeNotice_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_M_ChangeNotice_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_M_Product getM_ProductBOM() throws RuntimeException
+	public eone.base.model.I_M_Product getM_Product() throws RuntimeException
     {
 		return (eone.base.model.I_M_Product)MTable.get(getCtx(), eone.base.model.I_M_Product.Table_Name)
-			.getPO(getM_ProductBOM_ID(), get_TrxName());	}
+			.getPO(getM_Product_ID(), get_TrxName());	}
 
-	/** Set BOM Product.
-		@param M_ProductBOM_ID 
-		Bill of Material Component Product
+	/** Set Product.
+		@param M_Product_ID 
+		Product, Service, Item
 	  */
-	public void setM_ProductBOM_ID (int M_ProductBOM_ID)
+	public void setM_Product_ID (int M_Product_ID)
 	{
-		if (M_ProductBOM_ID < 1) 
-			set_Value (COLUMNNAME_M_ProductBOM_ID, null);
+		if (M_Product_ID < 1) 
+			set_Value (COLUMNNAME_M_Product_ID, null);
 		else 
-			set_Value (COLUMNNAME_M_ProductBOM_ID, Integer.valueOf(M_ProductBOM_ID));
+			set_Value (COLUMNNAME_M_Product_ID, Integer.valueOf(M_Product_ID));
 	}
 
-	/** Get BOM Product.
-		@return Bill of Material Component Product
+	/** Get Product.
+		@return Product, Service, Item
 	  */
-	public int getM_ProductBOM_ID () 
+	public int getM_Product_ID () 
 	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_M_ProductBOM_ID);
+		Integer ii = (Integer)get_Value(COLUMNNAME_M_Product_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
 	}
 
-	public eone.base.model.I_M_ProductOperation getM_ProductOperation() throws RuntimeException
-    {
-		return (eone.base.model.I_M_ProductOperation)MTable.get(getCtx(), eone.base.model.I_M_ProductOperation.Table_Name)
-			.getPO(getM_ProductOperation_ID(), get_TrxName());	}
-
-	/** Set Product Operation.
-		@param M_ProductOperation_ID 
-		Product Manufacturing Operation
+	/** Set Processed.
+		@param Processed 
+		The document has been processed
 	  */
-	public void setM_ProductOperation_ID (int M_ProductOperation_ID)
+	public void setProcessed (boolean Processed)
 	{
-		if (M_ProductOperation_ID < 1) 
-			set_Value (COLUMNNAME_M_ProductOperation_ID, null);
-		else 
-			set_Value (COLUMNNAME_M_ProductOperation_ID, Integer.valueOf(M_ProductOperation_ID));
+		set_Value (COLUMNNAME_Processed, Boolean.valueOf(Processed));
 	}
 
-	/** Get Product Operation.
-		@return Product Manufacturing Operation
+	/** Get Processed.
+		@return The document has been processed
 	  */
-	public int getM_ProductOperation_ID () 
+	public boolean isProcessed () 
 	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_M_ProductOperation_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
+		Object oo = get_Value(COLUMNNAME_Processed);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
 	}
 
 	/** Set Sequence.

@@ -4,10 +4,9 @@
  *****************************************************************************/
 package eone.base.model;
 
+import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-
-import eone.util.KeyNamePair;
 
 /** Generated Interface for M_Production
  *  @author EOne (generated) 
@@ -51,6 +50,15 @@ public interface I_M_Production
 	  */
 	public int getAD_Org_ID();
 
+    /** Column name Approved */
+    public static final String COLUMNNAME_Approved = "Approved";
+
+	/** Set Approved	  */
+	public void setApproved (String Approved);
+
+	/** Get Approved	  */
+	public String getApproved();
+
     /** Column name C_BPartner_ID */
     public static final String COLUMNNAME_C_BPartner_ID = "C_BPartner_ID";
 
@@ -66,20 +74,57 @@ public interface I_M_Production
 
 	public eone.base.model.I_C_BPartner getC_BPartner() throws RuntimeException;
 
-    /** Column name C_OrderLine_ID */
-    public static final String COLUMNNAME_C_OrderLine_ID = "C_OrderLine_ID";
+    /** Column name C_Construction_ID */
+    public static final String COLUMNNAME_C_Construction_ID = "C_Construction_ID";
 
-	/** Set Sales Order Line.
-	  * Sales Order Line
+	/** Set Construction	  */
+	public void setC_Construction_ID (int C_Construction_ID);
+
+	/** Get Construction	  */
+	public int getC_Construction_ID();
+
+	public eone.base.model.I_C_Construction getC_Construction() throws RuntimeException;
+
+    /** Column name C_Contract_ID */
+    public static final String COLUMNNAME_C_Contract_ID = "C_Contract_ID";
+
+	/** Set Contract	  */
+	public void setC_Contract_ID (int C_Contract_ID);
+
+	/** Get Contract	  */
+	public int getC_Contract_ID();
+
+	public eone.base.model.I_C_Contract getC_Contract() throws RuntimeException;
+
+    /** Column name C_DocType_ID */
+    public static final String COLUMNNAME_C_DocType_ID = "C_DocType_ID";
+
+	/** Set Document Type.
+	  * Document type or rules
 	  */
-	public void setC_OrderLine_ID (int C_OrderLine_ID);
+	public void setC_DocType_ID (int C_DocType_ID);
 
-	/** Get Sales Order Line.
-	  * Sales Order Line
+	/** Get Document Type.
+	  * Document type or rules
 	  */
-	public int getC_OrderLine_ID();
+	public int getC_DocType_ID();
 
-	public eone.base.model.I_C_OrderLine getC_OrderLine() throws RuntimeException;
+	public eone.base.model.I_C_DocType getC_DocType() throws RuntimeException;
+
+    /** Column name C_Order_ID */
+    public static final String COLUMNNAME_C_Order_ID = "C_Order_ID";
+
+	/** Set Order.
+	  * Order
+	  */
+	public void setC_Order_ID (int C_Order_ID);
+
+	/** Get Order.
+	  * Order
+	  */
+	public int getC_Order_ID();
+
+	public eone.base.model.I_C_Order getC_Order() throws RuntimeException;
 
     /** Column name C_Project_ID */
     public static final String COLUMNNAME_C_Project_ID = "C_Project_ID";
@@ -96,19 +141,14 @@ public interface I_M_Production
 
 	public eone.base.model.I_C_Project getC_Project() throws RuntimeException;
 
-    /** Column name C_ProjectPhase_ID */
-    public static final String COLUMNNAME_C_ProjectPhase_ID = "C_ProjectPhase_ID";
+    /** Column name Canceled */
+    public static final String COLUMNNAME_Canceled = "Canceled";
 
-	/** Set Project Phase.
-	  * Phase of a Project
-	  */
-	public void setC_ProjectPhase_ID (int C_ProjectPhase_ID);
+	/** Set Canceled	  */
+	public void setCanceled (String Canceled);
 
-	/** Get Project Phase.
-	  * Phase of a Project
-	  */
-	public int getC_ProjectPhase_ID();
-
+	/** Get Canceled	  */
+	public String getCanceled();
 
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
@@ -165,19 +205,6 @@ public interface I_M_Production
 	  */
 	public String getDescription();
 
-    /** Column name DocAction */
-    public static final String COLUMNNAME_DocAction = "DocAction";
-
-	/** Set Document Action.
-	  * The targeted status of the document
-	  */
-	public void setDocAction (String DocAction);
-
-	/** Get Document Action.
-	  * The targeted status of the document
-	  */
-	public String getDocAction();
-
     /** Column name DocStatus */
     public static final String COLUMNNAME_DocStatus = "DocStatus";
 
@@ -217,30 +244,6 @@ public interface I_M_Production
 	  */
 	public boolean isActive();
 
-    /** Column name IsCreated */
-    public static final String COLUMNNAME_IsCreated = "IsCreated";
-
-	/** Set Records created	  */
-	public void setIsCreated (boolean IsCreated);
-
-	/** Get Records created	  */
-	public boolean isCreated();
-
-    /** Column name M_Product_ID */
-    public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
-
-	/** Set Product.
-	  * Product, Service, Item
-	  */
-	public void setM_Product_ID (int M_Product_ID);
-
-	/** Get Product.
-	  * Product, Service, Item
-	  */
-	public int getM_Product_ID();
-
-	public eone.base.model.I_M_Product getM_Product() throws RuntimeException;
-
     /** Column name M_Production_ID */
     public static final String COLUMNNAME_M_Production_ID = "M_Production_ID";
 
@@ -254,32 +257,13 @@ public interface I_M_Production
 	  */
 	public int getM_Production_ID();
 
-    /** Column name M_Warehouse_ID */
-    public static final String COLUMNNAME_M_Warehouse_ID = "M_Warehouse_ID";
-
-	/** Set Warehouse.
-	  * Storage Warehouse and Service Point
-	  */
-	public void setM_Warehouse_ID (int M_Warehouse_ID);
-
-	/** Get Warehouse.
-	  * Storage Warehouse and Service Point
-	  */
-	public int getM_Warehouse_ID();
-
-	public eone.base.model.I_M_Warehouse getM_Warehouse() throws RuntimeException;
-
     /** Column name Name */
     public static final String COLUMNNAME_Name = "Name";
 
-	/** Set Name.
-	  * Alphanumeric identifier of the entity
-	  */
+	/** Set Name	  */
 	public void setName (String Name);
 
-	/** Get Name.
-	  * Alphanumeric identifier of the entity
-	  */
+	/** Get Name	  */
 	public String getName();
 
     /** Column name Processed */
@@ -294,28 +278,6 @@ public interface I_M_Production
 	  * The document has been processed
 	  */
 	public boolean isProcessed();
-
-    /** Column name Processing */
-    public static final String COLUMNNAME_Processing = "Processing";
-
-	/** Set Process Now	  */
-	public void setProcessing (boolean Processing);
-
-	/** Get Process Now	  */
-	public boolean isProcessing();
-
-    /** Column name ProductionQty */
-    public static final String COLUMNNAME_ProductionQty = "ProductionQty";
-
-	/** Set Production Quantity.
-	  * Quantity of products to produce
-	  */
-	public void setProductionQty (BigDecimal ProductionQty);
-
-	/** Get Production Quantity.
-	  * Quantity of products to produce
-	  */
-	public BigDecimal getProductionQty();
 
     /** Column name Updated */
     public static final String COLUMNNAME_Updated = "Updated";

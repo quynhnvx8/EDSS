@@ -251,7 +251,7 @@ public class MRule extends X_AD_Rule
 		String k = m_windowNo + "|";
 		if (key.startsWith(k))
 		{
-			String retValue = WINDOW_CONTEXT_PREFIX + key.substring(k.length());
+			String retValue = "W_" + key.substring(k.length());
 			retValue = Util.replace(retValue, "|", "_");
 			return retValue;
 		}
@@ -259,7 +259,7 @@ public class MRule extends X_AD_Rule
 		{
 			String retValue = null;
 			if (key.startsWith("#"))
-				retValue = GLOBAL_CONTEXT_PREFIX + key.substring(1);
+				retValue = "G_" + key.substring(1);
 			else
 				retValue = key;
 			retValue = Util.replace(retValue, "#", "_");

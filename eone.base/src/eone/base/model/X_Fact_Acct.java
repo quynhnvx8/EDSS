@@ -1050,55 +1050,6 @@ public class X_Fact_Acct extends PO implements I_Fact_Acct, I_Persistent
 		return ii.intValue();
 	}
 
-	public eone.base.model.I_M_Workshop getM_Workshop_Cr() throws RuntimeException
-    {
-		return (eone.base.model.I_M_Workshop)MTable.get(getCtx(), eone.base.model.I_M_Workshop.Table_Name)
-			.getPO(getM_Workshop_Cr_ID(), get_TrxName());	}
-
-	/** Set Workshop Cr.
-		@param M_Workshop_Cr_ID Workshop Cr	  */
-	public void setM_Workshop_Cr_ID (int M_Workshop_Cr_ID)
-	{
-		if (M_Workshop_Cr_ID < 1) 
-			set_Value (COLUMNNAME_M_Workshop_Cr_ID, null);
-		else 
-			set_Value (COLUMNNAME_M_Workshop_Cr_ID, Integer.valueOf(M_Workshop_Cr_ID));
-	}
-
-	/** Get Workshop Cr.
-		@return Workshop Cr	  */
-	public int getM_Workshop_Cr_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_M_Workshop_Cr_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_M_Workshop getM_Workshop() throws RuntimeException
-    {
-		return (eone.base.model.I_M_Workshop)MTable.get(getCtx(), eone.base.model.I_M_Workshop.Table_Name)
-			.getPO(getM_Workshop_ID(), get_TrxName());	}
-
-	/** Set Workshop.
-		@param M_Workshop_ID Workshop	  */
-	public void setM_Workshop_ID (int M_Workshop_ID)
-	{
-		if (M_Workshop_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_M_Workshop_ID, null);
-		else 
-			set_ValueNoCheck (COLUMNNAME_M_Workshop_ID, Integer.valueOf(M_Workshop_ID));
-	}
-
-	/** Get Workshop.
-		@return Workshop	  */
-	public int getM_Workshop_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_M_Workshop_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
 
 	public eone.base.model.I_PA_ReportLine getPA_ReportLine() throws RuntimeException
     {

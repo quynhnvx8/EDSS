@@ -1,22 +1,16 @@
 package eone.base.model;
 
-import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Properties;
-import java.util.logging.Level;
 
 import eone.base.process.DocAction;
 import eone.base.process.DocumentEngine;
 import eone.exceptions.EONEException;
 import eone.util.CLogger;
 import eone.util.DB;
-import eone.util.EONEUserError;
-import eone.util.Env;
-import eone.util.Util;
 
 public class MProduction extends X_M_Production implements DocAction {
 	/**
@@ -34,10 +28,7 @@ public class MProduction extends X_M_Production implements DocAction {
 
 	public MProduction(Properties ctx, int M_Production_ID, String trxName) {
 		super(ctx, M_Production_ID, trxName);
-		if (M_Production_ID == 0) {
-			setDocStatus(DOCSTATUS_Drafted);
-			setDocAction (DOCACTION_Complete);
-		}
+		
 	}
 
 	public MProduction(Properties ctx, ResultSet rs, String trxName) {
@@ -46,22 +37,9 @@ public class MProduction extends X_M_Production implements DocAction {
 	
 	public MProduction( MOrderLine line ) {
 		super( line.getCtx(), 0, line.get_TrxName());
-		setAD_Client_ID(line.getAD_Client_ID());
-		setAD_Org_ID(line.getAD_Org_ID());
 	}
 
-	public MProduction( MProjectLine line ) {
-		super( line.getCtx(), 0, line.get_TrxName());
-		MProject project = new MProject(line.getCtx(), line.getC_Project_ID(), line.get_TrxName());
-		
-		
-		setAD_Client_ID(line.getAD_Client_ID());
-		setAD_Org_ID(line.getAD_Org_ID());
-		setDescription(project.getValue()+"_"+project.getName()+" Line: "+line.getLine()+" (project)");
-		setC_Project_ID(line.getC_Project_ID());
-		setC_BPartner_ID(project.getC_BPartner_ID());
-	}
-
+	
 	@Override
 	public String completeIt()
 	{
@@ -69,18 +47,34 @@ public class MProduction extends X_M_Production implements DocAction {
 		if (m_processMsg != null)
 			return DocAction.STATUS_Drafted;
 		setProcessed(true);
-		return DocAction.STATUS_Completed;
+		return DocAction.STATUS_Inprogress;
 	}
 
 
-	
+	public void setProcessed (boolean processed)
+	{
+		super.setProcessed (processed);
+		if (get_ID() == 0)
+			return;
+		StringBuilder sql = new StringBuilder("UPDATE M_ProductionOutput SET Processed='")
+			.append((processed ? "Y" : "N"))
+			.append("' WHERE M_Production_ID=").append(getM_Production_ID());
+		DB.executeUpdate(sql.toString(), get_TrxName());
+		
+		sql = new StringBuilder("UPDATE M_ProductionInput SET Processed = '")
+				.append((processed ? "Y" : "N"))
+				.append("' WHERE M_ProductionOutput_ID  IN (SELECT M_ProductionOutput_ID FROM M_ProductionOutput WHERE M_Production_ID = ")
+				.append(getM_Production_ID())
+				.append(")");
+		DB.executeUpdate(sql.toString(), get_TrxName());
+	}
 	
 
-	public MProductionLine[] getLines() {
-		ArrayList<MProductionLine> list = new ArrayList<MProductionLine>();
+	public MProductionOutput[] getLines() {
+		ArrayList<MProductionOutput> list = new ArrayList<MProductionOutput>();
 		
-		String sql = "SELECT pl.M_ProductionLine_ID "
-			+ "FROM M_ProductionLine pl "
+		String sql = "SELECT pl.M_ProductionOutput_ID "
+			+ "FROM M_ProductionOutput pl "
 			+ "WHERE pl.M_Production_ID = ?";
 		
 		PreparedStatement pstmt = null;
@@ -91,7 +85,7 @@ public class MProduction extends X_M_Production implements DocAction {
 			pstmt.setInt(1, get_ID());
 			rs = pstmt.executeQuery();
 			while (rs.next())
-				list.add( new MProductionLine( getCtx(), rs.getInt(1), get_TrxName() ) );	
+				list.add( new MProductionOutput( getCtx(), rs.getInt(1), get_TrxName() ) );	
 		}
 		catch (SQLException ex)
 		{
@@ -104,82 +98,22 @@ public class MProduction extends X_M_Production implements DocAction {
 			pstmt = null;
 		}
 		
-		MProductionLine[] retValue = new MProductionLine[list.size()];
+		MProductionOutput[] retValue = new MProductionOutput[list.size()];
 		list.toArray(retValue);
 		return retValue;
 	}
 	
 	public void deleteLines(String trxName) {
 
-		for (MProductionLine line : getLines())
-		{
-			line.deleteEx(true);
-		}
-
+		String sqlDel = "DELETE FROM M_ProductionInput WHERE M_ProductionOutput_ID IN (SELECT M_ProductionOutput_ID FROM M_ProductionOutput WHERE M_Production_ID = ?)";
+		DB.executeUpdate(sqlDel, getM_Production_ID(), trxName);
+		
+		sqlDel = "DELETE FROM M_ProductionOutput WHERE M_Production_ID = ?";
+		DB.executeUpdate(sqlDel, getM_Production_ID(), trxName);
+		
 	}// deleteLines
 
-	public int createLines(boolean mustBeStocked) {
-		
-		lineno = 100;
-
-		count = 0;
-
-		// product to be produced
-		MProduct finishedProduct = new MProduct(getCtx(), getM_Product_ID(), get_TrxName());
-		
-
-		MProductionLine line = new MProductionLine( this );
-		line.setLine( lineno );
-		line.setM_Product_ID( finishedProduct.get_ID() );
-		line.setM_Warehouse_ID( getM_Warehouse_ID() );
-		line.setMovementQty( getProductionQty());
-		line.setPlannedQty(getProductionQty());
-		
-		line.saveEx();
-		count++;
-		
-		createLines(mustBeStocked, finishedProduct, getProductionQty());
-		
-		return count;
-	}
-
-	protected int createLines(boolean mustBeStocked, MProduct finishedProduct, BigDecimal requiredQty) {
-		
-		
-		
-		
-		// products used in production
-		String sql = "SELECT M_ProductBom_ID, BOMQty" + " FROM M_Product_BOM"
-				+ " WHERE M_Product_ID=" + finishedProduct.getM_Product_ID() + " ORDER BY Line";
-
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-			pstmt = DB.prepareStatement(sql, get_TrxName());
-
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				
-				lineno = lineno + 10;
-				int BOMProduct_ID = rs.getInt(1);
-				BigDecimal BOMQty = rs.getBigDecimal(2);
-				BigDecimal BOMMovementQty = BOMQty.multiply(requiredQty);
-				
-				MProduct bomproduct = new MProduct(Env.getCtx(), BOMProduct_ID, get_TrxName());
-				
-				createLines(mustBeStocked, bomproduct, BOMMovementQty);
-				
-			} // for all bom products
-		} catch (Exception e) {
-			throw new EONEException("Failed to create production lines", e);
-		}
-		finally {
-			DB.close(rs, pstmt);
-		}
-
-		return count;
-	}
+	
 	
 	@Override
 	protected boolean beforeDelete() {
@@ -204,71 +138,6 @@ public class MProduction extends X_M_Production implements DocAction {
 
 	
 
-	protected String validateEndProduct(int M_Product_ID) {
-		String msg = isBom(M_Product_ID);
-		if (!Util.isEmpty(msg))
-			return msg;
-
-		if (!costsOK(M_Product_ID)) {
-			msg = "Excessive difference in standard costs";
-			if (MSysConfig.getBooleanValue(MSysConfig.MFG_ValidateCostsDifferenceOnCreate, false, getAD_Client_ID())) {
-				return msg;
-			} else {
-				log.warning(msg);
-			}
-		}
-
-		return null;
-	}
-
-	protected String isBom(int M_Product_ID)
-	{
-		String bom = DB.getSQLValueString(get_TrxName(), "SELECT isbom FROM M_Product WHERE M_Product_ID = ?", M_Product_ID);
-		if ("N".compareTo(bom) == 0)
-		{
-			return "Attempt to create product line for Non Bill Of Materials";
-		}
-		int materials = DB.getSQLValue(get_TrxName(), "SELECT count(M_Product_BOM_ID) FROM M_Product_BOM WHERE M_Product_ID = ?", M_Product_ID);
-		if (materials == 0)
-		{
-			return "Attempt to create product line for Bill Of Materials with no BOM Products";
-		}
-		return null;
-	}
-
-	protected boolean costsOK(int M_Product_ID) throws EONEUserError {
-		
-		return true;
-	}
-
-	
-	
-	protected MProduction copyFrom(Timestamp reversalDate) {
-		MProduction to = new MProduction(getCtx(), 0, get_TrxName());
-		PO.copyValues (this, to, getAD_Client_ID(), getAD_Org_ID());
-
-		to.set_ValueNoCheck ("DocumentNo", null);
-		//
-		to.setDocStatus (DOCSTATUS_Drafted);		//	Draft
-		to.setDocAction(DOCACTION_Complete);
-		to.setDateAcct(reversalDate);
-		to.setProcessing(false);
-		to.setProcessed(false);
-		to.setProductionQty(getProductionQty().negate());	
-		to.saveEx();
-		MProductionLine[] flines = getLines();
-		for(MProductionLine fline : flines) {
-			MProductionLine tline = new MProductionLine(to);
-			PO.copyValues (fline, tline, getAD_Client_ID(), getAD_Org_ID());
-			tline.setM_Production_ID(to.getM_Production_ID());
-			tline.setMovementQty(fline.getMovementQty().negate());
-			tline.setPlannedQty(fline.getPlannedQty().negate());
-			tline.setQtyUsed(fline.getQtyUsed().negate());
-			tline.saveEx();
-		}
-
-		return to;
-	}
 
 	/**
 	 * 	Add to Description
@@ -289,9 +158,12 @@ public class MProduction extends X_M_Production implements DocAction {
 
 	@Override
 	public boolean reActivateIt() {
-		if (log.isLoggable(Level.INFO)) log.info("reActivateIt - " + toString());
+		if(!super.reActivate())
+			return false;
 		
-		return false;
+		
+		setProcessed(false);
+		return true;
 	}
 
 	@Override
