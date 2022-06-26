@@ -18,7 +18,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.logging.Level;
 
-import javax.script.ScriptEngine;
 import javax.swing.event.EventListenerList;
 
 import eone.EOne;
@@ -2377,70 +2376,54 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 
 		if (callout.length() > 0)
 		{
+			
 			StringTokenizer st = new StringTokenizer(callout, ";,", false);
 			while (st.hasMoreTokens())      //  for each callout
 			{
 				String cmd = st.nextToken().trim();
-	
-				//detect infinite loop
-				if (activeCallouts.contains(cmd)) continue;
-	
 				String retValue = "";
-				if (cmd.toLowerCase().startsWith(MRule.SCRIPT_PREFIX)) {
-	
-					MRule rule = MRule.get(m_vo.ctx, cmd.substring(MRule.SCRIPT_PREFIX.length()));
-					if (rule == null) {
-						retValue = "Callout " + cmd + " not found";
-						log.log(Level.SEVERE, retValue);
-						return retValue;
+				Callout call = null;
+				String method = null;
+				
+				if (cmd.startsWith("@")) {
+					
+					String left = cmd.substring(0, cmd.indexOf("="));
+					String right = cmd.substring(cmd.indexOf("=")+1);
+					
+					//Trường hợp là biểu thức tính toán đơn giản.
+					if (right.startsWith("@")) {
+						String [] element = right.split("[-+*/]");
+						if (element != null && element.length > 0) {
+							for (int i = 0; i < element.length; i ++) {
+								if (element[i].contains(field.getColumnName())) {
+									right = right.replace("@" + field.getColumnName() +"@", value.toString());
+								}else {
+									element[i] = element[i].replaceAll(" ", "");
+									String abc = Env.getContext(Env.getCtx(), this.getWindowNo(), element[i].substring(1, element[i].length() - 1));
+									right = right.replace(element[i].toString(), abc);
+									
+								}
+							}
+						}
+						retValue = ""+ Env.getValueByFormula(right);
 					}
-					if ( !  (rule.getEventType().equals(MRule.EVENTTYPE_Callout)
-						  && rule.getRuleType().equals(MRule.RULETYPE_JSR223ScriptingAPIs))) {
-						retValue = "Callout " + cmd
-							+ " must be of type JSR 223 and event Callout";
-						log.log(Level.SEVERE, retValue);
-						return retValue;
+					
+					//TRường hợp là câu lệnh SQL đơn giản
+					if (right.toUpperCase().startsWith("SELECT")) {
+						String sql = Env.parseContext(Env.getCtx(), this.getWindowNo(), right, false);
+						retValue = DB.getSQLValueStringEx(null, sql);
 					}
-	
-					ScriptEngine engine = rule.getScriptEngine();
-					if (engine == null) {
-						retValue = 	"Callout Invalid, engine not found: " + rule.getEngineName();
-						log.log(Level.SEVERE, retValue);
-						return retValue;
-					}
-	
-					// Window context are    W_
-					// Login context  are    G_
-					MRule.setContext(engine, m_vo.ctx, m_vo.WindowNo);
-					// now add the callout parameters windowNo, tab, field, value, oldValue to the engine
-					// Method arguments context are A_
-					engine.put(MRule.ARGUMENTS_PREFIX + "WindowNo", m_vo.WindowNo);
-					engine.put(MRule.ARGUMENTS_PREFIX + "Tab", this);
-					engine.put(MRule.ARGUMENTS_PREFIX + "Field", field);
-					engine.put(MRule.ARGUMENTS_PREFIX + "Value", value);
-					engine.put(MRule.ARGUMENTS_PREFIX + "OldValue", oldValue);
-					engine.put(MRule.ARGUMENTS_PREFIX + "Ctx", m_vo.ctx);
-	
-					try
-					{
-						activeCallouts.add(cmd);
-						retValue = engine.eval(rule.getScript()).toString();
-					}
-					catch (Exception e)
-					{
-						log.log(Level.SEVERE, "", e);
-						retValue = 	"Callout Invalid: " + e.toString();
-						return retValue;
-					}
-					finally
-					{
-						activeCallouts.remove(cmd);
-					}
-	
-				} else {
-	
-					Callout call = null;
-					String method = null;
+					
+					this.setValue(left.substring(1, left.length() - 1), retValue);
+					retValue = "";
+					
+				}//Kết thúc biểu thức đơn giản 
+				else 
+				{
+					//detect infinite loop
+					if (activeCallouts.contains(cmd)) continue;
+		
+					
 					int methodStart = cmd.lastIndexOf('.');
 					try
 					{
@@ -2462,10 +2445,11 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 						log.log(Level.SEVERE, "class", e);
 						return "Callout Invalid: " + cmd + " (" + e.toString() + ")";
 					}
-	
+					
+
 					if (call == null || method == null || method.length() == 0)
 						return "Callout Invalid: " + method;
-	
+
 					try
 					{
 						activeCallouts.add(cmd);
@@ -2483,8 +2467,9 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 						activeCallouts.remove(cmd);
 						activeCalloutInstance.remove(call);
 					}
-	
-				}
+				}//Kết thúc biểu thức là class.
+				
+
 	
 				if (!Util.isEmpty(retValue))		//	interrupt on first error
 				{
