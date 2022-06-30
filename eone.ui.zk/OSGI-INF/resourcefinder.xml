@@ -3,6 +3,6 @@
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="eone.webui.util.WebUIResourceFinder">
    <implementation class="eone.webui.util.WebUIResourceFinder"/>
    <service>
-      <provide interface="org.adempiere.base.IResourceFinder"/>
+      <provide interface="eone.base.IResourceFinder"/>
    </service>
 </scr:component>

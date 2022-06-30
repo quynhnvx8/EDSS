@@ -22,7 +22,6 @@ import eone.base.model.MClient;
 import eone.base.model.MConfigSignReport;
 import eone.base.model.MOrg;
 import eone.base.model.MProcess;
-import eone.base.model.MRule;
 import eone.base.process.ClientProcess;
 import eone.base.process.ProcessInfo;
 import eone.base.process.ProcessInfoParameter;

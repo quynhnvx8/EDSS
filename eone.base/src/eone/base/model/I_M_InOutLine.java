@@ -224,6 +224,17 @@ public interface I_M_InOutLine
 	  */
 	public int getM_InOutLine_ID();
 
+    /** Column name M_Product_Cr_ID */
+    public static final String COLUMNNAME_M_Product_Cr_ID = "M_Product_Cr_ID";
+
+	/** Set Product Cr	  */
+	public void setM_Product_Cr_ID (int M_Product_Cr_ID);
+
+	/** Get Product Cr	  */
+	public int getM_Product_Cr_ID();
+
+	public eone.base.model.I_M_Product getM_Product_Cr() throws RuntimeException;
+
     /** Column name M_Product_ID */
     public static final String COLUMNNAME_M_Product_ID = "M_Product_ID";
 

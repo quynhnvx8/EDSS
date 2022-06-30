@@ -155,7 +155,10 @@ public class Doc_InOut extends Doc
 		f.setC_BPartner_Dr_ID(header.getC_BPartner_Dr_ID());
 		f.setC_BPartner_Cr_ID(header.getC_BPartner_Cr_ID());
 		f.setM_Product_ID(line.getM_Product_ID());
-		f.setM_Product_Cr_ID(line.getM_Product_ID());
+		if (line.getM_Product_Cr_ID() > 0)
+			f.setM_Product_Cr_ID(line.getM_Product_Cr_ID());
+		else
+			f.setM_Product_Cr_ID(line.getM_Product_ID());
 		f.setM_Warehouse_Dr_ID(header.getM_Warehouse_Dr_ID());
 		f.setM_Warehouse_Cr_ID(header.getM_Warehouse_Cr_ID());
 		return true;
@@ -182,7 +185,10 @@ public class Doc_InOut extends Doc
 		f.setC_BPartner_Dr_ID(header.getC_BPartner_Dr_ID());
 		f.setC_BPartner_Cr_ID(header.getC_BPartner_Cr_ID());
 		f.setM_Product_ID(line.getM_Product_ID());
-		f.setM_Product_Cr_ID(line.getM_Product_ID());
+		if (line.getM_Product_Cr_ID() > 0)
+			f.setM_Product_Cr_ID(line.getM_Product_Cr_ID());
+		else
+			f.setM_Product_Cr_ID(line.getM_Product_ID());
 		f.setM_Warehouse_Dr_ID(header.getM_Warehouse_Dr_ID());
 		f.setM_Warehouse_Cr_ID(header.getM_Warehouse_Cr_ID());
 		return true;
@@ -237,7 +243,10 @@ public class Doc_InOut extends Doc
 		f.setC_BPartner_Dr_ID(header.getC_BPartner_Dr_ID());
 		f.setC_BPartner_Cr_ID(header.getC_BPartner_Cr_ID());
 		f.setM_Product_ID(line.getM_Product_ID());
-		f.setM_Product_Cr_ID(line.getM_Product_ID());
+		if (line.getM_Product_Cr_ID() > 0)
+			f.setM_Product_Cr_ID(line.getM_Product_Cr_ID());
+		else
+			f.setM_Product_Cr_ID(line.getM_Product_ID());
 		f.setM_Warehouse_Dr_ID(header.getM_Warehouse_Dr_ID());
 		f.setM_Warehouse_Cr_ID(header.getM_Warehouse_Cr_ID());
 		return true;

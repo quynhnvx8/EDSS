@@ -2382,6 +2382,7 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 			{
 				String cmd = st.nextToken().trim();
 				String retValue = "";
+				Object result = null;
 				Callout call = null;
 				String method = null;
 				
@@ -2405,16 +2406,16 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 								}
 							}
 						}
-						retValue = ""+ Env.getValueByFormula(right);
+						result = Env.getValueByFormula(right);
 					}
 					
 					//TRường hợp là câu lệnh SQL đơn giản
 					if (right.toUpperCase().startsWith("SELECT")) {
 						String sql = Env.parseContext(Env.getCtx(), this.getWindowNo(), right, false);
-						retValue = DB.getSQLValueStringEx(null, sql);
+						result = DB.getSQLValueStringEx(null, sql);
 					}
 					
-					this.setValue(left.substring(1, left.length() - 1), retValue);
+					this.setValue(left.substring(1, left.length() - 1), result);
 					retValue = "";
 					
 				}//Kết thúc biểu thức đơn giản 

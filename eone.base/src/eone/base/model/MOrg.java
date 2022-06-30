@@ -95,7 +95,7 @@ public class MOrg extends X_AD_Org
 			Env.setContext(getCtx(), "#AD_OrgAccess_ID", context);
 		}
 		
-		if (newRecord || is_ValueChanged("Value") || is_ValueChanged("Name") || isCreateBPartner()) {
+		if (is_ValueChanged("Value") || is_ValueChanged("Name") || isCreateBPartner()) {
 			if (!isSummary()) {
 				boolean ok = MBPartner.createBPartner(getAD_Org_ID(), getAD_Client_ID(), getValue(), getName(), getAD_Org_ID(), 
 						X_C_BPartner.CODE_ORIGINAL_Organization, X_C_BPartner.GROUPTYPE_Org, true, get_TrxName());

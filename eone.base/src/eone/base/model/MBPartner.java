@@ -314,7 +314,10 @@ public class MBPartner extends X_C_BPartner
 				bp.setName(Name);
 				bp.setName2(Name);
 				bp.setIsAutoCreate(true);
-				bp.setIsEmployee(true);
+				if ("EMP".equals(source_code))
+					bp.setIsEmployee(true);
+				else
+					bp.setIsEmployee(false);
 				bp.setGroupType(groupType);
 				bp.setKey_Original(souce_id);
 				bp.setCode_Original(source_code);

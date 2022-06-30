@@ -21,7 +21,7 @@ public class X_M_InOutLine extends PO implements I_M_InOutLine, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220514L;
+	private static final long serialVersionUID = 20220627L;
 
     /** Standard Constructor */
     public X_M_InOutLine (Properties ctx, int M_InOutLine_ID, String trxName)
@@ -316,6 +316,31 @@ public class X_M_InOutLine extends PO implements I_M_InOutLine, I_Persistent
 		return ii.intValue();
 	}
 
+	public eone.base.model.I_M_Product getM_Product_Cr() throws RuntimeException
+    {
+		return (eone.base.model.I_M_Product)MTable.get(getCtx(), eone.base.model.I_M_Product.Table_Name)
+			.getPO(getM_Product_Cr_ID(), get_TrxName());	}
+
+	/** Set Product Cr.
+		@param M_Product_Cr_ID Product Cr	  */
+	public void setM_Product_Cr_ID (int M_Product_Cr_ID)
+	{
+		if (M_Product_Cr_ID < 1) 
+			set_Value (COLUMNNAME_M_Product_Cr_ID, null);
+		else 
+			set_Value (COLUMNNAME_M_Product_Cr_ID, Integer.valueOf(M_Product_Cr_ID));
+	}
+
+	/** Get Product Cr.
+		@return Product Cr	  */
+	public int getM_Product_Cr_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_M_Product_Cr_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
 	public eone.base.model.I_M_Product getM_Product() throws RuntimeException
     {
 		return (eone.base.model.I_M_Product)MTable.get(getCtx(), eone.base.model.I_M_Product.Table_Name)
@@ -361,12 +386,16 @@ public class X_M_InOutLine extends PO implements I_M_InOutLine, I_Persistent
 		return (String)get_Value(COLUMNNAME_NumLines);
 	}
 
-	/** EONE = EONE */
-	public static final String ORIGINAL_EONE = "EONE";
+	/** Organization = ORG */
+	public static final String ORIGINAL_Organization = "ORG";
 	/** SALEMT = SALEMT */
 	public static final String ORIGINAL_SALEMT = "SALEMT";
 	/** OTHER = OTHER */
 	public static final String ORIGINAL_OTHER = "OTHER";
+	/** Department = DEPT */
+	public static final String ORIGINAL_Department = "DEPT";
+	/** NONE = NONE */
+	public static final String ORIGINAL_NONE = "NONE";
 	/** Set Original.
 		@param Original Original	  */
 	public void setOriginal (String Original)
