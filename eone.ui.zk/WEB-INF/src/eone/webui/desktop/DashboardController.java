@@ -191,7 +191,8 @@ public class DashboardController implements EventListener<Event> {
 		        	panel.appendChild(caption);
 		        	panel.setAttribute("PA_DashboardContent_ID", dp.getPA_DashboardContent_ID());
 		        	panel.setAttribute("PA_DashboardPreference_ID", dp.getPA_DashboardPreference_ID());
-		        	panelList.add(panel);
+		        	//panelList.add(panel);
+		        	maximizedHolder.appendChild(panel);
 		        	panel.addEventListener(Events.ON_MAXIMIZE, this);
 		        	//panel.setSclass("dashboard-widget");
 		        	panel.setSclass("dashboard-widget dashboard-widget-max");
@@ -204,8 +205,8 @@ public class DashboardController implements EventListener<Event> {
 	            	if(description != null)
 	            		panel.setTooltiptext(description);
 	
-	            	//panel.setCollapsible(dc.isCollapsible());
-	            	//panel.setOpen(!dp.isCollapsedByDefault());
+	            	panel.setCollapsible(dc.isCollapsible());
+	            	panel.setOpen(!dp.isCollapsedByDefault());
 	            	panel.addEventListener(Events.ON_OPEN, this);
 	            	
 	            	if (!ClientInfo.isMobile()) {
@@ -260,11 +261,7 @@ public class DashboardController implements EventListener<Event> {
         		dashboardColumnLayout.setAttribute("IsAdditionalColumn", true);
         		Anchorchildren dashboardColumn = new Anchorchildren();
         		dashboardColumn.setAnchor(extraWidth + "% 100%");
-        		if (!ClientInfo.isMobile())
-        		{
-        			dashboardColumn.setDroppable("true");
-        			dashboardColumn.addEventListener(Events.ON_DROP, this);
-        		}
+        		
         		dashboardColumn.appendChild(dashboardColumnLayout);
         		columnList.add(dashboardColumn);
                 dashboardLayout.appendChild(dashboardColumn);

@@ -137,6 +137,9 @@ public class MZoomCondition extends X_AD_ZoomCondition
 	 */
 	public static int findZoomWindowByWindowId(int AD_Window_ID, MQuery query, int windowNo)
 	{
+		//TODO Tạm thời return xem có vấn đề gì ko.
+		if (AD_Window_ID > 0)
+			return AD_Window_ID;
 		if (query == null)
 			return 0;
 		

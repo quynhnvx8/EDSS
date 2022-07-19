@@ -585,7 +585,11 @@ ContextMenuListener, IZoomableEditor
 	 */
     public void actionZoom()
 	{
-   		AEnv.actionZoom(lookup, getValue());
+    	if (gridField.getZO_Window_ID() > 0) {
+			AEnv.actionZoom(lookup, getValue(), gridField.getZO_Window_ID());
+		} else
+			AEnv.actionZoom(lookup, getValue());
+   		//AEnv.actionZoom(lookup, getValue());
 	}
     
     public Lookup getLookup()
