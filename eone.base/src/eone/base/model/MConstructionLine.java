@@ -76,7 +76,7 @@ public class MConstructionLine extends X_C_ConstructionLine
 	private void setLine()
 	{
 		setLine(DB.getSQLValue(get_TrxName(), 
-			"SELECT COALESCE(MAX(Line),0)+10 FROM C_ConstructionLine WHERE C_Construction_ID=?", getC_Construction_ID()));
+			"SELECT NVL(MAX(Line),0)+10 FROM C_ConstructionLine WHERE C_Construction_ID=?", getC_Construction_ID()));
 	}	//	setLine
 
 

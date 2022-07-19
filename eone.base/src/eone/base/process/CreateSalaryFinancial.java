@@ -52,10 +52,7 @@ public class CreateSalaryFinancial extends SvrProcess {
 			line.setAccount_Cr_ID(retValue.get(i).getAccount_Cr_ID());
 			line.setDescription(retValue.get(i).getDescription());
 			line.setC_General_ID(general.getC_General_ID());
-			if (retValue.get(i).getC_TypeCost_ID() > 0)
-				line.setC_TypeCost_ID(retValue.get(i).getC_TypeCost_ID());
-			if (retValue.get(i).getC_TypeRevenue_ID() > 0)
-				line.setC_TypeRevenue_ID(retValue.get(i).getC_TypeRevenue_ID());
+			
 			int orderNo = retValue.get(i).getOrderNo();
 			if (orderNo == 0 && data[0] != null) {
 				line.setAmount(new BigDecimal(data[0].toString()));

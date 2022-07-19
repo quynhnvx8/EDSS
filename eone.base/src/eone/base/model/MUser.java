@@ -615,7 +615,7 @@ public class MUser extends X_AD_User
 	 */
 	protected boolean beforeSave (boolean newRecord)
 	{
-		if (isUserSystem()) {
+		if (newRecord || (is_ValueChanged(X_AD_User.COLUMNNAME_IsUserSystem) && isUserSystem())) {
 			Map<String, Object> dataColumn = new HashMap<String, Object>();
 			dataColumn.put(COLUMNNAME_AD_User_ID, getAD_User_ID());
 			dataColumn.put(COLUMNNAME_IsUserSystem, isUserSystem());

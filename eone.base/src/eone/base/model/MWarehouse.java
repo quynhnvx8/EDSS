@@ -56,6 +56,11 @@ public class MWarehouse extends X_M_Warehouse
 		retValue = new Query(ctx, Table_Name, whereClause, trxName)
 				.setParameters(AD_Org_ID)
 				.firstOnly();
+		if (retValue == null) {
+			whereClause = " IsDefault = 'Y' ";
+			retValue = new Query(ctx, Table_Name, whereClause, trxName, true)
+					.firstOnly();
+		}
 		s_cache.put(key, retValue);
 		return retValue;
 	}
@@ -72,15 +77,15 @@ public class MWarehouse extends X_M_Warehouse
 	}	//	get
 	
 
-	public static MWarehouse[] getDefaultForOrg (Properties ctx, int AD_Org_ID)
+	public static MWarehouse getDefaultForOrg (Properties ctx, int AD_Org_ID)
 	{
 		final String whereClause = "IsDefault=? AND AD_Org_ID=?";
-		List<MWarehouse> list = new Query(ctx, Table_Name, whereClause, null)
+		MWarehouse list = new Query(ctx, Table_Name, whereClause, null)
 										.setParameters("Y", AD_Org_ID)
 										.setOnlyActiveRecords(true)
 										.setOrderBy(COLUMNNAME_M_Warehouse_ID)
-										.list();
-		return list.toArray(new MWarehouse[list.size()]);
+										.first();
+		return list;
 	}	//	get
 	
 	/**	Cache					*/

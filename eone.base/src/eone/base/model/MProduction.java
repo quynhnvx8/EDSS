@@ -9,6 +9,7 @@ import java.util.Properties;
 import eone.base.process.DocAction;
 import eone.base.process.DocumentEngine;
 import eone.exceptions.EONEException;
+import eone.util.CCache;
 import eone.util.CLogger;
 import eone.util.DB;
 
@@ -30,6 +31,20 @@ public class MProduction extends X_M_Production implements DocAction {
 		super(ctx, M_Production_ID, trxName);
 		
 	}
+	
+	private static CCache<Integer,MProduction>		s_cache	= new CCache<Integer,MProduction>(Table_Name, 5);
+
+	public static MProduction get(Properties ctx, int M_Production_ID) {
+		MProduction inout = null;
+		if (s_cache.containsKey(M_Production_ID)) {
+			return s_cache.get(M_Production_ID);
+		}
+		inout = new Query(ctx, Table_Name, "M_Production_ID = ?", null)
+				.setParameters(M_Production_ID)
+				.first();
+		s_cache.put(M_Production_ID, inout);
+		return inout;
+	}
 
 	public MProduction(Properties ctx, ResultSet rs, String trxName) {
 		super(ctx, rs, trxName);
@@ -47,7 +62,7 @@ public class MProduction extends X_M_Production implements DocAction {
 		if (m_processMsg != null)
 			return DocAction.STATUS_Drafted;
 		setProcessed(true);
-		return DocAction.STATUS_Inprogress;
+		return DocAction.STATUS_Completed;
 	}
 
 

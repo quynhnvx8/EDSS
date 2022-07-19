@@ -895,5 +895,29 @@ public final class DisplayType
 		return currencyFormatter;
 	}   //  getCurrencyFormat
 
+	
+	public static boolean isList(int displayType)
+	{
+		if (DisplayType.List == displayType  || DisplayType.RadiogroupList == displayType
+				|| DisplayType.ChosenMultipleSelectionList == displayType
+				|| DisplayType.Payment == displayType)
+			return true;
+		
+		IServiceReferenceHolder<IDisplayTypeFactory> cache = s_displayTypeFactoryCache.get(displayType);
+		if (cache != null) {
+			IDisplayTypeFactory service = cache.getService();
+			if (service != null)
+				return service.isList(displayType);
+		}
+		Optional<IServiceReferenceHolder<IDisplayTypeFactory>> found = getDisplayTypeFactories().stream()
+					.filter(e -> e.getService() != null && e.getService().isList(displayType))
+					.findFirst();
+		if (found.isPresent()) {
+			s_displayTypeFactoryCache.put(displayType, found.get());
+			return true;
+		}
+		
+		return false;
+	}
 
 }	//	DisplayType

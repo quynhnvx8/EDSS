@@ -374,7 +374,7 @@ public class LoginPanel extends Window implements EventListener<Event>
         HttpSession httpSess = (HttpSession) currSess.getNativeSession();
         Env.setContext(ctx, "#AD_Session_ID", httpSess.getId());
         
-        KeyNamePair clientsKNPairs[] = login.getClients(userId, userPassword, ROLE_TYPES_WEBUI);
+        KeyNamePair clientsKNPairs[] = login.getClients(userId, userPassword);
         
         if (clientsKNPairs == null || clientsKNPairs.length == 0)
         {
@@ -451,7 +451,7 @@ public class LoginPanel extends Window implements EventListener<Event>
 		if (email_login)
 			whereClause.append("EMail=?");
 		else
-			whereClause.append("COALESCE(LDAPUser,Name)=?");
+			whereClause.append("NVL(LDAPUser,Name)=?");
 		whereClause.append(" AND")
 				.append(" EXISTS (SELECT * FROM AD_User_Roles ur")
 				.append("         INNER JOIN AD_Role r ON (ur.AD_Role_ID=r.AD_Role_ID)")

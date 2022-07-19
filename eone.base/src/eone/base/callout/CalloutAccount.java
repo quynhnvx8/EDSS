@@ -8,6 +8,7 @@ import eone.base.model.GridField;
 import eone.base.model.GridTab;
 import eone.base.model.MAccount;
 import eone.base.model.MDocType;
+import eone.base.model.MInOut;
 import eone.base.model.MTax;
 import eone.base.model.X_C_Account;
 import eone.base.model.X_C_DocType;
@@ -41,6 +42,16 @@ public class CalloutAccount extends CalloutEngine
 		if(columnName.equalsIgnoreCase("C_DocTypeSub_ID")) {
 			re = MAccount.getAccountDocTypeSub(p_ID);			
 		}
+		
+		if (re == null) {
+			Object obj = mTab.getValue("M_InOut_ID");
+			if (obj != null) {
+				MInOut inout = MInOut.get(ctx, Integer.parseInt(obj.toString()));
+				p_ID = inout.getC_DocTypeSub_ID();
+				re = MAccount.getAccountDocTypeSub(p_ID);
+			}
+		}
+		
 		for(int i = 0; i < re.size(); i++) {
 			if (X_C_Account.TYPEACCOUNT_DebitAccount.equals(re.get(i).getTypeAccount())) {
 				mTab.setValue("Account_Dr_ID", re.get(i).getAccount_ID());

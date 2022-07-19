@@ -38,6 +38,7 @@ import eone.util.CCache;
 import eone.util.CLogger;
 import eone.util.DB;
 import eone.util.DisplayType;
+import eone.util.Env;
 import eone.util.Msg;
 import eone.util.Util;
 
@@ -55,6 +56,10 @@ public class MColumn extends X_AD_Column {
 
 	public static MColumn get(Properties ctx, int AD_Column_ID) {
 		return get(ctx, AD_Column_ID, null);
+	}
+	
+	public static MColumn get(int AD_Column_ID) {
+		return get(Env.getCtx(), AD_Column_ID, null);
 	}
 
 	/**
@@ -383,7 +388,7 @@ public class MColumn extends X_AD_Column {
 
 		if (isSelectionColumn() && getSeqNoSelection() <= 0) {
 			int next = DB.getSQLValueEx(get_TrxName(),
-					"SELECT ROUND((COALESCE(MAX(SeqNoSelection),0)+10)/10,0)*10 FROM AD_Column WHERE AD_Table_ID=? AND IsSelectionColumn='Y' AND IsActive='Y'",
+					"SELECT ROUND((NVL(MAX(SeqNoSelection),0)+10)/10,0)*10 FROM AD_Column WHERE AD_Table_ID=? AND IsSelectionColumn='Y' AND IsActive='Y'",
 					getAD_Table_ID());
 			setSeqNoSelection(next);
 		}

@@ -284,7 +284,7 @@ public class ResetPasswordPanel extends Window implements EventListener<Event>
     	StringBuilder sql = new StringBuilder("SELECT SecurityQuestion ");
     	sql.append("FROM AD_User ");
     	sql.append("WHERE IsActive='Y' ");
-   		sql.append("AND COALESCE(LDAPUser,Name)=? ");
+   		sql.append("AND NVL(LDAPUser,Name)=? ");
     	sql.append("AND EMail=? ");
     	sql.append("AND SecurityQuestion IS NOT NULL ");    	
     	sql.append("ORDER BY AD_Client_ID DESC");
@@ -338,7 +338,7 @@ public class ResetPasswordPanel extends Window implements EventListener<Event>
     		throw new IllegalArgumentException(Msg.getMsg(m_ctx, "FillMandatory") + " " + (m_email_login ? lblUserId.getValue() : lblEmail.getValue()));
 
     	StringBuilder whereClause = new StringBuilder("Password IS NOT NULL ");
-		whereClause.append("AND COALESCE(LDAPUser,Name)=? ");
+		whereClause.append("AND NVL(LDAPUser,Name)=? ");
     	whereClause.append("AND EMail=? ");
 		whereClause.append(" AND")
 				.append(" EXISTS (SELECT * FROM AD_User_Roles ur")
@@ -370,7 +370,7 @@ public class ResetPasswordPanel extends Window implements EventListener<Event>
     	if (m_noSecurityQuestion)
     	{
 	    	StringBuilder whereClause = new StringBuilder("Password IS NOT NULL ");
-			whereClause.append("AND COALESCE(LDAPUser,Name)=? ");
+			whereClause.append("AND NVL(LDAPUser,Name)=? ");
     		whereClause.append("AND EMail=? ");
 			whereClause.append(" AND")
 					.append(" EXISTS (SELECT * FROM AD_User_Roles ur")

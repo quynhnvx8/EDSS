@@ -71,7 +71,6 @@ public class MoveClient extends SvrProcess {
 	private List<String> p_tablesToPreserveIDsList = new ArrayList<String>();
 	private List<String> p_tablesToExcludeList = new ArrayList<String>();
 	private List<String> p_columnsVerifiedList = new ArrayList<String>();
-	private List<String> p_idSystemConversionList = new ArrayList<String>(); // can consume lot of memory but it helps for performance
 	private boolean p_isPreserveAll = false;
 
 	@Override
@@ -654,85 +653,13 @@ public class MoveClient extends SvrProcess {
 	}
 
 	private void moveClient() {
-		// first do the validation, process cannot be executed if there are blocking situations
-		// validation construct the list of tables and columns to process
-		// NOTE that the whole process will be done in a single transaction, foreign keys will be validated on commit
-		
 		List<MTable> tables = new Query(getCtx(), MTable.Table_Name,
 				"IsView='N' AND " + p_excludeTablesWhere,
 				get_TrxName())
 				.setOnlyActiveRecords(true)
 				.setOrderBy("TableName")
 				.list();
-		/*
-		// create/verify the ID conversions
-		for (MTable table : tables) {
-			String tableName = table.getTableName();
-			if (! p_tablesVerifiedList.contains(tableName.toUpperCase())) {
-				continue;
-			}
-			if (! p_columnsVerifiedList.contains(tableName.toUpperCase() + "." + tableName.toUpperCase() + "_ID")) {
-				continue;
-			}
-			statusUpdate("Converting IDs for table " + tableName);
-			StringBuilder selectVerifyIdSB = new StringBuilder()
-					.append("SELECT ").append(tableName).append("_ID FROM ").append(tableName)
-					.append(" WHERE ").append(tableName).append("_ID=?");
-			StringBuilder selectGetIdsSB = new StringBuilder()
-					.append("SELECT ").append(tableName).append(".").append(tableName).append("_ID FROM ").append(tableName);
-			if (! "AD_Client".equalsIgnoreCase(tableName)) {
-				selectGetIdsSB.append(" JOIN AD_Client ON (").append(tableName).append(".AD_Client_ID=AD_Client.AD_Client_ID)");
-			}
-			selectGetIdsSB.append(" WHERE ").append(p_whereClient)
-			.append(" ORDER BY ").append(tableName).append("_ID");
-			String selectGetIds = DB.getDatabase().convertStatement(selectGetIdsSB.toString());
-			PreparedStatement stmtGI = null;
-			ResultSet rsGI = null;
-			try {
-				stmtGI = externalConn.prepareStatement(selectGetIds, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-				rsGI = stmtGI.executeQuery();
-				while (rsGI.next()) {
-					int sourceID = rsGI.getInt(1);
-					int targetID = -1;
-					if (p_isPreserveAll || p_tablesToPreserveIDsList.contains(tableName.toUpperCase())) {
-						int localID = DB.getSQLValueEx(get_TrxName(), selectVerifyIdSB.toString(), sourceID);
-						if (localID < 0) {
-							targetID = sourceID;
-						} else {
-							throw new AdempiereException("In " + tableName + "." + tableName + "_ID already exist the ID=" + sourceID);
-						}
-					} else {
-						if ("AD_ChangeLog".equalsIgnoreCase(tableName)) {
-							// AD_ChangeLog_ID is not really a unique key - validate if it was already converted before
-							int clId = DB.getSQLValueEx(get_TrxName(),
-									"SELECT Target_ID FROM T_MoveClient WHERE AD_PInstance_ID=? AND TableName=? AND Source_ID=?",
-									getAD_PInstance_ID(), "AD_CHANGELOG", sourceID);
-							if (clId == -1) {
-								targetID = DB.getNextID(getAD_Client_ID(), tableName, get_TrxName());
-							}
-						} else {
-							targetID = DB.getNextID(getAD_Client_ID(), tableName, get_TrxName());
-						}
-					}
-					if (targetID >= 0) {
-						//DB.executeUpdateEx(insertConversionId, new Object[] {getAD_PInstance_ID(), tableName.toUpperCase(), sourceID, targetID}, get_TrxName());
-					}
-				}
-			} catch (SQLException e) {
-				throw new AdempiereException("Could not execute external query: " + selectGetIds + "\nCause = " + e.getLocalizedMessage());
-			} finally {
-				DB.close(rsGI, stmtGI);
-			}
-
-		}
-
-		try {
-			commitEx(); // commit the T_MoveClient table to analyze potential problems
-		} catch (SQLException e1) {
-			throw new AdempiereException(e1);
-		} 
-		*/
-		//int newADClientID = -1;
+		
 		String oldClientValue = null;
 		if (p_IsCopyClient) {
 			int clientInt;
@@ -741,9 +668,7 @@ public class MoveClient extends SvrProcess {
 			} catch (NumberFormatException e) {
 				throw new EONEException("Error in parameter Clients to Include, must be just one integer");
 			}
-			//newADClientID = DB.getSQLValueEx(get_TrxName(),
-			//		"SELECT Target_ID FROM T_MoveClient WHERE AD_PInstance_ID=? AND TableName=? AND Source_ID=?",
-			//		getAD_PInstance_ID(), "AD_CLIENT", clientInt);
+			
 			oldClientValue = DB.getSQLValueStringEx(get_TrxName(),
 					"SELECT Value FROM AD_Client WHERE AD_Client_ID=?", clientInt);
 		}
@@ -885,86 +810,14 @@ public class MoveClient extends SvrProcess {
 							}
 						}
 						if (! Util.isEmpty(convertTable)) {
-							// Foreign - potential ID conversion
-							int id = rsGD.getInt(i + 1);
-							if (rsGD.wasNull()) {
-								parameters[i] = null;
-							} else {
-								if (! (id == 0 && ("Parent_ID".equalsIgnoreCase(columnName) || "Node_ID".equalsIgnoreCase(columnName)))  // Parent_ID/Node_ID=0 is valid
-										&& (id >= MTable.MAX_OFFICIAL_ID || p_IsCopyClient)) {
-									int convertedId = -1;
-									final String query = "SELECT Target_ID FROM T_MoveClient WHERE AD_PInstance_ID=? AND TableName=? AND Source_ID=?";
-									try {
-										convertedId = DB.getSQLValueEx(get_TrxName(),
-												query,
-												getAD_PInstance_ID(), convertTable.toUpperCase(), id);
-									} catch (Exception e) {
-										throw new EONEException("Could not execute query: " + query + "\nCause = " + e.getLocalizedMessage());
-									}
-									if (convertedId < 0) {
-										// not found in the table - try to get it again - could be missed in first pass
-										convertedId = getLocalIDFor(convertTable, id, tableName);
-										if (convertedId < 0) {
-											if (("Record_ID".equalsIgnoreCase(columnName) && table.getColumnIndex("AD_Table_ID") > 0)
-													|| (("Node_ID".equalsIgnoreCase(columnName) || "Parent_ID".equalsIgnoreCase(columnName))
-															&& (       "AD_TreeNode".equalsIgnoreCase(tableName)
-																	|| "AD_TreeNodeMM".equalsIgnoreCase(tableName)
-																	|| "AD_TreeNodeBP".equalsIgnoreCase(tableName)
-																	|| "AD_TreeNodeCMC".equalsIgnoreCase(tableName)
-																	|| "AD_TreeNodeCMM".equalsIgnoreCase(tableName)
-																	|| "AD_TreeNodeCMS".equalsIgnoreCase(tableName)
-																	|| "AD_TreeNodeCMT".equalsIgnoreCase(tableName)
-																	|| "AD_TreeNodePR".equalsIgnoreCase(tableName)
-																	|| "AD_TreeNodeU1".equalsIgnoreCase(tableName)
-																	|| "AD_TreeNodeU2".equalsIgnoreCase(tableName)
-																	|| "AD_TreeNodeU3".equalsIgnoreCase(tableName)
-																	|| "AD_TreeNodeU4".equalsIgnoreCase(tableName)
-																	|| "AD_TreeBar".equalsIgnoreCase(tableName)))) {
-												if (p_tablesToExcludeList.contains(convertTable.toUpperCase())) {
-													// record is pointing to a table that is not included, ignore it
-													insertRecord = false;
-													break;
-												}
-											}
-											if ("AD_ChangeLog".equalsIgnoreCase(tableName)) {
-												// skip orphan records in AD_ChangeLog, can be log of deleted records, skip
-												insertRecord = false;
-												break;
-											}
-											throw new EONEException("Found orphan record in " + tableName + "." + columnName + ": " + id + " related to table " + convertTable);
-										}
-									}
-									id = convertedId;
-								}
-								if ("AD_Preference".equalsIgnoreCase(tableName) && "Value".equalsIgnoreCase(columnName)) {
-									parameters[i] = String.valueOf(id);
-								} else {
-									parameters[i] = id;
-								}
-							}
+							;
 						} else {
 							parameters[i] = rsGD.getObject(i + 1);
 							if (rsGD.wasNull()) {
 								parameters[i] = null;
 							}
 							if (p_IsCopyClient) {
-								/*Quynhnv.x8 => Bo PIPO
-								String uuidCol = MTable.getUUIDColumnName(tableName);
 								
-								if (columnName.equals(uuidCol)) {
-									String oldUUID = (String) parameters[i];
-									String newUUID = UUID.randomUUID().toString();
-									parameters[i] = newUUID;
-									if (! Util.isEmpty(oldUUID)) {
-										X_AD_Package_UUID_Map map = new X_AD_Package_UUID_Map(getCtx(), 0, get_TrxName());
-										map.setAD_Table_ID(table.getAD_Table_ID());
-										map.set_ValueNoCheck("AD_Client_ID", newADClientID);
-										map.setSource_UUID(oldUUID);
-										map.setTarget_UUID(newUUID);
-										map.saveEx();
-									}
-								} else
-								*/
 								if ("AD_Client".equalsIgnoreCase(tableName) && "Value".equalsIgnoreCase(columnName)) {
 									parameters[i] = p_ClientValue;
 								} else if ("AD_Client".equalsIgnoreCase(tableName) && "Name".equalsIgnoreCase(columnName)) {
@@ -1111,46 +964,5 @@ public class MoveClient extends SvrProcess {
 		*/
 	}
 
-	private int getLocalIDFor(String tableName, int foreignId, String tableNameSource) {
-		String uuidCol = MTable.getUUIDColumnName(tableName);
-		StringBuilder sqlRemoteUUSB = new StringBuilder()
-				.append("SELECT ").append(uuidCol).append(" FROM ").append(tableName)
-				.append(" WHERE ").append(tableName).append("_ID=?");
-		String sqlRemoteUU = DB.getDatabase().convertStatement(sqlRemoteUUSB.toString());
-		PreparedStatement stmtUU = null;
-		ResultSet rs = null;
-		String remoteUUID = null;
-		try {
-			stmtUU = externalConn.prepareStatement(sqlRemoteUU, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-			stmtUU.setInt(1, foreignId);
-			rs = stmtUU.executeQuery();
-			if (rs.next())
-				remoteUUID = rs.getString(1);
-		} catch (SQLException e) {
-			throw new EONEException("Could not execute external query for table " + tableNameSource + ": " + sqlRemoteUU + "\nCause = " + e.getLocalizedMessage());
-		} finally {
-			DB.close(rs, stmtUU);
-		}
-		int localID = -1;
-		if (remoteUUID != null) {
-			localID = getFromUUID(tableName, uuidCol, null, null, remoteUUID, foreignId);
-		}
-		return localID;
-	}
-
-	private int getFromUUID(String foreignTable, String uuidCol, String tableName, String columnName, String foreignUU, int foreignID) {
-		StringBuilder sqlCheckLocalUU = new StringBuilder()
-				.append("SELECT ").append(foreignTable).append("_ID FROM ").append(foreignTable)
-				.append(" WHERE ").append(uuidCol).append("=?");
-		int localID = DB.getSQLValueEx(get_TrxName(), sqlCheckLocalUU.toString(), foreignUU);
-		if (localID < 0) {
-			p_errorList.add("Column " + tableName + "." + columnName +  " has system reference not convertible, "
-					+ foreignTable + "." + uuidCol + "=" + foreignUU);
-			return -1;
-		}
-		//DB.executeUpdateEx(insertConversionId, new Object[] {getAD_PInstance_ID(), foreignTable.toUpperCase(), foreignID, localID}, get_TrxName());
-		p_idSystemConversionList.add(foreignTable.toUpperCase() + "." + foreignID);
-		return localID;
-	}
-
+	
 }

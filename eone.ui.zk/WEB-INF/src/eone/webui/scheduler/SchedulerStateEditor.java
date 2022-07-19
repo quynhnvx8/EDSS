@@ -1,9 +1,6 @@
 
 package eone.webui.scheduler;
 
-import org.compiere.server.EONEServerMgr;
-import org.compiere.server.IServerManager;
-import org.idempiere.server.cluster.ClusterServerMgr;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.Clients;
@@ -14,6 +11,9 @@ import eone.base.model.MScheduler;
 import eone.base.model.StateChangeEvent;
 import eone.base.model.StateChangeListener;
 import eone.distributed.IClusterService;
+import eone.server.EONEServerMgr;
+import eone.server.IServerManager;
+import eone.server.cluster.ClusterServerMgr;
 import eone.util.Callback;
 import eone.util.Env;
 import eone.util.Msg;

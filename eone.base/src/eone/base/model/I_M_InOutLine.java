@@ -29,6 +29,36 @@ public interface I_M_InOutLine
 
     /** Load Meta Data */
 
+    /** Column name Account_Cr_ID */
+    public static final String COLUMNNAME_Account_Cr_ID = "Account_Cr_ID";
+
+	/** Set Account Cr.
+	  * Account Cr
+	  */
+	public void setAccount_Cr_ID (int Account_Cr_ID);
+
+	/** Get Account Cr.
+	  * Account Cr
+	  */
+	public int getAccount_Cr_ID();
+
+	public eone.base.model.I_C_ElementValue getAccount_Cr() throws RuntimeException;
+
+    /** Column name Account_Dr_ID */
+    public static final String COLUMNNAME_Account_Dr_ID = "Account_Dr_ID";
+
+	/** Set Account Dr.
+	  * Account Dr
+	  */
+	public void setAccount_Dr_ID (int Account_Dr_ID);
+
+	/** Get Account Dr.
+	  * Account Dr
+	  */
+	public int getAccount_Dr_ID();
+
+	public eone.base.model.I_C_ElementValue getAccount_Dr() throws RuntimeException;
+
     /** Column name AD_Client_ID */
     public static final String COLUMNNAME_AD_Client_ID = "AD_Client_ID";
 
@@ -250,6 +280,36 @@ public interface I_M_InOutLine
 
 	public eone.base.model.I_M_Product getM_Product() throws RuntimeException;
 
+    /** Column name M_Warehouse_Cr_ID */
+    public static final String COLUMNNAME_M_Warehouse_Cr_ID = "M_Warehouse_Cr_ID";
+
+	/** Set Warehouse Cr.
+	  * Storage Warehouse and Service Point
+	  */
+	public void setM_Warehouse_Cr_ID (int M_Warehouse_Cr_ID);
+
+	/** Get Warehouse Cr.
+	  * Storage Warehouse and Service Point
+	  */
+	public int getM_Warehouse_Cr_ID();
+
+	public eone.base.model.I_M_Warehouse getM_Warehouse_Cr() throws RuntimeException;
+
+    /** Column name M_Warehouse_Dr_ID */
+    public static final String COLUMNNAME_M_Warehouse_Dr_ID = "M_Warehouse_Dr_ID";
+
+	/** Set Warehouse Dr.
+	  * Storage Warehouse and Service Point
+	  */
+	public void setM_Warehouse_Dr_ID (int M_Warehouse_Dr_ID);
+
+	/** Get Warehouse Dr.
+	  * Storage Warehouse and Service Point
+	  */
+	public int getM_Warehouse_Dr_ID();
+
+	public eone.base.model.I_M_Warehouse getM_Warehouse_Dr() throws RuntimeException;
+
     /** Column name NumLines */
     public static final String COLUMNNAME_NumLines = "NumLines";
 
@@ -332,6 +392,24 @@ public interface I_M_InOutLine
 	  * Quantity
 	  */
 	public BigDecimal getQty();
+
+    /** Column name QtyUnFinish */
+    public static final String COLUMNNAME_QtyUnFinish = "QtyUnFinish";
+
+	/** Set Qty UnFinish	  */
+	public void setQtyUnFinish (BigDecimal QtyUnFinish);
+
+	/** Get Qty UnFinish	  */
+	public BigDecimal getQtyUnFinish();
+
+    /** Column name RateFinish */
+    public static final String COLUMNNAME_RateFinish = "RateFinish";
+
+	/** Set Rate Finish	  */
+	public void setRateFinish (BigDecimal RateFinish);
+
+	/** Get Rate Finish	  */
+	public BigDecimal getRateFinish();
 
     /** Column name Ref_InOutLine_ID */
     public static final String COLUMNNAME_Ref_InOutLine_ID = "Ref_InOutLine_ID";

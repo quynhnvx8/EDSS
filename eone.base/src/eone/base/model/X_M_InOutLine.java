@@ -6,7 +6,6 @@
 package eone.base.model;
 
 import eone.util.Env;
-import eone.util.KeyNamePair;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
@@ -21,7 +20,7 @@ public class X_M_InOutLine extends PO implements I_M_InOutLine, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220627L;
+	private static final long serialVersionUID = 20220709L;
 
     /** Standard Constructor */
     public X_M_InOutLine (Properties ctx, int M_InOutLine_ID, String trxName)
@@ -65,6 +64,62 @@ public class X_M_InOutLine extends PO implements I_M_InOutLine, I_Persistent
         .append(get_ID()).append("]");
       return sb.toString();
     }
+
+	public eone.base.model.I_C_ElementValue getAccount_Cr() throws RuntimeException
+    {
+		return (eone.base.model.I_C_ElementValue)MTable.get(getCtx(), eone.base.model.I_C_ElementValue.Table_Name)
+			.getPO(getAccount_Cr_ID(), get_TrxName());	}
+
+	/** Set Account Cr.
+		@param Account_Cr_ID 
+		Account Cr
+	  */
+	public void setAccount_Cr_ID (int Account_Cr_ID)
+	{
+		if (Account_Cr_ID < 1) 
+			set_Value (COLUMNNAME_Account_Cr_ID, null);
+		else 
+			set_Value (COLUMNNAME_Account_Cr_ID, Integer.valueOf(Account_Cr_ID));
+	}
+
+	/** Get Account Cr.
+		@return Account Cr
+	  */
+	public int getAccount_Cr_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_Account_Cr_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	public eone.base.model.I_C_ElementValue getAccount_Dr() throws RuntimeException
+    {
+		return (eone.base.model.I_C_ElementValue)MTable.get(getCtx(), eone.base.model.I_C_ElementValue.Table_Name)
+			.getPO(getAccount_Dr_ID(), get_TrxName());	}
+
+	/** Set Account Dr.
+		@param Account_Dr_ID 
+		Account Dr
+	  */
+	public void setAccount_Dr_ID (int Account_Dr_ID)
+	{
+		if (Account_Dr_ID < 1) 
+			set_Value (COLUMNNAME_Account_Dr_ID, null);
+		else 
+			set_Value (COLUMNNAME_Account_Dr_ID, Integer.valueOf(Account_Dr_ID));
+	}
+
+	/** Get Account Dr.
+		@return Account Dr
+	  */
+	public int getAccount_Dr_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_Account_Dr_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
 
 	/** Set Amount.
 		@param Amount 
@@ -257,14 +312,6 @@ public class X_M_InOutLine extends PO implements I_M_InOutLine, I_Persistent
 		return ii.intValue();
 	}
 
-    /** Get Record ID/ColumnName
-        @return ID/ColumnName pair
-      */
-    public KeyNamePair getKeyNamePair() 
-    {
-        return new KeyNamePair(get_ID(), String.valueOf(getLine()));
-    }
-
 	public eone.base.model.I_M_InOut getM_InOut() throws RuntimeException
     {
 		return (eone.base.model.I_M_InOut)MTable.get(getCtx(), eone.base.model.I_M_InOut.Table_Name)
@@ -364,6 +411,62 @@ public class X_M_InOutLine extends PO implements I_M_InOutLine, I_Persistent
 	public int getM_Product_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_M_Product_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	public eone.base.model.I_M_Warehouse getM_Warehouse_Cr() throws RuntimeException
+    {
+		return (eone.base.model.I_M_Warehouse)MTable.get(getCtx(), eone.base.model.I_M_Warehouse.Table_Name)
+			.getPO(getM_Warehouse_Cr_ID(), get_TrxName());	}
+
+	/** Set Warehouse Cr.
+		@param M_Warehouse_Cr_ID 
+		Storage Warehouse and Service Point
+	  */
+	public void setM_Warehouse_Cr_ID (int M_Warehouse_Cr_ID)
+	{
+		if (M_Warehouse_Cr_ID < 1) 
+			set_Value (COLUMNNAME_M_Warehouse_Cr_ID, null);
+		else 
+			set_Value (COLUMNNAME_M_Warehouse_Cr_ID, Integer.valueOf(M_Warehouse_Cr_ID));
+	}
+
+	/** Get Warehouse Cr.
+		@return Storage Warehouse and Service Point
+	  */
+	public int getM_Warehouse_Cr_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_M_Warehouse_Cr_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	public eone.base.model.I_M_Warehouse getM_Warehouse_Dr() throws RuntimeException
+    {
+		return (eone.base.model.I_M_Warehouse)MTable.get(getCtx(), eone.base.model.I_M_Warehouse.Table_Name)
+			.getPO(getM_Warehouse_Dr_ID(), get_TrxName());	}
+
+	/** Set Warehouse Dr.
+		@param M_Warehouse_Dr_ID 
+		Storage Warehouse and Service Point
+	  */
+	public void setM_Warehouse_Dr_ID (int M_Warehouse_Dr_ID)
+	{
+		if (M_Warehouse_Dr_ID < 1) 
+			set_Value (COLUMNNAME_M_Warehouse_Dr_ID, null);
+		else 
+			set_Value (COLUMNNAME_M_Warehouse_Dr_ID, Integer.valueOf(M_Warehouse_Dr_ID));
+	}
+
+	/** Get Warehouse Dr.
+		@return Storage Warehouse and Service Point
+	  */
+	public int getM_Warehouse_Dr_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_M_Warehouse_Dr_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
@@ -504,6 +607,40 @@ public class X_M_InOutLine extends PO implements I_M_InOutLine, I_Persistent
 	public BigDecimal getQty () 
 	{
 		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_Qty);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
+	}
+
+	/** Set Qty UnFinish.
+		@param QtyUnFinish Qty UnFinish	  */
+	public void setQtyUnFinish (BigDecimal QtyUnFinish)
+	{
+		set_Value (COLUMNNAME_QtyUnFinish, QtyUnFinish);
+	}
+
+	/** Get Qty UnFinish.
+		@return Qty UnFinish	  */
+	public BigDecimal getQtyUnFinish () 
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_QtyUnFinish);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
+	}
+
+	/** Set Rate Finish.
+		@param RateFinish Rate Finish	  */
+	public void setRateFinish (BigDecimal RateFinish)
+	{
+		set_Value (COLUMNNAME_RateFinish, RateFinish);
+	}
+
+	/** Get Rate Finish.
+		@return Rate Finish	  */
+	public BigDecimal getRateFinish () 
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_RateFinish);
 		if (bd == null)
 			 return Env.ZERO;
 		return bd;

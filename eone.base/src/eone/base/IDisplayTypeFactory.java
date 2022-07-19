@@ -25,6 +25,9 @@ public interface IDisplayTypeFactory {
 	public Class<?> getClass (int displayType, boolean yesNoAsBoolean);
 	public String getSQLDataType (int displayType, String columnName, int fieldLength);
 	public String getDescription (int displayType);
+	public default boolean isList (int displayType) {
+		return false;
+	}
 
 }
 

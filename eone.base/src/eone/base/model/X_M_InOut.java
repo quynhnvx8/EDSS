@@ -21,7 +21,7 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220525L;
+	private static final long serialVersionUID = 20220709L;
 
     /** Standard Constructor */
     public X_M_InOut (Properties ctx, int M_InOut_ID, String trxName)
@@ -91,62 +91,6 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 	public int getAccount_COGS_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_Account_COGS_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_C_ElementValue getAccount_Cr() throws RuntimeException
-    {
-		return (eone.base.model.I_C_ElementValue)MTable.get(getCtx(), eone.base.model.I_C_ElementValue.Table_Name)
-			.getPO(getAccount_Cr_ID(), get_TrxName());	}
-
-	/** Set Account Cr.
-		@param Account_Cr_ID 
-		Account Cr
-	  */
-	public void setAccount_Cr_ID (int Account_Cr_ID)
-	{
-		if (Account_Cr_ID < 1) 
-			set_Value (COLUMNNAME_Account_Cr_ID, null);
-		else 
-			set_Value (COLUMNNAME_Account_Cr_ID, Integer.valueOf(Account_Cr_ID));
-	}
-
-	/** Get Account Cr.
-		@return Account Cr
-	  */
-	public int getAccount_Cr_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_Account_Cr_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_C_ElementValue getAccount_Dr() throws RuntimeException
-    {
-		return (eone.base.model.I_C_ElementValue)MTable.get(getCtx(), eone.base.model.I_C_ElementValue.Table_Name)
-			.getPO(getAccount_Dr_ID(), get_TrxName());	}
-
-	/** Set Account Dr.
-		@param Account_Dr_ID 
-		Account Dr
-	  */
-	public void setAccount_Dr_ID (int Account_Dr_ID)
-	{
-		if (Account_Dr_ID < 1) 
-			set_Value (COLUMNNAME_Account_Dr_ID, null);
-		else 
-			set_Value (COLUMNNAME_Account_Dr_ID, Integer.valueOf(Account_Dr_ID));
-	}
-
-	/** Get Account Dr.
-		@return Account Dr
-	  */
-	public int getAccount_Dr_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_Account_Dr_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
@@ -482,6 +426,20 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 		return (String)get_Value(COLUMNNAME_Canceled);
 	}
 
+	/** Set Original.
+		@param Code_Original Original	  */
+	public void setCode_Original (String Code_Original)
+	{
+		set_Value (COLUMNNAME_Code_Original, Code_Original);
+	}
+
+	/** Get Original.
+		@return Original	  */
+	public String getCode_Original () 
+	{
+		return (String)get_Value(COLUMNNAME_Code_Original);
+	}
+
 	/** Set Rate.
 		@param CurrencyRate 
 		Currency Conversion Rate
@@ -617,6 +575,8 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 	public static final String DOCSTATUS_InProgress = "IP";
 	/** Reject = RE */
 	public static final String DOCSTATUS_Reject = "RE";
+	/** Pending = PE */
+	public static final String DOCSTATUS_Pending = "PE";
 	/** Set Document Status.
 		@param DocStatus 
 		The current status of the document
@@ -660,29 +620,21 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
         return new KeyNamePair(get_ID(), getDocumentNo());
     }
 
-	public eone.base.model.I_HR_Employee getHR_Employee() throws RuntimeException
-    {
-		return (eone.base.model.I_HR_Employee)MTable.get(getCtx(), eone.base.model.I_HR_Employee.Table_Name)
-			.getPO(getHR_Employee_ID(), get_TrxName());	}
-
-	/** Set Employee.
-		@param HR_Employee_ID Employee	  */
-	public void setHR_Employee_ID (int HR_Employee_ID)
+	/** Set IncludeDoc.
+		@param IncludeDoc 
+		Document sequence number of the document
+	  */
+	public void setIncludeDoc (String IncludeDoc)
 	{
-		if (HR_Employee_ID < 1) 
-			set_Value (COLUMNNAME_HR_Employee_ID, null);
-		else 
-			set_Value (COLUMNNAME_HR_Employee_ID, Integer.valueOf(HR_Employee_ID));
+		set_Value (COLUMNNAME_IncludeDoc, IncludeDoc);
 	}
 
-	/** Get Employee.
-		@return Employee	  */
-	public int getHR_Employee_ID () 
+	/** Get IncludeDoc.
+		@return Document sequence number of the document
+	  */
+	public String getIncludeDoc () 
 	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_HR_Employee_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
+		return (String)get_Value(COLUMNNAME_IncludeDoc);
 	}
 
 	/** NONE = NONE */
@@ -734,6 +686,23 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 		return (String)get_Value(COLUMNNAME_InvoiceSymbol);
 	}
 
+	/** Set Key Original.
+		@param Key_Original Key Original	  */
+	public void setKey_Original (int Key_Original)
+	{
+		set_Value (COLUMNNAME_Key_Original, Integer.valueOf(Key_Original));
+	}
+
+	/** Get Key Original.
+		@return Key Original	  */
+	public int getKey_Original () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_Key_Original);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
 	/** Set Shipment/Receipt.
 		@param M_InOut_ID 
 		Material Shipment Document
@@ -757,62 +726,6 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 		return ii.intValue();
 	}
 
-	public eone.base.model.I_M_Warehouse getM_Warehouse_Cr() throws RuntimeException
-    {
-		return (eone.base.model.I_M_Warehouse)MTable.get(getCtx(), eone.base.model.I_M_Warehouse.Table_Name)
-			.getPO(getM_Warehouse_Cr_ID(), get_TrxName());	}
-
-	/** Set Warehouse Cr.
-		@param M_Warehouse_Cr_ID 
-		Storage Warehouse and Service Point
-	  */
-	public void setM_Warehouse_Cr_ID (int M_Warehouse_Cr_ID)
-	{
-		if (M_Warehouse_Cr_ID < 1) 
-			set_Value (COLUMNNAME_M_Warehouse_Cr_ID, null);
-		else 
-			set_Value (COLUMNNAME_M_Warehouse_Cr_ID, Integer.valueOf(M_Warehouse_Cr_ID));
-	}
-
-	/** Get Warehouse Cr.
-		@return Storage Warehouse and Service Point
-	  */
-	public int getM_Warehouse_Cr_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_M_Warehouse_Cr_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_M_Warehouse getM_Warehouse_Dr() throws RuntimeException
-    {
-		return (eone.base.model.I_M_Warehouse)MTable.get(getCtx(), eone.base.model.I_M_Warehouse.Table_Name)
-			.getPO(getM_Warehouse_Dr_ID(), get_TrxName());	}
-
-	/** Set Warehouse Dr.
-		@param M_Warehouse_Dr_ID 
-		Storage Warehouse and Service Point
-	  */
-	public void setM_Warehouse_Dr_ID (int M_Warehouse_Dr_ID)
-	{
-		if (M_Warehouse_Dr_ID < 1) 
-			set_Value (COLUMNNAME_M_Warehouse_Dr_ID, null);
-		else 
-			set_Value (COLUMNNAME_M_Warehouse_Dr_ID, Integer.valueOf(M_Warehouse_Dr_ID));
-	}
-
-	/** Get Warehouse Dr.
-		@return Storage Warehouse and Service Point
-	  */
-	public int getM_Warehouse_Dr_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_M_Warehouse_Dr_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
 	/** Set ObjectName.
 		@param ObjectName ObjectName	  */
 	public void setObjectName (String ObjectName)
@@ -825,29 +738,6 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 	public String getObjectName () 
 	{
 		return (String)get_Value(COLUMNNAME_ObjectName);
-	}
-
-	/** Organization = ORG */
-	public static final String ORIGINAL_Organization = "ORG";
-	/** SALEMT = SALEMT */
-	public static final String ORIGINAL_SALEMT = "SALEMT";
-	/** OTHER = OTHER */
-	public static final String ORIGINAL_OTHER = "OTHER";
-	/** Department = DEPT */
-	public static final String ORIGINAL_Department = "DEPT";
-	/** Set Original.
-		@param Original Original	  */
-	public void setOriginal (String Original)
-	{
-
-		set_Value (COLUMNNAME_Original, Original);
-	}
-
-	/** Get Original.
-		@return Original	  */
-	public String getOriginal () 
-	{
-		return (String)get_Value(COLUMNNAME_Original);
 	}
 
 	/** Set Processed.
@@ -872,26 +762,6 @@ public class X_M_InOut extends PO implements I_M_InOut, I_Persistent
 			return "Y".equals(oo);
 		}
 		return false;
-	}
-
-	/** Set Referenced Shipment.
-		@param Ref_InOut_ID Referenced Shipment	  */
-	public void setRef_InOut_ID (int Ref_InOut_ID)
-	{
-		if (Ref_InOut_ID < 1) 
-			set_Value (COLUMNNAME_Ref_InOut_ID, null);
-		else 
-			set_Value (COLUMNNAME_Ref_InOut_ID, Integer.valueOf(Ref_InOut_ID));
-	}
-
-	/** Get Referenced Shipment.
-		@return Referenced Shipment	  */
-	public int getRef_InOut_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_Ref_InOut_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
 	}
 
 	/** Set Tax Amount.

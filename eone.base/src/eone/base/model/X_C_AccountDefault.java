@@ -17,7 +17,7 @@ public class X_C_AccountDefault extends PO implements I_C_AccountDefault, I_Pers
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220618L;
+	private static final long serialVersionUID = 20220711L;
 
     /** Standard Constructor */
     public X_C_AccountDefault (Properties ctx, int C_AccountDefault_ID, String trxName)
@@ -144,9 +144,9 @@ public class X_C_AccountDefault extends PO implements I_C_AccountDefault, I_Pers
 	public void setC_DocType_ID (int C_DocType_ID)
 	{
 		if (C_DocType_ID < 0) 
-			set_ValueNoCheck (COLUMNNAME_C_DocType_ID, null);
+			set_Value (COLUMNNAME_C_DocType_ID, null);
 		else 
-			set_ValueNoCheck (COLUMNNAME_C_DocType_ID, Integer.valueOf(C_DocType_ID));
+			set_Value (COLUMNNAME_C_DocType_ID, Integer.valueOf(C_DocType_ID));
 	}
 
 	/** Get Document Type.
@@ -188,56 +188,6 @@ public class X_C_AccountDefault extends PO implements I_C_AccountDefault, I_Pers
 		return ii.intValue();
 	}
 
-	public eone.base.model.I_C_TypeCost getC_TypeCost() throws RuntimeException
-    {
-		return (eone.base.model.I_C_TypeCost)MTable.get(getCtx(), eone.base.model.I_C_TypeCost.Table_Name)
-			.getPO(getC_TypeCost_ID(), get_TrxName());	}
-
-	/** Set TypeCost.
-		@param C_TypeCost_ID TypeCost	  */
-	public void setC_TypeCost_ID (int C_TypeCost_ID)
-	{
-		if (C_TypeCost_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_C_TypeCost_ID, null);
-		else 
-			set_ValueNoCheck (COLUMNNAME_C_TypeCost_ID, Integer.valueOf(C_TypeCost_ID));
-	}
-
-	/** Get TypeCost.
-		@return TypeCost	  */
-	public int getC_TypeCost_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_C_TypeCost_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
-	public eone.base.model.I_C_TypeRevenue getC_TypeRevenue() throws RuntimeException
-    {
-		return (eone.base.model.I_C_TypeRevenue)MTable.get(getCtx(), eone.base.model.I_C_TypeRevenue.Table_Name)
-			.getPO(getC_TypeRevenue_ID(), get_TrxName());	}
-
-	/** Set Type Revenue.
-		@param C_TypeRevenue_ID Type Revenue	  */
-	public void setC_TypeRevenue_ID (int C_TypeRevenue_ID)
-	{
-		if (C_TypeRevenue_ID < 1) 
-			set_ValueNoCheck (COLUMNNAME_C_TypeRevenue_ID, null);
-		else 
-			set_ValueNoCheck (COLUMNNAME_C_TypeRevenue_ID, Integer.valueOf(C_TypeRevenue_ID));
-	}
-
-	/** Get Type Revenue.
-		@return Type Revenue	  */
-	public int getC_TypeRevenue_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_C_TypeRevenue_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
 	/** Set Description.
 		@param Description 
 		Optional short description of the record
@@ -253,6 +203,23 @@ public class X_C_AccountDefault extends PO implements I_C_AccountDefault, I_Pers
 	public String getDescription () 
 	{
 		return (String)get_Value(COLUMNNAME_Description);
+	}
+
+	/** Set OrderCalculate.
+		@param OrderCalculate OrderCalculate	  */
+	public void setOrderCalculate (int OrderCalculate)
+	{
+		set_Value (COLUMNNAME_OrderCalculate, Integer.valueOf(OrderCalculate));
+	}
+
+	/** Get OrderCalculate.
+		@return OrderCalculate	  */
+	public int getOrderCalculate () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_OrderCalculate);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
 	}
 
 	/** Set OrderNo.

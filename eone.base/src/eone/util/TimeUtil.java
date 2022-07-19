@@ -17,6 +17,7 @@
 package eone.util;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.BitSet;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -827,6 +828,11 @@ public class TimeUtil
 			gc.set(Calendar.HOUR_OF_DAY, 0);
 		}
 		return new Timestamp(gc.getTimeInMillis());
+	}
+	
+	public static String getStrDate(Timestamp timestamp) {
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		return format.format(timestamp);
 	}
 	
 	@SuppressWarnings("deprecation")

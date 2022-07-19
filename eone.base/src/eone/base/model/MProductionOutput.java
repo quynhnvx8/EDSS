@@ -1,9 +1,12 @@
 package eone.base.model;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import eone.util.CCache;
+import eone.util.DB;
 
 
 public class MProductionOutput extends X_M_ProductionOutput {
@@ -69,7 +72,18 @@ public class MProductionOutput extends X_M_ProductionOutput {
 	{
 		if (productionParent == null && getM_Production_ID() > 0)
 			productionParent = new MProduction(getCtx(), getM_Production_ID(), get_TrxName());
-
+		if (newRecord || is_ValueChanged(COLUMNNAME_M_Warehouse_ID)) {
+			String sql = "SELECT COUNT(1) FROM M_ProductionOutput WHERE M_Production_ID = ? AND M_Warehouse_ID = ? AND M_ProductionOutput_ID != ?";
+			List<Object> params = new ArrayList<Object>();
+			params.add(getM_Production_ID());
+			params.add(getM_Warehouse_ID());
+			params.add(getM_ProductionOutput_ID());
+			int count = DB.getSQLValue(get_TrxName(), sql, params);
+			if (count > 1) {
+				log.saveError("Error!", "Mỗi lệnh sản xuất là 1 nhóm sản phẩm tại từng phân xưởng, công đoạn!");
+				return false;
+			}
+		}
 		
 		return true;
 	}

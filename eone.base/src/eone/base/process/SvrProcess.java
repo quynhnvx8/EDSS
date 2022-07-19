@@ -246,24 +246,6 @@ public abstract class SvrProcess implements ProcessCall
 	}	//	rollback
 	
 	
-
-	protected boolean lockObject (PO po)
-	{
-		//	Unlock existing
-		if (m_locked || m_lockedObject != null)
-			unlockObject();
-		//	Nothing to lock			
-		if (po == null)
-			return false;
-		m_lockedObject = po;
-		m_locked = m_lockedObject.lock();
-		return m_locked;
-	}	//	lockObject
-
-	/**
-	 * 	Is an object Locked?
-	 *	@return true if object locked
-	 */
 	protected boolean isLocked()
 	{
 		return m_locked;
@@ -310,19 +292,7 @@ public abstract class SvrProcess implements ProcessCall
 		return m_pi.getTitle();
 	}   //  getName
 
-	/**
-	 *  Get Process Instance
-	 *  @return Process Instance
-	 */
-	protected String getAD_PInstance_ID()
-	{
-		return m_pi.getAD_Session_ID();
-	}   //  getAD_PInstance_ID
-
-	/**
-	 *  Get Table_ID
-	 *  @return AD_Table_ID
-	 */
+	
 	protected int getTable_ID()
 	{
 		return m_pi.getTable_ID();
@@ -469,17 +439,7 @@ public abstract class SvrProcess implements ProcessCall
 	 */
 	private void lock()
 	{
-		/*
-		if (log.isLoggable(Level.FINE)) log.fine("AD_PInstance_ID=" + m_pi.getAD_PInstance_ID());
-		try 
-		{
-			DB.executeUpdate("UPDATE AD_PInstance SET IsProcessing='Y' WHERE AD_PInstance_ID=" 
-				+ m_pi.getAD_PInstance_ID(), null);		//	outside trx
-		} catch (Exception e)
-		{
-			log.severe("lock() - " + e.getLocalizedMessage());
-		}
-		*/
+		
 	}   //  lock
 
 	/**

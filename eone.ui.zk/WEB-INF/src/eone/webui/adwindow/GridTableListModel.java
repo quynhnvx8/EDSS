@@ -1,15 +1,3 @@
-/******************************************************************************
- * Copyright (C) 2008 Low Heng Sin                                            *
- * This program is free software; you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY; without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program; if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- *****************************************************************************/
 package eone.webui.adwindow;
 
 import java.util.Comparator;
@@ -24,7 +12,6 @@ import org.zkoss.zul.ListitemComparator;
 import org.zkoss.zul.event.ListDataEvent;
 import org.zkoss.zul.ext.Sortable;
 
-import eone.base.model.GridField;
 import eone.base.model.GridTable;
 import eone.webui.util.SortComparator;
 
@@ -40,10 +27,6 @@ public class GridTableListModel extends AbstractListModel<Object> implements Tab
 	 */
 	private static final long serialVersionUID = 698185856751242764L;
 	private GridTable tableModel;
-	@SuppressWarnings("unused")
-	private GridField[] gridField;
-	@SuppressWarnings("unused")
-	private int windowNo;
 	
 	private int pageSize = -1;
 	private int pageNo = 0;
@@ -57,8 +40,8 @@ public class GridTableListModel extends AbstractListModel<Object> implements Tab
 	 */
 	public GridTableListModel(GridTable tableModel, int windowNo) {
 		this.tableModel = tableModel;
-		this.windowNo = windowNo;
-		gridField = tableModel.getFields();
+		//this.windowNo = windowNo;
+		//gridField = tableModel.getFields();
 		tableModel.addTableModelListener(this);
 	}
 

@@ -1881,12 +1881,20 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
         	listeners[i].dataStatusChanged(e);
 	}	//	fireDataStatusChanged
 
-	private void updateDataStatusEventProperties(DataStatusEvent e) {
+	public void updateDataStatusEventProperties(DataStatusEvent e) {
 		e.Created = (Timestamp)getValue("Created");
 		e.CreatedBy = (Integer)getValue("CreatedBy");
 		e.Updated = (Timestamp)getValue("Updated");
 		e.UpdatedBy = (Integer)getValue("UpdatedBy");
 		e.Record_ID = getValue(m_keyColumnName);
+		
+		if (e.AD_Table_ID == I_AD_ClientInfo.Table_ID
+				|| e.AD_Table_ID == I_AD_Ref_Table.Table_ID) {
+				e.Record_ID = getValue(m_parents.get(0));
+			} else {
+				e.Record_ID = getValue(m_keyColumnName);
+			}
+			
 		//  Info
 		StringBuilder info = new StringBuilder(getTableName());
 		
@@ -2987,4 +2995,7 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 		
 		return list;
 	}
+	
+	
+	
 }	//	GridTab

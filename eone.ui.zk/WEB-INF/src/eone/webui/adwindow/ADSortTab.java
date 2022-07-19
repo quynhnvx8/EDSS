@@ -32,6 +32,7 @@ import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Hlayout;
+import org.zkoss.zul.Toolbar;
 import org.zkoss.zul.event.ListDataEvent;
 
 import eone.base.model.GridTab;
@@ -1030,6 +1031,30 @@ public class ADSortTab extends Panel implements IADTabpanel
 	public boolean isEnableQuickFormButton() 
 	{
 		return false;
+	}
+	
+	@Override
+	public List<org.zkoss.zul.Button> getToolbarButtons()
+	{
+		return new ArrayList<org.zkoss.zul.Button>();
+	}
+	
+	@Override
+	public boolean isEnableProcessButton()
+	{
+		return false;
+	}
+	
+	@Override
+	public void updateToolbar(ADWindowToolbar toolbar)
+	{
+
+	}
+
+	@Override
+	public void updateDetailToolbar(Toolbar toolbar)
+	{
+
 	}
 }	//ADSortTab
 

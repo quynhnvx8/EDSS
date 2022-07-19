@@ -174,6 +174,8 @@ public class SessionContextListener implements ExecutionInit,
 		HttpSession httpSession = (HttpSession)session.getNativeSession();
 		//verify ctx
 		String cacheId = ctx.getProperty(SERVLET_SESSION_ID);
+		Env.setContext(ctx, "#AD_Session_ID", httpSession.getId());
+		
 		if (cacheId == null || httpSession == null || !cacheId.equals(httpSession.getId()) )
 		{
 			return false;

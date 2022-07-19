@@ -9,7 +9,7 @@
             thread="main"
             visible="true">
          <run
-               class="org.adempiere.server.Application">
+               class="eone.server.Application">
          </run>
       </application>
    </extension>

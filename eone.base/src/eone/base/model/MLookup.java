@@ -998,10 +998,44 @@ public final class MLookup extends Lookup implements Serializable
 			MTable objTable = MTable.get(Env.getCtx(), m_info.TableName);
 			if (objTable.getColumn("IsDefault") != null) {
 				isExistDefault = true;
-				String sqlSelect  = sql.substring(0, sql.indexOf(" FROM ")) + "," +  m_info.TableName + ".IsDefault";
+				String sqlSelect  = sql.substring(0, sql.indexOf(" FROM ")) + "," +  m_info.TableName + ".IsDefault ";
 				String sqlWhere = sql.substring(sql.indexOf(" FROM "));
 				sql = new StringBuilder(sqlSelect).append(sqlWhere);
 			}
+			
+			if ("AD_Ref_List".equals(objTable.getTableName())) {
+				String sqlSelect  = sql.substring(0, sql.indexOf(" FROM "));
+				String sqlWhere = sql.substring(sql.indexOf(" FROM "));
+				
+				String sqlOrder = "";
+				if (sqlWhere.indexOf("ORDER") > 0)
+				{
+					sqlOrder = sqlWhere.substring(sqlWhere.indexOf(" ORDER "));
+					sqlWhere = sqlWhere.substring(1, sqlWhere.indexOf(" ORDER "));
+					
+				}
+				sqlWhere = sqlWhere + " AND AD_Ref_List.AD_Ref_List_ID NOT IN (SELECT AD_Ref_List_ID FROM AD_Ref_List_Use WHERE AD_Client_ID = "+ Env.getAD_Client_ID(Env.getCtx()) +")";
+				sqlWhere = sqlWhere + sqlOrder;
+				
+				sql = new StringBuilder(sqlSelect).append(" ").append(sqlWhere);
+			}
+			
+			if ("C_DocTypeSub".equals(objTable.getTableName())) {
+				String sqlSelect  = sql.substring(0, sql.indexOf(" FROM "));
+				String sqlWhere = sql.substring(sql.indexOf(" FROM "));
+				String sqlOrder = "";
+				if (sqlWhere.indexOf("ORDER") > 0)
+				{
+					sqlOrder = sqlWhere.substring(sqlWhere.indexOf(" ORDER "));
+					sqlWhere = sqlWhere.substring(1, sqlWhere.indexOf(" ORDER "));
+					
+				}
+				sqlWhere = sqlWhere + " AND C_DocTYpeSub_ID NOT IN (SELECT C_DocTYpeSub_ID FROM C_DocTypeSubUse WHERE AD_Client_ID = "+ Env.getAD_Client_ID(Env.getCtx()) +")";
+				sqlWhere = sqlWhere + sqlOrder;
+				
+				sql = new StringBuilder(sqlSelect).append(" ").append(sqlWhere);
+			}
+			
 			if (isShortList())
 			{
 				// Adding ", IsShortList" to the sql SELECT clause

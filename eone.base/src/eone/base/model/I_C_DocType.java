@@ -186,18 +186,14 @@ public interface I_C_DocType
 	  */
 	public boolean isConfirmPosting();
 
-    /** Column name IsDefault */
-    public static final String COLUMNNAME_IsDefault = "IsDefault";
+    /** Column name IsFixAccount */
+    public static final String COLUMNNAME_IsFixAccount = "IsFixAccount";
 
-	/** Set Default.
-	  * Default value
-	  */
-	public void setIsDefault (boolean IsDefault);
+	/** Set Fix Account Register	  */
+	public void setIsFixAccount (boolean IsFixAccount);
 
-	/** Get Default.
-	  * Default value
-	  */
-	public boolean isDefault();
+	/** Get Fix Account Register	  */
+	public boolean isFixAccount();
 
     /** Column name IsShowSub */
     public static final String COLUMNNAME_IsShowSub = "IsShowSub";
@@ -220,14 +216,10 @@ public interface I_C_DocType
     /** Column name Name */
     public static final String COLUMNNAME_Name = "Name";
 
-	/** Set Name.
-	  * Alphanumeric identifier of the entity
-	  */
+	/** Set Name	  */
 	public void setName (String Name);
 
-	/** Get Name.
-	  * Alphanumeric identifier of the entity
-	  */
+	/** Get Name	  */
 	public String getName();
 
     /** Column name Processing */

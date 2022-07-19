@@ -27,7 +27,6 @@ import eone.base.model.MProduct;
 import eone.base.model.MProductGroup;
 import eone.base.model.MUOM;
 import eone.base.model.PO;
-import eone.base.model.X_M_ProductGroup;
 import eone.util.DB;
 import eone.util.Env;
 import eone.util.KeyNamePair;
@@ -390,7 +389,7 @@ public class WSelectHealthCareServices extends ADForm implements IFormController
 		if (productCategory != null && productCategory.getSelectedItem() != null) {
 			M_ProductGroup_ID = Integer.parseInt(productCategory.getSelectedItem().getValue().toString());
 			if (M_ProductGroup_ID == 0)
-				whereClause.append(" AND M_Product.M_ProductGroup_ID IN (SELECT M_ProductGroup_ID From M_ProductGroup WHERE CategoryType = '"+ X_M_ProductGroup.CATEGORYTYPE_Medical +"')");
+				whereClause.append(" AND M_Product.M_ProductGroup_ID IN (SELECT M_ProductGroup_ID From M_ProductGroup WHERE CategoryType = '"+ "X" +"')");//_M_ProductGroup.CATEGORYTYPE_Medical
 			else
 				whereClause.append(" AND M_Product.M_ProductGroup_ID = " + M_ProductGroup_ID);
 		}

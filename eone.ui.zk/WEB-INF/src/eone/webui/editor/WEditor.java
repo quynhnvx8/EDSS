@@ -46,6 +46,7 @@ import eone.util.Util;
 import eone.webui.ClientInfo;
 import eone.webui.EONEWebUI;
 import eone.webui.LayoutUtils;
+import eone.webui.adwindow.ADWindow;
 import eone.webui.adwindow.IFieldEditorContainer;
 import eone.webui.component.Bandbox;
 import eone.webui.component.Button;
@@ -330,6 +331,13 @@ public abstract class WEditor implements EventListener<Event>, PropertyChangeLis
         
         component.addEventListener(INIT_EDIT_EVENT, this);
         component.setAttribute("idempiere.editor", this);
+        
+        component.addEventListener(Events.ON_FOCUS, e -> {
+        	ADWindow adwindow = ADWindow.findADWindow(component);
+        	if (adwindow != null) {
+        		adwindow.getADWindowContent().setLastFocusEditor(component);
+        	}
+        });
     }
 
     /**

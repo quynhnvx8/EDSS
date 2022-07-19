@@ -252,6 +252,18 @@ public class MBPartner extends X_C_BPartner
 	}
 
 
+	public boolean isRecordUsed () {
+		String sql = " SELECT COUNT(1) FROM FACT_Acct WHERE (C_BPartner_DR_ID = ? OR C_BPartner_CR_ID = ?) AND AD_Client_ID = ? ";
+		List<Object> params = new ArrayList<Object>();
+		params.add(getC_BPartner_ID());
+		params.add(getC_BPartner_ID());
+		params.add(Env.getAD_Client_ID(getCtx()));
+		int count = DB.getSQLValue(get_TrxName(), sql, params);
+		if (count <= 0)
+			return false;
+		return true;
+	}
+	
 	/**************************************************************************
 	 * 	After Save
 	 *	@param newRecord new

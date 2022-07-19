@@ -75,10 +75,7 @@ public class MDocType extends X_C_DocType
 	public MDocType(Properties ctx, int C_DocType_ID, String trxName)
 	{
 		super(ctx, C_DocType_ID, trxName);
-		if (C_DocType_ID == 0)
-		{
-			setIsDefault (false);
-		}
+		
 	}	//	MDocType
 
 	/**

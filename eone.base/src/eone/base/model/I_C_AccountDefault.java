@@ -119,28 +119,6 @@ public interface I_C_AccountDefault
 
 	public eone.base.model.I_C_Element getC_Element() throws RuntimeException;
 
-    /** Column name C_TypeCost_ID */
-    public static final String COLUMNNAME_C_TypeCost_ID = "C_TypeCost_ID";
-
-	/** Set TypeCost	  */
-	public void setC_TypeCost_ID (int C_TypeCost_ID);
-
-	/** Get TypeCost	  */
-	public int getC_TypeCost_ID();
-
-	public eone.base.model.I_C_TypeCost getC_TypeCost() throws RuntimeException;
-
-    /** Column name C_TypeRevenue_ID */
-    public static final String COLUMNNAME_C_TypeRevenue_ID = "C_TypeRevenue_ID";
-
-	/** Set Type Revenue	  */
-	public void setC_TypeRevenue_ID (int C_TypeRevenue_ID);
-
-	/** Get Type Revenue	  */
-	public int getC_TypeRevenue_ID();
-
-	public eone.base.model.I_C_TypeRevenue getC_TypeRevenue() throws RuntimeException;
-
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
 
@@ -182,6 +160,15 @@ public interface I_C_AccountDefault
 	  * The record is active in the system
 	  */
 	public boolean isActive();
+
+    /** Column name OrderCalculate */
+    public static final String COLUMNNAME_OrderCalculate = "OrderCalculate";
+
+	/** Set OrderCalculate	  */
+	public void setOrderCalculate (int OrderCalculate);
+
+	/** Get OrderCalculate	  */
+	public int getOrderCalculate();
 
     /** Column name OrderNo */
     public static final String COLUMNNAME_OrderNo = "OrderNo";

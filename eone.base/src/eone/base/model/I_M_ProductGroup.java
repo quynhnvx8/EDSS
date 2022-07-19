@@ -100,14 +100,10 @@ public interface I_M_ProductGroup
     /** Column name Name */
     public static final String COLUMNNAME_Name = "Name";
 
-	/** Set Name.
-	  * Alphanumeric identifier of the entity
-	  */
+	/** Set Name	  */
 	public void setName (String Name);
 
-	/** Get Name.
-	  * Alphanumeric identifier of the entity
-	  */
+	/** Get Name	  */
 	public String getName();
 
     /** Column name Note */

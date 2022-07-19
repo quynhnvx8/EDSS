@@ -44,6 +44,8 @@ public class MQuery implements Serializable, Cloneable
 			return "M_Locator_ID";
 		if (columnName.equals("AD_OrgBP_ID") || columnName.equals("AD_OrgTrx_ID") || columnName.equals("AD_OrgTo_ID"))
 			return "AD_Org_ID";
+		if (columnName.equals("M_Product_Cr_ID"))
+			return "M_Product_ID";
 		//	See also GridTab.validateQuery
 		return columnName;
 	}	//	getZoomColumnName

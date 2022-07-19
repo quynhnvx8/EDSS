@@ -48,10 +48,11 @@
 						</goals>
 						<configuration>
 							<artifactItems>
+								
 								<artifactItem>
-									<groupId>org.codehaus.jettison</groupId>
-								    <artifactId>jettison</artifactId>
-								    <version>1.4.1</version>									
+								    <groupId>com.auth0</groupId>
+								    <artifactId>java-jwt</artifactId>
+								    <version>3.3.0</version>
 								</artifactItem>
 							</artifactItems>
 							
@@ -74,25 +75,7 @@
 					</compilerArgs>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>com.googlecode.maven-download-plugin</groupId>
-				<artifactId>download-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>validate</phase>
-						<goals>
-							<goal>wget</goal>
-						</goals>
-						<configuration>
-							<url>${url.file.srv}/extra.jar/idempiere-xmlbeans-1.0.jar</url>
-							<unpack>false</unpack>
-							<outputDirectory>WEB-INF/lib</outputDirectory>
-							<retries>5</retries>
-							<outputFileName>idempiere-xmlbeans.jar</outputFileName>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+			
 		</plugins>
 	</build>
 </project>

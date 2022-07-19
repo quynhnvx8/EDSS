@@ -13,7 +13,6 @@ import javax.swing.table.AbstractTableModel;
 
 import org.zkoss.lang.Library;
 import org.zkoss.zk.au.out.AuFocus;
-import org.zkoss.zk.au.out.AuScript;
 import org.zkoss.zk.ui.AbstractComponent;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -29,7 +28,6 @@ import org.zkoss.zul.Column;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Paging;
 import org.zkoss.zul.Row;
-import org.zkoss.zul.Tabpanel;
 import org.zkoss.zul.Vlayout;
 import org.zkoss.zul.event.ZulEvents;
 
@@ -494,11 +492,12 @@ public class GridView extends Vlayout implements EventListener<Event>, IdSpace, 
 		Columns columns = new Columns();
 		
 		//frozen not working well on tablet devices yet
-		if (!ClientInfo.isMobile())
+		if (!ClientInfo.isMobile()  && !ClientInfo.isFirefox("100."))
 		{
-			//Frozen frozen = new Frozen();
 			//freeze selection and indicator column
-			//frozen.setColumns(2);
+			
+			//Frozen frozen = new Frozen();
+			//frozen.setColumns(0);
 			//listbox.appendChild(frozen);
 		}
 		
@@ -508,8 +507,8 @@ public class GridView extends Vlayout implements EventListener<Event>, IdSpace, 
 		try{
 			selection.setSort("none");
 		} catch (Exception e) {}
-		//selection.setStyle("border-right: none");
-		//selection.setClass(".z-cell");
+		selection.setStyle("border-right: none");
+		selection.setClass(".z-cell");
 		selection.setStyle("padding: 0px 0px 0px 2px;");
 		selectAll = new Checkbox();
 		selection.appendChild(selectAll);
@@ -547,6 +546,7 @@ public class GridView extends Vlayout implements EventListener<Event>, IdSpace, 
 				colnames.put(index, gridField[i].getHeader());
 				index++;
 				org.zkoss.zul.Column column = new Column();
+				column.setAttribute(GRID_VIEW_GRID_FIELD_INDEX, i);
 				column.setHeight("2em");
 				int colindex =tableModel.findColumn(gridField[i].getColumnName()); 
 				column.setSortAscending(new SortComparator(colindex, true, Env.getLanguage(Env.getCtx())));
@@ -912,7 +912,8 @@ public class GridView extends Vlayout implements EventListener<Event>, IdSpace, 
 				}
 			}
 			if (cmp != null)
-				Clients.response(new AuScript(null, "parent.window.eone.scrollToRow('" + cmp.getUuid() + "');"));
+				//TODO Chưa hiểu Script để làm gì
+				;//Clients.response(new AuScript(null, "eone.scrollToRow('" + cmp.getUuid() + "');"));
 
 			if (columnOnClick != null && columnOnClick.trim().length() > 0) {
 				List<?> list = row.getChildren();
@@ -921,7 +922,8 @@ public class GridView extends Vlayout implements EventListener<Event>, IdSpace, 
 						Div div = (Div) element;
 						if (columnOnClick.equals(div.getAttribute("columnName"))) {
 							cmp = div.getFirstChild();
-							Clients.response(new AuScript(null, "parent.window.eone.scrollToRow('" + cmp.getUuid() + "');"));
+							//TODO Chưa hiểu Script để làm gì
+							//Clients.response(new AuScript(null, "eone.scrollToRow('" + cmp.getUuid() + "');"));
 							break;
 						}
 					}
@@ -949,6 +951,18 @@ public class GridView extends Vlayout implements EventListener<Event>, IdSpace, 
 		}
 
 		if (gridTab.getCurrentRow() != rowIndex) {
+			ADWindow adwindow = ADWindow.findADWindow(this);
+			if (adwindow != null) {
+				final boolean[] retValue = new boolean[] {false};
+				final int index = rowIndex;
+				adwindow.getADWindowContent().saveAndNavigate(e -> {
+					if (e) {
+						gridTab.navigate(index);
+						retValue[0] = true;
+					}
+				});
+				return retValue[0];
+			}
 			gridTab.navigate(rowIndex);
 			return true;
 		}
@@ -1201,13 +1215,8 @@ public class GridView extends Vlayout implements EventListener<Event>, IdSpace, 
 		if (isDetailPane()) {
 			Component parent = this.getParent();
 			while (parent != null) {
-				if (parent instanceof Tabpanel) {
-					Component firstChild = parent.getFirstChild();
-					if ( gridFooter.getParent() != firstChild ) { 
-						firstChild.appendChild(gridFooter);
-						ZKUpdateUtil.setHflex(gridFooter, "0");
-						gridFooter.setSclass("adwindow-detailpane-adtab-grid-south");												
-					}
+				if (parent instanceof DetailPane.Tabpanel) {
+					((DetailPane.Tabpanel) parent).setPagingControl(gridFooter);
 					break;
 				}
 				parent = parent.getParent();

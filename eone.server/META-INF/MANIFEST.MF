@@ -24,14 +24,14 @@ Import-Package: javax.jms;version="1.1.0",
  org.osgi.service.event;version="1.4.0",
  org.osgi.util.tracker;version="1.5.0",
  org.w3c.dom
-Export-Package: org.adempiere.server,
- org.compiere.server,
- org.idempiere.server.cluster,
- org.idempiere.server.cluster.callable,
- org.idempiere.server.factory
+Export-Package: eone.server,
+ eone.server.cluster,
+ eone.server.cluster.callable,
+ eone.server.factory,
+ eone.server
 Bundle-ActivationPolicy: lazy
 Service-Component: OSGI-INF/*.xml
-Bundle-Activator: org.adempiere.server.AdempiereServerActivator
+Bundle-Activator: eone.server.EONEServerActivator
 Automatic-Module-Name: eone.server
 Bundle-Vendor: EONE
 Bundle-RequiredExecutionEnvironment: JavaSE-11

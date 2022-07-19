@@ -12,25 +12,17 @@
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-	<!-- JAX-RS-->
-	<jaxrs:server id="RESTAPI" address="/restapi">
-		<jaxrs:serviceBeans>
-			<ref bean="ModelADServiceBean" />
-			<ref bean="CompositeServiceBean" />
-		</jaxrs:serviceBeans>
+	
+	<bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
+	<jaxrs:server id="REST" address="/rest">
 		<jaxrs:providers>
-			<ref bean="xmlBeansProvider" />
-			<ref bean="xmlBeansJSONProvider" />
+			<ref bean="jsonProvider" />
 		</jaxrs:providers>
+		<jaxrs:serviceBeans>
+			<bean id="modelServiceClass" class="eone.rest.api.v2.ModelRestServiceImpl" />
+			<bean id="modelResourceClass" class="eone.rest.api.v1.resource.impl.ModelResourceImpl" />
+			<bean id="authServiceClass" class="eone.rest.api.v1.auth.impl.AuthServiceImpl" />
+		</jaxrs:serviceBeans>
 	</jaxrs:server>
 
-	<bean id="ModelADServiceBean" class="eone.adinterface.ModelADServiceImpl" />
-	<bean id="CompositeServiceBean" class="com.trekglobal.ws.CompositeServiceImpl" />
-
-	<bean id="xmlBeansProvider"
-		class="org.apache.cxf.jaxrs.provider.xmlbeans.XMLBeansElementProvider" />
-		
-	<bean id="xmlBeansJSONProvider"
-		class="eone.jaxrs.provider.xmlbeans.XMLBeansJSONProvider" />
-	 
 </beans>

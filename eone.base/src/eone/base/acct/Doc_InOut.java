@@ -119,6 +119,14 @@ public class Doc_InOut extends Doc
 					//Dư đầu kỳ
 					|| MDocType.DOCBASETYPE_WarehouseOpenBalance.equals(dt.getDocBaseType())
 					
+					//Xuất sản xuất
+					|| MDocType.DOCBASETYPE_154Debit.equals(dt.getDocBaseType())
+					
+					//Xuất sản xuất
+					|| MDocType.DOCBASETYPE_154Credit.equals(dt.getDocBaseType())
+					
+					//Nhập thành phẩm
+					|| MDocType.DOCBASETYPE_155Debit.equals(dt.getDocBaseType())
 					) 
 			{
 				if (!insert_Data(fact, docLine, header, line))
@@ -140,7 +148,7 @@ public class Doc_InOut extends Doc
 		MElementValue dr = null;
 		MElementValue cr = null;
 		dr = MElementValue.get(getCtx(), header.getAccount_COGS_ID());
-		cr = MElementValue.get(getCtx(), header.getAccount_Cr_ID());
+		cr = MElementValue.get(getCtx(), line.getAccount_Cr_ID());
 		BigDecimal amount = line.getPricePO().multiply(line.getQty());
 		
 		FactLine f = fact.createLine(docLine, dr, cr, amount, amount);
@@ -159,8 +167,8 @@ public class Doc_InOut extends Doc
 			f.setM_Product_Cr_ID(line.getM_Product_Cr_ID());
 		else
 			f.setM_Product_Cr_ID(line.getM_Product_ID());
-		f.setM_Warehouse_Dr_ID(header.getM_Warehouse_Dr_ID());
-		f.setM_Warehouse_Cr_ID(header.getM_Warehouse_Cr_ID());
+		f.setM_Warehouse_Dr_ID(line.getM_Warehouse_Dr_ID());
+		f.setM_Warehouse_Cr_ID(line.getM_Warehouse_Cr_ID());
 		return true;
 	}
 	
@@ -169,7 +177,7 @@ public class Doc_InOut extends Doc
 		
 		MElementValue dr = null;
 		MElementValue cr = null;
-		dr = MElementValue.get(getCtx(), header.getAccount_Dr_ID());
+		dr = MElementValue.get(getCtx(), line.getAccount_Dr_ID());
 		cr = MElementValue.get(getCtx(), header.getAccount_REV_ID());
 		BigDecimal amount = line.getAmount().subtract(line.getDiscountAmt());
 		
@@ -189,8 +197,8 @@ public class Doc_InOut extends Doc
 			f.setM_Product_Cr_ID(line.getM_Product_Cr_ID());
 		else
 			f.setM_Product_Cr_ID(line.getM_Product_ID());
-		f.setM_Warehouse_Dr_ID(header.getM_Warehouse_Dr_ID());
-		f.setM_Warehouse_Cr_ID(header.getM_Warehouse_Cr_ID());
+		f.setM_Warehouse_Dr_ID(line.getM_Warehouse_Dr_ID());
+		f.setM_Warehouse_Cr_ID(line.getM_Warehouse_Cr_ID());
 		return true;
 	}
 	
@@ -199,7 +207,7 @@ public class Doc_InOut extends Doc
 		
 		MElementValue dr = null;
 		MElementValue cr = null;
-		dr = MElementValue.get(getCtx(), header.getAccount_Dr_ID());
+		dr = MElementValue.get(getCtx(), line.getAccount_Dr_ID());
 		cr = MElementValue.get(getCtx(), header.getAccount_Tax_ID());
 		BigDecimal amount = line.getTaxAmt();
 		
@@ -227,8 +235,8 @@ public class Doc_InOut extends Doc
 		
 		MElementValue dr = null;
 		MElementValue cr = null;
-		dr = MElementValue.get(getCtx(), header.getAccount_Dr_ID());
-		cr = MElementValue.get(getCtx(), header.getAccount_Cr_ID());
+		dr = MElementValue.get(getCtx(), line.getAccount_Dr_ID());
+		cr = MElementValue.get(getCtx(), line.getAccount_Cr_ID());
 		BigDecimal amount = line.getAmount();
 		
 		FactLine f = fact.createLine(docLine, dr, cr, amount, amount);
@@ -247,8 +255,8 @@ public class Doc_InOut extends Doc
 			f.setM_Product_Cr_ID(line.getM_Product_Cr_ID());
 		else
 			f.setM_Product_Cr_ID(line.getM_Product_ID());
-		f.setM_Warehouse_Dr_ID(header.getM_Warehouse_Dr_ID());
-		f.setM_Warehouse_Cr_ID(header.getM_Warehouse_Cr_ID());
+		f.setM_Warehouse_Dr_ID(line.getM_Warehouse_Dr_ID());
+		f.setM_Warehouse_Cr_ID(line.getM_Warehouse_Cr_ID());
 		return true;
 	}
 	
@@ -259,7 +267,7 @@ public class Doc_InOut extends Doc
 		MElementValue dr = null;
 		MElementValue cr = null;
 		dr = MElementValue.get(getCtx(), header.getAccount_Tax_ID());
-		cr = MElementValue.get(getCtx(), header.getAccount_Cr_ID());
+		cr = MElementValue.get(getCtx(), line.getAccount_Cr_ID());
 		BigDecimal amount = line.getTaxAmt();
 		
 		FactLine f1 = fact.createLine(docLine, dr, cr, amount, amount);

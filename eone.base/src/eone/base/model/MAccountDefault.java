@@ -27,6 +27,8 @@ public class MAccountDefault extends X_C_AccountDefault
 
 	static private CCache<Integer,HashMap<Integer, MAccountDefault>> s_cache = new CCache<Integer,HashMap<Integer, MAccountDefault>>(Table_Name, 30, 60);
 	
+	static private CCache<Integer,HashMap<Integer, MAccountDefault>> s_trasnfer = new CCache<Integer,HashMap<Integer, MAccountDefault>>(Table_Name, 30, 60);
+	
 	public static MAccountDefault get (Properties ctx)
 	{
 		final String whereClause = "1=1";
@@ -84,8 +86,6 @@ public class MAccountDefault extends X_C_AccountDefault
 	
 	
 	public static HashMap<Integer, MAccountDefault> getAccountDefault(int C_DocType_ID) {
-		
-		
 		if(s_cache.containsKey(C_DocType_ID))
 			return s_cache.get(C_DocType_ID);
 		String sqlWhere = "C_DocType_ID = ? AND C_Element_ID = ?";
@@ -100,7 +100,29 @@ public class MAccountDefault extends X_C_AccountDefault
 			data.put(value.get(i).getOrderNo(), value.get(i));
 		}
 		s_cache.put(C_DocType_ID, data);
-		return data;
+		data.clear();
+		data = null;
+		return s_cache.get(C_DocType_ID);
+	}
+	
+	public static HashMap<Integer, MAccountDefault> getAccountTransfer(int C_DocType_ID) {
+		if(s_trasnfer.containsKey(C_DocType_ID))
+			return s_trasnfer.get(C_DocType_ID);
+		String sqlWhere = "C_DocType_ID = ? AND C_Element_ID = ?";
+		int C_Element_ID = Env.getContextAsInt(Env.getCtx(), "#C_Element_ID");
+		HashMap<Integer, MAccountDefault> data = new HashMap<Integer, MAccountDefault>();
+		List<MAccountDefault> value = new Query(Env.getCtx(),  Table_Name, sqlWhere, null)
+				.setParameters(C_DocType_ID, C_Element_ID)
+				.setApplyAccessFilter(true)
+				.setOrderBy("OrderNo ASC")
+				.list();
+		for(int i = 0; i < value.size(); i ++) {
+			data.put(value.get(i).getAccount_Cr_ID(), value.get(i));
+		}
+		s_trasnfer.put(C_DocType_ID, data);
+		data.clear();
+		data = null;
+		return s_trasnfer.get(C_DocType_ID);
 	}
 }	//	Account
 

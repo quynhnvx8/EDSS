@@ -72,6 +72,16 @@ public class MRegister extends X_AD_Register
 			return false;
 		}
 		
+		dataColumn.clear();
+		dataColumn.put(COLUMNNAME_AD_Register_ID, getAD_Register_ID());
+		dataColumn.put(COLUMNNAME_Domain, getDomain());
+		check = isCheckDoubleValue(Table_Name, dataColumn, COLUMNNAME_AD_Register_ID, getAD_Register_ID(), get_TrxName());
+		
+		if (!check) {
+			log.saveError("Error", Msg.getMsg(Env.getLanguage(getCtx()), "ValueExists") + ": " + COLUMNNAME_Domain);
+			return false;
+		}
+		
 		String error = createData(getCtx(), get_TrxName());
 		
 		if (!"".equals(error)) {
@@ -105,7 +115,7 @@ public class MRegister extends X_AD_Register
 		
 		//Insert Client
 		
-		MClient  client = isExistsClient(ctx, getTaxID(), trxName); 
+		MClient  client = isExistsClient(ctx, getDomain(), trxName); 
 		
 		if (client == null)
 		{
@@ -148,7 +158,7 @@ public class MRegister extends X_AD_Register
 			org.setOrgType(X_AD_Org.ORGTYPE_Company);
 			org.setTaxID(getTaxID());
 			org.setPhone(getPhone());
-			
+			org.setIsCreateBPartner(true);
 			org.setIsCreateWarehouse(true);
 			org.setAD_Org_ID(DB.getNextID(ctx, X_AD_Org.Table_Name, trxName));
 			if (!org.save()) {

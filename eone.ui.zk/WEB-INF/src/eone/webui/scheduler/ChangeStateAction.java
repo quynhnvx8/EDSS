@@ -25,9 +25,6 @@
 **********************************************************************/
 package eone.webui.scheduler;
 
-import org.compiere.server.EONEServerMgr;
-import org.compiere.server.IServerManager;
-import org.idempiere.server.cluster.ClusterServerMgr;
 import org.osgi.service.component.annotations.Component;
 import org.zkoss.image.Image;
 import org.zkoss.zk.ui.event.Event;
@@ -42,6 +39,9 @@ import eone.base.model.GridField;
 import eone.base.model.GridTab;
 import eone.base.model.MScheduler;
 import eone.distributed.IClusterService;
+import eone.server.EONEServerMgr;
+import eone.server.IServerManager;
+import eone.server.cluster.ClusterServerMgr;
 import eone.util.Callback;
 import eone.util.Env;
 import eone.util.Msg;

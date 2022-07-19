@@ -26,6 +26,7 @@ import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.sys.ComponentCtrl;
 
 import eone.util.Env;
+import eone.util.Util;
 import eone.webui.session.SessionManager;
 
 /**
@@ -161,5 +162,12 @@ public class ClientInfo implements Serializable {
 	
 	public boolean isPortrait() {
 		return "portrait".equalsIgnoreCase(orientation);
+	}
+	
+	public static boolean isFirefox(String version) {
+		StringBuilder ua = new StringBuilder("Firefox");
+		if (!Util.isEmpty(version, true))
+			ua.append("/").append(version);
+		return get() != null && get().userAgent != null && get().userAgent.contains(ua.toString());
 	}
 }

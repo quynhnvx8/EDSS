@@ -17,7 +17,7 @@ public class X_C_TypeCost extends PO implements I_C_TypeCost, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220516L;
+	private static final long serialVersionUID = 20220706L;
 
     /** Standard Constructor */
     public X_C_TypeCost (Properties ctx, int C_TypeCost_ID, String trxName)
@@ -77,18 +77,113 @@ public class X_C_TypeCost extends PO implements I_C_TypeCost, I_Persistent
 		return ii.intValue();
 	}
 
-	/** Set Name.
-		@param Name 
-		Alphanumeric identifier of the entity
+	/** Set Code133.
+		@param Code133 Code133	  */
+	public void setCode133 (String Code133)
+	{
+		set_Value (COLUMNNAME_Code133, Code133);
+	}
+
+	/** Get Code133.
+		@return Code133	  */
+	public String getCode133 () 
+	{
+		return (String)get_Value(COLUMNNAME_Code133);
+	}
+
+	/** Set Code200.
+		@param Code200 Code200	  */
+	public void setCode200 (String Code200)
+	{
+		set_Value (COLUMNNAME_Code200, Code200);
+	}
+
+	/** Get Code200.
+		@return Code200	  */
+	public String getCode200 () 
+	{
+		return (String)get_Value(COLUMNNAME_Code200);
+	}
+
+	
+	/** Set Manufactured.
+		@param IsManufactured 
+		This product is manufactured
 	  */
+	public void setIsManufactured (boolean IsManufactured)
+	{
+		set_Value (COLUMNNAME_IsManufactured, Boolean.valueOf(IsManufactured));
+	}
+
+	/** Get Manufactured.
+		@return This product is manufactured
+	  */
+	public boolean isManufactured () 
+	{
+		Object oo = get_Value(COLUMNNAME_IsManufactured);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
+	}
+
+	/** Set Summary Level.
+		@param IsSummary 
+		This is a summary entity
+	  */
+	public void setIsSummary (boolean IsSummary)
+	{
+		set_Value (COLUMNNAME_IsSummary, Boolean.valueOf(IsSummary));
+	}
+
+	/** Get Summary Level.
+		@return This is a summary entity
+	  */
+	public boolean isSummary () 
+	{
+		Object oo = get_Value(COLUMNNAME_IsSummary);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
+	}
+
+	/** By Material = MATERIAL */
+	public static final String METHODALLOCATION_ByMaterial = "MATERIAL";
+	/** By Worker = WORKER */
+	public static final String METHODALLOCATION_ByWorker = "WORKER";
+	/** Fix Default = DEFAULT */
+	public static final String METHODALLOCATION_FixDefault = "DEFAULT";
+	/** Set Method Allocation.
+		@param MethodAllocation Method Allocation	  */
+	public void setMethodAllocation (String MethodAllocation)
+	{
+
+		set_Value (COLUMNNAME_MethodAllocation, MethodAllocation);
+	}
+
+	/** Get Method Allocation.
+		@return Method Allocation	  */
+	public String getMethodAllocation () 
+	{
+		return (String)get_Value(COLUMNNAME_MethodAllocation);
+	}
+
+	/** Set Name.
+		@param Name Name	  */
 	public void setName (String Name)
 	{
 		set_Value (COLUMNNAME_Name, Name);
 	}
 
 	/** Get Name.
-		@return Alphanumeric identifier of the entity
-	  */
+		@return Name	  */
 	public String getName () 
 	{
 		return (String)get_Value(COLUMNNAME_Name);

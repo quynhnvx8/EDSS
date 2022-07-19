@@ -12,7 +12,11 @@
  *****************************************************************************/
 package eone.webui.adwindow;
 
+import java.util.List;
+
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zul.Button;
+import org.zkoss.zul.Toolbar;
 
 import eone.base.model.GridTab;
 import eone.util.Evaluatee;
@@ -195,5 +199,16 @@ public interface IADTabpanel extends Component, Evaluatee {
 	/**
 	 * @return Quick Form Button Enabled/Disabled
 	 */
+	public List<Button> getToolbarButtons();
+	
+	default public boolean isEnableProcessButton() {
+		boolean isNewRow = getGridTab().getRowCount() == 0 || getGridTab().isNew();
+		return getToolbarButtons().size() > 0 && !isNewRow;
+	}
+	
 	public abstract boolean isEnableQuickFormButton();
+	
+	public void updateToolbar(ADWindowToolbar toolbar);
+
+	public void updateDetailToolbar(Toolbar toolbar);
 }

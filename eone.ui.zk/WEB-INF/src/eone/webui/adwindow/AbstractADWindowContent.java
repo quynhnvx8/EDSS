@@ -870,6 +870,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 			@Override
 			public void onEvent(Event event) throws Exception {
 				toolbar.setPressed("Attachment",adTabbox.getSelectedGridTab().hasAttachment());
+				focusToLastFocusEditor();
 				focusToActivePanel();				
 			}
 		};
@@ -2073,6 +2074,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 					else
 					{
 						toolbar.setPressed("Find",adTabbox.getSelectedGridTab().isQueryActive());
+						focusToLastFocusEditor();
 					}
 			        focusToActivePanel();
 				}
@@ -2645,7 +2647,8 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 			public void onCallback(Boolean result) {
 				if (result) {
 					onReport0();
-				}
+				}else
+					focusToLastFocusEditor();
 			}
 		};
 		onSave(false, false, callback);
@@ -3291,8 +3294,35 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
      */
 	public void onCustomize() {
 		ADTabpanel tabPanel = (ADTabpanel) getADTab().getSelectedTabpanel();
-		CustomizeGridViewDialog.onCustomize(tabPanel);	}
+		//CustomizeGridViewDialog.onCustomize(tabPanel);
+		CustomizeGridViewDialog.onCustomize(tabPanel, b -> {
+			focusToLastFocusEditor();
+		});
+	}
 
+	public boolean focusToLastFocusEditor() {
+		return focusToLastFocusEditor(false);
+	}
+	
+	protected Component lastFocusEditor = null;
+	public void setLastFocusEditor(Component component) {
+		lastFocusEditor = component;
+	}
+	
+	public boolean focusToLastFocusEditor(boolean defer) {
+		if (lastFocusEditor != null && lastFocusEditor instanceof HtmlBasedComponent && 
+			lastFocusEditor.getPage() != null && LayoutUtils.isReallyVisible(lastFocusEditor)) {
+			if (defer) {
+				final HtmlBasedComponent editor = (HtmlBasedComponent) lastFocusEditor;
+				Executions.schedule(getComponent().getDesktop(), e -> editor.focus(), new Event("onScheduleFocusToLastFocusEditor"));
+			} else {
+				((HtmlBasedComponent)lastFocusEditor).focus();
+			}
+			return true;
+		} else {
+			return false;
+		}
+	}
 	/**
 	 * @see eone.webui.event.ToolbarListener#onProcess()
 	 */
@@ -3312,6 +3342,8 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 	public void onSelect() {
 		if (findWindow != null && findWindow.getPage() != null && findWindow.isVisible() && m_queryInitiating) {
 			LayoutUtils.openEmbeddedWindow(getComponent().getParent(), findWindow, "overlap");
+		}else {
+			focusToLastFocusEditor();
 		}
 	}
 

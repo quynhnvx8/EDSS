@@ -3,6 +3,8 @@ package eone.base.model;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import eone.util.DB;
@@ -42,8 +44,6 @@ public class MInOutLine extends X_M_InOutLine
 		m_parent = inout;
 	}	//	MInOutLine
 
-	/**	Product					*/
-	private MProduct 		m_product = null;
 	
 	private MInOut			m_parent = null;
 
@@ -57,76 +57,6 @@ public class MInOutLine extends X_M_InOutLine
 			m_parent = new MInOut (getCtx(), getM_InOut_ID(), get_TrxName());
 		return m_parent;
 	}	//	getParent
-
-	
-	public MProduct getProduct()
-	{
-		if (m_product == null && getM_Product_ID() != 0)
-			m_product = MProduct.get (getCtx(), getM_Product_ID());
-		return m_product;
-	}	//	getProduct
-
-	/**
-	 * 	Set Product
-	 *	@param product product
-	 */
-	public void setProduct (MProduct product)
-	{
-		m_product = product;
-		if (m_product != null)
-		{
-			setM_Product_ID(m_product.getM_Product_ID());
-			setC_UOM_ID (m_product.getC_UOM_ID());
-		}
-		else
-		{
-			setM_Product_ID(0);
-			setC_UOM_ID (0);
-		}
-	}	//	setProduct
-
-	/**
-	 * 	Set M_Product_ID
-	 *	@param M_Product_ID product
-	 *	@param setUOM also set UOM from product
-	 */
-	public void setM_Product_ID (int M_Product_ID, boolean setUOM)
-	{
-		if (setUOM)
-			setProduct(MProduct.get(getCtx(), M_Product_ID));
-		else
-			super.setM_Product_ID (M_Product_ID);
-	}	//	setM_Product_ID
-
-	/**
-	 * 	Set Product and UOM
-	 *	@param M_Product_ID product
-	 *	@param C_UOM_ID uom
-	 */
-	public void setM_Product_ID (int M_Product_ID, int C_UOM_ID)
-	{
-		if (M_Product_ID != 0)
-			super.setM_Product_ID (M_Product_ID);
-		super.setC_UOM_ID(C_UOM_ID);
-		m_product = null;
-	}	//	setM_Product_ID
-
-	/**
-	 * 	Add to Description
-	 *	@param description text
-	 */
-	public void addDescription (String description)
-	{
-		String desc = getDescription();
-		if (desc == null)
-			setDescription(description);
-		else{
-			StringBuilder msgd = new StringBuilder(desc).append(" | ").append(description);
-			setDescription(msgd.toString());
-		}	
-	}	//	addDescription
-
-	
 	
 	protected boolean beforeSave (boolean newRecord)
 	{
@@ -139,7 +69,7 @@ public class MInOutLine extends X_M_InOutLine
 		//Neu la xuat va co cau hinh check so luong ton kho trong bang M_Storage (Voi dieu kien bang nay du lieu phai input day du)
 		//De input day du can kiem tra nghiep vu: CO, RA va UpdateOpenBalanceWarehouse.java
 		if (check && Env.checkRemainQty()) {
-			BigDecimal qtyRemain = MStorage.getQtyRemain(getM_Product_ID(), inout.getM_Warehouse_Cr_ID(), inout.getDateAcct());
+			BigDecimal qtyRemain = MStorage.getQtyRemain(getM_Product_ID(), getM_Warehouse_Cr_ID(), inout.getDateAcct());
 			if (qtyRemain.compareTo(getQty()) < 0)
 			{
 				log.saveError("Error!", "Số lượng không đủ, số lượng còn lại là " + qtyRemain);
@@ -156,6 +86,23 @@ public class MInOutLine extends X_M_InOutLine
 			log.saveError("Error!", "Quantity must be than zero!");
 			return false;
 		}
+		
+		if (getM_Product_ID() > 0 && getM_Warehouse_Dr_ID() > 0) {
+			MProduct product = MProduct.get(getCtx(), getM_Product_ID());
+			if (product.isManufactured() && !checkSetupBOM(getM_Product_ID(), getM_Warehouse_Dr_ID())) {
+				log.saveError("Error!", "Sản phẩm và phân xương/Công đoạn không trùng với thiết lập định mức!");
+				return false;
+			}
+		}
+		
+		if (getM_Product_Cr_ID() > 0 && getM_Warehouse_Cr_ID() > 0) {
+			MProduct product = MProduct.get(getCtx(), getM_Product_ID());
+			if (product.isManufactured() && !checkSetupBOM(getM_Product_Cr_ID(), getM_Warehouse_Cr_ID())) {
+				log.saveError("Error!", "Sản phẩm và phân xương/Công đoạn không trùng với thiết lập định mức!");
+				return false;
+			}
+		}
+		
 		//	Get Line No
 		if (getLine() == 0)
 		{
@@ -179,14 +126,6 @@ public class MInOutLine extends X_M_InOutLine
 				+ "WHERE M_InOut_ID=?";
 		DB.executeUpdateEx(sql, new Object[] {getM_InOut_ID()}, get_TrxName());
 		
-		/*
-		 * Thêm 1 dòng thuế nếu tiền hàng và tiền thuế khác nhau
-		 */
-		//if (getAmount().compareTo(getTaxBaseAmt()) != 0) {
-		//	insertLineTax(getCtx(), this, get_TrxName());
-		//}
-		
-		
 		return true;
 	}	
 	@Override
@@ -202,6 +141,18 @@ public class MInOutLine extends X_M_InOutLine
 		return true;
 	}
 
+	
+	private boolean checkSetupBOM(int M_Product_ID, int M_Warehouse_ID) {
+		String sql = "SELECT COUNT(1) FROM M_BOM b INNER JOIN M_Product p ON b.M_Product_ID = p.M_Product_ID"
+				+ " WHERE b.M_Product_ID = ? AND b.M_Warehouse_ID = ?";
+		List<Object> params = new ArrayList<Object>();
+		params.add(M_Product_ID);
+		params.add(M_Warehouse_ID);
+		int count = DB.getSQLValue(get_TrxName(), sql, params);
+		if (count > 0)
+			return true;
+		return false;
+	}
 	/**
 	 * 	Before Delete
 	 *	@return true if drafted
@@ -228,18 +179,4 @@ public class MInOutLine extends X_M_InOutLine
 		return sb.toString ();
 	}	//	toString
 
-	
-	/*
-	 * Thêm 1 dòng thuế
-	 */
-	public static void insertLineTax(Properties ctx, MInOutLine lineCurr, String trxName) {
-		MInOutLine line = new MInOutLine(ctx, 0, trxName);
-		copyValues(lineCurr, line);
-		line.setAmount(lineCurr.getTaxBaseAmt().subtract(lineCurr.getAmount()));
-		line.setTaxBaseAmt(line.getAmount());
-		line.save();		
-		lineCurr.setTaxBaseAmt(lineCurr.getAmount());
-		lineCurr.save();
-		
-	}
 }	//	MInOutLine

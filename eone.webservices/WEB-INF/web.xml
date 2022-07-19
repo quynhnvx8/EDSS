@@ -15,7 +15,7 @@
 
 	<listener>
 		<listener-class>
-			com.trekglobal.ws.ContextLoaderListener
+			eone.startwebservice.ContextLoaderListener
 		</listener-class>
 	</listener>
 

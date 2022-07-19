@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,10 +80,7 @@ public class MProduct extends X_M_Product
 	public MProduct (Properties ctx, int M_Product_ID, String trxName)
 	{
 		super (ctx, M_Product_ID, trxName);
-		if (M_Product_ID == 0)
-		{
 		
-		}
 	}	//	MProduct
 
 	/**
@@ -145,13 +143,6 @@ public class MProduct extends X_M_Product
 		MProductGroup group = MProductGroup.get(getCtx(), getM_ProductGroup_ID());
 		
 		if (newRecord || is_ValueChanged(X_M_Product.COLUMNNAME_M_ProductGroup_ID)) {
-			if (X_M_ProductGroup.CATEGORYTYPE_Medical.equalsIgnoreCase(group.getCategoryType())
-					|| X_M_ProductGroup.CATEGORYTYPE_Pharmaceuticals.equalsIgnoreCase(group.getCategoryType())
-					) {
-				setIsMedical(true);
-			} else {
-				setIsMedical(false);
-			}
 			
 			if (X_M_ProductGroup.CATEGORYTYPE_Service.equalsIgnoreCase(group.getCategoryType())) {
 				setIsService(true);
@@ -202,7 +193,15 @@ public class MProduct extends X_M_Product
 	@Override
 	protected boolean beforeDelete ()
 	{
-		
+		String sql = "SELECT COUNT(1) FROM M_InOutLine WHERE M_Product_ID = ? OR M_Product_CR_ID = ? AND Processed = 'Y'";
+		List<Object> params = new ArrayList<Object>();
+		params.add(getM_Product_ID());
+		params.add(getM_Product_ID());
+		int count = DB.getSQLValue(get_TrxName(), sql, params);
+		if (count > 0) {
+			log.saveError("Error", "Bản ghi này đã sử dụng, bạn không thể xóa!");
+			return false;
+		}
 		return true; 
 	}	//	beforeDelete
 	

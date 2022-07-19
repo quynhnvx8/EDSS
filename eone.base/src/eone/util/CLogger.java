@@ -28,10 +28,10 @@ import java.util.logging.Logger;
  */
 public class CLogger extends Logger
 {
-	private static final String LAST_INFO = "eone.util.CLogger.lastInfo";
-	private static final String LAST_WARNING = "eone.util.CLogger.lastWarning";
-	private static final String LAST_ERROR = "eone.util.CLogger.lastError";
-	private static final String LAST_EXCEPTION = "eone.util.CLogger.lastException";
+	public static final String LAST_INFO = "eone.util.CLogger.lastInfo";
+	public static final String LAST_WARNING = "eone.util.CLogger.lastWarning";
+	public static final String LAST_ERROR = "eone.util.CLogger.lastError";
+	public static final String LAST_EXCEPTION = "eone.util.CLogger.lastException";
 
 
 	/**

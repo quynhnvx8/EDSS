@@ -17,18 +17,23 @@
 package eone.base.model;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
 
+import eone.base.process.DocAction;
+import eone.base.process.DocumentEngine;
 import eone.util.CCache;
 import eone.util.CLogger;
+import eone.util.DB;
 
 /**
  * 	BOM Model
  *  @author Jorg Janke
  *  @version $Id: MBOM.java,v 1.3 2006/07/30 00:51:03 jjanke Exp $
  */
-public class MBOM extends X_M_BOM
+public class MBOM extends X_M_BOM implements DocAction
 {
 	/**
 	 * 
@@ -116,8 +121,87 @@ public class MBOM extends X_M_BOM
 	 */
 	protected boolean beforeSave (boolean newRecord)
 	{
-		
+		String sql = "SELECT COUNT(1) FROM M_BOM WHERE M_Product_ID = ?  AND M_BOM_ID !=?";//AND M_Warehouse_ID = ?
+		List<Object> params = new ArrayList<Object>();
+		params.add(getM_Product_ID());
+		//params.add(getM_Warehouse_ID());
+		params.add(getM_BOM_ID());
+		int count = DB.getSQLValue(get_TrxName(), sql, params);
+		if (count >= 1) {
+			log.saveError("Error", "Sản phẩm định mức này đã thiết lập rồi");
+			return false;
+		}
 		return true;
 	}	//	beforeSave
 	
+	
+	//Implements DocAction
+	protected String		m_processMsg = null;
+	
+	protected MBOMProduct[]	m_lines = null;
+	
+	public void setProcessed (boolean processed)
+	{
+		super.setProcessed (processed);
+		if (get_ID() == 0)
+			return;
+		StringBuilder sql = new StringBuilder("UPDATE M_BOMProduct SET Processed='")
+			.append((processed ? "Y" : "N"))
+			.append("' WHERE M_BOM_ID=").append(getM_BOM_ID());
+		int noLine = DB.executeUpdate(sql.toString(), get_TrxName());
+		m_lines = null;
+		if (log.isLoggable(Level.FINE)) log.fine(processed + " - Lines=" + noLine);
+	}
+	
+	@Override
+	public boolean processIt(String action, int AD_Window_ID) throws Exception {
+		m_processMsg = null;
+		DocumentEngine engine = new DocumentEngine (this, getDocStatus(), AD_Window_ID, false);
+		return engine.processIt (action, getDocStatus());
+	}
+
+	@Override
+	public String completeIt() {
+		
+		setProcessed(true);
+		return DocAction.STATUS_Completed;
+	}
+
+
+
+	@Override
+	public boolean reActivateIt() {
+		if (log.isLoggable(Level.INFO)) log.info(toString());
+		
+		if(!super.reActivate())
+			return false;
+		
+		setProcessed(false);
+			
+		return true;
+	}
+
+
+	@Override
+	public String getProcessMsg() {
+		return m_processMsg;
+	}
+
+	@Override
+	public void setProcessMsg(String text) {
+		m_processMsg = text;
+	}
+	
+	@Override
+	public String getSummary() {
+		
+		return "";
+	}
+
+
+	@Override
+	public int getAD_Window_ID() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }	//	MBOM

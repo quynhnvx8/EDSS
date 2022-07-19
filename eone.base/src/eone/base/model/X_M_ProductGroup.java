@@ -17,7 +17,7 @@ public class X_M_ProductGroup extends PO implements I_M_ProductGroup, I_Persiste
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220513L;
+	private static final long serialVersionUID = 20220701L;
 
     /** Standard Constructor */
     public X_M_ProductGroup (Properties ctx, int M_ProductGroup_ID, String trxName)
@@ -56,26 +56,20 @@ public class X_M_ProductGroup extends PO implements I_M_ProductGroup, I_Persiste
       return sb.toString();
     }
 
-	/** Material Main = 01_MAM */
+	/** NONE = 00_NON */
+	public static final String CATEGORYTYPE_NONE = "00_NON";
+	/** MaterialMain = 01_MAM */
 	public static final String CATEGORYTYPE_MaterialMain = "01_MAM";
-	/** Medical = 08_MED */
-	public static final String CATEGORYTYPE_Medical = "08_MED";
-	/** Pharmaceuticals = 09_PHA */
-	public static final String CATEGORYTYPE_Pharmaceuticals = "09_PHA";
 	/** Asset = 03_ASS */
 	public static final String CATEGORYTYPE_Asset = "03_ASS";
 	/** Tools = 04_TOO */
 	public static final String CATEGORYTYPE_Tools = "04_TOO";
-	/** Goods = 06_GOO */
-	public static final String CATEGORYTYPE_Goods = "06_GOO";
-	/** NONE = 00_NON */
-	public static final String CATEGORYTYPE_NONE = "00_NON";
 	/** Service = 05_SER */
 	public static final String CATEGORYTYPE_Service = "05_SER";
+	/** Goods = 06_GOO */
+	public static final String CATEGORYTYPE_Goods = "06_GOO";
 	/** Stocked = 07_STO */
 	public static final String CATEGORYTYPE_Stocked = "07_STO";
-	/** Material Extra = 02_MAE  */
-	public static final String CATEGORYTYPE_MaterialExtra = "02_MAE ";
 	/** Set CategoryType.
 		@param CategoryType CategoryType	  */
 	public void setCategoryType (String CategoryType)
@@ -112,17 +106,14 @@ public class X_M_ProductGroup extends PO implements I_M_ProductGroup, I_Persiste
 	}
 
 	/** Set Name.
-		@param Name 
-		Alphanumeric identifier of the entity
-	  */
+		@param Name Name	  */
 	public void setName (String Name)
 	{
 		set_Value (COLUMNNAME_Name, Name);
 	}
 
 	/** Get Name.
-		@return Alphanumeric identifier of the entity
-	  */
+		@return Name	  */
 	public String getName () 
 	{
 		return (String)get_Value(COLUMNNAME_Name);

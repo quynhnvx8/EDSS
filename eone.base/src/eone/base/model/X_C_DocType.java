@@ -18,7 +18,7 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220523L;
+	private static final long serialVersionUID = 20220708L;
 
     /** Standard Constructor */
     public X_C_DocType (Properties ctx, int C_DocType_ID, String trxName)
@@ -28,7 +28,6 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
         {
 			setC_DocType_ID (0);
 			setDocBaseType (null);
-			setIsDefault (false);
 			setName (null);
         } */
     }
@@ -172,8 +171,8 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	public static final String DOCBASETYPE_Debit_151 = "DR151";
 	/** Warehouse Import Use = 15DRIM */
 	public static final String DOCBASETYPE_WarehouseImportUse = "15DRIM";
-	/** 153 Debit = 153DR */
-	public static final String DOCBASETYPE_153Debit = "153DR";
+	/** Asset Revaluation = 21REA */
+	public static final String DOCBASETYPE_AssetRevaluation = "21REA";
 	/** 154 Debit = 154DR */
 	public static final String DOCBASETYPE_154Debit = "154DR";
 	/** 155 Debit = 155DR */
@@ -534,8 +533,8 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	public static final String DOCBASETYPE_217InvestLand = "217IV";
 	/** Asset Openbalance = OPASSET */
 	public static final String DOCBASETYPE_AssetOpenbalance = "OPASSET";
-	/** 241 Credit = 241CR */
-	public static final String DOCBASETYPE_241Credit = "241CR";
+	/** Expense General = EXPCOMMON */
+	public static final String DOCBASETYPE_ExpenseGeneral = "EXPCOMMON";
 	/** Asset Increment = ASSETINC */
 	public static final String DOCBASETYPE_AssetIncrement = "ASSETINC";
 	/** Asset DeIncrement = ASSETDOW */
@@ -550,6 +549,10 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	public static final String DOCBASETYPE_FixedAssetToLand = "FATL";
 	/** Land To Fixed Asset = LTFA */
 	public static final String DOCBASETYPE_LandToFixedAsset = "LTFA";
+	/** Expense Salary = EXPSALARY */
+	public static final String DOCBASETYPE_ExpenseSalary = "EXPSALARY";
+	/** Production Order = PROODER */
+	public static final String DOCBASETYPE_ProductionOrder = "PROODER";
 	/** Set Document BaseType.
 		@param DocBaseType 
 		Logical type of document
@@ -652,21 +655,18 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 		return false;
 	}
 
-	/** Set Default.
-		@param IsDefault 
-		Default value
-	  */
-	public void setIsDefault (boolean IsDefault)
+	/** Set Fix Account Register.
+		@param IsFixAccount Fix Account Register	  */
+	public void setIsFixAccount (boolean IsFixAccount)
 	{
-		set_Value (COLUMNNAME_IsDefault, Boolean.valueOf(IsDefault));
+		set_Value (COLUMNNAME_IsFixAccount, Boolean.valueOf(IsFixAccount));
 	}
 
-	/** Get Default.
-		@return Default value
-	  */
-	public boolean isDefault () 
+	/** Get Fix Account Register.
+		@return Fix Account Register	  */
+	public boolean isFixAccount () 
 	{
-		Object oo = get_Value(COLUMNNAME_IsDefault);
+		Object oo = get_Value(COLUMNNAME_IsFixAccount);
 		if (oo != null) 
 		{
 			 if (oo instanceof Boolean) 
@@ -719,17 +719,14 @@ public class X_C_DocType extends PO implements I_C_DocType, I_Persistent
 	}
 
 	/** Set Name.
-		@param Name 
-		Alphanumeric identifier of the entity
-	  */
+		@param Name Name	  */
 	public void setName (String Name)
 	{
 		set_Value (COLUMNNAME_Name, Name);
 	}
 
 	/** Get Name.
-		@return Alphanumeric identifier of the entity
-	  */
+		@return Name	  */
 	public String getName () 
 	{
 		return (String)get_Value(COLUMNNAME_Name);

@@ -50,7 +50,7 @@ public class MInOut extends X_M_InOut implements DocAction
 			MTax tax = MTax.get(ctx, C_Tax_ID);
 			taxRate = tax.getRate();
 		}
-		MOrderLine [] line = order.getLines(" And Coalesce(QtyDelivered,0) < Qty", "");
+		MOrderLine [] line = order.getLines(" And NVL(QtyDelivered,0) < Qty", "");
 		MInOutLine ioline = null;
 		for(int i = 0; i < line.length; i++) {
 			ioline = new MInOutLine(ctx, 0, trxName);
@@ -65,14 +65,13 @@ public class MInOut extends X_M_InOut implements DocAction
 			ioline.setC_OrderLine_ID(line[i].getC_OrderLine_ID());
 			ioline.save();
 		}
-			
 	}
 	
 	private void updateQtyOrderDelivered(boolean aproved) {
-		String sql = "UPDATE C_OrderLine ol SET QtyDelivered = Coalesce(ol.QtyDelivered,0) + "
+		String sql = "UPDATE C_OrderLine ol SET QtyDelivered = NVL(ol.QtyDelivered,0) + "
 				+ " (SELECT coalesce(io.Qty,0) FROM M_InOutLine io WHERE  ol.C_OrderLine_ID = io.C_OrderLine_ID AND io.M_InOut_ID = ?)";
 		if (!aproved) {
-			sql = "UPDATE C_OrderLine ol SET QtyDelivered = Coalesce(ol.QtyDelivered,0) - "
+			sql = "UPDATE C_OrderLine ol SET QtyDelivered = NVL(ol.QtyDelivered,0) - "
 					+ " (SELECT coalesce(io.Qty,0) FROM M_InOutLine io WHERE  ol.C_OrderLine_ID = io.C_OrderLine_ID AND io.M_InOut_ID = ?)";
 		}
 		DB.executeUpdate(sql, getM_InOut_ID(), get_TrxName());

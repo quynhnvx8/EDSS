@@ -44,36 +44,6 @@ public interface I_M_InOut
 
 	public eone.base.model.I_C_ElementValue getAccount_COGS() throws RuntimeException;
 
-    /** Column name Account_Cr_ID */
-    public static final String COLUMNNAME_Account_Cr_ID = "Account_Cr_ID";
-
-	/** Set Account Cr.
-	  * Account Cr
-	  */
-	public void setAccount_Cr_ID (int Account_Cr_ID);
-
-	/** Get Account Cr.
-	  * Account Cr
-	  */
-	public int getAccount_Cr_ID();
-
-	public eone.base.model.I_C_ElementValue getAccount_Cr() throws RuntimeException;
-
-    /** Column name Account_Dr_ID */
-    public static final String COLUMNNAME_Account_Dr_ID = "Account_Dr_ID";
-
-	/** Set Account Dr.
-	  * Account Dr
-	  */
-	public void setAccount_Dr_ID (int Account_Dr_ID);
-
-	/** Get Account Dr.
-	  * Account Dr
-	  */
-	public int getAccount_Dr_ID();
-
-	public eone.base.model.I_C_ElementValue getAccount_Dr() throws RuntimeException;
-
     /** Column name Account_REV_ID */
     public static final String COLUMNNAME_Account_REV_ID = "Account_REV_ID";
 
@@ -279,6 +249,15 @@ public interface I_M_InOut
 	/** Get Canceled	  */
 	public String getCanceled();
 
+    /** Column name Code_Original */
+    public static final String COLUMNNAME_Code_Original = "Code_Original";
+
+	/** Set Original	  */
+	public void setCode_Original (String Code_Original);
+
+	/** Get Original	  */
+	public String getCode_Original();
+
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
 
@@ -412,16 +391,18 @@ public interface I_M_InOut
 	  */
 	public String getDocumentNo();
 
-    /** Column name HR_Employee_ID */
-    public static final String COLUMNNAME_HR_Employee_ID = "HR_Employee_ID";
+    /** Column name IncludeDoc */
+    public static final String COLUMNNAME_IncludeDoc = "IncludeDoc";
 
-	/** Set Employee	  */
-	public void setHR_Employee_ID (int HR_Employee_ID);
+	/** Set IncludeDoc.
+	  * Document sequence number of the document
+	  */
+	public void setIncludeDoc (String IncludeDoc);
 
-	/** Get Employee	  */
-	public int getHR_Employee_ID();
-
-	public eone.base.model.I_HR_Employee getHR_Employee() throws RuntimeException;
+	/** Get IncludeDoc.
+	  * Document sequence number of the document
+	  */
+	public String getIncludeDoc();
 
     /** Column name IncludeTaxTab */
     public static final String COLUMNNAME_IncludeTaxTab = "IncludeTaxTab";
@@ -463,6 +444,15 @@ public interface I_M_InOut
 	  */
 	public boolean isActive();
 
+    /** Column name Key_Original */
+    public static final String COLUMNNAME_Key_Original = "Key_Original";
+
+	/** Set Key Original	  */
+	public void setKey_Original (int Key_Original);
+
+	/** Get Key Original	  */
+	public int getKey_Original();
+
     /** Column name M_InOut_ID */
     public static final String COLUMNNAME_M_InOut_ID = "M_InOut_ID";
 
@@ -476,36 +466,6 @@ public interface I_M_InOut
 	  */
 	public int getM_InOut_ID();
 
-    /** Column name M_Warehouse_Cr_ID */
-    public static final String COLUMNNAME_M_Warehouse_Cr_ID = "M_Warehouse_Cr_ID";
-
-	/** Set Warehouse Cr.
-	  * Storage Warehouse and Service Point
-	  */
-	public void setM_Warehouse_Cr_ID (int M_Warehouse_Cr_ID);
-
-	/** Get Warehouse Cr.
-	  * Storage Warehouse and Service Point
-	  */
-	public int getM_Warehouse_Cr_ID();
-
-	public eone.base.model.I_M_Warehouse getM_Warehouse_Cr() throws RuntimeException;
-
-    /** Column name M_Warehouse_Dr_ID */
-    public static final String COLUMNNAME_M_Warehouse_Dr_ID = "M_Warehouse_Dr_ID";
-
-	/** Set Warehouse Dr.
-	  * Storage Warehouse and Service Point
-	  */
-	public void setM_Warehouse_Dr_ID (int M_Warehouse_Dr_ID);
-
-	/** Get Warehouse Dr.
-	  * Storage Warehouse and Service Point
-	  */
-	public int getM_Warehouse_Dr_ID();
-
-	public eone.base.model.I_M_Warehouse getM_Warehouse_Dr() throws RuntimeException;
-
     /** Column name ObjectName */
     public static final String COLUMNNAME_ObjectName = "ObjectName";
 
@@ -514,15 +474,6 @@ public interface I_M_InOut
 
 	/** Get ObjectName	  */
 	public String getObjectName();
-
-    /** Column name Original */
-    public static final String COLUMNNAME_Original = "Original";
-
-	/** Set Original	  */
-	public void setOriginal (String Original);
-
-	/** Get Original	  */
-	public String getOriginal();
 
     /** Column name Processed */
     public static final String COLUMNNAME_Processed = "Processed";
@@ -536,15 +487,6 @@ public interface I_M_InOut
 	  * The document has been processed
 	  */
 	public boolean isProcessed();
-
-    /** Column name Ref_InOut_ID */
-    public static final String COLUMNNAME_Ref_InOut_ID = "Ref_InOut_ID";
-
-	/** Set Referenced Shipment	  */
-	public void setRef_InOut_ID (int Ref_InOut_ID);
-
-	/** Get Referenced Shipment	  */
-	public int getRef_InOut_ID();
 
     /** Column name TaxAmt */
     public static final String COLUMNNAME_TaxAmt = "TaxAmt";

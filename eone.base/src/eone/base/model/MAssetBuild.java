@@ -412,10 +412,10 @@ public class MAssetBuild extends X_A_Asset_Build implements DocAction
 	//Lấy số tiền còn lại và số kỳ còn lại trước khi thay đổi nguyên giá để tính lại giá trị khấu hao mới
 	private List<Object> getInfoBefore() {
 		String sql = 
-				" SELECT t1.BaseAmt - COALESCE(t2.Amount), t1.UseLifes - COALESCE(t2.UseLifed) "+
+				" SELECT t1.BaseAmt - NVL(t2.Amount), t1.UseLifes - NVL(t2.UseLifed) "+
 				" FROM A_Asset s "+
 				" 	LEFT JOIN ( "+
-				" 		SELECT A_Asset_ID, SUM(COALESCE(Amount,0) + COALESCE(AccumulateAmt)) BaseAmt , SUM(UseLifes)  UseLifes "+
+				" 		SELECT A_Asset_ID, SUM(NVL(Amount,0) + NVL(AccumulateAmt)) BaseAmt , SUM(UseLifes)  UseLifes "+
 				" 		FROM A_Asset_History  "+
 				" 		WHERE A_Asset_ID = ? AND ChangeDate != ? "+//#1,2
 				" 		GROUP BY A_Asset_ID "+

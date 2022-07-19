@@ -134,7 +134,12 @@ public class CalloutInOut extends CalloutEngine
 		if (MDocType.DOCTYPE_Output.equals(mDocType.getDocType())) {
 			
 			//Lay kho xuat (Kho co)
-			int M_Warehouse_ID = inout.getM_Warehouse_Cr_ID();
+			Object warehouse_Cr = mTab.getValue(MInOutLine.COLUMNNAME_M_Warehouse_Cr_ID);
+			
+			int M_Warehouse_ID = 0;
+			if (warehouse_Cr != null )
+				M_Warehouse_ID = (Integer)warehouse_Cr;
+			
 			Timestamp dateAcct = inout.getDateAcct();
 			//Lay Product
 			Object objProduct_ID = mTab.getValue(MInOutLine.COLUMNNAME_M_Product_ID);

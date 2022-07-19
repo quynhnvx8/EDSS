@@ -162,7 +162,7 @@ import eone.util.Msg;
 	protected boolean updateHeader()
 	{
 		StringBuilder sql = new StringBuilder("UPDATE C_Bank bs")
-			.append(" SET (Amount, AmountConvert)=(SELECT COALESCE(SUM(Amount),0), COALESCE(SUM(AmountConvert),0) FROM C_BankLine bsl ")
+			.append(" SET (Amount, AmountConvert)=(SELECT NVL(SUM(Amount),0), NVL(SUM(AmountConvert),0) FROM C_BankLine bsl ")
 				.append("WHERE bsl.C_Bank_ID=bs.C_Bank_ID AND bsl.IsActive='Y') ")
 			.append("WHERE C_Bank_ID=").append(getC_Bank_ID());
 		int no = DB.executeUpdate(sql.toString(), get_TrxName());

@@ -59,6 +59,24 @@ public interface I_C_TypeCost
 	/** Get TypeCost	  */
 	public int getC_TypeCost_ID();
 
+    /** Column name Code133 */
+    public static final String COLUMNNAME_Code133 = "Code133";
+
+	/** Set Code133	  */
+	public void setCode133 (String Code133);
+
+	/** Get Code133	  */
+	public String getCode133();
+
+    /** Column name Code200 */
+    public static final String COLUMNNAME_Code200 = "Code200";
+
+	/** Set Code200	  */
+	public void setCode200 (String Code200);
+
+	/** Get Code200	  */
+	public String getCode200();
+
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
 
@@ -88,17 +106,49 @@ public interface I_C_TypeCost
 	  */
 	public boolean isActive();
 
+
+    /** Column name IsManufactured */
+    public static final String COLUMNNAME_IsManufactured = "IsManufactured";
+
+	/** Set Manufactured.
+	  * This product is manufactured
+	  */
+	public void setIsManufactured (boolean IsManufactured);
+
+	/** Get Manufactured.
+	  * This product is manufactured
+	  */
+	public boolean isManufactured();
+
+    /** Column name IsSummary */
+    public static final String COLUMNNAME_IsSummary = "IsSummary";
+
+	/** Set Summary Level.
+	  * This is a summary entity
+	  */
+	public void setIsSummary (boolean IsSummary);
+
+	/** Get Summary Level.
+	  * This is a summary entity
+	  */
+	public boolean isSummary();
+
+    /** Column name MethodAllocation */
+    public static final String COLUMNNAME_MethodAllocation = "MethodAllocation";
+
+	/** Set Method Allocation	  */
+	public void setMethodAllocation (String MethodAllocation);
+
+	/** Get Method Allocation	  */
+	public String getMethodAllocation();
+
     /** Column name Name */
     public static final String COLUMNNAME_Name = "Name";
 
-	/** Set Name.
-	  * Alphanumeric identifier of the entity
-	  */
+	/** Set Name	  */
 	public void setName (String Name);
 
-	/** Get Name.
-	  * Alphanumeric identifier of the entity
-	  */
+	/** Get Name	  */
 	public String getName();
 
     /** Column name TypeCost */

@@ -167,7 +167,7 @@ public class MAccount extends X_C_Account
 	public static List<MAccount> getAccountDocType(int C_DocType_ID) {
 		String sqlWhere = "C_DocType_ID = ? And IsDefault = 'Y'";
 		
-		List<MAccount> value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
+		List<MAccount> value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null, true)
 				.setParameters(C_DocType_ID)
 				.setApplyAccessFilter(true)
 				.list();
@@ -180,7 +180,7 @@ public class MAccount extends X_C_Account
 	 */
 	public static List<MAccount> getAccountDocTypeSub(int C_DocTypeSub_ID) {
 		String sqlWhere = "C_DocTypeSub_ID = ? And IsDefault = 'Y'";
-		List<MAccount> value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
+		List<MAccount> value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null, true)
 				.setParameters(C_DocTypeSub_ID)
 				.setApplyAccessFilter(true)
 				.list();
@@ -192,7 +192,7 @@ public class MAccount extends X_C_Account
 	 */
 	public static MAccount getAccountBPartner(int C_BPartner_ID) {
 		String sqlWhere = "C_BPartner_ID = ? And IsDefault = 'Y'";
-		MAccount value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
+		MAccount value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null, true)
 				.setParameters(C_BPartner_ID)
 				.setApplyAccessFilter(true)
 				.firstOnly();
@@ -202,7 +202,7 @@ public class MAccount extends X_C_Account
 	
 	public static List<MAccount> getListAcctAssetGroup(int A_Asset_Group_ID) {
 		String sqlWhere = "A_Asset_Group_ID = ?";
-		List<MAccount> value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
+		List<MAccount> value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null, true)
 				.setParameters(A_Asset_Group_ID)
 				.list();
 		
@@ -211,7 +211,7 @@ public class MAccount extends X_C_Account
 	
 	public static List<MAccount> getListAcctProductGroup(int M_ProductGroup_ID) {
 		String sqlWhere = "M_ProductGroup_ID = ?";
-		List<MAccount> value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
+		List<MAccount> value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null, true)
 				.setParameters(M_ProductGroup_ID)
 				.list();
 		
@@ -220,7 +220,7 @@ public class MAccount extends X_C_Account
 	
 	public static List<MAccount> getListAcctAsset(int A_Asset_ID) {
 		String sqlWhere = "A_Asset_ID = ? AND IsDefault = 'Y'";
-		List<MAccount> value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
+		List<MAccount> value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null, true)
 				.setParameters(A_Asset_ID)
 				.list();
 		
@@ -232,7 +232,7 @@ public class MAccount extends X_C_Account
 	 */
 	public static MAccount getAccountAsset(int A_Asset_ID) {
 		String sqlWhere = "A_Asset_ID = ?  And IsDefault = 'Y'";
-		MAccount value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
+		MAccount value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null, true)
 				.setParameters(A_Asset_ID)
 				.setApplyAccessFilter(true)
 				.firstOnly();
@@ -249,7 +249,7 @@ public class MAccount extends X_C_Account
 			return null;
 		}
 		String sqlWhere = "M_Product_ID = ? And IsDefault = 'Y'";
-		MAccount value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
+		MAccount value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null, true)
 				.setParameters(M_Product_ID)
 				.setApplyAccessFilter(true)
 				.firstOnly();
@@ -262,7 +262,7 @@ public class MAccount extends X_C_Account
 	 */
 	public static List<MAccount> getAccountTax(int C_Tax_ID) {
 		String sqlWhere = "C_Tax_ID = ? And IsDefault = 'Y'";
-		List<MAccount> value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
+		List<MAccount> value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null, true)
 				.setParameters(C_Tax_ID)
 				.setApplyAccessFilter(true)
 				.list();
@@ -278,7 +278,7 @@ public class MAccount extends X_C_Account
 			return null;
 		}
 		String sqlWhere = "C_Contract_ID = ? And IsDefault = 'Y'";
-		MAccount value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
+		MAccount value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null, true)
 				.setParameters(C_Contract_ID)
 				.setApplyAccessFilter(true)
 				.firstOnly();
@@ -310,7 +310,7 @@ public class MAccount extends X_C_Account
 			return null;
 		}
 		String sqlWhere = "C_Construction_ID = ? And IsDefault = 'Y'";
-		MAccount value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
+		MAccount value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null, true)
 				.setParameters(C_Construction_ID)
 				.setApplyAccessFilter(true)
 				.firstOnly();
@@ -326,7 +326,7 @@ public class MAccount extends X_C_Account
 			return null;
 		}
 		String sqlWhere = "M_Warehouse_ID = ? And IsDefault = 'Y'";
-		MAccount value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null)
+		MAccount value = new Query(Env.getCtx(),  X_C_Account.Table_Name, sqlWhere, null, true)
 				.setParameters(M_Warehouse_ID)
 				.setApplyAccessFilter(true)
 				.firstOnly();

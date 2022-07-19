@@ -1,16 +1,4 @@
-/******************************************************************************
- * Copyright (C) 2012 Heng Sin Low                                            *
- * Copyright (C) 2012 Trek Global                 							  *
- * This program is free software; you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY; without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program; if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- *****************************************************************************/
+
 package eone.webui.adwindow;
 
 import org.zkoss.zk.ui.event.Event;
@@ -31,12 +19,18 @@ public class ToolbarCustomButton implements EventListener<Event>, Evaluatee {
 	private Toolbarbutton toolbarButton;
 	private String actionId;
 	private int windowNo;
+	private int tabNo = -1;
 	private MToolBarButton mToolbarButton;
 
 	public ToolbarCustomButton(MToolBarButton mToolbarButton, Toolbarbutton btn, String actionId, int windowNo) {
+		this(mToolbarButton, btn, actionId, windowNo, -1);
+	}
+	
+	public ToolbarCustomButton(MToolBarButton mToolbarButton, Toolbarbutton btn, String actionId, int windowNo, int tabNo) {
 		toolbarButton = btn;
 		this.actionId = actionId;
 		this.windowNo = windowNo;
+		this.tabNo = tabNo;
 		this.mToolbarButton = mToolbarButton;
 		
 		toolbarButton.addEventListener(Events.ON_CLICK, this);
@@ -63,7 +57,7 @@ public class ToolbarCustomButton implements EventListener<Event>, Evaluatee {
 		if (adTabpanel == null)
 			return "";
 		
-		int tabNo = adTabpanel.getTabNo();
+		int tabNo = this.tabNo >= 0 ? this.tabNo : adTabpanel.getTabNo();
 		if( tabNo == 0)
 	    	return adTabpanel.get_ValueAsString(variableName);
 	    else

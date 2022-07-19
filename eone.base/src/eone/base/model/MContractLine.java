@@ -77,7 +77,7 @@ public class MContractLine extends X_C_ContractLine
 	private void setLineNo()
 	{
 		setLineNo(DB.getSQLValue(get_TrxName(), 
-			"SELECT COALESCE(MAX(LineNo),0)+10 FROM C_ContractLine WHERE C_Contract_ID=?", getC_Contract_ID()));
+			"SELECT NVL(MAX(LineNo),0)+10 FROM C_ContractLine WHERE C_Contract_ID=?", getC_Contract_ID()));
 	}	//	setLine
 
 

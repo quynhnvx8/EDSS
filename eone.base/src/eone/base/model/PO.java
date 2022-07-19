@@ -1229,8 +1229,11 @@ public abstract class PO	implements Serializable, Comparator<Object>, Evaluatee,
 		for (index = 0; index < size; index++)
 		{
 			String columnName = p_info.getColumnName(index);
-			Class<?> clazz = p_info.getColumnClass(index);
 			int dt = p_info.getColumnDisplayType(index);
+			if (dt == DisplayType.Button)
+				continue;
+			Class<?> clazz = p_info.getColumnClass(index);
+			
 			try
 			{
 				if (clazz == Integer.class)
@@ -2216,9 +2219,9 @@ public abstract class PO	implements Serializable, Comparator<Object>, Evaluatee,
 		for (int i = 0; i < size; i++)
 		{
 			Object value = m_newValues[i];
-			if (value == null
-				|| p_info.isVirtualColumn(i))
+			if (value == null || p_info.isVirtualColumn(i) || p_info.getColumnDisplayType(i) == DisplayType.Button)
 				continue;
+			
 			//  we have a change
 			Class<?> c = p_info.getColumnClass(i);
 			int dt = p_info.getColumnDisplayType(i);
@@ -4724,4 +4727,79 @@ public abstract class PO	implements Serializable, Comparator<Object>, Evaluatee,
 		}
 	}
 
+	
+	public boolean validForeignKeys() {
+		List<ValueNamePair> fks = getForeignColumnIdxs();
+		if (fks == null) {
+			return true;
+		}
+		for (ValueNamePair vnp : fks) {
+			String fkcol = vnp.getID();
+			String fktab = vnp.getName();
+			int index = get_ColumnIndex(fkcol); 
+			if (is_new() || is_ValueChanged(index)) {
+				int fkval = get_ValueAsInt(index);
+				if (fkval > 0) {
+					MTable ft = MTable.get(getCtx(), fktab);
+					boolean systemAccess = false;
+					String accessLevel = ft.getAccessLevel();
+					if (   MTable.ACCESSLEVEL_All.equals(accessLevel)
+						|| MTable.ACCESSLEVEL_System.equals(accessLevel)
+						|| MTable.ACCESSLEVEL_Special.equals(accessLevel)
+						|| MTable.ACCESSLEVEL_Client.equals(accessLevel)) {
+						systemAccess = true;
+					}
+					StringBuilder sql = new StringBuilder("SELECT AD_Client_ID FROM ")
+							.append(fktab)
+							.append(" WHERE ")
+							.append(ft.getKeyColumns()[0])
+							.append("=?");
+					int pocid = DB.getSQLValue(get_TrxName(), sql.toString(), fkval);
+					if (pocid < 0) {
+						log.saveError("Error", "Foreign ID " + fkval + " not found in " + fkcol);
+						return false;
+					}
+					if (pocid == 0 && !systemAccess) {
+						log.saveError("Error", "System ID " + fkval + " cannot be used in " + fkcol);
+						return false;
+					}
+					int curcid = Env.getAD_Client_ID(getCtx());
+					if (pocid > 0 && pocid != curcid) {
+						log.saveError("Error", "Cross tenant ID " + fkval + " not allowed in " + fkcol);
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+	
+	private static CCache<Integer,List<ValueNamePair>> fks_cache	= new CCache<Integer,List<ValueNamePair>>("FKs", 5);
+	
+	private List<ValueNamePair> getForeignColumnIdxs() {
+		List<ValueNamePair> retValue;
+		if (fks_cache.containsKey(get_Table_ID())) {
+			retValue = fks_cache.get(get_Table_ID());
+			return retValue;
+		}
+		retValue = new ArrayList<ValueNamePair>();
+		int size = get_ColumnCount();
+		for (int i = 0; i < size; i++) {
+			int dt = p_info.getColumnDisplayType(i);
+			if (dt != DisplayType.ID && DisplayType.isID(dt)) {
+				MColumn col = MColumn.get(p_info.getColumn(i).AD_Column_ID);
+				if ("AD_Client_ID".equals(col.getColumnName())) {
+					// ad_client_id is verified with checkValidClient
+					continue;
+				}
+				String refTable = col.getReferenceTableName();
+				retValue.add(new ValueNamePair(col.getColumnName(), refTable));
+			}
+		}
+		if (retValue.size() == 0) {
+			retValue = null;
+		}
+		fks_cache.put(get_Table_ID(), retValue);
+		return retValue;
+	}
 }   //  PO

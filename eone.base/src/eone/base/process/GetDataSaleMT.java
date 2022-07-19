@@ -15,7 +15,6 @@ import eone.base.model.MCurrency;
 import eone.base.model.MInOut;
 import eone.base.model.MInOutLine;
 import eone.base.model.MProduct;
-import eone.base.model.MWarehouse;
 import eone.base.model.PO;
 import eone.base.model.X_C_Account;
 import eone.base.model.X_C_BPartner;
@@ -205,15 +204,13 @@ public class GetDataSaleMT extends SvrProcess
 					item.setC_Currency_ID(curr.getC_Currency_ID());
 					item.setCurrencyRate(Env.ONE);
 					item.setAccount_COGS_ID(account_cogs_id);
-					item.setAccount_Cr_ID(account_cr_id);
-					item.setAccount_Dr_ID(account_dr_id);
+					
 					item.setAccount_REV_ID(account_revenue_id);
 					item.setAccount_Tax_ID(account_tax_id);
 					//
-					String [] wh = rs.getString("STORE_CODE").split("@");
-					int wh_id = Integer.parseInt(wh[0].toString());
-					item.setM_Warehouse_Cr_ID(wh_id);
-					item.setC_BPartner_Dr_ID(wh_id); //TODO: Do doi tuong va kho duoc tao tu dong tu phong ban nen cung ID		
+					
+					
+					//item.setC_BPartner_Dr_ID(wh_id); //TODO: Do doi tuong va kho duoc tao tu dong tu phong ban nen cung ID		
 					item.setC_Tax_ID(104);
 					
 					item.setIncludeTaxTab(X_M_InOut.INCLUDETAXTAB_TAXS);
@@ -223,7 +220,7 @@ public class GetDataSaleMT extends SvrProcess
 					item.set_ValueNoCheck("UpdatedBy", 100);
 					item.setAD_Client_ID(getAD_Client_ID());
 					item.setAD_Org_ID(Env.getAD_Org_ID(getCtx()));
-					item.setOriginal(X_M_InOut.ORIGINAL_SALEMT);
+					item.setCode_Original("SALEMT");
 					item.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
 					item.setAD_Client_ID(Env.getAD_Client_ID(Env.getCtx()));
 					idheader = DB.getNextID(getCtx(), X_M_InOut.Table_Name, get_TrxName());
@@ -265,6 +262,11 @@ public class GetDataSaleMT extends SvrProcess
 				line.set_ValueNoCheck("Updated", rs.getTimestamp("EXPORT_DATE"));
 				line.set_ValueNoCheck("CreatedBy", 100);
 				line.set_ValueNoCheck("UpdatedBy", 100);
+				line.setAccount_Cr_ID(account_cr_id);
+				line.setAccount_Dr_ID(account_dr_id);
+				String [] wh = rs.getString("STORE_CODE").split("@");
+				int wh_id = Integer.parseInt(wh[0].toString());
+				line.setM_Warehouse_Cr_ID(wh_id);
 				line.setAD_Client_ID(getAD_Client_ID());
 				line.setAD_Org_ID(Env.getAD_Org_ID(getCtx()));
 				line.setIsActive(true);
@@ -389,13 +391,12 @@ public class GetDataSaleMT extends SvrProcess
 					item.setC_DocType_ID(C_DocType_ID);
 					item.setC_Currency_ID(curr.getC_Currency_ID());
 					item.setCurrencyRate(Env.ONE);
-					item.setAccount_Cr_ID(account_cr_id);
-					item.setAccount_Dr_ID(account_dr_id);
+					
 					//
-					String [] wh = rs.getString("STORE_CODE").split("@");
-					int wh_id = Integer.parseInt(wh[0].toString());
-					item.setM_Warehouse_Dr_ID(MWarehouse.getDefault(getCtx(), null).getM_Warehouse_ID());
-					item.setM_Warehouse_Cr_ID(wh_id);
+					//String [] wh = rs.getString("STORE_CODE").split("@");
+					//int wh_id = Integer.parseInt(wh[0].toString());
+					//item.setM_Warehouse_Dr_ID(MWarehouse.getDefault(getCtx(), null).getM_Warehouse_ID());
+					//item.setM_Warehouse_Cr_ID(wh_id);
 					
 					item.set_ValueNoCheck("Created", rs.getTimestamp("RETURN_DATE"));
 					item.set_ValueNoCheck("Updated", rs.getTimestamp("RETURN_DATE"));
@@ -403,7 +404,7 @@ public class GetDataSaleMT extends SvrProcess
 					item.set_ValueNoCheck("UpdatedBy", 100);
 					item.setAD_Client_ID(getAD_Client_ID());
 					item.setAD_Org_ID(Env.getAD_Org_ID(getCtx()));
-					item.setOriginal(X_M_InOut.ORIGINAL_SALEMT);
+					item.setCode_Original("SALEMT");
 					idheader = DB.getNextID(getCtx(), X_M_InOut.Table_Name, get_TrxName());
 					
 					List<String> colNames = PO.getSqlInsert_Para(X_M_InOut.Table_ID, get_TrxName());
@@ -431,6 +432,8 @@ public class GetDataSaleMT extends SvrProcess
 				line.set_ValueNoCheck("UpdatedBy", 100);
 				line.setAD_Client_ID(getAD_Client_ID());
 				line.setAD_Org_ID(Env.getAD_Org_ID(getCtx()));
+				line.setAccount_Cr_ID(account_cr_id);
+				line.setAccount_Dr_ID(account_dr_id);
 				line.setIsActive(true);
 				line.setOriginal(X_M_InOutLine.ORIGINAL_SALEMT);
 				int idInfo = DB.getNextID(getCtx(), X_M_InOutLine.Table_Name, get_TrxName());

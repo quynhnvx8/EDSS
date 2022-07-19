@@ -112,14 +112,14 @@ public class MStorage extends X_M_Storage
 		
 		//Type nhap hoặc đầu kỳ
 		if (MDocType.DOCTYPE_Input.equals(doctype) || MDocType.DOCTYPE_Balance.equals(doctype)) {
-			sql = " select 'IN' DocType, il.M_InOutLine_ID, i.M_Warehouse_Dr_ID M_Warehouse_ID, i.DateAcct, il.M_Product_ID, il.Qty, il.Price, il.Amount "+
+			sql = " select 'IN' DocType, il.M_InOutLine_ID, il.M_Warehouse_Dr_ID M_Warehouse_ID, i.DateAcct, il.M_Product_ID, il.Qty, il.Price, il.Amount "+
 						" From M_InOut i Inner Join M_InOutLine il On i.M_InOut_ID = il.M_InOut_ID "+
 						" Where i.M_InOut_ID = ? ";
 		}
 		
 		
 		if (MDocType.DOCTYPE_Output.equals(doctype)) {
-			sql = " select 'OU' DocType, il.M_InOutLine_ID, i.M_Warehouse_Cr_ID M_Warehouse_ID, i.DateAcct, il.M_Product_ID, il.Qty, il.Price, il.Amount "+
+			sql = " select 'OU' DocType, il.M_InOutLine_ID, il.M_Warehouse_Cr_ID M_Warehouse_ID, i.DateAcct, il.M_Product_ID, il.Qty, il.Price, il.Amount "+
 					" From M_InOut i Inner Join M_InOutLine il On i.M_InOut_ID = il.M_InOut_ID "+
 					" Where i.M_InOut_ID = ? ";
 		}
