@@ -54,7 +54,7 @@ public class DPCalendar extends DashboardPanel implements EventListener<Event>, 
 	private static final String ON_MOBILE_SET_SELECTED_TAB_ECHO = "onMobileSetSelectedTabEcho";
 	private Calendars calendars;
 	private SimpleCalendarModel scm;
-	private LabelImageElement btnCal, btnRefresh;	
+	private LabelImageElement btnRefresh;	
 
 	private LabelImageElement btnCurrentDate;
 	private Label lblDate;
@@ -79,9 +79,6 @@ public class DPCalendar extends DashboardPanel implements EventListener<Event>, 
 
 		calendars = (Calendars) component.getFellow("cal");
 
-		btnCal = (LabelImageElement) component.getFellow("btnCal");
-		btnCal.addEventListener(Events.ON_CLICK, this);
-		
 		btnRefresh = (LabelImageElement) component.getFellow("btnRefresh");
 		btnRefresh.addEventListener(Events.ON_CLICK, this);
 		
@@ -153,9 +150,7 @@ public class DPCalendar extends DashboardPanel implements EventListener<Event>, 
 		String type = e.getName();
 
 		if (type.equals(Events.ON_CLICK)) {
-			if (e.getTarget() == btnCal)
-				new CalendarWindow(scm);
-			else if (e.getTarget() == btnRefresh)
+			if (e.getTarget() == btnRefresh)
 				btnRefreshClicked();
 			else if (e.getTarget() == btnCurrentDate)
 				btnCurrentDateClicked();

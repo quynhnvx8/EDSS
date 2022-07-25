@@ -43,7 +43,6 @@ import eone.base.model.I_M_Product;
 import eone.base.model.MAppendSign;
 import eone.base.model.MProcess;
 import eone.base.model.MQuery;
-import eone.base.model.MRecentItem;
 import eone.base.model.MSysConfig;
 import eone.base.model.MTable;
 import eone.base.model.MUserPreference;
@@ -1628,24 +1627,6 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
         
         switchEditStatus (isEditting);
         
-        if (changed && !readOnly && !toolbar.isSaveEnable() ) {
-        	if (tabPanel.getGridTab().getRecord_ID() > 0) {
-            	if (adTabbox.getSelectedIndex() == 0 && !detailTab) {
-            		MRecentItem.addModifiedField(ctx, adTabbox.getSelectedGridTab().getAD_Table_ID(),
-            				adTabbox.getSelectedGridTab().getRecord_ID(), Env.getAD_User_ID(ctx),
-            				adTabbox.getSelectedGridTab().getAD_Window_ID(),
-            				adTabbox.getSelectedGridTab().getAD_Tab_ID());
-            	} else {
-	        		GridTab mainTab = getMainTabAbove();
-	        		if (mainTab != null) {
-			        	MRecentItem.addModifiedField(ctx, mainTab.getAD_Table_ID(),
-			        			mainTab.getRecord_ID(), Env.getAD_User_ID(ctx),
-			        			mainTab.getAD_Window_ID(),
-			        			mainTab.getAD_Tab_ID());
-	        		}
-            	}
-        	}
-        }
 
         toolbar.enableSave(adTabbox.needSave(true, false) ||
         		adTabbox.getSelectedGridTab().isNew() ||
@@ -1780,9 +1761,6 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 			detailTab.dynamicDisplay(0);
 		}
 		focusToActivePanel();
-		
-		MRecentItem.touchUpdatedRecord(ctx, adTabbox.getSelectedGridTab().getAD_Table_ID(),
-    			adTabbox.getSelectedGridTab().getRecord_ID(), Env.getAD_User_ID(ctx));
 	}
 
     /**
@@ -2328,37 +2306,6 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
     		}
 		}
 
-		if (wasChanged) {
-		    if (newRecord) {
-		    	if (adTabbox.getSelectedGridTab().getRecord_ID() > 0) {
-		        	if (adTabbox.getSelectedIndex() == 0) {
-			        	MRecentItem.addModifiedField(ctx, adTabbox.getSelectedGridTab().getAD_Table_ID(),
-			        			adTabbox.getSelectedGridTab().getRecord_ID(), Env.getAD_User_ID(ctx),
-			        			adTabbox.getSelectedGridTab().getAD_Window_ID(),
-			        			adTabbox.getSelectedGridTab().getAD_Tab_ID());
-		        	} else {
-		        		GridTab mainTab = getMainTabAbove();
-		        		if (mainTab != null) {
-				        	MRecentItem.addModifiedField(ctx, mainTab.getAD_Table_ID(),
-				        			mainTab.getRecord_ID(), Env.getAD_User_ID(ctx),
-				        			mainTab.getAD_Window_ID(),
-				        			mainTab.getAD_Tab_ID());
-		        		}
-		        	}
-		    	}
-		    } else {
-		    	if (adTabbox.getSelectedIndex() == 0) {
-		        	MRecentItem.touchUpdatedRecord(ctx, adTabbox.getSelectedGridTab().getAD_Table_ID(),
-		        			adTabbox.getSelectedGridTab().getRecord_ID(), Env.getAD_User_ID(ctx));
-		    	} else {
-	        		GridTab mainTab = getMainTabAbove();
-		    		if (mainTab != null) {
-			        	MRecentItem.touchUpdatedRecord(ctx, mainTab.getAD_Table_ID(),
-			        			mainTab.getRecord_ID(), Env.getAD_User_ID(ctx));
-		    		}
-		    	}
-		    }
-		}
 
 		if (dirtyTabpanel != null && dirtyTabpanel != adTabbox.getSelectedTabpanel()) {
 			Executions.getCurrent().setAttribute("adtabpane.saved", dirtyTabpanel);
@@ -2369,18 +2316,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 			callback.onCallback(true);
 	}
 
-	private GridTab getMainTabAbove() {
-		/* when a detail record is modified add header to recent items */
-		GridTab mainTab = adTabbox.getSelectedGridTab(); // find parent tab (IDEMPIERE-2125 - tbayen)
-		while (mainTab != null && mainTab.getTabLevel() > 0) {
-			GridTab parentTab = mainTab.getParentTab();
-			if (parentTab == mainTab)
-				break;
-			mainTab = parentTab;
-		}
-		return mainTab;
-	}
-
+	
 	private void showLastError() {
 		String msg = CLogger.retrieveErrorString(null);
 		if (msg != null)
@@ -2492,7 +2428,6 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 
 		            adTabbox.getSelectedTabpanel().dynamicDisplay(0);
 		            focusToActivePanel();
-		            MRecentItem.publishChangedEvent(Env.getAD_User_ID(ctx));		            
 				}
 				if (postCallback != null)
 					postCallback.onCallback(result);

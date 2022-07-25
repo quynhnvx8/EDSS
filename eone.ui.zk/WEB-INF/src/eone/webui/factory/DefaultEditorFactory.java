@@ -10,7 +10,6 @@ import eone.webui.editor.WButtonEditor;
 import eone.webui.editor.WChartEditor;
 import eone.webui.editor.WChosenboxListEditor;
 import eone.webui.editor.WChosenboxSearchEditor;
-import eone.webui.editor.WDashboardContentEditor;
 import eone.webui.editor.WDateEditor;
 import eone.webui.editor.WDatetimeEditor;
 import eone.webui.editor.WEditor;
@@ -133,12 +132,6 @@ public class DefaultEditorFactory implements IEditorFactory {
         	editor = new WChartEditor(gridField, (gridTab == null ? 0 : gridTab.getWindowNo()), tableEditor, editorConfiguration);
         }
 
-        /** Dashboard Content */
-        else if(displayType == DisplayType.DashboardContent)
-        {
-        	editor = new WDashboardContentEditor(gridField, (gridTab == null ? 0 : gridTab.getWindowNo()), tableEditor, editorConfiguration);
-        }
-        
         /**  Button */
         else if (displayType == DisplayType.Button)
         {

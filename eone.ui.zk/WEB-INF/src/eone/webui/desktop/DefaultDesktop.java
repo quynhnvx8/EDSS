@@ -240,7 +240,7 @@ public class DefaultDesktop extends TabbedDesktop implements MenuListener, Seria
 
         Executions.schedule(layout.getDesktop(), event -> {
         	renderHomeTab();
-        	automaticOpen(Env.getCtx());
+        	//automaticOpen(Env.getCtx());
         }, new Event("onRenderHomeTab"));        
 
 		
@@ -329,7 +329,7 @@ public class DefaultDesktop extends TabbedDesktop implements MenuListener, Seria
 	{		
 		homeTab.getChildren().clear();		
 
-		dashboardController.render(homeTab, this, true);
+		dashboardController.render(homeTab, this);
 		
 		homeTab.setAttribute(HOME_TAB_RENDER_ATTR, Boolean.TRUE);
 	
@@ -758,43 +758,7 @@ public class DefaultDesktop extends TabbedDesktop implements MenuListener, Seria
 
 		return AD_Tree_ID;
 	}
-	private void automaticOpen(Properties ctx) {
-		if (isActionURL())  // IDEMPIERE-2334 vs IDEMPIERE-3000 - do not open windows when coming from an action URL
-			return;
-
-		StringBuilder sql = new StringBuilder("SELECT m.Action, COALESCE(m.AD_Window_ID, m.AD_Process_ID, m.AD_Form_ID, m.AD_Task_ID, AD_InfoWindow_ID) ")
-		.append(" FROM AD_TreeBar tb")
-		.append(" INNER JOIN AD_Menu m ON (tb.Node_ID = m.AD_Menu_ID)")
-		.append(" WHERE tb.AD_Tree_ID = ").append(getMenuID())
-		.append(" AND tb.AD_User_ID = ").append(Env.getAD_User_ID(ctx))
-		.append(" AND tb.IsActive = 'Y' AND tb.LoginOpenSeqNo > 0")
-		.append(" ORDER BY tb.LoginOpenSeqNo");
-
-		List<List<Object>> rows = DB.getSQLArrayObjectsEx(null, sql.toString());
-		if (rows != null && rows.size() > 0) {
-			for (List<Object> row : rows) {
-
-				String action = (String) row.get(0);
-				int recordID = ((BigDecimal) row.get(1)).intValue();
-
-				if (action.equals(MMenu.ACTION_Form)) {
-					SessionManager.getAppDesktop().openForm(recordID);	
-				}
-				else if (action.equals(MMenu.ACTION_Info)) {
-					SessionManager.getAppDesktop().openInfo(recordID);	
-				}
-				else if (action.equals(MMenu.ACTION_Process) || action.equals(MMenu.ACTION_Report)) {
-					SessionManager.getAppDesktop().openProcessDialog(recordID, DB.getSQLValueStringEx(null, "SELECT IsSOTrx FROM AD_Menu WHERE AD_Menu_ID = ?", recordID).equals("Y"));	
-				}
-				
-				else if (action.equals(MMenu.ACTION_Window)) {
-					SessionManager.getAppDesktop().openWindow(recordID, null);
-				}
-				
-			}
-		}
-	}
-
+	
 	@Override
 	public void setClientInfo(ClientInfo clientInfo) {
 		super.setClientInfo(clientInfo);

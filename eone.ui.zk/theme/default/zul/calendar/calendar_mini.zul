@@ -2,7 +2,6 @@
 <?component name="divarrow" macro-uri="/theme/default/zul/calendar/divarrow.zul"?>
 <zk>
 <zscript><![CDATA[
-	var calendarIcon = eone.webui.theme.ThemeManager.getThemeResource("images/Calendar16.png");
 	import eone.util.Msg;
 	import eone.util.Env;
     import eone.util.Util;
@@ -17,11 +16,10 @@
 				<divarrow id="divArrowLeft" type="arrow-left"/>
 				<divarrow id="divArrowRight" type="arrow-right"/>
 				<div>
-					<button id="btnCurrentDate" label="${today}" sclass="btn-small"/>
-				    <separator orient="vertical" spacing="2px"/>
+					<separator orient="vertical" spacing="2px"/>
 					<label id="lblDate"/>
+					<toolbarbutton id="btnCurrentDate" label="${today}" class="refresh"/>
 					<toolbarbutton id="btnRefresh" label="${refresh}" class="refresh"/>
-					<toolbarbutton id="btnCal" image="${calendarIcon}"/>
 				</div>
 			</hbox>
 		</div>

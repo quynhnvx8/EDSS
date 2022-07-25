@@ -923,31 +923,7 @@ public class X_AD_Column extends PO implements I_AD_Column, I_Persistent
 		return (String)get_Value(COLUMNNAME_Name);
 	}
 
-	public eone.base.model.I_PA_DashboardContent getPA_DashboardContent() throws RuntimeException
-    {
-		return (eone.base.model.I_PA_DashboardContent)MTable.get(getCtx(), eone.base.model.I_PA_DashboardContent.Table_Name)
-			.getPO(getPA_DashboardContent_ID(), get_TrxName());	}
-
-	/** Set Dashboard Content.
-		@param PA_DashboardContent_ID Dashboard Content	  */
-	public void setPA_DashboardContent_ID (int PA_DashboardContent_ID)
-	{
-		if (PA_DashboardContent_ID < 1) 
-			set_Value (COLUMNNAME_PA_DashboardContent_ID, null);
-		else 
-			set_Value (COLUMNNAME_PA_DashboardContent_ID, Integer.valueOf(PA_DashboardContent_ID));
-	}
-
-	/** Get Dashboard Content.
-		@return Dashboard Content	  */
-	public int getPA_DashboardContent_ID () 
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_PA_DashboardContent_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
+	
 	/** Set Placeholder.
 		@param Placeholder Placeholder	  */
 	public void setPlaceholder (String Placeholder)

@@ -30,7 +30,6 @@ import eone.webui.component.Menupopup;
 import eone.webui.session.SessionManager;
 import eone.webui.util.FeedbackManager;
 import eone.webui.window.FDialog;
-import eone.webui.window.WPreference;
 
 public class UserPanel implements EventListener<Event>, Composer<Component>
 {
@@ -40,7 +39,7 @@ public class UserPanel implements EventListener<Event>, Composer<Component>
 	protected LabelImageElement logout;
     
     protected Label lblUserNameValue = new Label();
-    protected WPreference preferencePopup;
+    //protected WPreference preferencePopup;
 	
 	protected Menupopup feedbackMenu;
 

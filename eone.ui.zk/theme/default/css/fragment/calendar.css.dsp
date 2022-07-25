@@ -200,3 +200,11 @@
     padding-left: 6px;
     zoom: 1;
 }
+
+.z-calendars-day-of-month-bg .z-calendars-week-today {
+    background-color: #fdfdfd;
+}
+
+.z-calendars-month-date.z-calendars-week-today {
+    background-color: #c5c5c5;
+}
